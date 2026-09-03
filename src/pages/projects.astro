@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StubPage from '../components/StubPage.astro';
+import { withBase } from '../lib/paths';
+
+const title = 'Projects | The Cole Hotel, Condo Conversion & Cabin Rebuild | David Weis';
+const description =
+  'Development and investment projects by David Weis across Palm Springs, San Diego and Big Bear Lake, including The Cole Hotel, a Palm Springs condo conversion and a Big Bear cabin rebuild.';
+
+const projects = [
+  {
+    market: 'Palm Springs',
+    name: 'The Cole Hotel',
+    text: 'Co-developed with my husband and operated as General Manager, earning five-star ratings across every platform.',
+  },
+  {
+    market: 'Palm Springs',
+    name: 'Condo conversion',
+    text: 'Took a multi-unit property through a full condo conversion, from entitlement to sale.',
+  },
+  {
+    market: 'Palm Springs',
+    name: 'Six-bedroom vacation rental',
+    text: 'Owned and operated as a short-term rental, with hands-on experience in the local STR rules.',
+  },
+  {
+    market: 'Big Bear Lake',
+    name: 'Cabin rebuild',
+    text: 'Rebuilt our personal-use cabin near Big Bear Mountain Resort, start to finish.',
+  },
+  {
+    market: 'La Jolla',
+    name: 'Coastal short-term rentals',
+    text: 'Two of my three La Jolla homes operate as short-term rentals.',
+  },
+];
+---
+
+<BaseLayout {title} {description}>
+  <StubPage
+    eyebrow="Projects"
+    title="Built, rebuilt and operated"
+    lede="Hotel, condo conversion, cabin rebuild and short-term rentals across all three markets. The advice I give clients comes from doing this work myself."
+  >
+    <Fragment slot="actions">
+      <a class="btn" href={withBase('/contact')}>Talk about a project</a>
+    </Fragment>
+    <ul class="projects">
+      {
+        projects.map((p) => (
+          <li class="projects__item">
+            <span class="eyebrow">{p.market}</span>
+            <strong class="projects__name">{p.name}</strong>
+            <p>{p.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </StubPage>
+</BaseLayout>
+
+<style>
+  .projects {
+    list-style: none;
+    border-top: 1px solid var(--line-strong);
+  }
+  .projects__item {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .projects__name {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 500;
+  }
+  .projects__item p {
+    font-size: 0.875rem;
+    color: var(--ink-2);
+  }
+</style>

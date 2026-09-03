@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import MarketCard from '../components/MarketCard.astro';
+import AboutStrip from '../components/AboutStrip.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { markets } from '../data/site';
+
+const title = 'David Weis | Compass Broker Associate | San Diego, Palm Springs & Big Bear';
+const description =
+  'David Weis is a Compass Broker Associate and REALTOR® serving La Jolla and San Diego, Palm Springs and Big Bear Lake. Coastal, desert and mountain real estate from an agent who owns in all three markets.';
+---
+
+<BaseLayout {title} {description}>
+  <Hero />
+
+  <section class="markets section" aria-labelledby="markets-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Three markets</p>
+        <h2 id="markets-title">Coast, desert and mountain</h2>
+        <p>
+          Each market has its own rhythm, rules and rental math. I own property in all three, so the
+          guidance is practical, not theoretical.
+        </p>
+      </div>
+      <div class="markets__grid">
+        {markets.map((m) => <MarketCard market={m} />)}
+      </div>
+    </div>
+  </section>
+
+  <AboutStrip />
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  .markets {
+    padding-top: clamp(2rem, 5vw, 4rem);
+  }
+  .markets__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  @media (max-width: 1023px) {
+    .markets__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .markets__grid > :global(.market-card:last-child) {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 680px) {
+    .markets__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

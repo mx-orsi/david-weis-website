@@ -1,0 +1,69 @@
+---
+import StubPage from './StubPage.astro';
+import SearchCTA from './SearchCTA.astro';
+import { getMarket, type MarketSlug } from '../data/site';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  slug: MarketSlug;
+  title: string;
+}
+const { slug, title } = Astro.props;
+const m = getMarket(slug);
+---
+
+<StubPage eyebrow={`${m.region} · ${m.pill}`} title={title} lede={m.blurb} accent={m.accent}>
+  <Fragment slot="actions">
+    <SearchCTA market={slug} />
+    <a class="btn btn--ghost" href={withBase('/contact')}>Contact David</a>
+  </Fragment>
+
+  <div class="market-stub">
+    <div class="market-stub__media">
+      <img src={withBase(m.image.src)} alt={m.image.alt} width="800" height="600" loading="lazy" decoding="async" />
+    </div>
+    <ul class="market-stub__list">
+      {m.bullets.map((b) => <li>{b}</li>)}
+    </ul>
+  </div>
+</StubPage>
+
+<style>
+  .market-stub {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .market-stub__media {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
+  }
+  .market-stub__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .market-stub__list {
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+  .market-stub__list li {
+    position: relative;
+    padding-left: 1.1rem;
+  }
+  .market-stub__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.75em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+</style>

@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StubPage from '../components/StubPage.astro';
+import { withBase } from '../lib/paths';
+---
+
+<BaseLayout title="Page not found | David Weis, Compass Broker Associate" description="That page doesn't exist. Head back to the home page for San Diego, Palm Springs and Big Bear Lake real estate." noindex>
+  <StubPage eyebrow="404" title="That page isn't on the map" lede="The link may be old or mistyped. The three markets, projects and contact details are all one click away.">
+    <Fragment slot="actions">
+      <a class="btn" href={withBase('/')}>Back to home</a>
+      <a class="btn btn--ghost" href={withBase('/contact')}>Contact David</a>
+    </Fragment>
+  </StubPage>
+</BaseLayout>

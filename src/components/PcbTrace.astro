@@ -1,0 +1,90 @@
+---
+/**
+ * PcbTrace — the signature line motif from David's letterhead, drawn as thin
+ * circuit-board traces with rounded pads. Purely decorative (aria-hidden).
+ *
+ * variant="divider"  — wide horizontal rule with two branch pads
+ * variant="portrait" — traces that sit behind the hero portrait
+ * variant="corner"   — small ornament for cards / footers
+ */
+interface Props {
+  variant?: 'divider' | 'portrait' | 'corner';
+  class?: string;
+}
+const { variant = 'divider', class: className, ...rest } = Astro.props;
+---
+
+{
+  variant === 'divider' && (
+    <svg class:list={['pcb', 'pcb--divider', className]} {...rest} viewBox="0 0 1200 48" fill="none" aria-hidden="true" preserveAspectRatio="none">
+      <g stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+        <path d="M0 24 H520 L536 8 H704 L720 24 H1200" />
+        <path d="M300 24 L316 40 H430" />
+        <path d="M900 24 L884 8 H790" />
+      </g>
+      <g fill="var(--bg)" stroke="currentColor" stroke-width="1">
+        <circle cx="430" cy="40" r="3.5" />
+        <circle cx="790" cy="8" r="3.5" />
+        <rect x="617" y="4.5" width="7" height="7" />
+      </g>
+    </svg>
+  )
+}
+
+{
+  variant === 'portrait' && (
+    <svg class:list={['pcb', 'pcb--portrait', className]} {...rest} viewBox="0 0 520 620" fill="none" aria-hidden="true">
+      <g stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M-20 120 H110 L150 160 H250" />
+        <path d="M-20 200 H80 L120 240 V420 L80 460 H-20" />
+        <path d="M-20 540 H180 L220 500 H300" />
+        <path d="M330 -20 V60 L370 100 V250" />
+        <path d="M540 340 H430 L390 380 V640" />
+        <path d="M540 220 H470 L450 200 H420" />
+      </g>
+      <g fill="var(--bg)" stroke="currentColor" stroke-width="1">
+        <circle cx="250" cy="160" r="4" />
+        <circle cx="300" cy="500" r="4" />
+        <circle cx="370" cy="250" r="4" />
+        <circle cx="420" cy="200" r="4" />
+        <rect x="106" y="116" width="8" height="8" />
+        <rect x="76" y="456" width="8" height="8" />
+      </g>
+    </svg>
+  )
+}
+
+{
+  variant === 'corner' && (
+    <svg class:list={['pcb', 'pcb--corner', className]} {...rest} viewBox="0 0 160 60" fill="none" aria-hidden="true">
+      <g stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M0 30 H60 L76 14 H130" />
+        <path d="M40 30 L56 46 H100" />
+      </g>
+      <g fill="var(--bg)" stroke="currentColor" stroke-width="1">
+        <circle cx="130" cy="14" r="3.5" />
+        <circle cx="100" cy="46" r="3.5" />
+      </g>
+    </svg>
+  )
+}
+
+<style>
+  .pcb {
+    color: var(--line-strong);
+    pointer-events: none;
+    user-select: none;
+  }
+  .pcb--divider {
+    width: 100%;
+    height: 48px;
+  }
+  .pcb--portrait {
+    width: 100%;
+    height: 100%;
+  }
+  .pcb--corner {
+    width: 160px;
+    height: 60px;
+  }
+</style>

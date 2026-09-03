@@ -1,0 +1,45 @@
+---
+/**
+ * SearchCTA — the site's property-search entry point.
+ *
+ * Compass does not offer an embeddable IDX widget for personal agent sites, so
+ * this component links OUT to Compass:
+ *   • no `market` prop → David's Compass agent profile (his listings live there)
+ *   • `market="san-diego"` etc. → Compass consumer search pre-filtered to that area
+ *
+ * Every search button/link on the site renders through this component. If an IDX
+ * embed becomes available later, replace the markup below (keep the props API)
+ * and the whole site picks it up.
+ */
+import Icon from './Icon.astro';
+import { agent, getMarket, type MarketSlug } from '../data/site';
+
+interface Props {
+  market?: MarketSlug;
+  variant?: 'primary' | 'ghost' | 'light' | 'outline-light' | 'nav' | 'link';
+  label?: string;
+  class?: string;
+}
+
+const { market, variant = 'primary', label, class: className, ...rest } = Astro.props;
+const m = market ? getMarket(market) : undefined;
+const href = m ? m.searchHref : agent.compassProfile;
+const text = label ?? (m ? `Search ${m.shortName} homes` : 'Search Homes');
+const isLink = variant === 'link';
+const classes = isLink
+  ? ['link-arrow', 'link-arrow--ext', className]
+  : ['btn', variant === 'nav' ? 'btn--sm' : `btn--${variant}`, className];
+---
+
+<a
+  href={href}
+  class:list={classes}
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search-cta={m?.slug ?? 'all'}
+  {...rest}
+>
+  <span>{text}</span>
+  <Icon name="arrow-ext" />
+  <span class="sr-only">(opens Compass in a new tab)</span>
+</a>

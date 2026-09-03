@@ -1,0 +1,120 @@
+---
+import '@fontsource/poppins/300.css';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/500.css';
+import '@fontsource/cormorant-garamond/400.css';
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/cormorant-garamond/500-italic.css';
+import '@fontsource/cormorant-garamond/600.css';
+import '../styles/global.css';
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { agent, siteUrl } from '../data/site';
+import { withBase, isPreviewBuild } from '../lib/paths';
+
+interface Props {
+  /** Full <title>. Keep unique per page, ideally under ~65 characters. */
+  title: string;
+  /** Unique meta description, ideally 120–160 characters. */
+  description: string;
+  /** Path or absolute URL for the social share image. */
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const { title, description, ogImage = agent.headshot.src, noindex = false } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? siteUrl);
+const ogImageURL = new URL(withBase(ogImage), Astro.site ?? siteUrl);
+
+/**
+ * RealEstateAgent structured data. Rendered on every page so search engines
+ * see consistent NAP (name / address / phone) + license details site-wide.
+ */
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'RealEstateAgent',
+  '@id': `${siteUrl}/#agent`,
+  name: agent.name,
+  alternateName: `${agent.name}, ${agent.title}`,
+  description:
+    'Compass Broker Associate and REALTOR® serving La Jolla and San Diego, Palm Springs and Big Bear Lake, California. Coastal, desert and mountain real estate for buyers, sellers and investors.',
+  url: siteUrl,
+  image: new URL(agent.headshot.src, siteUrl).href,
+  telephone: agent.phoneE164,
+  email: [agent.email, agent.emailCompass],
+  identifier: {
+    '@type': 'PropertyValue',
+    propertyID: 'California DRE License',
+    value: agent.dre,
+  },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: agent.office.street,
+    addressLocality: agent.office.city,
+    addressRegion: agent.office.state,
+    postalCode: agent.office.zip,
+    addressCountry: 'US',
+  },
+  areaServed: [
+    { '@type': 'City', name: 'San Diego', sameAs: 'https://en.wikipedia.org/wiki/San_Diego' },
+    { '@type': 'Place', name: 'La Jolla', sameAs: 'https://en.wikipedia.org/wiki/La_Jolla' },
+    { '@type': 'City', name: 'Palm Springs', sameAs: 'https://en.wikipedia.org/wiki/Palm_Springs,_California' },
+    { '@type': 'City', name: 'Big Bear Lake', sameAs: 'https://en.wikipedia.org/wiki/Big_Bear_Lake,_California' },
+  ],
+  parentOrganization: {
+    '@type': 'Organization',
+    name: agent.brokerage,
+    url: agent.brokerageUrl,
+  },
+  employee: {
+    '@type': 'Person',
+    name: agent.name,
+    jobTitle: agent.title,
+    telephone: agent.phoneE164,
+    email: [agent.email, agent.emailCompass],
+  },
+  sameAs: [agent.compassProfile, agent.social.instagram, agent.social.linkedin, agent.social.facebook],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    {(noindex || isPreviewBuild) && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <link rel="icon" href={withBase('/favicon.ico')} sizes="32x32" />
+    <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#f7f5f0" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={`${agent.name} · ${agent.title} · ${agent.brokerage}`} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:alt" content={agent.headshot.alt} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

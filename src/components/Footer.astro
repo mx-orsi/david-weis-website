@@ -1,0 +1,188 @@
+---
+import Logo from './Logo.astro';
+import CompassLogo from './CompassLogo.astro';
+import Icon from './Icon.astro';
+import PcbTrace from './PcbTrace.astro';
+import { agent, markets, officeLine } from '../data/site';
+import { withBase } from '../lib/paths';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <PcbTrace variant="divider" class="site-footer__trace" />
+
+    <div class="site-footer__grid">
+      <div class="site-footer__lockup">
+        <Logo variant="stacked" />
+        <span class="site-footer__x" aria-hidden="true"></span>
+        <CompassLogo />
+      </div>
+
+      <nav class="site-footer__col" aria-label="Markets">
+        <h2 class="eyebrow">Markets</h2>
+        <ul>
+          {markets.map((m) => <li><a href={withBase(m.href)}>{m.name}</a></li>)}
+        </ul>
+      </nav>
+
+      <nav class="site-footer__col" aria-label="Explore">
+        <h2 class="eyebrow">Explore</h2>
+        <ul>
+          <li><a href={withBase('/projects')}>Projects</a></li>
+          <li><a href={withBase('/contact')}>Contact</a></li>
+          <li>
+            <a href={agent.compassProfile} target="_blank" rel="noopener noreferrer" class="site-footer__ext">
+              Search Homes on Compass <Icon name="arrow-ext" size={12} />
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="site-footer__col">
+        <h2 class="eyebrow">Connect</h2>
+        <ul>
+          <li><a href={agent.phoneHref}>{agent.phone}</a></li>
+          <li><a href={`mailto:${agent.email}`}>{agent.email}</a></li>
+          <li><a href={`mailto:${agent.emailCompass}`}>{agent.emailCompass}</a></li>
+          <li>{agent.office.street}<br />{agent.office.city}, {agent.office.state} {agent.office.zip}</li>
+        </ul>
+        <ul class="site-footer__social" aria-label="Social">
+          <li><a href={agent.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="David Weis on Instagram"><Icon name="instagram" size={18} /></a></li>
+          <li><a href={agent.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="David Weis on LinkedIn"><Icon name="linkedin" size={18} /></a></li>
+          <li><a href={agent.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="David Weis on Facebook"><Icon name="facebook" size={18} /></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__legal">
+      <p class="site-footer__line">
+        <Icon name="eho" size={22} class="site-footer__eho" />
+        <span>{officeLine}</span>
+      </p>
+      <p class="site-footer__disclaimer">
+        Compass is a real estate broker licensed by the State of California and abides by Equal Housing Opportunity laws.
+        License Number 01991628. All material presented herein is intended for informational purposes only and is compiled
+        from sources deemed reliable but has not been verified. Changes in price, condition, sale or withdrawal may be made
+        without notice. No statement is made as to accuracy of any description. All measurements and square footages are
+        approximate.
+      </p>
+      <p class="site-footer__copy">© {year} {agent.name} · {agent.title} · CA DRE #{agent.dre}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    padding-block: 2.5rem 3rem;
+  }
+  .site-footer__trace {
+    margin-bottom: 3rem;
+    opacity: 0.9;
+  }
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+    gap: 3rem 2rem;
+  }
+  .site-footer__lockup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .site-footer__x {
+    width: 40px;
+    height: 1px;
+    background: var(--line-strong);
+  }
+  .site-footer__col ul {
+    list-style: none;
+    display: grid;
+    gap: 0.55rem;
+    margin-top: 1.1rem;
+    font-size: 0.875rem;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+  .site-footer__col a {
+    text-decoration: none;
+    color: var(--ink-2);
+  }
+  .site-footer__col a:hover {
+    color: var(--ink);
+  }
+  .site-footer__ext {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+  }
+  .site-footer__social {
+    display: flex !important;
+    grid-auto-flow: column;
+    justify-content: start;
+    gap: 0.6rem !important;
+    margin-top: 1.25rem !important;
+  }
+  .site-footer__social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+  }
+  .site-footer__social a:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+
+  .site-footer__legal {
+    margin-top: 3rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--line);
+    display: grid;
+    gap: 0.9rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.6;
+  }
+  .site-footer__line {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--ink-2);
+    font-size: 0.8125rem;
+    font-weight: 400;
+  }
+  .site-footer__eho {
+    flex: none;
+    color: var(--ink);
+  }
+  .site-footer__disclaimer {
+    max-width: 78ch;
+  }
+
+  @media (max-width: 899px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .site-footer__lockup {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 540px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr;
+      gap: 2.25rem;
+    }
+    .site-footer__line {
+      align-items: flex-start;
+    }
+  }
+</style>

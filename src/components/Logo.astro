@@ -1,0 +1,87 @@
+---
+/**
+ * David Weis REALTOR® lockup.
+ * PLACEHOLDER: recreated from the mockup (three roof-lines + signature).
+ * Swap the inline SVG/text for the client's vector logo when supplied
+ * (see IMAGES-NEEDED.md). Text remains real text for accessibility/SEO.
+ */
+interface Props {
+  variant?: 'inline' | 'stacked';
+  class?: string;
+}
+const { variant = 'inline', class: className, ...rest } = Astro.props;
+---
+
+<span class:list={['logo', `logo--${variant}`, className]} {...rest}>
+  <svg class="logo__mark" viewBox="0 0 64 30" fill="none" aria-hidden="true">
+    <g stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 26 L17 10 L32 26" />
+      <path d="M17 26 L34 5 L51 26" />
+      <path d="M36 26 L47 14 L62 26" />
+    </g>
+    <rect x="15.5" y="16" width="3" height="3" fill="currentColor" />
+    <rect x="32.5" y="12" width="3" height="3" fill="currentColor" />
+    <rect x="45.5" y="19" width="3" height="3" fill="currentColor" />
+  </svg>
+  <span class="logo__text">
+    <span class="logo__name">David Weis</span>
+    <span class="logo__title">Realtor<sup>®</sup></span>
+  </span>
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .logo__mark {
+    width: 40px;
+    height: auto;
+    flex: none;
+  }
+  .logo__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
+  }
+  .logo__name {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.45rem;
+    letter-spacing: 0.005em;
+    line-height: 0.95;
+  }
+  .logo__title {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.5625rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .logo__title sup {
+    font-size: 0.6em;
+    letter-spacing: 0;
+    vertical-align: top;
+    line-height: 0;
+  }
+
+  .logo--stacked {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+  }
+  .logo--stacked .logo__mark {
+    width: 52px;
+  }
+  .logo--stacked .logo__name {
+    font-size: 2rem;
+  }
+  .logo--stacked .logo__title {
+    font-size: 0.625rem;
+  }
+</style>
