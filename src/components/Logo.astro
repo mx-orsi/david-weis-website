@@ -1,31 +1,42 @@
 ---
 /**
  * David Weis REALTOR® lockup.
- * PLACEHOLDER: recreated from the mockup (three roof-lines + signature).
- * Swap the inline SVG/text for the client's vector logo when supplied
- * (see IMAGES-NEEDED.md). Text remains real text for accessibility/SEO.
+ * Roof mark redrawn in code from David's business card (three gables, four-pane
+ * windows, chimney). Swap for the client's vector file when supplied (see
+ * IMAGES-NEEDED.md). Name and title stay real text for accessibility/SEO.
  */
 interface Props {
   variant?: 'inline' | 'stacked';
   class?: string;
 }
 const { variant = 'inline', class: className, ...rest } = Astro.props;
+const stacked = variant === 'stacked';
 ---
 
 <span class:list={['logo', `logo--${variant}`, className]} {...rest}>
-  <svg class="logo__mark" viewBox="0 0 64 30" fill="none" aria-hidden="true">
-    <g stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M2 26 L17 10 L32 26" />
-      <path d="M17 26 L34 5 L51 26" />
-      <path d="M36 26 L47 14 L62 26" />
+  <svg class="logo__mark" viewBox="0 0 80 40" fill="none" aria-hidden="true">
+    <g stroke="currentColor" stroke-width="2.6" stroke-linejoin="miter" stroke-linecap="butt">
+      <!-- left and right gables stop where they meet the centre roof -->
+      <path d="M2 35 L20 15 L27.6 22.6" />
+      <path d="M78 35 L60 15 L52.4 22.6" />
+      <!-- centre gable, tallest and in front -->
+      <path d="M18 35 L40 6 L62 35" />
+      <!-- chimney on the centre roof's right slope -->
+      <path d="M48.5 16.8 V10 H53 V22.5" />
     </g>
-    <rect x="15.5" y="16" width="3" height="3" fill="currentColor" />
-    <rect x="32.5" y="12" width="3" height="3" fill="currentColor" />
-    <rect x="45.5" y="19" width="3" height="3" fill="currentColor" />
+    <!-- four-pane windows under each peak -->
+    <g stroke="currentColor" stroke-width="1.6">
+      <rect x="17" y="24.5" width="6" height="6" />
+      <path d="M20 24.5 V30.5 M17 27.5 H23" />
+      <rect x="36.5" y="21" width="7" height="7" />
+      <path d="M40 21 V28 M36.5 24.5 H43.5" />
+      <rect x="57" y="24.5" width="6" height="6" />
+      <path d="M60 24.5 V30.5 M57 27.5 H63" />
+    </g>
   </svg>
   <span class="logo__text">
     <span class="logo__name">David Weis</span>
-    <span class="logo__title">Realtor<sup>®</sup></span>
+    <span class="logo__title">{stacked && <>Broker Associate <span class="logo__sep">|</span> </>}Realtor<sup>®</sup></span>
   </span>
 </span>
 
@@ -38,9 +49,12 @@ const { variant = 'inline', class: className, ...rest } = Astro.props;
     line-height: 1;
   }
   .logo__mark {
-    width: 40px;
+    width: 46px;
     height: auto;
     flex: none;
+  }
+  .logo__sep {
+    opacity: 0.45;
   }
   .logo__text {
     display: flex;
@@ -76,12 +90,13 @@ const { variant = 'inline', class: className, ...rest } = Astro.props;
     gap: 0.9rem;
   }
   .logo--stacked .logo__mark {
-    width: 52px;
+    width: 64px;
   }
   .logo--stacked .logo__name {
     font-size: 2rem;
   }
   .logo--stacked .logo__title {
     font-size: 0.625rem;
+    letter-spacing: 0.26em;
   }
 </style>

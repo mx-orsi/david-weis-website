@@ -1,10 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="14" fill="#16181B"/>
-  <g fill="none" stroke="#F7F5F0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M10 40 L22 26 L34 40"/>
-    <path d="M22 40 L37 22 L52 40"/>
+  <g transform="translate(6 14) scale(0.65)" fill="none" stroke="#F7F5F0" stroke-width="3.2" stroke-linejoin="miter">
+    <path d="M2 35 L20 15 L27.6 22.6"/>
+    <path d="M78 35 L60 15 L52.4 22.6"/>
+    <path d="M18 35 L40 6 L62 35"/>
+    <path d="M48.5 16.8 V10 H53 V22.5"/>
   </g>
-  <rect x="20.5" y="31" width="3" height="3" fill="#F7F5F0"/>
-  <rect x="35.5" y="27" width="3" height="3" fill="#F7F5F0"/>
-  <path d="M10 46 H54" stroke="#F7F5F0" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+  <g transform="translate(6 14) scale(0.65)" fill="none" stroke="#F7F5F0" stroke-width="2">
+    <rect x="17" y="24.5" width="6" height="6"/><path d="M20 24.5 V30.5 M17 27.5 H23"/>
+    <rect x="36.5" y="21" width="7" height="7"/><path d="M40 21 V28 M36.5 24.5 H43.5"/>
+    <rect x="57" y="24.5" width="6" height="6"/><path d="M60 24.5 V30.5 M57 27.5 H63"/>
+  </g>
 </svg>
