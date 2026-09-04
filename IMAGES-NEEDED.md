@@ -36,9 +36,9 @@ Current placeholders live in `public/images/placeholders/` (simple line-art SVGs
 
 | Slot | Current placeholder | Needed | Suggested filename |
 | --- | --- | --- | --- |
-| David Weis REALTOR® logo (header + footer) | Recreated in code from the mockup: three roof-lines + italic serif "David Weis" | Vector original (SVG, AI or EPS) of the signature/roof-line logo used on the letterhead and video assets, in black and in white | `david-weis-realtor-logo.svg` |
-| Compass logo (footer lockup) | Vector redrawn in code from the PNG the client supplied (`CompassLogo.astro`) | Optional: the official Compass SVG from the brand portal if his office provides one, plus any co-branding rules | `compass-logo.svg` |
-| Favicon | Roof-line mark generated from the placeholder logo | Will be derived from the real logo once supplied | `favicon.svg` |
+| David Weis REALTOR® logo (header + footer) | Exact artwork lifted at 1080p from the video end card (`public/images/david-weis-logo-lockup.png`, transparent, ink and white versions) | Vector original (SVG, AI or EPS) would still be ideal for print-sharp scaling, but the current file is production-usable | `david-weis-realtor-logo.svg` |
+| Compass logo (footer lockup) | Official Compass horizontal SVG, inlined in `CompassLogo.astro` | Nothing further needed beyond any co-branding rules his office requires | — |
+| Favicon | Roof mark from the real logo on an ink tile (`favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`) | Nothing further needed | — |
 
 ## 4. Projects page (next phase)
 

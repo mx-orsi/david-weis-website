@@ -8,7 +8,8 @@ noted; everything else is still open.
 - **Email:** show both `david@davidweis.net` and `david.weis@compass.com`. Done.
 - **Search links:** open Compass in a new tab. Done.
 - **Headings:** designer's call. Staying with the serif display face paired with Poppins.
-- **Compass logo:** supplied as PNG; recreated as a vector in `CompassLogo.astro`.
+- **Compass logo:** official Compass SVG now inlined in `CompassLogo.astro`.
+- **David Weis logo:** exact artwork taken from the video end card; a vector file is still welcome.
 
 ## Still open
 

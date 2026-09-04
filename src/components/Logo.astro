@@ -1,81 +1,62 @@
 ---
 /**
- * David Weis REALTOR® lockup.
- * Roof mark redrawn in code from David's business card (three gables, four-pane
- * windows, chimney). Swap for the client's vector file when supplied (see
- * IMAGES-NEEDED.md). Name and title stay real text for accessibility/SEO.
+ * David Weis REALTOR® lockup: the exact brand artwork (three-gable roof mark
+ * plus the "David Weis" signature), lifted at 1080p from David's video end card
+ * and saved with a transparent background in public/images/.
+ *
+ *   david-weis-logo-lockup.png        ink on transparent (light backgrounds)
+ *   david-weis-logo-lockup-white.png  white on transparent (dark backgrounds)
+ *   david-weis-roof-mark.png          roof mark only (favicons, small uses)
+ *
+ * Replace these with the client's vector file when supplied (see IMAGES-NEEDED.md).
+ * The title line stays real text so it remains selectable and indexable.
  */
+import { withBase } from '../lib/paths';
+
 interface Props {
   variant?: 'inline' | 'stacked';
+  /** Use the white artwork on dark backgrounds */
+  tone?: 'ink' | 'white';
   class?: string;
 }
-const { variant = 'inline', class: className, ...rest } = Astro.props;
+const { variant = 'inline', tone = 'ink', class: className, ...rest } = Astro.props;
 const stacked = variant === 'stacked';
+const src = withBase(tone === 'white' ? '/images/david-weis-logo-lockup-white.png' : '/images/david-weis-logo-lockup.png');
 ---
 
 <span class:list={['logo', `logo--${variant}`, className]} {...rest}>
-  <svg class="logo__mark" viewBox="0 0 80 40" fill="none" aria-hidden="true">
-    <g stroke="currentColor" stroke-width="2.6" stroke-linejoin="miter" stroke-linecap="butt">
-      <!-- left and right gables stop where they meet the centre roof -->
-      <path d="M2 35 L20 15 L27.6 22.6" />
-      <path d="M78 35 L60 15 L52.4 22.6" />
-      <!-- centre gable, tallest and in front -->
-      <path d="M18 35 L40 6 L62 35" />
-      <!-- chimney on the centre roof's right slope -->
-      <path d="M48.5 16.8 V10 H53 V22.5" />
-    </g>
-    <!-- four-pane windows under each peak -->
-    <g stroke="currentColor" stroke-width="1.6">
-      <rect x="17" y="24.5" width="6" height="6" />
-      <path d="M20 24.5 V30.5 M17 27.5 H23" />
-      <rect x="36.5" y="21" width="7" height="7" />
-      <path d="M40 21 V28 M36.5 24.5 H43.5" />
-      <rect x="57" y="24.5" width="6" height="6" />
-      <path d="M60 24.5 V30.5 M57 27.5 H63" />
-    </g>
-  </svg>
-  <span class="logo__text">
-    <span class="logo__name">David Weis</span>
-    <span class="logo__title">{stacked && <>Broker Associate <span class="logo__sep">|</span> </>}Realtor<sup>®</sup></span>
-  </span>
+  <img class="logo__img" src={src} alt="David Weis, REALTOR®" width="729" height="303" decoding="async" />
+  {
+    stacked && (
+      <span class="logo__title">
+        Broker Associate <span class="logo__sep">|</span> Realtor<sup>®</sup>
+      </span>
+    )
+  }
 </span>
 
 <style>
   .logo {
     display: inline-flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.7rem;
+    gap: 0.75rem;
     color: var(--ink);
     line-height: 1;
   }
-  .logo__mark {
-    width: 46px;
-    height: auto;
-    flex: none;
-  }
-  .logo__sep {
-    opacity: 0.45;
-  }
-  .logo__text {
-    display: flex;
-    flex-direction: column;
-    gap: 0.28rem;
-  }
-  .logo__name {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 500;
-    font-size: 1.45rem;
-    letter-spacing: 0.005em;
-    line-height: 0.95;
+  .logo__img {
+    display: block;
+    width: auto;
+    height: 58px;
   }
   .logo__title {
     font-family: var(--font-sans);
     font-weight: 500;
-    font-size: 0.5625rem;
-    letter-spacing: 0.34em;
+    font-size: 0.625rem;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--ink-2);
+    white-space: nowrap;
   }
   .logo__title sup {
     font-size: 0.6em;
@@ -83,20 +64,21 @@ const stacked = variant === 'stacked';
     vertical-align: top;
     line-height: 0;
   }
+  .logo__sep {
+    opacity: 0.45;
+  }
 
   .logo--stacked {
-    flex-direction: column;
     align-items: flex-start;
     gap: 0.9rem;
   }
-  .logo--stacked .logo__mark {
-    width: 64px;
+  .logo--stacked .logo__img {
+    height: 104px;
   }
-  .logo--stacked .logo__name {
-    font-size: 2rem;
-  }
-  .logo--stacked .logo__title {
-    font-size: 0.625rem;
-    letter-spacing: 0.26em;
+
+  @media (max-width: 540px) {
+    .logo--inline .logo__img {
+      height: 48px;
+    }
   }
 </style>
