@@ -1,9 +1,9 @@
 ---
 import Logo from './Logo.astro';
-import CompassLogo from './CompassLogo.astro';
 import Icon from './Icon.astro';
 import PcbTrace from './PcbTrace.astro';
-import { agent, markets, officeLine } from '../data/site';
+import Title from './Title.astro';
+import { agent, markets, legal } from '../data/site';
 import { withBase } from '../lib/paths';
 
 const year = new Date().getFullYear();
@@ -15,9 +15,7 @@ const year = new Date().getFullYear();
 
     <div class="site-footer__grid">
       <div class="site-footer__lockup">
-        <Logo variant="stacked" />
-        <span class="site-footer__x" aria-hidden="true"></span>
-        <CompassLogo />
+        <Logo variant="lockup" />
       </div>
 
       <nav class="site-footer__col" aria-label="Markets">
@@ -34,8 +32,14 @@ const year = new Date().getFullYear();
           <li><a href={withBase('/contact')}>Contact</a></li>
           <li>
             <a href={agent.compassProfile} target="_blank" rel="noopener noreferrer" class="site-footer__ext">
-              Search Homes on Compass <Icon name="arrow-ext" size={12} />
+              Search Homes on Compass <Icon name="arrow-ext" size={12} /><span class="sr-only">(opens in a new tab)</span>
             </a>
+          </li>
+          <li>
+            <a href={agent.vacationRentals.url} target="_blank" rel="noopener noreferrer" class="site-footer__ext">
+              Vacation rentals: {agent.vacationRentals.name} <Icon name="arrow-ext" size={12} /><span class="sr-only">(opens in a new tab)</span>
+            </a>
+            <span class="site-footer__note">Independently operated. Compass is not involved in rentals.</span>
           </li>
         </ul>
       </nav>
@@ -45,30 +49,28 @@ const year = new Date().getFullYear();
         <ul>
           <li><a href={agent.phoneHref}>{agent.phone}</a></li>
           <li><a href={`mailto:${agent.email}`}>{agent.email}</a></li>
-          <li><a href={`mailto:${agent.emailCompass}`}>{agent.emailCompass}</a></li>
           <li>{agent.office.street}<br />{agent.office.city}, {agent.office.state} {agent.office.zip}</li>
         </ul>
         <ul class="site-footer__social" aria-label="Social">
-          <li><a href={agent.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="David Weis on Instagram"><Icon name="instagram" size={18} /></a></li>
-          <li><a href={agent.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="David Weis on LinkedIn"><Icon name="linkedin" size={18} /></a></li>
-          <li><a href={agent.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="David Weis on Facebook"><Icon name="facebook" size={18} /></a></li>
+          <li><a href={agent.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="David Weis on Instagram (opens in a new tab)"><Icon name="instagram" size={18} /></a></li>
+          <li><a href={agent.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="David Weis on LinkedIn (opens in a new tab)"><Icon name="linkedin" size={18} /></a></li>
+          <li><a href={agent.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="David Weis on Facebook (opens in a new tab)"><Icon name="facebook" size={18} /></a></li>
         </ul>
       </div>
     </div>
 
     <div class="site-footer__legal">
-      <p class="site-footer__line">
-        <Icon name="eho" size={22} class="site-footer__eho" />
-        <span>{officeLine}</span>
+      <div class="site-footer__marks">
+        <img src={withBase('/images/equal-housing-opportunity-logo.png')} alt="Equal Housing Opportunity" width="481" height="514" loading="lazy" decoding="async" />
+        <img src={withBase('/images/realtor-logo.png')} alt="REALTOR®" width={248} height={286} loading="lazy" decoding="async" />
+      </div>
+      <p class="site-footer__lines">
+        <span>{agent.name} | <Title /> | CA DRE #{agent.dre}</span>
+        <span>{legal.officeLine}</span>
+        <span>{legal.brokerLine}</span>
       </p>
-      <p class="site-footer__disclaimer">
-        Compass is a real estate broker licensed by the State of California and abides by Equal Housing Opportunity laws.
-        License Number 01991628. All material presented herein is intended for informational purposes only and is compiled
-        from sources deemed reliable but has not been verified. Changes in price, condition, sale or withdrawal may be made
-        without notice. No statement is made as to accuracy of any description. All measurements and square footages are
-        approximate.
-      </p>
-      <p class="site-footer__copy">© {year} {agent.name} · {agent.title} · CA DRE #{agent.dre}</p>
+      <p class="site-footer__disclaimer">{legal.disclaimer}</p>
+      <p class="site-footer__copy">© {year} {agent.name} · <Title /> · CA DRE #{agent.dre}</p>
     </div>
   </div>
 </footer>
@@ -85,19 +87,13 @@ const year = new Date().getFullYear();
   }
   .site-footer__grid {
     display: grid;
-    grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+    grid-template-columns: 1.5fr 0.9fr 1.3fr 1.1fr;
     gap: 3rem 2rem;
   }
   .site-footer__lockup {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.5rem;
-  }
-  .site-footer__x {
-    width: 40px;
-    height: 1px;
-    background: var(--line-strong);
   }
   .site-footer__col ul {
     list-style: none;
@@ -114,15 +110,24 @@ const year = new Date().getFullYear();
   }
   .site-footer__col a:hover {
     color: var(--ink);
+    text-decoration: underline;
   }
   .site-footer__ext {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35em;
+    display: inline;
+  }
+  .site-footer__ext svg {
+    display: inline-block;
+    vertical-align: -0.05em;
+    margin-left: 0.3em;
+  }
+  .site-footer__note {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--muted);
+    line-height: 1.5;
   }
   .site-footer__social {
     display: flex !important;
-    grid-auto-flow: column;
     justify-content: start;
     gap: 0.6rem !important;
     margin-top: 1.25rem !important;
@@ -131,9 +136,9 @@ const year = new Date().getFullYear();
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    border: 1px solid var(--line-strong);
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--line-control);
     border-radius: 999px;
     transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
   }
@@ -147,22 +152,26 @@ const year = new Date().getFullYear();
     padding-top: 1.75rem;
     border-top: 1px solid var(--line);
     display: grid;
-    gap: 0.9rem;
+    gap: 1rem;
     color: var(--muted);
     font-size: 0.75rem;
     line-height: 1.6;
   }
-  .site-footer__line {
+  .site-footer__marks {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1rem;
+  }
+  .site-footer__marks img {
+    height: 44px;
+    width: auto;
+  }
+  .site-footer__lines {
+    display: grid;
+    gap: 0.15rem;
     color: var(--ink-2);
     font-size: 0.8125rem;
     font-weight: 400;
-  }
-  .site-footer__eho {
-    flex: none;
-    color: var(--ink);
   }
   .site-footer__disclaimer {
     max-width: 78ch;
@@ -180,9 +189,6 @@ const year = new Date().getFullYear();
     .site-footer__grid {
       grid-template-columns: 1fr;
       gap: 2.25rem;
-    }
-    .site-footer__line {
-      align-items: flex-start;
     }
   }
 </style>

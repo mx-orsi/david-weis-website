@@ -2,11 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StubPage from '../components/StubPage.astro';
 import Icon from '../components/Icon.astro';
+import Title from '../components/Title.astro';
 import { agent } from '../data/site';
 
 const title = 'Contact David Weis | Compass Broker Associate in La Jolla, CA';
 const description =
-  'Reach David Weis, Compass Broker Associate and REALTOR®, at 619-518-9246 or david@davidweis.net. Office: 7863 Girard Ave #210, La Jolla, CA 92037. Serving San Diego, Palm Springs and Big Bear Lake.';
+  'Reach David Weis, Compass Broker Associate and REALTOR®, at 619-518-9246 or david@davidweis.com. Office: 7863 Girard Ave, Suite 210, La Jolla, CA 92037. Serving San Diego, Palm Springs and Big Bear Lake.';
 ---
 
 <BaseLayout {title} {description}>
@@ -31,10 +32,6 @@ const description =
           <a href={`mailto:${agent.email}`}>{agent.email}</a>
         </li>
         <li>
-          <Icon name="mail" size={16} />
-          <a href={`mailto:${agent.emailCompass}`}>{agent.emailCompass}</a>
-        </li>
-        <li>
           <Icon name="pin" size={16} />
           <span>
             {agent.brokerage}<br />
@@ -48,7 +45,7 @@ const description =
         <li><a href={agent.social.linkedin} target="_blank" rel="noopener noreferrer"><Icon name="linkedin" size={15} /> LinkedIn</a></li>
         <li><a href={agent.social.facebook} target="_blank" rel="noopener noreferrer"><Icon name="facebook" size={15} /> Facebook</a></li>
       </ul>
-      <p class="contact-card__meta">{agent.title} · CA DRE #{agent.dre}</p>
+      <p class="contact-card__meta"><Title /> · CA DRE #{agent.dre}</p>
     </address>
   </StubPage>
 </BaseLayout>

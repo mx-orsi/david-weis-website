@@ -1,38 +1,35 @@
 ---
 /**
- * David Weis REALTOR® lockup: the exact brand artwork (three-gable roof mark
- * plus the "David Weis" signature), lifted at 1080p from David's video end card
- * and saved with a transparent background in public/images/.
+ * David Weis brand artwork, supplied by David (2026-09-08) and saved with a
+ * transparent background in public/images/:
  *
- *   david-weis-logo-lockup.png        ink on transparent (light backgrounds)
- *   david-weis-logo-lockup-white.png  white on transparent (dark backgrounds)
- *   david-weis-roof-mark.png          roof mark only (favicons, small uses)
+ *   david-weis-realtor-logo.png             roof mark + signature (header)
+ *   david-weis-realtor-logo-white.png       same, white, for dark backgrounds
+ *   david-weis-realtor-compass-lockup.png   full lockup: mark, signature,
+ *                                           title, markets and Compass (footer)
  *
- * Replace these with the client's vector file when supplied (see IMAGES-NEEDED.md).
- * The title line stays real text so it remains selectable and indexable.
+ * Alt text carries the words so the artwork stays indexable and readable.
  */
 import { withBase } from '../lib/paths';
 
 interface Props {
-  variant?: 'inline' | 'stacked';
-  /** Use the white artwork on dark backgrounds */
+  /** inline: header mark + signature. lockup: full footer lockup with Compass. */
+  variant?: 'inline' | 'lockup';
+  /** Use the white artwork on dark backgrounds (inline only) */
   tone?: 'ink' | 'white';
   class?: string;
 }
 const { variant = 'inline', tone = 'ink', class: className, ...rest } = Astro.props;
-const stacked = variant === 'stacked';
-const src = withBase(tone === 'white' ? '/images/david-weis-logo-lockup-white.png' : '/images/david-weis-logo-lockup.png');
+const art =
+  variant === 'lockup'
+    ? { src: '/images/david-weis-realtor-compass-lockup.png', w: 892, h: 749, alt: 'David Weis, Broker Associate | REALTOR® with Compass, serving San Diego, Palm Springs and Big Bear' }
+    : tone === 'white'
+      ? { src: '/images/david-weis-realtor-logo-white.png', w: 884, h: 428, alt: 'David Weis, REALTOR®' }
+      : { src: '/images/david-weis-realtor-logo.png', w: 884, h: 428, alt: 'David Weis, REALTOR®' };
 ---
 
 <span class:list={['logo', `logo--${variant}`, className]} {...rest}>
-  <img class="logo__img" src={src} alt="David Weis, REALTOR®" width="729" height="303" decoding="async" />
-  {
-    stacked && (
-      <span class="logo__title">
-        Broker Associate <span class="logo__sep">|</span> Realtor<sup>®</sup>
-      </span>
-    )
-  }
+  <img class="logo__img" src={withBase(art.src)} alt={art.alt} width={art.w} height={art.h} decoding="async" />
 </span>
 
 <style>
@@ -49,31 +46,10 @@ const src = withBase(tone === 'white' ? '/images/david-weis-logo-lockup-white.pn
     width: auto;
     height: 58px;
   }
-  .logo__title {
-    font-family: var(--font-sans);
-    font-weight: 500;
-    font-size: 0.625rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--ink-2);
-    white-space: nowrap;
-  }
-  .logo__title sup {
-    font-size: 0.6em;
-    letter-spacing: 0;
-    vertical-align: top;
-    line-height: 0;
-  }
-  .logo__sep {
-    opacity: 0.45;
-  }
 
-  .logo--stacked {
-    align-items: flex-start;
-    gap: 0.9rem;
-  }
-  .logo--stacked .logo__img {
-    height: 104px;
+  .logo--lockup .logo__img {
+    height: auto;
+    width: min(100%, 280px);
   }
 
   @media (max-width: 540px) {

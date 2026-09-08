@@ -43,7 +43,7 @@ const jsonLd = {
   url: siteUrl,
   image: new URL(agent.headshot.src, siteUrl).href,
   telephone: agent.phoneE164,
-  email: [agent.email, agent.emailCompass],
+  email: agent.email,
   identifier: {
     '@type': 'PropertyValue',
     propertyID: 'California DRE License',
@@ -67,13 +67,14 @@ const jsonLd = {
     '@type': 'Organization',
     name: agent.brokerage,
     url: agent.brokerageUrl,
+    identifier: { '@type': 'PropertyValue', propertyID: 'California DRE License', value: agent.brokerageDre },
   },
   employee: {
     '@type': 'Person',
     name: agent.name,
     jobTitle: agent.title,
     telephone: agent.phoneE164,
-    email: [agent.email, agent.emailCompass],
+    email: agent.email,
   },
   sameAs: [agent.compassProfile, agent.social.instagram, agent.social.linkedin, agent.social.facebook],
 };

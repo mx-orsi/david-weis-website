@@ -1,0 +1,20 @@
+---
+/**
+ * David's title with the ® set small and superscript, as the REALTOR® mark
+ * requires. Use this wherever the title is rendered as text; keep the plain
+ * string in src/data/site.ts for metadata and alt text.
+ */
+interface Props {
+  /** Render only "REALTOR®" */
+  short?: boolean;
+}
+const { short = false } = Astro.props;
+---
+
+{!short && <>Broker Associate <span class="title-sep">|</span> </>}REALTOR<sup class="reg">®</sup>
+
+<style>
+  .title-sep {
+    opacity: 0.5;
+  }
+</style>

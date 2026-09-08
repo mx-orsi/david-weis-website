@@ -12,7 +12,7 @@ resize and convert to WebP/AVIF during the build). No text baked into images.
 
 | Slot | Current placeholder | Needed | Suggested filename |
 | --- | --- | --- | --- |
-| Home hero portrait | 480×480 headshot pulled from the Compass profile (too small for retina screens) | High-resolution original of the same or a newer portrait, at least 1600px on the short side, vertical or square crop with headroom | `david-weis-realtor-broker-associate-compass-la-jolla.jpg` |
+| Home hero portrait | 480×480 headshot pulled from the Compass profile (too small for retina screens). The file David sent on 2026-09-08 is only 200×265 and cannot be used. | High-resolution original of the same or a newer portrait, at least 1200px on the short side, vertical or square crop with headroom | `david-weis-compass-real-estate-agent-san-diego-palm-springs-big-bear.jpg` |
 
 Also useful: a second, more environmental portrait (e.g. on the La Jolla
 coast) for the Contact page and market pages later.
@@ -36,8 +36,9 @@ Current placeholders live in `public/images/placeholders/` (simple line-art SVGs
 
 | Slot | Current placeholder | Needed | Suggested filename |
 | --- | --- | --- | --- |
-| David Weis REALTOR® logo (header + footer) | Exact artwork lifted at 1080p from the video end card (`public/images/david-weis-logo-lockup.png`, transparent, ink and white versions) | Vector original (SVG, AI or EPS) would still be ideal for print-sharp scaling, but the current file is production-usable | `david-weis-realtor-logo.svg` |
-| Compass logo (footer lockup) | Official Compass horizontal SVG, inlined in `CompassLogo.astro` | Nothing further needed beyond any co-branding rules his office requires | — |
+| David Weis REALTOR® logo (header + footer) | Done. David's own 1448px lockup (2026-09-08), converted to transparent PNGs: `david-weis-realtor-logo.png` (mark + signature) and `david-weis-realtor-compass-lockup.png` (full lockup) | Nothing further needed; a vector file remains welcome | — |
+| Compass logo (footer lockup) | Part of David's full lockup image; the official Compass SVG is also available in `CompassLogo.astro` | Nothing further needed beyond any co-branding rules his office requires | — |
+| Equal Housing Opportunity and REALTOR® marks (footer) | Done, from the files David sent (`equal-housing-opportunity-logo.png`, `realtor-logo.png`) | Nothing further needed | — |
 | Favicon | Roof mark from the real logo on an ink tile (`favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`) | Nothing further needed | — |
 
 ## 4. Projects page (next phase)

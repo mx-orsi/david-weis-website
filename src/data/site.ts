@@ -14,29 +14,35 @@ export const agent = {
   titleShort: 'Broker Associate',
   brokerage: 'Compass',
   brokerageUrl: 'https://www.compass.com',
+  /** Compass California broker license, per David's 2026-09-04 email */
+  brokerageDre: '01527365',
   dre: '02196688',
   phone: '619-518-9246',
   phoneHref: 'tel:+16195189246',
   phoneE164: '+1-619-518-9246',
-  /** Client-specified contact email (also the IDX contact email on Compass). */
-  email: 'david@davidweis.net',
-  /** Compass-issued email; client asked for both to be shown. */
-  emailCompass: 'david.weis@compass.com',
+  /** Per David's 2026-09 email: the only public address (Compass address removed). */
+  email: 'david@davidweis.com',
   office: {
     name: 'Compass La Jolla',
-    street: '7863 Girard Ave #210',
+    street: '7863 Girard Ave, Suite 210',
     city: 'La Jolla',
     state: 'CA',
     zip: '92037',
   },
   headshot: {
-    src: '/images/david-weis-realtor-broker-associate-compass-la-jolla.jpg',
-    alt: 'David Weis, Broker Associate and REALTOR® with Compass, serving San Diego, Palm Springs and Big Bear Lake, California',
+    src: '/images/david-weis-compass-real-estate-agent-san-diego-palm-springs-big-bear.jpg',
+    alt: 'David Weis, Compass Broker Associate and REALTOR® serving San Diego, Palm Springs and Big Bear Lake, California',
     width: 480,
     height: 480,
   },
   /** Primary outbound property-search destination (Compass agent profile with listings). */
   compassProfile: 'https://www.compass.com/agents/david-weis/',
+  /** David's short-term rentals are managed through this separate business (not Compass). */
+  vacationRentals: {
+    name: 'Celebrity Vacation Homes',
+    url: 'https://celebrityvacationhomes.com',
+    markets: 'San Diego and Palm Springs',
+  },
   social: {
     instagram: 'https://www.instagram.com/david.weis.realtor/',
     linkedin: 'https://www.linkedin.com/in/davidweis/',
@@ -44,7 +50,13 @@ export const agent = {
   },
 } as const;
 
-export const officeLine = `${agent.brokerage} · ${agent.office.street}, ${agent.office.city}, ${agent.office.state} ${agent.office.zip} · CA DRE #${agent.dre} · Equal Housing Opportunity`;
+/** Footer legal block, wording supplied by David on 2026-09-04. */
+export const legal = {
+  officeLine: `${agent.brokerage} | ${agent.office.street}, ${agent.office.city}, ${agent.office.state} ${agent.office.zip}`,
+  brokerLine: `${agent.brokerage} | CA DRE #${agent.brokerageDre} | Equal Housing Opportunity`,
+  disclaimer:
+    'Compass is a real estate broker licensed by the State of California and abides by Equal Housing Opportunity laws. License Number 01527365. All material presented herein is intended for informational purposes only and is compiled from sources deemed reliable but has not been verified. Changes in price, condition, sale, or withdrawal may be made without notice. No statement is made as to the accuracy of any description. All measurements and square footages are approximate.',
+} as const;
 
 export type MarketSlug = 'san-diego' | 'palm-springs' | 'big-bear';
 
@@ -76,13 +88,13 @@ export const markets: readonly Market[] = [
     region: 'Coastal',
     name: 'San Diego',
     shortName: 'San Diego',
-    tagline: 'La Jolla and the coast, from the inside',
+    tagline: 'Coast to Kensington, from the inside',
     pill: 'Coastal Luxury',
     blurb:
-      "I'm based in La Jolla and own three homes here, including two short-term rentals. I help clients buy and sell coastal and metro properties across Greater San Diego, and I'm rooted in the community as a garden club member, chapter leader for Gay 4 Good, a regular in two local running groups, and host of annual fundraisers for local causes.",
+      "My office is in La Jolla and home is Kensington, and I work all of Greater San Diego. I own and manage three short-term rentals here, in Mission Beach, Ocean Beach and Kensington, so I know the coastal and metro markets as an owner, not just an agent. I'm rooted in the community as a garden club member, chapter leader for Gay 4 Good, a regular in two local running groups, and host of annual fundraisers for local causes.",
     bullets: [
       'La Jolla, coastal and metro neighborhoods',
-      'Move-up buyers, second homes and condos',
+      'Move-up buyers, second homes, condos and short-term rentals',
       'Investment and 1031 exchange guidance',
     ],
     href: '/san-diego',
@@ -102,10 +114,10 @@ export const markets: readonly Market[] = [
     tagline: 'Mid-century, luxury and vacation rentals',
     pill: 'Desert Luxury',
     blurb:
-      'I own a six-bedroom vacation rental in Palm Springs, co-developed The Cole Hotel and ran it as General Manager, and completed a condo conversion project here. I also serve on the board of The Vista Las Palmas Neighborhood Foundation, which supports neighborhood preservation, safety and community-building, and I stay connected through a local running group.',
+      'I helped my husband complete Querencia Palms, a condo conversion that brought a new community to Palm Springs: Phases I and II sold out, every escrow opened at full price, and the first Phase III unit is already in escrow at full ask. I also own a six-bedroom vacation rental here and co-developed The Cole Hotel. I represent Vista Las Palmas at the monthly ONE-PS meetings (Organized Neighborhoods of Palm Springs), sit on its Neighborhoods of Distinction Awards committee and the Vista Las Palmas Neighbors Foundation board, and belong to the Desert Business Association.',
     bullets: [
       'Mid-century, luxury and STR-friendly areas',
-      'Hotel and condo project experience',
+      'Condo conversion and hotel project experience',
       'Wealth-building through desert real estate',
     ],
     href: '/palm-springs',
@@ -115,7 +127,7 @@ export const markets: readonly Market[] = [
       alt: 'Placeholder for a photo of a mid-century modern home against the San Jacinto Mountains in Palm Springs, California',
     },
     accent: 'var(--desert)',
-    keywords: ['Palm Springs', 'mid-century', 'vacation rental', 'Vista Las Palmas'],
+    keywords: ['Palm Springs', 'mid-century', 'vacation rental', 'Vista Las Palmas', 'Querencia Palms'],
   },
   {
     slug: 'big-bear',
@@ -125,10 +137,10 @@ export const markets: readonly Market[] = [
     tagline: 'Cabins, second homes and rental strategy',
     pill: 'Mountain Cabins',
     blurb:
-      'My husband and I rebuilt our personal-use cabin near Big Bear Mountain Resort, which gives me firsthand insight into what mountain ownership actually involves. I stay closely connected with local vacation rental owners, so clients get an inside track on rental trends and opportunities.',
+      'Our cabin near Big Bear Mountain Resort was the first home I ever bought on my own, so I know the first-time buyer process from the inside, and my husband and I rebuilt it ourselves. I have since helped cabin sellers here get a great price, and I stay closely connected with local vacation rental owners, so clients get an inside track on rental trends and opportunities.',
     bullets: [
       'Luxury cabins and character homes',
-      'Second homes with optional rental use',
+      'First-time buyers and second homes with optional rental use',
       'Practical guidance from an actual cabin owner',
     ],
     href: '/big-bear',
@@ -173,6 +185,11 @@ export const bio = {
     {
       label: 'Finance background',
       text: 'Former Personal Banker with securities and insurance licensing, bringing financial strategy to every transaction',
+    },
+    {
+      label: 'Celebrity Vacation Homes',
+      text: 'My short-term rentals in San Diego and Palm Springs are managed through Celebrity Vacation Homes, a separate business from my brokerage work with Compass',
+      href: 'https://celebrityvacationhomes.com',
     },
     {
       label: '50+ moves',

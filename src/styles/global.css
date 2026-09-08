@@ -13,13 +13,14 @@
   /* Text */
   --ink: #16181b;
   --ink-2: #41454c;
-  --muted: #767b83;
+  --muted: #646972; /* 5.1:1 on --bg, WCAG AA for small text */
   --on-ink: #f7f5f0;
   --on-ink-muted: #b9bcc2;
 
   /* Lines */
   --line: #e6e2da;
   --line-strong: #d0cabf;
+  --line-control: #b9b2a5; /* borders on buttons/inputs */
 
   /* Market accents (used sparingly: dots, hairlines) */
   --coastal: #4a6b80;
@@ -225,6 +226,14 @@ button {
   font-weight: 500;
 }
 
+sup.reg {
+  font-size: 0.55em;
+  line-height: 0;
+  vertical-align: super;
+  letter-spacing: 0;
+  margin-left: 0.04em;
+}
+
 /* Buttons & links --------------------------------------------------- */
 
 .btn {
@@ -271,7 +280,7 @@ button {
 .btn--ghost {
   background: transparent;
   color: var(--ink);
-  border-color: var(--line-strong);
+  border-color: var(--line-control);
 }
 
 .btn--ghost:hover {
