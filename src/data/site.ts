@@ -32,8 +32,8 @@ export const agent = {
   headshot: {
     src: '/images/david-weis-compass-real-estate-agent-san-diego-palm-springs-big-bear.jpg',
     alt: 'David Weis, Compass Broker Associate and REALTOR® serving San Diego, Palm Springs and Big Bear Lake, California',
-    width: 480,
-    height: 480,
+    width: 600,
+    height: 796,
   },
   /** Primary outbound property-search destination (Compass agent profile with listings). */
   compassProfile: 'https://www.compass.com/agents/david-weis/',

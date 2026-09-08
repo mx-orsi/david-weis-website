@@ -12,6 +12,7 @@ const projects = [
     market: 'Palm Springs',
     name: 'Querencia Palms',
     text: 'A condo conversion I helped my husband complete and bring into the community. Phases I and II sold out: eight of eight escrows opened at full-price offers, six units closed, and the first Phase III unit is already in escrow at full ask.',
+    logo: { src: '/images/querencia-palms-logo.png', alt: 'Querencia Palms logo: palm trees and the tagline Love where you live', width: 800, height: 626 },
   },
   {
     market: 'Palm Springs',
@@ -48,10 +49,17 @@ const projects = [
     <ul class="projects">
       {
         projects.map((p) => (
-          <li class="projects__item">
-            <span class="eyebrow">{p.market}</span>
-            <strong class="projects__name">{p.name}</strong>
-            <p>{p.text}</p>
+          <li class:list={['projects__item', { 'projects__item--logo': 'logo' in p }]}>
+            {'logo' in p && p.logo && (
+              <span class="projects__logo">
+                <img src={withBase(p.logo.src)} alt={p.logo.alt} width={p.logo.width} height={p.logo.height} loading="lazy" decoding="async" />
+              </span>
+            )}
+            <span class="projects__body">
+              <span class="eyebrow">{p.market}</span>
+              <strong class="projects__name">{p.name}</strong>
+              <p>{p.text}</p>
+            </span>
           </li>
         ))
       }
@@ -69,6 +77,35 @@ const projects = [
     gap: 0.25rem;
     padding: 1.1rem 0;
     border-bottom: 1px solid var(--line);
+  }
+  .projects__item--logo {
+    grid-template-columns: 132px minmax(0, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .projects__body {
+    display: grid;
+    gap: 0.25rem;
+  }
+  .projects__logo {
+    display: block;
+    padding: 0.4rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+  }
+  .projects__logo img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  @media (max-width: 540px) {
+    .projects__item--logo {
+      grid-template-columns: 1fr;
+    }
+    .projects__logo {
+      width: 160px;
+    }
   }
   .projects__name {
     font-family: var(--font-serif);

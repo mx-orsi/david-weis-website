@@ -24,12 +24,16 @@ file whenever he answers something.
 - **Accessibility:** audited with axe-core against WCAG 2.2 AA on desktop and
   phone: zero violations. Body text contrast was raised to pass AA.
 
+- **Max, 2026-09-08:** use the attached headshot (done, upscaled from 200 px);
+  Compass co-branding is fine for now; Querencia Palms logo added to Projects;
+  keep placeholder market photos for now, stock allowed if needed; footer
+  spread into a wide legal band with larger marks.
+
 ## Still open
 
-1. **Headshot.** The file he attached is 200 × 265 pixels, far too small for
-   the hero. We need the original export, at least 1200 px on the short side.
-   Suggested filename: `david-weis-compass-real-estate-agent-san-diego-palm-springs-big-bear.jpg`
-   (the site already uses that name for the interim 480 px Compass photo).
+1. **Headshot original.** The site now uses the photo he sent, but it is only
+   200 × 265 px and had to be upscaled, so it will look soft on sharp screens.
+   The original export (1200 px or more on the short side) would fix that.
 2. **Celebrity Vacation Homes link.** The site now links to
    celebrityvacationhomes.com from the footer and the About facts, labeled as
    a separate business not involving Compass. Is there a specific page that
@@ -43,6 +47,6 @@ file whenever he answers something.
 5. **Big Bear.** Any specific seller result he wants cited (e.g. sold over asking)?
 6. **davidweis.net.** Compass still lists david@davidweis.net as his IDX contact
    email. Does .net still forward, and should Compass be updated to .com?
-7. **Market photos.** Until he has his own, may we use free-license stock
-   (Unsplash/Pexels) as stand-ins for La Jolla, Palm Springs and Big Bear?
-8. **Compass co-branding rules.** Still waiting on his office.
+7. **Market photos.** Placeholders stay for now; free-license stock can be
+   dropped in on request.
+8. **Compass co-branding rules.** Fine for now per Max; final word from his office later.

@@ -35,13 +35,14 @@ const year = new Date().getFullYear();
               Search Homes on Compass <Icon name="arrow-ext" size={12} /><span class="sr-only">(opens in a new tab)</span>
             </a>
           </li>
-          <li>
-            <a href={agent.vacationRentals.url} target="_blank" rel="noopener noreferrer" class="site-footer__ext">
-              Vacation rentals: {agent.vacationRentals.name} <Icon name="arrow-ext" size={12} /><span class="sr-only">(opens in a new tab)</span>
-            </a>
-            <span class="site-footer__note">Independently operated. Compass is not involved in rentals.</span>
-          </li>
         </ul>
+        <div class="site-footer__rentals">
+          <span class="site-footer__label">Vacation rentals</span>
+          <a href={agent.vacationRentals.url} target="_blank" rel="noopener noreferrer" class="site-footer__ext">
+            {agent.vacationRentals.name} <Icon name="arrow-ext" size={12} /><span class="sr-only">(opens in a new tab)</span>
+          </a>
+          <span class="site-footer__note">Independently operated. Compass is not involved in rentals.</span>
+        </div>
       </nav>
 
       <div class="site-footer__col">
@@ -60,17 +61,30 @@ const year = new Date().getFullYear();
     </div>
 
     <div class="site-footer__legal">
-      <div class="site-footer__marks">
-        <img src={withBase('/images/equal-housing-opportunity-logo.png')} alt="Equal Housing Opportunity" width="481" height="514" loading="lazy" decoding="async" />
-        <img src={withBase('/images/realtor-logo.png')} alt="REALTOR®" width={248} height={286} loading="lazy" decoding="async" />
+      <div class="site-footer__legal-col">
+        <p class="eyebrow">Compliance</p>
+        <div class="site-footer__marks">
+          <img src={withBase('/images/equal-housing-opportunity-logo.png')} alt="Equal Housing Opportunity" width="481" height="514" loading="lazy" decoding="async" />
+          <img src={withBase('/images/realtor-logo.png')} alt="REALTOR®" width="248" height="286" loading="lazy" decoding="async" />
+        </div>
       </div>
-      <p class="site-footer__lines">
-        <span>{agent.name} | <Title /> | CA DRE #{agent.dre}</span>
-        <span>{legal.officeLine}</span>
-        <span>{legal.brokerLine}</span>
-      </p>
-      <p class="site-footer__disclaimer">{legal.disclaimer}</p>
+      <div class="site-footer__legal-col">
+        <p class="eyebrow">Licensing</p>
+        <p class="site-footer__lines">
+          <span>{agent.name} | <Title /> | CA DRE #{agent.dre}</span>
+          <span>{legal.officeLine}</span>
+          <span>{legal.brokerLine}</span>
+        </p>
+      </div>
+      <div class="site-footer__legal-col site-footer__legal-col--wide">
+        <p class="eyebrow">Disclosure</p>
+        <p class="site-footer__disclaimer">{legal.disclaimer}</p>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
       <p class="site-footer__copy">© {year} {agent.name} · <Title /> · CA DRE #{agent.dre}</p>
+      <a class="site-footer__top" href="#main">Back to top <Icon name="arrow-right" size={12} /></a>
     </div>
   </div>
 </footer>
@@ -79,16 +93,19 @@ const year = new Date().getFullYear();
   .site-footer {
     background: var(--surface);
     border-top: 1px solid var(--line);
-    padding-block: 2.5rem 3rem;
+    padding-block: 2.5rem 2.5rem;
   }
   .site-footer__trace {
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
     opacity: 0.9;
   }
+
+  /* Row 1: lockup + link columns */
   .site-footer__grid {
     display: grid;
-    grid-template-columns: 1.5fr 0.9fr 1.3fr 1.1fr;
-    gap: 3rem 2rem;
+    grid-template-columns: 1.7fr 0.8fr 1.3fr 1.1fr;
+    gap: 3rem 2.5rem;
+    align-items: start;
   }
   .site-footer__lockup {
     display: flex;
@@ -98,9 +115,9 @@ const year = new Date().getFullYear();
   .site-footer__col ul {
     list-style: none;
     display: grid;
-    gap: 0.55rem;
+    gap: 0.6rem;
     margin-top: 1.1rem;
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     color: var(--ink-2);
     line-height: 1.6;
   }
@@ -120,8 +137,24 @@ const year = new Date().getFullYear();
     vertical-align: -0.05em;
     margin-left: 0.3em;
   }
+  .site-footer__rentals {
+    display: grid;
+    gap: 0.25rem;
+    margin-top: 1.6rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+  .site-footer__label {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
   .site-footer__note {
-    display: block;
     font-size: 0.75rem;
     color: var(--muted);
     line-height: 1.5;
@@ -136,8 +169,8 @@ const year = new Date().getFullYear();
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     border: 1px solid var(--line-control);
     border-radius: 999px;
     transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
@@ -147,48 +180,94 @@ const year = new Date().getFullYear();
     color: var(--ink);
   }
 
+  /* Row 2: wide legal band */
   .site-footer__legal {
-    margin-top: 3rem;
-    padding-top: 1.75rem;
+    display: grid;
+    grid-template-columns: 0.9fr 1.5fr 1.9fr;
+    gap: 2.5rem 3rem;
+    margin-top: 3.5rem;
+    padding-top: 2.25rem;
     border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.8125rem;
+    line-height: 1.65;
+  }
+  .site-footer__legal-col {
     display: grid;
     gap: 1rem;
-    color: var(--muted);
-    font-size: 0.75rem;
-    line-height: 1.6;
+    align-content: start;
   }
   .site-footer__marks {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem;
   }
   .site-footer__marks img {
-    height: 44px;
+    height: 76px;
     width: auto;
   }
   .site-footer__lines {
     display: grid;
-    gap: 0.15rem;
+    gap: 0.3rem;
     color: var(--ink-2);
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     font-weight: 400;
   }
   .site-footer__disclaimer {
-    max-width: 78ch;
+    max-width: 62ch;
   }
 
-  @media (max-width: 899px) {
+  /* Row 3 */
+  .site-footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+  .site-footer__top {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: var(--ink-2);
+  }
+  .site-footer__top svg {
+    transform: rotate(-90deg);
+  }
+  .site-footer__top:hover {
+    color: var(--ink);
+  }
+
+  @media (max-width: 1023px) {
     .site-footer__grid {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
     }
     .site-footer__lockup {
       grid-column: 1 / -1;
     }
+    .site-footer__legal {
+      grid-template-columns: 1fr 1fr;
+    }
+    .site-footer__legal-col--wide {
+      grid-column: 1 / -1;
+    }
   }
-  @media (max-width: 540px) {
-    .site-footer__grid {
+  @media (max-width: 640px) {
+    .site-footer__grid,
+    .site-footer__legal {
       grid-template-columns: 1fr;
       gap: 2.25rem;
+    }
+    .site-footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 </style>
