@@ -12,7 +12,7 @@ resize and convert to WebP/AVIF during the build). No text baked into images.
 
 | Slot | Current placeholder | Needed | Suggested filename |
 | --- | --- | --- | --- |
-| Home hero portrait | 480×480 headshot pulled from the Compass profile (too small for retina screens). The file David sent on 2026-09-08 is only 200×265 and cannot be used. | High-resolution original of the same or a newer portrait, at least 1200px on the short side, vertical or square crop with headroom | `david-weis-compass-real-estate-agent-san-diego-palm-springs-big-bear.jpg` |
+| Home hero portrait | Done. David's 1365×2048 original (kept in `assets-source/`), cropped 4:5 to 1000×1250 with a 500px variant | Nothing further needed | `david-weis-compass-real-estate-agent-san-diego-palm-springs-big-bear.jpg` |
 
 Also useful: a second, more environmental portrait (e.g. on the La Jolla
 coast) for the Contact page and market pages later.
@@ -55,8 +55,8 @@ Suggested filenames: `the-cole-hotel-palm-springs.jpg`, `palm-springs-condo-conv
 
 ## 5. Social share image (optional)
 
-A 1200×630 branded image for link previews. Until supplied, the headshot is
-used as the Open Graph image.
+Done: `david-weis-share-image.jpg` (1200×630, logo plus portrait) is the Open
+Graph image on every page. Can be redesigned any time.
 
 ## 6. Brand assets (not images, but needed)
 

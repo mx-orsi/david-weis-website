@@ -31,9 +31,7 @@ file whenever he answers something.
 
 ## Still open
 
-1. **Headshot original.** The site now uses the photo he sent, but it is only
-   200 × 265 px and had to be upscaled, so it will look soft on sharp screens.
-   The original export (1200 px or more on the short side) would fix that.
+1. ~~Headshot original.~~ Received 2026-09-08 (1365 × 2048). In use.
 2. **Celebrity Vacation Homes link.** The site now links to
    celebrityvacationhomes.com from the footer and the About facts, labeled as
    a separate business not involving Compass. Is there a specific page that

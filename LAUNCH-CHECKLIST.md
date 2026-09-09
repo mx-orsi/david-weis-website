@@ -5,9 +5,7 @@ Grouped by who has to act. Tick items off as they land.
 
 ## 1. Needs David
 
-- [ ] **Original headshot export** (1200 px or wider on the short side). The
-      hero currently uses the 480 px Compass crop; his arms-crossed portrait is
-      saved as `…-portrait.jpg` but is too small to use.
+- [x] **Original headshot export** received 2026-09-08 and in use.
 - [ ] **Confirm copy facts:** Querencia Palms numbers and wording; Vista Las
       Palmas Neighbors Foundation board seat still accurate; any Big Bear seller
       result to quote.
@@ -44,7 +42,7 @@ Grouped by who has to act. Tick items off as they land.
 - [ ] Point davidweis.com at the host; add HTTPS; keep www and apex both working.
 - [ ] Production build uses root paths automatically (no `SITE_BASE`), which
       also removes the `noindex` tag. Verify after the first deploy.
-- [ ] Add a branded 1200×630 share image (currently the headshot).
+- [x] Branded 1200×630 share image added (`david-weis-share-image.jpg`).
 - [ ] Google Search Console: verify, submit `/sitemap-index.xml`.
 - [ ] Google Business Profile: link the site; confirm Suite 210 matches.
 - [ ] Analytics (GA4 or a privacy-light option like Plausible) if David wants numbers.
