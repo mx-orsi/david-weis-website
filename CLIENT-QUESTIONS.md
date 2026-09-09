@@ -29,6 +29,10 @@ file whenever he answers something.
   keep placeholder market photos for now, stock allowed if needed; footer
   spread into a wide legal band with larger marks.
 
+- **David, 2026-09-08 (via text):** unsure about the market pages; asked to see
+  them built without pictures so he can judge which photos fit. Done: all three
+  pages are fully written with labeled photo placeholders.
+
 ## Still open
 
 1. ~~Headshot original.~~ Received 2026-09-08 (1365 × 2048). In use.
@@ -49,3 +53,7 @@ file whenever he answers something.
    Cove, a Palm Springs mid-century home, Boulder Bay at Big Bear Lake). See
    `PHOTO-CREDITS.md`. David's own photos can replace them any time.
 8. **Compass co-branding rules.** Fine for now per Max; final word from his office later.
+9. **Market page copy.** David to read San Diego, Palm Springs and Big Bear and
+   mark up anything wrong, especially the neighborhood notes, which are general
+   descriptions for him to correct or cut. Each photo placeholder names the shot
+   we'd suggest; he can swap in whatever he has.

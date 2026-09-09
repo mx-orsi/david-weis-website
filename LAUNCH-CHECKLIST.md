@@ -22,9 +22,10 @@ Grouped by who has to act. Tick items off as they land.
 
 ## 2. Pages still to build
 
-- [ ] **San Diego, Palm Springs, Big Bear** market pages (currently stubs):
-      neighborhood sections, buyer/seller/investor guidance, rental notes, FAQs,
-      per-market Compass search links, local SEO copy.
+- [x] **San Diego, Palm Springs, Big Bear** market pages built: intro, owner's
+      notes, neighborhoods, buyer/seller/investor guidance, FAQ with FAQPage
+      schema, breadcrumbs, per-market Compass search. Photos are placeholders
+      until David chooses images; copy awaits his read-through.
 - [ ] **Projects** page: full write-ups with photos for Querencia Palms, The Cole
       Hotel, the six-bedroom rental, the Big Bear cabin, the San Diego rentals.
 - [ ] **Contact** page: a working form (needs a form service such as Formspree,

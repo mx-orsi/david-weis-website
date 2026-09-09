@@ -2,6 +2,21 @@
 import PcbTrace from './PcbTrace.astro';
 import SearchCTA from './SearchCTA.astro';
 import { withBase } from '../lib/paths';
+import type { MarketSlug } from '../data/site';
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  body?: string;
+  /** Point the search button at one market's Compass search */
+  market?: MarketSlug;
+}
+const {
+  eyebrow = 'Buying · Selling · Investing',
+  title = 'One conversation, three markets',
+  body = "Whether you're weighing a La Jolla condo, a Palm Springs mid-century or a Big Bear cabin, start with someone who owns and operates in all three.",
+  market,
+} = Astro.props;
 ---
 
 <section class="cta section section--tight" aria-labelledby="cta-title">
@@ -10,15 +25,12 @@ import { withBase } from '../lib/paths';
       <PcbTrace variant="corner" class="cta__trace cta__trace--tl" />
       <PcbTrace variant="corner" class="cta__trace cta__trace--br" />
       <div class="cta__copy">
-        <p class="eyebrow">Buying · Selling · Investing</p>
-        <h2 id="cta-title">One conversation, three markets</h2>
-        <p>
-          Whether you're weighing a La Jolla condo, a Palm Springs mid-century or a Big Bear cabin,
-          start with someone who owns and operates in all three.
-        </p>
+        <p class="eyebrow">{eyebrow}</p>
+        <h2 id="cta-title">{title}</h2>
+        <p>{body}</p>
       </div>
       <div class="cta__actions">
-        <SearchCTA variant="light" />
+        <SearchCTA variant="light" market={market} />
         <a class="btn btn--outline-light" href={withBase('/contact')}>Contact David</a>
       </div>
     </div>

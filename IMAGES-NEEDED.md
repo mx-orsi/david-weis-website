@@ -63,3 +63,15 @@ Graph image on every page. Can be redesigned any time.
 - The letterhead / brand guide PDF, so we can match the PCB-trace motif exactly
   rather than our current interpretation.
 - Confirmation of brand colors, if any beyond black/white.
+
+## 7. Market page photo slots (added 2026-09-08)
+
+Each market page has four labeled placeholders: one 4:5 hero portrait-orientation
+slot and three 4:3 gallery slots. The suggested subject is printed inside each
+slot on the page. Landscape or portrait originals both work; we crop.
+
+| Page | Hero (4:5) | Gallery (4:3 × 3) |
+| --- | --- | --- |
+| San Diego | La Jolla Cove or Windansea, late afternoon | Kensington streetscape · Mission Beach boardwalk or bay · interior of one of David's rentals |
+| Palm Springs | Mid-century home with the San Jacinto Mountains | Querencia Palms exterior or courtyard · The Cole Hotel pool · Vista Las Palmas street with the mountain |
+| Big Bear | Lake view with cabins in the pines, or the resort in early snow | David's cabin exterior · cabin interior · Big Bear Mountain Resort slopes |
