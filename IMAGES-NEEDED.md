@@ -45,13 +45,15 @@ Stock stand-ins from Unsplash are in place for all three cards (see `PHOTO-CREDI
 
 The page is built with labeled 4:3 placeholders; each prints its suggested subject. Landscape originals preferred.
 
-| Project | Slots |
+| Project | Slots (4 each; the first leads the card when there is no logo) |
 | --- | --- |
 | Querencia Palms | Pool, spa and courtyard · a finished two-bedroom interior · koi pond at the entry · mountain view from a private patio |
-| The Cole Hotel | Pool at dusk · guest room · bar or restaurant |
-| Six-bedroom Palm Springs rental | Exterior with the pool · great room · primary bedroom |
-| Big Bear cabin | Before the rebuild · exterior after · living room with the fireplace |
-| San Diego rentals | Mission Beach · Ocean Beach · Kensington (one each) |
+| The Cole Hotel | Pool at dusk · exterior with the Kaptur roofline · guest room · bar or restaurant |
+| Six-bedroom Palm Springs rental | Exterior with the pool (lead) · great room · primary bedroom · outdoor dining at dusk |
+| Big Bear cabin | Exterior after the rebuild (lead) · before the rebuild · living room with the fireplace · deck with the mountain view |
+| San Diego rentals | Mission Beach boardwalk (lead) · Mission Beach rental · Ocean Beach rental · Kensington rental |
+
+Logos in place: Querencia Palms (from David) and The Cole Hotel (SVG from thecolehotel.com).
 
 Suggested filenames: `querencia-palms-pool-palm-springs.jpg`, `the-cole-hotel-pool-palm-springs.jpg`, `big-bear-cabin-rebuild-after.jpg`, etc.
 

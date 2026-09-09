@@ -65,9 +65,15 @@ export const projects: readonly Project[] = [
       { label: 'Built', value: '1959, architect Hugh Kaptur' },
       { label: 'Amenities', value: 'Pool, hot tub, restaurant and bar, outdoor fireplace' },
     ],
-    results: [{ value: '5-star', label: 'Ratings across every platform' }],
+    results: [
+      { value: '30', label: 'Rooms, adults only' },
+      { value: '1959', label: 'Hugh Kaptur original' },
+      { value: '5-star', label: 'Ratings across every platform' },
+      { value: 'GM', label: 'Ran day-to-day operations' },
+    ],
     link: { label: 'Visit thecolehotel.com', href: 'https://www.thecolehotel.com/' },
-    photos: ['Pool at dusk', 'Guest room', 'Bar or restaurant'],
+    logo: { src: '/images/the-cole-hotel-logo.svg', alt: 'The Cole Hotel logo', width: 211, height: 86 },
+    photos: ['Pool at dusk', 'Exterior with the Kaptur roofline', 'Guest room', 'Bar or restaurant'],
   },
   {
     slug: 'palm-springs-vacation-rental',
@@ -83,8 +89,14 @@ export const projects: readonly Project[] = [
       { label: 'Bedrooms', value: 'Six' },
       { label: 'Bookings', value: 'Celebrity Vacation Homes, independent of Compass' },
     ],
+    results: [
+      { value: '6', label: 'Bedrooms' },
+      { value: 'Permitted', label: 'Palm Springs vacation rental' },
+      { value: 'Owner-run', label: 'Operated by me' },
+      { value: 'Booked', label: 'Through Celebrity Vacation Homes' },
+    ],
     link: { label: 'See the rentals', href: 'https://celebrityvacationhomes.com' },
-    photos: ['Exterior with the pool', 'Great room', 'Primary bedroom'],
+    photos: ['Exterior with the pool', 'Great room', 'Primary bedroom', 'Outdoor dining at dusk'],
   },
   {
     slug: 'big-bear-cabin',
@@ -102,7 +114,13 @@ export const projects: readonly Project[] = [
       { label: 'Use', value: 'Personal cabin' },
       { label: 'Scope', value: 'Full rebuild' },
     ],
-    photos: ['Before the rebuild', 'Exterior after', 'Living room with the fireplace'],
+    results: [
+      { value: '1st', label: 'Home I bought on my own' },
+      { value: 'Full', label: 'Rebuild, roof to systems' },
+      { value: 'Resort', label: 'Near Big Bear Mountain Resort' },
+      { value: 'Personal', label: 'Use, not rented' },
+    ],
+    photos: ['Exterior after the rebuild', 'Before the rebuild', 'Living room with the fireplace', 'Deck with the mountain view'],
   },
   {
     slug: 'san-diego-rentals',
@@ -119,7 +137,13 @@ export const projects: readonly Project[] = [
       { label: 'Licensing', value: 'City of San Diego Short-Term Residential Occupancy program' },
       { label: 'Bookings', value: 'Celebrity Vacation Homes, independent of Compass' },
     ],
+    results: [
+      { value: '3', label: 'Neighborhoods' },
+      { value: 'Licensed', label: 'City of San Diego STRO program' },
+      { value: 'Owner-run', label: 'Managed by me' },
+      { value: 'Booked', label: 'Through Celebrity Vacation Homes' },
+    ],
     link: { label: 'See the rentals', href: 'https://celebrityvacationhomes.com' },
-    photos: ['Mission Beach rental', 'Ocean Beach rental', 'Kensington rental'],
+    photos: ['Mission Beach boardwalk', 'Mission Beach rental', 'Ocean Beach rental', 'Kensington rental'],
   },
 ];

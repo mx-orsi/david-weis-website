@@ -9,8 +9,6 @@ import { withBase } from '../lib/paths';
 const title = 'Projects | Querencia Palms, The Cole Hotel & Big Bear Cabin | David Weis';
 const description =
   'Development and investment projects by David Weis across Palm Springs, San Diego and Big Bear Lake: the Querencia Palms condo conversion, The Cole Hotel restoration, a Big Bear cabin rebuild and short-term rentals he owns and operates.';
-const featured = projects.filter((p) => p.featured);
-const rest = projects.filter((p) => !p.featured);
 ---
 
 <BaseLayout {title} {description}>
@@ -46,9 +44,8 @@ const rest = projects.filter((p) => !p.featured);
 
   <section class="pr-list section" aria-label="Projects">
     <div class="container">
-      {featured.map((p) => <ProjectCase project={p} />)}
-      <div class="pr-list__rest">
-        {rest.map((p, i) => <ProjectCase project={p} flip={i % 2 === 1} />)}
+      <div class="pr-list__cases">
+        {projects.map((p) => <ProjectCase project={p} />)}
       </div>
     </div>
   </section>
@@ -130,8 +127,9 @@ const rest = projects.filter((p) => !p.featured);
   .pr-list {
     padding-top: clamp(1.5rem, 4vw, 3rem);
   }
-  .pr-list__rest {
-    margin-top: clamp(1rem, 3vw, 2rem);
+  .pr-list__cases {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
   }
   @media (max-width: 1023px) {
     .pr-index {

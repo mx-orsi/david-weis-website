@@ -70,3 +70,6 @@ file whenever he answers something.
     To receive submissions directly we need a form service (Formspree or Basin,
     both have free tiers); then one setting turns it on. Also confirm the promise
     on the form: "I reply personally, usually within a business day."
+13. **The Cole Hotel logo.** The Projects page now shows the hotel's logo, taken
+    from thecolehotel.com. Since the hotel appears to be under new operation,
+    confirm David is comfortable displaying it (or has the owner's OK).
