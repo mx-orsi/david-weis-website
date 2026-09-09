@@ -19,13 +19,32 @@ const steps = [
 
 <BaseLayout {title} {description}>
   <section class="ct-hero" aria-labelledby="ct-title">
-    <div class="container ct-hero__copy">
-      <p class="eyebrow eyebrow--dot">Contact</p>
-      <h1 id="ct-title">Let's start with a conversation</h1>
-      <p class="lede">
-        Buying, selling or thinking about an investment in San Diego, Palm Springs or Big Bear? Call, text
-        or send a note. I answer my own phone and my own email.
-      </p>
+    <div class="container ct-hero__grid">
+      <div class="ct-hero__copy">
+        <p class="eyebrow eyebrow--dot">Contact</p>
+        <h1 id="ct-title">Let's start with a conversation</h1>
+        <p class="lede">
+          Buying, selling or thinking about an investment in San Diego, Palm Springs or Big Bear? Call, text
+          or send a note. I answer my own phone and my own email.
+        </p>
+        <ul class="ct-hero__quick" aria-label="Quick contact">
+          <li><Icon name="phone" size={15} /><a href={agent.phoneHref}>{agent.phone}</a></li>
+          <li><Icon name="mail" size={15} /><a href={`mailto:${agent.email}`}>{agent.email}</a></li>
+        </ul>
+      </div>
+      <figure class="ct-hero__photo">
+        <img
+          src={withBase('/images/david-weis-compass-broker-associate-la-jolla.jpg')}
+          srcset={`${withBase('/images/david-weis-compass-broker-associate-la-jolla-500.jpg')} 500w, ${withBase('/images/david-weis-compass-broker-associate-la-jolla.jpg')} 1000w`}
+          sizes="(min-width: 900px) 480px, 100vw"
+          alt="David Weis, Compass Broker Associate and REALTOR®, based in La Jolla"
+          width="1000"
+          height="800"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </figure>
     </div>
   </section>
 
@@ -100,10 +119,54 @@ const steps = [
   .ct-hero {
     padding-block: clamp(3rem, 7vw, 5.5rem) 0;
   }
+  .ct-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
   .ct-hero__copy {
     display: grid;
     gap: 1.25rem;
     justify-items: start;
+  }
+  .ct-hero__quick {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.75rem;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: var(--ink-2);
+  }
+  .ct-hero__quick li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+  }
+  .ct-hero__quick svg {
+    color: var(--muted);
+  }
+  .ct-hero__quick a {
+    text-decoration: none;
+  }
+  .ct-hero__quick a:hover {
+    text-decoration: underline;
+  }
+  .ct-hero__photo {
+    justify-self: end;
+    width: min(100%, 480px);
+    aspect-ratio: 5 / 4;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px var(--line),
+      0 30px 60px -30px rgba(22, 24, 27, 0.35);
+  }
+  .ct-hero__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .ct-hero__copy h1 {
     font-size: clamp(2.5rem, 4.8vw, 3.9rem);
@@ -281,8 +344,13 @@ const steps = [
     max-width: 32ch;
   }
   @media (max-width: 899px) {
+    .ct-hero__grid,
     .ct__grid {
       grid-template-columns: minmax(0, 1fr);
+    }
+    .ct-hero__photo {
+      justify-self: start;
+      width: min(100%, 420px);
     }
     .ct-steps {
       grid-template-columns: 1fr;

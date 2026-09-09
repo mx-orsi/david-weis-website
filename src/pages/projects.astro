@@ -14,28 +14,41 @@ const rest = projects.filter((p) => !p.featured);
 ---
 
 <BaseLayout {title} {description}>
-  <section class="pr-hero" aria-labelledby="pr-title">
-    <div class="container pr-hero__grid">
-      <div class="pr-hero__copy">
-        <p class="eyebrow eyebrow--dot">Projects</p>
-        <h1 id="pr-title">Built, rebuilt and operated</h1>
-        <p class="lede">
-          A condo conversion, a boutique hotel, a cabin rebuild and the rentals I run myself, across all
-          three markets. The advice I give clients comes from doing this work with my own money.
-        </p>
-        <div class="pr-hero__actions">
+  <section class="pr-head" aria-labelledby="pr-title">
+    <div class="container">
+      <div class="pr-head__grid">
+        <div class="pr-head__title">
+          <p class="eyebrow eyebrow--dot">Projects</p>
+          <h1 id="pr-title">Built, rebuilt and operated</h1>
+        </div>
+        <div class="pr-head__aside">
+          <p class="lede">
+            A condo conversion, a boutique hotel, a cabin rebuild and the rentals I run myself, across all
+            three markets. The advice I give clients comes from doing this work with my own money.
+          </p>
+          <p class="pr-head__stats">
+            {projectStats.map((st, i) => (
+              <span class="pr-head__stat">
+                {i > 0 && <span class="pr-head__dot" aria-hidden="true">·</span>}
+                <strong>{st.value}</strong> {st.label}
+              </span>
+            ))}
+          </p>
           <a class="btn" href={withBase('/contact')}>Talk about a project</a>
-          <a class="link-arrow" href="#querencia-palms">Start with Querencia Palms <span aria-hidden="true">↓</span></a>
         </div>
       </div>
-      <ul class="pr-stats" aria-label="By the numbers">
-        {projectStats.map((s) => (
+
+      <ol class="pr-index" aria-label="Projects on this page">
+        {projects.map((p, i) => (
           <li>
-            <strong>{s.value}</strong>
-            <span>{s.label}</span>
+            <a href={`#${p.slug}`}>
+              <span class="pr-index__num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="pr-index__name">{p.name}</span>
+              <span class="pr-index__meta">{p.market} · {p.kind}</span>
+            </a>
           </li>
         ))}
-      </ul>
+      </ol>
     </div>
   </section>
 
@@ -58,56 +71,88 @@ const rest = projects.filter((p) => !p.featured);
 </BaseLayout>
 
 <style>
-  .pr-hero {
-    padding-block: clamp(3rem, 7vw, 5.5rem) clamp(1.5rem, 4vw, 3rem);
+  .pr-head {
+    padding-block: clamp(3rem, 7vw, 5.5rem) 0;
   }
-  .pr-hero__grid {
+  .pr-head__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-    gap: clamp(2.5rem, 6vw, 5rem);
-    align-items: center;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: end;
   }
-  .pr-hero__copy {
+  .pr-head__title {
     display: grid;
     gap: 1.25rem;
+  }
+  .pr-head__title h1 {
+    font-size: clamp(2.8rem, 5.4vw, 4.4rem);
+    max-width: 12ch;
+  }
+  .pr-head__aside {
+    display: grid;
+    gap: 1.1rem;
     justify-items: start;
   }
-  .pr-hero__copy h1 {
-    font-size: clamp(2.6rem, 5vw, 4rem);
-    max-width: 14ch;
-  }
-  .pr-hero__actions {
+  .pr-head__stats {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 0.75rem 1.5rem;
-    margin-top: 0.25rem;
+    gap: 0.35rem 0.6rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
   }
-  .pr-stats {
+  .pr-head__stats strong {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-right: 0.15em;
+  }
+  .pr-head__stat {
+    white-space: nowrap;
+  }
+  .pr-head__dot {
+    color: var(--line-control);
+    margin-right: 0.6rem;
+  }
+
+  .pr-index {
     list-style: none;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line-strong);
   }
-  .pr-stats li {
+  .pr-index a {
     display: grid;
-    gap: 0.35rem;
-    padding: 1.4rem 1.4rem 1.3rem;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-card);
+    gap: 0.3rem;
+    text-decoration: none;
+    color: var(--ink);
   }
-  .pr-stats strong {
-    font-family: var(--font-serif);
-    font-size: 2.6rem;
+  .pr-index__num {
+    font-size: 0.6875rem;
     font-weight: 500;
-    line-height: 1;
+    letter-spacing: 0.2em;
+    color: var(--muted);
   }
-  .pr-stats span {
-    font-size: 0.8125rem;
-    color: var(--ink-2);
-    line-height: 1.4;
+  .pr-index__name {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.15;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.18em;
+    transition: text-decoration-color 0.2s var(--ease);
+  }
+  .pr-index a:hover .pr-index__name {
+    text-decoration-color: var(--ink);
+  }
+  .pr-index__meta {
+    font-size: 0.75rem;
+    color: var(--muted);
   }
   .pr-list {
     padding-top: clamp(1.5rem, 4vw, 3rem);
@@ -115,14 +160,32 @@ const rest = projects.filter((p) => !p.featured);
   .pr-list__rest {
     margin-top: clamp(1rem, 3vw, 2rem);
   }
-  @media (max-width: 899px) {
-    .pr-hero__grid {
-      grid-template-columns: minmax(0, 1fr);
+  @media (max-width: 1023px) {
+    .pr-index {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
-  @media (max-width: 480px) {
-    .pr-stats {
-      grid-template-columns: 1fr;
+  @media (max-width: 899px) {
+    .pr-head__grid {
+      grid-template-columns: minmax(0, 1fr);
+      align-items: start;
     }
+  }
+  @media (max-width: 600px) {
+    .pr-index {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+    .pr-index li {
+      border-bottom: 1px solid var(--line);
+    }
+    .pr-index a {
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+      grid-template-areas: 'num name' 'num meta';
+      padding: 0.8rem 0;
+    }
+    .pr-index__num { grid-area: num; }
+    .pr-index__name { grid-area: name; }
+    .pr-index__meta { grid-area: meta; }
   }
 </style>

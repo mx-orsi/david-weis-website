@@ -20,10 +20,10 @@ export interface Project {
 }
 
 export const projectStats = [
-  { value: '3', label: 'California markets' },
-  { value: '1', label: 'Condo conversion, sold out' },
-  { value: '1', label: 'Boutique hotel restored' },
-  { value: '4', label: 'Rentals owned and operated' },
+  { value: '3', label: 'markets' },
+  { value: '1', label: 'condo conversion, sold out' },
+  { value: '1', label: 'boutique hotel' },
+  { value: '4', label: 'rentals owned and operated' },
 ] as const;
 
 export const projects: readonly Project[] = [
