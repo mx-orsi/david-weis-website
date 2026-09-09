@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Icon from '../components/Icon.astro';
 import Title from '../components/Title.astro';
-import { agent, markets } from '../data/site';
+import { agent } from '../data/site';
 import { withBase } from '../lib/paths';
 
 const title = 'Contact David Weis | Compass Broker Associate in La Jolla, CA';
@@ -19,33 +19,17 @@ const steps = [
 
 <BaseLayout {title} {description}>
   <section class="ct-hero" aria-labelledby="ct-title">
-    <div class="container ct-hero__grid">
-      <div class="ct-hero__copy">
-        <p class="eyebrow eyebrow--dot">Contact</p>
-        <h1 id="ct-title">Let's start with a conversation</h1>
-        <p class="lede">
-          Buying, selling or thinking about an investment in San Diego, Palm Springs or Big Bear? Call, text
-          or send a note. I answer my own phone and my own email.
-        </p>
-        <ul class="ct-hero__quick" aria-label="Quick contact">
-          <li><Icon name="phone" size={15} /><a href={agent.phoneHref}>{agent.phone}</a></li>
-          <li><Icon name="mail" size={15} /><a href={`mailto:${agent.email}`}>{agent.email}</a></li>
-        </ul>
-      </div>
-      <div class="ct-hero__markets">
-        <p class="eyebrow">Markets</p>
-        <ul class="ct-card__markets">
-          {markets.map((m) => (
-            <li>
-              <a href={withBase(m.href)}>
-                <span class="ct-card__market-name">{m.name}</span>
-                <span class="ct-card__market-region">{m.region}</span>
-                <Icon name="arrow-right" size={13} />
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div class="container ct-hero__copy">
+      <p class="eyebrow eyebrow--dot">Contact</p>
+      <h1 id="ct-title">Let's start with a conversation</h1>
+      <p class="lede">
+        Buying, selling or thinking about an investment in San Diego, Palm Springs or Big Bear? Call, text
+        or send a note. I answer my own phone and my own email.
+      </p>
+      <ul class="ct-hero__quick" aria-label="Quick contact">
+        <li><Icon name="phone" size={15} /><a href={agent.phoneHref}>{agent.phone}</a></li>
+        <li><Icon name="mail" size={15} /><a href={`mailto:${agent.email}`}>{agent.email}</a></li>
+      </ul>
     </div>
   </section>
 
@@ -106,12 +90,6 @@ const steps = [
   .ct-hero {
     padding-block: clamp(3rem, 7vw, 5.5rem) 0;
   }
-  .ct-hero__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    gap: clamp(2.5rem, 6vw, 5rem);
-    align-items: center;
-  }
   .ct-hero__copy {
     display: grid;
     gap: 1.25rem;
@@ -143,17 +121,6 @@ const steps = [
   }
   .ct-hero__quick a:hover {
     text-decoration: underline;
-  }
-  .ct-hero__markets {
-    justify-self: end;
-    width: min(100%, 420px);
-    display: grid;
-    gap: 0.75rem;
-    padding: 1.6rem 1.75rem 0.9rem;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-card);
   }
   .ct {
     padding-top: clamp(2rem, 5vw, 3.5rem);
@@ -237,41 +204,6 @@ const steps = [
     padding-top: 0.75rem;
     border-top: 1px solid var(--line);
   }
-  .ct-card__markets {
-    list-style: none;
-    display: grid;
-  }
-  .ct-card__markets a {
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.8rem 0;
-    border-bottom: 1px solid var(--line);
-    text-decoration: none;
-    color: var(--ink);
-  }
-  .ct-card__markets li:last-child a {
-    border-bottom: 0;
-  }
-  .ct-card__market-name {
-    font-family: var(--font-serif);
-    font-size: 1.2rem;
-    font-weight: 500;
-  }
-  .ct-card__market-region {
-    font-size: 0.625rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .ct-card__markets svg {
-    color: var(--muted);
-    transition: transform 0.2s var(--ease);
-  }
-  .ct-card__markets a:hover svg {
-    transform: translateX(3px);
-  }
   .ct-card__social {
     list-style: none;
     display: flex;
@@ -323,12 +255,8 @@ const steps = [
     max-width: 32ch;
   }
   @media (max-width: 899px) {
-    .ct-hero__grid,
     .ct__grid {
       grid-template-columns: minmax(0, 1fr);
-    }
-    .ct-hero__markets {
-      justify-self: start;
     }
     .ct-steps {
       grid-template-columns: 1fr;
