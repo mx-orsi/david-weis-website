@@ -47,6 +47,7 @@ file whenever he answers something.
 5. **Big Bear.** Any specific seller result he wants cited (e.g. sold over asking)?
 6. **davidweis.net.** Compass still lists david@davidweis.net as his IDX contact
    email. Does .net still forward, and should Compass be updated to .com?
-7. **Market photos.** Placeholders stay for now; free-license stock can be
-   dropped in on request.
+7. **Market photos.** Free-license Unsplash photos are now in place (La Jolla
+   Cove, a Palm Springs mid-century home, Boulder Bay at Big Bear Lake). See
+   `PHOTO-CREDITS.md`. David's own photos can replace them any time.
 8. **Compass co-branding rules.** Fine for now per Max; final word from his office later.

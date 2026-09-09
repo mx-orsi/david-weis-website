@@ -10,6 +10,8 @@ interface Props {
 }
 const { slug, title } = Astro.props;
 const m = getMarket(slug);
+const src = withBase(m.image.src);
+const small = m.image.src.endsWith('.jpg') ? withBase(m.image.src.replace(/\.jpg$/, '-800.jpg')) : undefined;
 ---
 
 <StubPage eyebrow={`${m.region} · ${m.pill}`} title={title} lede={m.blurb} accent={m.accent}>
@@ -20,7 +22,17 @@ const m = getMarket(slug);
 
   <div class="market-stub">
     <div class="market-stub__media">
-      <img src={withBase(m.image.src)} alt={m.image.alt} width="800" height="600" loading="lazy" decoding="async" />
+      <img
+        src={src}
+        srcset={small ? `${small} 800w, ${src} 1600w` : undefined}
+        sizes={small ? '(min-width: 900px) 40vw, 100vw' : undefined}
+        alt={m.image.alt}
+        width="1600"
+        height="1200"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
     </div>
     <ul class="market-stub__list">
       {m.bullets.map((b) => <li>{b}</li>)}

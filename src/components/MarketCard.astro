@@ -8,12 +8,23 @@ interface Props {
   market: Market;
 }
 const { market } = Astro.props;
+const src = withBase(market.image.src);
+const small = market.image.src.endsWith('.jpg') ? withBase(market.image.src.replace(/\.jpg$/, '-800.jpg')) : undefined;
 ---
 
 <article class="market-card" style={`--accent: ${market.accent}`} aria-labelledby={`market-${market.slug}`}>
   <div class="market-card__inner">
   <div class="market-card__media">
-    <img src={withBase(market.image.src)} alt={market.image.alt} width="800" height="600" loading="lazy" decoding="async" />
+    <img
+      src={src}
+      srcset={small ? `${small} 800w, ${src} 1600w` : undefined}
+      sizes={small ? '(min-width: 1024px) 380px, (min-width: 681px) 50vw, 100vw' : undefined}
+      alt={market.image.alt}
+      width="1600"
+      height="1200"
+      loading="lazy"
+      decoding="async"
+    />
   </div>
   <div class="market-card__body">
     <div class="market-card__head">

@@ -30,7 +30,7 @@ licensed stock is fine, but we need to know the source.
 | Palm Springs | Mid-century home with the San Jacinto Mountains behind it | `palm-springs-mid-century-home-real-estate.jpg` |
 | Big Bear Lake | Cabin among pines, ideally with the lake or Big Bear Mountain Resort visible | `big-bear-lake-cabin-real-estate.jpg` |
 
-Current placeholders live in `public/images/placeholders/` (simple line-art SVGs).
+Stock stand-ins from Unsplash are in place for all three cards (see `PHOTO-CREDITS.md`); David's own photos can replace them under the same filenames. The original line-art placeholders remain in `public/images/placeholders/`.
 
 ## 3. Logos
 

@@ -100,8 +100,8 @@ export const markets: readonly Market[] = [
     href: '/san-diego',
     searchHref: 'https://www.compass.com/homes-for-sale/san-diego-ca/',
     image: {
-      src: '/images/placeholders/san-diego-la-jolla-coastline-placeholder.svg',
-      alt: 'Placeholder for a photo of the La Jolla coastline in San Diego, California',
+      src: '/images/la-jolla-cove-san-diego-real-estate.jpg',
+      alt: 'La Jolla Cove and the La Jolla village shoreline in San Diego, California',
     },
     accent: 'var(--coastal)',
     keywords: ['San Diego', 'La Jolla', 'coastal', 'condos', '1031 exchange'],
@@ -123,8 +123,8 @@ export const markets: readonly Market[] = [
     href: '/palm-springs',
     searchHref: 'https://www.compass.com/homes-for-sale/palm-springs-ca/',
     image: {
-      src: '/images/placeholders/palm-springs-desert-mid-century-placeholder.svg',
-      alt: 'Placeholder for a photo of a mid-century modern home against the San Jacinto Mountains in Palm Springs, California',
+      src: '/images/palm-springs-mid-century-home-real-estate.jpg',
+      alt: 'White mid-century modern home with palm trees and desert landscaping in Palm Springs, California',
     },
     accent: 'var(--desert)',
     keywords: ['Palm Springs', 'mid-century', 'vacation rental', 'Vista Las Palmas', 'Querencia Palms'],
@@ -146,8 +146,8 @@ export const markets: readonly Market[] = [
     href: '/big-bear',
     searchHref: 'https://www.compass.com/homes-for-sale/big-bear-lake-ca/',
     image: {
-      src: '/images/placeholders/big-bear-lake-mountain-cabin-placeholder.svg',
-      alt: 'Placeholder for a photo of a cabin among pines above Big Bear Lake, California',
+      src: '/images/big-bear-lake-cabin-real-estate.jpg',
+      alt: 'Cabin among boulders and pines on the shore of Big Bear Lake, California',
     },
     accent: 'var(--mountain)',
     keywords: ['Big Bear Lake', 'cabins', 'second homes', 'vacation rental'],
