@@ -87,6 +87,12 @@ real domain. To push an updated preview:
 ./scripts/deploy-preview.sh
 ```
 
+## Contact form
+
+`src/components/ContactForm.astro` posts JSON to `PUBLIC_FORM_ENDPOINT` (set it in
+`.env`, e.g. a Formspree or Basin URL). When unset, submitting opens the
+visitor's email app with the message pre-filled, so the form always works.
+
 ## SEO
 
 - Unique `<title>` and meta description per page (props on `BaseLayout`).

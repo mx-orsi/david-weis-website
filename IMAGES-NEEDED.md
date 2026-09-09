@@ -41,17 +41,19 @@ Stock stand-ins from Unsplash are in place for all three cards (see `PHOTO-CREDI
 | Equal Housing Opportunity and REALTOR® marks (footer) | Done, from the files David sent (`equal-housing-opportunity-logo.png`, `realtor-logo.png`) | Nothing further needed | — |
 | Favicon | Roof mark from the real logo on an ink tile (`favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`) | Nothing further needed | — |
 
-## 4. Projects page (next phase)
+## 4. Projects page
 
-One to three photos per project, landscape preferred:
+The page is built with labeled 4:3 placeholders; each prints its suggested subject. Landscape originals preferred.
 
-- The Cole Hotel, Palm Springs (exterior, pool or courtyard, one interior)
-- Palm Springs condo conversion (before/after if available)
-- Six-bedroom Palm Springs vacation rental
-- Big Bear cabin rebuild (before/after, finished exterior and interior)
-- La Jolla short-term rentals (exterior or a signature interior view)
+| Project | Slots |
+| --- | --- |
+| Querencia Palms | Pool, spa and courtyard · a finished two-bedroom interior · koi pond at the entry · mountain view from a private patio |
+| The Cole Hotel | Pool at dusk · guest room · bar or restaurant |
+| Six-bedroom Palm Springs rental | Exterior with the pool · great room · primary bedroom |
+| Big Bear cabin | Before the rebuild · exterior after · living room with the fireplace |
+| San Diego rentals | Mission Beach · Ocean Beach · Kensington (one each) |
 
-Suggested filenames: `the-cole-hotel-palm-springs.jpg`, `palm-springs-condo-conversion.jpg`, `big-bear-cabin-rebuild.jpg`, etc.
+Suggested filenames: `querencia-palms-pool-palm-springs.jpg`, `the-cole-hotel-pool-palm-springs.jpg`, `big-bear-cabin-rebuild-after.jpg`, etc.
 
 ## 5. Social share image (optional)
 

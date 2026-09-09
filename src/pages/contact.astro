@@ -1,116 +1,291 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import StubPage from '../components/StubPage.astro';
+import ContactForm from '../components/ContactForm.astro';
 import Icon from '../components/Icon.astro';
 import Title from '../components/Title.astro';
-import { agent } from '../data/site';
+import { agent, markets } from '../data/site';
+import { withBase } from '../lib/paths';
 
 const title = 'Contact David Weis | Compass Broker Associate in La Jolla, CA';
 const description =
   'Reach David Weis, Compass Broker Associate and REALTOR®, at 619-518-9246 or david@davidweis.com. Office: 7863 Girard Ave, Suite 210, La Jolla, CA 92037. Serving San Diego, Palm Springs and Big Bear Lake.';
+const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${agent.brokerage} ${agent.office.street}, ${agent.office.city}, ${agent.office.state} ${agent.office.zip}`)}`;
+const steps = [
+  { title: 'I reply personally', text: 'Usually within a business day, by whichever channel you prefer.' },
+  { title: 'A short call', text: "Twenty minutes on what you're after, your timeline and which market fits." },
+  { title: 'A plan with numbers', text: 'What it costs, what it could earn and what I would do, before you commit to anything.' },
+];
 ---
 
 <BaseLayout {title} {description}>
-  <StubPage
-    eyebrow="Contact"
-    title="Let's start with a conversation"
-    lede="Buying, selling or thinking about an investment in San Diego, Palm Springs or Big Bear? Call, text or email and I'll get back to you quickly."
-  >
-    <Fragment slot="actions">
-      <a class="btn" href={agent.phoneHref}>Call {agent.phone}</a>
-      <a class="btn btn--ghost" href={`mailto:${agent.email}`}>Email David</a>
-    </Fragment>
+  <section class="ct-hero" aria-labelledby="ct-title">
+    <div class="container ct-hero__copy">
+      <p class="eyebrow eyebrow--dot">Contact</p>
+      <h1 id="ct-title">Let's start with a conversation</h1>
+      <p class="lede">
+        Buying, selling or thinking about an investment in San Diego, Palm Springs or Big Bear? Call, text
+        or send a note. I answer my own phone and my own email.
+      </p>
+    </div>
+  </section>
 
-    <address class="contact-card">
-      <ul class="contact-card__list">
-        <li>
-          <Icon name="phone" size={16} />
-          <a href={agent.phoneHref}>{agent.phone}</a>
-        </li>
-        <li>
-          <Icon name="mail" size={16} />
-          <a href={`mailto:${agent.email}`}>{agent.email}</a>
-        </li>
-        <li>
-          <Icon name="pin" size={16} />
-          <span>
-            {agent.brokerage}<br />
-            {agent.office.street}<br />
-            {agent.office.city}, {agent.office.state} {agent.office.zip}
-          </span>
-        </li>
-      </ul>
-      <ul class="contact-card__social" aria-label="Social">
-        <li><a href={agent.social.instagram} target="_blank" rel="noopener noreferrer"><Icon name="instagram" size={15} /> Instagram</a></li>
-        <li><a href={agent.social.linkedin} target="_blank" rel="noopener noreferrer"><Icon name="linkedin" size={15} /> LinkedIn</a></li>
-        <li><a href={agent.social.facebook} target="_blank" rel="noopener noreferrer"><Icon name="facebook" size={15} /> Facebook</a></li>
-      </ul>
-      <p class="contact-card__meta"><Title /> · CA DRE #{agent.dre}</p>
-    </address>
-  </StubPage>
+  <section class="ct section" aria-label="Contact David">
+    <div class="container ct__grid">
+      <div class="ct__form">
+        <p class="eyebrow">Send a note</p>
+        <ContactForm />
+      </div>
+
+      <aside class="ct__aside">
+        <address class="ct-card">
+          <p class="eyebrow">Direct</p>
+          <ul class="ct-card__list">
+            <li>
+              <Icon name="phone" size={16} />
+              <span><a href={agent.phoneHref}>{agent.phone}</a><small>Call or text</small></span>
+            </li>
+            <li>
+              <Icon name="mail" size={16} />
+              <span><a href={`mailto:${agent.email}`}>{agent.email}</a><small>Email</small></span>
+            </li>
+            <li>
+              <Icon name="pin" size={16} />
+              <span>
+                {agent.brokerage}<br />{agent.office.street}<br />{agent.office.city}, {agent.office.state} {agent.office.zip}
+                <a class="ct-card__map" href={mapsHref} target="_blank" rel="noopener noreferrer">Directions <Icon name="arrow-ext" size={11} /><span class="sr-only">(opens in a new tab)</span></a>
+              </span>
+            </li>
+          </ul>
+          <p class="ct-card__meta"><Title /> · CA DRE #{agent.dre}</p>
+        </address>
+
+        <div class="ct-card ct-card--quiet">
+          <p class="eyebrow">Markets</p>
+          <ul class="ct-card__markets">
+            {markets.map((m) => (
+              <li>
+                <a href={withBase(m.href)}>
+                  <span class="ct-card__market-name">{m.name}</span>
+                  <span class="ct-card__market-region">{m.region}</span>
+                  <Icon name="arrow-right" size={13} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <ul class="ct-card__social" aria-label="Social">
+          <li><a href={agent.social.instagram} target="_blank" rel="noopener noreferrer"><Icon name="instagram" size={15} /> Instagram</a></li>
+          <li><a href={agent.social.linkedin} target="_blank" rel="noopener noreferrer"><Icon name="linkedin" size={15} /> LinkedIn</a></li>
+          <li><a href={agent.social.facebook} target="_blank" rel="noopener noreferrer"><Icon name="facebook" size={15} /> Facebook</a></li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="container">
+      <ol class="ct-steps" aria-label="What happens next">
+        {steps.map((s, i) => (
+          <li>
+            <span class="ct-steps__num">{String(i + 1).padStart(2, '0')}</span>
+            <h2>{s.title}</h2>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .contact-card {
-    font-style: normal;
+  .ct-hero {
+    padding-block: clamp(3rem, 7vw, 5.5rem) 0;
+  }
+  .ct-hero__copy {
     display: grid;
     gap: 1.25rem;
-    padding: 1.75rem;
+    justify-items: start;
+  }
+  .ct-hero__copy h1 {
+    font-size: clamp(2.5rem, 4.8vw, 3.9rem);
+    max-width: 16ch;
+  }
+  .ct {
+    padding-top: clamp(2rem, 5vw, 3.5rem);
+  }
+  .ct__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .ct__form {
+    display: grid;
+    gap: 1.25rem;
+    padding: clamp(1.5rem, 3.5vw, 2.5rem);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+  .ct__aside {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .ct-card {
+    font-style: normal;
+    display: grid;
+    gap: 1rem;
+    padding: 1.6rem;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: var(--radius);
     box-shadow: var(--shadow-card);
   }
-  .contact-card__list {
+  .ct-card--quiet {
+    background: transparent;
+    box-shadow: none;
+  }
+  .ct-card__list {
     list-style: none;
     display: grid;
-    gap: 0.9rem;
+    gap: 1rem;
     font-size: 0.9375rem;
     font-weight: 400;
-    line-height: 1.55;
+    line-height: 1.5;
   }
-  .contact-card__list li {
+  .ct-card__list li {
     display: flex;
     gap: 0.75rem;
     align-items: flex-start;
   }
-  .contact-card__list svg {
+  .ct-card__list svg {
     flex: none;
     margin-top: 0.3em;
     color: var(--muted);
   }
-  .contact-card__list a {
+  .ct-card__list li > span {
+    display: grid;
+    gap: 0.1rem;
+  }
+  .ct-card__list small {
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ct-card__list a {
     text-decoration: none;
   }
-  .contact-card__list a:hover {
+  .ct-card__list a:hover {
     text-decoration: underline;
   }
-  .contact-card__social {
+  .ct-card__map {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    margin-top: 0.35rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+  .ct-card__meta {
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line);
+  }
+  .ct-card__markets {
+    list-style: none;
+    display: grid;
+  }
+  .ct-card__markets a {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .ct-card__markets li:last-child a {
+    border-bottom: 0;
+  }
+  .ct-card__market-name {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  .ct-card__market-region {
+    font-size: 0.625rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ct-card__markets svg {
+    color: var(--muted);
+    transition: transform 0.2s var(--ease);
+  }
+  .ct-card__markets a:hover svg {
+    transform: translateX(3px);
+  }
+  .ct-card__social {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    padding-top: 1.1rem;
-    border-top: 1px solid var(--line);
   }
-  .contact-card__social a {
+  .ct-card__social a {
     display: inline-flex;
     align-items: center;
     gap: 0.4em;
     padding: 0.5em 0.9em;
-    border: 1px solid var(--line-strong);
+    border: 1px solid var(--line-control);
     border-radius: 999px;
     font-size: 0.75rem;
     font-weight: 500;
     text-decoration: none;
   }
-  .contact-card__social a:hover {
+  .ct-card__social a:hover {
     border-color: var(--ink);
   }
-  .contact-card__meta {
+
+  .ct-steps {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding-top: 2rem;
+    border-top: 1px solid var(--line-strong);
+  }
+  .ct-steps li {
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+  }
+  .ct-steps__num {
     font-size: 0.6875rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.2em;
     color: var(--muted);
+  }
+  .ct-steps h2 {
+    font-size: 1.5rem;
+  }
+  .ct-steps p {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+    max-width: 32ch;
+  }
+  @media (max-width: 899px) {
+    .ct__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .ct-steps {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

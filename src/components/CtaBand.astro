@@ -10,18 +10,21 @@ interface Props {
   body?: string;
   /** Point the search button at one market's Compass search */
   market?: MarketSlug;
+  /** dark (default) ink band, or a light card */
+  tone?: 'dark' | 'light';
 }
 const {
   eyebrow = 'Buying · Selling · Investing',
   title = 'One conversation, three markets',
   body = "Whether you're weighing a La Jolla condo, a Palm Springs mid-century or a Big Bear cabin, start with someone who owns and operates in all three.",
   market,
+  tone = 'dark',
 } = Astro.props;
 ---
 
 <section class="cta section section--tight" aria-labelledby="cta-title">
   <div class="container">
-    <div class="cta__card">
+    <div class:list={["cta__card", `cta__card--${tone}`]}>
       <PcbTrace variant="corner" class="cta__trace cta__trace--tl" />
       <PcbTrace variant="corner" class="cta__trace cta__trace--br" />
       <div class="cta__copy">
@@ -30,8 +33,17 @@ const {
         <p>{body}</p>
       </div>
       <div class="cta__actions">
-        <SearchCTA variant="light" market={market} />
-        <a class="btn btn--outline-light" href={withBase('/contact')}>Contact David</a>
+        {tone === 'dark' ? (
+          <>
+            <SearchCTA variant="light" market={market} />
+            <a class="btn btn--outline-light" href={withBase('/contact')}>Contact David</a>
+          </>
+        ) : (
+          <>
+            <a class="btn" href={withBase('/contact')}>Contact David</a>
+            <SearchCTA variant="ghost" market={market} />
+          </>
+        )}
       </div>
     </div>
   </div>
@@ -73,6 +85,19 @@ const {
   .cta__trace {
     position: absolute;
     color: rgba(247, 245, 240, 0.28);
+  }
+  .cta__card--light {
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
+  }
+  .cta__card--light .cta__copy .eyebrow,
+  .cta__card--light .cta__copy p:not(.eyebrow) {
+    color: var(--ink-2);
+  }
+  .cta__card--light .cta__trace {
+    color: var(--line-strong);
   }
   .cta__trace--tl {
     top: 1.25rem;

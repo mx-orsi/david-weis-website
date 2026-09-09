@@ -26,10 +26,14 @@ Grouped by who has to act. Tick items off as they land.
       notes, neighborhoods, buyer/seller/investor guidance, FAQ with FAQPage
       schema, breadcrumbs, per-market Compass search. Photos are placeholders
       until David chooses images; copy awaits his read-through.
-- [ ] **Projects** page: full write-ups with photos for Querencia Palms, The Cole
-      Hotel, the six-bedroom rental, the Big Bear cabin, the San Diego rentals.
-- [ ] **Contact** page: a working form (needs a form service such as Formspree,
-      Basin or Netlify Forms; pick one), plus map or office hours if wanted.
+- [x] **Projects** page built as a showcase: Querencia Palms featured with logo
+      and results, The Cole Hotel, the rentals and the cabin, each with photo
+      placeholders and links to the project sites.
+- [x] **Contact** page built: working form (emails David via the visitor's mail
+      app until a form service is connected via `PUBLIC_FORM_ENDPOINT`), direct
+      contact card, directions link, markets, what-happens-next steps.
+- [ ] **Form service.** Create a Formspree or Basin form, set
+      `PUBLIC_FORM_ENDPOINT` in `.env` and in the deploy environment.
 - [ ] **About** page (optional): the About strip expanded, with the second portrait.
 - [ ] **Blog** scaffold (Astro content collections, markdown posts, listing page,
       RSS), since the brief called for one.

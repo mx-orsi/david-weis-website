@@ -57,3 +57,16 @@ file whenever he answers something.
    mark up anything wrong, especially the neighborhood notes, which are general
    descriptions for him to correct or cut. Each photo placeholder names the shot
    we'd suggest; he can swap in whatever he has.
+10. **The Cole Hotel credit.** Palm Springs Life credits the restoration to owner
+    Mark Weis with general manager David Smith. The site says David co-developed
+    it with his husband and ran it as General Manager. Confirm the wording and
+    whether he wants Mark named. The hotel now appears to be run by a hospitality
+    operator, so his role is written in the past tense.
+11. **Querencia Palms details.** The Projects page now lists the address, the
+    1966 conversion, amenities and "fee-simple with a rental-friendly HOA" (from
+    the listing video title). Confirm those, and whether the Phase III
+    one-bedroom line is right.
+12. **Contact form.** The form works today by opening the visitor's email app.
+    To receive submissions directly we need a form service (Formspree or Basin,
+    both have free tiers); then one setting turns it on. Also confirm the promise
+    on the form: "I reply personally, usually within a business day."

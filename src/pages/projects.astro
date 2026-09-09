@@ -1,119 +1,128 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import StubPage from '../components/StubPage.astro';
+import ProjectCase from '../components/ProjectCase.astro';
+import CtaBand from '../components/CtaBand.astro';
+import PcbTrace from '../components/PcbTrace.astro';
+import { projects, projectStats } from '../data/projects';
 import { withBase } from '../lib/paths';
 
 const title = 'Projects | Querencia Palms, The Cole Hotel & Big Bear Cabin | David Weis';
 const description =
-  'Development and investment projects by David Weis across Palm Springs, San Diego and Big Bear Lake, including the Querencia Palms condo conversion, The Cole Hotel and a Big Bear cabin rebuild.';
-
-const projects = [
-  {
-    market: 'Palm Springs',
-    name: 'Querencia Palms',
-    text: 'A condo conversion I helped my husband complete and bring into the community. Phases I and II sold out: eight of eight escrows opened at full-price offers, six units closed, and the first Phase III unit is already in escrow at full ask.',
-    logo: { src: '/images/querencia-palms-logo.png', alt: 'Querencia Palms logo: palm trees and the tagline Love where you live', width: 800, height: 626 },
-  },
-  {
-    market: 'Palm Springs',
-    name: 'The Cole Hotel',
-    text: 'Co-developed with my husband and operated as General Manager, earning five-star ratings across every platform.',
-  },
-  {
-    market: 'Palm Springs',
-    name: 'Six-bedroom vacation rental',
-    text: 'Owned and operated as a short-term rental, with hands-on experience in the local STR rules.',
-  },
-  {
-    market: 'Big Bear Lake',
-    name: 'Cabin rebuild',
-    text: 'The first home I bought on my own, near Big Bear Mountain Resort, which my husband and I then rebuilt.',
-  },
-  {
-    market: 'San Diego',
-    name: 'Short-term rentals',
-    text: 'Three rentals I own and manage in Mission Beach, Ocean Beach and Kensington. Bookings run through Celebrity Vacation Homes, a separate business from my Compass brokerage work.',
-  },
-];
+  'Development and investment projects by David Weis across Palm Springs, San Diego and Big Bear Lake: the Querencia Palms condo conversion, The Cole Hotel restoration, a Big Bear cabin rebuild and short-term rentals he owns and operates.';
+const featured = projects.filter((p) => p.featured);
+const rest = projects.filter((p) => !p.featured);
 ---
 
 <BaseLayout {title} {description}>
-  <StubPage
-    eyebrow="Projects"
-    title="Built, rebuilt and operated"
-    lede="Hotel, condo conversion, cabin rebuild and short-term rentals across all three markets. The advice I give clients comes from doing this work myself."
-  >
-    <Fragment slot="actions">
-      <a class="btn" href={withBase('/contact')}>Talk about a project</a>
-    </Fragment>
-    <ul class="projects">
-      {
-        projects.map((p) => (
-          <li class:list={['projects__item', { 'projects__item--logo': 'logo' in p }]}>
-            {'logo' in p && p.logo && (
-              <span class="projects__logo">
-                <img src={withBase(p.logo.src)} alt={p.logo.alt} width={p.logo.width} height={p.logo.height} loading="lazy" decoding="async" />
-              </span>
-            )}
-            <span class="projects__body">
-              <span class="eyebrow">{p.market}</span>
-              <strong class="projects__name">{p.name}</strong>
-              <p>{p.text}</p>
-            </span>
+  <section class="pr-hero" aria-labelledby="pr-title">
+    <div class="container pr-hero__grid">
+      <div class="pr-hero__copy">
+        <p class="eyebrow eyebrow--dot">Projects</p>
+        <h1 id="pr-title">Built, rebuilt and operated</h1>
+        <p class="lede">
+          A condo conversion, a boutique hotel, a cabin rebuild and the rentals I run myself, across all
+          three markets. The advice I give clients comes from doing this work with my own money.
+        </p>
+        <div class="pr-hero__actions">
+          <a class="btn" href={withBase('/contact')}>Talk about a project</a>
+          <a class="link-arrow" href="#querencia-palms">Start with Querencia Palms <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      <ul class="pr-stats" aria-label="By the numbers">
+        {projectStats.map((s) => (
+          <li>
+            <strong>{s.value}</strong>
+            <span>{s.label}</span>
           </li>
-        ))
-      }
-    </ul>
-  </StubPage>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="pr-list section" aria-label="Projects">
+    <div class="container">
+      {featured.map((p) => <ProjectCase project={p} />)}
+      <div class="pr-list__rest">
+        {rest.map((p, i) => <ProjectCase project={p} flip={i % 2 === 1} />)}
+      </div>
+    </div>
+  </section>
+
+  <div class="container"><PcbTrace variant="divider" /></div>
+  <CtaBand
+    tone="light"
+    eyebrow="Have a project in mind?"
+    title="From a first cabin to a condo conversion"
+    body="I've been on the owner's side of the table for all of it. Tell me what you're weighing and I'll tell you what I'd do with my own money."
+  />
 </BaseLayout>
 
 <style>
-  .projects {
-    list-style: none;
-    border-top: 1px solid var(--line-strong);
+  .pr-hero {
+    padding-block: clamp(3rem, 7vw, 5.5rem) clamp(1.5rem, 4vw, 3rem);
   }
-  .projects__item {
+  .pr-hero__grid {
     display: grid;
-    gap: 0.25rem;
-    padding: 1.1rem 0;
-    border-bottom: 1px solid var(--line);
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
   }
-  .projects__item--logo {
-    grid-template-columns: 132px minmax(0, 1fr);
+  .pr-hero__copy {
+    display: grid;
     gap: 1.25rem;
-    align-items: start;
+    justify-items: start;
   }
-  .projects__body {
+  .pr-hero__copy h1 {
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    max-width: 14ch;
+  }
+  .pr-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.5rem;
+    margin-top: 0.25rem;
+  }
+  .pr-stats {
+    list-style: none;
     display: grid;
-    gap: 0.25rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
   }
-  .projects__logo {
-    display: block;
-    padding: 0.4rem;
-    background: #fff;
+  .pr-stats li {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.4rem 1.4rem 1.3rem;
+    background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
   }
-  .projects__logo img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
+  .pr-stats strong {
+    font-family: var(--font-serif);
+    font-size: 2.6rem;
+    font-weight: 500;
+    line-height: 1;
   }
-  @media (max-width: 540px) {
-    .projects__item--logo {
+  .pr-stats span {
+    font-size: 0.8125rem;
+    color: var(--ink-2);
+    line-height: 1.4;
+  }
+  .pr-list {
+    padding-top: clamp(1.5rem, 4vw, 3rem);
+  }
+  .pr-list__rest {
+    margin-top: clamp(1rem, 3vw, 2rem);
+  }
+  @media (max-width: 899px) {
+    .pr-hero__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .pr-stats {
       grid-template-columns: 1fr;
     }
-    .projects__logo {
-      width: 160px;
-    }
-  }
-  .projects__name {
-    font-family: var(--font-serif);
-    font-size: 1.35rem;
-    font-weight: 500;
-  }
-  .projects__item p {
-    font-size: 0.875rem;
-    color: var(--ink-2);
   }
 </style>

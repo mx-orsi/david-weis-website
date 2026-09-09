@@ -29,6 +29,8 @@ const { suggestion, ratio = '4 / 3', class: className } = Astro.props;
 <style>
   .slot {
     aspect-ratio: var(--ratio);
+    min-width: 0;
+    overflow: hidden;
     display: grid;
     place-items: center;
     padding: 1.25rem;
