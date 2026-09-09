@@ -19,13 +19,6 @@ export interface Project {
   featured?: boolean;
 }
 
-export const projectStats = [
-  { value: '3', label: 'markets' },
-  { value: '1', label: 'condo conversion, sold out' },
-  { value: '1', label: 'boutique hotel' },
-  { value: '4', label: 'rentals owned and operated' },
-] as const;
-
 export const projects: readonly Project[] = [
   {
     slug: 'querencia-palms',

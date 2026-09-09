@@ -32,19 +32,20 @@ const steps = [
           <li><Icon name="mail" size={15} /><a href={`mailto:${agent.email}`}>{agent.email}</a></li>
         </ul>
       </div>
-      <figure class="ct-hero__photo">
-        <img
-          src={withBase('/images/david-weis-compass-broker-associate-la-jolla.jpg')}
-          srcset={`${withBase('/images/david-weis-compass-broker-associate-la-jolla-500.jpg')} 500w, ${withBase('/images/david-weis-compass-broker-associate-la-jolla.jpg')} 1000w`}
-          sizes="(min-width: 900px) 480px, 100vw"
-          alt="David Weis, Compass Broker Associate and REALTOR®, based in La Jolla"
-          width="1000"
-          height="800"
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-        />
-      </figure>
+      <div class="ct-hero__markets">
+        <p class="eyebrow">Markets</p>
+        <ul class="ct-card__markets">
+          {markets.map((m) => (
+            <li>
+              <a href={withBase(m.href)}>
+                <span class="ct-card__market-name">{m.name}</span>
+                <span class="ct-card__market-region">{m.region}</span>
+                <Icon name="arrow-right" size={13} />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -78,20 +79,6 @@ const steps = [
           <p class="ct-card__meta"><Title /> · CA DRE #{agent.dre}</p>
         </address>
 
-        <div class="ct-card ct-card--quiet">
-          <p class="eyebrow">Markets</p>
-          <ul class="ct-card__markets">
-            {markets.map((m) => (
-              <li>
-                <a href={withBase(m.href)}>
-                  <span class="ct-card__market-name">{m.name}</span>
-                  <span class="ct-card__market-region">{m.region}</span>
-                  <Icon name="arrow-right" size={13} />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
 
         <ul class="ct-card__social" aria-label="Social">
           <li><a href={agent.social.instagram} target="_blank" rel="noopener noreferrer"><Icon name="instagram" size={15} /> Instagram</a></li>
@@ -130,6 +117,10 @@ const steps = [
     gap: 1.25rem;
     justify-items: start;
   }
+  .ct-hero__copy h1 {
+    font-size: clamp(2.5rem, 4.8vw, 3.9rem);
+    max-width: 16ch;
+  }
   .ct-hero__quick {
     list-style: none;
     display: flex;
@@ -153,24 +144,16 @@ const steps = [
   .ct-hero__quick a:hover {
     text-decoration: underline;
   }
-  .ct-hero__photo {
+  .ct-hero__markets {
     justify-self: end;
-    width: min(100%, 480px);
-    aspect-ratio: 5 / 4;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow:
-      0 0 0 1px var(--line),
-      0 30px 60px -30px rgba(22, 24, 27, 0.35);
-  }
-  .ct-hero__photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .ct-hero__copy h1 {
-    font-size: clamp(2.5rem, 4.8vw, 3.9rem);
-    max-width: 16ch;
+    width: min(100%, 420px);
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.6rem 1.75rem 0.9rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
   }
   .ct {
     padding-top: clamp(2rem, 5vw, 3.5rem);
@@ -203,10 +186,6 @@ const steps = [
     border: 1px solid var(--line);
     border-radius: var(--radius);
     box-shadow: var(--shadow-card);
-  }
-  .ct-card--quiet {
-    background: transparent;
-    box-shadow: none;
   }
   .ct-card__list {
     list-style: none;
@@ -348,9 +327,8 @@ const steps = [
     .ct__grid {
       grid-template-columns: minmax(0, 1fr);
     }
-    .ct-hero__photo {
+    .ct-hero__markets {
       justify-self: start;
-      width: min(100%, 420px);
     }
     .ct-steps {
       grid-template-columns: 1fr;

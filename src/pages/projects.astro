@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCase from '../components/ProjectCase.astro';
 import CtaBand from '../components/CtaBand.astro';
 import PcbTrace from '../components/PcbTrace.astro';
-import { projects, projectStats } from '../data/projects';
+import { projects } from '../data/projects';
 import { withBase } from '../lib/paths';
 
 const title = 'Projects | Querencia Palms, The Cole Hotel & Big Bear Cabin | David Weis';
@@ -16,39 +16,15 @@ const rest = projects.filter((p) => !p.featured);
 <BaseLayout {title} {description}>
   <section class="pr-head" aria-labelledby="pr-title">
     <div class="container">
-      <div class="pr-head__grid">
-        <div class="pr-head__title">
-          <p class="eyebrow eyebrow--dot">Projects</p>
-          <h1 id="pr-title">Built, rebuilt and operated</h1>
-        </div>
-        <div class="pr-head__aside">
-          <p class="lede">
-            A condo conversion, a boutique hotel, a cabin rebuild and the rentals I run myself, across all
-            three markets. The advice I give clients comes from doing this work with my own money.
-          </p>
-          <p class="pr-head__stats">
-            {projectStats.map((st, i) => (
-              <span class="pr-head__stat">
-                {i > 0 && <span class="pr-head__dot" aria-hidden="true">·</span>}
-                <strong>{st.value}</strong> {st.label}
-              </span>
-            ))}
-          </p>
-          <a class="btn" href={withBase('/contact')}>Talk about a project</a>
-        </div>
+      <p class="eyebrow eyebrow--dot">Projects</p>
+      <h1 id="pr-title">Built, rebuilt and operated</h1>
+      <div class="pr-head__row">
+        <p class="lede">
+          A condo conversion, a boutique hotel, a cabin rebuild and the rentals I run myself. The advice I
+          give clients comes from doing this work with my own money.
+        </p>
+        <a class="btn" href={withBase('/contact')}>Talk about a project</a>
       </div>
-
-      <ol class="pr-index" aria-label="Projects on this page">
-        {projects.map((p, i) => (
-          <li>
-            <a href={`#${p.slug}`}>
-              <span class="pr-index__num">{String(i + 1).padStart(2, '0')}</span>
-              <span class="pr-index__name">{p.name}</span>
-              <span class="pr-index__meta">{p.market} · {p.kind}</span>
-            </a>
-          </li>
-        ))}
-      </ol>
     </div>
   </section>
 
@@ -74,85 +50,24 @@ const rest = projects.filter((p) => !p.featured);
   .pr-head {
     padding-block: clamp(3rem, 7vw, 5.5rem) 0;
   }
-  .pr-head__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(2rem, 5vw, 5rem);
-    align-items: end;
+  .pr-head .eyebrow {
+    margin-bottom: 1.25rem;
   }
-  .pr-head__title {
-    display: grid;
-    gap: 1.25rem;
+  .pr-head h1 {
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    max-width: 14ch;
   }
-  .pr-head__title h1 {
-    font-size: clamp(2.8rem, 5.4vw, 4.4rem);
-    max-width: 12ch;
-  }
-  .pr-head__aside {
-    display: grid;
-    gap: 1.1rem;
-    justify-items: start;
-  }
-  .pr-head__stats {
+  .pr-head__row {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem 0.6rem;
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-  }
-  .pr-head__stats strong {
-    font-family: var(--font-serif);
-    font-size: 1.05rem;
-    font-weight: 500;
-    color: var(--ink);
-    margin-right: 0.15em;
-  }
-  .pr-head__stat {
-    white-space: nowrap;
-  }
-  .pr-head__dot {
-    color: var(--line-control);
-    margin-right: 0.6rem;
-  }
-
-  .pr-index {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 1.5rem;
-    margin-top: clamp(2.5rem, 5vw, 4rem);
-    padding-top: 1.25rem;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
     border-top: 1px solid var(--line-strong);
   }
-  .pr-index a {
-    display: grid;
-    gap: 0.3rem;
-    text-decoration: none;
-    color: var(--ink);
-  }
-  .pr-index__num {
-    font-size: 0.6875rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-  }
-  .pr-index__name {
-    font-family: var(--font-serif);
-    font-size: 1.25rem;
-    font-weight: 500;
-    line-height: 1.15;
-    text-decoration: underline;
-    text-decoration-color: transparent;
-    text-underline-offset: 0.18em;
-    transition: text-decoration-color 0.2s var(--ease);
-  }
-  .pr-index a:hover .pr-index__name {
-    text-decoration-color: var(--ink);
-  }
-  .pr-index__meta {
-    font-size: 0.75rem;
-    color: var(--muted);
+  .pr-head__row .lede {
+    max-width: 52ch;
   }
   .pr-list {
     padding-top: clamp(1.5rem, 4vw, 3rem);
@@ -160,32 +75,10 @@ const rest = projects.filter((p) => !p.featured);
   .pr-list__rest {
     margin-top: clamp(1rem, 3vw, 2rem);
   }
-  @media (max-width: 1023px) {
-    .pr-index {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+  @media (max-width: 720px) {
+    .pr-head__row {
+      flex-direction: column;
+      align-items: flex-start;
     }
-  }
-  @media (max-width: 899px) {
-    .pr-head__grid {
-      grid-template-columns: minmax(0, 1fr);
-      align-items: start;
-    }
-  }
-  @media (max-width: 600px) {
-    .pr-index {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 0;
-    }
-    .pr-index li {
-      border-bottom: 1px solid var(--line);
-    }
-    .pr-index a {
-      grid-template-columns: 2.5rem minmax(0, 1fr);
-      grid-template-areas: 'num name' 'num meta';
-      padding: 0.8rem 0;
-    }
-    .pr-index__num { grid-area: num; }
-    .pr-index__name { grid-area: name; }
-    .pr-index__meta { grid-area: meta; }
   }
 </style>
