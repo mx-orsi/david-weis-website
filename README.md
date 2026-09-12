@@ -13,6 +13,7 @@ npm run dev      # http://localhost:4321
 npm run build    # static output in dist/
 npm run preview  # serve the production build
 npx astro check  # type-check the .astro files
+npm run images   # generate .webp siblings for new .jpg photos in public/images
 ```
 
 Requires Node 22.12+.
@@ -68,6 +69,8 @@ public/images/       ← headshot, logos, compliance marks, Unsplash market phot
 - **Add a photo:** every image goes through `Media.astro`. Give the `Photo`
   entry a `src` (path under `public/images/`), `alt`, `width` and `height` and
   the placeholder is replaced. Keep the `suggestion` as the editor's note.
+  Run `npm run images` afterwards: it writes a `.webp` sibling for each JPEG,
+  and the components serve it automatically through `<picture>`.
 - **Add or reorder a project:** edit `projects.ts`. The page, the nav dropdown,
   the Experience landing, the home teasers (`homeFeaturedProjects`) and the
   market pages (`featuredProjects`) all follow.

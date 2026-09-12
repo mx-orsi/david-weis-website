@@ -51,7 +51,7 @@ Grouped by who has to act. Tick items off as they land.
 ## 4. Final QA before go-live
 
 - [ ] Re-run the axe audit and the screenshot pass after photos land.
-- [ ] Lighthouse pass on performance and SEO.
+- [x] Lighthouse pass (2026-09-12): desktop 100/100/100/100 on home; mobile performance 97 home, 98 San Diego, 96 project page, all other categories 100. CSS is inlined, photos ship as WebP with the hero preloaded. Re-run after photos land.
 - [ ] Real-device check on iPhone and Android, Safari and Chrome.
 - [ ] Every link clicked, every Compass link opens the right area.
 - [ ] Proofread all copy once more against the deck with David's final answers in.

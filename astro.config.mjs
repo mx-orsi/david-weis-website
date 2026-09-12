@@ -10,6 +10,11 @@ export default defineConfig({
   // Preview deployments (GitHub Pages project site) set SITE_BASE=/repo-name.
   base: process.env.SITE_BASE || '/',
   trailingSlash: 'never',
+  build: {
+    // A handful of static pages: inline the CSS so nothing render-blocking
+    // stands between the HTML and first paint (Lighthouse: 800 ms on mobile).
+    inlineStylesheets: 'always',
+  },
   // The Projects showcase became the Experience section; keep the old link alive.
   redirects: {
     '/projects': '/experience',

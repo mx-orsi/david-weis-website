@@ -9,12 +9,20 @@ import Icon from '../components/Icon.astro';
 import { home } from '../data/home';
 import { markets } from '../data/site';
 import { getProject, homeFeaturedProjects } from '../data/projects';
+import { agent } from '../data/site';
 import { withBase } from '../lib/paths';
+import { sizedVariant, webpVariant } from '../lib/images';
 
 const featured = homeFeaturedProjects.map(getProject);
+const heroWebp = webpVariant(agent.headshot.src);
+const heroWebpSmall = webpVariant(sizedVariant(agent.headshot.src, 500));
+const heroPreload = heroWebp && heroWebpSmall ? `${withBase(heroWebpSmall)} 500w, ${withBase(heroWebp)} 1000w` : undefined;
 ---
 
 <BaseLayout title={home.seo.title} description={home.seo.description}>
+  {heroPreload && (
+    <link slot="head" rel="preload" as="image" type="image/webp" imagesrcset={heroPreload} imagesizes="(min-width: 960px) 40vw, 100vw" fetchpriority="high" />
+  )}
   <Hero />
 
   <!-- 2. More than a transaction -->

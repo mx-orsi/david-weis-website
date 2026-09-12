@@ -8,10 +8,14 @@ import Title from './Title.astro';
 import { agent } from '../data/site';
 import { home } from '../data/home';
 import { withBase } from '../lib/paths';
+import { sizedVariant, webpVariant } from '../lib/images';
 
 const h = home.hero;
 const src = withBase(agent.headshot.src);
-const small = withBase(agent.headshot.src.replace(/\.jpg$/, '-500.jpg'));
+const small = withBase(sizedVariant(agent.headshot.src, 500));
+const webp = webpVariant(agent.headshot.src);
+const webpSmall = webpVariant(sizedVariant(agent.headshot.src, 500));
+const webpSet = webp && webpSmall ? `${withBase(webpSmall)} 500w, ${withBase(webp)} 1000w` : undefined;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
@@ -28,17 +32,20 @@ const small = withBase(agent.headshot.src.replace(/\.jpg$/, '-500.jpg'));
 
     <figure class="hero__portrait rise rise--late">
       <div class="hero__frame frame">
-        <img
-          src={src}
-          srcset={`${small} 500w, ${src} 1000w`}
-          sizes="(min-width: 960px) 40vw, 100vw"
-          alt={agent.headshot.alt}
-          width={agent.headshot.width}
-          height={agent.headshot.height}
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-        />
+        <picture>
+          {webpSet && <source type="image/webp" srcset={webpSet} sizes="(min-width: 960px) 40vw, 100vw" />}
+          <img
+            src={src}
+            srcset={`${small} 500w, ${src} 1000w`}
+            sizes="(min-width: 960px) 40vw, 100vw"
+            alt={agent.headshot.alt}
+            width={agent.headshot.width}
+            height={agent.headshot.height}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
       </div>
       <figcaption class="hero__caption">
         <span class="hero__caption-name">{agent.name}</span>
@@ -84,6 +91,13 @@ const small = withBase(agent.headshot.src.replace(/\.jpg$/, '-500.jpg'));
   .hero__frame {
     aspect-ratio: 4 / 5;
     box-shadow: 0 40px 80px -48px rgba(10, 11, 13, 0.45);
+  }
+  .hero__frame picture,
+  .hero__frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .hero__frame img {
     object-position: 50% 20%;
