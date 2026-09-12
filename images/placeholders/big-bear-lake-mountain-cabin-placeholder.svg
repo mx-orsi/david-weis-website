@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Placeholder image for a cabin above Big Bear Lake">
+  <defs>
+    <linearGradient id="pine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eef1ee"/>
+      <stop offset="0.6" stop-color="#d8e0da"/>
+      <stop offset="1" stop-color="#aebfb3"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#pine)"/>
+  <g fill="none" stroke="#4b6a57" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55">
+    <path d="M0 360 L140 220 L230 300 L360 150 L470 270 L560 210 L680 330 L800 260"/>
+    <path d="M0 470 H800"/>
+    <path d="M330 470 V420 L400 372 L470 420 V470"/>
+    <path d="M356 470 V438 H386 V470"/>
+    <path d="M120 470 L140 420 L160 470"/>
+    <path d="M130 470 L140 440"/>
+    <path d="M610 470 L630 410 L650 470"/>
+    <path d="M660 470 L676 428 L692 470"/>
+    <path d="M60 470 V450 H0"/>
+    <path d="M740 470 V446 H800"/>
+    <path d="M60 530 H260 L276 514 H420"/>
+    <circle cx="420" cy="514" r="4" fill="#eef1ee"/>
+  </g>
+</svg>
