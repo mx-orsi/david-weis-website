@@ -1,85 +1,289 @@
 ---
 /**
- * Testimonials — hidden until src/data/testimonials.ts sets `enabled: true`
- * (real quotes are pending from David). Pass `force` to preview the layout
- * with the placeholder entries.
+ * Testimonials — ratings strip plus real client quotes, built at build time
+ * from David's RealSatisfied feed merged with src/data/testimonials.json.
+ * On brand (black / white / blue, site typography): no RealSatisfied widget,
+ * no iframe, no third-party script.
+ *
+ * Display rules from the build brief:
+ *  · ratings strip = overall score plus Satisfaction · Performance ·
+ *    Recommendation, with a small "Verified by RealSatisfied" profile link;
+ *  · 2–4 quotes, each with first name + last initial and a source label;
+ *  · zero quotes → ratings strip only; no ratings either → nothing renders;
+ *  · static grid, no auto-advance, no fabricated text.
  */
-import { testimonials } from '../data/testimonials';
+import Icon from './Icon.astro';
+import { getTestimonials, sourceLabels, testimonialsMeta } from '../data/testimonials';
 
 interface Props {
-  force?: boolean;
+  /** 2 on the home band, 4 on About. */
+  limit?: number;
+  /** 'concise' keeps the home band tight by selecting the shortest quotes. */
+  prefer?: 'recent' | 'concise';
+  /** 'band' is the compact home treatment; 'full' is the About treatment. */
+  variant?: 'band' | 'full';
+  class?: string;
 }
-const { force = false } = Astro.props;
-const show = testimonials.enabled || force;
+
+const { limit = 3, prefer = 'recent', variant = 'band', class: className } = Astro.props;
+const { ratings, items } = await getTestimonials(limit, prefer);
+
+const scores = ratings
+  ? [
+      { label: 'Satisfaction', value: ratings.satisfaction },
+      { label: 'Performance', value: ratings.performance },
+      { label: 'Recommendation', value: ratings.recommendation },
+    ]
+  : [];
+
+const fmt = (n: number) => n.toFixed(1);
+const hasQuotes = items.length > 0;
 ---
 
-{show && (
-  <section class="tm section section--line" aria-labelledby="tm-title">
-    <div class="container">
-      <p class="eyebrow eyebrow--dot">{testimonials.eyebrow}</p>
-      <h2 id="tm-title" class="title-lg tm__title">{testimonials.title}</h2>
-      <ul class="tm__grid">
-        {testimonials.items.map((t) => (
-          <li class:list={['tm__item', t.placeholder && 'tm__item--placeholder']}>
-            <blockquote>
-              <p class="tm__quote">{t.quote}</p>
-              <footer class="tm__cite">
-                <span class="tm__name">{t.name}</span>
-                <span class="tm__context">{t.context}</span>
-              </footer>
-            </blockquote>
-          </li>
-        ))}
-      </ul>
+{(ratings || hasQuotes) && (
+  <section class:list={['tm', `tm--${variant}`, 'section', 'section--line', className]} aria-labelledby="tm-title">
+    <div class="container tm__inner">
+      <div class="tm__head">
+        <p class="eyebrow eyebrow--dot">{testimonialsMeta.eyebrow}</p>
+        <h2 id="tm-title" class="title-lg tm__title">{testimonialsMeta.title}</h2>
+      </div>
+
+      {ratings && (
+        <div class="tm__ratings">
+          <p class="tm__overall">
+            <span class="tm__score">{fmt(ratings.overall)}</span>
+            <span class="tm__outof">out of 5</span>
+          </p>
+          <dl class="tm__scores">
+            {scores.map((s) => (
+              <div class="tm__scores-item">
+                <dt>{s.label}</dt>
+                <dd>{fmt(s.value)}</dd>
+              </div>
+            ))}
+          </dl>
+          <p class="tm__verified">
+            <a href={testimonialsMeta.profileUrl} target="_blank" rel="noopener noreferrer">
+              {testimonialsMeta.verifiedLabel} <Icon name="arrow-ext" size={12} /><span class="sr-only"> (opens in a new tab)</span>
+            </a>
+            {ratings.responses ? <span class="tm__responses">{ratings.responses} client surveys</span> : null}
+          </p>
+        </div>
+      )}
+
+      {hasQuotes && (
+        <ul class="tm__grid">
+          {items.map((t) => (
+            <li class="tm__item">
+              <figure>
+                <blockquote class="tm__quote">
+                  {t.quote.map((p) => <p>{p}</p>)}
+                </blockquote>
+                <figcaption class="tm__cite">
+                  <span class="tm__author">{t.author}</span>
+                  {t.context && <span class="tm__context">{t.context}</span>}
+                  <span class="tm__source">{sourceLabels[t.source]}</span>
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   </section>
 )}
 
 <style>
+  .tm__inner {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3.25rem);
+  }
+  .tm__head {
+    display: grid;
+    gap: 0.9rem;
+  }
   .tm__title {
-    margin-top: 0.9rem;
     max-width: 16ch;
   }
+
+  /* Ratings strip -------------------------------------------------- */
+  .tm__ratings {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 1.5rem clamp(2rem, 5vw, 3.5rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line-strong);
+  }
+  .tm__overall {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .tm__score {
+    font-family: var(--font-serif);
+    font-size: clamp(2.75rem, 4.5vw, 3.75rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--blue);
+  }
+  .tm__outof {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .tm__scores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.25rem;
+    margin: 0;
+  }
+  .tm__scores-item {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.25rem;
+  }
+  .tm__scores dd {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .tm__scores dt {
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .tm__verified {
+    display: grid;
+    gap: 0.3rem;
+    margin-left: auto;
+    font-size: 0.8125rem;
+  }
+  .tm__verified a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    color: var(--ink-2);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 0.15em;
+  }
+  .tm__verified a:hover {
+    color: var(--blue);
+    border-color: var(--blue);
+  }
+  .tm__responses {
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+
+  /* Quotes --------------------------------------------------------- */
   .tm__grid {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2rem;
-    margin-top: 2.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem clamp(2rem, 5vw, 4rem);
   }
-  .tm__item {
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--line-strong);
+  /* The About treatment mixes one-line and five-paragraph reviews, so it
+     flows in columns instead of a grid: no half-empty cells. */
+  .tm--full .tm__grid {
+    display: block;
+    columns: 2;
+    column-gap: clamp(2rem, 5vw, 4rem);
+  }
+  .tm--full .tm__item {
+    break-inside: avoid;
+  }
+  .tm--full .tm__item + .tm__item {
+    padding-top: 2.75rem;
+  }
+  .tm__item figure {
+    margin: 0;
+    display: grid;
+    gap: 1.25rem;
+    align-content: start;
+    height: 100%;
   }
   .tm__quote {
+    margin: 0;
+    display: grid;
+    gap: 0.85rem;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--blue);
+  }
+  .tm__quote p {
     font-family: var(--font-serif);
-    font-size: 1.35rem;
-    line-height: 1.4;
+    font-size: clamp(1.1875rem, 1.6vw, 1.4rem);
+    line-height: 1.45;
     color: var(--ink);
   }
-  .tm__quote::before {
+  .tm__quote p:first-child::before {
     content: '“';
   }
-  .tm__quote::after {
+  .tm__quote p:last-child::after {
     content: '”';
   }
   .tm__cite {
-    display: grid;
-    gap: 0.1rem;
-    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 0.75rem;
     font-size: 0.8125rem;
     color: var(--muted);
   }
-  .tm__name {
+  .tm__author {
+    font-family: var(--font-sans);
     font-weight: 500;
-    color: var(--ink-2);
+    color: var(--ink);
   }
-  .tm__item--placeholder .tm__quote {
+  .tm__source {
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     color: var(--muted);
+    padding: 0.3em 0.7em;
+    border: 1px solid var(--line);
+    border-radius: 999px;
   }
+
+  /* Keep the strip to two tight rows on a phone instead of four. */
+  @media (max-width: 560px) {
+    .tm__ratings {
+      gap: 1.25rem;
+    }
+    .tm__scores {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+      width: 100%;
+    }
+    .tm__scores dd {
+      font-size: 1.25rem;
+    }
+    .tm__scores dt {
+      font-size: 0.625rem;
+      letter-spacing: 0.08em;
+    }
+  }
+
   @media (max-width: 899px) {
     .tm__grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .tm--full .tm__grid {
+      columns: 1;
+    }
+    .tm__verified {
+      margin-left: 0;
+    }
+    .tm__quote p {
+      font-size: 1.125rem;
     }
   }
 </style>

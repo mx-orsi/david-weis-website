@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import Media from '../components/Media.astro';
 import Story from '../components/Story.astro';
+import Testimonials from '../components/Testimonials.astro';
 import StatRow from '../components/StatRow.astro';
 import Icon from '../components/Icon.astro';
 import { about } from '../data/about';
@@ -91,6 +92,8 @@ const cole = getProject('the-cole');
       <Media photo={about.community.photo} ratio="4 / 3" sizes="(min-width: 960px) 45vw, 100vw" />
     </div>
   </section>
+
+  <Testimonials limit={4} variant="full" />
 
   <section class="section section--line" aria-labelledby="ab-close">
     <div class="container ab-close">

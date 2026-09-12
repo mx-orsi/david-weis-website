@@ -96,7 +96,8 @@ const heroPreload = heroWebp && heroWebpSmall ? `${withBase(heroWebpSmall)} 500w
     </div>
   </section>
 
-  <Testimonials />
+  <!-- Client reviews: tight band between Ownership and Property is personal -->
+  <Testimonials limit={2} prefer="concise" variant="band" />
 
   <!-- 7. Property is personal -->
   <section class="hm-st section section--line" aria-labelledby="hm-st-title">

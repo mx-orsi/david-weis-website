@@ -49,7 +49,7 @@ export const agent = {
   },
 } as const;
 
-export type SocialIcon = 'instagram' | 'linkedin' | 'youtube';
+export type SocialIcon = 'instagram' | 'linkedin' | 'youtube' | 'facebook' | 'realtor' | 'homes';
 export interface SocialLink {
   name: string;
   icon: SocialIcon;
@@ -57,12 +57,29 @@ export interface SocialLink {
   href: string;
 }
 
-/** Footer order per the copy deck: Instagram · LinkedIn · YouTube. */
+/**
+ * Footer order per the copy deck: Instagram · LinkedIn · YouTube · Facebook ·
+ * Realtor.com · Homes.com. Each URL below was loaded in a real browser on
+ * 2026-09-12 except where noted.
+ */
 export const social: readonly SocialLink[] = [
   { name: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/david.weis.realtor/' },
   { name: 'LinkedIn', icon: 'linkedin', href: 'https://www.linkedin.com/in/davidweis/' },
-  // TODO: David's YouTube channel URL is pending (see CLIENT-QUESTIONS.md).
-  { name: 'YouTube', icon: 'youtube', href: '' },
+  { name: 'YouTube', icon: 'youtube', href: 'https://www.youtube.com/@DavidWeisRealtor' },
+  // David's business page (Profile · Real Estate Agent, 3.4K followers). His
+  // RealSatisfied feed lists a personal profile URL instead; the deck asks for
+  // the business page, so this is the one that ships.
+  { name: 'Facebook', icon: 'facebook', href: 'https://www.facebook.com/davidweisrealty/' },
+  // TODO: Realtor.com profile URL unconfirmed (see CLIENT-QUESTIONS.md). The
+  // only candidate we have is the one in David's RealSatisfied feed,
+  // http://www.realtor.com/realestateagents/___99919493, which looks like
+  // RealSatisfied's template with the name/city/state segments left empty.
+  // Realtor.com blocks automated requests, so it could not be checked. The
+  // footer hides this entry until a URL David has opened himself is pasted in.
+  { name: 'Realtor.com', icon: 'realtor', href: '' },
+  // From the build brief. Homes.com blocks automated requests, so this one is
+  // trusted as supplied rather than loaded here.
+  { name: 'Homes.com', icon: 'homes', href: 'https://www.homes.com/real-estate-agents/david-weis/t6g3d09/' },
 ];
 
 /** Footer legal block, wording from the copy deck (David's 2026-09-04 disclosure). */

@@ -13,6 +13,8 @@ interface Props {
     | 'linkedin'
     | 'youtube'
     | 'facebook'
+    | 'realtor'
+    | 'homes'
     | 'menu'
     | 'close';
   class?: string;
@@ -59,4 +61,11 @@ const { name, class: className, size = 16, ...rest } = Astro.props;
 )}
 {name === 'close' && (
   <svg class={className} {...rest} width={size} height={size} viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+)}
+
+{name === 'realtor' && (
+  <svg class={className} {...rest} width={size} height={size} viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 7.2L8 2.5l6 4.7M3.6 8.4V13a.5.5 0 00.5.5h7.8a.5.5 0 00.5-.5V8.4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.6 13.5V9.6h2.8v3.9" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+)}
+{name === 'homes' && (
+  <svg class={className} {...rest} width={size} height={size} viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1.8 6.6L7 2.6l5.2 4M3.3 7.7v4.6a.5.5 0 00.5.5h3.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10.4" cy="10.4" r="2.7" stroke="currentColor" stroke-width="1.2"/><path d="M12.4 12.4l1.9 1.9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
 )}

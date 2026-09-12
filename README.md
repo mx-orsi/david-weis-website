@@ -45,7 +45,8 @@ src/
     projects.ts      ← the seven Experience projects (cards + full pages + SEO)
     marketPages.ts   ← market page copy, featured areas, featured projects
     listings.ts      ← Properties page: featured listings, selected sales, block toggles
-    testimonials.ts  ← placeholder quotes, hidden until `enabled: true`
+    testimonials.ts  ← testimonial merge/selection rules and fallback ratings
+    testimonials.json ← hand-added quotes (starts empty)
     contact.ts       ← contact copy and form options
     types.ts         ← Photo / Stat / Cta types shared by data and components
   layouts/BaseLayout.astro   ← <head>, SEO meta, JSON-LD, header, final CTA, footer
@@ -54,10 +55,12 @@ src/
     Hero.astro (home), PageHero.astro (interior openers)
     ProjectCard.astro, ProjectPage.astro
     MarketCard.astro, MarketPage.astro, AreaCard.astro
-    ListingCard.astro, StatRow.astro, Testimonials.astro
-    Story.astro (heading + prose block), Media.astro (photo or labeled placeholder)
+    ListingCard.astro, StatRow.astro
+    Testimonials.astro (ratings strip + quotes), Story.astro (heading + prose block)
+    Media.astro (photo or labeled placeholder)
     PhotoSlot.astro, SearchCTA.astro (every outbound Compass link)
     Logo.astro, CompassLogo.astro, Title.astro (REALTOR® with small ®), Icon.astro, PcbTrace.astro
+  lib/realsatisfied.ts ← build-time RealSatisfied feed reader
   styles/global.css  ← design tokens + base styles
   pages/             ← one file per route; experience/[slug].astro builds the project pages
 public/images/       ← headshot, logos, compliance marks, Unsplash market photos
@@ -76,8 +79,8 @@ public/images/       ← headshot, logos, compliance marks, Unsplash market phot
   market pages (`featuredProjects`) all follow.
 - **Listings:** edit `listings.ts`. Set `placeholder: false` on real entries.
   `propertiesConfig` toggles the three blocks on the Properties page.
-- **Testimonials:** replace the entries in `testimonials.ts` and set
-  `enabled: true`. The section stays hidden until then.
+- **Testimonials:** they come from David's RealSatisfied feed automatically.
+  See "Testimonials" below to add a quote by hand or hide one.
 - **Stats:** `StatRow` renders any `Stat[]`. Only use figures that appear in
   the approved copy.
 
@@ -101,6 +104,50 @@ outbound link rather than a fake search UI. All Compass links render through
 `SearchCTA.astro`: no `market` prop → David's Compass profile (the Properties
 page "View all listings on Compass"); `market="san-diego"` etc. → Compass
 consumer search for that area (the market page "Explore … Properties" button).
+
+## Testimonials
+
+Client reviews are read from David's RealSatisfied profile **at build time**, so
+no third-party script or iframe runs in the browser and the section can never
+shift the layout or break when RealSatisfied is slow.
+
+- **Feed:** `https://rss.realsatisfied.com/rss/agent/David-Weis` (verified
+  2026-09-12; `https://www.realsatisfied.com/rss/agent/David-Weis` serves the
+  same payload, and the `/page=1` variant 404s). Reader:
+  `src/lib/realsatisfied.ts`.
+- **Where it shows:** a tight band on the home page between "Ownership changes
+  your perspective" and "Property is personal" (2 quotes), and a fuller version
+  on About directly before the closing CTA (4 quotes).
+- **Ratings strip:** the feed's percentages become the 0–5 scores, with the
+  overall figure as the mean of Satisfaction, Performance and Recommendation,
+  plus a "Verified by RealSatisfied" link to the profile.
+- **Never shown:** reviews that name a unit or street address, an email or a
+  phone number are dropped rather than edited, and reviewers appear as first
+  name plus last initial even though the feed publishes full names.
+- **Add a quote by hand** (a Google review, say): append to
+  `src/data/testimonials.json` as
+  `{ "quote": "…", "author": "Jane D.", "context": "Seller · La Jolla", "source": "google" }`.
+  Hand-added entries render first. The file starts empty and must only ever
+  hold real, attributable quotes.
+- **Hide one feed review:** add its `guid` (visible in the feed XML) to
+  `excludedIds` in `src/data/testimonials.ts`.
+- **If the feed fails** the build still succeeds: it logs a warning and falls
+  back to `testimonials.json` plus the `fallbackRatings` constant. With no
+  quotes from either source the component renders the ratings strip alone —
+  never an empty grid, never sample text.
+- **Rehearse the failure modes** before a release:
+
+  ```bash
+  npm run build                                              # feed up
+  REALSATISFIED_FEED="http://127.0.0.1:9/rss" npm run build   # feed down
+  ```
+
+- **New reviews appear on the next deploy.** `.github/workflows/weekly-rebuild.yml`
+  rebuilds the GitHub Pages preview every Monday (and on every push to `main`),
+  so the site keeps up without anyone touching it. It starts working once the
+  workflow file is on GitHub with Actions enabled. On another host, use that
+  host's scheduled-build hook instead (Netlify build hook + cron, Cloudflare
+  Pages scheduled deploy).
 
 ## Contact form
 

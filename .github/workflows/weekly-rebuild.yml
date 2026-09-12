@@ -1,0 +1,55 @@
+# Weekly rebuild so new RealSatisfied reviews reach the site.
+#
+# The testimonials are read from David's RealSatisfied feed at build time, so a
+# new review only appears after the next build. This workflow rebuilds the
+# GitHub Pages preview every Monday and on demand. It starts running once this
+# file is on GitHub and Actions is enabled for the repository.
+#
+# Production note: the preview build sets SITE_BASE (project-site sub-path) and
+# therefore carries a noindex tag. When the site moves to davidweis.com, drop
+# SITE_BASE and point SITE_URL at the production domain.
+name: Weekly rebuild
+
+on:
+  schedule:
+    # Mondays, 13:10 UTC (about 6 am Pacific).
+    - cron: '10 13 * * 1'
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-preview
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build
+        env:
+          SITE_URL: https://mx-orsi.github.io
+          SITE_BASE: /david-weis-website
+        run: npx astro build --outDir dist-preview
+
+      - name: Publish to gh-pages
+        run: |
+          cd dist-preview
+          git init -q -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -qm "Weekly rebuild $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push -qf "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" gh-pages

@@ -11,8 +11,13 @@ Grouped by who has to act. Tick items off as they land.
       section and the market image breaks. Specs in `IMAGES-NEEDED.md`.
 - [ ] **Properties decision:** keep the Featured Listings grid, the Compass
       link, and Selected Sales, or drop a block. Then send listing details.
-- [ ] **Testimonials:** two or three real quotes.
-- [ ] **YouTube channel URL** for the footer.
+- [x] **Testimonials:** live from David's RealSatisfied feed (5.0 ratings strip
+      plus real client quotes). Nothing left to send unless he wants a Google
+      review added by hand, or the held-back "Mark W" review shown.
+- [x] **YouTube channel URL** (`@DavidWeisRealtor`) and the **Facebook business
+      page** are in the footer.
+- [ ] **Realtor.com profile URL** — the last footer link. Ask David to paste
+      the address from his own browser (Realtor.com blocks us).
 - [ ] **Compass compliance sign-off** on the footer disclosure, the wordmark
       placement and the privacy policy.
 - [ ] **Confirm:** The Cole logo use, Querencia Palms link, Celebrity Vacation
@@ -25,7 +30,9 @@ Grouped by who has to act. Tick items off as they land.
 - [x] Home, About, Experience landing, seven project pages, three market
       pages, Properties, Contact, Privacy Policy stub, 404, `/projects` redirect.
 - [x] Reusable data-driven components: project cards, listing cards, stat
-      rows, testimonials (hidden), market cards, area cards.
+      rows, testimonials, market cards, area cards.
+- [x] RealSatisfied testimonials read at build time, with the feed-up,
+      feed-down and feed-empty builds all rehearsed.
 - [x] Black / white / blue palette; uppercase only via CSS; one page-load moment.
 - [x] Accessibility: axe-core (WCAG 2.2 AA + best practice) reports zero
       violations on every page at desktop and phone widths; no horizontal
@@ -33,7 +40,9 @@ Grouped by who has to act. Tick items off as they land.
 - [ ] **Form service.** Create a Formspree or Basin form, set
       `PUBLIC_FORM_ENDPOINT` in `.env` and in the deploy environment.
 - [ ] Swap placeholders for photos as they arrive (data edits only).
-- [ ] Turn on testimonials when quotes arrive.
+- [x] Weekly rebuild workflow (`.github/workflows/weekly-rebuild.yml`) so new
+      reviews reach the site without a manual deploy. Needs Actions enabled on
+      the GitHub repo; swap it for the host's scheduled build if the site moves.
 
 ## 3. Launch plumbing
 
@@ -51,6 +60,8 @@ Grouped by who has to act. Tick items off as they land.
 ## 4. Final QA before go-live
 
 - [ ] Re-run the axe audit and the screenshot pass after photos land.
+      (2026-09-12: axe clean on home and About at 1440 and 390 with the
+      testimonials section in.)
 - [x] Lighthouse pass (2026-09-12): desktop 100/100/100/100 on home; mobile performance 97 home, 98 San Diego, 96 project page, all other categories 100. CSS is inlined, photos ship as WebP with the hero preloaded. Re-run after photos land.
 - [ ] Real-device check on iPhone and Android, Safari and Chrome.
 - [ ] Every link clicked, every Compass link opens the right area.
