@@ -1,0 +1,149 @@
+---
+/**
+ * Privacy Policy — a stub draft. The contact form collects name, email and
+ * phone, so the site needs a policy; Compass requires an approved one before
+ * launch. Adapted from the July 2026 draft in the earlier project folder.
+ * Kept out of the sitemap and noindexed until it is approved.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Title from '../components/Title.astro';
+import { agent } from '../data/site';
+
+const title = 'Privacy Policy | David Weis';
+const description = 'Privacy policy for davidweis.com: what information the site collects through its contact form, how it is used and the choices you have.';
+const updated = 'September 12, 2026';
+---
+
+<BaseLayout {title} {description} noindex finalCta={false}>
+  <article class="pp section">
+    <div class="container pp__doc">
+      <p class="eyebrow eyebrow--dot">Legal</p>
+      <h1 class="title-xl">Privacy Policy</h1>
+      <p class="pp__updated">Draft · Last updated {updated}</p>
+
+      <div class="pp__todo">
+        <strong>Before launch:</strong> Compass requires agent sites to carry an approved privacy policy. Have this draft reviewed by
+        Compass compliance and, ideally, by counsel. Confirm the analytics and form-handling details once those services are
+        connected. Remove this box when the policy is approved.
+      </div>
+
+      <p class="lede lede--wide">This policy explains what information is collected through davidweis.com, why, and what choices you have.</p>
+
+      <h2>Who we are</h2>
+      <p>
+        This website is operated by {agent.name}, a licensed real estate <Title /> in the State of California (DRE #{agent.dre}),
+        affiliated with {agent.brokerage} (DRE #{agent.brokerageDre}). You can reach us at
+        <a href={`mailto:${agent.email}`}>{agent.email}</a> or <a href={agent.phoneHref}>{agent.phone}</a>.
+      </p>
+
+      <h2>What we collect</h2>
+      <ul>
+        <li>
+          <strong>Information you give us.</strong> Your name, email address, phone number, what you are interested in, the location
+          you select and anything you write in the message field of the contact form.
+        </li>
+        <li>
+          <strong>Information collected automatically.</strong> Standard server and analytics data such as IP address, browser and
+          device type, pages viewed and referring URL.
+        </li>
+      </ul>
+      <p>
+        We do not knowingly collect information from anyone under 16, and we do not ask for Social Security numbers, financial
+        account numbers or other sensitive identifiers through this website.
+      </p>
+
+      <h2>How we use it</h2>
+      <ul>
+        <li>To respond to your inquiry and provide real estate brokerage services.</li>
+        <li>To send you property information or market updates you asked for.</li>
+        <li>To improve how this site works.</li>
+        <li>To meet legal, regulatory and brokerage record-keeping obligations.</li>
+      </ul>
+      <p><strong>We do not sell or rent your personal information.</strong></p>
+
+      <h2>Who we share it with</h2>
+      <p>
+        We share information only with service providers who help operate this business, such as form handling, email, customer
+        relationship management and analytics, and with {agent.brokerage} as our responsible broker where required for a
+        transaction or by brokerage policy. We may also disclose information where required by law.
+      </p>
+
+      <h2>Your California privacy rights</h2>
+      <p>
+        Under the California Consumer Privacy Act, as amended by the CPRA, California residents have the right to know what personal
+        information we collect and how it is used, to request deletion, to request correction, to opt out of sale or sharing (we do
+        neither), to limit the use of sensitive personal information, and not to receive discriminatory treatment for exercising
+        these rights. To make a request, email <a href={`mailto:${agent.email}`}>{agent.email}</a> or call
+        <a href={agent.phoneHref}>{agent.phone}</a>. We will verify your identity before acting on the request.
+      </p>
+
+      <h2>Cookies</h2>
+      <p>
+        This site may use cookies and similar technologies for basic functionality and analytics. Most browsers let you refuse or
+        delete cookies; doing so may affect how parts of the site work.
+      </p>
+
+      <h2>Security and retention</h2>
+      <p>
+        We use reasonable safeguards to protect the information we hold and keep it only as long as needed for the purposes above
+        or as required by law and brokerage record-keeping rules. No method of transmission over the internet is completely secure.
+      </p>
+
+      <h2>Third-party links</h2>
+      <p>This site links to other websites, including compass.com. We are not responsible for their privacy practices.</p>
+
+      <h2>Changes</h2>
+      <p>We may update this policy. The revised version will be posted here with a new "last updated" date.</p>
+
+      <h2>Contact</h2>
+      <p>
+        {agent.name}, <Title /><br />
+        {agent.brokerage}, {agent.office.street}, {agent.office.city}, {agent.office.state} {agent.office.zip}<br />
+        <a href={`mailto:${agent.email}`}>{agent.email}</a> · <a href={agent.phoneHref}>{agent.phone}</a>
+      </p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .pp__doc {
+    max-width: 72ch;
+    margin-inline: auto;
+    display: grid;
+    gap: 1rem;
+  }
+  .pp__updated {
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .pp__todo {
+    padding: 1.25rem 1.5rem;
+    margin-block: 0.5rem 1rem;
+    border: 1px solid var(--blue);
+    background: var(--blue-tint);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .pp__doc h2 {
+    font-size: 1.75rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .pp__doc p,
+  .pp__doc li {
+    color: var(--ink-2);
+    line-height: 1.75;
+  }
+  .pp__doc ul {
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .pp__doc a {
+    color: var(--ink);
+  }
+</style>

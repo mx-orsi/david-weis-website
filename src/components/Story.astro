@@ -1,0 +1,47 @@
+---
+/**
+ * Story — an editorial prose block: optional eyebrow, a serif heading and
+ * paragraphs kept to a readable measure. `layout="split"` puts the heading in
+ * a left column and the prose on the right (desktop only).
+ */
+interface Props {
+  heading: string;
+  paragraphs: readonly string[];
+  eyebrow?: string;
+  layout?: 'stack' | 'split';
+  level?: 2 | 3;
+  id?: string;
+  class?: string;
+}
+const { heading, paragraphs, eyebrow, layout = 'stack', level = 2, id, class: className } = Astro.props;
+const Tag = level === 3 ? 'h3' : 'h2';
+---
+
+<div class:list={['story', layout === 'split' && 'split', className]}>
+  <div class="story__head">
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <Tag class:list={['story__title', level === 3 ? 'title-md' : 'title-lg']} id={id}>{heading}</Tag>
+  </div>
+  <div class="prose">
+    {paragraphs.map((p) => <p>{p}</p>)}
+    <slot />
+  </div>
+</div>
+
+<style>
+  .story {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .story__head {
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+  }
+  .story__title {
+    max-width: 16ch;
+  }
+  .story.split {
+    gap: clamp(1.5rem, 5vw, 5rem);
+  }
+</style>

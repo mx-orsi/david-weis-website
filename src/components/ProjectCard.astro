@@ -1,0 +1,108 @@
+---
+/**
+ * ProjectCard — the reusable project card. Used on Home (teaser), the
+ * Experience landing (index, numbered) and the market pages (index).
+ *   variant="teaser"  home copy: kindTeaser, teaser, teaserCta
+ *   variant="index"   summary and "View Project"
+ *   variant="wide"    index content, horizontal layout for a single card
+ */
+import Icon from './Icon.astro';
+import Media from './Media.astro';
+import type { Project } from '../data/projects';
+import { projectHref } from '../data/projects';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  project: Project;
+  variant?: 'teaser' | 'index' | 'wide';
+  number?: string;
+  headingLevel?: 'h2' | 'h3';
+  class?: string;
+}
+const { project: p, variant = 'index', number, headingLevel = 'h3', class: className } = Astro.props;
+const Heading = headingLevel;
+const teaser = variant === 'teaser';
+const label = teaser ? (p.kindTeaser ?? p.kind) : p.kindIndex;
+const copy = teaser ? (p.teaser ?? p.summary) : p.summary;
+const cta = teaser ? (p.teaserCta ?? 'View Project') : 'View Project';
+const href = withBase(projectHref(p));
+const titleId = `project-card-${p.slug}-${variant}`;
+---
+
+<article class:list={['pc', `pc--${variant}`, className]} aria-labelledby={titleId}>
+  <a class="pc__media" href={href} tabindex="-1" aria-hidden="true">
+    <Media photo={p.photos[0]} ratio={variant === 'wide' ? '4 / 3' : '4 / 3'} sizes="(min-width: 1024px) 33vw, (min-width: 700px) 50vw, 100vw" />
+  </a>
+  <div class="pc__body">
+    <p class="pc__eyebrow eyebrow eyebrow--muted">
+      {number && <span class="pc__num">{number}</span>}
+      {p.place} · {label}
+    </p>
+    <Heading class="pc__title" id={titleId}>
+      <a href={href}>{p.name}</a>
+    </Heading>
+    <p class="pc__copy">{copy}</p>
+    <a class="link-arrow" href={href}>{cta} <Icon name="arrow-right" /></a>
+  </div>
+</article>
+
+<style>
+  .pc {
+    display: grid;
+    gap: 1.1rem;
+    align-content: start;
+    min-width: 0;
+  }
+  .pc__media {
+    display: block;
+    text-decoration: none;
+  }
+  .pc__body {
+    display: grid;
+    gap: 0.7rem;
+    justify-items: start;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-strong);
+  }
+  .pc__eyebrow {
+    gap: 1em;
+  }
+  .pc__num {
+    color: var(--blue);
+  }
+  .pc__title {
+    font-size: clamp(1.6rem, 2.2vw, 2rem);
+    line-height: 1.05;
+  }
+  .pc__title a {
+    text-decoration: none;
+  }
+  .pc__title a:hover {
+    color: var(--blue);
+  }
+  .pc__copy {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+    max-width: 44ch;
+  }
+
+  /* Horizontal layout for a single card */
+  .pc--wide {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: center;
+  }
+  .pc--wide .pc__body {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .pc--wide .pc__title {
+    font-size: clamp(2rem, 3.2vw, 2.75rem);
+  }
+  @media (max-width: 699px) {
+    .pc--wide {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

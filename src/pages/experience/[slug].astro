@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectPage from '../../components/ProjectPage.astro';
+import { projects, type Project } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+---
+
+<BaseLayout title={project.seo.title} description={project.seo.description}>
+  <ProjectPage project={project} />
+</BaseLayout>

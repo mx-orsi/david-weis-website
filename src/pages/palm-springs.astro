@@ -1,12 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MarketPage from '../components/MarketPage.astro';
+import { marketPages } from '../data/marketPages';
 
-const title = 'Palm Springs Real Estate | David Weis, Compass Broker Associate';
-const description =
-  'Mid-century, luxury and vacation-rental-friendly homes in Palm Springs with David Weis, a Compass Broker Associate behind the Querencia Palms condo conversion and The Cole Hotel who owns and operates desert investment property.';
+const c = marketPages['palm-springs'];
 ---
 
-<BaseLayout {title} {description}>
-  <MarketPage slug="palm-springs" title="Palm Springs real estate, from a desert owner and operator" />
+<BaseLayout title={c.seo.title} description={c.seo.description}>
+  <MarketPage slug="palm-springs" />
 </BaseLayout>

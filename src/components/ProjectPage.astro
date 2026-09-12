@@ -1,0 +1,243 @@
+---
+/**
+ * ProjectPage — the single structure every Experience project page shares.
+ * Content comes from src/data/projects.ts. Rhythm: opener with the name and
+ * intro, a wide lead photo, story sections in an editorial split layout,
+ * a two-up image break after the second section, a wide break after the
+ * fourth, a stat row where the copy supports figures, remaining photos as a
+ * closing gallery, then the market CTA and previous/next project links.
+ */
+import Icon from './Icon.astro';
+import Media from './Media.astro';
+import Story from './Story.astro';
+import StatRow from './StatRow.astro';
+import type { Project } from '../data/projects';
+import { projects, projectHref } from '../data/projects';
+import { siteUrl } from '../data/site';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  project: Project;
+}
+const { project: p } = Astro.props;
+
+const idx = projects.findIndex((x) => x.slug === p.slug);
+const prev = projects[(idx - 1 + projects.length) % projects.length];
+const next = projects[(idx + 1) % projects.length];
+
+const [lead, ...rest] = p.photos;
+const showTwoUp = p.sections.length > 1 && rest.length > 0;
+const twoUp = showTwoUp ? rest.slice(0, 2) : [];
+const afterTwoUp = rest.slice(twoUp.length);
+const showWide = p.sections.length > 3 && afterTwoUp.length > 0;
+const wide = showWide ? afterTwoUp[0] : undefined;
+const tail = showWide ? afterTwoUp.slice(1) : afterTwoUp;
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+    { '@type': 'ListItem', position: 2, name: 'Experience', item: `${siteUrl}/experience` },
+    { '@type': 'ListItem', position: 3, name: p.name, item: `${siteUrl}${projectHref(p)}` },
+  ],
+};
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
+
+<article class="pp">
+  <header class="pp-hero">
+    <div class="container">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href={withBase('/')}>Home</a>
+        <span aria-hidden="true">/</span>
+        <a href={withBase('/experience')}>Experience</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{p.name}</span>
+      </nav>
+      <p class="eyebrow eyebrow--dot">{p.place} · {p.kind}</p>
+      <div class="pp-hero__grid">
+        <h1 class="display">{p.name}</h1>
+        <div class="pp-hero__aside">
+          {p.logo && (
+            <img class="pp-hero__logo" src={withBase(p.logo.src)} alt={p.logo.alt} width={p.logo.width} height={p.logo.height} loading="eager" decoding="async" />
+          )}
+          <p class="lede lede--wide">{p.intro}</p>
+          {p.link && (
+            <a class="link-arrow link-arrow--ext" href={p.link.href} target="_blank" rel="noopener noreferrer">
+              {p.link.label} <Icon name="arrow-ext" /><span class="sr-only">(opens in a new tab)</span>
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+    <div class="container pp-hero__lead">
+      <Media photo={lead} ratio="21 / 9" priority sizes="100vw" />
+    </div>
+  </header>
+
+  <div class="pp-body">
+    {p.sections.map((s, i) => (
+      <>
+        <section class="pp-section" aria-labelledby={`${p.slug}-s${i}`}>
+          <div class="container">
+            <Story heading={s.heading} paragraphs={s.paragraphs} layout="split" id={`${p.slug}-s${i}`} />
+          </div>
+        </section>
+        {i === 1 && twoUp.length > 0 && (
+          <div class:list={['container', 'pp-break', twoUp.length === 2 && 'pp-break--two']}>
+            {twoUp.map((ph) => <Media photo={ph} ratio={twoUp.length === 2 ? '4 / 3' : '16 / 9'} />)}
+          </div>
+        )}
+        {i === 3 && wide && (
+          <div class="container pp-break">
+            <Media photo={wide} ratio="16 / 9" sizes="100vw" />
+          </div>
+        )}
+      </>
+    ))}
+
+    {p.stats && (
+      <div class="container pp-stats">
+        <StatRow stats={p.stats} />
+      </div>
+    )}
+
+    {tail.length > 0 && (
+      <div class="container pp-break pp-break--grid" aria-label="More photos">
+        {tail.map((ph) => <Media photo={ph} ratio="4 / 3" />)}
+      </div>
+    )}
+  </div>
+
+  <footer class="pp-foot">
+    <div class="container pp-foot__inner">
+      <div class="pp-foot__cta">
+        <p class="eyebrow eyebrow--muted">Keep exploring</p>
+        <a class="btn" href={withBase(p.cta.href)}>{p.cta.label} <Icon name="arrow-right" /></a>
+      </div>
+      <nav class="pp-foot__nav" aria-label="More projects">
+        <a class="pp-foot__link" href={withBase(projectHref(prev))} rel="prev">
+          <span class="pp-foot__k"><Icon name="arrow-left" size={12} /> Previous</span>
+          <span class="pp-foot__name">{prev.name}</span>
+        </a>
+        <a class="pp-foot__link pp-foot__link--next" href={withBase(projectHref(next))} rel="next">
+          <span class="pp-foot__k">Next <Icon name="arrow-right" size={12} /></span>
+          <span class="pp-foot__name">{next.name}</span>
+        </a>
+      </nav>
+    </div>
+  </footer>
+</article>
+
+<style>
+  .pp-hero {
+    padding-block: clamp(3rem, 7vw, 6rem) 0;
+  }
+  .pp-hero .crumbs {
+    margin-bottom: 1.5rem;
+  }
+  .pp-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+    margin-top: 1.25rem;
+  }
+  .pp-hero__grid h1 {
+    max-width: 10ch;
+  }
+  .pp-hero__aside {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+  }
+  .pp-hero__logo {
+    height: 64px;
+    width: auto;
+    max-width: 220px;
+  }
+  .pp-hero__lead {
+    margin-top: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .pp-body {
+    display: grid;
+    gap: clamp(3.5rem, 7vw, 6.5rem);
+    padding-block: clamp(3.5rem, 7vw, 6.5rem);
+  }
+  .pp-break {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .pp-break--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pp-break--grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .pp-foot {
+    border-top: 1px solid var(--line);
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+  .pp-foot__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+  .pp-foot__cta {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+  }
+  .pp-foot__nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .pp-foot__link {
+    display: grid;
+    gap: 0.4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-strong);
+    text-decoration: none;
+  }
+  .pp-foot__link--next {
+    text-align: right;
+    justify-items: end;
+  }
+  .pp-foot__k {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .pp-foot__name {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+  .pp-foot__link:hover .pp-foot__name {
+    color: var(--blue);
+  }
+
+  @media (max-width: 899px) {
+    .pp-hero__grid,
+    .pp-foot__inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 599px) {
+    .pp-break--two {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

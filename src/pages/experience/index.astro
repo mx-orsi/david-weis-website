@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/projects';
+
+const title = 'Real Estate Projects & Experience | David Weis';
+const description =
+  "Explore the properties and projects that shaped David Weis' approach to real estate, including renovation, hospitality, investment property, condominium conversion and vacation rental operations.";
+---
+
+<BaseLayout {title} {description}>
+  <PageHero
+    eyebrow="Experience"
+    title="The projects that shaped how I work."
+    intro="Every property teaches you something. Sometimes the lesson is about construction, sometimes presentation, sometimes people — and sometimes the biggest lesson is realizing the original plan is no longer the right one. These are some of the properties that changed how I understand real estate."
+    size="display"
+  />
+
+  <section class="ex section section--flush-top" aria-label="Projects">
+    <div class="container ex__grid">
+      {projects.map((p, i) => (
+        <ProjectCard
+          project={p}
+          variant={i === 0 ? 'wide' : 'index'}
+          number={String(i + 1).padStart(2, '0')}
+          headingLevel="h2"
+          class={i === 0 ? 'ex__lead' : undefined}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .ex__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2.5rem, 5vw, 4rem) 2.5rem;
+    padding-top: clamp(1rem, 3vw, 2rem);
+  }
+  .ex__grid > :global(.ex__lead) {
+    grid-column: 1 / -1;
+    padding-bottom: clamp(1rem, 3vw, 2rem);
+    border-bottom: 1px solid var(--line);
+  }
+  @media (max-width: 699px) {
+    .ex__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

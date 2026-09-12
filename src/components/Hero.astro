@@ -1,47 +1,37 @@
 ---
+/**
+ * Home hero. The only page-load motion on the site: the copy and portrait
+ * settle in once (see .rise in global.css; disabled under reduced motion).
+ */
 import Icon from './Icon.astro';
-import PcbTrace from './PcbTrace.astro';
-import SearchCTA from './SearchCTA.astro';
-import { agent } from '../data/site';
-import { withBase } from '../lib/paths';
 import Title from './Title.astro';
+import { agent } from '../data/site';
+import { home } from '../data/home';
+import { withBase } from '../lib/paths';
+
+const h = home.hero;
+const src = withBase(agent.headshot.src);
+const small = withBase(agent.headshot.src.replace(/\.jpg$/, '-500.jpg'));
 ---
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="container hero__grid">
-    <div class="hero__copy">
-      <p class="eyebrow eyebrow--dot">San Diego · Palm Springs · Big Bear</p>
-      <h1 id="hero-title">
-        Three California Markets.<br />
-        <em>One Agent.</em>
-      </h1>
-      <p class="lede">
-        Coastal, desert and mountain real estate with one point of contact. I don't just work in these
-        markets. I've owned and managed homes, cabins and investment properties in all three since 2018.
-      </p>
+    <div class="hero__copy rise">
+      <p class="eyebrow eyebrow--dot">{h.eyebrow}</p>
+      <h1 id="hero-title" class="display">{h.title}</h1>
+      <p class="lede">{h.body}</p>
       <div class="hero__actions">
-        <SearchCTA />
-        <a class="btn btn--ghost" href={withBase('/contact')}>Start a conversation</a>
+        <a class="btn" href={withBase(h.primary.href)}>{h.primary.label} <Icon name="arrow-right" /></a>
+        <a class="btn btn--ghost" href={withBase(h.secondary.href)}>{h.secondary.label}</a>
       </div>
-      <ul class="hero__contact" aria-label="Contact David">
-        <li>
-          <Icon name="phone" size={15} />
-          <a href={agent.phoneHref}>{agent.phone}</a>
-        </li>
-        <li>
-          <Icon name="mail" size={15} />
-          <a href={`mailto:${agent.email}`}>{agent.email}</a>
-        </li>
-      </ul>
     </div>
 
-    <figure class="hero__portrait">
-      <PcbTrace variant="portrait" class="hero__trace" />
-      <div class="hero__frame">
+    <figure class="hero__portrait rise rise--late">
+      <div class="hero__frame frame">
         <img
-          src={withBase(agent.headshot.src)}
-          srcset={`${withBase(agent.headshot.src.replace(/\.jpg$/, '-500.jpg'))} 500w, ${withBase(agent.headshot.src)} 1000w`}
-          sizes="(min-width: 900px) 420px, 320px"
+          src={src}
+          srcset={`${small} 500w, ${src} 1000w`}
+          sizes="(min-width: 960px) 40vw, 100vw"
           alt={agent.headshot.alt}
           width={agent.headshot.width}
           height={agent.headshot.height}
@@ -52,8 +42,7 @@ import Title from './Title.astro';
       </div>
       <figcaption class="hero__caption">
         <span class="hero__caption-name">{agent.name}</span>
-        <span class="hero__caption-title"><Title /></span>
-        <span class="hero__caption-meta">{agent.brokerage} · CA DRE #{agent.dre}</span>
+        <span class="hero__caption-title"><Title /> · {agent.brokerage}</span>
       </figcaption>
     </figure>
   </div>
@@ -61,134 +50,67 @@ import Title from './Title.astro';
 
 <style>
   .hero {
-    padding-block: clamp(3.5rem, 8vw, 6.5rem) clamp(2.5rem, 6vw, 4rem);
+    padding-block: clamp(3rem, 7vw, 6rem) clamp(3rem, 6vw, 5rem);
     overflow: hidden;
   }
   .hero__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     align-items: center;
-    gap: clamp(2.5rem, 6vw, 5rem);
+    gap: clamp(2.5rem, 6vw, 6rem);
   }
   .hero__copy {
     display: grid;
-    gap: 1.5rem;
+    gap: 1.6rem;
     justify-items: start;
   }
   .hero__copy h1 {
-    font-size: clamp(2.75rem, 5.8vw, 4.75rem);
-    line-height: 1.02;
-    max-width: 14ch;
-  }
-  .hero__copy h1 em {
-    font-weight: 500;
-    color: var(--ink-2);
+    max-width: 10ch;
   }
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    margin-top: 0.25rem;
-  }
-  .hero__contact {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem 1.75rem;
     margin-top: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 400;
-    color: var(--ink-2);
-  }
-  .hero__contact li {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55em;
-  }
-  .hero__contact svg {
-    color: var(--muted);
-  }
-  .hero__contact a {
-    text-decoration: none;
-  }
-  .hero__contact a:hover {
-    text-decoration: underline;
   }
 
   .hero__portrait {
     position: relative;
-    justify-self: center;
-    width: min(100%, 420px);
-  }
-  .hero__trace {
-    position: absolute;
-    inset: -12% -18%;
-    width: auto;
-    height: auto;
-    z-index: 0;
+    justify-self: end;
+    width: min(100%, 520px);
+    display: grid;
+    gap: 0.9rem;
   }
   .hero__frame {
-    position: relative;
-    z-index: 1;
     aspect-ratio: 4 / 5;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background: var(--surface-2);
-    box-shadow:
-      0 0 0 1px var(--line),
-      0 30px 60px -30px rgba(22, 24, 27, 0.35);
+    box-shadow: 0 40px 80px -48px rgba(10, 11, 13, 0.45);
   }
   .hero__frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
     object-position: 50% 20%;
   }
   .hero__caption {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    gap: 0.2rem;
-    margin: -2.4rem 0 0 -1.25rem;
-    width: max-content;
-    max-width: calc(100% + 1.25rem);
-    padding: 0.95rem 1.25rem;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-card);
-    line-height: 1.35;
-  }
-  .hero__caption-name {
-    font-family: var(--font-serif);
-    font-size: 1.25rem;
-    font-weight: 500;
-  }
-  .hero__caption-title {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+    align-items: baseline;
     font-size: 0.6875rem;
-    font-weight: 500;
     letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-2);
-  }
-  .hero__caption-meta {
-    font-size: 0.6875rem;
-    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
   }
+  .hero__caption-name {
+    font-weight: 500;
+    color: var(--ink);
+  }
 
-  @media (max-width: 899px) {
+  @media (max-width: 959px) {
     .hero__grid {
       grid-template-columns: 1fr;
     }
     .hero__portrait {
       order: -1;
-      width: min(100%, 320px);
+      width: min(100%, 360px);
       justify-self: start;
-    }
-    .hero__caption {
-      margin-left: 0;
     }
   }
   @media (max-width: 540px) {

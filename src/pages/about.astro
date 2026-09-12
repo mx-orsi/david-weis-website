@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Media from '../components/Media.astro';
+import Story from '../components/Story.astro';
+import StatRow from '../components/StatRow.astro';
+import Icon from '../components/Icon.astro';
+import { about } from '../data/about';
+import { agent } from '../data/site';
+import { getProject } from '../data/projects';
+import { withBase } from '../lib/paths';
+
+const portrait = { ...agent.headshot, suggestion: 'Portrait of David' };
+const cole = getProject('the-cole');
+---
+
+<BaseLayout title={about.seo.title} description={about.seo.description}>
+  <PageHero eyebrow={about.hero.eyebrow} title={about.hero.title} intro={about.hero.intro} size="display">
+    <Media slot="media" photo={portrait} ratio="4 / 5" priority sizes="(min-width: 960px) 40vw, 100vw" class="ab-portrait" />
+  </PageHero>
+
+  <div class="container ab-stats">
+    <StatRow stats={about.stats} />
+  </div>
+
+  <section class="section" aria-labelledby="ab-moving">
+    <div class="container">
+      <Story heading={about.moving.heading} paragraphs={about.moving.paragraphs} layout="split" id="ab-moving" />
+    </div>
+  </section>
+
+  <section class="section section--flush-top" aria-labelledby="ab-building">
+    <div class="container">
+      <Story heading={about.building.heading} paragraphs={about.building.paragraphs} layout="split" id="ab-building" />
+    </div>
+  </section>
+
+  <div class="container">
+    <Media photo={about.portrait} ratio="21 / 9" sizes="100vw" />
+  </div>
+
+  <section class="section" aria-labelledby="ab-career">
+    <div class="container">
+      <div class="split">
+        <h2 id="ab-career" class="title-lg ab-career__title">{about.career.heading}</h2>
+        <p class="lede lede--wide">{about.career.intro}</p>
+      </div>
+      <div class="ab-chapters">
+        {about.career.chapters.map((c) => (
+          <div class="ab-chapter">
+            <h3 class="title-md">{c.title}</h3>
+            <p>{c.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--line ab-cole" aria-labelledby="ab-cole">
+    <div class="container ab-cole__grid">
+      <Story heading={about.cole.heading} paragraphs={about.cole.paragraphs} id="ab-cole">
+        <a class="link-arrow ab-cole__link" href={withBase(about.cole.cta.href)}>{about.cole.cta.label} <Icon name="arrow-right" /></a>
+      </Story>
+      <div class="ab-cole__media">
+        {cole.logo && <img class="ab-cole__logo" src={withBase(cole.logo.src)} alt={cole.logo.alt} width={cole.logo.width} height={cole.logo.height} loading="lazy" decoding="async" />}
+        <Media photo={about.cole.photo} ratio="4 / 5" sizes="(min-width: 960px) 40vw, 100vw" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="ab-license">
+    <div class="container">
+      <Story heading={about.license.heading} paragraphs={about.license.paragraphs} layout="split" id="ab-license" />
+    </div>
+  </section>
+
+  <section class="section section--flush-top" aria-labelledby="ab-today">
+    <div class="container">
+      <Story heading={about.today.heading} paragraphs={about.today.paragraphs} layout="split" id="ab-today">
+        <p class="ab-note">
+          <a href={agent.vacationRentals.url} target="_blank" rel="noopener noreferrer">{agent.vacationRentals.name}<span class="sr-only"> (opens in a new tab)</span></a>
+          {' '}is {agent.vacationRentals.note.charAt(0).toLowerCase() + agent.vacationRentals.note.slice(1)}
+        </p>
+      </Story>
+    </div>
+  </section>
+
+  <section class="section section--line" aria-labelledby="ab-community">
+    <div class="container ab-comm">
+      <Story heading={about.community.heading} paragraphs={about.community.paragraphs} id="ab-community" />
+      <Media photo={about.community.photo} ratio="4 / 3" sizes="(min-width: 960px) 45vw, 100vw" />
+    </div>
+  </section>
+
+  <section class="section section--line" aria-labelledby="ab-close">
+    <div class="container ab-close">
+      <h2 id="ab-close" class="title-lg">{about.closing.title}</h2>
+      <p class="lede lede--wide">{about.closing.body}</p>
+      <a class="btn" href={withBase(about.closing.cta.href)}>{about.closing.cta.label} <Icon name="arrow-right" /></a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .ab-stats {
+    margin-top: clamp(1rem, 3vw, 2rem);
+  }
+  .ab-career__title {
+    max-width: 14ch;
+  }
+  .ab-chapters {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem 2rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+  .ab-chapter {
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line-strong);
+  }
+  .ab-chapter p {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--ink-2);
+  }
+
+  .ab-cole__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: start;
+  }
+  .ab-cole__link {
+    margin-top: 0.5rem;
+  }
+  .ab-cole__media {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+    max-width: 460px;
+    justify-self: end;
+    width: 100%;
+  }
+  .ab-cole__logo {
+    height: 56px;
+    width: auto;
+  }
+  .ab-note {
+    font-size: 0.875rem !important;
+    color: var(--muted) !important;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line);
+  }
+  .ab-note a {
+    color: var(--ink);
+  }
+
+  .ab-comm {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: center;
+  }
+  .ab-close {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+    max-width: 44rem;
+  }
+  .ab-close h2 {
+    max-width: 16ch;
+  }
+
+  @media (max-width: 899px) {
+    .ab-chapters {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .ab-cole__grid,
+    .ab-comm {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .ab-cole__media {
+      justify-self: start;
+    }
+  }
+</style>

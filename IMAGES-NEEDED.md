@@ -1,81 +1,70 @@
 # Images needed from the client
 
-Every image slot on the site currently uses a placeholder. Please supply the
-originals below. Filenames are lowercase and hyphen-separated for SEO; alt text
-is already written in `src/data/site.ts` and the components, and will be
-refined once we see the real photos.
+Every photo slot that is still a placeholder prints its suggested subject on
+the page, so David can read the site and match his photos. To drop a photo
+in, add it to `public/images/` and give the matching `Photo` entry in
+`src/data/` a `src`, `alt`, `width` and `height` (see `README.md`).
 
-**General specs:** JPG or PNG, sRGB, largest original available (we will
-resize and convert to WebP/AVIF during the build). No text baked into images.
+**General specs:** JPG or PNG, sRGB, largest original available. Landscape
+originals preferred for the wide slots; we crop. No text baked into images.
+Filenames lowercase and hyphen-separated with the market or project name.
 
-## 1. Headshot (home hero, social share image)
+## Done
 
-| Slot | Current placeholder | Needed | Suggested filename |
-| --- | --- | --- | --- |
-| Home hero portrait | Done. David's 1365×2048 original (kept in `assets-source/`), cropped 4:5 to 1000×1250 with a 500px variant | Nothing further needed | `david-weis-compass-real-estate-agent-san-diego-palm-springs-big-bear.jpg` |
-
-Also useful: a second, more environmental portrait (e.g. on the La Jolla
-coast) for the Contact page and market pages later.
-
-## 2. Market imagery (home cards, future market page heroes)
-
-Each home-page card shows one landscape image at 4:3. Each market page will
-eventually need a wide hero image (approx. 16:9, at least 2400px wide) and
-2–4 supporting photos. Photos David has taken himself are ideal; otherwise
-licensed stock is fine, but we need to know the source.
-
-| Market | Card image (4:3, ≥1600px wide) | Suggested filename |
-| --- | --- | --- |
-| San Diego / La Jolla | La Jolla coastline, coves or a coastal streetscape | `la-jolla-coastline-san-diego-real-estate.jpg` |
-| Palm Springs | Mid-century home with the San Jacinto Mountains behind it | `palm-springs-mid-century-home-real-estate.jpg` |
-| Big Bear Lake | Cabin among pines, ideally with the lake or Big Bear Mountain Resort visible | `big-bear-lake-cabin-real-estate.jpg` |
-
-Stock stand-ins from Unsplash are in place for all three cards (see `PHOTO-CREDITS.md`); David's own photos can replace them under the same filenames. The original line-art placeholders remain in `public/images/placeholders/`.
-
-## 3. Logos
-
-| Slot | Current placeholder | Needed | Suggested filename |
-| --- | --- | --- | --- |
-| David Weis REALTOR® logo (header + footer) | Done. David's own 1448px lockup (2026-09-08), converted to transparent PNGs: `david-weis-realtor-logo.png` (mark + signature) and `david-weis-realtor-compass-lockup.png` (full lockup) | Nothing further needed; a vector file remains welcome | — |
-| Compass logo (footer lockup) | Part of David's full lockup image; the official Compass SVG is also available in `CompassLogo.astro` | Nothing further needed beyond any co-branding rules his office requires | — |
-| Equal Housing Opportunity and REALTOR® marks (footer) | Done, from the files David sent (`equal-housing-opportunity-logo.png`, `realtor-logo.png`) | Nothing further needed | — |
-| Favicon | Roof mark from the real logo on an ink tile (`favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`) | Nothing further needed | — |
-
-## 4. Projects page
-
-The page is built with labeled 4:3 placeholders; each prints its suggested subject. Landscape originals preferred.
-
-| Project | Slots (4 each; the first leads the card when there is no logo) |
+| Slot | File |
 | --- | --- |
-| Querencia Palms | Pool, spa and courtyard · a finished two-bedroom interior · koi pond at the entry · mountain view from a private patio |
-| The Cole Hotel | Pool at dusk · exterior with the Kaptur roofline · guest room · bar or restaurant |
-| Six-bedroom Palm Springs rental | Exterior with the pool (lead) · great room · primary bedroom · outdoor dining at dusk |
-| Big Bear cabin | Exterior after the rebuild (lead) · before the rebuild · living room with the fireplace · deck with the mountain view |
-| San Diego rentals | Mission Beach boardwalk (lead) · Mission Beach rental · Ocean Beach rental · Kensington rental |
+| Home hero and About portrait | `david-weis-compass-real-estate-agent-san-diego-palm-springs-big-bear.jpg` (+ `-500`) |
+| Market photos (home cards and market page openers) | Unsplash stand-ins, see `PHOTO-CREDITS.md`; David's own can replace them under the same filenames |
+| Logos and marks | David's mark, Querencia Palms logo, The Cole logo, EHO and REALTOR® marks, favicons |
+| Share image | `david-weis-share-image.jpg` (1200×630) |
 
-Logos in place: Querencia Palms (from David) and The Cole Hotel (SVG from thecolehotel.com).
+## Home
 
-Suggested filenames: `querencia-palms-pool-palm-springs.jpg`, `the-cole-hotel-pool-palm-springs.jpg`, `big-bear-cabin-rebuild-after.jpg`, etc.
-
-## 5. Social share image (optional)
-
-Done: `david-weis-share-image.jpg` (1200×630, logo plus portrait) is the Open
-Graph image on every page. Can be redesigned any time.
-
-## 6. Brand assets (not images, but needed)
-
-- The letterhead / brand guide PDF, so we can match the PCB-trace motif exactly
-  rather than our current interpretation.
-- Confirmation of brand colors, if any beyond black/white.
-
-## 7. Market page photo slots (added 2026-09-08)
-
-Each market page has four labeled placeholders: one 4:5 hero portrait-orientation
-slot and three 4:3 gallery slots. The suggested subject is printed inside each
-slot on the page. Landscape or portrait originals both work; we crop.
-
-| Page | Hero (4:5) | Gallery (4:3 × 3) |
+| Section | Slot | Suggested subject |
 | --- | --- | --- |
-| San Diego | La Jolla Cove or Windansea, late afternoon | Kensington streetscape · Mission Beach boardwalk or bay · interior of one of David's rentals |
-| Palm Springs | Mid-century home with the San Jacinto Mountains | Querencia Palms exterior or courtyard · The Cole Hotel pool · Vista Las Palmas street with the mountain |
-| Big Bear | Lake view with cabins in the pines, or the resort in early snow | David's cabin exterior · cabin interior · Big Bear Mountain Resort slopes |
+| Ownership changes your perspective | 4:5 portrait | David on site at a project, for example on the Sierra Chalet deck or in the Querencia Palms courtyard |
+
+## About
+
+| Section | Slot | Suggested subject |
+| --- | --- | --- |
+| After "I have always liked building something" | wide 21:9 | A second, environmental portrait of David, on the coast or at a project |
+| The Cole changed everything | 4:5 | The Cole Hotel pool and courtyard |
+| Community matters | 4:3 | David at a community event (Gay For Good, a Palm Springs neighborhood organization) |
+
+## Market pages (one image break each, 16:9)
+
+| Page | Suggested subject |
+| --- | --- |
+| San Diego | Kensington streetscape, or the Mission Beach boardwalk |
+| Palm Springs | A Palm Springs street with the San Jacinto Mountains behind it |
+| Big Bear | Big Bear Lake from the north shore, or the cabin in early snow |
+
+## Experience project pages
+
+The first photo leads the page (wide 21:9) and the project's cards. The next
+two form a two-up break, the fourth a wide break, and any remaining photos a
+closing gallery. Order in `projects.ts` sets the order on the page.
+
+| Project | Photos, in order |
+| --- | --- |
+| Querencia Palms | Pool, spa and courtyard · koi pond after the aquatic planting was restored · a staged residence interior · mountain view from a private patio · an open house event on the grounds |
+| The Cole | Pool at dusk · exterior with the original motor-lodge roofline · a guest room · the bar and restaurant · branded welcome materials from the reopening |
+| Vista Voltaire | Front exterior of the restored 1924 farmhouse · living room after the restoration · kitchen · back yard or porch · a guest-ready bedroom |
+| Kensington Canyon | Front exterior among the Spanish and Tudor-influenced homes · restored original hardwood floors · the rolling tool-chest kitchen island · living room · the canyon behind the house |
+| Belmont Beach House | Ocean view from the house · exterior with the beach beyond · living area · deck or patio at sunset |
+| Sierra Chalet | Exterior after the rebuild, both decks complete · before: the rear deck · mid-renovation, walls open · upper deck with the lake view · screened lower deck with the spa · the repositioned entry after a heavy snowfall |
+| Mercury Palms | Exterior with the stone and wood ceilings visible · entertaining space opening to the outdoors · a bedroom suite connecting to the outdoors · the 2025 kitchen renovation · the house set for a gathering |
+
+Suggested filenames: `querencia-palms-pool-palm-springs.jpg`,
+`the-cole-hotel-pool-palm-springs.jpg`, `sierra-chalet-big-bear-exterior-after.jpg`, etc.
+
+## Properties
+
+Each listing card needs one primary 4:3 photo; sold cards the same. Add them
+with the listing details in `src/data/listings.ts`.
+
+## Brand assets (not images, but useful)
+
+- A vector version of David's mark, if one exists.
+- Confirmation of the blue (`#1d4ed8` and the deep `#0b2a6b` bands) as the brand blue.

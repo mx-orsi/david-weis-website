@@ -3,73 +3,64 @@
 Running log of what David has decided and what is still open. Update this
 file whenever he answers something.
 
-## Answered (David, 2026-09-04 and 2026-09-08 emails)
+## Answered
+
+**David, 2026-09-04 and 2026-09-08 emails**
 
 - **Email:** `david@davidweis.com` only. The Compass address is gone from the site.
-- **Suite:** 7863 Girard Ave, Suite 210 (matches Google). Done.
+- **Suite:** 7863 Girard Ave, Suite 210 (matches Google). Shown on the Contact page and in structured data.
 - **Domain:** davidweis.com. Already set as the production URL.
-- **Footer disclosure:** his 2026-09-04 wording is in, with the Compass DRE
-  #01527365. He still plans to get final confirmation from Compass.
-- **Logo:** the full lockup he sent is now the header (mark + signature) and
-  footer (mark, signature, title, markets, Compass).
-- **Equal Housing Opportunity and REALTOR® marks:** in the footer legal block.
+- **Footer disclosure:** the deck wording is in, with Compass CA DRE #01527365.
+  He still plans to get final confirmation from Compass.
+- **Logo:** David's own mark and signature head the header and footer.
+- **Equal Housing Opportunity and REALTOR® marks:** in the footer compliance band.
 - **REALTOR®:** always carries ® and the ® is set small and superscript
   everywhere it appears as text.
-- **About facts:** kept.
-- **Compass search links:** kept, open in a new tab.
-- **Copy:** San Diego no longer says "based in La Jolla" (office La Jolla, home
-  Kensington, rentals in Mission Beach, Ocean Beach and Kensington). Palm
-  Springs adds Querencia Palms, ONE-PS and the Desert Business Association.
-  Big Bear adds the first-home story and seller experience.
-- **Accessibility:** audited with axe-core against WCAG 2.2 AA on desktop and
-  phone: zero violations. Body text contrast was raised to pass AA.
+- **Compass search links:** outbound, open in a new tab.
 
-- **Max, 2026-09-08:** use the attached headshot (done, upscaled from 200 px);
-  Compass co-branding is fine for now; Querencia Palms logo added to Projects;
-  keep placeholder market photos for now, stock allowed if needed; footer
-  spread into a wide legal band with larger marks.
+**Max, 2026-09-08:** headshot in use; Compass co-branding fine for now;
+Unsplash market photos allowed as stand-ins.
 
-- **David, 2026-09-08 (via text):** unsure about the market pages; asked to see
-  them built without pictures so he can judge which photos fit. Done: all three
-  pages are fully written with labeled photo placeholders.
+**Copy deck, September 2026 (edited and approved):** the whole site was
+rebuilt from it on 2026-09-12. Home, About, Experience (seven project pages),
+the three market pages, Properties, Contact, the global final CTA and the
+footer all use the deck copy verbatim. Pricing figures were intentionally
+removed from Querencia Palms and Vista Voltaire and must not be re-added. The
+earlier market-page neighborhood notes and FAQ were retired in favor of the
+deck copy (they are in git history if anything needs to come back).
 
 ## Still open
 
-1. ~~Headshot original.~~ Received 2026-09-08 (1365 × 2048). In use.
-2. **Celebrity Vacation Homes link.** The site now links to
-   celebrityvacationhomes.com from the footer and the About facts, labeled as
-   a separate business not involving Compass. Is there a specific page that
-   mentions him we should link instead? Is the "independently operated" wording OK?
-3. **Querencia Palms.** Confirm the wording: "Phases I and II sold out, eight of
-   eight escrows opened at full-price offers, six units closed, first Phase III
-   unit in escrow at full ask." Is there a Querencia Palms website to link, and
-   is the palm-tree "Love where you live" graphic its logo for the Projects page?
-4. **Vista Las Palmas.** We kept the foundation board seat alongside the ONE-PS
-   representative role. Correct name is "Vista Las Palmas Neighbors Foundation"?
-5. **Big Bear.** Any specific seller result he wants cited (e.g. sold over asking)?
-6. **davidweis.net.** Compass still lists david@davidweis.net as his IDX contact
-   email. Does .net still forward, and should Compass be updated to .com?
-7. **Market photos.** Free-license Unsplash photos are now in place (La Jolla
-   Cove, a Palm Springs mid-century home, Boulder Bay at Big Bear Lake). See
-   `PHOTO-CREDITS.md`. David's own photos can replace them any time.
-8. **Compass co-branding rules.** Fine for now per Max; final word from his office later.
-9. **Market page copy.** David to read San Diego, Palm Springs and Big Bear and
-   mark up anything wrong, especially the neighborhood notes, which are general
-   descriptions for him to correct or cut. Each photo placeholder names the shot
-   we'd suggest; he can swap in whatever he has.
-10. **The Cole Hotel credit.** Palm Springs Life credits the restoration to owner
-    Mark Weis with general manager David Smith. The site says David co-developed
-    it with his husband and ran it as General Manager. Confirm the wording and
-    whether he wants Mark named. The hotel now appears to be run by a hospitality
-    operator, so his role is written in the past tense.
-11. **Querencia Palms details.** The Projects page now lists the address, the
-    1966 conversion, amenities and "fee-simple with a rental-friendly HOA" (from
-    the listing video title). Confirm those, and whether the Phase III
-    one-bedroom line is right.
-12. **Contact form.** The form works today by opening the visitor's email app.
-    To receive submissions directly we need a form service (Formspree or Basin,
-    both have free tiers); then one setting turns it on. Also confirm the promise
-    on the form: "I reply personally, usually within a business day."
-13. **The Cole Hotel logo.** The Projects page now shows the hotel's logo, taken
-    from thecolehotel.com. Since the hotel appears to be under new operation,
-    confirm David is comfortable displaying it (or has the owner's OK).
+1. **YouTube.** The deck footer lists Instagram · LinkedIn · YouTube. We have
+   no YouTube channel URL; the footer shows YouTube as soon as one is added to
+   `src/data/site.ts` (`social`). Facebook was dropped per the deck.
+2. **Testimonials.** The component is built and hidden. Send two or three
+   client quotes with a name and context ("Seller, Kensington") and we turn it on.
+3. **Properties page approach.** Compass cannot be embedded, so the page is a
+   hybrid: a manually maintained Featured Listings grid, a "View all listings
+   on Compass" band, and Selected Sales. All three currently show labeled
+   placeholders. Decide: keep all three, or only the Compass link? Then send
+   current listings (address, city, price, beds, baths, sq ft, photo, Compass
+   URL) and a few past sales.
+4. **Photos.** Every project page, the About page, the home "Ownership"
+   section and the market pages have labeled photo placeholders naming the
+   suggested shot. See `IMAGES-NEEDED.md`.
+5. **Privacy policy.** A draft stub is at `/privacy-policy` (noindexed). Compass
+   requires an approved policy before launch; please route it to Compass
+   compliance.
+6. **The Cole Hotel logo.** The project page and the About page show the hotel's
+   logo (taken from thecolehotel.com). Since the hotel was sold, confirm David
+   is comfortable displaying it. The page no longer links to the hotel's site.
+7. **Querencia Palms link.** The project page links to querenciapalms.com. Keep?
+8. **Celebrity Vacation Homes.** Linked once, on the About page ("Today"), with
+   the note "Independently operated. Compass is not involved in rentals."
+   Confirm the wording and whether a specific page should be linked.
+9. **Contact form delivery.** The form works today by opening the visitor's
+   email app. To receive submissions directly we need a form service
+   (Formspree or Basin, both have free tiers); then one setting turns it on.
+10. **Compass co-branding rules.** Fine for now per Max; final word from his
+    office later. The Compass wordmark is black, set small under David's name.
+11. **davidweis.net.** Compass still lists david@davidweis.net as his IDX
+    contact email. Does .net still forward, and should Compass be updated to .com?
+12. **Domain access.** Confirm where davidweis.com DNS is managed and who can
+    change it (it currently redirects to his Compass profile).

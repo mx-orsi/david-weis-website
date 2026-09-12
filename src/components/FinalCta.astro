@@ -1,0 +1,50 @@
+---
+/** Global final CTA, rendered before the footer on every page (BaseLayout). */
+import Icon from './Icon.astro';
+import { finalCta } from '../data/site';
+import { withBase } from '../lib/paths';
+---
+
+<section class="fcta" aria-labelledby="fcta-title">
+  <div class="container fcta__inner">
+    <div class="fcta__copy">
+      <h2 id="fcta-title" class="title-lg">{finalCta.title}</h2>
+      <p class="fcta__body">{finalCta.body}</p>
+    </div>
+    <a class="btn btn--light" href={withBase(finalCta.cta.href)}>{finalCta.cta.label} <Icon name="arrow-right" /></a>
+  </div>
+</section>
+
+<style>
+  .fcta {
+    background: var(--surface-ink);
+    color: var(--on-ink);
+    padding-block: clamp(4rem, 8vw, 7rem);
+  }
+  .fcta__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  .fcta__copy {
+    display: grid;
+    gap: 1rem;
+  }
+  .fcta__copy h2 {
+    max-width: 20ch;
+  }
+  .fcta__body {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+    line-height: 1.3;
+    color: var(--on-ink-muted);
+  }
+  @media (max-width: 899px) {
+    .fcta__inner {
+      grid-template-columns: 1fr;
+      justify-items: start;
+    }
+  }
+</style>

@@ -1,0 +1,85 @@
+---
+/**
+ * Testimonials — hidden until src/data/testimonials.ts sets `enabled: true`
+ * (real quotes are pending from David). Pass `force` to preview the layout
+ * with the placeholder entries.
+ */
+import { testimonials } from '../data/testimonials';
+
+interface Props {
+  force?: boolean;
+}
+const { force = false } = Astro.props;
+const show = testimonials.enabled || force;
+---
+
+{show && (
+  <section class="tm section section--line" aria-labelledby="tm-title">
+    <div class="container">
+      <p class="eyebrow eyebrow--dot">{testimonials.eyebrow}</p>
+      <h2 id="tm-title" class="title-lg tm__title">{testimonials.title}</h2>
+      <ul class="tm__grid">
+        {testimonials.items.map((t) => (
+          <li class:list={['tm__item', t.placeholder && 'tm__item--placeholder']}>
+            <blockquote>
+              <p class="tm__quote">{t.quote}</p>
+              <footer class="tm__cite">
+                <span class="tm__name">{t.name}</span>
+                <span class="tm__context">{t.context}</span>
+              </footer>
+            </blockquote>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
+
+<style>
+  .tm__title {
+    margin-top: 0.9rem;
+    max-width: 16ch;
+  }
+  .tm__grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+  .tm__item {
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line-strong);
+  }
+  .tm__quote {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .tm__quote::before {
+    content: '“';
+  }
+  .tm__quote::after {
+    content: '”';
+  }
+  .tm__cite {
+    display: grid;
+    gap: 0.1rem;
+    margin-top: 1rem;
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+  .tm__name {
+    font-weight: 500;
+    color: var(--ink-2);
+  }
+  .tm__item--placeholder .tm__quote {
+    color: var(--muted);
+  }
+  @media (max-width: 899px) {
+    .tm__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

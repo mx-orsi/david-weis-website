@@ -1,35 +1,29 @@
 ---
 /**
- * MarketPage — the full market page template (San Diego, Palm Springs,
- * Big Bear). Content comes from src/data/marketPages.ts; photos are
- * PhotoSlot placeholders until David picks images.
+ * MarketPage — the shared template for San Diego, Palm Springs and Big Bear.
+ * Content comes from src/data/marketPages.ts and site.ts; featured projects
+ * are pulled from projects.ts so cards stay in sync.
  */
 import Icon from './Icon.astro';
-import PhotoSlot from './PhotoSlot.astro';
+import Media from './Media.astro';
+import Story from './Story.astro';
+import AreaCard from './AreaCard.astro';
+import ProjectCard from './ProjectCard.astro';
 import SearchCTA from './SearchCTA.astro';
-import CtaBand from './CtaBand.astro';
-import PcbTrace from './PcbTrace.astro';
 import { getMarket, siteUrl, type MarketSlug } from '../data/site';
 import { marketPages } from '../data/marketPages';
+import { getProject } from '../data/projects';
 import { withBase } from '../lib/paths';
 
 interface Props {
   slug: MarketSlug;
-  title: string;
 }
-const { slug, title } = Astro.props;
+const { slug } = Astro.props;
 const m = getMarket(slug);
 const c = marketPages[slug];
+const featured = c.featuredProjects.map(getProject);
+const [first, ...restSections] = c.sections;
 
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: c.faq.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-};
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -40,354 +34,159 @@ const breadcrumbJsonLd = {
 };
 ---
 
-<script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />
 <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
 
-<article class="mp" style={`--accent: ${m.accent}`}>
-  <!-- Hero -->
-  <section class="mp-hero" aria-labelledby="mp-title">
-    <div class="container mp-hero__grid">
-      <div class="mp-hero__copy">
-        <nav class="mp-crumbs" aria-label="Breadcrumb">
-          <a href={withBase('/')}>Home</a>
-          <span aria-hidden="true">/</span>
-          <span aria-current="page">{m.name}</span>
-        </nav>
-        <p class="eyebrow eyebrow--dot">{m.region} · {m.pill}</p>
-        <h1 id="mp-title">{title}</h1>
-        <p class="lede">{m.blurb}</p>
-        <div class="mp-hero__actions">
-          <SearchCTA market={slug} />
-          <a class="btn btn--ghost" href={withBase('/contact')}>Contact David</a>
+<article class="mp">
+  <header class="mp-hero">
+    <div class="container">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href={withBase('/')}>Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{m.name}</span>
+      </nav>
+      <p class="eyebrow eyebrow--dot">{c.eyebrow}</p>
+      <div class="mp-hero__grid">
+        <h1 class="display">{c.title}</h1>
+        <p class="lede lede--wide">{c.intro}</p>
+      </div>
+    </div>
+    <div class="container mp-hero__lead">
+      <Media photo={m.image} ratio="21 / 9" priority sizes="100vw" />
+    </div>
+  </header>
+
+  <div class="mp-body">
+    <section class="mp-section" aria-labelledby={`${slug}-s0`}>
+      <div class="container">
+        <Story heading={first.heading} paragraphs={first.paragraphs} layout="split" id={`${slug}-s0`} />
+      </div>
+    </section>
+
+    <div class="container">
+      <Media photo={c.photo} ratio="16 / 9" sizes="100vw" />
+    </div>
+
+    {restSections.map((s, i) => (
+      <section class="mp-section" aria-labelledby={`${slug}-s${i + 1}`}>
+        <div class="container">
+          <Story heading={s.heading} paragraphs={s.paragraphs} layout="split" id={`${slug}-s${i + 1}`} />
         </div>
-      </div>
-      <PhotoSlot suggestion={c.heroPhoto} ratio="4 / 5" class="mp-hero__photo" />
+      </section>
+    ))}
+
+    {c.areas && (
+      <section class="mp-areas" aria-labelledby={`${slug}-areas`}>
+        <div class="container">
+          <h2 id={`${slug}-areas`} class="title-lg">{c.areas.title}</h2>
+          <ul class="mp-areas__grid">
+            {c.areas.items.map((a) => <AreaCard area={a} />)}
+          </ul>
+        </div>
+      </section>
+    )}
+
+    {featured.length > 0 && (
+      <section class="mp-featured" aria-labelledby={`${slug}-featured`}>
+        <div class="container">
+          <div class="mp-featured__head">
+            <h2 id={`${slug}-featured`} class="title-lg">{c.featuredTitle}</h2>
+            <a class="link-arrow" href={withBase('/experience')}>All projects <Icon name="arrow-right" /></a>
+          </div>
+          <div class:list={['mp-featured__grid', featured.length === 1 && 'mp-featured__grid--single']}>
+            {featured.map((p) => <ProjectCard project={p} variant={featured.length === 1 ? 'wide' : 'index'} />)}
+          </div>
+        </div>
+      </section>
+    )}
+  </div>
+
+  <section class="mp-cta" aria-label={`${m.name} properties`}>
+    <div class="container mp-cta__inner">
+      <SearchCTA market={slug} />
+      <a class="btn btn--ghost" href={withBase('/contact')}>Work With David</a>
     </div>
   </section>
-
-  <!-- Intro + owner's notes -->
-  <section class="mp-intro section" aria-labelledby="mp-intro-title">
-    <div class="container mp-intro__grid">
-      <div class="mp-intro__copy">
-        <p class="eyebrow">From the inside</p>
-        <h2 id="mp-intro-title">{c.introTitle}</h2>
-        {c.intro.map((p) => <p class="mp-intro__p">{p}</p>)}
-      </div>
-      <aside class="mp-notes" aria-labelledby="mp-notes-title">
-        <p class="eyebrow" id="mp-notes-title">{c.notesTitle}</p>
-        <ul class="mp-notes__list">
-          {c.notes.map((n) => <li>{n}</li>)}
-        </ul>
-      </aside>
-    </div>
-  </section>
-
-  <!-- Neighborhoods -->
-  <section class="mp-hoods section" aria-labelledby="mp-hoods-title">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Neighborhoods</p>
-        <h2 id="mp-hoods-title">{c.neighborhoodsTitle}</h2>
-        <p>{c.neighborhoodsLede}</p>
-      </div>
-      <ul class="mp-hoods__grid">
-        {
-          c.neighborhoods.map((n) => (
-            <li class="mp-hood">
-              <h3 class="mp-hood__name">{n.name}</h3>
-              <p class="mp-hood__text">{n.text}</p>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <!-- Who I help -->
-  <section class="mp-help section" aria-labelledby="mp-help-title">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Who I help</p>
-        <h2 id="mp-help-title">Buyers, sellers and investors</h2>
-      </div>
-      <div class="mp-help__grid">
-        {
-          c.help.map((h) => (
-            <div class="mp-help__item">
-              <p class="eyebrow eyebrow--dot">{h.label}</p>
-              <h3>{h.title}</h3>
-              <p>{h.text}</p>
-            </div>
-          ))
-        }
-      </div>
-      <div class="mp-gallery" aria-label="Photo placeholders">
-        {c.gallery.map((g) => <PhotoSlot suggestion={g} ratio="4 / 3" />)}
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="mp-faq section" aria-labelledby="mp-faq-title">
-    <div class="container mp-faq__grid">
-      <div class="section-head">
-        <p class="eyebrow">Questions</p>
-        <h2 id="mp-faq-title">Asked on most first calls</h2>
-        <p>Short answers here. The long ones are better over coffee.</p>
-        <a class="link-arrow" href={withBase('/contact')}>Ask something else <Icon name="arrow-right" /></a>
-      </div>
-      <div class="mp-faq__list">
-        {
-          c.faq.map((f) => (
-            <details class="mp-faq__item">
-              <summary>
-                <span>{f.q}</span>
-                <Icon name="arrow-right" size={14} />
-              </summary>
-              <p>{f.a}</p>
-            </details>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <div class="container"><PcbTrace variant="divider" /></div>
-  <CtaBand eyebrow={`${m.name} · Buying · Selling · Investing`} title={c.cta.title} body={c.cta.body} market={slug} />
 </article>
 
 <style>
-  /* Hero */
   .mp-hero {
-    padding-block: clamp(3rem, 7vw, 5.5rem) clamp(2rem, 5vw, 3.5rem);
+    padding-block: clamp(3rem, 7vw, 6rem) 0;
+  }
+  .mp-hero .crumbs {
+    margin-bottom: 1.5rem;
   }
   .mp-hero__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    gap: clamp(2.5rem, 6vw, 5rem);
-    align-items: center;
-  }
-  .mp-hero__copy {
-    display: grid;
-    gap: 1.25rem;
-    justify-items: start;
-  }
-  .mp-hero__copy h1 {
-    font-size: clamp(2.5rem, 4.8vw, 3.9rem);
-    max-width: 18ch;
-  }
-  .mp-hero__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 0.25rem;
-  }
-  .mp-hero__photo {
-    justify-self: center;
-    width: min(100%, 440px);
-  }
-  .mp-crumbs {
-    display: flex;
-    gap: 0.6em;
-    font-size: 0.75rem;
-    color: var(--muted);
-  }
-  .mp-crumbs a {
-    text-decoration: none;
-    color: var(--muted);
-  }
-  .mp-crumbs a:hover {
-    color: var(--ink);
-  }
-
-  /* Intro */
-  .mp-intro {
-    border-top: 1px solid var(--line);
-  }
-  .mp-intro__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-    gap: clamp(2.5rem, 6vw, 6rem);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
     align-items: start;
+    margin-top: 1.25rem;
   }
-  .mp-intro__copy {
+  .mp-hero__lead {
+    margin-top: clamp(2.5rem, 5vw, 4.5rem);
+  }
+  .mp-body {
     display: grid;
-    gap: 1.1rem;
+    gap: clamp(3.5rem, 7vw, 6.5rem);
+    padding-block: clamp(3.5rem, 7vw, 6.5rem);
   }
-  .mp-intro__copy h2 {
-    font-size: clamp(2rem, 3.4vw, 2.75rem);
-  }
-  .mp-intro__p {
-    color: var(--ink-2);
-    font-size: 1.0625rem;
-    line-height: 1.75;
-    max-width: 60ch;
-  }
-  .mp-notes {
-    padding: 1.75rem;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-card);
-  }
-  .mp-notes__list {
-    list-style: none;
-    display: grid;
-    gap: 0.9rem;
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--ink-2);
-  }
-  .mp-notes__list li {
-    position: relative;
-    padding-left: 1.2rem;
-  }
-  .mp-notes__list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.65em;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-
-  /* Neighborhoods */
-  .mp-hoods {
-    background: var(--surface);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .mp-hoods__grid {
+  .mp-areas__grid {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1.25rem;
+    gap: 2rem;
     margin-top: 2.5rem;
   }
-  .mp-hood {
-    padding: 1.4rem 1.4rem 1.5rem;
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    display: grid;
-    gap: 0.5rem;
-    align-content: start;
+  .mp-areas__grid > :global(li:nth-child(5)) {
+    grid-column: 1 / -1;
+    max-width: 44ch;
   }
-  .mp-hood__name {
-    font-size: 1.4rem;
-  }
-  .mp-hood__text {
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: var(--ink-2);
-  }
-
-  /* Who I help */
-  .mp-help__grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2.5rem;
-    margin-top: 2.5rem;
-  }
-  .mp-help__item {
-    display: grid;
-    gap: 0.6rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--line-strong);
-  }
-  .mp-help__item h3 {
-    font-size: 1.55rem;
-  }
-  .mp-help__item p:not(.eyebrow) {
-    font-size: 0.9375rem;
-    line-height: 1.65;
-    color: var(--ink-2);
-  }
-  .mp-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.25rem;
-    margin-top: clamp(2.5rem, 5vw, 4rem);
-  }
-
-  /* FAQ */
-  .mp-faq {
-    border-top: 1px solid var(--line);
-  }
-  .mp-faq__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: clamp(2.5rem, 6vw, 6rem);
-    align-items: start;
-  }
-  .mp-faq__list {
-    border-top: 1px solid var(--line-strong);
-  }
-  .mp-faq__item {
-    border-bottom: 1px solid var(--line);
-  }
-  .mp-faq__item summary {
+  .mp-featured__head {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     gap: 1rem;
-    padding: 1.1rem 0;
-    cursor: pointer;
-    list-style: none;
-    font-family: var(--font-serif);
-    font-size: 1.35rem;
-    font-weight: 500;
-    line-height: 1.25;
   }
-  .mp-faq__item summary::-webkit-details-marker {
-    display: none;
+  .mp-featured__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
   }
-  .mp-faq__item summary svg {
-    flex: none;
-    color: var(--muted);
-    transition: transform 0.25s var(--ease);
+  .mp-featured__grid--single {
+    grid-template-columns: minmax(0, 1fr);
   }
-  .mp-faq__item[open] summary svg {
-    transform: rotate(90deg);
+  .mp-cta {
+    border-top: 1px solid var(--line);
+    padding-block: clamp(2.5rem, 5vw, 4rem);
   }
-  .mp-faq__item p {
-    padding: 0 0 1.25rem;
-    max-width: 62ch;
-    font-size: 0.9375rem;
-    line-height: 1.7;
-    color: var(--ink-2);
+  .mp-cta__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
   }
 
   @media (max-width: 1023px) {
-    .mp-hoods__grid {
+    .mp-areas__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
   @media (max-width: 899px) {
     .mp-hero__grid,
-    .mp-intro__grid,
-    .mp-faq__grid {
+    .mp-featured__grid {
       grid-template-columns: minmax(0, 1fr);
     }
-    .mp-hero__photo {
-      order: -1;
-      width: min(100%, 360px);
-      justify-self: start;
-    }
-    .mp-help__grid {
-      grid-template-columns: 1fr;
-      gap: 1.75rem;
-    }
-    .mp-gallery {
-      grid-template-columns: 1fr;
-    }
   }
-  @media (max-width: 540px) {
-    .mp-hoods__grid {
-      grid-template-columns: 1fr;
+  @media (max-width: 560px) {
+    .mp-areas__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .mp-cta__inner {
+      flex-direction: column;
+    }
+    .mp-cta__inner :global(.btn) {
+      width: 100%;
     }
   }
 </style>

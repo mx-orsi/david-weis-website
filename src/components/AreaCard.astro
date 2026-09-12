@@ -1,0 +1,33 @@
+---
+/** AreaCard — a featured neighborhood on a market page. */
+import type { Area } from '../data/marketPages';
+
+interface Props {
+  area: Area;
+}
+const { area } = Astro.props;
+---
+
+<li class="ac">
+  <h3 class="ac__name">{area.name}</h3>
+  <p class="ac__text">{area.text}</p>
+</li>
+
+<style>
+  .ac {
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--line-strong);
+  }
+  .ac__name {
+    font-size: 1.5rem;
+  }
+  .ac__text {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+    max-width: 40ch;
+  }
+</style>

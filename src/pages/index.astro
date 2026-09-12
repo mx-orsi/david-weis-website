@@ -2,59 +2,232 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import MarketCard from '../components/MarketCard.astro';
-import AboutStrip from '../components/AboutStrip.astro';
-import CtaBand from '../components/CtaBand.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Media from '../components/Media.astro';
+import Icon from '../components/Icon.astro';
+import { home } from '../data/home';
 import { markets } from '../data/site';
+import { getProject, homeFeaturedProjects } from '../data/projects';
+import { withBase } from '../lib/paths';
 
-const title = 'David Weis | Compass Broker Associate | San Diego, Palm Springs & Big Bear';
-const description =
-  'David Weis is a Compass Broker Associate and REALTOR® serving La Jolla and San Diego, Palm Springs and Big Bear Lake. Coastal, desert and mountain real estate from an agent who owns in all three markets.';
+const featured = homeFeaturedProjects.map(getProject);
 ---
 
-<BaseLayout {title} {description}>
+<BaseLayout title={home.seo.title} description={home.seo.description}>
   <Hero />
 
-  <section class="markets section" aria-labelledby="markets-title">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Three markets</p>
-        <h2 id="markets-title">Coast, desert and mountain</h2>
-        <p>
-          Each market has its own rhythm, rules and rental math. I own property in all three, so the
-          guidance is practical, not theoretical.
-        </p>
+  <!-- 2. More than a transaction -->
+  <section class="hm-tx section section--line" aria-labelledby="hm-tx-title">
+    <div class="container split">
+      <h2 id="hm-tx-title" class="title-lg">{home.transaction.title}</h2>
+      <div class="prose">
+        {home.transaction.paragraphs.map((p) => <p>{p}</p>)}
+        <a class="link-arrow hm-tx__cta" href={withBase(home.transaction.cta.href)}>{home.transaction.cta.label} <Icon name="arrow-right" /></a>
       </div>
-      <div class="markets__grid">
+    </div>
+  </section>
+
+  <!-- 3. Three markets -->
+  <section class="hm-mk section section--line" aria-labelledby="hm-mk-title">
+    <div class="container">
+      <div class="hm-head">
+        <p class="eyebrow eyebrow--dot">Markets</p>
+        <h2 id="hm-mk-title" class="title-lg">{home.markets.title}</h2>
+        <p class="lede lede--wide">{home.markets.intro}</p>
+      </div>
+      <div class="hm-mk__grid">
         {markets.map((m) => <MarketCard market={m} />)}
       </div>
     </div>
   </section>
 
-  <AboutStrip />
-  <CtaBand />
+  <!-- 4. Experience is built -->
+  <section class="hm-ex section section--line" aria-labelledby="hm-ex-title">
+    <div class="container">
+      <div class="hm-head hm-head--row">
+        <div class="hm-head">
+          <p class="eyebrow eyebrow--dot">Experience</p>
+          <h2 id="hm-ex-title" class="title-lg">{home.experience.title}</h2>
+          <p class="lede lede--wide">{home.experience.intro}</p>
+        </div>
+        <a class="link-arrow" href={withBase(home.experience.cta.href)}>{home.experience.cta.label} <Icon name="arrow-right" /></a>
+      </div>
+      <div class="hm-ex__grid">
+        {featured.map((p) => <ProjectCard project={p} variant="teaser" />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 50+ moves -->
+  <section class="hm-mv" aria-labelledby="hm-mv-title">
+    <div class="container hm-mv__inner">
+      <h2 id="hm-mv-title" class="title-xl">{home.moves.title}</h2>
+      <div class="hm-mv__copy">
+        <p>{home.moves.body}</p>
+        <a class="btn btn--outline-light" href={withBase(home.moves.cta.href)}>{home.moves.cta.label} <Icon name="arrow-right" /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Ownership changes your perspective -->
+  <section class="hm-ow section" aria-labelledby="hm-ow-title">
+    <div class="container hm-ow__grid">
+      <Media photo={home.ownership.photo} ratio="4 / 5" class="hm-ow__photo" sizes="(min-width: 960px) 45vw, 100vw" />
+      <div class="hm-ow__copy">
+        <p class="eyebrow eyebrow--dot">Ownership</p>
+        <h2 id="hm-ow-title" class="title-lg">{home.ownership.title}</h2>
+        <div class="prose">
+          <p>{home.ownership.body}</p>
+        </div>
+        <ul class="hm-ow__q">
+          {home.ownership.questions.map((q) => <li>{q}</li>)}
+        </ul>
+        <p class="hm-ow__closing">{home.ownership.closing}</p>
+      </div>
+    </div>
+  </section>
+
+  <Testimonials />
+
+  <!-- 7. Property is personal -->
+  <section class="hm-st section section--line" aria-labelledby="hm-st-title">
+    <div class="container hm-st__inner">
+      <p class="eyebrow eyebrow--dot">Let's talk</p>
+      <h2 id="hm-st-title" class="title-lg">{home.strategy.title}</h2>
+      <p class="lede lede--wide">{home.strategy.body}</p>
+      <a class="btn" href={withBase(home.strategy.cta.href)}>{home.strategy.cta.label} <Icon name="arrow-right" /></a>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .markets {
-    padding-top: clamp(2rem, 5vw, 4rem);
+  .hm-head {
+    display: grid;
+    gap: 1rem;
+    max-width: 48rem;
   }
-  .markets__grid {
+  .hm-head--row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1.5rem;
+    max-width: none;
+  }
+  .hm-head h2 {
+    max-width: 16ch;
+  }
+  .hm-tx__cta {
+    margin-top: 0.5rem;
+  }
+
+  .hm-mk__grid,
+  .hm-ex__grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.5rem;
-    margin-top: 2.5rem;
+    gap: 2rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
   }
+
+  .hm-mv {
+    background: var(--surface-blue);
+    color: var(--on-ink);
+    padding-block: clamp(4.5rem, 9vw, 8rem);
+  }
+  .hm-mv__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: end;
+  }
+  .hm-mv__inner h2 {
+    max-width: 13ch;
+  }
+  .hm-mv__copy {
+    display: grid;
+    gap: 1.75rem;
+    justify-items: start;
+  }
+  .hm-mv__copy p {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: #dfe5f5;
+    max-width: 48ch;
+  }
+
+  .hm-ow__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: center;
+  }
+  .hm-ow__copy {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+  }
+  .hm-ow__copy h2 {
+    max-width: 14ch;
+  }
+  .hm-ow__q {
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.35rem, 2vw, 1.75rem);
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  .hm-ow__q li {
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--blue);
+  }
+  .hm-ow__closing {
+    font-size: 1.0625rem;
+    color: var(--ink-2);
+  }
+
+  .hm-st__inner {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+    max-width: 44rem;
+  }
+  .hm-st__inner h2 {
+    max-width: 16ch;
+  }
+
   @media (max-width: 1023px) {
-    .markets__grid {
+    .hm-mk__grid,
+    .hm-ex__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    .markets__grid > :global(.market-card:last-child) {
+    .hm-mk__grid > :global(:last-child),
+    .hm-ex__grid > :global(:last-child) {
       grid-column: 1 / -1;
+      max-width: calc(50% - 1rem);
+    }
+  }
+  @media (max-width: 899px) {
+    .hm-mv__inner,
+    .hm-ow__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .hm-ow__photo {
+      max-width: 420px;
     }
   }
   @media (max-width: 680px) {
-    .markets__grid {
-      grid-template-columns: 1fr;
+    .hm-mk__grid,
+    .hm-ex__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .hm-mk__grid > :global(:last-child),
+    .hm-ex__grid > :global(:last-child) {
+      max-width: none;
     }
   }
 </style>

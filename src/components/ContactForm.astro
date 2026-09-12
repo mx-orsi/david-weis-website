@@ -1,14 +1,18 @@
 ---
 /**
- * ContactForm — a working sample. If PUBLIC_FORM_ENDPOINT is set at build time
- * (e.g. a Formspree or Basin URL) the form posts there as JSON. Without it,
- * submitting opens the visitor's email app with the message pre-filled, so the
- * form is never a dead end. Includes a honeypot field for spam.
+ * ContactForm — fields per the copy deck: Name, Email, Phone, Interested In,
+ * Location, Message. If PUBLIC_FORM_ENDPOINT is set at build time (a
+ * Formspree or Basin URL) the form posts there as JSON. Without it,
+ * submitting opens the visitor's email app with the message pre-filled, so
+ * the form is never a dead end. Includes a honeypot field for spam.
  */
 import Icon from './Icon.astro';
-import { agent, markets } from '../data/site';
+import { agent } from '../data/site';
+import { contact } from '../data/contact';
+import { withBase } from '../lib/paths';
 
 const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
+const f = contact.form;
 ---
 
 <form class="cf" method="post" action={endpoint || undefined} data-endpoint={endpoint} data-email={agent.email} novalidate>
@@ -24,42 +28,35 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
   </div>
   <div class="cf__row">
     <label class="cf__field">
-      <span>Phone <em>(optional)</em></span>
+      <span>Phone</span>
       <input type="tel" name="phone" autocomplete="tel" />
     </label>
     <label class="cf__field">
-      <span>Market</span>
-      <select name="market">
-        <option value="">Not sure yet</option>
-        {markets.map((m) => <option value={m.name}>{m.name}</option>)}
-        <option value="More than one">More than one</option>
+      <span>Interested in</span>
+      <select name="interest">
+        {f.interestedIn.map((v) => <option value={v}>{v}</option>)}
       </select>
     </label>
   </div>
-  <fieldset class="cf__fieldset">
-    <legend>I'm looking to</legend>
-    <div class="cf__chips">
-      {['Buy', 'Sell', 'Invest', 'Ask about rentals', 'Something else'].map((v, i) => (
-        <label class="cf__chip">
-          <input type="radio" name="intent" value={v} checked={i === 0} />
-          <span>{v}</span>
-        </label>
-      ))}
-    </div>
-  </fieldset>
   <label class="cf__field">
-    <span>What are you weighing?</span>
-    <textarea name="message" rows="5" required placeholder="A neighborhood, a budget, a timeline, a property you have your eye on. Anything helps."></textarea>
+    <span>Location</span>
+    <select name="location">
+      {f.locations.map((v) => <option value={v}>{v}</option>)}
+    </select>
+  </label>
+  <label class="cf__field">
+    <span>Message</span>
+    <textarea name="message" rows="6" required></textarea>
   </label>
   <div class="cf__hp" aria-hidden="true">
     <label>Leave this field empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
   </div>
   <div class="cf__foot">
     <button class="btn" type="submit">
-      <span>Send message</span>
+      <span>{f.submit}</span>
       <Icon name="arrow-right" />
     </button>
-    <p class="cf__note">I reply personally, usually within a business day. Your details stay with me.</p>
+    <p class="cf__note">Your details go only to David. See the <a href={withBase('/privacy-policy')}>Privacy Policy</a>.</p>
   </div>
   <p class="cf__status" role="status" aria-live="polite"></p>
 </form>
@@ -95,10 +92,10 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
           if (!res.ok) throw new Error(String(res.status));
           form.reset();
           status.dataset.state = 'ok';
-          status.textContent = "Thanks. Your message is on its way and I'll be in touch shortly.";
+          status.textContent = 'Thanks. Your message is on its way.';
         } catch {
           status.dataset.state = 'error';
-          status.textContent = `Something went wrong sending that. Email me directly at ${email} and I'll get right back to you.`;
+          status.textContent = `Something went wrong sending that. Email me directly at ${email}.`;
         } finally {
           button.disabled = false;
         }
@@ -106,13 +103,13 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
       }
 
       // No endpoint configured: hand off to the visitor's email app.
-      const subject = `Website inquiry: ${fields.intent || 'General'}${fields.market ? ` · ${fields.market}` : ''}`;
+      const subject = `Website inquiry: ${fields.interest || 'General'}${fields.location ? ` · ${fields.location}` : ''}`;
       const body = [
         `Name: ${fields.name}`,
         `Email: ${fields.email}`,
         fields.phone ? `Phone: ${fields.phone}` : '',
-        `Market: ${fields.market || 'Not sure yet'}`,
-        `Looking to: ${fields.intent}`,
+        `Interested in: ${fields.interest}`,
+        `Location: ${fields.location}`,
         '',
         fields.message,
       ]
@@ -139,86 +136,36 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
     display: grid;
     gap: 0.4rem;
   }
-  .cf__field > span,
-  .cf__fieldset legend {
+  .cf__field > span {
     font-size: 0.6875rem;
     font-weight: 500;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--ink-2);
   }
-  .cf__field em {
-    font-style: normal;
-    letter-spacing: 0.04em;
-    text-transform: none;
-    color: var(--muted);
-  }
   .cf input,
   .cf select,
   .cf textarea {
     width: 100%;
-    padding: 0.8rem 0.95rem;
+    padding: 0.85rem 0.95rem;
     font: inherit;
     font-size: 0.9375rem;
     color: var(--ink);
-    background: var(--bg);
+    background: var(--surface);
     border: 1px solid var(--line-control);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius);
     transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
   }
   .cf textarea {
     resize: vertical;
-    min-height: 8rem;
+    min-height: 9rem;
   }
   .cf input:focus-visible,
   .cf select:focus-visible,
   .cf textarea:focus-visible {
     outline: none;
-    border-color: var(--ink);
-    box-shadow: 0 0 0 3px rgba(22, 24, 27, 0.08);
-  }
-  .cf__fieldset {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    display: grid;
-    gap: 0.5rem;
-  }
-  .cf__chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  .cf__chip {
-    position: relative;
-  }
-  .cf__chip input {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    margin: 0;
-    cursor: pointer;
-  }
-  .cf__chip span {
-    display: inline-block;
-    padding: 0.55em 0.95em;
-    border: 1px solid var(--line-control);
-    border-radius: 999px;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--ink-2);
-    transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
-  }
-  .cf__chip input:checked + span {
-    background: var(--ink);
-    border-color: var(--ink);
-    color: var(--on-ink);
-  }
-  .cf__chip input:focus-visible + span {
-    outline: 2px solid var(--ink);
-    outline-offset: 3px;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.14);
   }
   .cf__hp {
     position: absolute;
@@ -237,15 +184,18 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
   .cf__note {
     font-size: 0.8125rem;
     color: var(--muted);
-    max-width: 30ch;
+    max-width: 32ch;
     line-height: 1.5;
+  }
+  .cf__note a {
+    color: var(--ink-2);
   }
   .cf__status:empty {
     display: none;
   }
   .cf__status {
     padding: 0.9rem 1rem;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius);
     font-size: 0.875rem;
     line-height: 1.5;
     background: var(--surface-2);
@@ -253,7 +203,7 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
     color: var(--ink-2);
   }
   .cf__status[data-state='error'] {
-    border-color: #c27c6a;
+    border-color: var(--blue);
   }
   @media (max-width: 560px) {
     .cf__row {

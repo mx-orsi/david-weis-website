@@ -1,0 +1,123 @@
+---
+/**
+ * Properties — a hybrid because Compass has no embeddable IDX for
+ * third-party sites: a manually maintained Featured Listings grid, a
+ * prominent link out to David's Compass listings, and Selected Sales.
+ * Each block is independent; toggle them in src/data/listings.ts
+ * (`propertiesConfig`) once David decides on the final approach.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ListingCard from '../components/ListingCard.astro';
+import SearchCTA from '../components/SearchCTA.astro';
+import Icon from '../components/Icon.astro';
+import { properties, propertiesConfig, featuredListings, selectedSales } from '../data/listings';
+import { withBase } from '../lib/paths';
+---
+
+<BaseLayout title={properties.seo.title} description={properties.seo.description}>
+  <PageHero eyebrow={properties.hero.eyebrow} title={properties.hero.title} intro={properties.hero.intro} size="display" />
+
+  {/* Block A: Featured Listings (manually maintained) */}
+  {propertiesConfig.showFeaturedListings && (
+    <section class="pr section section--flush-top" aria-labelledby="pr-sale-title">
+      <div class="container">
+        <h2 id="pr-sale-title" class="title-lg">{properties.forSale.title}</h2>
+        {featuredListings.length > 0 ? (
+          <div class="pr__grid">
+            {featuredListings.map((l) => <ListingCard listing={l} cta={properties.forSale.cardCta} />)}
+          </div>
+        ) : (
+          <p class="pr__empty">{properties.forSale.empty}</p>
+        )}
+      </div>
+    </section>
+  )}
+
+  {/* Block B: link out to Compass */}
+  {propertiesConfig.showCompassLink && (
+    <section class="pr-compass" aria-labelledby="pr-compass-title">
+      <div class="container pr-compass__inner">
+        <div class="pr-compass__copy">
+          <p class="eyebrow eyebrow--light">Every current listing</p>
+          <h2 id="pr-compass-title" class="title-lg">{properties.compass.title}</h2>
+          <p>{properties.compass.body}</p>
+        </div>
+        <SearchCTA variant="light" label={properties.compass.cta} />
+      </div>
+    </section>
+  )}
+
+  {/* Block C: Selected Sales */}
+  {propertiesConfig.showSelectedSales && (
+    <section class="pr section" aria-labelledby="pr-sold-title">
+      <div class="container">
+        <div class="split pr-sold__head">
+          <h2 id="pr-sold-title" class="title-lg">{properties.sold.title}</h2>
+          <p class="lede lede--wide">{properties.sold.intro}</p>
+        </div>
+        <div class="pr__grid">
+          {selectedSales.map((l) => <ListingCard listing={l} />)}
+        </div>
+        <a class="btn pr-sold__cta" href={withBase(properties.sold.cta.href)}>{properties.sold.cta.label} <Icon name="arrow-right" /></a>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .pr__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+  .pr__empty {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    border: 1px dashed var(--line-control);
+    color: var(--ink-2);
+    max-width: 60ch;
+  }
+  .pr-compass {
+    background: var(--surface-blue);
+    color: var(--on-ink);
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+  }
+  .pr-compass__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  .pr-compass__copy {
+    display: grid;
+    gap: 1rem;
+  }
+  .pr-compass__copy h2 {
+    max-width: 18ch;
+  }
+  .pr-compass__copy p:not(.eyebrow) {
+    color: #dfe5f5;
+    max-width: 48ch;
+  }
+  .pr-sold__cta {
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+  @media (max-width: 1023px) {
+    .pr__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 899px) {
+    .pr-compass__inner {
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: start;
+    }
+  }
+  @media (max-width: 640px) {
+    .pr__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

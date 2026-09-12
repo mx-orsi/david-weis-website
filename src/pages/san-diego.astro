@@ -1,12 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MarketPage from '../components/MarketPage.astro';
+import { marketPages } from '../data/marketPages';
 
-const title = 'San Diego & La Jolla Real Estate | David Weis, Compass Broker Associate';
-const description =
-  'Buy or sell across Greater San Diego with David Weis, a Compass Broker Associate with an office in La Jolla who owns and manages short-term rentals in Mission Beach, Ocean Beach and Kensington. Coastal homes, condos, move-up buyers and 1031 exchanges.';
+const c = marketPages['san-diego'];
 ---
 
-<BaseLayout {title} {description}>
-  <MarketPage slug="san-diego" title="San Diego real estate, from a local owner and operator" />
+<BaseLayout title={c.seo.title} description={c.seo.description}>
+  <MarketPage slug="san-diego" />
 </BaseLayout>

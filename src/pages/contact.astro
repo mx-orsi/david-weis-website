@@ -1,48 +1,30 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Icon from '../components/Icon.astro';
 import Title from '../components/Title.astro';
-import { agent } from '../data/site';
-import { withBase } from '../lib/paths';
+import { agent, social } from '../data/site';
+import { contact } from '../data/contact';
 
-const title = 'Contact David Weis | Compass Broker Associate in La Jolla, CA';
-const description =
-  'Reach David Weis, Compass Broker Associate and REALTOR®, at 619-518-9246 or david@davidweis.com. Office: 7863 Girard Ave, Suite 210, La Jolla, CA 92037. Serving San Diego, Palm Springs and Big Bear Lake.';
 const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${agent.brokerage} ${agent.office.street}, ${agent.office.city}, ${agent.office.state} ${agent.office.zip}`)}`;
-const steps = [
-  { title: 'I reply personally', text: 'Usually within a business day, by whichever channel you prefer.' },
-  { title: 'A short call', text: "Twenty minutes on what you're after, your timeline and which market fits." },
-  { title: 'A plan with numbers', text: 'What it costs, what it could earn and what I would do, before you commit to anything.' },
-];
+const socialLinks = social.filter((s) => s.href);
 ---
 
-<BaseLayout {title} {description}>
-  <section class="ct-hero" aria-labelledby="ct-title">
-    <div class="container ct-hero__copy">
-      <p class="eyebrow eyebrow--dot">Contact</p>
-      <h1 id="ct-title">Let's start with a conversation</h1>
-      <p class="lede">
-        Buying, selling or thinking about an investment in San Diego, Palm Springs or Big Bear? Call, text
-        or send a note. I answer my own phone and my own email.
-      </p>
-      <ul class="ct-hero__quick" aria-label="Quick contact">
-        <li><Icon name="phone" size={15} /><a href={agent.phoneHref}>{agent.phone}</a></li>
-        <li><Icon name="mail" size={15} /><a href={`mailto:${agent.email}`}>{agent.email}</a></li>
-      </ul>
-    </div>
-  </section>
+<BaseLayout title={contact.seo.title} description={contact.seo.description} finalCta={false}>
+  <PageHero eyebrow={contact.hero.eyebrow} title={contact.hero.title} intro={contact.hero.intro} size="display" />
 
-  <section class="ct section" aria-label="Contact David">
+  <section class="ct section section--flush-top" aria-label="Contact David">
     <div class="container ct__grid">
       <div class="ct__form">
-        <p class="eyebrow">Send a note</p>
+        <h2 class="title-md">{contact.form.title}</h2>
+        <p class="ct__body">{contact.form.body}</p>
         <ContactForm />
       </div>
 
       <aside class="ct__aside">
         <address class="ct-card">
-          <p class="eyebrow">Direct</p>
+          <p class="eyebrow eyebrow--muted">Direct</p>
           <ul class="ct-card__list">
             <li>
               <Icon name="phone" size={16} />
@@ -60,104 +42,55 @@ const steps = [
               </span>
             </li>
           </ul>
-          <p class="ct-card__meta"><Title /> · CA DRE #{agent.dre}</p>
+          <p class="ct-card__meta">{agent.name} · <Title /> · CA DRE #{agent.dre}</p>
         </address>
-
-
-        <ul class="ct-card__social" aria-label="Social">
-          <li><a href={agent.social.instagram} target="_blank" rel="noopener noreferrer"><Icon name="instagram" size={15} /> Instagram</a></li>
-          <li><a href={agent.social.linkedin} target="_blank" rel="noopener noreferrer"><Icon name="linkedin" size={15} /> LinkedIn</a></li>
-          <li><a href={agent.social.facebook} target="_blank" rel="noopener noreferrer"><Icon name="facebook" size={15} /> Facebook</a></li>
-        </ul>
+        {socialLinks.length > 0 && (
+          <ul class="ct__social" aria-label="Social">
+            {socialLinks.map((s) => (
+              <li>
+                <a href={s.href} target="_blank" rel="noopener noreferrer"><Icon name={s.icon} size={15} /> {s.name}<span class="sr-only"> (opens in a new tab)</span></a>
+              </li>
+            ))}
+          </ul>
+        )}
       </aside>
-    </div>
-
-    <div class="container">
-      <ol class="ct-steps" aria-label="What happens next">
-        {steps.map((s, i) => (
-          <li>
-            <span class="ct-steps__num">{String(i + 1).padStart(2, '0')}</span>
-            <h2>{s.title}</h2>
-            <p>{s.text}</p>
-          </li>
-        ))}
-      </ol>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .ct-hero {
-    padding-block: clamp(3rem, 7vw, 5.5rem) 0;
-  }
-  .ct-hero__copy {
-    display: grid;
-    gap: 1.25rem;
-    justify-items: start;
-  }
-  .ct-hero__copy h1 {
-    font-size: clamp(2.5rem, 4.8vw, 3.9rem);
-    max-width: 16ch;
-  }
-  .ct-hero__quick {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem 1.75rem;
-    font-size: 0.9375rem;
-    font-weight: 400;
-    color: var(--ink-2);
-  }
-  .ct-hero__quick li {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55em;
-  }
-  .ct-hero__quick svg {
-    color: var(--muted);
-  }
-  .ct-hero__quick a {
-    text-decoration: none;
-  }
-  .ct-hero__quick a:hover {
-    text-decoration: underline;
-  }
-  .ct {
-    padding-top: clamp(2rem, 5vw, 3.5rem);
-  }
   .ct__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
-    gap: clamp(2rem, 5vw, 4rem);
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
     align-items: start;
+    padding-top: clamp(1rem, 3vw, 2rem);
+    border-top: 1px solid var(--line);
   }
   .ct__form {
     display: grid;
-    gap: 1.25rem;
-    padding: clamp(1.5rem, 3.5vw, 2.5rem);
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
+    gap: 1rem;
+    padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .ct__body {
+    color: var(--ink-2);
+    max-width: 48ch;
+    margin-bottom: 0.75rem;
   }
   .ct__aside {
     display: grid;
-    gap: 1.25rem;
+    gap: 1.5rem;
+    padding-top: clamp(1.5rem, 3vw, 2.5rem);
   }
   .ct-card {
     font-style: normal;
     display: grid;
-    gap: 1rem;
-    padding: 1.6rem;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-card);
+    gap: 1.25rem;
   }
   .ct-card__list {
     list-style: none;
     display: grid;
-    gap: 1rem;
+    gap: 1.1rem;
     font-size: 0.9375rem;
     font-weight: 400;
     line-height: 1.5;
@@ -170,7 +103,7 @@ const steps = [
   .ct-card__list svg {
     flex: none;
     margin-top: 0.3em;
-    color: var(--muted);
+    color: var(--blue);
   }
   .ct-card__list li > span {
     display: grid;
@@ -186,7 +119,7 @@ const steps = [
     text-decoration: none;
   }
   .ct-card__list a:hover {
-    text-decoration: underline;
+    color: var(--blue);
   }
   .ct-card__map {
     display: inline-flex;
@@ -201,16 +134,16 @@ const steps = [
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--muted);
-    padding-top: 0.75rem;
+    padding-top: 0.9rem;
     border-top: 1px solid var(--line);
   }
-  .ct-card__social {
+  .ct__social {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  .ct-card__social a {
+  .ct__social a {
     display: inline-flex;
     align-items: center;
     gap: 0.4em;
@@ -221,45 +154,13 @@ const steps = [
     font-weight: 500;
     text-decoration: none;
   }
-  .ct-card__social a:hover {
-    border-color: var(--ink);
-  }
-
-  .ct-steps {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2rem;
-    margin-top: clamp(3rem, 6vw, 5rem);
-    padding-top: 2rem;
-    border-top: 1px solid var(--line-strong);
-  }
-  .ct-steps li {
-    display: grid;
-    gap: 0.5rem;
-    align-content: start;
-  }
-  .ct-steps__num {
-    font-size: 0.6875rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-  }
-  .ct-steps h2 {
-    font-size: 1.5rem;
-  }
-  .ct-steps p {
-    font-size: 0.9375rem;
-    line-height: 1.65;
-    color: var(--ink-2);
-    max-width: 32ch;
+  .ct__social a:hover {
+    border-color: var(--blue);
+    color: var(--blue);
   }
   @media (max-width: 899px) {
     .ct__grid {
       grid-template-columns: minmax(0, 1fr);
-    }
-    .ct-steps {
-      grid-template-columns: 1fr;
     }
   }
 </style>

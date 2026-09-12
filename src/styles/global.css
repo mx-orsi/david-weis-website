@@ -1,47 +1,50 @@
 /* ------------------------------------------------------------------
    David Weis · Broker Associate | REALTOR® · Compass
    Global tokens and base styles. Component styles live in each .astro file.
+
+   Palette is black, white and one blue. No warm neutrals, no gold.
+   Uppercase is applied only through text-transform on eyebrows and small
+   labels; markup keeps normal sentence case.
    ------------------------------------------------------------------ */
 
 :root {
   /* Surfaces */
-  --bg: #f7f5f0;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --surface-2: #f1eee7;
-  --surface-ink: #16181b;
+  --surface-2: #f3f5f8;
+  --surface-ink: #0a0b0d;
+  --surface-blue: #0b2a6b;
 
   /* Text */
-  --ink: #16181b;
-  --ink-2: #41454c;
-  --muted: #646972; /* 5.1:1 on --bg, WCAG AA for small text */
-  --on-ink: #f7f5f0;
-  --on-ink-muted: #b9bcc2;
+  --ink: #0a0b0d;
+  --ink-2: #363a42;
+  --muted: #5b606b; /* 5.7:1 on white */
+  --on-ink: #ffffff;
+  --on-ink-muted: #b4b8c1;
+
+  /* Blue accent */
+  --blue: #1d4ed8; /* 6.3:1 on white */
+  --blue-hover: #1742b8;
+  --blue-tint: #e9eefb;
 
   /* Lines */
-  --line: #e6e2da;
-  --line-strong: #d0cabf;
-  --line-control: #b9b2a5; /* borders on buttons/inputs */
-
-  /* Market accents (used sparingly: dots, hairlines) */
-  --coastal: #4a6b80;
-  --desert: #b57e47;
-  --mountain: #4b6a57;
+  --line: #e4e7ec;
+  --line-strong: #c9ced8;
+  --line-control: #a9b0bc;
 
   /* Type */
   --font-sans: 'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
   --font-serif: 'Cormorant Garamond', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
 
-  /* Shape */
-  --radius-sm: 8px;
-  --radius: 16px;
-  --radius-lg: 24px;
-  --shadow-card: 0 1px 0 rgba(22, 24, 27, 0.03), 0 14px 34px -20px rgba(22, 24, 27, 0.22);
-  --shadow-card-hover: 0 1px 0 rgba(22, 24, 27, 0.04), 0 22px 44px -22px rgba(22, 24, 27, 0.28);
+  /* Shape: editorial, square-cornered */
+  --radius-sm: 2px;
+  --radius: 4px;
 
   /* Layout */
-  --container: 1180px;
-  --gutter: clamp(1.25rem, 4vw, 2.5rem);
-  --section: clamp(4.5rem, 9vw, 7.5rem);
+  --container: 1240px;
+  --measure: 62ch;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --section: clamp(4.5rem, 9vw, 8.5rem);
 
   /* Motion */
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -89,8 +92,8 @@ h3,
 h4 {
   font-family: var(--font-serif);
   font-weight: 500;
-  line-height: 1.08;
-  letter-spacing: -0.005em;
+  line-height: 1.06;
+  letter-spacing: -0.01em;
   margin: 0;
   text-wrap: balance;
 }
@@ -98,7 +101,10 @@ h4 {
 p,
 ul,
 ol,
-figure {
+figure,
+blockquote,
+dl,
+dd {
   margin: 0;
 }
 
@@ -135,13 +141,13 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--blue);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
 ::selection {
-  background: #dfe6e9;
+  background: #d6e0fb;
   color: var(--ink);
 }
 
@@ -160,23 +166,49 @@ button {
   padding-block: calc(var(--section) * 0.6);
 }
 
-.section-head {
+.section--flush-top {
+  padding-top: 0;
+}
+
+.section--line {
+  border-top: 1px solid var(--line);
+}
+
+/* Editorial two-column: heading left, prose right */
+.split {
   display: grid;
-  gap: 0.9rem;
-  max-width: 44rem;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: start;
 }
 
-.section-head h2 {
-  font-size: clamp(2rem, 3.4vw, 2.75rem);
-}
-
-.section-head p {
-  color: var(--ink-2);
-  font-size: 1.0625rem;
-  max-width: 38rem;
+@media (max-width: 899px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
 }
 
 /* Typography helpers ------------------------------------------------ */
+
+.display {
+  font-size: clamp(2.75rem, 6.2vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+}
+
+.title-xl {
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  line-height: 1.02;
+}
+
+.title-lg {
+  font-size: clamp(2.1rem, 3.8vw, 3.25rem);
+}
+
+.title-md {
+  font-size: clamp(1.7rem, 2.6vw, 2.25rem);
+}
 
 .eyebrow {
   display: inline-flex;
@@ -187,7 +219,15 @@ button {
   font-size: 0.6875rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
+  color: var(--blue);
+}
+
+.eyebrow--muted {
   color: var(--muted);
+}
+
+.eyebrow--light {
+  color: var(--on-ink-muted);
 }
 
 .eyebrow--dot::before {
@@ -195,29 +235,32 @@ button {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--accent, currentColor);
+  background: currentColor;
   flex: none;
-}
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.38em 0.9em;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  font-weight: 500;
-  font-size: 0.625rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-  white-space: nowrap;
 }
 
 .lede {
   color: var(--ink-2);
+  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+  line-height: 1.65;
+  max-width: 34rem;
+}
+
+.lede--wide {
+  max-width: var(--measure);
+}
+
+/* Long-form prose blocks: keep the measure readable */
+.prose {
+  display: grid;
+  gap: 1.1rem;
+  max-width: var(--measure);
+}
+
+.prose p {
+  color: var(--ink-2);
   font-size: 1.0625rem;
   line-height: 1.75;
-  max-width: 36rem;
 }
 
 .serif-italic {
@@ -241,7 +284,7 @@ sup.reg {
   align-items: center;
   justify-content: center;
   gap: 0.6em;
-  padding: 0.85em 1.45em;
+  padding: 0.95em 1.6em;
   border-radius: 999px;
   border: 1px solid var(--ink);
   background: var(--ink);
@@ -258,8 +301,8 @@ sup.reg {
 }
 
 .btn:hover {
-  background: #2b2f35;
-  border-color: #2b2f35;
+  background: var(--blue);
+  border-color: var(--blue);
 }
 
 .btn:active {
@@ -274,7 +317,7 @@ sup.reg {
 }
 
 .btn:hover svg {
-  transform: translate(1px, -1px);
+  transform: translateX(2px);
 }
 
 .btn--ghost {
@@ -285,8 +328,8 @@ sup.reg {
 
 .btn--ghost:hover {
   background: transparent;
-  color: var(--ink);
-  border-color: var(--ink);
+  color: var(--blue);
+  border-color: var(--blue);
 }
 
 .btn--light {
@@ -296,13 +339,14 @@ sup.reg {
 }
 
 .btn--light:hover {
-  background: #ffffff;
-  border-color: #ffffff;
+  background: var(--on-ink);
+  border-color: var(--on-ink);
+  color: var(--blue);
 }
 
 .btn--outline-light {
   background: transparent;
-  border-color: rgba(247, 245, 240, 0.35);
+  border-color: rgba(255, 255, 255, 0.4);
   color: var(--on-ink);
 }
 
@@ -312,7 +356,7 @@ sup.reg {
 }
 
 .btn--sm {
-  padding: 0.7em 1.15em;
+  padding: 0.75em 1.2em;
   font-size: 0.75rem;
 }
 
@@ -322,7 +366,7 @@ sup.reg {
   gap: 0.5em;
   font-weight: 500;
   font-size: 0.8125rem;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
   text-decoration: none;
   color: var(--ink);
 }
@@ -331,6 +375,10 @@ sup.reg {
   width: 0.85em;
   height: 0.85em;
   transition: transform 0.2s var(--ease);
+}
+
+.link-arrow:hover {
+  color: var(--blue);
 }
 
 .link-arrow:hover svg {
@@ -350,6 +398,20 @@ sup.reg {
 
 .link-quiet:hover {
   color: var(--ink);
+}
+
+/* Media ------------------------------------------------------------- */
+
+.frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Utilities --------------------------------------------------------- */
@@ -388,6 +450,44 @@ sup.reg {
   border: 0;
   border-top: 1px solid var(--line);
   margin: 0;
+}
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.crumbs a {
+  text-decoration: none;
+  color: var(--muted);
+}
+
+.crumbs a:hover {
+  color: var(--ink);
+}
+
+/* The one page-load moment: the home hero settles in. Nothing else animates on load. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.7s var(--ease) both;
+}
+
+.rise--late {
+  animation-delay: 0.12s;
 }
 
 @media (prefers-reduced-motion: reduce) {

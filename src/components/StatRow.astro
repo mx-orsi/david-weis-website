@@ -1,0 +1,67 @@
+---
+/**
+ * StatRow — a row of figures (value + label) driven by data. Values are
+ * strings so "50+", "1924" and "Full ask" all work. Use only for figures
+ * that appear in the approved copy.
+ */
+import type { Stat } from '../data/types';
+
+interface Props {
+  stats: readonly Stat[];
+  tone?: 'light' | 'dark';
+  class?: string;
+}
+const { stats, tone = 'light', class: className } = Astro.props;
+---
+
+<dl class:list={['stats', `stats--${tone}`, className]}>
+  {stats.map((s) => (
+    <div class="stats__item">
+      <dt class="stats__label">{s.label}</dt>
+      <dd class="stats__value">{s.value}</dd>
+    </div>
+  ))}
+</dl>
+
+<style>
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1.5rem 2.5rem;
+    margin: 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line-strong);
+  }
+  .stats__item {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 0.35rem;
+  }
+  .stats__value {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3.2vw, 2.9rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .stats__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+    color: var(--muted);
+    max-width: 24ch;
+  }
+  .stats--dark {
+    border-top-color: rgba(255, 255, 255, 0.25);
+  }
+  .stats--dark .stats__value {
+    color: var(--on-ink);
+  }
+  .stats--dark .stats__label {
+    color: var(--on-ink-muted);
+  }
+</style>

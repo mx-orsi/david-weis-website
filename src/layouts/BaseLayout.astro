@@ -10,7 +10,8 @@ import '../styles/global.css';
 
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { agent, siteUrl } from '../data/site';
+import FinalCta from '../components/FinalCta.astro';
+import { agent, siteUrl, social } from '../data/site';
 import { withBase, isPreviewBuild } from '../lib/paths';
 
 interface Props {
@@ -21,16 +22,18 @@ interface Props {
   /** Path or absolute URL for the social share image. */
   ogImage?: string;
   noindex?: boolean;
+  /** The sitewide "Real estate rarely gives you only one option." band before the footer. */
+  finalCta?: boolean;
 }
 
-const { title, description, ogImage = '/images/david-weis-share-image.jpg', noindex = false } = Astro.props;
+const { title, description, ogImage = '/images/david-weis-share-image.jpg', noindex = false, finalCta = true } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? siteUrl);
 const ogImageURL = new URL(withBase(ogImage), Astro.site ?? siteUrl);
 
 /**
- * RealEstateAgent structured data. Rendered on every page so search engines
- * see consistent NAP (name / address / phone) + license details site-wide.
+ * RealEstateAgent structured data, rendered on every page so search engines
+ * see consistent name / address / phone and license details site-wide.
  */
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -39,7 +42,7 @@ const jsonLd = {
   name: agent.name,
   alternateName: `${agent.name}, ${agent.title}`,
   description:
-    'Compass Broker Associate and REALTOR® serving La Jolla and San Diego, Palm Springs and Big Bear Lake, California. Coastal, desert and mountain real estate for buyers, sellers and investors.',
+    'Compass Broker Associate representing buyers and sellers across San Diego, Palm Springs and Big Bear, with firsthand experience in ownership, investment, renovation, hospitality and vacation rental operations.',
   url: siteUrl,
   image: new URL(agent.headshot.src, siteUrl).href,
   telephone: agent.phoneE164,
@@ -59,7 +62,6 @@ const jsonLd = {
   },
   areaServed: [
     { '@type': 'City', name: 'San Diego', sameAs: 'https://en.wikipedia.org/wiki/San_Diego' },
-    { '@type': 'Place', name: 'La Jolla', sameAs: 'https://en.wikipedia.org/wiki/La_Jolla' },
     { '@type': 'City', name: 'Palm Springs', sameAs: 'https://en.wikipedia.org/wiki/Palm_Springs,_California' },
     { '@type': 'City', name: 'Big Bear Lake', sameAs: 'https://en.wikipedia.org/wiki/Big_Bear_Lake,_California' },
   ],
@@ -76,7 +78,7 @@ const jsonLd = {
     telephone: agent.phoneE164,
     email: agent.email,
   },
-  sameAs: [agent.compassProfile, agent.social.instagram, agent.social.linkedin, agent.social.facebook],
+  sameAs: [agent.compassProfile, ...social.filter((s) => s.href).map((s) => s.href)],
 };
 ---
 
@@ -94,7 +96,7 @@ const jsonLd = {
     <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} sizes="180x180" />
     <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#f7f5f0" />
+    <meta name="theme-color" content="#ffffff" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={`${agent.name} · ${agent.title} · ${agent.brokerage}`} />
@@ -119,6 +121,7 @@ const jsonLd = {
     <main id="main">
       <slot />
     </main>
+    {finalCta && <FinalCta />}
     <Footer />
   </body>
 </html>

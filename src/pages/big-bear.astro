@@ -1,12 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MarketPage from '../components/MarketPage.astro';
+import { marketPages } from '../data/marketPages';
 
-const title = 'Big Bear Lake Cabins & Homes | David Weis, Compass Broker Associate';
-const description =
-  'Luxury cabins, character homes and second homes with rental potential in Big Bear Lake, with David Weis, a Compass Broker Associate who bought his first home here and rebuilt it near Big Bear Mountain Resort.';
+const c = marketPages['big-bear'];
 ---
 
-<BaseLayout {title} {description}>
-  <MarketPage slug="big-bear" title="Big Bear Lake cabins, from an actual cabin owner" />
+<BaseLayout title={c.seo.title} description={c.seo.description}>
+  <MarketPage slug="big-bear" />
 </BaseLayout>
