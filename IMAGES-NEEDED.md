@@ -15,12 +15,10 @@ Filenames lowercase and hyphen-separated with the market or project name.
 
 | Page | Slot | What would fit |
 | --- | --- | --- |
-| Sierra Chalet hot tub sequence | hands-on chapter | David's phone photos, in `public/images/sierra-chalet/`: `IMG_7676` → `sierra-chalet-hot-tub-plywood-ramp-big-bear.jpg` · `IMG_7677` → `sierra-chalet-hot-tub-halfway-up-big-bear.jpg` · `IMG_7682` → `sierra-chalet-hot-tub-on-the-deck-big-bear.jpg`. Rough is fine; do not retouch. |
-| Sierra Chalet (all six) | lead, two-up, wide break, gallery | Exterior after the rebuild with both decks · the rear deck before · mid-renovation with walls open · the upper deck and lake view · the screened lower deck with the spa · the repositioned entry after a snowfall. The lead also fills the Sierra Chalet card on Experience and Big Bear. |
+| Sierra Chalet | lead + interiors, once the listing shoot arrives | Max's 2026-09-15 upload (renovation and action shots) fills every slot for now: finished exterior leads, walls-open + framing pair, the snow exterior wide, and a gallery of the red cabin before, David mixing concrete, the dogs at the door and the carved bear. The hot tub chapter has all three phone photos. When the professional listing photos land, swap the lead and add the upper deck with the lake view and the screened lower deck with the spa. |
 | About | "Community matters" 4:3 | David at a community event (Gay For Good, a Palm Springs neighborhood group) |
 | San Diego market page | 16:9 image break | Kensington streetscape or the Mission Beach boardwalk |
 | Palm Springs market page | 16:9 image break | A Palm Springs street with the San Jacinto Mountains behind it |
-| Big Bear market page | 16:9 image break | Big Bear Lake from the north shore, or the cabin in early snow |
 | Properties | 3 listing cards + 3 sold cards | Waits on David's Properties decision and listing details |
 | Home + market openers | 3 market cards / page headers | Currently Unsplash stand-ins (La Jolla cove, mid-century Palm Springs home, Big Bear cabin). Fine to launch with; David's own would be better. |
 
@@ -37,6 +35,7 @@ stay in the folders and can be swapped in by editing `projects.ts`.
 
 - **Querencia Palms property set (4):** `david-weis-homes-for-sale-palm-springs-realtor-83` (duplicate of the About mural portrait), `condos-palm-springs` (black-shirt mural portrait), `south-palm-springs-condo-community` and `tahquitz-river-estates-condos` (David at the big mural wall).
 - **Querencia landscaping (20):** the second Unit 102 and 106 koi-pond shots, the 104 and 105 back-patio pairs, the 102 and 106 front-patio pairs, the 105 primary-yard pair, the second waterfall, the night koi shot, the third David walkway portrait, the sunset aerial before landscaping, and the cannas by the stairs.
+- **Sierra Chalet (5):** two more red-cabin before shots, and the old listing's entry, bedroom and kitchen photos (1170px, pre-renovation) — could become before/after pairs once the new interiors arrive.
 - **Kensington Canyon (4):** the bathroom, the second living-room angle, the duplicate kitchen shot, the pool from the terrace.
 
 ## Done

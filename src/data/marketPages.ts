@@ -134,7 +134,15 @@ export const marketPages: Record<MarketSlug, MarketPageContent> = {
         ],
       },
     ],
-    photo: { suggestion: 'Big Bear Lake from the north shore, or the cabin in early snow' },
+    photo: {
+      suggestion: 'David on a mountain bike at the South Shore trail map',
+      src: '/images/sierra-chalet/sierra-chalet-big-bear-cabin-renovation-david-weis.jpg',
+      alt: 'David Weis on a mountain bike beside the Welcome to the South Shore trail map in Big Bear, pines behind',
+      width: 2048,
+      height: 1776,
+      hasSmall: true,
+      position: 'center 40%',
+    },
     featuredProjects: ['sierra-chalet'],
     featuredTitle: 'Featured experience',
     seo: {
