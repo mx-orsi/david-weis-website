@@ -8,7 +8,6 @@ import StatRow from '../components/StatRow.astro';
 import Icon from '../components/Icon.astro';
 import { about } from '../data/about';
 import { agent } from '../data/site';
-import { getProject } from '../data/projects';
 import { withBase } from '../lib/paths';
 
 // A different portrait from the home hero, so the two pages do not open the same way.
@@ -21,7 +20,6 @@ const portrait = {
   hasSmall: true,
   position: 'center 30%',
 };
-const cole = getProject('the-cole');
 ---
 
 <BaseLayout title={about.seo.title} description={about.seo.description}>
@@ -72,7 +70,6 @@ const cole = getProject('the-cole');
         <a class="link-arrow ab-cole__link" href={withBase(about.cole.cta.href)}>{about.cole.cta.label} <Icon name="arrow-right" /></a>
       </Story>
       <div class="ab-cole__media">
-        {cole.logo && <img class="ab-cole__logo" src={withBase(cole.logo.src)} alt={cole.logo.alt} width={cole.logo.width} height={cole.logo.height} loading="lazy" decoding="async" />}
         <Media photo={about.cole.photo} ratio="4 / 5" sizes="(min-width: 960px) 40vw, 100vw" />
       </div>
     </div>
@@ -155,10 +152,6 @@ const cole = getProject('the-cole');
     max-width: 460px;
     justify-self: end;
     width: 100%;
-  }
-  .ab-cole__logo {
-    height: 56px;
-    width: auto;
   }
   .ab-note {
     font-size: 0.875rem !important;

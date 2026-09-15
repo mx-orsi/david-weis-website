@@ -9,6 +9,36 @@ in, add it to `public/images/` and give the matching `Photo` entry in
 originals preferred for the wide slots; we crop. No text baked into images.
 Filenames lowercase and hyphen-separated with the market or project name.
 
+## Status report — 2026-09-14 (evening)
+
+### Still needed
+
+| Page | Slot | What would fit |
+| --- | --- | --- |
+| Sierra Chalet (all six) | lead, two-up, wide break, gallery | Exterior after the rebuild with both decks · the rear deck before · mid-renovation with walls open · the upper deck and lake view · the screened lower deck with the spa · the repositioned entry after a snowfall. The lead also fills the Sierra Chalet card on Experience and Big Bear. |
+| Querencia Palms | wide break after "Stage. Clean. Present. Repeat." | A staged residence interior |
+| About | "Community matters" 4:3 | David at a community event (Gay For Good, a Palm Springs neighborhood group) |
+| San Diego market page | 16:9 image break | Kensington streetscape or the Mission Beach boardwalk |
+| Palm Springs market page | 16:9 image break | A Palm Springs street with the San Jacinto Mountains behind it |
+| Big Bear market page | 16:9 image break | Big Bear Lake from the north shore, or the cabin in early snow |
+| Properties | 3 listing cards + 3 sold cards | Waits on David's Properties decision and listing details |
+| Home + market openers | 3 market cards / page headers | Currently Unsplash stand-ins (La Jolla cove, mid-century Palm Springs home, Big Bear cabin). Fine to launch with; David's own would be better. |
+
+### Better versions wanted
+
+- **The Cole:** the pool-at-dusk lead and the guest suite are enlarged low-res files and look soft. Full-resolution originals under the same filenames would swap in.
+- **Kensington Canyon:** all files are 1024px wide, so the lead exterior is upscaled. Larger originals, same filenames.
+- **Belmont Beach House:** no exterior, deck or ocean photo in the set; the living room leads. One ocean-side shot would fix the page.
+
+### Uploaded but not used (28 photos)
+
+Nothing wrong with them; the pages simply have fewer slots than photos. They
+stay in the folders and can be swapped in by editing `projects.ts`.
+
+- **Querencia Palms property set (4):** `david-weis-homes-for-sale-palm-springs-realtor-83` (duplicate of the About mural portrait), `condos-palm-springs` (black-shirt mural portrait), `south-palm-springs-condo-community` and `tahquitz-river-estates-condos` (David at the big mural wall).
+- **Querencia landscaping (20):** the second Unit 102 and 106 koi-pond shots, the 104 and 105 back-patio pairs, the 102 and 106 front-patio pairs, the 105 primary-yard pair, the second waterfall, the night koi shot, the third David walkway portrait, the sunset aerial before landscaping, and the cannas by the stairs.
+- **Kensington Canyon (4):** the bathroom, the second living-room angle, the duplicate kitchen shot, the pool from the terrace.
+
 ## Done
 
 | Slot | File |

@@ -57,16 +57,16 @@ const breadcrumbJsonLd = {
         <span aria-hidden="true">/</span>
         <span aria-current="page">{p.name}</span>
       </nav>
-      {p.logo ? (
-        <p class="pp-hero__mark">
-          <img src={withBase(p.logo.src)} alt={p.logo.alt} width={p.logo.width} height={p.logo.height} loading="eager" decoding="async" />
-          <span class="sr-only">{p.place} · {p.kind}</span>
-        </p>
-      ) : (
-        <p class="eyebrow eyebrow--dot">{p.place} · {p.kind}</p>
-      )}
-      <div class="pp-hero__grid">
-        <h1 class="display">{p.name}</h1>
+      {!p.logo && <p class="eyebrow eyebrow--dot">{p.place} · {p.kind}</p>}
+      <div class:list={['pp-hero__grid', p.logo && 'pp-hero__grid--logo']}>
+        {p.logo ? (
+          <h1 class="pp-hero__logo-title">
+            <img src={withBase(p.logo.src)} alt={p.name} width={p.logo.width} height={p.logo.height} loading="eager" decoding="async" fetchpriority="high" />
+            <span class="sr-only">{p.name} — {p.place} · {p.kind}</span>
+          </h1>
+        ) : (
+          <h1 class="display">{p.name}</h1>
+        )}
         <div class="pp-hero__aside">
           <p class="lede lede--wide">{p.intro}</p>
           {p.roles && p.roles.length > 0 && (
@@ -169,15 +169,20 @@ const breadcrumbJsonLd = {
     gap: 1.25rem;
     justify-items: start;
   }
-  /* Project logo in place of the place · kind line (The Cole, Querencia Palms). */
-  .pp-hero__mark {
+  /* Projects with a logo (The Cole, Querencia Palms) open on the logo instead
+     of the name; the name stays in the markup for screen readers and search. */
+  .pp-hero__grid .pp-hero__logo-title {
     margin: 0;
+    line-height: 0;
+    max-width: none;
   }
-  .pp-hero__mark img {
+  .pp-hero__logo-title img {
     display: block;
-    height: 84px;
-    width: auto;
-    max-width: 260px;
+    width: min(100%, 460px);
+    height: auto;
+  }
+  .pp-hero__grid--logo {
+    align-items: center;
   }
   .pp-hero__roles {
     display: grid;
