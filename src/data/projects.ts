@@ -51,11 +51,14 @@ export type ChapterBlock =
       /** Two photos side by side, read left to right (e.g. barren → lush). */
       photos: readonly [Photo, Photo];
       ratio?: string;
+      captions?: readonly [string, string];
     }
   | {
-      /** Oversized pull line, optionally followed by short prose. */
+      /** Oversized pull line, optionally a second line, a small note and short prose. */
       type: 'callout';
       text: string;
+      second?: string;
+      note?: string;
       paragraphs?: readonly string[];
     }
   | {
@@ -69,6 +72,17 @@ export type ChapterBlock =
       type: 'gallery';
       photos: readonly Photo[];
       label: string;
+      /** Optional small label + note under each photo, aligned by index. */
+      captions?: readonly { title: string; note?: string }[];
+    }
+  | {
+      /** Compact strip of photos; hover or tap reveals each label. No voting, no backend. */
+      type: 'strip';
+      heading: string;
+      photos: readonly Photo[];
+      labels: readonly string[];
+      /** One closing sentence under the strip. */
+      closing?: string;
     };
 
 export interface ProjectChapter {
@@ -100,8 +114,8 @@ export interface Project {
   /** Compact list of David's involvement, shown under the intro. */
   roles?: readonly string[];
   sections: readonly ProjectSection[];
-  /** Optional deep-dive chapter, inserted after `sections[chapter.after]`. */
-  chapter?: ProjectChapter;
+  /** Optional deep-dive chapters, each inserted after `sections[chapter.after]`, in array order. */
+  chapters?: readonly ProjectChapter[];
   stats?: readonly Stat[];
   /** photos[0] leads the page and the cards; the rest become image breaks. */
   photos: readonly Photo[];
@@ -184,7 +198,8 @@ export const projects: readonly Project[] = [
      * David's Drive filenames); slots render as labeled placeholders until the
      * files are there.
      */
-    chapter: {
+    chapters: [
+    {
       id: 'the-grounds',
       after: 2,
       blocks: [
@@ -379,6 +394,162 @@ export const projects: readonly Project[] = [
         },
       ],
     },
+    {
+      /*
+       * The interiors and model-home chapter, from David's 2026-09-14 email.
+       * Sits after the grounds chapter and before "Stage. Clean. Present.
+       * Repeat." Roles stay exact: Mark chose the furniture, wallpaper and
+       * design direction; David ran the sales and presentation strategy,
+       * pushed for more turnkey residences and the upstairs model, assembled
+       * furniture, prepared the units, watched buyers and sold the homes.
+       * Never "David designed seven interiors". Never "free furniture".
+       * Unit numbers on the photos are a best read of David's descriptions
+       * and need his confirmation (CLIENT-QUESTIONS.md).
+       */
+      id: 'the-interiors',
+      after: 2,
+      blocks: [
+        {
+          type: 'story',
+          eyebrow: 'The interiors',
+          heading: 'We started with two model homes.',
+          paragraphs: [
+            'When we first prepared Querencia Palms for sale, the plan was fairly simple. Units 102 and 206 would be our model residences: fully furnished, styled and finished so buyers could walk through and understand what living at Querencia might actually feel like.',
+            'The other residences were supposed to give buyers more freedom. We even created a binder of wallpaper options so someone could choose a pattern that fit their own style. At the time, I thought that flexibility would be a selling point.',
+            'Then people started touring.',
+          ],
+        },
+        {
+          type: 'photo',
+          photo: { suggestion: 'Unit 206 living room', src: '/images/querencia-interiors/querencia-palms-renovated-condo-interior-south-palm-springs-david-weis.jpg', alt: 'Unit 206 at Querencia Palms: a brown leather sofa and two white armchairs against a teal, rust and mustard geometric mural', width: 1448, height: 1086, hasSmall: true },
+          ratio: '16 / 9',
+          caption: 'Unit 206, one of the two original models.',
+        },
+        {
+          type: 'story',
+          heading: 'It turns out, imagination is asking a lot.',
+          paragraphs: [
+            'What surprised me was how differently buyers reacted to the finished homes. Standing inside an empty residence with a binder of wallpaper samples sounded exciting in theory. In practice, it gave people more work to do. They had to imagine the wallpaper. Imagine the furniture. Imagine the scale. Imagine what appliances would eventually look like. Imagine how much more they would need to buy after closing.',
+            'And when someone is already deciding whether to make a major purchase, every unanswered question can become another reason to hesitate.',
+            'Units 102 and 206 did not ask buyers to imagine nearly as much. They were finished. They were furnished. They were turnkey. And they were the first two residences to sell.',
+          ],
+        },
+        {
+          type: 'callout',
+          text: 'Choice wasn’t the selling point. Certainty was.',
+        },
+        {
+          type: 'story',
+          eyebrow: 'The pivot',
+          heading: 'So we built another model.',
+          paragraphs: [
+            'Once the original models sold, we had a new problem. Our best sales tools had just become someone’s homes. So we created another. Unit 104 came next.',
+            'Then I realized we were still missing an important part of the Querencia experience: the second floor. I kept saying, “We need a model upstairs with the mountains in the background.” That became Unit 202.',
+            'From there, the strategy kept evolving. One finished residence became another, then another. Eventually, the interiors themselves became part of how we told the story of the property.',
+          ],
+        },
+        {
+          type: 'pair',
+          photos: [{ suggestion: 'Unit 104 living room', src: '/images/querencia-interiors/querencia-palms-renovated-kitchen-palm-springs-david-weis.jpg', alt: 'Unit 104 at Querencia Palms: a tan leather sofa and a round coffee table in front of a green and gold botanical mural', width: 2400, height: 1800, hasSmall: true }, { suggestion: 'Unit 202 living room', src: '/images/querencia-interiors/querencia-palms-open-concept-living-room-david-weis.jpg', alt: 'Unit 202 at Querencia Palms: a blue leather sofa and a walnut credenza in front of a bold blue, orange and brown mural', width: 2400, height: 1800, hasSmall: true, position: 'center 30%' }],
+          ratio: '4 / 3',
+          captions: ['Unit 104, the third model.', 'Unit 202, the upstairs model.'],
+        },
+        {
+          type: 'story',
+          eyebrow: 'The furniture',
+          heading: 'Why rent the staging when the buyer could have it?',
+          paragraphs: [
+            'Once we knew the furnished homes were connecting with buyers, we looked at the economics differently. We could spend a substantial amount of money renting furniture from a staging company, then watch all of it leave after the sale. Or we could put that money into furniture we selected ourselves, control exactly how the residence looked and give the buyer the option to keep it. So that is what we did.',
+            'The furniture was included with the residence at no additional charge. The buyer could keep everything, keep only the pieces they liked, give pieces back, sell something later or replace it completely. It was their home. The important part was that, during the buying process, the residence already felt complete.',
+          ],
+        },
+        {
+          type: 'callout',
+          text: 'The staging didn’t have to leave at closing.',
+          note: 'If the buyer wanted it, it stayed.',
+        },
+        {
+          type: 'story',
+          heading: 'Control the presentation. Give the buyer the upside.',
+          paragraphs: [
+            'I had already experienced what happens when expensive staging does not actually serve the property. Furniture can be the wrong scale. The design can fight the architecture. The style can feel disconnected from the likely buyer. A room can technically be staged and still show worse because of it.',
+            'At Querencia, we wanted control. Mark selected the furniture, wallpaper and overall design direction for the residences. I assembled the furniture, cleaned and prepared the units, helped determine when we needed another model and paid close attention to how buyers responded as they toured.',
+            'If something was not working, we could change it. If a room needed a stronger point of view, we could give it one. And if buyers loved the finished result, there was another advantage: they could keep it.',
+          ],
+        },
+        {
+          type: 'story',
+          eyebrow: 'The result',
+          heading: 'One building. Seven very different points of view.',
+          paragraphs: [
+            'By the time the strategy fully evolved, seven of the two-bedroom residences had been individually furnished and styled. The architecture connected them. The personalities did not. Some became bold and graphic. Others were warm and organic. Some leaned into saturated color. Others were quieter and more restrained.',
+            'That variety became one of my favorite things about the project. There was never supposed to be one required Querencia look. The design simply needed to help someone see what was possible.',
+          ],
+        },
+        {
+          type: 'gallery',
+          label: 'The seven furnished residences',
+          photos: [{ suggestion: 'Unit 105 living room', src: '/images/querencia-interiors/querencia-palms-midcentury-interior-design-palm-springs-david-weis.jpg', alt: 'Unit 105 at Querencia Palms: a white sofa and a green fluted credenza against a teal, mustard and rust geometric mural', width: 2048, height: 1367, hasSmall: true }, { suggestion: 'Unit 201 living room', src: '/images/querencia-interiors/querencia-palms-renovated-bathroom-palm-springs-david-weis.jpg', alt: 'Unit 201 at Querencia Palms: a tan leather sofa and a green credenza against a grey and beige geometric mural', width: 2048, height: 1365, hasSmall: true }, { suggestion: 'Unit 106 sitting area', src: '/images/querencia-interiors/querencia-palms-primary-bedroom-suite-condo-david-weis.jpg', alt: 'Unit 106 at Querencia Palms: two green velvet armchairs, a marble side table and a patio door to the courtyard', width: 2048, height: 1366, hasSmall: true }, { suggestion: 'Unit 204 living room', src: '/images/querencia-interiors/querencia-palms-indoor-outdoor-living-patio-doors-david-weis.jpg', alt: 'Unit 204 at Querencia Palms: a cream sofa with rust pillows on a rust rug, in front of a green and gold mural', width: 2048, height: 1368, hasSmall: true }, { suggestion: 'Unit 106 dining area', src: '/images/querencia-interiors/querencia-palms-condo-interior-palm-springs-david-weis.jpg', alt: 'Unit 106 at Querencia Palms: a round black dining table with mustard chairs beside a green mural', width: 2048, height: 1369, hasSmall: true }, { suggestion: 'Unit 206 living room', src: '/images/querencia-interiors/querencia-palms-renovated-condo-interior-south-palm-springs-david-weis.jpg', alt: 'Unit 206 at Querencia Palms: a brown leather sofa and two white armchairs against a teal, rust and mustard geometric mural', width: 1448, height: 1086, hasSmall: true }, { suggestion: 'Unit 202 living room', src: '/images/querencia-interiors/querencia-palms-open-concept-living-room-david-weis.jpg', alt: 'Unit 202 at Querencia Palms: a blue leather sofa and a walnut credenza in front of a bold blue, orange and brown mural', width: 2400, height: 1800, hasSmall: true, position: 'center 30%' }],
+          captions: [
+            { title: 'Unit 105', note: 'Graphic geometry + saturated color' },
+            { title: 'Unit 201', note: 'Warm tones + geometric restraint' },
+            { title: 'Unit 106', note: 'Soft modernism + organic neutrals' },
+            { title: 'Unit 204', note: 'Green, gold + garden-inspired color' },
+            { title: 'Unit 106', note: 'The dining side of the same residence' },
+            { title: 'Unit 206', note: 'Graphic modernism + deep contrast' },
+            { title: 'Unit 202', note: 'Desert color + mid-century energy' },
+          ],
+        },
+        {
+          type: 'story',
+          eyebrow: 'The real estate lesson',
+          heading: 'Empty rooms ask buyers to work.',
+          paragraphs: [
+            'Querencia permanently changed the way I think about staging. An empty residence asks a buyer to solve too many things at once. Will my sofa fit? Where does the television go? How large can the dining table be? Does this bedroom actually feel generous? What wallpaper would I choose? What will it cost to furnish all of this after closing?',
+            'A completed room removes much of that work. Furniture gives the space scale. Design gives it identity. Lighting creates mood. Wallpaper can turn a wall into the thing someone remembers after touring six other properties that day. And appliances make a residence feel like something you can actually move into rather than another project waiting after closing.',
+          ],
+        },
+        {
+          type: 'callout',
+          text: 'Empty rooms ask buyers to work.',
+          second: 'Staged rooms let buyers feel.',
+        },
+        {
+          type: 'story',
+          heading: 'The buyer wasn’t just seeing more. They were getting more.',
+          paragraphs: [
+            'We did not raise the purchase price because a residence was furnished. The furniture was simply included. That changed the psychology. Instead of someone walking through a beautiful staged home knowing that everything they liked would disappear after closing, they had a choice. The sofa could stay. The dining table could stay. The beds, lamps, chairs and accessories could stay.',
+            'Maybe they loved every piece. Maybe they replaced half of it six months later. That was not the point. The point was that the home felt complete on the day they decided to buy it. And because the furniture was included if they wanted it, there was also a sense that they were walking away with something extra.',
+          ],
+        },
+        {
+          type: 'callout',
+          text: 'Same price. More to walk away with.',
+        },
+        {
+          type: 'story',
+          eyebrow: 'After closing',
+          heading: 'Then the buyers took over.',
+          paragraphs: [
+            'The best part happened after the residences stopped being models. They became homes. Owners brought in their own art. Changed furniture. Added pieces we never would have selected. Kept things they loved. Made the spaces more personal.',
+            'Touring their homes afterward has become one of my favorite parts of Querencia. There is almost a show-and-tell quality to it. Someone recognizes wallpaper they also have. A neighbor sees how somebody else used the same floor plan. People compare what they kept, what they changed and what they added. It reminds me a little of a tiny Modernism tour inside the community. You see people light up when they discover something familiar in someone else’s residence, then immediately show what they did differently in their own.',
+          ],
+        },
+        {
+          type: 'callout',
+          text: 'The model was never supposed to be the final version.',
+          note: 'It just needed to help someone see the beginning.',
+        },
+        {
+          type: 'strip',
+          heading: 'Which one would you have chosen?',
+          photos: [{ suggestion: 'Unit 104 living room', src: '/images/querencia-interiors/querencia-palms-renovated-kitchen-palm-springs-david-weis.jpg', alt: 'Unit 104 at Querencia Palms: a tan leather sofa and a round coffee table in front of a green and gold botanical mural', width: 2400, height: 1800, hasSmall: true }, { suggestion: 'Unit 105 living room', src: '/images/querencia-interiors/querencia-palms-midcentury-interior-design-palm-springs-david-weis.jpg', alt: 'Unit 105 at Querencia Palms: a white sofa and a green fluted credenza against a teal, mustard and rust geometric mural', width: 2048, height: 1367, hasSmall: true }, { suggestion: 'Unit 106 sitting area', src: '/images/querencia-interiors/querencia-palms-primary-bedroom-suite-condo-david-weis.jpg', alt: 'Unit 106 at Querencia Palms: two green velvet armchairs, a marble side table and a patio door to the courtyard', width: 2048, height: 1366, hasSmall: true }, { suggestion: 'Unit 201 living room', src: '/images/querencia-interiors/querencia-palms-renovated-bathroom-palm-springs-david-weis.jpg', alt: 'Unit 201 at Querencia Palms: a tan leather sofa and a green credenza against a grey and beige geometric mural', width: 2048, height: 1365, hasSmall: true }, { suggestion: 'Unit 202 living room', src: '/images/querencia-interiors/querencia-palms-open-concept-living-room-david-weis.jpg', alt: 'Unit 202 at Querencia Palms: a blue leather sofa and a walnut credenza in front of a bold blue, orange and brown mural', width: 2400, height: 1800, hasSmall: true, position: 'center 30%' }, { suggestion: 'Unit 204 living room', src: '/images/querencia-interiors/querencia-palms-indoor-outdoor-living-patio-doors-david-weis.jpg', alt: 'Unit 204 at Querencia Palms: a cream sofa with rust pillows on a rust rug, in front of a green and gold mural', width: 2048, height: 1368, hasSmall: true }, { suggestion: 'Unit 206 living room', src: '/images/querencia-interiors/querencia-palms-renovated-condo-interior-south-palm-springs-david-weis.jpg', alt: 'Unit 206 at Querencia Palms: a brown leather sofa and two white armchairs against a teal, rust and mustard geometric mural', width: 1448, height: 1086, hasSmall: true }],
+          labels: ['Unit 104', 'Unit 105', 'Unit 106', 'Unit 201', 'Unit 202', 'Unit 204', 'Unit 206'],
+          closing: 'At Querencia, the models didn’t just show buyers where furniture could go. They helped buyers see a life there.',
+        },
+      ],
+    },
+    ],
     stats: [
       { value: '14', label: 'Residences' },
       { value: 'South Palm Springs', label: 'Fee-land condominiums' },
@@ -410,7 +581,14 @@ export const projects: readonly Project[] = [
         height: 1365,
         hasSmall: true,
       },
-      { suggestion: 'A staged residence interior' },
+      {
+        suggestion: 'Breezeway with the painted mural',
+        src: '/images/querencia-palms/querencia-palms-bbq-courtyard-community-amenities-david-weis.jpg',
+        alt: 'The covered breezeway at Querencia Palms with the painted mural reading Querencia Palms, love where you live',
+        width: 2048,
+        height: 1365,
+        hasSmall: true,
+      },
       {
         suggestion: 'Street exterior with the yellow facade',
         src: '/images/querencia-palms/querencia-palms-dog-friendly-condos-palm-springs-david-weis.jpg',
@@ -423,14 +601,6 @@ export const projects: readonly Project[] = [
         suggestion: 'Courtyard fountain under the palo verde in bloom',
         src: '/images/querencia-palms/querencia-palms-renovated-1966-midcentury-condos-david-weis.jpg',
         alt: 'The Querencia Palms courtyard fountain with a palo verde in yellow bloom and the residences behind',
-        width: 2048,
-        height: 1365,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Breezeway with the painted mural',
-        src: '/images/querencia-palms/querencia-palms-bbq-courtyard-community-amenities-david-weis.jpg',
-        alt: 'The covered breezeway at Querencia Palms with the painted mural reading Querencia Palms, love where you live',
         width: 2048,
         height: 1365,
         hasSmall: true,
@@ -929,6 +1099,71 @@ export const projects: readonly Project[] = [
         heading: 'You see houses differently after you have opened the walls.',
         paragraphs: [
           'Sierra Chalet changed the way I look at renovation. Things that appear simple rarely are. Moving one element can affect five others. Materials behave differently in extreme climates. Older construction often contains both ingenious solutions and unexpected surprises. Most importantly, I gained enormous respect for the labor required to physically transform a property.',
+        ],
+      },
+    ],
+    /*
+     * The hands-on chapter, from David's 2026-09-15 email: the hot tub story
+     * in three phone photos, then what working on the house taught him. Sits
+     * after "The mountain always gets a vote." and before "You see houses
+     * differently". The photos are rough on purpose; do not retouch. Spa
+     * weight: "nearly 600 pounds" / "more than 500 pounds empty", never
+     * "600+".
+     */
+    chapters: [
+      {
+        id: 'hands-on',
+        after: 2,
+        blocks: [
+          {
+            type: 'story',
+            eyebrow: 'Hands-on',
+            heading: 'Nearly 600 pounds. Two people. One piece of plywood.',
+            paragraphs: [
+              'When the hot tub arrived, there was one small problem. It still had to get up the hillside and onto the lower screened porch. The spa weighed more than 500 pounds empty, and Mark and I decided we were going to move it ourselves.',
+              'Our solution was not particularly glamorous. We used a sheet of plywood as a ramp and moved the spa upward a little at a time. I would push, lift and hold the weight in place while Mark ran underneath, unscrewed a small wooden stop, moved it farther up the plywood and screwed it back in. Then we would do it again. And again. And again.',
+              'Each board position became the next rung of a homemade ladder until, eventually, the entire hot tub was sitting on the deck.',
+            ],
+          },
+          {
+            type: 'pair',
+            photos: [
+              { suggestion: 'IMG_7676: the plywood ramp and the small wooden stops', src: '/images/sierra-chalet/sierra-chalet-hot-tub-plywood-ramp-big-bear.jpg', alt: 'A sheet of plywood laid up the hillside at Sierra Chalet as a ramp, with small wooden stops screwed to it' },
+              { suggestion: 'IMG_7677: the wrapped hot tub partway up the ramp', src: '/images/sierra-chalet/sierra-chalet-hot-tub-halfway-up-big-bear.jpg', alt: 'The wrapped hot tub partway up the plywood ramp on the Sierra Chalet hillside' },
+            ],
+            ratio: '4 / 3',
+            captions: ['The improvised ramp.', 'Almost there.'],
+          },
+          {
+            type: 'callout',
+            text: 'Push. Hold. Move the stop. Screw it back in. Repeat.',
+          },
+          {
+            type: 'photo',
+            photo: { suggestion: 'IMG_7682: David beside the hot tub after it made it onto the lower porch', src: '/images/sierra-chalet/sierra-chalet-hot-tub-on-the-deck-big-bear.jpg', alt: 'David Weis standing beside the hot tub after it reached the lower screened porch at Sierra Chalet' },
+            ratio: '4 / 3',
+            caption: 'Made it.',
+          },
+          {
+            type: 'story',
+            heading: 'Looking back, I still cannot believe we did that.',
+            paragraphs: [
+              'Looking back at the pictures now, I still have the same reaction: I cannot believe we actually did that. But that is also what I love about Sierra Chalet. It was not a renovation I watched happen. I was physically part of it.',
+            ],
+          },
+          {
+            type: 'story',
+            heading: 'There’s a difference between knowing a house and working on one.',
+            paragraphs: [
+              'Sierra Chalet was the first project where I became deeply involved in the physical work of rebuilding a property. Removing siding. Opening walls. Drilling. Plumbing. Deck construction. And apparently figuring out how to move a nearly 600-pound hot tub up a hillside with plywood.',
+              'Mark is a licensed contractor and brought the technical experience. I brought a willingness to learn, help and keep going even when the work was far outside anything I had done before.',
+              'That experience changed the way I walk through property today. I have a much greater appreciation for what is behind a finished wall, beneath a deck and inside the seemingly simple renovation somebody describes in one sentence.',
+            ],
+          },
+          {
+            type: 'callout',
+            text: 'It wasn’t a renovation I watched happen. I was physically part of it.',
+          },
         ],
       },
     ],

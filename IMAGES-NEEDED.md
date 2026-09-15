@@ -15,8 +15,8 @@ Filenames lowercase and hyphen-separated with the market or project name.
 
 | Page | Slot | What would fit |
 | --- | --- | --- |
+| Sierra Chalet hot tub sequence | hands-on chapter | David's phone photos, in `public/images/sierra-chalet/`: `IMG_7676` → `sierra-chalet-hot-tub-plywood-ramp-big-bear.jpg` · `IMG_7677` → `sierra-chalet-hot-tub-halfway-up-big-bear.jpg` · `IMG_7682` → `sierra-chalet-hot-tub-on-the-deck-big-bear.jpg`. Rough is fine; do not retouch. |
 | Sierra Chalet (all six) | lead, two-up, wide break, gallery | Exterior after the rebuild with both decks · the rear deck before · mid-renovation with walls open · the upper deck and lake view · the screened lower deck with the spa · the repositioned entry after a snowfall. The lead also fills the Sierra Chalet card on Experience and Big Bear. |
-| Querencia Palms | wide break after "Stage. Clean. Present. Repeat." | A staged residence interior |
 | About | "Community matters" 4:3 | David at a community event (Gay For Good, a Palm Springs neighborhood group) |
 | San Diego market page | 16:9 image break | Kensington streetscape or the Mission Beach boardwalk |
 | Palm Springs market page | 16:9 image break | A Palm Springs street with the San Jacinto Mountains behind it |
@@ -119,7 +119,7 @@ closing gallery. Order in `projects.ts` sets the order on the page.
 
 | Project | Photos, in order |
 | --- | --- |
-| Querencia Palms | done except: a staged residence interior |
+| Querencia Palms | done |
 | The Cole | All six mapped above |
 | Vista Voltaire | All eight mapped above |
 | Kensington Canyon | done (1024px files, see above) |

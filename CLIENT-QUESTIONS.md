@@ -56,6 +56,30 @@ name the file each one expects; the map from his Drive filenames is in
 
 ## Still open
 
+**For David, from the interiors chapter (2026-09-15):**
+
+- **Unit numbers on the interior photos need confirming.** Max's SEO
+  filenames do not carry the unit numbers, so the labels are a best read of
+  David's descriptions: tan leather sofa + green/gold botanical mural = 104;
+  white sofa + teal/mustard/rust geometric mural = 105; green armchairs and
+  patio door = 106 (with the mustard-chair dining shot as 106's second);
+  tan sofa + grey geometric mural = 201; blue sofa + blue/orange circles =
+  202; cream sofa + rust rug + green/gold mural = 204; brown sofa + white
+  chairs + teal geometric mural = 206. If any are wrong, the fix is one line
+  per photo in `projects.ts` (the `U` map comments show which file is which).
+- **Wallpaper binder.** David's brief suggests photographing the original
+  binder and placing it before "Choice wasn't the selling point." A slot can
+  be added the moment there is a photo.
+- **Roles are kept exact** (Mark: furniture, wallpaper, design direction;
+  David: strategy, models, assembly, prep, buyer behavior, sales). Language
+  follows his rules: "included at no additional charge", never "free
+  furniture". The "which one would you have chosen?" strip is hover/tap only,
+  no voting or data collection.
+
+**For David, from the Sierra Chalet hands-on chapter (2026-09-15):** built
+to his sequence with "nearly 600 pounds" / "more than 500 pounds empty"; the
+three phone photos have named slots waiting for Max's upload.
+
 **For David, from the grounds chapter (2026-09-14):**
 
 - **Wording changes to confirm.** (a) "Make the property impossible to

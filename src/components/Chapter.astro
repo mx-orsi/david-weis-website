@@ -53,14 +53,21 @@ const galleryRatio: Record<(typeof galleryShape)[number], string> = { tall: '4 /
     if (b.type === 'pair') {
       return (
         <div class="container ch__block ch__pair">
-          {b.photos.map((ph) => <Media photo={ph} ratio={b.ratio ?? '4 / 3'} />)}
+          {b.photos.map((ph, j) => (
+            <figure class="ch__figure">
+              <Media photo={ph} ratio={b.ratio ?? '4 / 3'} />
+              {b.captions?.[j] && <figcaption class="ch__caption">{b.captions[j]}</figcaption>}
+            </figure>
+          ))}
         </div>
       );
     }
     if (b.type === 'callout') {
       return (
-        <div class="container ch__block ch__callout">
+        <div class:list={['container', 'ch__block', 'ch__callout', b.second && 'ch__callout--two']}>
           <p class="ch__pull">{b.text}</p>
+          {b.second && <p class="ch__pull ch__pull--second">{b.second}</p>}
+          {b.note && <p class="ch__note">{b.note}</p>}
           {b.paragraphs && (
             <div class="prose ch__pull-prose">
               {b.paragraphs.map((p) => <p>{p}</p>)}
@@ -90,14 +97,56 @@ const galleryRatio: Record<(typeof galleryShape)[number], string> = { tall: '4 /
         <div class="container ch__block ch__gallery" role="group" aria-label={b.label}>
           {b.photos.map((ph, j) => {
             const shape = galleryShape[j % galleryShape.length];
-            return <Media photo={ph} ratio={galleryRatio[shape]} class={`ch__g ch__g--${shape}`} sizes="(min-width: 1024px) 33vw, 50vw" />;
+            const cap = b.captions?.[j];
+            return cap ? (
+              <figure class={`ch__figure ch__g ch__g--${shape}`}>
+                <Media photo={ph} ratio={galleryRatio[shape]} sizes="(min-width: 1024px) 33vw, 50vw" />
+                <figcaption class="ch__caption ch__caption--unit">
+                  <span class="ch__unit">{cap.title}</span>
+                  {cap.note && <span class="ch__unit-note">{cap.note}</span>}
+                </figcaption>
+              </figure>
+            ) : (
+              <Media photo={ph} ratio={galleryRatio[shape]} class={`ch__g ch__g--${shape}`} sizes="(min-width: 1024px) 33vw, 50vw" />
+            );
           })}
+        </div>
+      );
+    }
+    if (b.type === 'strip') {
+      return (
+        <div class="container ch__block ch__strip">
+          <h2 id={hid} class="title-md ch__strip-title">{b.heading}</h2>
+          <ul class="ch__strip-list" data-strip>
+            {b.photos.map((ph, j) => (
+              <li class="ch__strip-item">
+                <button type="button" class="ch__strip-btn" aria-pressed="false" aria-label={`Reveal: ${b.labels[j]}`}>
+                  <Media photo={ph} ratio="4 / 5" sizes="(min-width: 1024px) 14vw, 33vw" />
+                  <span class="ch__strip-label" aria-hidden="true">{b.labels[j]}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          <p class="ch__strip-hint">Hover or tap a residence to see which one it is.</p>
+          {b.closing && <p class="ch__strip-closing">{b.closing}</p>}
         </div>
       );
     }
     return null;
   })}
 </section>
+
+<script>
+  for (const list of document.querySelectorAll<HTMLElement>('[data-strip]')) {
+    list.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.ch__strip-btn');
+      if (!btn) return;
+      const open = btn.getAttribute('aria-pressed') === 'true';
+      for (const b of list.querySelectorAll('.ch__strip-btn')) b.setAttribute('aria-pressed', 'false');
+      btn.setAttribute('aria-pressed', open ? 'false' : 'true');
+    });
+  }
+</script>
 
 <style>
   .ch {
@@ -167,6 +216,108 @@ const galleryRatio: Record<(typeof galleryShape)[number], string> = { tall: '4 /
     padding-left: 1.25rem;
     border-left: 2px solid var(--blue);
   }
+  .ch__callout--two {
+    gap: clamp(1.5rem, 4vw, 3rem);
+    padding-block: clamp(1rem, 3vw, 2.5rem);
+  }
+  .ch__pull--second {
+    color: var(--blue);
+  }
+  .ch__note {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+    color: var(--ink-2);
+    margin-top: -0.75rem;
+  }
+  .ch__caption--unit {
+    display: grid;
+    gap: 0.15rem;
+  }
+  .ch__unit {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .ch__unit-note {
+    color: var(--muted);
+  }
+
+  /* Strip: hover or tap reveals the unit number. */
+  .ch__strip {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+  }
+  .ch__strip-title {
+    max-width: 20ch;
+  }
+  .ch__strip-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.75rem;
+    width: 100%;
+  }
+  .ch__strip-btn {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+  }
+  .ch__strip-btn:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+  .ch__strip-label {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 0.55em 0.7em;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--on-ink);
+    background: rgba(10, 11, 13, 0.82);
+    opacity: 0;
+    transition: opacity 0.2s var(--ease);
+  }
+  .ch__strip-btn:focus-visible .ch__strip-label,
+  .ch__strip-btn[aria-pressed='true'] .ch__strip-label {
+    opacity: 1;
+  }
+  @media (hover: hover) {
+    .ch__strip-btn:hover .ch__strip-label {
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ch__strip-label {
+      transition: none;
+    }
+  }
+  .ch__strip-hint {
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+  .ch__strip-closing {
+    font-family: var(--font-serif);
+    font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+    line-height: 1.4;
+    max-width: 34ch;
+    color: var(--ink);
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-strong);
+    margin-top: 0.5rem;
+  }
 
   .ch__compare {
     display: grid;
@@ -205,6 +356,9 @@ const galleryRatio: Record<(typeof galleryShape)[number], string> = { tall: '4 /
   }
 
   @media (max-width: 899px) {
+    .ch__strip-list {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
     .ch__aside {
       grid-template-columns: minmax(0, 1fr);
     }
@@ -229,6 +383,14 @@ const galleryRatio: Record<(typeof galleryShape)[number], string> = { tall: '4 /
   @media (max-width: 599px) {
     .ch__pair {
       grid-template-columns: minmax(0, 1fr);
+    }
+    .ch__strip-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+    .ch__strip-label {
+      font-size: 0.5625rem;
+      padding: 0.45em 0.5em;
     }
   }
 </style>

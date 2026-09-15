@@ -110,7 +110,7 @@ const breadcrumbJsonLd = {
             <Media photo={wide} ratio="16 / 9" sizes="100vw" />
           </div>
         )}
-        {p.chapter && p.chapter.after === i && <Chapter chapter={p.chapter} slug={p.slug} />}
+        {p.chapters?.filter((c) => c.after === i).map((c) => <Chapter chapter={c} slug={p.slug} />)}
       </>
     ))}
 
