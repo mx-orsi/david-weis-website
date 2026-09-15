@@ -935,7 +935,7 @@ export const projects: readonly Project[] = [
       },
     ],
     photos: [
-    // Max's photos (2026-09-14). These files are 1024px wide; larger originals would sharpen the lead.
+    // Max's photos (2026-09-14, three more 2026-09-15). All are the 1024px web exports; the MLS originals would sharpen the lead.
       {
         suggestion: 'Front exterior from the street',
         src: '/images/kensington-canyon/kensington-canyon-spanish-architecture-san-diego-david-weis.jpg',
@@ -988,6 +988,38 @@ export const projects: readonly Project[] = [
         suggestion: 'Bedroom with French doors',
         src: '/images/kensington-canyon/kensington-canyon-mid-city-san-diego-real-estate-david-weis.jpg',
         alt: 'A bedroom at Kensington Canyon with a wood ceiling, a wood bed and French doors to a balcony',
+        width: 1024,
+        height: 683,
+        hasSmall: true,
+      },
+      {
+        suggestion: 'Kitchen under the skylights',
+        src: '/images/kensington-canyon/kensington-canyon-kitchen-skylights-san-diego-david-weis.jpg',
+        alt: 'The Kensington Canyon kitchen under its skylights, with the river-rock wall, grey cabinets and the rolling island',
+        width: 1024,
+        height: 683,
+        hasSmall: true,
+      },
+      {
+        suggestion: 'Bathroom with the stained-glass windows',
+        src: '/images/kensington-canyon/kensington-canyon-stained-glass-bathroom-david-weis.jpg',
+        alt: 'A bathroom at Kensington Canyon with original leaded stained-glass windows, a navy vanity and a brass mirror',
+        width: 1024,
+        height: 683,
+        hasSmall: true,
+      },
+      {
+        suggestion: 'Primary bedroom with the fireplace',
+        src: '/images/kensington-canyon/kensington-canyon-primary-bedroom-fireplace-david-weis.jpg',
+        alt: 'The primary bedroom at Kensington Canyon with a wood ceiling, a fireplace and French doors to the balcony',
+        width: 1024,
+        height: 683,
+        hasSmall: true,
+      },
+      {
+        suggestion: 'Primary bath with the stone fireplace',
+        src: '/images/kensington-canyon/kensington-canyon-estate-adams-avenue-san-diego-david-weis.jpg',
+        alt: 'The primary bath at Kensington Canyon: a soaking tub beside a river-rock fireplace and a glass shower',
         width: 1024,
         height: 683,
         hasSmall: true,
