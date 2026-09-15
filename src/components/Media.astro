@@ -48,6 +48,7 @@ const webpSet = webp ? (webpSmall ? `${withBase(webpSmall)} 800w, ${withBase(web
         loading={priority ? 'eager' : 'lazy'}
         fetchpriority={priority ? 'high' : undefined}
         decoding="async"
+        style={photo.position ? `object-position: ${photo.position}` : undefined}
       />
     </picture>
   </figure>

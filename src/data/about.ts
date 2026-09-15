@@ -62,7 +62,15 @@ export const about = {
       'That experience fundamentally changed how I think about property. A beautiful building gets someone\'s attention. How it is operated determines whether it succeeds.',
     ],
     cta: { label: 'Read The Cole story', href: '/experience/the-cole' } as Cta,
-    photo: { suggestion: 'The Cole Hotel pool and courtyard' } as Photo,
+    photo: {
+      suggestion: 'The Cole Hotel sign against palms and sky',
+      src: '/images/the-cole/the-cole-palm-springs-pool-desert-oasis-david-weis.jpg',
+      alt: 'The Cole Hotel roadside sign in yellow, orange and turquoise, with tall palms behind it against a clear sky',
+      width: 1511,
+      height: 2400,
+      hasSmall: true,
+      position: 'center 70%',
+    } as Photo,
   },
   license: {
     heading: 'Then real estate made sense.',

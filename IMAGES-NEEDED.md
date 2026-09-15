@@ -29,7 +29,7 @@ Filenames lowercase and hyphen-separated with the market or project name.
 | Section | Slot | Suggested subject |
 | --- | --- | --- |
 | After "I have always liked building something" | wide 21:9 | A second, environmental portrait of David, on the coast or at a project |
-| The Cole changed everything | 4:5 | The Cole Hotel pool and courtyard |
+| The Cole changed everything | 4:5 | done: the Cole sign |
 | Community matters | 4:3 | David at a community event (Gay For Good, a Palm Springs neighborhood organization) |
 
 ## Market pages (one image break each, 16:9)
@@ -88,6 +88,14 @@ names and wired into `projects.ts`. Lead: the straight-on facade; two-up:
 living room and entry; wide break: kitchen and dining; gallery: kitchen
 range, kitchen bar, front corner exterior, street view.
 
+## The Cole — done (2026-09-14)
+
+Six photos in `public/images/the-cole/` under Max's SEO names. Lead: pool at
+dusk; two-up: guest suite and the Cole sign; wide break: the restaurant;
+gallery: fire pit and the branded espresso cup. The sign also fills the
+About page's "The Cole changed everything" slot. The 6720px restaurant
+original is kept in `assets-source/`; the site copy is 2400px.
+
 ## Experience project pages
 
 The first photo leads the page (wide 21:9) and the project's cards. The next
@@ -97,7 +105,7 @@ closing gallery. Order in `projects.ts` sets the order on the page.
 | Project | Photos, in order |
 | --- | --- |
 | Querencia Palms | Pool After · 105 Primary Yard After 1 · 106 Front Patio After (all mapped above) · a staged residence interior · an open house event on the grounds |
-| The Cole | Pool at dusk · exterior with the original motor-lodge roofline · a guest room · the bar and restaurant · branded welcome materials from the reopening |
+| The Cole | All six mapped above |
 | Vista Voltaire | All eight mapped above |
 | Kensington Canyon | Front exterior among the Spanish and Tudor-influenced homes · restored original hardwood floors · the rolling tool-chest kitchen island · living room · the canyon behind the house |
 | Belmont Beach House | Ocean view from the house · exterior with the beach beyond · living area · deck or patio at sunset |

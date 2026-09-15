@@ -14,6 +14,8 @@ export interface Photo {
   height?: number;
   /** A `-800.jpg` variant exists next to `src` for a srcset (market stock photos). */
   hasSmall?: boolean;
+  /** CSS object-position for the crop, e.g. "center 80%" to keep a sign low in the frame. */
+  position?: string;
 }
 
 /** One figure in a stat row. Values are strings so "50+" and "1924" both work. */
