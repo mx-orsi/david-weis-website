@@ -9,6 +9,21 @@ in, add it to `public/images/` and give the matching `Photo` entry in
 originals preferred for the wide slots; we crop. No text baked into images.
 Filenames lowercase and hyphen-separated with the market or project name.
 
+## Incoming from David (2026-09-15 email) — slots are prepped
+
+Every slot below already exists on the site as a labeled placeholder that
+prints its expected filename. Drop the file in under that name and it
+appears; if the SEO name differs, say so and the data gets pointed at it.
+
+| Set | Folder | Expected files |
+| --- | --- | --- |
+| Community (About page) | `public/images/community/` | `david-weis-gay-for-good-volunteers.jpg` (the 4:3 beside the copy) · `david-weis-victory-fund-palm-springs-karine-jean-pierre-toni-atkins.jpg` · `david-weis-victory-fund-san-diego-mayor-todd-gloria.jpg` · `david-weis-front-runners-palm-springs-san-diego.jpg` · `david-weis-desert-business-association-palm-springs.jpg` · `david-weis-vista-las-palmas-one-ps-neighborhood-of-distinction-award.jpg` · `david-weis-modernism-week-docent-training-querencia-palms.jpg` |
+| The Cole, before photos | `public/images/the-cole/` | A before/after pair after "Build it. Sell it. Move on.": `the-cole-motor-lodge-before-renovation-palm-springs.jpg` + `the-cole-hotel-after-renovation-palm-springs.jpg` (matching angle if one exists), then a small before gallery: `the-cole-before-pool-palm-springs.jpg` · `the-cole-before-guest-room-palm-springs.jpg` · `the-cole-before-exterior-street-palm-springs.jpg`. More or fewer is fine; the list is in `projects.ts`. |
+| Belmont Beach House | `public/images/belmont-beach-house/` | `belmont-beach-house-exterior-mission-beach-san-diego.jpg` (new lead) · `belmont-beach-house-ocean-view-mission-beach-san-diego.jpg` (two-up). The interiors already there move down. |
+| Kensington Canyon, web-sized replacements | `public/images/kensington-canyon/` | Save the better files under the same eleven names already in the folder and they replace the 1024px ones in place. New extra photos: any name; they get slotted by hand. |
+| The Cole, more pool shots | `public/images/the-cole/` | Any name; slotted by hand. Note: 2018–2020 files are low resolution because they were exported for web/social at the time, not because of the era. The photographer's or Mark's originals would be full size. |
+| Market breaks | `public/images/markets/` | `san-diego-downtown-skyline-sunset.jpg` · `palm-springs-vista-las-palmas-mountains-valley.jpg` (or wind turbines) · Big Bear is filled by the mountain-bike shot for now; a Village-in-winter or lake-with-snowcaps photo can replace it. |
+
 ## Status report — 2026-09-14 (evening)
 
 ### Still needed

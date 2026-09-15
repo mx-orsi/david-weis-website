@@ -681,6 +681,37 @@ export const projects: readonly Project[] = [
         ],
       },
     ],
+    /*
+     * Before photos of the motor lodge, from David (2026-09-15). Sits right
+     * after "Build it. Sell it. Move on." Files go in public/images/the-cole/
+     * under these names; add or remove entries to match what he sent.
+     */
+    chapters: [
+      {
+        id: 'before',
+        after: 0,
+        blocks: [
+          {
+            type: 'pair',
+            photos: [
+              { suggestion: 'The motor lodge before: the same view as the pool-at-dusk photo, if there is one', src: '/images/the-cole/the-cole-motor-lodge-before-renovation-palm-springs.jpg', alt: 'The former motor lodge in Palm Springs before it became The Cole Hotel', hasSmall: true },
+              { suggestion: 'The Cole after, matching angle', src: '/images/the-cole/the-cole-hotel-after-renovation-palm-springs.jpg', alt: 'The Cole Hotel after the renovation, from the same angle', hasSmall: true },
+            ],
+            ratio: '4 / 3',
+            captions: ['The motor lodge Mark bought.', 'The Cole.'],
+          },
+          {
+            type: 'gallery',
+            label: 'The motor lodge before the renovation',
+            photos: [
+              { suggestion: 'Before: the pool area', src: '/images/the-cole/the-cole-before-pool-palm-springs.jpg', alt: 'The pool area of the motor lodge before the renovation', hasSmall: true },
+              { suggestion: 'Before: a guest room', src: '/images/the-cole/the-cole-before-guest-room-palm-springs.jpg', alt: 'A motor lodge guest room before the renovation', hasSmall: true },
+              { suggestion: 'Before: the exterior from the street', src: '/images/the-cole/the-cole-before-exterior-street-palm-springs.jpg', alt: 'The motor lodge exterior from the street before the renovation', hasSmall: true },
+            ],
+          },
+        ],
+      },
+    ],
     stats: [
       { value: '30', label: 'Rooms' },
       { value: '10 days', label: 'Open before the COVID-19 shutdown' },
@@ -1000,8 +1031,21 @@ export const projects: readonly Project[] = [
         ],
       },
     ],
+    // Beach and exterior shots are coming from David (2026-09-15). Until they
+    // land the living room leads; then these two placeholders take over.
     photos: [
-    // Max's photos (2026-09-14). No exterior or ocean shot yet; the lead is the living room until one arrives.
+      {
+        suggestion: 'Exterior of Belmont Beach House with the beach beyond',
+        src: '/images/belmont-beach-house/belmont-beach-house-exterior-mission-beach-san-diego.jpg',
+        alt: 'Belmont Beach House from outside, with the Mission Beach sand and ocean beyond',
+        hasSmall: true,
+      },
+      {
+        suggestion: 'The beach or the ocean view from the house',
+        src: '/images/belmont-beach-house/belmont-beach-house-ocean-view-mission-beach-san-diego.jpg',
+        alt: 'The ocean and Mission Beach shoreline seen from Belmont Beach House',
+        hasSmall: true,
+      },
       {
         suggestion: 'Living room and dining',
         src: '/images/belmont-beach-house/belmont-beach-house-steps-to-the-sand-san-diego-david-weis.jpg',

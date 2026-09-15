@@ -1,0 +1,93 @@
+---
+/**
+ * Gallery — the irregular editorial grid used by project chapters and the
+ * About page. Sizes cycle by position (wide 4:3, small 1:1, tall 4:5) so a
+ * mix of photos reads like a magazine spread, not a listing gallery. Each
+ * photo may carry a small caption: a title line and a muted note.
+ */
+import Media from './Media.astro';
+import type { Photo } from '../data/types';
+
+export interface GalleryCaption {
+  title: string;
+  note?: string;
+}
+
+interface Props {
+  photos: readonly Photo[];
+  captions?: readonly (GalleryCaption | undefined)[];
+  label: string;
+  class?: string;
+}
+const { photos, captions, label, class: className } = Astro.props;
+
+const shapes = ['wide', 'small', 'small', 'tall', 'small', 'tall', 'wide'] as const;
+const ratios: Record<(typeof shapes)[number], string> = { tall: '4 / 5', wide: '4 / 3', small: '1 / 1' };
+---
+
+<div class:list={['gal', className]} role="group" aria-label={label}>
+  {photos.map((ph, j) => {
+    const shape = shapes[j % shapes.length];
+    const cap = captions?.[j];
+    return cap ? (
+      <figure class={`gal__figure gal__item gal__item--${shape}`}>
+        <Media photo={ph} ratio={ratios[shape]} sizes="(min-width: 1024px) 33vw, 50vw" />
+        <figcaption class="gal__caption">
+          <span class="gal__title">{cap.title}</span>
+          {cap.note && <span class="gal__note">{cap.note}</span>}
+        </figcaption>
+      </figure>
+    ) : (
+      <Media photo={ph} ratio={ratios[shape]} class={`gal__item gal__item--${shape}`} sizes="(min-width: 1024px) 33vw, 50vw" />
+    );
+  })}
+</div>
+
+<style>
+  .gal {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-auto-flow: dense;
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .gal :global(.gal__item--tall),
+  .gal :global(.gal__item--small) {
+    grid-column: span 2;
+  }
+  .gal :global(.gal__item--wide) {
+    grid-column: span 4;
+  }
+  .gal__figure {
+    margin: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .gal__caption {
+    display: grid;
+    gap: 0.15rem;
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+  .gal__title {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  @media (max-width: 899px) {
+    .gal {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+    .gal :global(.gal__item--tall),
+    .gal :global(.gal__item--small) {
+      grid-column: span 1;
+    }
+    .gal :global(.gal__item--wide) {
+      grid-column: span 2;
+    }
+  }
+</style>

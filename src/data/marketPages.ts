@@ -53,7 +53,12 @@ export const marketPages: Record<MarketSlug, MarketPageContent> = {
         ],
       },
     ],
-    photo: { suggestion: 'Kensington streetscape, or the Mission Beach boardwalk' },
+    photo: {
+      suggestion: 'Downtown San Diego at sunset',
+      src: '/images/markets/san-diego-downtown-skyline-sunset.jpg',
+      alt: 'The downtown San Diego skyline at sunset',
+      hasSmall: true,
+    },
     areas: {
       title: 'Featured areas',
       items: [
@@ -99,7 +104,12 @@ export const marketPages: Record<MarketSlug, MarketPageContent> = {
         ],
       },
     ],
-    photo: { suggestion: 'A Palm Springs street with the San Jacinto Mountains behind it' },
+    photo: {
+      suggestion: 'The mountains and the valley from Vista Las Palmas, or the wind turbines',
+      src: '/images/markets/palm-springs-vista-las-palmas-mountains-valley.jpg',
+      alt: 'The San Jacinto Mountains and the Coachella Valley from Vista Las Palmas in Palm Springs',
+      hasSmall: true,
+    },
     featuredProjects: ['querencia-palms', 'the-cole', 'mercury-palms'],
     featuredTitle: 'Featured experience',
     seo: {

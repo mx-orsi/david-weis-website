@@ -10,6 +10,7 @@
  * the visitor moves it.
  */
 import Compare from './Compare.astro';
+import Gallery from './Gallery.astro';
 import Media from './Media.astro';
 import Story from './Story.astro';
 import type { ProjectChapter } from '../data/projects';
@@ -21,9 +22,6 @@ interface Props {
 }
 const { chapter, slug } = Astro.props;
 
-/** Size pattern for the editorial gallery, cycling by position. */
-const galleryShape = ['wide', 'small', 'small', 'tall', 'small', 'tall', 'wide'] as const;
-const galleryRatio: Record<(typeof galleryShape)[number], string> = { tall: '4 / 5', wide: '4 / 3', small: '1 / 1' };
 ---
 
 <section class="ch" id={chapter.id} aria-label="Chapter">
@@ -94,22 +92,8 @@ const galleryRatio: Record<(typeof galleryShape)[number], string> = { tall: '4 /
     }
     if (b.type === 'gallery') {
       return (
-        <div class="container ch__block ch__gallery" role="group" aria-label={b.label}>
-          {b.photos.map((ph, j) => {
-            const shape = galleryShape[j % galleryShape.length];
-            const cap = b.captions?.[j];
-            return cap ? (
-              <figure class={`ch__figure ch__g ch__g--${shape}`}>
-                <Media photo={ph} ratio={galleryRatio[shape]} sizes="(min-width: 1024px) 33vw, 50vw" />
-                <figcaption class="ch__caption ch__caption--unit">
-                  <span class="ch__unit">{cap.title}</span>
-                  {cap.note && <span class="ch__unit-note">{cap.note}</span>}
-                </figcaption>
-              </figure>
-            ) : (
-              <Media photo={ph} ratio={galleryRatio[shape]} class={`ch__g ch__g--${shape}`} sizes="(min-width: 1024px) 33vw, 50vw" />
-            );
-          })}
+        <div class="container ch__block">
+          <Gallery photos={b.photos} captions={b.captions} label={b.label} />
         </div>
       );
     }
@@ -230,21 +214,100 @@ const galleryRatio: Record<(typeof galleryShape)[number], string> = { tall: '4 /
     color: var(--ink-2);
     margin-top: -0.75rem;
   }
-  .ch__caption--unit {
+
+  /* Strip: hover or tap reveals the unit number. */
+  .ch__strip {
     display: grid;
-    gap: 0.15rem;
+    gap: 1.25rem;
+    justify-items: start;
   }
-  .ch__unit {
+  .ch__strip-title {
+    max-width: 20ch;
+  }
+  .ch__strip-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.75rem;
+    width: 100%;
+  }
+  .ch__strip-btn {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+  }
+  .ch__strip-btn:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+  .ch__strip-label {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 0.55em 0.7em;
     font-family: var(--font-sans);
     font-weight: 500;
     font-size: 0.6875rem;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--ink);
+    color: var(--on-ink);
+    background: rgba(10, 11, 13, 0.82);
+    opacity: 0;
+    transition: opacity 0.2s var(--ease);
   }
-  .ch__unit-note {
+  .ch__strip-btn:focus-visible .ch__strip-label,
+  .ch__strip-btn[aria-pressed='true'] .ch__strip-label {
+    opacity: 1;
+  }
+  @media (hover: hover) {
+    .ch__strip-btn:hover .ch__strip-label {
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ch__strip-label {
+      transition: none;
+    }
+  }
+  .ch__strip-hint {
+    font-size: 0.8125rem;
     color: var(--muted);
   }
+  .ch__strip-closing {
+    font-family: var(--font-serif);
+    font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+    line-height: 1.4;
+    max-width: 34ch;
+    color: var(--ink);
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-strong);
+    margin-top: 0.5rem;
+  }
+
+  .ch__compare {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3.5rem);
+  }
+  .ch__compare-title {
+    max-width: 14ch;
+  }
+  .ch__hint {
+    font-size: 0.8125rem !important;
+    color: var(--muted) !important;
+  }
+  .ch__compare-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .ch__compare-grid :global(.ch__compare-lead) {
+    grid-column: 1 / -1;
+  }
+
 
   /* Strip: hover or tap reveals the unit number. */
   .ch__strip {
@@ -367,17 +430,6 @@ const galleryRatio: Record<(typeof galleryShape)[number], string> = { tall: '4 /
     }
     .ch__compare-grid {
       grid-template-columns: minmax(0, 1fr);
-    }
-    .ch__gallery {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.9rem;
-    }
-    .ch__gallery :global(.ch__g--tall),
-    .ch__gallery :global(.ch__g--small) {
-      grid-column: span 1;
-    }
-    .ch__gallery :global(.ch__g--wide) {
-      grid-column: span 2;
     }
   }
   @media (max-width: 599px) {

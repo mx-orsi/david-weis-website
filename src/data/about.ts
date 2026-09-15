@@ -90,7 +90,42 @@ export const about = {
     paragraphs: [
       'Moving so frequently taught me early that community does not simply happen — you participate in it. Today, I stay actively involved in organizations and causes that connect me to the places where I live and work, including Gay For Good, the Village of La Jolla Garden Club and neighborhood organizations in Palm Springs. Real estate gave me another reason to become deeply connected to these communities. It was never the only reason.',
     ],
-    photo: { suggestion: 'David at a community event, for example with Gay For Good or a Palm Springs neighborhood organization' } as Photo,
+    photo: {
+      suggestion: 'David with the Gay For Good volunteers',
+      src: '/images/community/david-weis-gay-for-good-volunteers.jpg',
+      alt: 'David Weis with fellow Gay For Good volunteers at a community service event',
+      hasSmall: true,
+    } as Photo,
+    /**
+     * Community gallery, from David's 2026-09-15 email. Files go in
+     * public/images/community/ under these names; captions are his words.
+     */
+    gallery: [
+      {
+        photo: { suggestion: 'Victory Fund, Palm Springs: David with Karine Jean-Pierre and Senator Toni G. Atkins', src: '/images/community/david-weis-victory-fund-palm-springs-karine-jean-pierre-toni-atkins.jpg', alt: 'David Weis at a Victory Fund event in Palm Springs with Karine Jean-Pierre and Senator Toni G. Atkins', hasSmall: true },
+        caption: { title: 'Victory Fund · Palm Springs', note: 'With Karine Jean-Pierre, former White House Press Secretary, and Senator Toni G. Atkins, California Senate President pro Tempore Emeritus' },
+      },
+      {
+        photo: { suggestion: 'Victory Fund, San Diego: David with Mayor Todd Gloria', src: '/images/community/david-weis-victory-fund-san-diego-mayor-todd-gloria.jpg', alt: 'David Weis at a Victory Fund event in San Diego with Mayor Todd Gloria', hasSmall: true },
+        caption: { title: 'Victory Fund · San Diego', note: 'With San Diego Mayor Todd Gloria' },
+      },
+      {
+        photo: { suggestion: 'Front Runners, Palm Springs and San Diego', src: '/images/community/david-weis-front-runners-palm-springs-san-diego.jpg', alt: 'David Weis with the Front Runners running club', hasSmall: true },
+        caption: { title: 'Front Runners', note: 'Palm Springs and San Diego' },
+      },
+      {
+        photo: { suggestion: 'Desert Business Association', src: '/images/community/david-weis-desert-business-association-palm-springs.jpg', alt: 'David Weis at a Desert Business Association gathering in Palm Springs', hasSmall: true },
+        caption: { title: 'Desert Business Association' },
+      },
+      {
+        photo: { suggestion: 'Vista Las Palmas / ONE-PS Neighborhood of Distinction Award', src: '/images/community/david-weis-vista-las-palmas-one-ps-neighborhood-of-distinction-award.jpg', alt: 'David Weis at the ONE-PS Neighborhood of Distinction Award presentation for Vista Las Palmas', hasSmall: true },
+        caption: { title: 'Vista Las Palmas · ONE-PS', note: 'Neighborhood of Distinction Award' },
+      },
+      {
+        photo: { suggestion: 'Modernism Week docent training for volunteers at Querencia Palms', src: '/images/community/david-weis-modernism-week-docent-training-querencia-palms.jpg', alt: 'Modernism Week docent training for volunteers held at Querencia Palms', hasSmall: true },
+        caption: { title: 'Modernism Week', note: 'Docent training for volunteers at Querencia Palms' },
+      },
+    ] as readonly { photo: Photo; caption: { title: string; note?: string } }[],
   },
   portrait: {
     suggestion: 'David at the Querencia Palms mural, among the lantana',
