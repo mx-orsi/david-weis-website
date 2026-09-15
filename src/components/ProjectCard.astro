@@ -34,10 +34,18 @@ const titleId = `project-card-${p.slug}-${variant}`;
     <Media photo={p.photos[0]} ratio={variant === 'wide' ? '4 / 3' : '4 / 3'} sizes="(min-width: 1024px) 33vw, (min-width: 700px) 50vw, 100vw" />
   </a>
   <div class="pc__body">
-    <p class="pc__eyebrow eyebrow eyebrow--muted">
-      {number && <span class="pc__num">{number}</span>}
-      {p.place} · {label}
-    </p>
+    {p.logo ? (
+      <p class="pc__eyebrow pc__eyebrow--logo eyebrow eyebrow--muted">
+        {number && <span class="pc__num">{number}</span>}
+        <img class="pc__logo" src={withBase(p.logo.src)} alt="" width={p.logo.width} height={p.logo.height} loading="lazy" decoding="async" />
+        <span class="sr-only">{p.place} · {label}</span>
+      </p>
+    ) : (
+      <p class="pc__eyebrow eyebrow eyebrow--muted">
+        {number && <span class="pc__num">{number}</span>}
+        {p.place} · {label}
+      </p>
+    )}
     <Heading class="pc__title" id={titleId}>
       <a href={href}>{p.name}</a>
     </Heading>
@@ -69,6 +77,14 @@ const titleId = `project-card-${p.slug}-${variant}`;
   }
   .pc__num {
     color: var(--blue);
+  }
+  .pc__eyebrow--logo {
+    align-items: center;
+  }
+  .pc__logo {
+    height: 52px;
+    width: auto;
+    max-width: 200px;
   }
   .pc__title {
     font-size: clamp(1.6rem, 2.2vw, 2rem);

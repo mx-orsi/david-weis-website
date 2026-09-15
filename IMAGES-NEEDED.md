@@ -51,6 +51,21 @@ staged residence interior and an open-house photo. Unused but good: the
 sunset aerial (`mural-before-renovation`), the 105 primary yard pair, the
 Unit 102 and 106 front patio pairs, the pool pair (optional sixth slider).
 
+## Mercury Palms, Kensington Canyon, Belmont Beach House — done (2026-09-14)
+
+Max's photos are in `public/images/<project>/` under his SEO names and wired
+in `projects.ts`. Two gaps worth a better file from David:
+
+- **Kensington Canyon:** all eleven files are 1024px wide, so the lead is
+  upscaled and soft. Larger originals under the same filenames would fix it.
+- **Belmont Beach House:** no exterior, deck or ocean photo was in the set,
+  so the living room leads. An ocean-side shot should replace it.
+
+The property photos for Querencia Palms (dusk pool as the lead, four in the
+closing gallery) are in `public/images/querencia-palms/`; the landscaping set
+is in `public/images/querencia-landscaping/`. A second portrait of David from
+that set now opens the About page so Home and About no longer share a photo.
+
 ## Vista Voltaire — done (2026-09-14)
 
 All eight photos are in `public/images/vista-voltaire/` under Max's SEO
@@ -74,13 +89,13 @@ closing gallery. Order in `projects.ts` sets the order on the page.
 
 | Project | Photos, in order |
 | --- | --- |
-| Querencia Palms | done except: a staged residence interior · an open house event on the grounds |
+| Querencia Palms | done except: a staged residence interior |
 | The Cole | All six mapped above |
 | Vista Voltaire | All eight mapped above |
-| Kensington Canyon | Front exterior among the Spanish and Tudor-influenced homes · restored original hardwood floors · the rolling tool-chest kitchen island · living room · the canyon behind the house |
-| Belmont Beach House | Ocean view from the house · exterior with the beach beyond · living area · deck or patio at sunset |
+| Kensington Canyon | done (1024px files, see above) |
+| Belmont Beach House | done, except an exterior or ocean shot |
 | Sierra Chalet | Exterior after the rebuild, both decks complete · before: the rear deck · mid-renovation, walls open · upper deck with the lake view · screened lower deck with the spa · the repositioned entry after a heavy snowfall |
-| Mercury Palms | Exterior with the stone and wood ceilings visible · entertaining space opening to the outdoors · a bedroom suite connecting to the outdoors · the 2025 kitchen renovation · the house set for a gathering |
+| Mercury Palms | done |
 
 Suggested filenames: `querencia-palms-pool-palm-springs.jpg`,
 `the-cole-hotel-pool-palm-springs.jpg`, `sierra-chalet-big-bear-exterior-after.jpg`, etc.

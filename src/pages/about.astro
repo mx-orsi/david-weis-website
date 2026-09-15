@@ -11,7 +11,16 @@ import { agent } from '../data/site';
 import { getProject } from '../data/projects';
 import { withBase } from '../lib/paths';
 
-const portrait = { ...agent.headshot, suggestion: 'Portrait of David' };
+// A different portrait from the home hero, so the two pages do not open the same way.
+const portrait = {
+  suggestion: 'Portrait of David in front of the Querencia Palms mural',
+  src: '/images/querencia-palms/querencia-palms-condos-palm-springs-david-weis.jpg',
+  alt: 'David Weis in a black shirt, standing in front of a painted mural in blue, green and orange',
+  width: 1365,
+  height: 2048,
+  hasSmall: true,
+  position: 'center 22%',
+};
 const cole = getProject('the-cole');
 ---
 
