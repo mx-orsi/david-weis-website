@@ -57,13 +57,17 @@ const breadcrumbJsonLd = {
         <span aria-hidden="true">/</span>
         <span aria-current="page">{p.name}</span>
       </nav>
-      <p class="eyebrow eyebrow--dot">{p.place} · {p.kind}</p>
+      {p.logo ? (
+        <p class="pp-hero__mark">
+          <img src={withBase(p.logo.src)} alt={p.logo.alt} width={p.logo.width} height={p.logo.height} loading="eager" decoding="async" />
+          <span class="sr-only">{p.place} · {p.kind}</span>
+        </p>
+      ) : (
+        <p class="eyebrow eyebrow--dot">{p.place} · {p.kind}</p>
+      )}
       <div class="pp-hero__grid">
         <h1 class="display">{p.name}</h1>
         <div class="pp-hero__aside">
-          {p.logo && (
-            <img class="pp-hero__logo" src={withBase(p.logo.src)} alt={p.logo.alt} width={p.logo.width} height={p.logo.height} loading="eager" decoding="async" />
-          )}
           <p class="lede lede--wide">{p.intro}</p>
           {p.roles && p.roles.length > 0 && (
             <dl class="pp-hero__roles">
@@ -165,10 +169,15 @@ const breadcrumbJsonLd = {
     gap: 1.25rem;
     justify-items: start;
   }
-  .pp-hero__logo {
-    height: 64px;
+  /* Project logo in place of the place · kind line (The Cole, Querencia Palms). */
+  .pp-hero__mark {
+    margin: 0;
+  }
+  .pp-hero__mark img {
+    display: block;
+    height: 84px;
     width: auto;
-    max-width: 220px;
+    max-width: 260px;
   }
   .pp-hero__roles {
     display: grid;
