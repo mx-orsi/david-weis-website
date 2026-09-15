@@ -92,39 +92,26 @@ export const about = {
     ],
     photo: {
       suggestion: 'David with the Gay For Good volunteers',
-      src: '/images/community/david-weis-gay-for-good-volunteers.jpg',
-      alt: 'David Weis with fellow Gay For Good volunteers at a community service event',
+      src: '/images/community/david-weis-gay-for-good-oceanside-pride-01.jpg',
+      alt: 'David Weis with fellow Gay For Good volunteers in matching shirts at their booth at Oceanside Pride',
+      width: 1170,
+      height: 832,
       hasSmall: true,
     } as Photo,
     /**
-     * Community gallery, from David's 2026-09-15 email. Files go in
-     * public/images/community/ under these names; captions are his words.
+     * Community gallery, from David's 2026-09-15 email and Max's upload.
+     * Nine tiles fill the editorial grid exactly (4+2 / 2+2+2 / 4+2).
      */
     gallery: [
-      {
-        photo: { suggestion: 'Victory Fund, Palm Springs: David with Karine Jean-Pierre and Senator Toni G. Atkins', src: '/images/community/david-weis-victory-fund-palm-springs-karine-jean-pierre-toni-atkins.jpg', alt: 'David Weis at a Victory Fund event in Palm Springs with Karine Jean-Pierre and Senator Toni G. Atkins', hasSmall: true },
-        caption: { title: 'Victory Fund · Palm Springs', note: 'With Karine Jean-Pierre, former White House Press Secretary, and Senator Toni G. Atkins, California Senate President pro Tempore Emeritus' },
-      },
-      {
-        photo: { suggestion: 'Victory Fund, San Diego: David with Mayor Todd Gloria', src: '/images/community/david-weis-victory-fund-san-diego-mayor-todd-gloria.jpg', alt: 'David Weis at a Victory Fund event in San Diego with Mayor Todd Gloria', hasSmall: true },
-        caption: { title: 'Victory Fund · San Diego', note: 'With San Diego Mayor Todd Gloria' },
-      },
-      {
-        photo: { suggestion: 'Front Runners, Palm Springs and San Diego', src: '/images/community/david-weis-front-runners-palm-springs-san-diego.jpg', alt: 'David Weis with the Front Runners running club', hasSmall: true },
-        caption: { title: 'Front Runners', note: 'Palm Springs and San Diego' },
-      },
-      {
-        photo: { suggestion: 'Desert Business Association', src: '/images/community/david-weis-desert-business-association-palm-springs.jpg', alt: 'David Weis at a Desert Business Association gathering in Palm Springs', hasSmall: true },
-        caption: { title: 'Desert Business Association' },
-      },
-      {
-        photo: { suggestion: 'Vista Las Palmas / ONE-PS Neighborhood of Distinction Award', src: '/images/community/david-weis-vista-las-palmas-one-ps-neighborhood-of-distinction-award.jpg', alt: 'David Weis at the ONE-PS Neighborhood of Distinction Award presentation for Vista Las Palmas', hasSmall: true },
-        caption: { title: 'Vista Las Palmas · ONE-PS', note: 'Neighborhood of Distinction Award' },
-      },
-      {
-        photo: { suggestion: 'Modernism Week docent training for volunteers at Querencia Palms', src: '/images/community/david-weis-modernism-week-docent-training-querencia-palms.jpg', alt: 'Modernism Week docent training for volunteers held at Querencia Palms', hasSmall: true },
-        caption: { title: 'Modernism Week', note: 'Docent training for volunteers at Querencia Palms' },
-      },
+      { photo: { suggestion: 'Victory Fund, San Diego, with Mayor Todd Gloria', src: '/images/community/david-weis-victory-fund-san-diego-01.jpg', alt: 'David Weis with three others in front of the LGBTQ+ Victory Fund backdrop in San Diego', width: 2400, height: 1800, hasSmall: true }, caption: { title: 'Victory Fund · San Diego', note: 'With San Diego Mayor Todd Gloria' } },
+      { photo: { suggestion: 'Victory Fund, Palm Springs, with Senator Toni G. Atkins', src: '/images/community/david-weis-victory-fund-palm-springs-toni-atkins.jpg', alt: 'Guests gathered beside a pool at a Victory Fund event in Palm Springs, the mountains behind', width: 2400, height: 1800, hasSmall: true, position: '40% center' }, caption: { title: 'Victory Fund · Palm Springs', note: 'With Senator Toni G. Atkins, California Senate President pro Tempore Emeritus' } },
+      { photo: { suggestion: 'Desert Business Association', src: '/images/community/david-weis-desert-business-association-palm-springs-03.jpg', alt: 'David Weis with two members of the Desert Business Association at a holiday gathering', width: 928, height: 792, hasSmall: true }, caption: { title: 'Desert Business Association' } },
+      { photo: { suggestion: 'Victory Fund, Palm Springs, with Karine Jean-Pierre', src: '/images/community/david-weis-victory-fund-palm-springs-01.jpg', alt: 'David Weis with Karine Jean-Pierre in front of the Victory Fund backdrop in Palm Springs', width: 1206, height: 1545, hasSmall: true }, caption: { title: 'Victory Fund · Palm Springs', note: 'With Karine Jean-Pierre, former White House Press Secretary' } },
+      { photo: { suggestion: 'The Neighborhood of Distinction Award', src: '/images/community/vista-las-palmas-neighborhood-of-distinction-award-david-weis.jpg', alt: 'The ONE-PS Neighborhood of Distinction Award for Vista Las Palmas, a crystal trophy set beside a pool with the mountains behind', width: 1800, height: 2400, hasSmall: true }, caption: { title: 'Vista Las Palmas · ONE-PS', note: 'Neighborhood of Distinction Award' } },
+      { photo: { suggestion: 'Front Runners, San Diego', src: '/images/community/david-weis-front-runners-san-diego-02.jpg', alt: 'The Front Runners running group gathered on the grass in San Diego', width: 1170, height: 1147, hasSmall: true }, caption: { title: 'Front Runners', note: 'Palm Springs and San Diego' } },
+      { photo: { suggestion: 'Modernism Week docent training at Querencia Palms', src: '/images/community/querencia-palms-modernism-week-docent-training-david-weis.jpg', alt: 'David Weis with Modernism Week docent volunteers in front of the Querencia Palms sign', width: 2400, height: 1800, hasSmall: true }, caption: { title: 'Modernism Week', note: 'Docent training for volunteers at Querencia Palms' } },
+      { photo: { suggestion: 'The award presentation', src: '/images/community/david-weis-one-ps-neighborhood-of-distinction-award-palm-springs.jpg', alt: 'David Weis on stage at the ONE-PS awards as the Neighborhood of Distinction Award is presented', width: 2400, height: 1996, hasSmall: true }, caption: { title: 'ONE-PS', note: 'The award presentation' } },
+      { photo: { suggestion: 'Gay For Good at San Diego Pride', src: '/images/community/david-weis-gay-for-good-volunteer-san-diego-01.jpg', alt: 'David Weis holding a rainbow flag at the Gay For Good booth', width: 1206, height: 899, hasSmall: true }, caption: { title: 'Gay For Good', note: 'San Diego' } },
     ] as readonly { photo: Photo; caption: { title: string; note?: string } }[],
   },
   portrait: {

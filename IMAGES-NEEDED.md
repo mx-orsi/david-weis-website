@@ -17,7 +17,7 @@ appears; if the SEO name differs, say so and the data gets pointed at it.
 
 | Set | Folder | Expected files |
 | --- | --- | --- |
-| Community (About page) | `public/images/community/` | `david-weis-gay-for-good-volunteers.jpg` (the 4:3 beside the copy) · `david-weis-victory-fund-palm-springs-karine-jean-pierre-toni-atkins.jpg` · `david-weis-victory-fund-san-diego-mayor-todd-gloria.jpg` · `david-weis-front-runners-palm-springs-san-diego.jpg` · `david-weis-desert-business-association-palm-springs.jpg` · `david-weis-vista-las-palmas-one-ps-neighborhood-of-distinction-award.jpg` · `david-weis-modernism-week-docent-training-querencia-palms.jpg` |
+| Community (About page) | `public/images/community/` | **Done 2026-09-15.** 24 photos in; the Gay For Good booth sits beside the copy and nine tiles fill the gallery. The other 14 stay in the folder as spares. |
 | The Cole, before photos | `public/images/the-cole/` | A before/after pair after "Build it. Sell it. Move on.": `the-cole-motor-lodge-before-renovation-palm-springs.jpg` + `the-cole-hotel-after-renovation-palm-springs.jpg` (matching angle if one exists), then a small before gallery: `the-cole-before-pool-palm-springs.jpg` · `the-cole-before-guest-room-palm-springs.jpg` · `the-cole-before-exterior-street-palm-springs.jpg`. More or fewer is fine; the list is in `projects.ts`. |
 | Belmont Beach House | `public/images/belmont-beach-house/` | `belmont-beach-house-exterior-mission-beach-san-diego.jpg` (new lead) · `belmont-beach-house-ocean-view-mission-beach-san-diego.jpg` (two-up). The interiors already there move down. |
 | Kensington Canyon, web-sized replacements | `public/images/kensington-canyon/` | Save the better files under the same eleven names already in the folder and they replace the 1024px ones in place. New extra photos: any name; they get slotted by hand. |
@@ -31,7 +31,6 @@ appears; if the SEO name differs, say so and the data gets pointed at it.
 | Page | Slot | What would fit |
 | --- | --- | --- |
 | Sierra Chalet | lead + interiors, once the listing shoot arrives | Max's 2026-09-15 upload (renovation and action shots) fills every slot for now: finished exterior leads, walls-open + framing pair, the snow exterior wide, and a gallery of the red cabin before, David mixing concrete, the dogs at the door and the carved bear. The hot tub chapter has all three phone photos. When the professional listing photos land, swap the lead and add the upper deck with the lake view and the screened lower deck with the spa. |
-| About | "Community matters" 4:3 | David at a community event (Gay For Good, a Palm Springs neighborhood group) |
 | San Diego market page | 16:9 image break | Kensington streetscape or the Mission Beach boardwalk |
 | Palm Springs market page | 16:9 image break | A Palm Springs street with the San Jacinto Mountains behind it |
 | Properties | 3 listing cards + 3 sold cards | Waits on David's Properties decision and listing details |
