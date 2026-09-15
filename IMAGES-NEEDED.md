@@ -81,6 +81,23 @@ Gallery photos are shown at up to about 700px wide; the sliders, waterfall and
 mural at full page width, so send those at full resolution (the brief asks
 that individual plants stay visible).
 
+## Vista Voltaire (Max's photos, 2026-09-14)
+
+Eight photos received. Save them under `public/images/vista-voltaire/` with
+these names (or tell Claude your names and the data gets updated), then run
+`npm run images`.
+
+| Photo | Where it goes | Save as |
+| --- | --- | --- |
+| Straight-on facade, red door, walkway with lantana | page lead (21:9) and the project's cards | `vista-voltaire-ocean-beach-san-diego-front-exterior.jpg` |
+| Living room with the terracotta fireplace | two-up break, left | `vista-voltaire-living-room-fireplace.jpg` |
+| Entry and staircase | two-up break, right | `vista-voltaire-entry-staircase.jpg` |
+| Kitchen and dining, wide | wide break after "The home found a different buyer" | `vista-voltaire-kitchen-dining.jpg` |
+| Kitchen detail, range and pot filler | closing gallery | `vista-voltaire-kitchen-range.jpg` |
+| Kitchen bar, three stools | closing gallery | `vista-voltaire-kitchen-bar.jpg` |
+| Exterior from the front corner, lawn and palms | closing gallery | `vista-voltaire-front-yard-palms.jpg` |
+| Street view with the garage | closing gallery | `vista-voltaire-street-view-garage.jpg` |
+
 ## Experience project pages
 
 The first photo leads the page (wide 21:9) and the project's cards. The next
@@ -91,7 +108,7 @@ closing gallery. Order in `projects.ts` sets the order on the page.
 | --- | --- |
 | Querencia Palms | Pool After · 105 Primary Yard After 1 · 106 Front Patio After (all mapped above) · a staged residence interior · an open house event on the grounds |
 | The Cole | Pool at dusk · exterior with the original motor-lodge roofline · a guest room · the bar and restaurant · branded welcome materials from the reopening |
-| Vista Voltaire | Front exterior of the restored 1924 farmhouse · living room after the restoration · kitchen · back yard or porch · a guest-ready bedroom |
+| Vista Voltaire | All eight mapped above |
 | Kensington Canyon | Front exterior among the Spanish and Tudor-influenced homes · restored original hardwood floors · the rolling tool-chest kitchen island · living room · the canyon behind the house |
 | Belmont Beach House | Ocean view from the house · exterior with the beach beyond · living area · deck or patio at sunset |
 | Sierra Chalet | Exterior after the rebuild, both decks complete · before: the rear deck · mid-renovation, walls open · upper deck with the lake view · screened lower deck with the spa · the repositioned entry after a heavy snowfall |
