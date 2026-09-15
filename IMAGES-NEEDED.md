@@ -81,22 +81,12 @@ Gallery photos are shown at up to about 700px wide; the sliders, waterfall and
 mural at full page width, so send those at full resolution (the brief asks
 that individual plants stay visible).
 
-## Vista Voltaire (Max's photos, 2026-09-14)
+## Vista Voltaire — done (2026-09-14)
 
-Eight photos received. Save them under `public/images/vista-voltaire/` with
-these names (or tell Claude your names and the data gets updated), then run
-`npm run images`.
-
-| Photo | Where it goes | Save as |
-| --- | --- | --- |
-| Straight-on facade, red door, walkway with lantana | page lead (21:9) and the project's cards | `vista-voltaire-ocean-beach-san-diego-front-exterior.jpg` |
-| Living room with the terracotta fireplace | two-up break, left | `vista-voltaire-living-room-fireplace.jpg` |
-| Entry and staircase | two-up break, right | `vista-voltaire-entry-staircase.jpg` |
-| Kitchen and dining, wide | wide break after "The home found a different buyer" | `vista-voltaire-kitchen-dining.jpg` |
-| Kitchen detail, range and pot filler | closing gallery | `vista-voltaire-kitchen-range.jpg` |
-| Kitchen bar, three stools | closing gallery | `vista-voltaire-kitchen-bar.jpg` |
-| Exterior from the front corner, lawn and palms | closing gallery | `vista-voltaire-front-yard-palms.jpg` |
-| Street view with the garage | closing gallery | `vista-voltaire-street-view-garage.jpg` |
+All eight photos are in `public/images/vista-voltaire/` under Max's SEO
+names and wired into `projects.ts`. Lead: the straight-on facade; two-up:
+living room and entry; wide break: kitchen and dining; gallery: kitchen
+range, kitchen bar, front corner exterior, street view.
 
 ## Experience project pages
 
