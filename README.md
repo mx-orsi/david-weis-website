@@ -146,6 +146,9 @@ shift the layout or break when RealSatisfied is slow.
   hold real, attributable quotes.
 - **Hide one feed review:** add its `guid` (visible in the feed XML) to
   `excludedIds` in `src/data/testimonials.ts`.
+- **Choose which reviews lead:** `featuredIds` in the same file pins reviews
+  by guid, in order, for the home band and for About. Anything not pinned
+  follows by date.
 - **If the feed fails** the build still succeeds: it logs a warning and falls
   back to `testimonials.json` plus the `fallbackRatings` constant. With no
   quotes from either source the component renders the ratings strip alone —

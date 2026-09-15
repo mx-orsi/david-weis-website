@@ -13,7 +13,7 @@
  *  · static grid, no auto-advance, no fabricated text.
  */
 import Icon from './Icon.astro';
-import { getTestimonials, sourceLabels, testimonialsMeta } from '../data/testimonials';
+import { featuredIds, getTestimonials, sourceLabels, testimonialsMeta } from '../data/testimonials';
 
 interface Props {
   /** 2 on the home band, 4 on About. */
@@ -26,7 +26,7 @@ interface Props {
 }
 
 const { limit = 3, prefer = 'recent', variant = 'band', class: className } = Astro.props;
-const { ratings, items } = await getTestimonials(limit, prefer);
+const { ratings, items } = await getTestimonials(limit, prefer, featuredIds[variant]);
 
 const scores = ratings
   ? [

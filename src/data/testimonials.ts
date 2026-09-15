@@ -62,6 +62,28 @@ export const excludedIds: readonly string[] = [
   '7a21loHO',
 ];
 
+/**
+ * Hand-picked order, by feed guid, chosen with Max on 2026-09-14 from the
+ * reviews on David's RealSatisfied page. Pinned reviews render first, in this
+ * order, then the rest by date. Home and About pin different ones so a
+ * visitor who reads both sees six distinct clients across buyers, sellers,
+ * San Diego and Palm Springs.
+ */
+export const featuredIds: Record<'band' | 'full', readonly string[]> = {
+  // Home band: one seller, one buyer, both short enough to sit side by side.
+  band: [
+    'b9c3LRHO', // G. B. · Seller · San Diego — sold quickly, offer spreadsheets
+    '4d36ZRHO', // Mike C. · Buyer · San Diego — proactive, network, "trusted friend"
+  ],
+  // About: the fuller stories.
+  full: [
+    '16f1CRHO', // Kathy B. · Buyer · Palm Springs — 1031 exchange across two cities, closed the same week
+    '5a92xoHO', // Justin A. · Buyer · San Diego — RealSatisfied verified; property value, challenging seller
+    '7fea8RHO', // Thomas Z. · Buyer · San Diego — RealSatisfied verified; first-time buyer
+    '6cfcbRHO', // Rachel H. · Referral · Palm Springs — sold in San Diego, bought in Palm Springs
+  ],
+};
+
 export const sourceLabels: Record<TestimonialSource, string> = {
   realsatisfied: 'RealSatisfied verified',
   google: 'Google review',
@@ -110,10 +132,12 @@ export interface TestimonialsData {
  * @param prefer 'concise' picks the shortest quotes, which keeps the home
  *               band tight; 'recent' keeps newest first. Selection only —
  *               quote text is never trimmed or edited.
+ * @param pinned feed guids to put first, in order (see `featuredIds`).
  */
 export async function getTestimonials(
   limit: number,
   prefer: 'recent' | 'concise' = 'recent',
+  pinned: readonly string[] = [],
 ): Promise<TestimonialsData> {
   const feed = await getRealSatisfied();
 
@@ -134,6 +158,10 @@ export async function getTestimonials(
     })
     .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
   if (prefer === 'concise') remote.sort((a, b) => chars(a) - chars(b));
+
+  // Pinned feed reviews lead, in the pinned order; the rest follow.
+  const rank = (t: Testimonial) => (t.id && pinned.includes(t.id) ? pinned.indexOf(t.id) : pinned.length);
+  remote.sort((a, b) => rank(a) - rank(b));
 
   // Local entries render first, then the feed.
   const items = [...local, ...remote].slice(0, limit);

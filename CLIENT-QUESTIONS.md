@@ -80,6 +80,11 @@ name the file each one expects; the map from his Drive filenames is in
 - **Aquatic plants folder:** the ten IMG_ files are unnamed, so Max picks
   which is the pink lily, white lily, canna, yellow flower, dragonfly, koi
   and rocks shot when renaming.
+- **Featured reviews (Max, 2026-09-14: "take the best ones"):** pinned in
+  `featuredIds`. Home: G. B. (seller) and Mike C. (buyer). About: Kathy B.
+  (1031 exchange across two cities), Justin A. and Thomas Z. (both
+  RealSatisfied verified) and Rachel H. (sold in San Diego, bought in Palm
+  Springs). Swap any of them by editing that list.
 - **"Leave a review" link:** the RealSatisfied review page Max sent is now
   a small link beside "Verified by RealSatisfied" on About only. Want it on
   the home band too, or nowhere?
