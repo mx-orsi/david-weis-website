@@ -52,7 +52,7 @@ export const home = {
     closing: 'That is where experience matters.',
     photo: {
       suggestion: 'David on the Querencia Palms walkway',
-      src: '/images/querencia-palms/querencia-palms-walkway-courtyard-path-palm-springs-david-weis.jpg',
+      src: '/images/querencia-landscaping/querencia-palms-walkway-courtyard-path-palm-springs-david-weis.jpg',
       alt: 'David Weis standing on the front walkway at Querencia Palms in Palm Springs, with the San Jacinto Mountains behind him',
       width: 1365,
       height: 2048,

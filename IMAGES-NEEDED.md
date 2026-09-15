@@ -42,7 +42,7 @@ Filenames lowercase and hyphen-separated with the market or project name.
 
 ## Querencia Palms — done (2026-09-14)
 
-All 48 of David's landscaping photos are in `public/images/querencia-palms/`
+All 48 of David's landscaping photos are in `public/images/querencia-landscaping/`
 under Max's SEO names, normalized to 2400px with rotation baked in. The
 grounds chapter, the page lead, the two-up break, the home "Ownership"
 portrait (David on the walkway) and the About environmental portrait (David

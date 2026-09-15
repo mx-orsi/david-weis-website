@@ -180,7 +180,7 @@ export const projects: readonly Project[] = [
      * The grounds chapter, from David's 2026-09-13 brief. It sits after
      * "Make the property impossible to ignore" and before "Stage. Clean.
      * Present. Repeat." Every photo names the file it expects under
-     * public/images/querencia-palms/ (see IMAGES-NEEDED.md for the map from
+     * public/images/querencia-landscaping/ (see IMAGES-NEEDED.md for the map from
      * David's Drive filenames); slots render as labeled placeholders until the
      * files are there.
      */
@@ -192,7 +192,7 @@ export const projects: readonly Project[] = [
           type: 'photo',
           photo: {
             suggestion: 'The koi pond after the greenery was pulled out (Unit 102 sequence)',
-            src: '/images/querencia-palms/querencia-palms-102-koi-pond-during-renovation-david-weis.jpg',
+            src: '/images/querencia-landscaping/querencia-palms-102-koi-pond-during-renovation-david-weis.jpg',
             alt: 'The Querencia Palms koi pond stripped to rock and water after the plantings were removed',
             width: 1800,
             height: 2400,
@@ -217,7 +217,7 @@ export const projects: readonly Project[] = [
           type: 'photo',
           photo: {
             suggestion: 'The same stretch of koi pond today, planted and mature (104 Koi Pond After 1)',
-            src: '/images/querencia-palms/querencia-palms-104-koi-pond-palm-springs-david-weis.jpg',
+            src: '/images/querencia-landscaping/querencia-palms-104-koi-pond-palm-springs-david-weis.jpg',
             alt: 'The Querencia Palms koi pond today, its banks planted with lilies, cannas and papyrus',
             width: 2048,
             height: 1365,
@@ -256,34 +256,34 @@ export const projects: readonly Project[] = [
           pairs: [
             {
               label: 'Unit 105 · Koi pond',
-              before: { suggestion: '105 Koi Pond Before 1', src: '/images/querencia-palms/querencia-palms-105-koi-pond-before-installation-david-weis.jpg', alt: 'Koi pond beside Unit 105 before planting: rock, water and bare banks', width: 2400, height: 1350, hasSmall: true },
-              after: { suggestion: '105 Koi Pond After 1', src: '/images/querencia-palms/querencia-palms-105-koi-pond-palm-springs-david-weis.jpg', alt: 'Koi pond beside Unit 105 after planting: lilies, grasses and flowering marginals along the water', width: 2048, height: 1365, hasSmall: true },
+              before: { suggestion: '105 Koi Pond Before 1', src: '/images/querencia-landscaping/querencia-palms-105-koi-pond-before-installation-david-weis.jpg', alt: 'Koi pond beside Unit 105 before planting: rock, water and bare banks', width: 2400, height: 1350, hasSmall: true },
+              after: { suggestion: '105 Koi Pond After 1', src: '/images/querencia-landscaping/querencia-palms-105-koi-pond-palm-springs-david-weis.jpg', alt: 'Koi pond beside Unit 105 after planting: lilies, grasses and flowering marginals along the water', width: 2048, height: 1365, hasSmall: true },
             },
             {
               label: 'Unit 104 · Back patio',
-              before: { suggestion: '104 Full Back Patio Before 1', src: '/images/querencia-palms/querencia-palms-104-full-back-patio-before-hardscape-david-weis.jpg', alt: 'Back patio of Unit 104 before, open to the walkway with little planting', width: 2400, height: 1350, hasSmall: true },
-              after: { suggestion: '104 Full Back patio After 1', src: '/images/querencia-palms/querencia-palms-104-full-back-patio-private-outdoor-space-david-weis.jpg', alt: 'Back patio of Unit 104 after, screened and softened by mature planting', width: 2048, height: 1365, hasSmall: true },
+              before: { suggestion: '104 Full Back Patio Before 1', src: '/images/querencia-landscaping/querencia-palms-104-full-back-patio-before-hardscape-david-weis.jpg', alt: 'Back patio of Unit 104 before, open to the walkway with little planting', width: 2400, height: 1350, hasSmall: true },
+              after: { suggestion: '104 Full Back patio After 1', src: '/images/querencia-landscaping/querencia-palms-104-full-back-patio-private-outdoor-space-david-weis.jpg', alt: 'Back patio of Unit 104 after, screened and softened by mature planting', width: 2048, height: 1365, hasSmall: true },
             },
             {
               label: 'Unit 106 · Back patio',
-              before: { suggestion: '106 Back Patio Before 1 or 2, closest matching angle', src: '/images/querencia-palms/querencia-palms-106-back-patio-02-before-hardscape-david-weis.jpg', alt: 'Back patio of Unit 106 before planting', width: 2400, height: 1800, hasSmall: true },
-              after: { suggestion: '106 Back Patio After 1 or 2, same angle', src: '/images/querencia-palms/querencia-palms-106-back-patio-02-outdoor-living-david-weis.jpg', alt: 'Back patio of Unit 106 after planting, private and green', width: 2048, height: 1365, hasSmall: true },
+              before: { suggestion: '106 Back Patio Before 1 or 2, closest matching angle', src: '/images/querencia-landscaping/querencia-palms-106-back-patio-02-before-hardscape-david-weis.jpg', alt: 'Back patio of Unit 106 before planting', width: 2400, height: 1800, hasSmall: true },
+              after: { suggestion: '106 Back Patio After 1 or 2, same angle', src: '/images/querencia-landscaping/querencia-palms-106-back-patio-02-outdoor-living-david-weis.jpg', alt: 'Back patio of Unit 106 after planting, private and green', width: 2048, height: 1365, hasSmall: true },
             },
             {
               label: 'Unit 106 · Primary yard',
-              before: { suggestion: '106 Primary Yard Before 1', src: '/images/querencia-palms/querencia-palms-104-primary-yard-before-renovation-david-weis.jpg', alt: 'Primary yard of Unit 106 before planting', width: 2400, height: 1350, hasSmall: true },
-              after: { suggestion: '106 Primary Yard After 1', src: '/images/querencia-palms/querencia-palms-104-primary-yard-desert-landscaping-david-weis.jpg', alt: 'Primary yard of Unit 106 after planting', width: 2048, height: 1365, hasSmall: true },
+              before: { suggestion: '106 Primary Yard Before 1', src: '/images/querencia-landscaping/querencia-palms-104-primary-yard-before-renovation-david-weis.jpg', alt: 'Primary yard of Unit 106 before planting', width: 2400, height: 1350, hasSmall: true },
+              after: { suggestion: '106 Primary Yard After 1', src: '/images/querencia-landscaping/querencia-palms-104-primary-yard-desert-landscaping-david-weis.jpg', alt: 'Primary yard of Unit 106 after planting', width: 2048, height: 1365, hasSmall: true },
             },
             {
               label: 'Front walkway',
-              before: { suggestion: 'Front Walkway Before', src: '/images/querencia-palms/querencia-palms-front-walkway-before-renovation-david-weis.jpg', alt: 'The Querencia Palms front walkway before the landscape matured', width: 2048, height: 1368, hasSmall: true },
-              after: { suggestion: 'Front Walkway After', src: '/images/querencia-palms/querencia-palms-front-walkway-desert-landscaping-david-weis.jpg', alt: 'The Querencia Palms front walkway with mature planting on both sides', width: 2048, height: 1365, hasSmall: true },
+              before: { suggestion: 'Front Walkway Before', src: '/images/querencia-landscaping/querencia-palms-front-walkway-before-renovation-david-weis.jpg', alt: 'The Querencia Palms front walkway before the landscape matured', width: 2048, height: 1368, hasSmall: true },
+              after: { suggestion: 'Front Walkway After', src: '/images/querencia-landscaping/querencia-palms-front-walkway-desert-landscaping-david-weis.jpg', alt: 'The Querencia Palms front walkway with mature planting on both sides', width: 2048, height: 1365, hasSmall: true },
             },
             // Optional sixth pair, per David: use only if the page still feels balanced.
             // {
             //   label: 'Pool',
-            //   before: { suggestion: 'Pool Before', src: '/images/querencia-palms/querencia-palms-pool-before-renovation-david-weis.jpg', alt: 'The Querencia Palms pool before the landscape matured', width: 2048, height: 1368, hasSmall: true },
-            //   after: { suggestion: 'Pool After', src: '/images/querencia-palms/querencia-palms-resort-pool-spa-palm-springs-david-weis.jpg', alt: 'The Querencia Palms pool surrounded by mature planting', width: 2048, height: 1365, hasSmall: true },
+            //   before: { suggestion: 'Pool Before', src: '/images/querencia-landscaping/querencia-palms-pool-before-renovation-david-weis.jpg', alt: 'The Querencia Palms pool before the landscape matured', width: 2048, height: 1368, hasSmall: true },
+            //   after: { suggestion: 'Pool After', src: '/images/querencia-landscaping/querencia-palms-resort-pool-spa-palm-springs-david-weis.jpg', alt: 'The Querencia Palms pool surrounded by mature planting', width: 2048, height: 1365, hasSmall: true },
             // },
           ],
         },
@@ -299,13 +299,13 @@ export const projects: readonly Project[] = [
           type: 'gallery',
           label: 'Details from the grounds',
           photos: [
-            { suggestion: 'Koi visible through clear water', src: '/images/querencia-palms/querencia-palms-floating-water-plants-desert-garden-david-weis.jpg', alt: 'Orange koi in a clear, shallow stretch of the pond between river rocks', width: 2400, height: 1800, hasSmall: true },
-            { suggestion: 'Pink water lily', src: '/images/querencia-palms/querencia-palms-aquatic-landscaping-tahquitz-river-estates-david-weis.jpg', alt: 'A pink water lily open on the pond, with a koi passing beneath the pads', width: 1800, height: 2400, hasSmall: true },
-            { suggestion: 'Dragonfly beside the pond', src: '/images/querencia-palms/querencia-palms-water-iris-koi-pond-david-weis.jpg', alt: 'An orange dragonfly resting on a wall beside the pond', width: 1800, height: 2400, hasSmall: true },
-            { suggestion: 'Orange canna', src: '/images/querencia-palms/querencia-palms-lotus-water-garden-palm-springs-david-weis.jpg', alt: 'An orange canna flower above a lily pad at the edge of the pond', width: 1800, height: 2400, hasSmall: true },
-            { suggestion: 'Small red aquatic bloom floating on the water', src: '/images/querencia-palms/querencia-palms-pond-plants-desert-oasis-david-weis.jpg', alt: 'A small red bloom on a floating aquatic plant, seen from above the water', width: 1800, height: 2400, hasSmall: true },
-            { suggestion: 'White water lily', src: '/images/querencia-palms/querencia-palms-papyrus-pond-landscaping-david-weis.jpg', alt: 'A white water lily open on the pond beside broad canna leaves', width: 1800, height: 2400, hasSmall: true },
-            { suggestion: 'Plants growing naturally between the rocks', src: '/images/querencia-palms/querencia-palms-pond-greenery-south-palm-springs-david-weis.jpg', alt: 'Koi gathered below a clump of marginal plants growing between the rocks at the pond edge', width: 1800, height: 2400, hasSmall: true, position: 'center 40%' },
+            { suggestion: 'Koi visible through clear water', src: '/images/querencia-landscaping/querencia-palms-floating-water-plants-desert-garden-david-weis.jpg', alt: 'Orange koi in a clear, shallow stretch of the pond between river rocks', width: 2400, height: 1800, hasSmall: true },
+            { suggestion: 'Pink water lily', src: '/images/querencia-landscaping/querencia-palms-aquatic-landscaping-tahquitz-river-estates-david-weis.jpg', alt: 'A pink water lily open on the pond, with a koi passing beneath the pads', width: 1800, height: 2400, hasSmall: true },
+            { suggestion: 'Dragonfly beside the pond', src: '/images/querencia-landscaping/querencia-palms-water-iris-koi-pond-david-weis.jpg', alt: 'An orange dragonfly resting on a wall beside the pond', width: 1800, height: 2400, hasSmall: true },
+            { suggestion: 'Orange canna', src: '/images/querencia-landscaping/querencia-palms-lotus-water-garden-palm-springs-david-weis.jpg', alt: 'An orange canna flower above a lily pad at the edge of the pond', width: 1800, height: 2400, hasSmall: true },
+            { suggestion: 'Small red aquatic bloom floating on the water', src: '/images/querencia-landscaping/querencia-palms-pond-plants-desert-oasis-david-weis.jpg', alt: 'A small red bloom on a floating aquatic plant, seen from above the water', width: 1800, height: 2400, hasSmall: true },
+            { suggestion: 'White water lily', src: '/images/querencia-landscaping/querencia-palms-papyrus-pond-landscaping-david-weis.jpg', alt: 'A white water lily open on the pond beside broad canna leaves', width: 1800, height: 2400, hasSmall: true },
+            { suggestion: 'Plants growing naturally between the rocks', src: '/images/querencia-landscaping/querencia-palms-pond-greenery-south-palm-springs-david-weis.jpg', alt: 'Koi gathered below a clump of marginal plants growing between the rocks at the pond edge', width: 1800, height: 2400, hasSmall: true, position: 'center 40%' },
           ],
         },
         {
@@ -318,7 +318,7 @@ export const projects: readonly Project[] = [
           ],
           aside: {
             suggestion: 'David in the mature front walkway planting (David Weis Front Walkway 2)',
-            src: '/images/querencia-palms/querencia-palms-walkway-gated-community-south-palm-springs-david-weis.jpg',
+            src: '/images/querencia-landscaping/querencia-palms-walkway-gated-community-south-palm-springs-david-weis.jpg',
             alt: 'David Weis standing among the mature plantings along the Querencia Palms front walkway',
             width: 2048,
             height: 1365,
@@ -339,7 +339,7 @@ export const projects: readonly Project[] = [
           width: 'bleed',
           photo: {
             suggestion: 'The waterfall framed by foliage, large enough to see the layers of planting (105 Waterfall)',
-            src: '/images/querencia-palms/querencia-palms-105-waterfall-desert-garden-david-weis.jpg',
+            src: '/images/querencia-landscaping/querencia-palms-105-waterfall-desert-garden-david-weis.jpg',
             alt: 'A waterfall on the Querencia Palms koi pond framed by layered planting, with lilies on the water below',
             width: 2048,
             height: 1365,
@@ -368,7 +368,7 @@ export const projects: readonly Project[] = [
           type: 'photo',
           photo: {
             suggestion: 'The mural with the mature landscaping in front of it (Mural After). No text over this image.',
-            src: '/images/querencia-palms/querencia-palms-mural-courtyard-art-palm-springs-david-weis.jpg',
+            src: '/images/querencia-landscaping/querencia-palms-mural-courtyard-art-palm-springs-david-weis.jpg',
             alt: 'The Querencia Palms mural with mature planting grown in along its base',
             width: 2048,
             height: 1365,
@@ -388,7 +388,7 @@ export const projects: readonly Project[] = [
     photos: [
       {
         suggestion: 'Pool, spa and courtyard with mature planting (Pool After)',
-        src: '/images/querencia-palms/querencia-palms-resort-pool-spa-palm-springs-david-weis.jpg',
+        src: '/images/querencia-landscaping/querencia-palms-resort-pool-spa-palm-springs-david-weis.jpg',
         alt: 'The Querencia Palms pool and spa surrounded by palms and mature planting',
         width: 2048,
         height: 1365,
@@ -396,7 +396,7 @@ export const projects: readonly Project[] = [
       },
       {
         suggestion: 'A private primary yard with the planting grown in (105 Primary Yard After 1)',
-        src: '/images/querencia-palms/querencia-palms-105-primary-yard-desert-landscaping-david-weis.jpg',
+        src: '/images/querencia-landscaping/querencia-palms-105-primary-yard-desert-landscaping-david-weis.jpg',
         alt: 'A private yard at Querencia Palms with established planting and a mountain view',
         width: 2048,
         height: 1365,
@@ -404,7 +404,7 @@ export const projects: readonly Project[] = [
       },
       {
         suggestion: 'A front patio arrival with mature planting (106 Front Patio After)',
-        src: '/images/querencia-palms/querencia-palms-106-front-patio-koi-pond-views-david-weis.jpg',
+        src: '/images/querencia-landscaping/querencia-palms-106-front-patio-koi-pond-views-david-weis.jpg',
         alt: 'The front patio of a Querencia Palms residence framed by mature planting',
         width: 2048,
         height: 1365,

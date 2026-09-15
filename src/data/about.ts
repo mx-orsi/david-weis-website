@@ -94,7 +94,7 @@ export const about = {
   },
   portrait: {
     suggestion: 'David at the Querencia Palms mural, among the lantana',
-    src: '/images/querencia-palms/querencia-palms-david-weis-realtor-mural-palm-springs.jpg',
+    src: '/images/querencia-landscaping/querencia-palms-david-weis-realtor-mural-palm-springs.jpg',
     alt: 'David Weis standing in front of the Querencia Palms mural in Palm Springs, surrounded by orange and yellow lantana in bloom',
     width: 2048,
     height: 1365,
