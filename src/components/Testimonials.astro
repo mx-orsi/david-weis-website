@@ -67,6 +67,11 @@ const hasQuotes = items.length > 0;
               {testimonialsMeta.verifiedLabel} <Icon name="arrow-ext" size={12} /><span class="sr-only"> (opens in a new tab)</span>
             </a>
             {ratings.responses ? <span class="tm__responses">{ratings.responses} client surveys</span> : null}
+            {variant === 'full' && (
+              <a class="tm__review" href={testimonialsMeta.reviewUrl} target="_blank" rel="noopener noreferrer">
+                {testimonialsMeta.reviewLabel} <Icon name="arrow-ext" size={12} /><span class="sr-only"> (opens in a new tab)</span>
+              </a>
+            )}
           </p>
         </div>
       )}
@@ -181,6 +186,10 @@ const hasQuotes = items.length > 0;
   .tm__responses {
     color: var(--muted);
     font-size: 0.75rem;
+  }
+  .tm__review {
+    margin-top: 0.35rem;
+    justify-self: start;
   }
 
   /* Quotes --------------------------------------------------------- */

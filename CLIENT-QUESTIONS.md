@@ -39,7 +39,51 @@ deck copy (they are in git history if anything needs to come back).
   missing a URL (below). YouTube is `@DavidWeisRealtor`, Facebook is the
   business page `facebook.com/davidweisrealty`, both loaded and checked.
 
+**David, 2026-09-13 email (Querencia Palms grounds chapter):** built as a
+chapter inside the Querencia page between "Make the property impossible to
+ignore" and "Stage. Clean. Present. Repeat.", following his section order:
+barren opener → the gardener → damage control → Cherry Valley (with the pull
+line) → five drag-to-reveal before/after sliders → the details gallery → the
+garden club with one portrait → the water feature with the full-bleed
+waterfall → care is something buyers can feel → "The spaces between the
+buildings matter too." → Mural After with the caption "A landscape that grew
+alongside the community." His copy is used as written, joined into
+paragraphs to match the rest of the site (no "didn't"/"couldn't" in body
+copy, same as the deck). "Landscape stewardship + aquatic planting" appears
+in a new Involvement line under the page intro. Photos are placeholders that
+name the file each one expects; the map from his Drive filenames is in
+`IMAGES-NEEDED.md`.
+
 ## Still open
+
+**For David, from the grounds chapter (2026-09-14):**
+
+- **Wording changes to confirm.** (a) "Make the property impossible to
+  ignore" was trimmed to one paragraph that hands off to the chapter, since
+  the pond story now has its own telling; the staging paragraph became
+  "Stage. Clean. Present. Repeat." and the open-house paragraph moved into
+  "Marketing to the people who already knew the buyer." (b) His short
+  one-line fragments were joined into paragraphs. (c) Body copy avoids
+  contractions to match the deck ("did not", "could not"); headings keep
+  them ("The difference wasn't subtle.").
+- **Two captions were added:** "Two days before the grand opening." under
+  the barren opener, and his suggested "A landscape that grew alongside the
+  community." under Mural After. Nothing else is captioned. Keep both?
+- **Involvement line** reads: Brokerage · Pricing strategy · Staging +
+  presentation · Landscape stewardship + aquatic planting · Marketing +
+  events. Edit freely; it is one list in `projects.ts`.
+- **Sixth slider (pool):** left out, the data is there commented out. Say the
+  word to add it.
+- **Which Unit 102 photo opens the chapter:** "102 Koi Pond After
+  Landscapers ripped all the greenery out" is assumed; "Koi Pond right after
+  it was full cleaned out" is the alternative.
+- **Aquatic plants folder:** the ten IMG_ files are unnamed, so Max picks
+  which is the pink lily, white lily, canna, yellow flower, dragonfly, koi
+  and rocks shot when renaming.
+- **"Leave a review" link:** the RealSatisfied review page Max sent is now
+  a small link beside "Verified by RealSatisfied" on About only. Want it on
+  the home band too, or nowhere?
+
 
 1. **Realtor.com profile URL.** The footer has an entry for it, hidden until we
    have a working link. The only candidate is the one inside David's

@@ -1,0 +1,234 @@
+---
+/**
+ * Chapter — an editorial deep-dive inside a project page, rendered from a
+ * list of typed blocks in src/data/projects.ts (story, photo, pair, callout,
+ * compare, gallery). ProjectPage.astro inserts it after the story section
+ * the data names, so the surrounding page structure stays shared.
+ *
+ * Rhythm rules: photographs get whitespace, full-bleed images are used
+ * sparingly, headings stay sentence case in markup, and nothing moves unless
+ * the visitor moves it.
+ */
+import Compare from './Compare.astro';
+import Media from './Media.astro';
+import Story from './Story.astro';
+import type { ProjectChapter } from '../data/projects';
+
+interface Props {
+  chapter: ProjectChapter;
+  /** Used to build unique heading ids. */
+  slug: string;
+}
+const { chapter, slug } = Astro.props;
+
+/** Size pattern for the editorial gallery, cycling by position. */
+const galleryShape = ['wide', 'small', 'small', 'tall', 'small', 'tall', 'wide'] as const;
+const galleryRatio: Record<(typeof galleryShape)[number], string> = { tall: '4 / 5', wide: '4 / 3', small: '1 / 1' };
+---
+
+<section class="ch" id={chapter.id} aria-label="Chapter">
+  {chapter.blocks.map((b, i) => {
+    const hid = `${slug}-${chapter.id}-${i}`;
+    if (b.type === 'story') {
+      return b.aside ? (
+        <div class="container ch__block ch__aside">
+          <Story heading={b.heading} paragraphs={b.paragraphs} eyebrow={b.eyebrow} id={hid} />
+          <Media photo={b.aside} ratio="4 / 5" sizes="(min-width: 960px) 40vw, 100vw" class="ch__aside-photo" />
+        </div>
+      ) : (
+        <div class="container ch__block">
+          <Story heading={b.heading} paragraphs={b.paragraphs} eyebrow={b.eyebrow} layout="split" id={hid} />
+        </div>
+      );
+    }
+    if (b.type === 'photo') {
+      const inner = (
+        <figure class="ch__figure">
+          <Media photo={b.photo} ratio={b.ratio ?? '16 / 9'} sizes="100vw" />
+          {b.caption && <figcaption class="ch__caption">{b.caption}</figcaption>}
+        </figure>
+      );
+      return b.width === 'bleed' ? <div class="ch__block ch__bleed">{inner}</div> : <div class="container ch__block">{inner}</div>;
+    }
+    if (b.type === 'pair') {
+      return (
+        <div class="container ch__block ch__pair">
+          {b.photos.map((ph) => <Media photo={ph} ratio={b.ratio ?? '4 / 3'} />)}
+        </div>
+      );
+    }
+    if (b.type === 'callout') {
+      return (
+        <div class="container ch__block ch__callout">
+          <p class="ch__pull">{b.text}</p>
+          {b.paragraphs && (
+            <div class="prose ch__pull-prose">
+              {b.paragraphs.map((p) => <p>{p}</p>)}
+            </div>
+          )}
+        </div>
+      );
+    }
+    if (b.type === 'compare') {
+      return (
+        <div class="container ch__block ch__compare" aria-labelledby={hid}>
+          <div class="split">
+            <h2 id={hid} class="title-lg ch__compare-title">{b.heading}</h2>
+            <div class="prose">
+              {b.paragraphs.map((p) => <p>{p}</p>)}
+              <p class="ch__hint">Drag the divider to compare.</p>
+            </div>
+          </div>
+          <div class="ch__compare-grid">
+            {b.pairs.map((pair, j) => <Compare pair={pair} class={j === 0 ? 'ch__compare-lead' : undefined} sizes={j === 0 ? '100vw' : '(min-width: 1024px) 50vw, 100vw'} />)}
+          </div>
+        </div>
+      );
+    }
+    if (b.type === 'gallery') {
+      return (
+        <div class="container ch__block ch__gallery" role="group" aria-label={b.label}>
+          {b.photos.map((ph, j) => {
+            const shape = galleryShape[j % galleryShape.length];
+            return <Media photo={ph} ratio={galleryRatio[shape]} class={`ch__g ch__g--${shape}`} sizes="(min-width: 1024px) 33vw, 50vw" />;
+          })}
+        </div>
+      );
+    }
+    return null;
+  })}
+</section>
+
+<style>
+  .ch {
+    display: grid;
+    gap: clamp(3.5rem, 7vw, 6.5rem);
+  }
+  .ch__block {
+    min-width: 0;
+  }
+
+  .ch__aside {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: start;
+  }
+  .ch :global(.ch__aside-photo) {
+    max-width: 460px;
+    justify-self: end;
+    width: 100%;
+  }
+
+  .ch__figure {
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .ch__bleed {
+    width: 100%;
+  }
+  .ch__bleed .ch__figure :global(.media),
+  .ch__bleed .ch__figure :global(.slot) {
+    max-height: 88vh;
+  }
+  .ch__bleed .ch__caption {
+    padding-inline: var(--gutter);
+  }
+  .ch__caption {
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+
+  .ch__pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    align-items: start;
+  }
+
+  .ch__callout {
+    display: grid;
+    gap: 1.75rem;
+    padding-block: 0.5rem;
+  }
+  .ch__pull {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(2.1rem, 4.6vw, 4rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    max-width: 30ch;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .ch__pull-prose {
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--blue);
+  }
+
+  .ch__compare {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3.5rem);
+  }
+  .ch__compare-title {
+    max-width: 14ch;
+  }
+  .ch__hint {
+    font-size: 0.8125rem !important;
+    color: var(--muted) !important;
+  }
+  .ch__compare-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .ch__compare-grid :global(.ch__compare-lead) {
+    grid-column: 1 / -1;
+  }
+
+  /* Editorial gallery: a six-column grid with items of three sizes. */
+  .ch__gallery {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-auto-flow: dense;
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .ch__gallery :global(.ch__g--tall),
+  .ch__gallery :global(.ch__g--small) {
+    grid-column: span 2;
+  }
+  .ch__gallery :global(.ch__g--wide) {
+    grid-column: span 4;
+  }
+
+  @media (max-width: 899px) {
+    .ch__aside {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .ch :global(.ch__aside-photo) {
+      justify-self: start;
+    }
+    .ch__compare-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .ch__gallery {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+    .ch__gallery :global(.ch__g--tall),
+    .ch__gallery :global(.ch__g--small) {
+      grid-column: span 1;
+    }
+    .ch__gallery :global(.ch__g--wide) {
+      grid-column: span 2;
+    }
+  }
+  @media (max-width: 599px) {
+    .ch__pair {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

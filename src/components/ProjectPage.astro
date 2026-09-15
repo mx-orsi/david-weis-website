@@ -7,6 +7,7 @@
  * fourth, a stat row where the copy supports figures, remaining photos as a
  * closing gallery, then the market CTA and previous/next project links.
  */
+import Chapter from './Chapter.astro';
 import Icon from './Icon.astro';
 import Media from './Media.astro';
 import Story from './Story.astro';
@@ -64,6 +65,16 @@ const breadcrumbJsonLd = {
             <img class="pp-hero__logo" src={withBase(p.logo.src)} alt={p.logo.alt} width={p.logo.width} height={p.logo.height} loading="eager" decoding="async" />
           )}
           <p class="lede lede--wide">{p.intro}</p>
+          {p.roles && p.roles.length > 0 && (
+            <dl class="pp-hero__roles">
+              <dt class="eyebrow eyebrow--muted">Involvement</dt>
+              <dd>
+                <ul>
+                  {p.roles.map((r) => <li>{r}</li>)}
+                </ul>
+              </dd>
+            </dl>
+          )}
           {p.link && (
             <a class="link-arrow link-arrow--ext" href={p.link.href} target="_blank" rel="noopener noreferrer">
               {p.link.label} <Icon name="arrow-ext" /><span class="sr-only">(opens in a new tab)</span>
@@ -95,6 +106,7 @@ const breadcrumbJsonLd = {
             <Media photo={wide} ratio="16 / 9" sizes="100vw" />
           </div>
         )}
+        {p.chapter && p.chapter.after === i && <Chapter chapter={p.chapter} slug={p.slug} />}
       </>
     ))}
 
@@ -157,6 +169,37 @@ const breadcrumbJsonLd = {
     height: 64px;
     width: auto;
     max-width: 220px;
+  }
+  .pp-hero__roles {
+    display: grid;
+    gap: 0.6rem;
+    margin: 0.25rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    width: 100%;
+  }
+  .pp-hero__roles dd {
+    margin: 0;
+  }
+  .pp-hero__roles ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 0.35rem 1.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .pp-hero__roles li {
+    padding-left: 0.9rem;
+    text-indent: -0.9rem;
+  }
+  .pp-hero__roles li::before {
+    content: '·';
+    display: inline-block;
+    width: 0.9rem;
+    text-indent: 0;
+    color: var(--blue);
   }
   .pp-hero__lead {
     margin-top: clamp(2.5rem, 5vw, 4.5rem);

@@ -7,11 +7,13 @@
 interface Props {
   /** Suggested subject for the photo, shown inside the slot */
   suggestion: string;
+  /** Expected path under public/, printed so the upload can be named to match. */
+  file?: string;
   /** CSS aspect ratio, e.g. "4 / 5" or "16 / 9" */
   ratio?: string;
   class?: string;
 }
-const { suggestion, ratio = '4 / 3', class: className } = Astro.props;
+const { suggestion, file, ratio = '4 / 3', class: className } = Astro.props;
 ---
 
 <figure class:list={['slot', className]} style={`--ratio: ${ratio}`} role="img" aria-label={`Photo placeholder: ${suggestion}`}>
@@ -22,6 +24,7 @@ const { suggestion, ratio = '4 / 3', class: className } = Astro.props;
     </svg>
     <span class="slot__label">Photo placeholder</span>
     <span class="slot__text">{suggestion}</span>
+    {file && <span class="slot__file">{file.replace(/^\/images\//, '')}</span>}
   </div>
 </figure>
 
@@ -56,6 +59,13 @@ const { suggestion, ratio = '4 / 3', class: className } = Astro.props;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--blue);
+  }
+  .slot__file {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.6875rem;
+    line-height: 1.4;
+    color: var(--muted);
+    word-break: break-all;
   }
   .slot__text {
     font-family: var(--font-serif);

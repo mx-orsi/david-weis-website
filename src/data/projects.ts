@@ -15,6 +15,70 @@ export interface ProjectSection {
   paragraphs: readonly string[];
 }
 
+/** One before/after pair for the drag-to-reveal comparison. */
+export interface ComparePair {
+  /** Short label under the slider, e.g. "Unit 105 koi pond" */
+  label: string;
+  before: Photo;
+  after: Photo;
+}
+
+/**
+ * Blocks that make up an editorial chapter. The chapter is rendered by
+ * Chapter.astro between two regular story sections, so a project with real
+ * photographic documentation (Querencia Palms' grounds) can go deeper without
+ * changing the shared page structure.
+ */
+export type ChapterBlock =
+  | {
+      type: 'story';
+      heading: string;
+      paragraphs: readonly string[];
+      eyebrow?: string;
+      /** A photo set beside the prose (4:5) rather than below it. */
+      aside?: Photo;
+    }
+  | {
+      type: 'photo';
+      photo: Photo;
+      ratio?: string;
+      /** 'bleed' runs edge to edge; 'container' stays inside the page gutters. */
+      width?: 'container' | 'bleed';
+      caption?: string;
+    }
+  | {
+      type: 'pair';
+      /** Two photos side by side, read left to right (e.g. barren → lush). */
+      photos: readonly [Photo, Photo];
+      ratio?: string;
+    }
+  | {
+      /** Oversized pull line, optionally followed by short prose. */
+      type: 'callout';
+      text: string;
+      paragraphs?: readonly string[];
+    }
+  | {
+      type: 'compare';
+      heading: string;
+      paragraphs: readonly string[];
+      pairs: readonly ComparePair[];
+    }
+  | {
+      /** Irregular editorial grid of detail shots; sizes cycle automatically. */
+      type: 'gallery';
+      photos: readonly Photo[];
+      label: string;
+    };
+
+export interface ProjectChapter {
+  /** Anchor id for the chapter. */
+  id: string;
+  /** Zero-based index of the story section the chapter follows. */
+  after: number;
+  blocks: readonly ChapterBlock[];
+}
+
 export interface Project {
   slug: string;
   name: string;
@@ -33,7 +97,11 @@ export interface Project {
   teaser?: string;
   teaserCta?: string;
   intro: string;
+  /** Compact list of David's involvement, shown under the intro. */
+  roles?: readonly string[];
   sections: readonly ProjectSection[];
+  /** Optional deep-dive chapter, inserted after `sections[chapter.after]`. */
+  chapter?: ProjectChapter;
   stats?: readonly Stat[];
   /** photos[0] leads the page and the cards; the rest become image breaks. */
   photos: readonly Photo[];
@@ -60,6 +128,9 @@ export const projects: readonly Project[] = [
     teaserCta: 'Explore the Project',
     intro:
       'A 14-residence condominium conversion in South Palm Springs became one of the most demanding and rewarding projects of my career. It reinforced something I will probably carry with me forever: when the market does not immediately agree with you, the answer is not always to lower the price. Sometimes you need to make the product better, tell the story differently and find the people who understand what you created.',
+    // Wording per David's 2026-09-13 email: "Landscape stewardship + aquatic
+    // planting", never "landscape design" or "landscape architecture".
+    roles: ['Brokerage', 'Pricing strategy', 'Staging + presentation', 'Landscape stewardship + aquatic planting', 'Marketing + events'],
     sections: [
       {
         heading: 'It was supposed to move quickly.',
@@ -76,14 +147,19 @@ export const projects: readonly Project[] = [
       {
         heading: 'Make the property impossible to ignore.',
         paragraphs: [
-          'That meant getting involved in nearly every detail. I took over much of the landscape oversight and spent months bringing color, life and maturity back into the grounds. When the aquatic landscaping around the koi pond repeatedly disappeared during maintenance, I took responsibility for restoring it myself — sourcing aquatic plants, learning how the pond behaved through the seasons, and gradually transforming what had felt like water and rocks into something much closer to the tropical oasis I believed buyers should experience.',
+          'That meant getting involved in nearly every detail, starting with the grounds. I took over much of the landscape oversight and spent months bringing color, life and maturity back into the property. What happened around the koi pond turned into a story of its own.',
+        ],
+      },
+      {
+        heading: 'Stage. Clean. Present. Repeat.',
+        paragraphs: [
           'Then came the units. Paint splatter on windows, fingerprints, small imperfections — tiny things buyers might never consciously mention, but their brain still registers. I went through the residences obsessively: clean, correct, stage, present, repeat.',
-          'Once the physical presentation was right, I focused on visibility. Open houses became events. Agents were invited back. Vendors, food, music and community were incorporated when appropriate. I increased my involvement across Palm Springs organizations and made sure people knew what Querencia Palms was. The goal was simple: get people through the gates. Once they experienced the property, the work could speak for itself.',
         ],
       },
       {
         heading: 'Marketing to the people who already knew the buyer.',
         paragraphs: [
+          'Once the physical presentation was right, I focused on visibility. Open houses became events. Agents were invited back. Vendors, food, music and community were incorporated when appropriate. I increased my involvement across Palm Springs organizations and made sure people knew what Querencia Palms was. The goal was simple: get people through the gates. Once they experienced the property, the work could speak for itself.',
           'One of the most important changes was recognizing that I did not need to personally find every buyer — I needed more agents actively thinking about Querencia Palms. By creating incentives and encouraging agents to look inside their own networks for people who matched the property, showing activity increased. Then contracts started coming, and the momentum changed.',
         ],
       },
@@ -100,16 +176,215 @@ export const projects: readonly Project[] = [
         ],
       },
     ],
+    /*
+     * The grounds chapter, from David's 2026-09-13 brief. It sits after
+     * "Make the property impossible to ignore" and before "Stage. Clean.
+     * Present. Repeat." Every photo names the file it expects under
+     * public/images/querencia-palms/ (see IMAGES-NEEDED.md for the map from
+     * David's Drive filenames); slots render as labeled placeholders until the
+     * files are there.
+     */
+    chapter: {
+      id: 'the-grounds',
+      after: 2,
+      blocks: [
+        {
+          type: 'photo',
+          photo: {
+            suggestion: 'The koi pond after the greenery was pulled out (Unit 102 sequence)',
+            src: '/images/querencia-palms/querencia-palms-koi-pond-cleared-palm-springs.jpg',
+            alt: 'The Querencia Palms koi pond stripped to rock and water after the plantings were removed',
+          },
+          ratio: '21 / 9',
+          caption: 'Two days before the grand opening.',
+        },
+        {
+          type: 'story',
+          eyebrow: 'The grounds',
+          heading: 'I never planned to become the gardener.',
+          paragraphs: [
+            'When we were preparing Querencia Palms for its grand opening, landscaping was supposed to be one of the things I did not have to worry about. Two days before the event, I arrived to find that much of the greenery around the koi pond had been pulled out and thrown away.',
+            'They were not weeds. They were aquatic and marginal plants that had been intentionally planted around the pond.',
+            'I spent the next two weeks watering the remaining roots and new growth every day, trying to bring the area back. It worked. Then the landscaping crew removed it again.',
+            'That was the moment I realized I could not keep watching the landscape disappear. I ended the relationship with the landscaping company and took over much of the work myself.',
+          ],
+        },
+        {
+          type: 'photo',
+          photo: {
+            suggestion: 'The same stretch of koi pond today, planted and mature (104 Koi Pond After 1)',
+            src: '/images/querencia-palms/querencia-palms-koi-pond-restored-palm-springs.jpg',
+            alt: 'The Querencia Palms koi pond today, its banks planted with lilies, cannas and papyrus',
+          },
+          ratio: '16 / 9',
+        },
+        {
+          type: 'story',
+          heading: 'What started as damage control became an obsession.',
+          paragraphs: [
+            'At first, I was simply trying to get the property back to where it had been. Then something changed. The plants started responding. The grounds became greener. Owners, buyers and visitors began commenting on how much they loved it. And I started seeing what the property could become.',
+            'The koi pond was the biggest opportunity. It winds through the community, alongside private patios, beneath palms and past two waterfalls. Yet much of it had originally been rock, water and fish. I wanted it to feel less like a constructed water feature and more like a garden you discovered as you moved through the property.',
+          ],
+        },
+        {
+          type: 'story',
+          eyebrow: 'The koi pond',
+          heading: 'From rocks and water to a living garden.',
+          paragraphs: [
+            'Winter made the transformation slow at first. There were not many aquatic plants available, so I worked with what I could find and waited for the seasons to change.',
+            'As spring approached, the selection became completely different. I started driving to Cherry Valley myself to visit the aquatic nursery, walking through the available plants and selecting them individually, one by one. Water lilies. Cannas. Papyrus. Flowering marginal plants. Different heights, textures, colors and growth habits. I would bring them back to Palm Springs and figure out where each belonged.',
+            'By that point, I was not just trying to make the pond greener anymore. I was trying to create a landscape that felt intentional from every angle. Because the pond runs alongside several residences, every planting changed more than the water feature. It changed someone’s patio, walkway, view or arrival home.',
+          ],
+        },
+        {
+          type: 'callout',
+          text: 'I would drive to Cherry Valley and select the aquatic plants individually, one by one.',
+        },
+        {
+          type: 'compare',
+          heading: 'The difference wasn’t subtle.',
+          paragraphs: [
+            'As the landscape matured, spaces that had once felt exposed began to feel private, established and alive. The architecture did not change. The experience of it did.',
+          ],
+          pairs: [
+            {
+              label: 'Unit 105 · Koi pond',
+              before: { suggestion: '105 Koi Pond Before 1', src: '/images/querencia-palms/querencia-palms-unit-105-koi-pond-before.jpg', alt: 'Koi pond beside Unit 105 before planting: rock, water and bare banks' },
+              after: { suggestion: '105 Koi Pond After 1', src: '/images/querencia-palms/querencia-palms-unit-105-koi-pond-after.jpg', alt: 'Koi pond beside Unit 105 after planting: lilies, grasses and flowering marginals along the water' },
+            },
+            {
+              label: 'Unit 104 · Back patio',
+              before: { suggestion: '104 Full Back Patio Before 1', src: '/images/querencia-palms/querencia-palms-unit-104-back-patio-before.jpg', alt: 'Back patio of Unit 104 before, open to the walkway with little planting' },
+              after: { suggestion: '104 Full Back patio After 1', src: '/images/querencia-palms/querencia-palms-unit-104-back-patio-after.jpg', alt: 'Back patio of Unit 104 after, screened and softened by mature planting' },
+            },
+            {
+              label: 'Unit 106 · Back patio',
+              before: { suggestion: '106 Back Patio Before 1 or 2, closest matching angle', src: '/images/querencia-palms/querencia-palms-unit-106-back-patio-before.jpg', alt: 'Back patio of Unit 106 before planting' },
+              after: { suggestion: '106 Back Patio After 1 or 2, same angle', src: '/images/querencia-palms/querencia-palms-unit-106-back-patio-after.jpg', alt: 'Back patio of Unit 106 after planting, private and green' },
+            },
+            {
+              label: 'Unit 106 · Primary yard',
+              before: { suggestion: '106 Primary Yard Before 1', src: '/images/querencia-palms/querencia-palms-unit-106-primary-yard-before.jpg', alt: 'Primary yard of Unit 106 before planting' },
+              after: { suggestion: '106 Primary Yard After 1', src: '/images/querencia-palms/querencia-palms-unit-106-primary-yard-after.jpg', alt: 'Primary yard of Unit 106 after planting' },
+            },
+            {
+              label: 'Front walkway',
+              before: { suggestion: 'Front Walkway Before', src: '/images/querencia-palms/querencia-palms-front-walkway-before.jpg', alt: 'The Querencia Palms front walkway before the landscape matured' },
+              after: { suggestion: 'Front Walkway After', src: '/images/querencia-palms/querencia-palms-front-walkway-after.jpg', alt: 'The Querencia Palms front walkway with mature planting on both sides' },
+            },
+            // Optional sixth pair, per David: use only if the page still feels balanced.
+            // {
+            //   label: 'Pool',
+            //   before: { suggestion: 'Pool Before', src: '/images/querencia-palms/querencia-palms-pool-before.jpg', alt: 'The Querencia Palms pool before the landscape matured' },
+            //   after: { suggestion: 'Pool After', src: '/images/querencia-palms/querencia-palms-pool-after.jpg', alt: 'The Querencia Palms pool surrounded by mature planting' },
+            // },
+          ],
+        },
+        {
+          type: 'story',
+          heading: 'The details I started looking for.',
+          paragraphs: [
+            'Eventually, I started looking forward to the smallest changes. A new flower. A plant finally taking hold. The first water lily opening. A dragonfly appearing beside the pond.',
+            'Those details have almost nothing to do with selling a condominium on paper. But they have everything to do with creating a place someone wants to come home to.',
+          ],
+        },
+        {
+          type: 'gallery',
+          label: 'Details from the grounds',
+          photos: [
+            { suggestion: 'Pink water lily', src: '/images/querencia-palms/querencia-palms-pink-water-lily.jpg', alt: 'A pink water lily open on the koi pond' },
+            { suggestion: 'Koi visible through clear water', src: '/images/querencia-palms/querencia-palms-koi-clear-water.jpg', alt: 'Koi moving between plant stems in clear water' },
+            { suggestion: 'Orange canna', src: '/images/querencia-palms/querencia-palms-orange-canna.jpg', alt: 'An orange canna flower beside the pond' },
+            { suggestion: 'White water lily', src: '/images/querencia-palms/querencia-palms-white-water-lily.jpg', alt: 'A white water lily on the surface of the pond' },
+            { suggestion: 'Dragonfly beside the pond', src: '/images/querencia-palms/querencia-palms-dragonfly.jpg', alt: 'A dragonfly resting on a reed at the edge of the pond' },
+            { suggestion: 'Plants growing naturally between the rocks', src: '/images/querencia-palms/querencia-palms-plants-between-rocks.jpg', alt: 'Marginal plants growing between the rocks along the pond edge' },
+            { suggestion: 'Yellow aquatic flower', src: '/images/querencia-palms/querencia-palms-yellow-aquatic-flower.jpg', alt: 'A yellow aquatic flower at the water line' },
+          ],
+        },
+        {
+          type: 'story',
+          eyebrow: 'Learning as I went',
+          heading: 'The garden club came with me.',
+          paragraphs: [
+            'Around the same time, I joined the Village of La Jolla Garden Club. What began as an enjoyable way to learn more about plants quickly became surprisingly practical.',
+            'I found myself taking what I was learning and experimenting with it at Querencia, paying more attention to form, color, seasonal change, pruning, growth habits and how a landscape develops over time. The more I learned, the more I noticed. And the more I noticed, the more I wanted to improve.',
+          ],
+          aside: {
+            suggestion: 'David in the mature front walkway planting (David Weis Front Walkway 2)',
+            src: '/images/querencia-palms/david-weis-querencia-palms-front-walkway.jpg',
+            alt: 'David Weis standing among the mature plantings along the Querencia Palms front walkway',
+          },
+        },
+        {
+          type: 'story',
+          heading: 'The water feature became a garden.',
+          paragraphs: [
+            'As the plantings matured, the pond changed completely. Stone softened. The waterfalls became framed by foliage. Flowers appeared through different seasons. Water lilies opened across the surface. Dragonflies began visiting. The koi moved through plants instead of simply through water.',
+            'What had originally felt like an amenity slowly became one of the defining experiences of the property.',
+          ],
+        },
+        {
+          type: 'photo',
+          width: 'bleed',
+          photo: {
+            suggestion: 'The waterfall framed by foliage, large enough to see the layers of planting (105 Waterfall)',
+            src: '/images/querencia-palms/querencia-palms-koi-pond-waterfall-palm-springs.jpg',
+            alt: 'A waterfall on the Querencia Palms koi pond framed by layered planting, with lilies on the water below',
+          },
+          ratio: '16 / 9',
+        },
+        {
+          type: 'story',
+          heading: 'Care is something buyers can feel.',
+          paragraphs: [
+            'Nobody toured Querencia and knew how many hours I spent watering plants back to life. They did not know which aquatic varieties had been difficult to source in winter. They did not know how many times I moved something because it was not thriving, or how many trips I made looking for something better.',
+            'They did not need to. They could feel the result. The property looked cared for.',
+            'Querencia taught me that buyers experience that care long before they understand exactly what they are responding to. Landscaping stopped being maintenance. It became part of how we presented the property.',
+          ],
+        },
+        {
+          type: 'callout',
+          text: 'The spaces between the buildings matter too.',
+          paragraphs: [
+            'Real estate is not experienced as a list of specifications. People experience the arrival. The path to the front door. Privacy from a patio. Flowers along a walkway. The sound of water. Shade. Color. The feeling that somebody cared enough to notice the details.',
+            'All of it becomes part of the property.',
+          ],
+        },
+        {
+          type: 'photo',
+          photo: {
+            suggestion: 'The mural with the mature landscaping in front of it (Mural After). No text over this image.',
+            src: '/images/querencia-palms/querencia-palms-mural-landscaping-palm-springs.jpg',
+            alt: 'The Querencia Palms mural with mature planting grown in along its base',
+          },
+          ratio: '16 / 9',
+          caption: 'A landscape that grew alongside the community.',
+        },
+      ],
+    },
     stats: [
       { value: '14', label: 'Residences' },
       { value: 'South Palm Springs', label: 'Fee-land condominiums' },
       { value: 'Full ask', label: 'Escrows opened at asking price' },
     ],
+    // Current, lush photography outside the chapter so it does not feel isolated.
     photos: [
-      { suggestion: 'Pool, spa and courtyard at Querencia Palms' },
-      { suggestion: 'The koi pond after the aquatic planting was restored' },
+      {
+        suggestion: 'Pool, spa and courtyard with mature planting (Pool After)',
+        src: '/images/querencia-palms/querencia-palms-pool-palm-springs.jpg',
+        alt: 'The Querencia Palms pool and spa surrounded by palms and mature planting',
+      },
+      {
+        suggestion: 'A private primary yard with the planting grown in (105 Primary Yard After 1)',
+        src: '/images/querencia-palms/querencia-palms-unit-105-primary-yard.jpg',
+        alt: 'A private yard at Querencia Palms with established planting and a mountain view',
+      },
+      {
+        suggestion: 'A front patio arrival with mature planting (106 Front Patio After)',
+        src: '/images/querencia-palms/querencia-palms-unit-106-front-patio.jpg',
+        alt: 'The front patio of a Querencia Palms residence framed by mature planting',
+      },
       { suggestion: 'A staged residence interior' },
-      { suggestion: 'Mountain view from a private patio' },
       { suggestion: 'An open house event on the grounds' },
     ],
     logo: {

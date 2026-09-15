@@ -10,7 +10,8 @@ import { fileURLToPath } from 'node:url';
 const dir = fileURLToPath(new URL('../public/images/', import.meta.url));
 const force = process.argv.includes('--force');
 let made = 0;
-for (const f of readdirSync(dir)) {
+for (const entry of readdirSync(dir, { recursive: true })) {
+  const f = String(entry);
   if (!/\.jpe?g$/i.test(f)) continue;
   const src = join(dir, f);
   const out = join(dir, f.replace(/\.jpe?g$/i, '.webp'));

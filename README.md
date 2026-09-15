@@ -54,6 +54,7 @@ src/
     Header.astro, Footer.astro, FinalCta.astro
     Hero.astro (home), PageHero.astro (interior openers)
     ProjectCard.astro, ProjectPage.astro
+    Chapter.astro (editorial deep-dive blocks inside a project page), Compare.astro (before/after slider)
     MarketCard.astro, MarketPage.astro, AreaCard.astro
     ListingCard.astro, StatRow.astro
     Testimonials.astro (ratings strip + quotes), Story.astro (heading + prose block)
@@ -77,6 +78,20 @@ public/images/       ← headshot, logos, compliance marks, Unsplash market phot
 - **Add or reorder a project:** edit `projects.ts`. The page, the nav dropdown,
   the Experience landing, the home teasers (`homeFeaturedProjects`) and the
   market pages (`featuredProjects`) all follow.
+- **Name a photo before it exists:** a `Photo` may carry a `src` for a file
+  that is not in `public/` yet. The placeholder then prints the expected
+  filename, and the photo appears as soon as a file with that name is dropped
+  in (no data edit needed). `IMAGES-NEEDED.md` lists the expected names.
+- **Deep-dive chapter on a project page:** give the project a `chapter`
+  (`projects.ts`), a list of typed blocks rendered by `Chapter.astro` after the
+  story section it names: `story` (optionally with an `aside` portrait),
+  `photo` (container or full-bleed, optional caption), `pair`, `callout`,
+  `compare` (before/after sliders) and `gallery` (irregular editorial grid).
+  Querencia Palms' grounds chapter is the first; any project can have one.
+- **Before/after sliders:** `Compare.astro` takes a `{ label, before, after }`
+  pair. It is a native range input laid over two photos, so it drags with a
+  mouse or finger, works with arrow keys and needs no library. Until both
+  files exist it shows the two placeholders side by side.
 - **Listings:** edit `listings.ts`. Set `placeholder: false` on real entries.
   `propertiesConfig` toggles the three blocks on the Properties page.
 - **Testimonials:** they come from David's RealSatisfied feed automatically.

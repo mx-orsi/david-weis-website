@@ -7,6 +7,11 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
+/** True when the photo names a file that is actually in public/. */
+export function photoExists(src: string | undefined): boolean {
+  return Boolean(src) && existsSync(join(process.cwd(), 'public', src!));
+}
+
 export function webpVariant(src: string | undefined): string | undefined {
   if (!src || !/\.jpe?g$/i.test(src)) return undefined;
   const webp = src.replace(/\.jpe?g$/i, '.webp');

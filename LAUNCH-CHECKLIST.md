@@ -9,6 +9,9 @@ Grouped by who has to act. Tick items off as they land.
 - [x] **Copy** — the approved September 2026 deck is fully built out.
 - [ ] **Photos** for the seven project pages, About, the home Ownership
       section and the market image breaks. Specs in `IMAGES-NEEDED.md`.
+      Querencia Palms grounds photos are in David's Drive folder (2026-09-13);
+      Max is renaming them per the table in `IMAGES-NEEDED.md`.
+- [ ] **Confirm the grounds chapter wording** (see `CLIENT-QUESTIONS.md`).
 - [ ] **Properties decision:** keep the Featured Listings grid, the Compass
       link, and Selected Sales, or drop a block. Then send listing details.
 - [x] **Testimonials:** live from David's RealSatisfied feed (5.0 ratings strip
@@ -33,6 +36,9 @@ Grouped by who has to act. Tick items off as they land.
       rows, testimonials, market cards, area cards.
 - [x] RealSatisfied testimonials read at build time, with the feed-up,
       feed-down and feed-empty builds all rehearsed.
+- [x] Querencia Palms grounds chapter: editorial chapter blocks, before/after
+      sliders (mouse, touch, keyboard), detail gallery; axe clean at 1440
+      and 390.
 - [x] Black / white / blue palette; uppercase only via CSS; one page-load moment.
 - [x] Accessibility: axe-core (WCAG 2.2 AA + best practice) reports zero
       violations on every page at desktop and phone widths; no horizontal

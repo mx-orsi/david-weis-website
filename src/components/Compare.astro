@@ -1,0 +1,218 @@
+---
+/**
+ * Compare — a drag-to-reveal before/after photograph.
+ *
+ * One frame, the "after" photo clipped from the left by a divider the visitor
+ * drags. The whole interaction is a native range input laid over the frame,
+ * so it is draggable with a mouse or a finger, keyboard-operable (arrow keys)
+ * and screen-reader friendly, with no library and no animation: the divider
+ * only moves when the visitor moves it.
+ *
+ * Until both photos are on disk it renders the two placeholders side by side
+ * so the slot is visible and named.
+ */
+import Media from './Media.astro';
+import type { ComparePair } from '../data/projects';
+import { withBase } from '../lib/paths';
+import { photoExists, webpVariant } from '../lib/images';
+
+interface Props {
+  pair: ComparePair;
+  ratio?: string;
+  sizes?: string;
+  class?: string;
+}
+const { pair, ratio = '4 / 3', sizes = '(min-width: 1024px) 50vw, 100vw', class: className } = Astro.props;
+const ready = photoExists(pair.before.src) && photoExists(pair.after.src);
+
+const img = (photo: typeof pair.before) => ({
+  src: withBase(photo.src!),
+  webp: webpVariant(photo.src),
+  alt: photo.alt ?? '',
+  width: photo.width,
+  height: photo.height,
+});
+const before = ready ? img(pair.before) : undefined;
+const after = ready ? img(pair.after) : undefined;
+---
+
+<figure class:list={['cmp', className]}>
+  {ready && before && after ? (
+    <div class="cmp__frame frame" style={`aspect-ratio: ${ratio}; --pos: 50%`} data-compare>
+      <picture class="cmp__pic">
+        {before.webp && <source type="image/webp" srcset={withBase(before.webp)} />}
+        <img src={before.src} alt={before.alt} width={before.width} height={before.height} loading="lazy" decoding="async" sizes={sizes} />
+      </picture>
+      <picture class="cmp__pic cmp__pic--after">
+        {after.webp && <source type="image/webp" srcset={withBase(after.webp)} />}
+        <img src={after.src} alt={after.alt} width={after.width} height={after.height} loading="lazy" decoding="async" sizes={sizes} />
+      </picture>
+      <span class="cmp__tag cmp__tag--before" aria-hidden="true">Before</span>
+      <span class="cmp__tag cmp__tag--after" aria-hidden="true">After</span>
+      <div class="cmp__divider" aria-hidden="true">
+        <span class="cmp__handle">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </span>
+      </div>
+      <input
+        class="cmp__range"
+        type="range"
+        min="0"
+        max="100"
+        value="50"
+        step="1"
+        aria-label={`${pair.label}: drag to compare before and after`}
+        aria-valuetext="Half before, half after"
+      />
+    </div>
+  ) : (
+    <div class="cmp__pending">
+      <Media photo={{ ...pair.before, suggestion: `Before · ${pair.before.suggestion}` }} ratio={ratio} sizes={sizes} />
+      <Media photo={{ ...pair.after, suggestion: `After · ${pair.after.suggestion}` }} ratio={ratio} sizes={sizes} />
+    </div>
+  )}
+  <figcaption class="cmp__caption">{pair.label}</figcaption>
+</figure>
+
+<script>
+  // Reveal follows the range input; nothing moves on its own.
+  const frames = document.querySelectorAll<HTMLElement>('[data-compare]');
+  for (const frame of frames) {
+    const range = frame.querySelector<HTMLInputElement>('.cmp__range');
+    if (!range) continue;
+    const apply = () => {
+      const v = Number(range.value);
+      frame.style.setProperty('--pos', `${v}%`);
+      range.setAttribute(
+        'aria-valuetext',
+        v <= 2 ? 'Showing after' : v >= 98 ? 'Showing before' : `${v} percent before, ${100 - v} percent after`,
+      );
+    };
+    range.addEventListener('input', apply);
+    apply();
+  }
+</script>
+
+<style>
+  .cmp {
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .cmp__frame {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: var(--surface-2);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y;
+  }
+  .cmp__pic,
+  .cmp__pic img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  .cmp__pic--after {
+    clip-path: inset(0 0 0 var(--pos));
+  }
+  .cmp__divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--pos);
+    width: 2px;
+    margin-left: -1px;
+    background: #ffffff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18);
+    pointer-events: none;
+  }
+  .cmp__handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: #ffffff;
+    color: var(--ink);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+  }
+  .cmp__handle svg {
+    width: 18px;
+    height: 18px;
+  }
+  .cmp__tag {
+    position: absolute;
+    top: 0.75rem;
+    padding: 0.35em 0.7em;
+    font-family: var(--font-sans);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.88);
+    pointer-events: none;
+  }
+  .cmp__tag--before {
+    left: 0.75rem;
+  }
+  .cmp__tag--after {
+    right: 0.75rem;
+  }
+  /* The range covers the frame: dragging anywhere moves the divider. */
+  .cmp__range {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: ew-resize;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+  }
+  .cmp__range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 40px;
+    height: 100%;
+  }
+  .cmp__range::-moz-range-thumb {
+    width: 40px;
+    height: 100%;
+    border: 0;
+  }
+  .cmp__range:focus-visible {
+    opacity: 1;
+    outline: 2px solid var(--blue);
+    outline-offset: -2px;
+    background: transparent;
+  }
+  .cmp__range:focus-visible::-webkit-slider-thumb {
+    background: transparent;
+  }
+  .cmp__pending {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .cmp__caption {
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+  @media (max-width: 599px) {
+    .cmp__pending {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

@@ -31,6 +31,9 @@ export const testimonialsMeta = {
   /** Label under the ratings strip. */
   verifiedLabel: 'Verified by RealSatisfied',
   profileUrl: REALSATISFIED_PROFILE,
+  /** RealSatisfied's review form for David; shown as "Leave a review" on About. */
+  reviewUrl: `${REALSATISFIED_PROFILE}/review`,
+  reviewLabel: 'Leave a review',
 } as const;
 
 /**

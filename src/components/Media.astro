@@ -5,11 +5,15 @@
  * image slot on the site goes through this component so a photo can be
  * dropped in by editing data only. When a .webp sibling exists (npm run
  * images) it is offered first through <picture>.
+ *
+ * A Photo may name a `src` that is not in public/ yet (the data is written
+ * ahead of the upload). In that case the placeholder renders and prints the
+ * expected filename, so dropping the file in is all it takes.
  */
 import PhotoSlot from './PhotoSlot.astro';
 import type { Photo } from '../data/types';
 import { withBase } from '../lib/paths';
-import { sizedVariant, webpVariant } from '../lib/images';
+import { photoExists, sizedVariant, webpVariant } from '../lib/images';
 
 interface Props {
   photo: Photo;
@@ -22,9 +26,10 @@ interface Props {
 }
 const { photo, ratio = '4 / 3', sizes = '(min-width: 1024px) 50vw, 100vw', priority = false, class: className } = Astro.props;
 
-const src = photo.src ? withBase(photo.src) : undefined;
-const small = photo.src && photo.hasSmall ? withBase(sizedVariant(photo.src, 800)) : undefined;
-const webp = webpVariant(photo.src);
+const onDisk = photoExists(photo.src);
+const src = onDisk ? withBase(photo.src!) : undefined;
+const small = onDisk && photo.hasSmall ? withBase(sizedVariant(photo.src!, 800)) : undefined;
+const webp = onDisk ? webpVariant(photo.src) : undefined;
 const webpSmall = webp && photo.hasSmall ? webpVariant(sizedVariant(photo.src!, 800)) : undefined;
 const webpSet = webp ? (webpSmall ? `${withBase(webpSmall)} 800w, ${withBase(webp)} 1600w` : withBase(webp)) : undefined;
 ---
@@ -47,7 +52,7 @@ const webpSet = webp ? (webpSmall ? `${withBase(webpSmall)} 800w, ${withBase(web
     </picture>
   </figure>
 ) : (
-  <PhotoSlot suggestion={photo.suggestion} ratio={ratio} class={className} />
+  <PhotoSlot suggestion={photo.suggestion} file={photo.src} ratio={ratio} class={className} />
 )}
 
 <style>
