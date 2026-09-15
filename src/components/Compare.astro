@@ -14,7 +14,7 @@
 import Media from './Media.astro';
 import type { ComparePair } from '../data/projects';
 import { withBase } from '../lib/paths';
-import { photoExists, webpVariant } from '../lib/images';
+import { photoExists, sizedVariant, webpVariant } from '../lib/images';
 
 interface Props {
   pair: ComparePair;
@@ -25,13 +25,28 @@ interface Props {
 const { pair, ratio = '4 / 3', sizes = '(min-width: 1024px) 50vw, 100vw', class: className } = Astro.props;
 const ready = photoExists(pair.before.src) && photoExists(pair.after.src);
 
-const img = (photo: typeof pair.before) => ({
-  src: withBase(photo.src!),
-  webp: webpVariant(photo.src),
-  alt: photo.alt ?? '',
-  width: photo.width,
-  height: photo.height,
-});
+const img = (photo: typeof pair.before) => {
+  const full = photo.width && photo.width > 1600 ? photo.width : 1600;
+  const steps = (variant: (p: string) => string | undefined, base: string) => {
+    if (!photo.hasSmall) return base;
+    const out: string[] = [];
+    for (const w of [800, 1600]) {
+      const v = variant(sizedVariant(photo.src!, w));
+      if (v && w < full) out.push(`${withBase(v)} ${w}w`);
+    }
+    out.push(`${base} ${full}w`);
+    return out.join(', ');
+  };
+  const webp = webpVariant(photo.src);
+  return {
+    src: withBase(photo.src!),
+    srcset: steps((p) => (photoExists(p) ? p : undefined), withBase(photo.src!)),
+    webpSet: webp ? steps((p) => webpVariant(p), withBase(webp)) : undefined,
+    alt: photo.alt ?? '',
+    width: photo.width,
+    height: photo.height,
+  };
+};
 const before = ready ? img(pair.before) : undefined;
 const after = ready ? img(pair.after) : undefined;
 ---
@@ -40,12 +55,12 @@ const after = ready ? img(pair.after) : undefined;
   {ready && before && after ? (
     <div class="cmp__frame frame" style={`aspect-ratio: ${ratio}; --pos: 50%`} data-compare>
       <picture class="cmp__pic">
-        {before.webp && <source type="image/webp" srcset={withBase(before.webp)} />}
-        <img src={before.src} alt={before.alt} width={before.width} height={before.height} loading="lazy" decoding="async" sizes={sizes} />
+        {before.webpSet && <source type="image/webp" srcset={before.webpSet} sizes={sizes} />}
+        <img src={before.src} srcset={before.srcset} sizes={sizes} alt={before.alt} width={before.width} height={before.height} loading="lazy" decoding="async" />
       </picture>
       <picture class="cmp__pic cmp__pic--after">
-        {after.webp && <source type="image/webp" srcset={withBase(after.webp)} />}
-        <img src={after.src} alt={after.alt} width={after.width} height={after.height} loading="lazy" decoding="async" sizes={sizes} />
+        {after.webpSet && <source type="image/webp" srcset={after.webpSet} sizes={sizes} />}
+        <img src={after.src} srcset={after.srcset} sizes={sizes} alt={after.alt} width={after.width} height={after.height} loading="lazy" decoding="async" />
       </picture>
       <span class="cmp__tag cmp__tag--before" aria-hidden="true">Before</span>
       <span class="cmp__tag cmp__tag--after" aria-hidden="true">After</span>

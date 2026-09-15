@@ -80,7 +80,7 @@ const galleryRatio: Record<(typeof galleryShape)[number], string> = { tall: '4 /
             </div>
           </div>
           <div class="ch__compare-grid">
-            {b.pairs.map((pair, j) => <Compare pair={pair} class={j === 0 ? 'ch__compare-lead' : undefined} sizes={j === 0 ? '100vw' : '(min-width: 1024px) 50vw, 100vw'} />)}
+            {b.pairs.map((pair, j) => <Compare pair={pair} ratio="3 / 2" class={j === 0 ? 'ch__compare-lead' : undefined} sizes={j === 0 ? '100vw' : '(min-width: 1024px) 50vw, 100vw'} />)}
           </div>
         </div>
       );

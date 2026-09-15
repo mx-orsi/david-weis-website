@@ -74,12 +74,16 @@ name the file each one expects; the map from his Drive filenames is in
   events. Edit freely; it is one list in `projects.ts`.
 - **Sixth slider (pool):** left out, the data is there commented out. Say the
   word to add it.
-- **Which Unit 102 photo opens the chapter:** "102 Koi Pond After
-  Landscapers ripped all the greenery out" is assumed; "Koi Pond right after
-  it was full cleaned out" is the alternative.
-- **Aquatic plants folder:** the ten IMG_ files are unnamed, so Max picks
-  which is the pink lily, white lily, canna, yellow flower, dragonfly, koi
-  and rocks shot when renaming.
+- **Photos are in (2026-09-14).** The chapter opens on the cleared pond
+  (Max's `102-koi-pond-during-renovation`). The gallery uses the pink lily,
+  koi in clear water, orange canna, white lily, dragonfly, koi below the
+  rock plantings and the small red floating bloom. The "primary yard" slider
+  uses the pair David filed under Unit 104 and labeled 106 in his brief; it
+  is labeled Unit 106 on the page, so tell us if that should be 104.
+- **David's portraits:** the garden club section uses the black-shirt shot
+  among the plantings; the blue-shirt walkway shot now fills the home page
+  "Ownership" slot and the mural shot fills the About page environmental
+  portrait, which also solves the home and About openers looking alike.
 - **Featured reviews (Max, 2026-09-14: "take the best ones"):** pinned in
   `featuredIds`. Home: G. B. (seller) and Mike C. (buyer). About: Kathy B.
   (1031 exchange across two cities), Justin A. and Thomas Z. (both

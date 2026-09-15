@@ -92,7 +92,15 @@ export const about = {
     ],
     photo: { suggestion: 'David at a community event, for example with Gay For Good or a Palm Springs neighborhood organization' } as Photo,
   },
-  portrait: { suggestion: 'A second, environmental portrait of David, for example on the coast or at a project' } as Photo,
+  portrait: {
+    suggestion: 'David at the Querencia Palms mural, among the lantana',
+    src: '/images/querencia-palms/querencia-palms-david-weis-realtor-mural-palm-springs.jpg',
+    alt: 'David Weis standing in front of the Querencia Palms mural in Palm Springs, surrounded by orange and yellow lantana in bloom',
+    width: 2048,
+    height: 1365,
+    hasSmall: true,
+    position: 'center 38%',
+  } as Photo,
   closing: {
     title: "Let's talk about what you're trying to do.",
     body: 'You do not need to know exactly what the next move is before reaching out. Sometimes that is the conversation we need to have first.',

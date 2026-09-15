@@ -28,19 +28,34 @@ const { photo, ratio = '4 / 3', sizes = '(min-width: 1024px) 50vw, 100vw', prior
 
 const onDisk = photoExists(photo.src);
 const src = onDisk ? withBase(photo.src!) : undefined;
-const small = onDisk && photo.hasSmall ? withBase(sizedVariant(photo.src!, 800)) : undefined;
 const webp = onDisk ? webpVariant(photo.src) : undefined;
-const webpSmall = webp && photo.hasSmall ? webpVariant(sizedVariant(photo.src!, 800)) : undefined;
-const webpSet = webp ? (webpSmall ? `${withBase(webpSmall)} 800w, ${withBase(webp)} 1600w` : withBase(webp)) : undefined;
+
+/**
+ * Size ladder: -800 and -1600 variants when they exist (npm run images), then
+ * the full file at its real width. Browsers pick the smallest that fits.
+ */
+const fullWidth = photo.width && photo.width > 1600 ? photo.width : 1600;
+const ladder = (base: string, toVariant: (p: string) => string | undefined) => {
+  if (!photo.hasSmall) return undefined;
+  const steps: string[] = [];
+  for (const w of [800, 1600]) {
+    const v = toVariant(sizedVariant(photo.src!, w));
+    if (v && w < fullWidth) steps.push(`${withBase(v)} ${w}w`);
+  }
+  steps.push(`${base} ${fullWidth}w`);
+  return steps.length > 1 ? steps.join(', ') : undefined;
+};
+const small = onDisk ? ladder(src!, (p) => (photoExists(p) ? p : undefined)) : undefined;
+const webpSet = webp ? ladder(withBase(webp), (p) => webpVariant(p)) ?? withBase(webp) : undefined;
 ---
 
 {src ? (
   <figure class:list={['media', 'frame', className]} style={`aspect-ratio: ${ratio}`}>
     <picture>
-      {webpSet && <source type="image/webp" srcset={webpSet} sizes={webpSmall ? sizes : undefined} />}
+      {webpSet && <source type="image/webp" srcset={webpSet} sizes={small ? sizes : undefined} />}
       <img
         src={src}
-        srcset={small ? `${small} 800w, ${src} 1600w` : undefined}
+        srcset={small}
         sizes={small ? sizes : undefined}
         alt={photo.alt ?? ''}
         width={photo.width}

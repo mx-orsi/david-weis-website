@@ -50,7 +50,15 @@ export const home = {
       'Is the problem the price, or the presentation?',
     ],
     closing: 'That is where experience matters.',
-    photo: { suggestion: 'David on site at one of the projects, for example on the Sierra Chalet deck or in the Querencia Palms courtyard' },
+    photo: {
+      suggestion: 'David on the Querencia Palms walkway',
+      src: '/images/querencia-palms/querencia-palms-walkway-courtyard-path-palm-springs-david-weis.jpg',
+      alt: 'David Weis standing on the front walkway at Querencia Palms in Palm Springs, with the San Jacinto Mountains behind him',
+      width: 1365,
+      height: 2048,
+      hasSmall: true,
+      position: 'center 30%',
+    },
   },
   strategy: {
     title: 'Property is personal. Strategy should be too.',
