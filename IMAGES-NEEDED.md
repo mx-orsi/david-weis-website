@@ -22,7 +22,7 @@ appears; if the SEO name differs, say so and the data gets pointed at it.
 | Belmont Beach House | `public/images/belmont-beach-house/` | `belmont-beach-house-exterior-mission-beach-san-diego.jpg` (new lead) · `belmont-beach-house-ocean-view-mission-beach-san-diego.jpg` (two-up). The interiors already there move down. |
 | Kensington Canyon, web-sized replacements | `public/images/kensington-canyon/` | Save the better files under the same eleven names already in the folder and they replace the 1024px ones in place. New extra photos: any name; they get slotted by hand. |
 | The Cole, more pool shots | `public/images/the-cole/` | Any name; slotted by hand. Note: 2018–2020 files are low resolution because they were exported for web/social at the time, not because of the era. The photographer's or Mark's originals would be full size. |
-| Market breaks | `public/images/markets/` | `san-diego-downtown-skyline-sunset.jpg` · `palm-springs-vista-las-palmas-mountains-valley.jpg` (or wind turbines) · Big Bear is filled by the mountain-bike shot for now; a Village-in-winter or lake-with-snowcaps photo can replace it. |
+| Market photos | `public/images/markets/` | **Done 2026-09-15** with Max's picks from the Unsplash shortlist: downtown San Diego at sunset, wind turbines under the snow-capped San Jacintos, Big Bear Lake from above in winter. They lead the market pages and the home cards; the earlier Unsplash shots moved to the San Diego and Palm Springs mid-page breaks. David's own photos can replace any of them under the same filenames. |
 
 ## Status report — 2026-09-14 (evening)
 
@@ -31,10 +31,7 @@ appears; if the SEO name differs, say so and the data gets pointed at it.
 | Page | Slot | What would fit |
 | --- | --- | --- |
 | Sierra Chalet | lead + interiors, once the listing shoot arrives | Max's 2026-09-15 upload (renovation and action shots) fills every slot for now: finished exterior leads, walls-open + framing pair, the snow exterior wide, and a gallery of the red cabin before, David mixing concrete, the dogs at the door and the carved bear. The hot tub chapter has all three phone photos. When the professional listing photos land, swap the lead and add the upper deck with the lake view and the screened lower deck with the spa. |
-| San Diego market page | 16:9 image break | Kensington streetscape or the Mission Beach boardwalk |
-| Palm Springs market page | 16:9 image break | A Palm Springs street with the San Jacinto Mountains behind it |
 | Properties | 3 listing cards + 3 sold cards | Waits on David's Properties decision and listing details |
-| Home + market openers | 3 market cards / page headers | Currently Unsplash stand-ins (La Jolla cove, mid-century Palm Springs home, Big Bear cabin). Fine to launch with; David's own would be better. |
 
 ### Better versions wanted
 
