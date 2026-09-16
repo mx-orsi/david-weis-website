@@ -686,6 +686,11 @@ export const projects: readonly Project[] = [
      * after "Build it. Sell it. Move on." Files go in public/images/the-cole/
      * under these names; add or remove entries to match what he sent.
      */
+    /*
+     * Before photos of the motor lodge, from David (2026-09-15). Two matched
+     * pairs right after "Build it. Sell it. Move on." The before shots are
+     * small web files from the time; that roughness is part of the story.
+     */
     chapters: [
       {
         id: 'before',
@@ -694,20 +699,20 @@ export const projects: readonly Project[] = [
           {
             type: 'pair',
             photos: [
-              { suggestion: 'The motor lodge before: the same view as the pool-at-dusk photo, if there is one', src: '/images/the-cole/the-cole-motor-lodge-before-renovation-palm-springs.jpg', alt: 'The former motor lodge in Palm Springs before it became The Cole Hotel', hasSmall: true },
-              { suggestion: 'The Cole after, matching angle', src: '/images/the-cole/the-cole-hotel-after-renovation-palm-springs.jpg', alt: 'The Cole Hotel after the renovation, from the same angle', hasSmall: true },
+              { suggestion: 'The motor lodge courtyard before', src: '/images/the-cole/the-cole-hotel-before-renovation-palm-springs-david-weis-04.jpg', alt: 'The motor lodge courtyard before the renovation: a bare two-story building, a white block wall and a single palm', width: 542, height: 371 },
+              { suggestion: 'The Cole pool with the building behind', src: '/images/the-cole/the-cole-hotel-pool-desert-oasis-palm-springs-david-weis.jpg', alt: 'The Cole pool after the renovation, white loungers with turquoise cushions and striped umbrellas beneath the colored doors', width: 2400, height: 1680, hasSmall: true },
             ],
             ratio: '4 / 3',
             captions: ['The motor lodge Mark bought.', 'The Cole.'],
           },
           {
-            type: 'gallery',
-            label: 'The motor lodge before the renovation',
+            type: 'pair',
             photos: [
-              { suggestion: 'Before: the pool area', src: '/images/the-cole/the-cole-before-pool-palm-springs.jpg', alt: 'The pool area of the motor lodge before the renovation', hasSmall: true },
-              { suggestion: 'Before: a guest room', src: '/images/the-cole/the-cole-before-guest-room-palm-springs.jpg', alt: 'A motor lodge guest room before the renovation', hasSmall: true },
-              { suggestion: 'Before: the exterior from the street', src: '/images/the-cole/the-cole-before-exterior-street-palm-springs.jpg', alt: 'The motor lodge exterior from the street before the renovation', hasSmall: true },
+              { suggestion: 'The motor lodge from the street, before', src: '/images/the-cole/the-cole-hotel-before-renovation-palm-springs-david-weis-01.jpg', alt: 'The former motor lodge from North Palm Canyon Drive before the renovation, its stone facade and carport under the mountains', width: 541, height: 370 },
+              { suggestion: 'The courtyard dug up mid-construction', src: '/images/the-cole/the-cole-hotel-before-renovation-palm-springs-david-weis-02.jpg', alt: 'The courtyard of the motor lodge torn up during construction, with the pool excavation framed in lumber', width: 2400, height: 1800, hasSmall: true },
             ],
+            ratio: '4 / 3',
+            captions: ['From the street, before.', 'The courtyard, mid-construction.'],
           },
         ],
       },
@@ -720,9 +725,9 @@ export const projects: readonly Project[] = [
     // Max's six photos (2026-09-14), his SEO filenames.
     photos: [
       {
-        suggestion: 'Pool at dusk with the two-story hotel and its colored doors behind it',
-        src: '/images/the-cole/the-cole-adults-only-boutique-retreat-david-weis.jpg',
-        alt: 'The Cole Hotel pool at dusk: white loungers with turquoise cushions, striped umbrellas and the two-story motor-lodge building with its orange, yellow and green doors lit behind',
+        suggestion: 'The pool at sunset, palms and cabanas against a pink sky',
+        src: '/images/the-cole/the-cole-hotel-pool-deck-boutique-hotel-david-weis.jpg',
+        alt: 'The Cole Hotel pool at sunset: turquoise and white loungers, cabanas and striped umbrellas under tall palms and a pink sky',
         width: 2400,
         height: 1680,
         hasSmall: true,
@@ -766,6 +771,22 @@ export const projects: readonly Project[] = [
         width: 1174,
         height: 1270,
         position: 'center 70%',
+      },
+      {
+        suggestion: 'A pool corner at dusk with the Cole sign lit beyond the wall',
+        src: '/images/the-cole/the-cole-hotel-pool-san-jacinto-mountain-views-david-weis.jpg',
+        alt: 'A corner of the Cole pool at dusk, a lounger and cabana in the foreground and the lit Cole sign rising beyond the block wall',
+        width: 2400,
+        height: 1680,
+        hasSmall: true,
+      },
+      {
+        suggestion: 'The bar with a tiered stand of cupcakes',
+        src: '/images/the-cole/the-cole-hotel-guest-experience-palm-springs-david-weis.jpg',
+        alt: 'The bar at The Cole, backlit bottles on the shelves and a tiered stand of cupcakes on the counter',
+        width: 2400,
+        height: 1640,
+        hasSmall: true,
       },
     ],
     logo: { src: '/images/the-cole-hotel-logo.svg', alt: 'The Cole Hotel logo', width: 211, height: 86 },
