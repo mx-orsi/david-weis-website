@@ -19,7 +19,7 @@ appears; if the SEO name differs, say so and the data gets pointed at it.
 | --- | --- | --- |
 | Community (About page) | `public/images/community/` | **Done 2026-09-15.** 24 photos in; the Gay For Good booth sits beside the copy and nine tiles fill the gallery. The other 14 stay in the folder as spares. |
 | The Cole, before photos | `public/images/the-cole/` | A before/after pair after "Build it. Sell it. Move on.": `the-cole-motor-lodge-before-renovation-palm-springs.jpg` + `the-cole-hotel-after-renovation-palm-springs.jpg` (matching angle if one exists), then a small before gallery: `the-cole-before-pool-palm-springs.jpg` · `the-cole-before-guest-room-palm-springs.jpg` · `the-cole-before-exterior-street-palm-springs.jpg`. More or fewer is fine; the list is in `projects.ts`. |
-| Belmont Beach House | `public/images/belmont-beach-house/` | `belmont-beach-house-exterior-mission-beach-san-diego.jpg` (new lead) · `belmont-beach-house-ocean-view-mission-beach-san-diego.jpg` (two-up). The interiors already there move down. |
+| Belmont Beach House | `public/images/belmont-beach-house/` | **Done 2026-09-15.** The Mission Beach aerial leads; the house with its rooftop deck and the Mission Bay aerial pair up; four interiors close. Unused: the entry stair, the second bedroom and the plain kitchen shot. |
 | Kensington Canyon | `public/images/kensington-canyon/` | The 2026-09-15 "web" upload was the same 1024px size as before; three new angles were added to the gallery (kitchen under the skylights, stained-glass bathroom, bedroom with fireplace) plus the stone-tub bath. **Still wanted:** the full-size MLS originals from David's Drive folder, saved under the existing filenames, to sharpen the lead. |
 | The Cole, more pool shots | `public/images/the-cole/` | Any name; slotted by hand. Note: 2018–2020 files are low resolution because they were exported for web/social at the time, not because of the era. The photographer's or Mark's originals would be full size. |
 | Market photos | `public/images/markets/` | **Done 2026-09-15** with Max's picks from the Unsplash shortlist: downtown San Diego at sunset, wind turbines under the snow-capped San Jacintos, Big Bear Lake from above in winter. They lead the market pages and the home cards; the earlier Unsplash shots moved to the San Diego and Palm Springs mid-page breaks. David's own photos can replace any of them under the same filenames. |
@@ -37,7 +37,6 @@ appears; if the SEO name differs, say so and the data gets pointed at it.
 
 - **The Cole:** the pool-at-dusk lead and the guest suite are enlarged low-res files and look soft. Full-resolution originals under the same filenames would swap in.
 - **Kensington Canyon:** all files are 1024px wide, so the lead exterior is upscaled. Larger originals, same filenames.
-- **Belmont Beach House:** no exterior, deck or ocean photo in the set; the living room leads. One ocean-side shot would fix the page.
 
 ### Uploaded but not used (28 photos)
 

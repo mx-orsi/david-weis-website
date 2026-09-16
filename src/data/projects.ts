@@ -1063,19 +1063,30 @@ export const projects: readonly Project[] = [
         ],
       },
     ],
-    // Beach and exterior shots are coming from David (2026-09-15). Until they
-    // land the living room leads; then these two placeholders take over.
+    // Max's photos (2026-09-14 and 2026-09-15). The aerial of the beach leads; the house and Mission Bay pair up; interiors close.
     photos: [
       {
-        suggestion: 'Exterior of Belmont Beach House with the beach beyond',
-        src: '/images/belmont-beach-house/belmont-beach-house-exterior-mission-beach-san-diego.jpg',
-        alt: 'Belmont Beach House from outside, with the Mission Beach sand and ocean beyond',
+        suggestion: 'Aerial of Mission Beach',
+        src: '/images/belmont-beach-house/belmont-beach-house-mission-beach-aerial-san-diego.jpg',
+        alt: 'Mission Beach from the air: the long strand, the surf and the boardwalk with the city beyond',
+        width: 2048,
+        height: 1536,
         hasSmall: true,
       },
       {
-        suggestion: 'The beach or the ocean view from the house',
-        src: '/images/belmont-beach-house/belmont-beach-house-ocean-view-mission-beach-san-diego.jpg',
-        alt: 'The ocean and Mission Beach shoreline seen from Belmont Beach House',
+        suggestion: 'The house with its rooftop deck',
+        src: '/images/belmont-beach-house/belmont-beach-house-exterior-mission-beach-san-diego.jpg',
+        alt: 'Belmont Beach House from above: a terracotta three-story home with a rooftop deck among the palms of Mission Beach',
+        width: 1239,
+        height: 1130,
+        hasSmall: true,
+      },
+      {
+        suggestion: 'Aerial of Mission Bay',
+        src: '/images/belmont-beach-house/belmont-beach-house-mission-bay-aerial-san-diego.jpg',
+        alt: 'Mission Bay from the air, with sailboats moored along the sand and the city behind',
+        width: 2048,
+        height: 1536,
         hasSmall: true,
       },
       {
@@ -1095,14 +1106,6 @@ export const projects: readonly Project[] = [
         hasSmall: true,
       },
       {
-        suggestion: 'Entry stair',
-        src: '/images/belmont-beach-house/belmont-beach-house-mission-beach-san-diego-david-weis.jpg',
-        alt: 'The exterior stair up to Belmont Beach House, with a palm and blue sky above',
-        width: 2048,
-        height: 1365,
-        hasSmall: true,
-      },
-      {
         suggestion: 'Bedroom',
         src: '/images/belmont-beach-house/belmont-beach-house-near-belmont-park-boardwalk-david-weis.jpg',
         alt: 'A bedroom at Belmont Beach House with a white bed, blue linens and a ceiling fan',
@@ -1114,22 +1117,6 @@ export const projects: readonly Project[] = [
         suggestion: 'Kitchen counter with bar seating',
         src: '/images/belmont-beach-house/belmont-beach-house-oceanfront-deck-mission-beach-david-weis.jpg',
         alt: 'The kitchen counter at Belmont Beach House with bar seating',
-        width: 2048,
-        height: 1365,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Second bedroom',
-        src: '/images/belmont-beach-house/belmont-beach-house-two-car-garage-mission-beach-david-weis.jpg',
-        alt: 'A second bedroom at Belmont Beach House with coastal artwork',
-        width: 2048,
-        height: 1365,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Kitchen',
-        src: '/images/belmont-beach-house/belmont-beach-house-ocean-bay-views-mission-beach-david-weis.jpg',
-        alt: 'The kitchen at Belmont Beach House with stainless appliances and a tile backsplash',
         width: 2048,
         height: 1365,
         hasSmall: true,
