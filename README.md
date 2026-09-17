@@ -23,7 +23,7 @@ Requires Node 22.12+.
 | Page | Route | Notes |
 | --- | --- | --- |
 | Home | `/` | Seven short sections from the deck; full stories live on interior pages |
-| About | `/about` | Full story, career chapters, The Cole, community |
+| About | `/about` | Chapter-driven (`Chapter.astro`, two chapters around the career grid): the personal story, The Cole, community, markets and closing |
 | Markets | `/san-diego`, `/palm-springs`, `/big-bear` | Shared `MarketPage` template |
 | Experience | `/experience` | Landing with all seven project cards |
 | Project pages | `/experience/<slug>` | One shared `ProjectPage` structure, generated from `projects.ts` |
@@ -82,12 +82,27 @@ public/images/       ← headshot, logos, compliance marks, Unsplash market phot
   that is not in `public/` yet. The placeholder then prints the expected
   filename, and the photo appears as soon as a file with that name is dropped
   in (no data edit needed). `IMAGES-NEEDED.md` lists the expected names.
-- **Deep-dive chapter on a project page:** give the project a `chapter`
-  (`projects.ts`), a list of typed blocks rendered by `Chapter.astro` after the
-  story section it names: `story` (optionally with an `aside` portrait),
-  `photo` (container or full-bleed, optional caption), `pair`, `callout`,
-  `compare` (before/after sliders) and `gallery` (irregular editorial grid).
-  Querencia Palms' grounds chapter is the first; any project can have one.
+- **Deep-dive chapter on a project page:** give the project one or more
+  `chapters` (`projects.ts`), each a list of typed blocks rendered by
+  `Chapter.astro`. `after: -1` puts a chapter right after the hero lead photo,
+  before `sections[0]` (Kensington Canyon and Vista Voltaire are told this
+  way, entirely as a chapter); any other `after` value inserts it after that
+  story section. Block types: `story` (optionally with an `aside` portrait,
+  its own `asideRatio` and `asideCaption`), `photo` (container or full-bleed,
+  optional caption and a `link`), `pair` (two photos, optional `labels` like
+  Before/After shown on the images and `emphasis` to size one larger),
+  `callout`, `compare` (before/after sliders), `gallery` (irregular editorial
+  grid), `strip` (hover/tap-to-reveal labels), `cta` (a single outbound-style
+  link with an optional note, not a button) and `sequence` (stages a visitor
+  steps through manually — one large photo, small numbered stage buttons and
+  Previous/Next, rendered by `Sequence.astro`; the Vista Voltaire fence is the
+  first). Querencia Palms' grounds chapter is the first deep-dive; any
+  project can have one.
+- **Lightbox:** every chapter photograph that is actually on disk (`photo`,
+  `pair` and `gallery` items, and a sequence's large image) opens larger on
+  click, via one `Lightbox.astro` dialog per project page. Placeholders are
+  never clickable. Esc, the backdrop or the close button all dismiss it, and
+  focus returns to the photo that opened it.
 - **Before/after sliders:** `Compare.astro` takes a `{ label, before, after }`
   pair. It is a native range input laid over two photos, so it drags with a
   mouse or finger, works with arrow keys and needs no library. Until both

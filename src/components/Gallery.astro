@@ -7,6 +7,8 @@
  */
 import Media from './Media.astro';
 import type { Photo } from '../data/types';
+import { withBase } from '../lib/paths';
+import { photoExists } from '../lib/images';
 
 export interface GalleryCaption {
   title: string;
@@ -23,22 +25,43 @@ const { photos, captions, label, class: className } = Astro.props;
 
 const shapes = ['wide', 'small', 'small', 'tall', 'small', 'tall', 'wide'] as const;
 const ratios: Record<(typeof shapes)[number], string> = { tall: '4 / 5', wide: '4 / 3', small: '1 / 1' };
+/**
+ * The cycling pattern fills six columns cleanly for 5–9 photos. Three photos
+ * become one even row of thirds and four become two rows of halves, so no
+ * tile is left alone on a row.
+ */
+const shapeFor = (j: number): (typeof shapes)[number] | 'third' | 'half' =>
+  photos.length === 3 ? 'third' : photos.length === 4 ? 'half' : shapes[j % shapes.length];
+const ratioFor = (s: ReturnType<typeof shapeFor>) => (s === 'third' ? '4 / 3' : s === 'half' ? '3 / 2' : ratios[s]);
 ---
 
 <div class:list={['gal', className]} role="group" aria-label={label}>
   {photos.map((ph, j) => {
     const shape = shapes[j % shapes.length];
     const cap = captions?.[j];
+    const zoomable = photoExists(ph.src);
+    const media = <Media photo={ph} ratio={ratios[shape]} sizes="(min-width: 1024px) 33vw, 50vw" />;
+    const wrapped = zoomable ? (
+      <a class="ch__zoom" href={withBase(ph.src!)} data-lightbox data-caption={cap?.title ?? ph.alt ?? ''}>
+        {media}
+      </a>
+    ) : (
+      media
+    );
     return cap ? (
       <figure class={`gal__figure gal__item gal__item--${shape}`}>
-        <Media photo={ph} ratio={ratios[shape]} sizes="(min-width: 1024px) 33vw, 50vw" />
+        {wrapped}
         <figcaption class="gal__caption">
           <span class="gal__title">{cap.title}</span>
           {cap.note && <span class="gal__note">{cap.note}</span>}
         </figcaption>
       </figure>
+    ) : zoomable ? (
+      <a class={`ch__zoom gal__item gal__item--${shape}`} href={withBase(ph.src!)} data-lightbox data-caption={ph.alt ?? ''}>
+        <Media photo={ph} ratio={ratios[shape]} sizes="(min-width: 1024px) 33vw, 50vw" />
+      </a>
     ) : (
-      <Media photo={ph} ratio={ratios[shape]} class={`gal__item gal__item--${shape}`} sizes="(min-width: 1024px) 33vw, 50vw" />
+      media
     );
   })}
 </div>
@@ -57,6 +80,12 @@ const ratios: Record<(typeof shapes)[number], string> = { tall: '4 / 5', wide: '
   }
   .gal :global(.gal__item--wide) {
     grid-column: span 4;
+  }
+  .gal :global(.gal__item--third) {
+    grid-column: span 2;
+  }
+  .gal :global(.gal__item--half) {
+    grid-column: span 3;
   }
   .gal__figure {
     margin: 0;
@@ -86,8 +115,13 @@ const ratios: Record<(typeof shapes)[number], string> = { tall: '4 / 5', wide: '
     .gal :global(.gal__item--small) {
       grid-column: span 1;
     }
-    .gal :global(.gal__item--wide) {
+    .gal :global(.gal__item--wide),
+    .gal :global(.gal__item--third),
+    .gal :global(.gal__item--half) {
       grid-column: span 2;
+    }
+    .gal :global(.gal__item--third) {
+      grid-column: span 1;
     }
   }
 </style>

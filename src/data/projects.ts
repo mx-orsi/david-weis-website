@@ -7,6 +7,7 @@
  * Palms and Vista Voltaire especially); no negative guest or tenant specifics
  * on Belmont Beach House. Photos are placeholders until David supplies them.
  */
+import { agent } from './site';
 import type { MarketSlug } from './site';
 import type { Cta, Photo, Stat } from './types';
 
@@ -35,8 +36,12 @@ export type ChapterBlock =
       heading: string;
       paragraphs: readonly string[];
       eyebrow?: string;
-      /** A photo set beside the prose (4:5) rather than below it. */
+      /** A photo set beside the prose (4:5 by default) rather than below it. */
       aside?: Photo;
+      /** CSS aspect ratio for the aside photo (default '4 / 5'). */
+      asideRatio?: string;
+      /** Caption shown under the aside photo. */
+      asideCaption?: string;
     }
   | {
       type: 'photo';
@@ -45,6 +50,8 @@ export type ChapterBlock =
       /** 'bleed' runs edge to edge; 'container' stays inside the page gutters. */
       width?: 'container' | 'bleed';
       caption?: string;
+      /** A link-arrow shown under the caption. */
+      link?: { label: string; href: string; external?: boolean };
     }
   | {
       type: 'pair';
@@ -52,6 +59,10 @@ export type ChapterBlock =
       photos: readonly [Photo, Photo];
       ratio?: string;
       captions?: readonly [string, string];
+      /** Small uppercase tags shown on the photos, always visible, e.g. ['Before', 'After']. */
+      labels?: readonly [string, string];
+      /** Unequal columns so one photo reads larger; equal by default. */
+      emphasis?: 'first' | 'second';
     }
   | {
       /** Oversized pull line, optionally a second line, a small note and short prose. */
@@ -72,17 +83,35 @@ export type ChapterBlock =
       type: 'gallery';
       photos: readonly Photo[];
       label: string;
-      /** Optional small label + note under each photo, aligned by index. */
-      captions?: readonly { title: string; note?: string }[];
+      /** Optional small label + note under each photo, aligned by index; an index can be left undefined. */
+      captions?: readonly ({ title: string; note?: string } | undefined)[];
     }
   | {
       /** Compact strip of photos; hover or tap reveals each label. No voting, no backend. */
       type: 'strip';
-      heading: string;
+      /** Omit for a strip with no heading (e.g. one following its own story block). */
+      heading?: string;
       photos: readonly Photo[];
       labels: readonly string[];
       /** One closing sentence under the strip. */
       closing?: string;
+    }
+  | {
+      /** A single outbound-style link with an optional muted note. Not a button. */
+      type: 'cta';
+      label: string;
+      href: string;
+      external?: boolean;
+      note?: string;
+    }
+  | {
+      /** A sequence of stages stepped through manually: one large photo with
+       * an always-visible title/caption, small numbered stage buttons, and
+       * Previous/Next controls. Rendered by Sequence.astro. */
+      type: 'sequence';
+      heading: string;
+      intro?: readonly string[];
+      stages: readonly { title: string; caption: string; photo: Photo }[];
     };
 
 export interface ProjectChapter {
@@ -802,7 +831,7 @@ export const projects: readonly Project[] = [
     name: 'Vista Voltaire',
     market: 'san-diego',
     place: 'San Diego',
-    kind: 'Restoration + Vacation Rental',
+    kind: 'Renovation + Ownership',
     kindIndex: '1924 Restoration',
     kindTeaser: 'Renovation + Vacation Rental',
     summary:
@@ -810,36 +839,343 @@ export const projects: readonly Project[] = [
     teaser: 'A restored 1924 home that proved sometimes the best real estate decision is knowing when not to sell.',
     teaserCta: 'Explore the Project',
     intro:
-      'Sometimes the most important decision in real estate is deciding not to follow the original plan. Vista Voltaire became exactly that kind of lesson.',
-    sections: [
+      'Vista Voltaire began with a straightforward plan: purchase a neglected 1924 home in Ocean Beach, renovate it, and sell it. What followed was less straightforward.',
+    sections: [],
+    /*
+     * David's 2026-09-17 brief, told as one continuous story: the purchase,
+     * the renovation, the fence (with its own five-stage sequence), the
+     * landscaping and the pivot to Celebrity Vacation Homes. `after: -1`
+     * puts it right after the hero lead photo. The old "Restore it. Sell
+     * it." / "The market stopped." sections are fully superseded by this.
+     * Files go in public/images/vista-voltaire/; see IMAGES-NEEDED.md for the
+     * map from David's Drive filenames.
+     */
+    chapters: [
       {
-        heading: 'Restore it. Sell it.',
-        paragraphs: [
-          'The 1924 home had been neglected for years. Other prospective buyers saw redevelopment potential and considered replacing it with multiple units. Mark saw something else: a historic farmhouse with character worth preserving. The property was restored rather than demolished, allowing one of the neighborhood\'s older homes to remain part of the community. The original plan was to complete the renovation and sell it.',
-        ],
-      },
-      {
-        heading: 'The market stopped.',
-        paragraphs: [
-          "By 2025, San Diego's market had slowed dramatically. Despite the quality of the restoration, buyers were not moving — and the same thing was happening across the market. As the listing agent, it was easy to interpret the lack of a sale as failure. But the problem was larger than one property.",
-        ],
-      },
-      {
-        heading: "If the market won't buy it, maybe the market should rent it.",
-        paragraphs: [
-          'We withdrew from the original plan and converted the home into a vacation rental. Initially, outside management seemed like the easiest solution. Instead, operating costs increased, rates underperformed and the guest experience did not meet our expectations. Eventually, I took the property back under our own management through Celebrity Vacation Homes. That changed everything. The branding improved, operations tightened, the guest experience became more consistent, and the property finally began performing in a way that matched the quality of the home.',
-        ],
-      },
-      {
-        heading: 'The home found a different buyer: the guest.',
-        paragraphs: [
-          'Interestingly, buyer interest eventually returned. But by then, something else had happened. Guests loved the home. The property had become a successful part of Celebrity Vacation Homes, and its operating value had changed the way we looked at selling it. What originally felt like a failed sale became another viable strategy.',
-        ],
-      },
-      {
-        heading: 'A price reduction is not a business plan.',
-        paragraphs: [
-          'Sometimes lowering a price is exactly the right decision. But there is a point where continuing to reduce simply because a property has not sold can destroy value unnecessarily. Vista Voltaire taught me to separate emotion from strategy. Look at the larger market. Understand carrying costs, alternatives, and what the asset can do. Then decide. Real estate gives owners options. My job is to help them understand those options before one decision becomes irreversible.',
+        id: 'the-story',
+        after: -1,
+        blocks: [
+          {
+            type: 'story',
+            heading: 'The house stayed. The plan changed.',
+            paragraphs: [
+              'There was a substantial renovation, a fence that needed several revisions, landscaping that took time to become what we envisioned, and a sale that never became the outcome we expected.',
+              'Today, the home is part of Celebrity Vacation Homes.',
+              'Looking back, the most interesting part is not simply how much the property changed. It is how our thinking changed along with it.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'The beginning',
+            heading: 'Two cities. Two projects. A lot happening at once.',
+            paragraphs: [
+              'I represented Mark on the purchase of Vista Voltaire.',
+              'The house needed considerable work, but Mark saw a home worth renovating rather than replacing. Bringing it back to life would give it another chapter while keeping it part of the neighborhood.',
+              'At the same time, we were working on Querencia Palms in Palm Springs.',
+              'Managing the demands of both projects meant dividing our attention between two properties, two cities, and very different challenges.',
+              'This time, we had a contractor on the renovation. After projects where Mark and I had been much more hands-on, not having to do the heavy lifting ourselves was a welcome change.',
+              'My involvement began with representing the purchase and continued through presentation, marketing, showings, and paying attention to what people were experiencing when they visited.',
+              'As the project progressed, that feedback became increasingly important.',
+            ],
+            aside: {
+              suggestion: 'The house before renovation',
+              src: '/images/vista-voltaire/vista-voltaire-front-before-renovation.jpg',
+              alt: 'Vista Voltaire before renovation, showing the home’s neglected condition.',
+            },
+            asideRatio: '4 / 3',
+            asideCaption: 'The house before renovation.',
+          },
+          {
+            type: 'story',
+            eyebrow: 'The renovation',
+            heading: 'The potential was there. The work was substantial.',
+            paragraphs: [
+              'The earlier photographs show why this was more than a cosmetic refresh.',
+              'Worn surfaces, tired cabinetry, and separated rooms made it difficult to appreciate the home’s potential. The construction photographs show another part of the process, with walls opened and the work well underway.',
+              'The finished interiors brought the spaces together through warm wood tones, lighter surfaces, and a consistent palette.',
+              'The transformation was not only about making the rooms look different. It was about making them feel welcoming and ready to use.',
+            ],
+            aside: {
+              suggestion: 'David on site during the renovation',
+              src: '/images/vista-voltaire/vista-voltaire-construction-portrait.jpg',
+              alt: 'David inside Vista Voltaire during the renovation, with exposed framing and construction visible around him.',
+            },
+            asideRatio: '4 / 5',
+            asideCaption: 'On site during the renovation.',
+          },
+          {
+            type: 'story',
+            heading: 'The kitchen and dining area',
+            paragraphs: [
+              'The kitchen and dining area became one of the clearest examples.',
+              'The earlier kitchen felt separate from the surrounding rooms. The finished space connects cooking, dining, and gathering around a generous breakfast counter.',
+              'Wood-toned cabinetry, white surfaces, textured tile, and warm lighting give the room a much lighter feeling without making it cold.',
+              'The wider photographs matter here. They show how the spaces relate to one another, not just the finishes we chose.',
+            ],
+          },
+          {
+            type: 'pair',
+            photos: [
+              {
+                suggestion: 'The kitchen before renovation',
+                src: '/images/vista-voltaire/vista-voltaire-kitchen-before-renovation.jpg',
+                alt: 'The Vista Voltaire kitchen before renovation.',
+              },
+              {
+                suggestion: 'The finished kitchen and dining room, wide',
+                src: '/images/vista-voltaire/ocean-beach-dining-room-with-water-views-2.jpg',
+                alt: 'The open kitchen and dining room at Vista Voltaire: oak cabinets, a white waterfall island with tan leather stools, a long wood dining table under a rattan pendant and two arched doorways',
+                width: 2048,
+                height: 1367,
+                hasSmall: true,
+              },
+            ],
+            labels: ['Before', 'After'],
+            captions: ['The kitchen, before renovation.', 'The kitchen, after renovation.'],
+            ratio: '4 / 3',
+          },
+          {
+            type: 'pair',
+            photos: [
+              {
+                suggestion: 'The dining area before renovation',
+                src: '/images/vista-voltaire/vista-voltaire-dining-before-renovation.jpg',
+                alt: 'The Vista Voltaire dining area before renovation.',
+              },
+              {
+                suggestion: 'The finished breakfast counter and its connection to the kitchen',
+                src: '/images/vista-voltaire/san-diego-vacation-rental-kitchen-with-coastal-views.jpg',
+                alt: 'Three tan leather stools at the fluted oak breakfast bar in the Vista Voltaire kitchen, under two brass and glass pendants',
+                width: 2048,
+                height: 1367,
+                hasSmall: true,
+              },
+            ],
+            labels: ['Before', 'After'],
+            captions: ['The dining area, before.', 'The dining area and its connection to the finished kitchen.'],
+            ratio: '4 / 3',
+          },
+          {
+            type: 'story',
+            heading: 'Same room. A different feeling.',
+            paragraphs: [
+              'The living room shows another side of the transformation.',
+              'During construction, tools and materials filled the space around the fireplace. In the finished room, that wall became the focal point of a bright, welcoming place to gather.',
+              'Warm coral tile, lighter wood tones, textured furnishings, and comfortable seating gave the room a different personality.',
+              'The fireplace wall and the windows on either side make the transformation easy to follow. What changed was how the whole room came together.',
+            ],
+          },
+          {
+            type: 'pair',
+            photos: [
+              {
+                suggestion: 'The living room during renovation',
+                src: '/images/vista-voltaire/vista-voltaire-living-room-during-renovation.jpg',
+                alt: 'The Vista Voltaire living room during renovation, tools and materials around the fireplace.',
+              },
+              {
+                suggestion: 'The finished living room',
+                src: '/images/vista-voltaire/vista-voltaire-ocean-beach-vacation-rental-san-diego.jpg',
+                alt: 'The living room at Vista Voltaire with a light sectional, two rust armchairs, a round oak coffee table and the original fireplace faced in terracotta tile',
+                width: 2048,
+                height: 1367,
+                hasSmall: true,
+              },
+            ],
+            labels: ['During renovation', 'After'],
+            captions: ['The living room during renovation.', 'The finished living room, with a warm palette and space to gather.'],
+            ratio: '4 / 3',
+          },
+          {
+            type: 'story',
+            heading: 'The smaller spaces changed, too.',
+            paragraphs: [
+              'Upstairs, the transformation continued through the landing and into a window-lined corner.',
+              'The finished nook became a place to sit and work, with the outlook becoming part of the experience.',
+              'These smaller spaces were not the headline features of the renovation, but they helped the house feel considered throughout.',
+            ],
+          },
+          {
+            type: 'pair',
+            photos: [
+              {
+                suggestion: 'The upstairs landing before renovation',
+                src: '/images/vista-voltaire/vista-voltaire-hallway-before-renovation.jpg',
+                alt: 'The upstairs landing at Vista Voltaire before renovation.',
+              },
+              {
+                suggestion: 'The upstairs landing, renewed',
+                src: '/images/vista-voltaire/vista-voltaire-hallway-after-renovation.jpg',
+                alt: 'The upstairs landing at Vista Voltaire after renovation.',
+              },
+            ],
+            labels: ['Before', 'After'],
+            captions: ['The upstairs landing, before.', 'The upstairs landing, renewed.'],
+            ratio: '4 / 3',
+          },
+          {
+            type: 'pair',
+            photos: [
+              {
+                suggestion: 'The window-lined corner before renovation',
+                src: '/images/vista-voltaire/vista-voltaire-window-nook-before-renovation.jpg',
+                alt: 'The window-lined corner at Vista Voltaire before renovation.',
+              },
+              {
+                suggestion: 'The window-lined corner, reimagined',
+                src: '/images/vista-voltaire/vista-voltaire-window-nook-after-renovation.jpg',
+                alt: 'The window-lined corner at Vista Voltaire reimagined as a place to sit and work.',
+              },
+            ],
+            labels: ['Before', 'After'],
+            captions: ['The window-lined corner, before.', 'A window-lined corner, reimagined as a place to sit and work.'],
+            ratio: '4 / 3',
+          },
+          {
+            type: 'story',
+            eyebrow: 'The part we thought would be simple',
+            heading: 'The fence had other plans.',
+            paragraphs: [
+              'One of the first things we did was build a six-foot solid fence.',
+              'The intention was straightforward: create privacy from the street and try to reduce traffic noise.',
+              'Then we discovered online that a complaint had been filed, and learned that the fence needed to change.',
+              'I used ChatGPT to look up the height requirements and passed the answer along. The feet-and-inches information we relied on was wrong. The fence was shortened, but the first correction still left it too tall.',
+              'Eventually, we removed alternating boards and reworked it into an open picket design.',
+              'It became a memorable lesson in checking the applicable requirements and exact measurements directly, rather than treating an online answer as a construction instruction.',
+              'The first fence was not entirely wasted effort. During construction, it had also helped control access to the property.',
+              'But the long-term privacy solution would turn out to be something that could grow.',
+            ],
+          },
+          {
+            type: 'story',
+            heading: 'I was picturing privacy. We had little boxwoods.',
+            paragraphs: [
+              'When the first landscaping was finished, I was excited to see the yard.',
+              'Then we pulled up.',
+              'I had been picturing a substantial green screen. What I saw were little boxwoods.',
+              'They added greenery, but they were not providing the privacy I had in mind. Mark expected the planting to grow in. I was thinking about how the property felt to someone touring it that day.',
+              'As we introduced the home through Compass Private Exclusives and brought agents through, feedback kept returning to the street setting.',
+              'That reinforced the issue I had been raising: the yard needed meaningful screening, not simply a planted border.',
+              'The boxwoods were relocated and taller hedge planting was introduced. Even then, it took another round of planting to create the density we wanted.',
+              'With more plants and time to fill in, the yard finally began to feel much more enclosed and personal.',
+              'We had started by trying to create privacy with a solid fence. We ended up with a more open fence and a much greener boundary.',
+              'It took several attempts, but the result was closer to the yard I had imagined.',
+            ],
+          },
+          {
+            type: 'callout',
+            text: 'I wasn’t simply asking for more plants. I was asking for more privacy.',
+          },
+          {
+            type: 'sequence',
+            heading: 'Five stages of a fence.',
+            stages: [
+              {
+                title: 'The starting point',
+                caption: 'The original fence and yard.',
+                photo: {
+                  suggestion: 'The original fence and yard',
+                  src: '/images/vista-voltaire/vista-voltaire-fence-1-original.jpg',
+                  alt: 'The original fence and front yard at Vista Voltaire, before any changes.',
+                },
+              },
+              {
+                title: 'The first approach',
+                caption: 'The solid fence early in construction.',
+                photo: {
+                  suggestion: 'The solid fence early in construction',
+                  src: '/images/vista-voltaire/vista-voltaire-fence-2-solid.jpg',
+                  alt: 'The solid six-foot fence at Vista Voltaire early in construction.',
+                },
+              },
+              {
+                title: 'A revised design',
+                caption: 'The fence being reworked into an open picket design.',
+                photo: {
+                  suggestion: 'The fence reworked into an open picket design',
+                  src: '/images/vista-voltaire/vista-voltaire-fence-3-open-picket.jpg',
+                  alt: 'The Vista Voltaire fence reworked into an open picket design.',
+                },
+              },
+              {
+                title: 'The first planting',
+                caption: 'The first planting added greenery, but not yet the screening we wanted.',
+                photo: {
+                  suggestion: 'The first planting along the fence line',
+                  src: '/images/vista-voltaire/vista-voltaire-fence-4-first-planting.jpg',
+                  alt: 'The first landscaping planted along the Vista Voltaire fence line, with young boxwoods.',
+                },
+              },
+              {
+                title: 'The fuller landscape',
+                caption: 'Taller, fuller planting changed the feeling of the yard.',
+                photo: {
+                  suggestion: 'The fuller, hedge-screened yard',
+                  src: '/images/vista-voltaire/vista-voltaire-coastal-exterior-san-diego.jpg',
+                  alt: 'Vista Voltaire from the front corner of the lot: fresh lawn, a gate and picket fence, tall palms and the black pergola over the entry',
+                  width: 2048,
+                  height: 1367,
+                  hasSmall: true,
+                },
+              },
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'A practical detail',
+            heading: 'A garage that opens both ways.',
+            paragraphs: [
+              'One of my favorite practical details at Vista Voltaire is the pass-through garage.',
+              'With garage doors at both ends, it offers a way through rather than simply a place to pull in and park.',
+              'It is a small feature compared with a whole-house renovation, but one that makes the property memorable.',
+              'Not every interesting part of a home is a finish or a design statement. Sometimes it is simply a different way to use the space.',
+            ],
+            aside: {
+              suggestion: 'Both doors open: Vista Voltaire’s pass-through garage',
+              src: '/images/vista-voltaire/vista-voltaire-pass-through-garage.jpg',
+              alt: 'Vista Voltaire’s pass-through garage with both overhead doors open and a vehicle parked between the openings.',
+            },
+            asideRatio: '4 / 3',
+            asideCaption: 'Both doors open: Vista Voltaire’s pass-through garage.',
+          },
+          {
+            type: 'story',
+            eyebrow: 'The next decision',
+            heading: 'We finished the house. Then reconsidered the plan.',
+            paragraphs: [
+              'The original intention was still to sell.',
+              'But the sale we expected did not materialize. We adjusted the presentation, responded to feedback, and reconsidered pricing.',
+              'As the listing agent, it was difficult not to take that personally. I cared about the house and the work that had gone into it. At the same time, we were managing the demands of Querencia Palms and our other responsibilities.',
+              'Eventually, we had to ask a different question.',
+              'Instead of continuing to focus only on finding a buyer, could the property work for us in another way?',
+              'That became the beginning of Vista Voltaire’s vacation-rental chapter.',
+              'We initially used outside management because I did not have the capacity to take on another rental while everything else was underway. The cost and guest experience did not meet our expectations.',
+              'Later, I took over management through Celebrity Vacation Homes, applying the hospitality, branding, and operating experience I had developed through our other properties.',
+              'Guests began enjoying the home in a way that changed how we thought about keeping it.',
+              'What had started as a renovation for resale became part of our hospitality business instead.',
+            ],
+          },
+          {
+            type: 'cta',
+            label: 'Explore Vista Voltaire at Celebrity Vacation Homes',
+            href: agent.vacationRentals.url,
+            external: true,
+            note: agent.vacationRentals.note,
+          },
+          {
+            type: 'story',
+            eyebrow: 'Looking back',
+            heading: 'Not the outcome we planned. One I’m glad we have.',
+            paragraphs: [
+              'Looking at Vista Voltaire now, I can laugh about the fence revisions and the little boxwoods.',
+              'I could not always laugh about them at the time.',
+              'The project reminded me that finishing construction does not necessarily mean every part of a property is working as intended. The arrival, privacy, presentation, and day-to-day use deserve attention too.',
+              'It also reinforced the importance of listening to feedback and being willing to reconsider the plan.',
+              'I sometimes think that if every detail had come together sooner, we might have sold the house and moved on.',
+              'Instead, we still have Vista Voltaire.',
+              'That was not the original plan. It is a chapter I have come to appreciate.',
+            ],
+          },
         ],
       },
     ],
@@ -848,69 +1184,11 @@ export const projects: readonly Project[] = [
       { value: 'Ocean Beach', label: 'San Diego' },
       { value: 'Celebrity Vacation Homes', label: 'Operated under our own management' },
     ],
-    // Max's eight photos (2026-09-14), his SEO filenames. Order sets the
-    // page: lead, two-up, wide break, then the closing gallery.
     photos: [
       {
         suggestion: 'Front facade, straight on: red door, pergola, walkway lined with lantana',
         src: '/images/vista-voltaire/vista-voltaire-exterior-above-ocean-beach-san-diego.jpg',
         alt: 'Vista Voltaire after the restoration: a white two-story home in Ocean Beach with black-trimmed windows, a wood front door under a pergola, red steps and a walkway lined with flowering lantana',
-        width: 2048,
-        height: 1367,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Living room: sectional, terracotta tile fireplace, ceiling fan, corner windows',
-        src: '/images/vista-voltaire/vista-voltaire-ocean-beach-vacation-rental-san-diego.jpg',
-        alt: 'The living room at Vista Voltaire with a light sectional, two rust armchairs, a round oak coffee table and the original fireplace faced in terracotta tile',
-        width: 2048,
-        height: 1367,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Entry: staircase, console table, brass chandelier, living room to the left',
-        src: '/images/vista-voltaire/ocean-beach-vacation-home-with-views-from-every-room.jpg',
-        alt: 'The entry at Vista Voltaire with the white staircase and square balusters, a walnut console table and a brass chandelier',
-        width: 2048,
-        height: 1367,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Kitchen and dining: waterfall island, bar stools, dining table under the rattan pendant, arched doorways',
-        src: '/images/vista-voltaire/ocean-beach-dining-room-with-water-views-2.jpg',
-        alt: 'The open kitchen and dining room at Vista Voltaire: oak cabinets, a white waterfall island with tan leather stools, a long wood dining table under a rattan pendant and two arched doorways',
-        width: 2048,
-        height: 1367,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Kitchen detail: range, brass pot filler, oak cabinets, white zellige tile',
-        src: '/images/vista-voltaire/ocean-beach-dining-room-with-water-views.jpg',
-        alt: 'Kitchen detail at Vista Voltaire: a stainless range and hood, a brass pot filler on glossy white tile and oak cabinets, with the front door visible beyond',
-        width: 2048,
-        height: 1367,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Kitchen bar: three tan leather stools at the fluted oak peninsula under brass pendants',
-        src: '/images/vista-voltaire/san-diego-vacation-rental-kitchen-with-coastal-views.jpg',
-        alt: 'Three tan leather stools at the fluted oak breakfast bar in the Vista Voltaire kitchen, under two brass and glass pendants',
-        width: 2048,
-        height: 1367,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Exterior from the front corner: lawn, palms, pergola over the entry',
-        src: '/images/vista-voltaire/vista-voltaire-coastal-exterior-san-diego.jpg',
-        alt: 'Vista Voltaire from the front corner of the lot: fresh lawn, a gate and picket fence, tall palms and the black pergola over the entry',
-        width: 2048,
-        height: 1367,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'From the street: driveway, garage, hedge and fence along the sidewalk',
-        src: '/images/vista-voltaire/vista-voltaire-drive-through-garage-san-diego.jpg',
-        alt: 'Vista Voltaire from the street, with the driveway, a black garage door, a new hedge inside the fence and palms overhead',
         width: 2048,
         height: 1367,
         hasSmall: true,
@@ -934,113 +1212,318 @@ export const projects: readonly Project[] = [
       'A deeply personal home and extensive renovation that taught me the value of preserving character while making an older property work beautifully for modern life.',
     intro:
       'Of all the properties in our portfolio, Kensington Canyon may be the most personal to me. For a long time, it was simply home.',
-    sections: [
+    sections: [],
+    /*
+     * The renovation chapter, from David's 2026-09-17 brief: the reclaimed
+     * stained-glass windows, the kitchen rework, the hardwood, the bathroom,
+     * the closet conversion and the grounds, each paired with a before/during
+     * photo where one exists. `after: -1` puts it right after the hero lead
+     * photo, so the page reads as one connected story with no separate
+     * sections up top. The closing two story blocks are the kept "vacation
+     * rental portfolio" and "protect a home" copy from the old page (the
+     * duplicate owner's-closets sentence removed, per David). Files go in
+     * public/images/kensington-canyon/; see IMAGES-NEEDED.md for the map from
+     * David's Drive filenames.
+     */
+    chapters: [
       {
-        heading: 'Preserve what made it special.',
-        paragraphs: [
-          'The home has the scale and presence of something from a storybook, surrounded by the Spanish and Tudor-influenced homes that give Kensington so much character. Its renovation became a lesson in restraint. Not everything old needs to be replaced — the original hardwood floors could be restored, and existing architectural character could remain. The goal was to make the home function better without stripping away the things that made it distinctive.',
-          'One of my favorite examples is the kitchen island. After searching endlessly for the right piece, inspiration came from an unexpected place: a beautifully built rolling tool chest. With a custom butcher-block top, it became an incredibly functional movable island and a true piece of furniture. Sometimes good design has more to do with creativity than price.',
-        ],
-      },
-      {
-        heading: 'Then home became an asset.',
-        paragraphs: [
-          "Eventually, Kensington Canyon became part of our vacation rental portfolio. That transition taught me something entirely different. It is not easy to hand your home to strangers. You create owner's closets, store sentimental pieces, rethink what linens and decor you are willing to replace, and accept that wear will happen. But you also realize that while you are somewhere else, another family is making memories in a home that otherwise might have been sitting empty.",
-        ],
-      },
-      {
-        heading: 'You can protect a home without being afraid to use it.',
-        paragraphs: [
-          'Investment decisions are not always purely financial. Sometimes a property is both personal and productive. The key is building boundaries and systems that allow it to be both. And if the strategy stops making sense, you reassess — short-term rental, long-term rental, personal residence, sale. Real estate rarely gives you only one option.',
+        id: 'the-renovation',
+        after: -1,
+        blocks: [
+          {
+            type: 'story',
+            eyebrow: 'The renovation',
+            heading: 'Make it work better. Keep what makes it home.',
+            paragraphs: [
+              'Kensington Canyon was our home, which made renovating it deeply personal.',
+              'Mark and I carried out the renovation ourselves, with help from his brother and nephews. Mark brought his experience as a licensed contractor, and I worked alongside him as we transformed spaces we already knew and loved. A stained-glass specialist restored three reclaimed windows that became some of the home’s most distinctive features.',
+              'The goal was not to make everything new.',
+              'We restored materials worth keeping, reconsidered how rooms functioned, and introduced details that gave the house even more character.',
+              'The finished photographs show the result. The photographs taken along the way show what it took to get there.',
+            ],
+            aside: {
+              suggestion: 'David during the Kensington Canyon renovation, safety glasses in hand',
+              src: '/images/kensington-canyon/kensington-canyon-renovation-selfie-david-weis.jpg',
+              alt: 'Renovation selfie at Kensington Canyon, with safety glasses in the foreground and exposed framing and brickwork behind.',
+            },
+            asideRatio: '4 / 5',
+            asideCaption: 'Kensington Canyon, during the work.',
+          },
+          {
+            type: 'story',
+            eyebrow: 'Reclaimed character',
+            heading: 'Three windows. A second life.',
+            paragraphs: [
+              'Some of my favorite additions to Kensington Canyon had a story long before they became part of ours.',
+              'Mark found three matching stained-glass windows in Dana Point and bought the entire set.',
+              'According to the history shared with us, they came from a Los Angeles house that was moved to make way for the 405 freeway. The windows were never reinstalled. Instead, they had been stored in an attic.',
+              'The stained-glass specialist who restored them believed they dated to the 1800s, based on the nails used in their construction.',
+              'A few panes were broken. The specialist carefully matched the color and aged appearance of the surrounding glass, making the repairs blend beautifully with the existing panes.',
+              'Then we found a place for each window.',
+              'One replaced the French doors that had opened from the dining room to the courtyard. Another went into the downstairs bathroom. The third was installed in the upstairs hallway where a sliding door had led to the balcony that became Mark’s closet.',
+              'Together, they connected three very different spaces through one shared detail.',
+              'They were not original to the house. But they became part of what makes it ours.',
+            ],
+          },
+          {
+            type: 'photo',
+            photo: {
+              suggestion: 'The dining room’s reclaimed stained-glass window',
+              src: '/images/kensington-canyon/kensington-canyon-stained-glass-dining-room-david-weis.jpg',
+              alt: 'The dining room at Kensington Canyon with a reclaimed stained-glass window in place of the former courtyard doors.',
+            },
+            ratio: '3 / 2',
+            caption: 'The dining room: reclaimed stained glass in place of the former courtyard doors.',
+          },
+          {
+            type: 'pair',
+            photos: [
+              {
+                suggestion: 'The reclaimed window in the downstairs bathroom',
+                src: '/images/kensington-canyon/kensington-canyon-stained-glass-bathroom-window-david-weis.jpg',
+                alt: 'The downstairs bathroom at Kensington Canyon with the reclaimed stained-glass window in a completely different setting.',
+              },
+              {
+                suggestion: 'The reclaimed window in the upstairs hallway',
+                src: '/images/kensington-canyon/kensington-canyon-stained-glass-hallway-david-weis.jpg',
+                alt: 'The upstairs hallway at Kensington Canyon with the third reclaimed stained-glass window at the former balcony doorway, hung with holiday garland.',
+              },
+            ],
+            ratio: '4 / 5',
+            captions: [
+              'The downstairs bathroom: the second window in a completely different setting.',
+              'The upstairs hallway: the third window at the former balcony doorway.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Rethinking the space',
+            heading: 'The same footprint. A different way to use it.',
+            paragraphs: [
+              'The kitchen became one of the most satisfying parts of the renovation.',
+              'We worked within its existing footprint, but reconsidered how the room functioned. The goal was not simply new finishes. It was a kitchen that was easier to move through, easier to use, and more enjoyable to gather in.',
+              'The fixed peninsula gave way to a movable island. Gray cabinetry, lighter countertops, patterned tile, stonework, and warm wood surfaces gave the space a different identity.',
+              'It still felt connected to the house. But the way we could use it had changed.',
+            ],
+          },
+          {
+            type: 'pair',
+            photos: [
+              {
+                suggestion: 'The earlier kitchen, with its fixed peninsula',
+                src: '/images/kensington-canyon/kensington-canyon-kitchen-before-peninsula-david-weis.jpg',
+                alt: 'The Kensington Canyon kitchen before renovation, with its fixed peninsula.',
+              },
+              {
+                suggestion: 'The reworked kitchen: range, stone surround, fridge, rolling island',
+                src: '/images/kensington-canyon/kensington-canyon-kitchen-after-island-david-weis.jpg',
+                alt: 'The reworked Kensington Canyon kitchen with a freestanding island, a stone range surround and the fridge.',
+              },
+            ],
+            labels: ['Before', 'After'],
+            emphasis: 'second',
+            captions: [
+              'The earlier kitchen, with its fixed peninsula.',
+              'The reworked kitchen, with a freestanding island and stone range surround.',
+            ],
+            ratio: '4 / 3',
+          },
+          {
+            type: 'story',
+            heading: 'The right island wasn’t in a kitchen showroom.',
+            paragraphs: [
+              'After a long search for the right island, the solution turned up in an unexpected place: Costco.',
+              'A rolling tool chest had the functional drawers and flexibility we had been looking for. We added a butcher-block top, stained it, and turned it into a working piece of kitchen furniture.',
+              'It gives us storage and a preparation surface when we need them. When we want more room for a gathering, we can roll it out of the way.',
+              'It remains one of my favorite decisions in the house. Not because it was the obvious choice, but because it solved the problem.',
+            ],
+            aside: {
+              suggestion: 'The rolling tool-chest kitchen island, cropped to the island',
+              src: '/images/kensington-canyon/kensington-canyon-estate-canyon-views-san-diego-david-weis.jpg',
+              alt: 'The kitchen at Kensington Canyon: a river-rock wall behind the range, grey cabinets and the rolling tool-chest island with its butcher-block top',
+              width: 1024,
+              height: 683,
+              hasSmall: true,
+              position: 'center 80%',
+            },
+            asideRatio: '1 / 1',
+            asideCaption: 'A tool chest, reimagined for the kitchen.',
+          },
+          {
+            type: 'story',
+            eyebrow: 'What we kept',
+            heading: 'Not everything needed to be new.',
+            paragraphs: [
+              'Kensington taught me to look more carefully at what was already there.',
+              'The hardwood floors did not need to disappear beneath something new. They needed to be restored.',
+              'Seeing them refinished reinforced how much warmth and character existing materials can bring to a home. The dining room’s wood ceiling and familiar architectural details were part of that same feeling.',
+              'Some of the most satisfying parts of the renovation were not additions. They were the things we chose to keep.',
+            ],
+          },
+          {
+            type: 'pair',
+            photos: [
+              {
+                suggestion: 'The dining room during the renovation',
+                src: '/images/kensington-canyon/kensington-canyon-dining-room-during-renovation-david-weis.jpg',
+                alt: 'The Kensington Canyon dining room during the renovation, its wood ceiling and floor exposed.',
+              },
+              {
+                suggestion: 'The refinished hardwood floors',
+                src: '/images/kensington-canyon/kensington-canyon-hardwood-floors-refinished-david-weis.jpg',
+                alt: 'The existing hardwood floors at Kensington Canyon, refinished.',
+              },
+            ],
+            labels: ['During renovation', 'After'],
+            emphasis: 'second',
+            captions: ['The dining room during the renovation.', 'The existing hardwood, refinished.'],
+            ratio: '4 / 3',
+          },
+          {
+            type: 'photo',
+            photo: {
+              suggestion: 'Living room with the vaulted wood ceiling',
+              src: '/images/kensington-canyon/kensington-canyon-estate-indoor-outdoor-living-david-weis.jpg',
+              alt: 'The living room at Kensington Canyon with a vaulted wood ceiling, a river-rock fireplace and a long sofa',
+              width: 1024,
+              height: 683,
+              hasSmall: true,
+            },
+            ratio: '16 / 9',
+            caption: 'The living room’s wood ceiling and river-rock fireplace, kept.',
+          },
+          {
+            type: 'story',
+            eyebrow: 'A smaller transformation',
+            heading: 'A small room with a strong identity.',
+            paragraphs: [
+              'The downstairs bathroom became another example of combining something old with a completely different setting.',
+              'White wall tile, a navy vanity, patterned flooring, and warm metal finishes created a fresh backdrop for the reclaimed stained glass.',
+              'The window is the memorable detail, but the surrounding choices let it stand out.',
+              'The result feels updated without feeling interchangeable with every other renovated bathroom.',
+            ],
+          },
+          {
+            type: 'pair',
+            photos: [
+              {
+                suggestion: 'The downstairs bathroom before renovation',
+                src: '/images/kensington-canyon/kensington-canyon-bathroom-before-david-weis.jpg',
+                alt: 'The downstairs bathroom at Kensington Canyon before renovation.',
+              },
+              {
+                suggestion: 'The finished bathroom with the stained-glass window',
+                src: '/images/kensington-canyon/kensington-canyon-stained-glass-bathroom-david-weis.jpg',
+                alt: 'A bathroom at Kensington Canyon with original leaded stained-glass windows, a navy vanity and a brass mirror',
+                width: 1024,
+                height: 683,
+                hasSmall: true,
+              },
+            ],
+            labels: ['Before', 'After'],
+            captions: ['The bathroom before renovation.', 'New finishes surrounding a reclaimed focal point.'],
+            ratio: '4 / 3',
+          },
+          {
+            type: 'story',
+            eyebrow: 'Making the house work for us',
+            heading: 'A different use for the space.',
+            paragraphs: [
+              'Upstairs, the renovation changed how we used part of the house.',
+              'The former balcony became Mark’s closet. In the hallway, where the sliding door had provided access to that balcony, we installed the third matching stained-glass window.',
+              'One change addressed how we wanted to use the space. The other gave the former doorway a new identity.',
+              'Together, they reflected what we were trying to accomplish throughout Kensington: make the house work better for our lives while giving the changes a character of their own.',
+            ],
+          },
+          {
+            type: 'pair',
+            photos: [
+              {
+                suggestion: 'The balcony during its conversion to a closet',
+                src: '/images/kensington-canyon/kensington-canyon-closet-before-david-weis.jpg',
+                alt: 'The former balcony at Kensington Canyon during its conversion into a closet.',
+              },
+              {
+                suggestion: 'The completed closet',
+                src: '/images/kensington-canyon/kensington-canyon-closet-after-david-weis.jpg',
+                alt: 'The completed closet at Kensington Canyon, in the space that was once a balcony.',
+              },
+            ],
+            labels: ['During conversion', 'After'],
+            captions: ['The former balcony during its conversion.', 'The completed closet.'],
+            ratio: '4 / 3',
+          },
+          {
+            type: 'story',
+            eyebrow: 'Outside, too',
+            heading: 'The work didn’t stop at the door.',
+            paragraphs: [
+              'My involvement was not limited to the interiors.',
+              'Outside, I worked in the planting beds, preparing soil and adding plants. It was another part of making Kensington our own.',
+              'The outdoor spaces mattered just as much as the rooms. The planting around the house, the decks, the pool, and the canyon setting were all part of the home we loved.',
+              'Some spaces needed work. Others needed care and a fresh perspective. Not everything needed to be replaced to feel renewed.',
+            ],
+            aside: {
+              suggestion: 'Preparing the planting beds at Kensington Canyon',
+              src: '/images/kensington-canyon/kensington-canyon-landscaping-planting-beds-david-weis.jpg',
+              alt: 'Garden planting in progress beside Kensington Canyon’s brick exterior, with bagged soil, potted plants, and stone borders.',
+            },
+            asideRatio: '4 / 3',
+            asideCaption: 'Preparing the planting beds at Kensington Canyon.',
+          },
+          {
+            type: 'pair',
+            photos: [
+              {
+                suggestion: 'The deck and outdoor gathering spaces, before',
+                src: '/images/kensington-canyon/kensington-canyon-deck-before-david-weis.jpg',
+                alt: 'The deck and outdoor gathering spaces at Kensington Canyon, before.',
+              },
+              {
+                suggestion: 'The outdoor spaces overlooking the pool and canyon, after',
+                src: '/images/kensington-canyon/kensington-canyon-deck-after-david-weis.jpg',
+                alt: 'The outdoor spaces at Kensington Canyon overlooking the pool and canyon, after.',
+              },
+            ],
+            labels: ['Before', 'After'],
+            captions: [
+              'The deck and outdoor gathering spaces, before.',
+              'The outdoor spaces overlooking the pool and canyon, after.',
+            ],
+            ratio: '4 / 3',
+          },
+          {
+            type: 'story',
+            heading: 'Then we had to learn how to share it.',
+            paragraphs: [
+              'After putting so much of ourselves into Kensington Canyon, opening it to vacation guests was another adjustment.',
+              'This was not simply a furnished property. It was a home we had lived in, worked on, and made our own.',
+              'We created owner’s storage, put away sentimental belongings, and worked out how the house could welcome other families without losing its place in our own lives.',
+              'The renovation taught me how personal improving a property can be. Sharing it taught me that ownership sometimes requires a different kind of flexibility.',
+            ],
+          },
+          {
+            type: 'story',
+            heading: 'Then home became an asset.',
+            paragraphs: [
+              'Eventually, Kensington Canyon became part of our vacation rental portfolio. That transition taught me something entirely different. It is not easy to hand your home to strangers. But you also realize that while you are somewhere else, another family is making memories in a home that otherwise might have been sitting empty.',
+            ],
+          },
+          {
+            type: 'story',
+            heading: 'You can protect a home without being afraid to use it.',
+            paragraphs: [
+              'Investment decisions are not always purely financial. Sometimes a property is both personal and productive. The key is building boundaries and systems that allow it to be both. And if the strategy stops making sense, you reassess — short-term rental, long-term rental, personal residence, sale. Real estate rarely gives you only one option.',
+            ],
+          },
         ],
       },
     ],
     photos: [
-    // Max's photos (2026-09-14, three more 2026-09-15). All are the 1024px web exports; the MLS originals would sharpen the lead.
       {
         suggestion: 'Front exterior from the street',
         src: '/images/kensington-canyon/kensington-canyon-spanish-architecture-san-diego-david-weis.jpg',
         alt: 'Kensington Canyon from the street: a brick and half-timbered Tudor with a red door, behind a river-rock wall and dark picket fence',
-        width: 1024,
-        height: 683,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Living room with the vaulted wood ceiling',
-        src: '/images/kensington-canyon/kensington-canyon-estate-indoor-outdoor-living-david-weis.jpg',
-        alt: 'The living room at Kensington Canyon with a vaulted wood ceiling, a river-rock fireplace and a long sofa',
-        width: 1024,
-        height: 683,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'The rolling tool-chest kitchen island',
-        src: '/images/kensington-canyon/kensington-canyon-estate-canyon-views-san-diego-david-weis.jpg',
-        alt: 'The kitchen at Kensington Canyon: a river-rock wall behind the range, grey cabinets and the rolling tool-chest island with its butcher-block top',
-        width: 1024,
-        height: 683,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Pool and spa under the trees',
-        src: '/images/kensington-canyon/kensington-canyon-estate-near-balboa-park-david-weis.jpg',
-        alt: 'The pool and spa at Kensington Canyon, edged in river rock beneath tall trees',
-        width: 1024,
-        height: 683,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'The arched front door',
-        src: '/images/kensington-canyon/kensington-canyon-private-hillside-estate-david-weis.jpg',
-        alt: 'The arched front door of Kensington Canyon set in brick, with a stone path and planting',
-        width: 1024,
-        height: 683,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Kitchen window to the canyon',
-        src: '/images/kensington-canyon/kensington-canyon-estate-san-diego-david-weis.jpg',
-        alt: 'The kitchen window at Kensington Canyon opening to the canyon, with a bowl of lemons on the butcher block',
-        width: 1024,
-        height: 683,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Bedroom with French doors',
-        src: '/images/kensington-canyon/kensington-canyon-mid-city-san-diego-real-estate-david-weis.jpg',
-        alt: 'A bedroom at Kensington Canyon with a wood ceiling, a wood bed and French doors to a balcony',
-        width: 1024,
-        height: 683,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Kitchen under the skylights',
-        src: '/images/kensington-canyon/kensington-canyon-kitchen-skylights-san-diego-david-weis.jpg',
-        alt: 'The Kensington Canyon kitchen under its skylights, with the river-rock wall, grey cabinets and the rolling island',
-        width: 1024,
-        height: 683,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Bathroom with the stained-glass windows',
-        src: '/images/kensington-canyon/kensington-canyon-stained-glass-bathroom-david-weis.jpg',
-        alt: 'A bathroom at Kensington Canyon with original leaded stained-glass windows, a navy vanity and a brass mirror',
-        width: 1024,
-        height: 683,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Primary bedroom with the fireplace',
-        src: '/images/kensington-canyon/kensington-canyon-primary-bedroom-fireplace-david-weis.jpg',
-        alt: 'The primary bedroom at Kensington Canyon with a wood ceiling, a fireplace and French doors to the balcony',
-        width: 1024,
-        height: 683,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Primary bath with the stone fireplace',
-        src: '/images/kensington-canyon/kensington-canyon-estate-adams-avenue-san-diego-david-weis.jpg',
-        alt: 'The primary bath at Kensington Canyon: a soaking tub beside a river-rock fireplace and a glass shower',
         width: 1024,
         height: 683,
         hasSmall: true,

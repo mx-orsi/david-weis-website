@@ -1,0 +1,242 @@
+---
+/**
+ * Sequence — a set of stages a visitor steps through manually (the Vista
+ * Voltaire fence went through five). One large photo with the current
+ * stage's title and caption always visible below it, small numbered stage
+ * buttons under that, and Previous/Next controls. No autoplay, no timers:
+ * nothing changes unless the visitor moves it.
+ *
+ * Progressive: every stage's photo is in the markup from the start (only the
+ * active one visible, via a class), so the page works without JS and shows
+ * the first stage. Placeholders (Media) work here like anywhere else.
+ */
+import Media from './Media.astro';
+import type { Photo } from '../data/types';
+import { withBase } from '../lib/paths';
+import { photoExists } from '../lib/images';
+
+export interface SequenceStage {
+  title: string;
+  caption: string;
+  photo: Photo;
+}
+
+interface Props {
+  heading: string;
+  intro?: readonly string[];
+  stages: readonly SequenceStage[];
+}
+const { heading, intro, stages } = Astro.props;
+---
+
+<div class="seq" data-sequence>
+  <div class="seq__head">
+    <h2 class="title-lg">{heading}</h2>
+    {intro && (
+      <div class="prose">
+        {intro.map((p) => <p>{p}</p>)}
+      </div>
+    )}
+  </div>
+
+  <div class="seq__stage">
+    {stages.map((s, i) => {
+      const media = <Media photo={s.photo} ratio="4 / 3" sizes="100vw" />;
+      const zoomable = photoExists(s.photo.src);
+      return (
+        <figure class:list={['seq__frame', i !== 0 && 'is-hidden']} data-seq-frame data-index={i}>
+          {zoomable ? (
+            <a class="ch__zoom" href={withBase(s.photo.src!)} data-lightbox data-caption={s.caption}>
+              {media}
+            </a>
+          ) : (
+            media
+          )}
+          <figcaption class="seq__caption">
+            <span class="seq__stage-title">{s.title}</span>
+            <span class="seq__stage-text">{s.caption}</span>
+          </figcaption>
+        </figure>
+      );
+    })}
+  </div>
+
+  <div class="seq__controls">
+    <ul class="seq__thumbs" role="list">
+      {stages.map((s, i) => (
+        <li>
+          <button type="button" class="seq__thumb" data-seq-thumb data-index={i} aria-pressed={i === 0 ? 'true' : 'false'}>
+            <Media photo={s.photo} ratio="4 / 3" sizes="(min-width: 900px) 14vw, (min-width: 600px) 30vw, 45vw" class="seq__thumb-media" />
+            <span class="seq__thumb-meta">
+              <span class="seq__thumb-n" aria-hidden="true">{i + 1}</span>
+              <span class="seq__thumb-title">{s.title}</span>
+            </span>
+          </button>
+        </li>
+      ))}
+    </ul>
+    <div class="seq__nav">
+      <button type="button" class="seq__nav-btn" data-seq-prev>Previous stage</button>
+      <button type="button" class="seq__nav-btn" data-seq-next>Next stage</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Manual, stepped navigation: nothing plays on its own. Arrow keys move
+  // between stages when a thumbnail or a Previous/Next button has focus.
+  for (const seq of document.querySelectorAll<HTMLElement>('[data-sequence]')) {
+    const frames = Array.from(seq.querySelectorAll<HTMLElement>('[data-seq-frame]'));
+    const thumbs = Array.from(seq.querySelectorAll<HTMLButtonElement>('[data-seq-thumb]'));
+    const prev = seq.querySelector<HTMLButtonElement>('[data-seq-prev]');
+    const next = seq.querySelector<HTMLButtonElement>('[data-seq-next]');
+    let active = 0;
+
+    const show = (i: number) => {
+      active = (i + frames.length) % frames.length;
+      frames.forEach((f, j) => f.classList.toggle('is-hidden', j !== active));
+      thumbs.forEach((t, j) => t.setAttribute('aria-pressed', j === active ? 'true' : 'false'));
+    };
+
+    for (const [i, t] of thumbs.entries()) t.addEventListener('click', () => show(i));
+    prev?.addEventListener('click', () => show(active - 1));
+    next?.addEventListener('click', () => show(active + 1));
+
+    const controls = [...thumbs, prev, next].filter((el): el is HTMLButtonElement => Boolean(el));
+    for (const el of controls) {
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          show(active + 1);
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          show(active - 1);
+        }
+      });
+    }
+  }
+</script>
+
+<style>
+  .seq {
+    display: grid;
+    gap: 1.75rem;
+  }
+  .seq__head {
+    display: grid;
+    gap: 0.9rem;
+    max-width: 46ch;
+  }
+  .seq__frame {
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .seq__frame.is-hidden {
+    display: none;
+  }
+  .seq__caption {
+    display: grid;
+    gap: 0.2rem;
+  }
+  .seq__stage-title {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+  .seq__stage-text {
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+    max-width: 60ch;
+  }
+  .seq__controls {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .seq__thumbs {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.75rem;
+    padding: 0;
+    margin: 0;
+  }
+  .seq__thumb {
+    display: grid;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+  }
+  .seq__thumb :global(.media),
+  .seq__thumb :global(.slot) {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  .seq__thumb[aria-pressed='true'] :global(.media),
+  .seq__thumb[aria-pressed='true'] :global(.slot) {
+    outline-color: var(--blue);
+  }
+  .seq__thumb:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+  .seq__thumb-meta {
+    display: grid;
+    gap: 0.15rem;
+  }
+  .seq__thumb-n {
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .seq__thumb[aria-pressed='true'] .seq__thumb-n {
+    color: var(--blue);
+  }
+  .seq__thumb-title {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--ink);
+  }
+  .seq__nav {
+    display: flex;
+    gap: 1rem;
+  }
+  .seq__nav-btn {
+    padding: 0.65em 1.2em;
+    border: 1px solid var(--line-strong);
+    background: none;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .seq__nav-btn:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+  .seq__nav-btn:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+  @media (max-width: 599px) {
+    .seq__thumbs {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 420px) {
+    .seq__thumbs {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

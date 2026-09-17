@@ -1,0 +1,110 @@
+---
+/**
+ * Lightbox — one dialog per project page that opens any photograph marked up
+ * elsewhere with `data-lightbox` (Chapter's photo, pair and gallery items,
+ * and Sequence's active stage — only when the file is on disk). Included
+ * once, at the bottom of ProjectPage.astro; nothing to configure here.
+ *
+ * The clicked link supplies the full-size `href` (the original file, not a
+ * srcset variant) and a `data-caption`. Esc, the backdrop and the close
+ * button all close it; focus returns to the link that opened it.
+ */
+import Icon from './Icon.astro';
+---
+
+<dialog class="lb" data-lightbox-dialog aria-label="Photograph">
+  <button type="button" class="lb__close" data-lightbox-close aria-label="Close">
+    <Icon name="close" />
+  </button>
+  <img class="lb__img" data-lightbox-img alt="" />
+  <p class="lb__caption" data-lightbox-caption></p>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox-dialog]');
+  const img = dialog?.querySelector<HTMLImageElement>('[data-lightbox-img]');
+  const caption = dialog?.querySelector<HTMLElement>('[data-lightbox-caption]');
+  let opener: HTMLElement | null = null;
+
+  if (dialog && img && caption) {
+    document.addEventListener('click', (e) => {
+      const link = (e.target as HTMLElement).closest<HTMLAnchorElement>('[data-lightbox]');
+      if (!link) return;
+      e.preventDefault();
+      opener = link;
+      img.src = link.href;
+      img.alt = link.querySelector('img')?.alt ?? '';
+      caption.textContent = link.dataset.caption ?? '';
+      dialog.showModal();
+    });
+
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+    dialog.querySelector('[data-lightbox-close]')?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('close', () => {
+      img.src = '';
+      opener?.focus();
+      opener = null;
+    });
+  }
+</script>
+
+<style>
+  .lb {
+    position: relative;
+    max-width: min(92vw, 1400px);
+    max-height: 92vh;
+    margin: auto;
+    padding: 2.5rem 1rem 1rem;
+    border: 0;
+    background: transparent;
+    color: #ffffff;
+  }
+  .lb[open] {
+    display: grid;
+    gap: 0.75rem;
+    justify-items: center;
+  }
+  .lb::backdrop {
+    background: rgba(10, 11, 13, 0.9);
+  }
+  .lb__img {
+    display: block;
+    max-width: 100%;
+    max-height: 78vh;
+    width: auto;
+    height: auto;
+  }
+  .lb__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.5em;
+    border: 0;
+    background: none;
+    color: #ffffff;
+    cursor: pointer;
+  }
+  .lb__close:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+  .lb__caption {
+    margin: 0;
+    max-width: 60ch;
+    font-size: 0.8125rem;
+    text-align: center;
+    color: #ffffff;
+  }
+  .lb__caption:empty {
+    display: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lb,
+    .lb::backdrop {
+      transition: none;
+      animation: none;
+    }
+  }
+</style>

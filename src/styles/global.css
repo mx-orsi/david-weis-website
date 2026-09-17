@@ -402,6 +402,17 @@ sup.reg {
 
 /* Media ------------------------------------------------------------- */
 
+/* Chapter photographs (Chapter, Gallery, Sequence) open larger on click,
+   only when the file is on disk; placeholders are never wrapped in this. */
+.ch__zoom {
+  display: block;
+  cursor: zoom-in;
+}
+.ch__zoom:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
 .frame {
   position: relative;
   overflow: hidden;

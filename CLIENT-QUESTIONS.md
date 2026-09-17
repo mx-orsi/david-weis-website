@@ -54,7 +54,33 @@ in a new Involvement line under the page intro. Photos are placeholders that
 name the file each one expects; the map from his Drive filenames is in
 `IMAGES-NEEDED.md`.
 
+**David, 2026-09-15 and 2026-09-16 briefs (Kensington Canyon, Vista Voltaire, About):** all
+three pages were rebuilt as chapter-driven stories on 2026-09-17 with his copy verbatim, headings in
+sentence case, and named placeholder slots for every photo he referenced (see IMAGES-NEEDED.md). His
+accuracy rules are followed: Kensington's windows are "reclaimed", the kitchen kept its footprint, the
+hardwood was restored; Voltaire had a contractor and David is never described as doing the construction;
+fence copy makes no regulatory claims; no revenue or occupancy figures anywhere.
+
 ## Still open
+
+**From the 2026-09-17 rebuilds:**
+
+- **Kensington Canyon:** David's new "Then we had to learn how to share it." section and the deck's
+  "Then home became an asset." both described owner's closets and stored belongings. Per his note to
+  remove duplicates, the sentence was dropped from the older deck section; his new section keeps it.
+  The deck's "Preserve what made it special." section is gone (superseded by the renovation story).
+- **Vista Voltaire:** the deck's five sections, including "A price reduction is not a business plan.",
+  were replaced by his new sequence, which ends on "Not the outcome we planned." If he wants the old
+  closing lesson back, it is one block to add. The Celebrity Vacation Homes link currently points at
+  the CVH home page; send the Vista Voltaire listing URL to deep-link it.
+- **About page:** his 2026-09-16 copy replaces the approved deck's About copy wholesale (hero, moving
+  story, career, The Cole, license, today, community). The home page teaser sections still use the
+  deck. Toy-drive figures (200 guests, 300 toys in 2024; 230 toys in 2025) are his; the "75,000
+  lights" and "15th annual" are his. Public figures named in captions (Assemblymember Chris Ward,
+  Karine Jean-Pierre, Senator Toni G. Atkins, Mayor Todd Gloria) are as he wrote them.
+- **Photos for all three pages** are uploads in progress from Max; every slot prints its expected
+  filename.
+
 
 **For David, from the interiors chapter (2026-09-15):**
 

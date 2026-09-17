@@ -9,6 +9,7 @@
  */
 import Chapter from './Chapter.astro';
 import Icon from './Icon.astro';
+import Lightbox from './Lightbox.astro';
 import Media from './Media.astro';
 import Story from './Story.astro';
 import StatRow from './StatRow.astro';
@@ -93,6 +94,7 @@ const breadcrumbJsonLd = {
   </header>
 
   <div class="pp-body">
+    {p.chapters?.filter((c) => c.after === -1).map((c) => <Chapter chapter={c} slug={p.slug} />)}
     {p.sections.map((s, i) => (
       <>
         <section class="pp-section" aria-labelledby={`${p.slug}-s${i}`}>
@@ -145,6 +147,8 @@ const breadcrumbJsonLd = {
       </nav>
     </div>
   </footer>
+
+  <Lightbox />
 </article>
 
 <style>
