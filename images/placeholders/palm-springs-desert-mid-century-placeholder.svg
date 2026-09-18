@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Placeholder image for a mid-century home in Palm Springs">
+  <defs>
+    <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4efe6"/>
+      <stop offset="0.6" stop-color="#e9dcc8"/>
+      <stop offset="1" stop-color="#d4bc9c"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sand)"/>
+  <g fill="none" stroke="#b57e47" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55">
+    <circle cx="640" cy="150" r="52"/>
+    <path d="M0 400 L120 330 L210 372 L330 286 L430 348 L520 310 L640 380 L720 350 L800 392"/>
+    <path d="M0 456 H800"/>
+    <path d="M250 456 V420 H460 V456"/>
+    <path d="M300 420 V396 H420"/>
+    <path d="M130 456 V440 H200"/>
+    <circle cx="200" cy="440" r="4" fill="#f4efe6"/>
+    <path d="M670 456 V436 H600"/>
+    <circle cx="600" cy="436" r="4" fill="#f4efe6"/>
+    <path d="M40 520 H320 L336 504 H560"/>
+    <circle cx="560" cy="504" r="4" fill="#f4efe6"/>
+  </g>
+</svg>
