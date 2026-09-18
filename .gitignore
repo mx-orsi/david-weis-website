@@ -27,3 +27,6 @@ pnpm-debug.log*
 
 # preview build output
 dist-preview/
+
+# David's raw community upload (videos, docs, originals) — staged copies live in public/images
+assets-source/community-raw/

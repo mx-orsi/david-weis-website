@@ -37,10 +37,10 @@ const ratioFor = (s: ReturnType<typeof shapeFor>) => (s === 'third' ? '4 / 3' : 
 
 <div class:list={['gal', className]} role="group" aria-label={label}>
   {photos.map((ph, j) => {
-    const shape = shapes[j % shapes.length];
+    const shape = shapeFor(j);
     const cap = captions?.[j];
     const zoomable = photoExists(ph.src);
-    const media = <Media photo={ph} ratio={ratios[shape]} sizes="(min-width: 1024px) 33vw, 50vw" />;
+    const media = <Media photo={ph} ratio={ratioFor(shape)} sizes="(min-width: 1024px) 33vw, 50vw" />;
     const wrapped = zoomable ? (
       <a class="ch__zoom" href={withBase(ph.src!)} data-lightbox data-caption={cap?.title ?? ph.alt ?? ''}>
         {media}
@@ -58,10 +58,10 @@ const ratioFor = (s: ReturnType<typeof shapeFor>) => (s === 'third' ? '4 / 3' : 
       </figure>
     ) : zoomable ? (
       <a class={`ch__zoom gal__item gal__item--${shape}`} href={withBase(ph.src!)} data-lightbox data-caption={ph.alt ?? ''}>
-        <Media photo={ph} ratio={ratios[shape]} sizes="(min-width: 1024px) 33vw, 50vw" />
+        <Media photo={ph} ratio={ratioFor(shape)} sizes="(min-width: 1024px) 33vw, 50vw" />
       </a>
     ) : (
-      media
+      <div class={`gal__item gal__item--${shape}`}>{media}</div>
     );
   })}
 </div>
