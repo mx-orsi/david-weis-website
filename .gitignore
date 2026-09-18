@@ -30,3 +30,6 @@ dist-preview/
 
 # David's raw community upload (videos, docs, originals) — staged copies live in public/images
 assets-source/community-raw/
+
+# Full Drive downloads from David; never published, compared against staged photos
+assets-source/drive-*/

@@ -187,7 +187,8 @@ export const aboutChapterB: ProjectChapter = {
       photos: [
         { suggestion: 'First Listing', src: '/images/about/david-weis-first-listing.jpg', alt: 'David Weis at the sign for his first real estate listing', width: 1170, height: 1555, hasSmall: true },
         { suggestion: 'Legislative Day 2023', src: '/images/about/david-weis-legislative-day-sacramento-2023.jpg', alt: 'David Weis at REALTOR® Legislative Day in Sacramento, 2023', width: 1170, height: 1163, hasSmall: true },
-        { suggestion: 'Broker caravan', src: '/images/about/david-weis-broker-caravan.jpg', alt: 'David Weis presenting a listing at a broker caravan', width: 1206, height: 1193, hasSmall: true },
+        { suggestion: 'Broker caravan', src: '/images/about/david-weis-broker-caravan.jpg', alt: 'David Weis presenting a listing at a broker caravan', width: 1206, height: 1193, hasSmall: true },,
+        { suggestion: 'A sold property', src: '/images/about/david-weis-sold-property.jpg', alt: 'The two-story Third Avenue triplex in Bankers Hill, San Diego, after it sold', width: 800, height: 600 }
       ],
       captions: [{ title: 'First listing' }, { title: 'Legislative Day, Sacramento' }, { title: 'Broker caravan' }],
     },

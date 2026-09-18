@@ -23,6 +23,25 @@ appears; if the SEO name differs, say so and the data gets pointed at it.
 | Kensington Canyon | `public/images/kensington-canyon/` | The 2026-09-15 "web" upload was the same 1024px size as before; three new angles were added to the gallery (kitchen under the skylights, stained-glass bathroom, bedroom with fireplace) plus the stone-tub bath. **Still wanted:** the full-size MLS originals from David's Drive folder, saved under the existing filenames, to sharpen the lead. |
 | Market photos | `public/images/markets/` | **Done 2026-09-15** with Max's picks from the Unsplash shortlist: downtown San Diego at sunset, wind turbines under the snow-capped San Jacintos, Big Bear Lake from above in winter. They lead the market pages and the home cards; the earlier Unsplash shots moved to the San Diego and Palm Springs mid-page breaks. David's own photos can replace any of them under the same filenames. |
 
+## Drive download check — 2026-09-18
+
+Max downloaded David's entire Drive to `assets-source/drive-2026-09-18/` (ignored by git)
+and it was compared file by file against everything already in the project. Genuinely new:
+
+- **Kensington Canyon › Web › Web Photos:** 65 professional listing photos, "Daytime 1–65".
+  Same 1024px web size as the set already on the page, so no resolution gain; the aerials
+  (1–6), the primary suite with its stone tub (47–52) and the pool angles (36–43) are new
+  views. Not placed, since David's Kensington brief moves photos into the story and drops
+  the bottom gallery. The full-size MLS originals are still what would sharpen the lead.
+- **Sold Listings › 3700 Third Ave:** two small photos (800px and 720px) of the sold
+  triplex. The exterior now fills the "Sold" tile on About.
+- **Listings:** one photo each of 2487 S Gene Autry Trail Unit A (4000px) and Querencia
+  Palms Unit 104 (2048px). These belong to the Properties page once the IDX decision is made.
+- A "Real Estate Mixers" video (not used).
+
+Still not in the Drive: Vista Voltaire fence stages 2–4 and the pass-through garage, the
+GMC Sierra EV, The Cole photographer originals, Kensington MLS originals.
+
 ## Status report — 2026-09-14 (evening)
 
 ### Still needed
