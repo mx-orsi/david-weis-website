@@ -300,7 +300,7 @@ export const aboutChapterB: ProjectChapter = {
       label: 'Gay For Good',
       photos: [
         { suggestion: 'Gay For Good toy drive', src: '/images/community/david-weis-gay-for-good-volunteer-san-diego-03.jpg', alt: 'Volunteers with Santa at the Gay For Good toy drive', width: 1206, height: 777, hasSmall: true },
-        { suggestion: 'Gay For Good Hillcrest Honors', src: '/images/about/david-weis-gay-for-good-hillcrest-honors.jpg', alt: 'David Weis and another honoree on the red carpet at the Hillcrest Honors awards', width: 797, height: 1165 },
+        { suggestion: 'Gay For Good Hillcrest Honors', src: '/images/about/david-weis-gay-for-good-hillcrest-honors.jpg', alt: 'David Weis and another honoree on the red carpet at the Hillcrest Honors awards', width: 797, height: 1165, position: 'center 12%' },
         { suggestion: 'Gay For Good Equality California gala', src: '/images/about/david-weis-gay-for-good-equality-california-gala.jpg', alt: 'David Weis with a friend at the Equality California gala', width: 1012, height: 1554, hasSmall: true },
       ],
       captions: [{ title: 'Toy drive' }, { title: 'Hillcrest Honors' }, { title: 'Equality California gala' }],
@@ -322,7 +322,7 @@ export const aboutChapterB: ProjectChapter = {
       photos: [
         { suggestion: 'Garden Club May Luncheon Hat Competition', src: '/images/about/david-weis-garden-club-hat-competition.jpg', alt: 'David Weis wearing the flower-covered hat and holding a bouquet at the Village Garden Club of La Jolla’s hat competition', width: 1800, height: 2400, hasSmall: true },
         { suggestion: 'Rosemary simple syrup', src: '/images/about/david-weis-garden-club-rosemary-syrup.jpg', alt: 'Bottles of rosemary simple syrup made for the Village Garden Club of La Jolla holiday pantry sale', width: 1800, height: 2400, hasSmall: true },
-        { suggestion: 'La Jolla Light coverage', src: '/images/about/david-weis-garden-club-la-jolla-light.jpg', alt: 'A La Jolla Light newspaper clipping featuring the Village Garden Club hat competition', width: 1104, height: 2400, hasSmall: true },
+        { suggestion: 'La Jolla Light coverage', src: '/images/about/david-weis-garden-club-la-jolla-light.jpg', alt: 'The La Jolla Light photo of the Village Garden Club hat contest: six members in flowered hats, David among them holding a bouquet', width: 890, height: 699, hasSmall: true },
       ],
       captions: [{ title: 'The hat' }, { title: 'Rosemary simple syrup' }, { title: 'La Jolla Light' }],
     },
