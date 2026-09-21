@@ -63,6 +63,28 @@ fence copy makes no regulatory claims; no revenue or occupancy figures anywhere.
 
 ## Still open
 
+**From David's About page notes (2026-09-21):** all applied. Points to confirm with him:
+
+- **Modernism Week years.** His captions say Limón was the 2024 tour, The Marquee at Twin Palms 2025,
+  and the Vista Las Palmas docent photos 2026. His own Drive folders label the docent photos
+  "Modernism Week 2025 - Vista Las Palmas" and the Limón Instagram post is dated February 2025.
+  The captions follow his email; one word each to change if the folders were right.
+- **The cookie-competition photo** is no longer on the page. His holiday layout lists every row and
+  ends with the Christmas cards as the "last row", so the cookie tile was dropped. Easy to restore.
+- **Work-truck paragraph:** his text read "many peoples dream cars, and he shouldn't reference it a
+  work truck"; the page has "many people's dream cars, and he shouldn't reference it as a work truck".
+- **"Broker caravan" caption** was removed as asked; the photo stays beside the first-listing photo,
+  uncaptioned. Say the word if the photo should go too.
+- **The Marquee photo of David and Mark** only exists as an Instagram screenshot (1206px wide), so it
+  is cropped from that and is the softest photo on the page. The original from his phone would swap in
+  under the same filename.
+- **April refreshment-table photo** is not in the 2026-09-18 Drive download; its slot prints the
+  expected filename (see IMAGES-NEEDED.md).
+- **Assemblymember caption** uses his wording, "California State Assemblymember Chris Ward,
+  representing part of San Diego County." The bill name (More Homes on the Market Act) was added to
+  the paragraph above it as well.
+
+
 **From the 2026-09-17 rebuilds:**
 
 - **Kensington Canyon:** David's new "Then we had to learn how to share it." section and the deck's

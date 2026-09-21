@@ -23,6 +23,22 @@ appears; if the SEO name differs, say so and the data gets pointed at it.
 | Kensington Canyon | `public/images/kensington-canyon/` | The 2026-09-15 "web" upload was the same 1024px size as before; three new angles were added to the gallery (kitchen under the skylights, stained-glass bathroom, bedroom with fireplace) plus the stone-tub bath. **Still wanted:** the full-size MLS originals from David's Drive folder, saved under the existing filenames, to sharpen the lead. |
 | Market photos | `public/images/markets/` | **Done 2026-09-15** with Max's picks from the Unsplash shortlist: downtown San Diego at sunset, wind turbines under the snow-capped San Jacintos, Big Bear Lake from above in winter. They lead the market pages and the home cards; the earlier Unsplash shots moved to the San Diego and Palm Springs mid-page breaks. David's own photos can replace any of them under the same filenames. |
 
+## About page notes — 2026-09-21
+
+David's About notes placed eight more photos from the Drive download under `public/images/about/`:
+the white tile and the David-and-Mark photo at The Marquee at Twin Palms (the latter cropped from an
+Instagram screenshot, 1206px), the four docents in front of the pool in Vista Las Palmas, the 2022
+(rendered from the PDF), 2024 and 2025 holiday cards, and two more gift-bag photos.
+
+**Still wanted:**
+
+- **Garden Club, April refreshment table** (The Posy Book program): David says it is in the Drive,
+  but it is not in the 2026-09-18 download. Save it as
+  `public/images/about/david-weis-garden-club-april-refreshment-table-arrangement.jpg` and it fills
+  the placeholder beside the La Jolla Light photo.
+- **The Marquee at Twin Palms, David and Mark:** the phone original, to replace the screenshot crop
+  (`david-weis-mark-h3k-marquee-twin-palms-modernism-week-2025.jpg`).
+
 ## Drive download check — 2026-09-18
 
 Max downloaded David's entire Drive to `assets-source/drive-2026-09-18/` (ignored by git)

@@ -33,17 +33,18 @@ const { chapter, slug } = Astro.props;
     const hid = `${slug}-${chapter.id}-${i}`;
     if (b.type === 'story') {
       const asideRatio = b.asideRatio ?? '4 / 5';
+      const level = b.level ?? (b.sub ? 3 : 2);
       return b.aside ? (
         <div class="container ch__block ch__aside">
-          <Story heading={b.heading} paragraphs={b.paragraphs} eyebrow={b.eyebrow} id={hid} />
+          <Story heading={b.heading} paragraphs={b.paragraphs} eyebrow={b.eyebrow} level={level} id={hid} />
           <figure class="ch__aside-figure">
             <Media photo={b.aside} ratio={asideRatio} sizes="(min-width: 960px) 40vw, 100vw" class="ch__aside-photo" />
             {b.asideCaption && <figcaption class="ch__caption">{b.asideCaption}</figcaption>}
           </figure>
         </div>
       ) : (
-        <div class="container ch__block">
-          <Story heading={b.heading} paragraphs={b.paragraphs} eyebrow={b.eyebrow} layout="split" id={hid} />
+        <div class:list={['container', 'ch__block', b.sub && 'ch__sub']}>
+          <Story heading={b.heading} paragraphs={b.paragraphs} eyebrow={b.eyebrow} layout="split" level={level} id={hid} />
         </div>
       );
     }
@@ -75,26 +76,42 @@ const { chapter, slug } = Astro.props;
     }
     if (b.type === 'pair') {
       return (
-        <div class:list={['container', 'ch__block', 'ch__pair', b.emphasis && `ch__pair--emphasis-${b.emphasis}`]}>
-          {b.photos.map((ph, j) => {
-            const zoomable = photoExists(ph.src);
-            const media = <Media photo={ph} ratio={b.ratio ?? '4 / 3'} />;
-            return (
-              <figure class="ch__figure">
-                <div class="ch__pair-media">
-                  {zoomable ? (
-                    <a class="ch__zoom" href={withBase(ph.src!)} data-lightbox data-caption={b.captions?.[j] ?? ph.alt ?? ''}>
-                      {media}
-                    </a>
-                  ) : (
-                    media
+        <div class="container ch__block">
+          <div class:list={['ch__pair', b.emphasis && `ch__pair--emphasis-${b.emphasis}`, b.align && `ch__pair--${b.align}`]}>
+            {b.photos.map((ph, j) => {
+              const zoomable = photoExists(ph.src);
+              const cap = b.captions?.[j];
+              const lightboxCaption = (typeof cap === 'string' ? cap : cap?.title) ?? b.caption?.title ?? ph.alt ?? '';
+              const media = <Media photo={ph} ratio={b.ratio ?? '4 / 3'} sizes={b.align ? '(min-width: 900px) 36vw, 100vw' : undefined} />;
+              return (
+                <figure class="ch__figure">
+                  <div class="ch__pair-media">
+                    {zoomable ? (
+                      <a class="ch__zoom" href={withBase(ph.src!)} data-lightbox data-caption={lightboxCaption}>
+                        {media}
+                      </a>
+                    ) : (
+                      media
+                    )}
+                    {b.labels?.[j] && <span class="ch__pair-tag">{b.labels[j]}</span>}
+                  </div>
+                  {typeof cap === 'string' && <figcaption class="ch__caption">{cap}</figcaption>}
+                  {cap && typeof cap !== 'string' && (
+                    <figcaption class="ch__caption">
+                      <span class="ch__cap-title">{cap.title}</span>
+                      {cap.note && <span class="ch__cap-note">{cap.note}</span>}
+                    </figcaption>
                   )}
-                  {b.labels?.[j] && <span class="ch__pair-tag">{b.labels[j]}</span>}
-                </div>
-                {b.captions?.[j] && <figcaption class="ch__caption">{b.captions[j]}</figcaption>}
-              </figure>
-            );
-          })}
+                </figure>
+              );
+            })}
+            {b.caption && (
+              <p class="ch__caption ch__pair-caption">
+                <span class="ch__cap-title">{b.caption.title}</span>
+                {b.caption.note && <span class="ch__cap-note">{b.caption.note}</span>}
+              </p>
+            )}
+          </div>
         </div>
       );
     }
@@ -136,14 +153,15 @@ const { chapter, slug } = Astro.props;
       );
     }
     if (b.type === 'strip') {
+      const cols = b.bleed ? b.photos.length : 7;
       return (
-        <div class="container ch__block ch__strip">
+        <div class:list={['ch__block', 'ch__strip', b.bleed ? 'ch__strip--bleed' : 'container']}>
           {b.heading && <h2 id={hid} class="title-md ch__strip-title">{b.heading}</h2>}
-          <ul class="ch__strip-list" data-strip>
+          <ul class="ch__strip-list" data-strip style={`--strip-cols: ${cols}`}>
             {b.photos.map((ph, j) => (
               <li class="ch__strip-item">
                 <button type="button" class="ch__strip-btn" aria-pressed="false" aria-label={`Reveal: ${b.labels[j]}`}>
-                  <Media photo={ph} ratio="4 / 5" sizes="(min-width: 1024px) 14vw, 33vw" />
+                  <Media photo={ph} ratio="4 / 5" sizes={`(min-width: 1024px) ${Math.round(100 / cols)}vw, 33vw`} />
                   <span class="ch__strip-label" aria-hidden="true">{b.labels[j]}</span>
                 </button>
               </li>
@@ -237,6 +255,27 @@ const { chapter, slug } = Astro.props;
     letter-spacing: 0.02em;
     color: var(--muted);
   }
+  /* Titled captions: a small uppercase title with a muted note under it (matches Gallery). */
+  .ch__cap-title {
+    display: block;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .ch__cap-note {
+    display: block;
+    margin-top: 0.2rem;
+  }
+
+  /* A sub-section: sits tighter under the block before it, behind a thin rule. */
+  .ch__sub {
+    margin-top: calc(-1 * clamp(1.75rem, 4vw, 3.75rem));
+    padding-top: clamp(1.5rem, 3vw, 2.25rem);
+    border-top: 1px solid var(--line-strong);
+  }
 
   .ch__pair {
     display: grid;
@@ -249,6 +288,17 @@ const { chapter, slug } = Astro.props;
   }
   .ch__pair--emphasis-second {
     grid-template-columns: 2fr 3fr;
+  }
+  .ch__pair--left,
+  .ch__pair--right {
+    max-width: 72%;
+  }
+  .ch__pair--right {
+    margin-left: auto;
+  }
+  .ch__pair-caption {
+    grid-column: 1 / -1;
+    margin-top: 0.25rem;
   }
   .ch__pair-media {
     position: relative;
@@ -324,9 +374,16 @@ const { chapter, slug } = Astro.props;
   .ch__strip-list {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-template-columns: repeat(var(--strip-cols, 7), minmax(0, 1fr));
     gap: 0.75rem;
     width: 100%;
+  }
+  .ch__strip--bleed {
+    width: 100%;
+    padding-inline: var(--gutter);
+  }
+  .ch__strip--bleed .ch__strip-list {
+    gap: 1rem;
   }
   .ch__strip-btn {
     position: relative;
@@ -405,99 +462,6 @@ const { chapter, slug } = Astro.props;
     grid-column: 1 / -1;
   }
 
-
-  /* Strip: hover or tap reveals the unit number. */
-  .ch__strip {
-    display: grid;
-    gap: 1.25rem;
-    justify-items: start;
-  }
-  .ch__strip-title {
-    max-width: 20ch;
-  }
-  .ch__strip-list {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
-    gap: 0.75rem;
-    width: 100%;
-  }
-  .ch__strip-btn {
-    position: relative;
-    display: block;
-    width: 100%;
-    padding: 0;
-    border: 0;
-    background: none;
-    cursor: pointer;
-    text-align: left;
-  }
-  .ch__strip-btn:focus-visible {
-    outline: 2px solid var(--blue);
-    outline-offset: 3px;
-  }
-  .ch__strip-label {
-    position: absolute;
-    inset: auto 0 0 0;
-    padding: 0.55em 0.7em;
-    font-family: var(--font-sans);
-    font-weight: 500;
-    font-size: 0.6875rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--on-ink);
-    background: rgba(10, 11, 13, 0.82);
-    opacity: 0;
-    transition: opacity 0.2s var(--ease);
-  }
-  .ch__strip-btn:focus-visible .ch__strip-label,
-  .ch__strip-btn[aria-pressed='true'] .ch__strip-label {
-    opacity: 1;
-  }
-  @media (hover: hover) {
-    .ch__strip-btn:hover .ch__strip-label {
-      opacity: 1;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .ch__strip-label {
-      transition: none;
-    }
-  }
-  .ch__strip-hint {
-    font-size: 0.8125rem;
-    color: var(--muted);
-  }
-  .ch__strip-closing {
-    font-family: var(--font-serif);
-    font-size: clamp(1.25rem, 1.8vw, 1.6rem);
-    line-height: 1.4;
-    max-width: 34ch;
-    color: var(--ink);
-    padding-top: 1rem;
-    border-top: 1px solid var(--line-strong);
-    margin-top: 0.5rem;
-  }
-
-  .ch__compare {
-    display: grid;
-    gap: clamp(2rem, 4vw, 3.5rem);
-  }
-  .ch__compare-title {
-    max-width: 14ch;
-  }
-  .ch__hint {
-    font-size: 0.8125rem !important;
-    color: var(--muted) !important;
-  }
-  .ch__compare-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(1.5rem, 3vw, 2.5rem);
-  }
-  .ch__compare-grid :global(.ch__compare-lead) {
-    grid-column: 1 / -1;
-  }
 
   /* Editorial gallery: a six-column grid with items of three sizes. */
   .ch__gallery {
@@ -524,6 +488,10 @@ const { chapter, slug } = Astro.props;
     }
     .ch__aside-figure {
       justify-self: start;
+    }
+    .ch__pair--left,
+    .ch__pair--right {
+      max-width: none;
     }
     .ch__compare-grid {
       grid-template-columns: minmax(0, 1fr);

@@ -130,7 +130,10 @@ export const aboutChapterA: ProjectChapter = {
   ],
 };
 
-/** Chapter B: everything from The Cole through the closing thought on the work trucks. */
+/**
+ * Chapter B: everything from The Cole through the closing thought on the work
+ * trucks. Copy, captions and photo order follow David's 2026-09-21 notes.
+ */
 export const aboutChapterB: ProjectChapter = {
   id: 'about-b',
   after: -1,
@@ -161,9 +164,9 @@ export const aboutChapterB: ProjectChapter = {
           position: 'center 70%',
         },
         { suggestion: 'The Cole Hotel - Mark and I when sold', src: '/images/about/david-weis-mark-the-cole-when-sold.jpg', alt: 'David and Mark Weis at The Cole Hotel on the day it sold', width: 2053, height: 2303, hasSmall: true },
-        { suggestion: 'Our wedding at The Cole', src: '/images/about/david-weis-mark-wedding-the-cole.jpg', alt: 'David and Mark Weis at their wedding, held at The Cole Hotel in Palm Springs', width: 2400, height: 1600, hasSmall: true },
+        { suggestion: 'Our wedding reception at The Cole', src: '/images/about/david-weis-mark-wedding-the-cole.jpg', alt: 'David and Mark Weis at their wedding reception, held at The Cole Hotel in Palm Springs', width: 2400, height: 1600, hasSmall: true },
       ],
-      captions: [{ title: 'Before' }, { title: 'The Cole' }, { title: 'The day it sold' }, { title: 'Our wedding' }],
+      captions: [{ title: 'Before' }, { title: 'The Cole' }, { title: 'The day it sold' }, { title: 'Our wedding reception at The Cole' }],
     },
     {
       type: 'cta',
@@ -182,15 +185,13 @@ export const aboutChapterB: ProjectChapter = {
       ],
     },
     {
-      type: 'gallery',
-      label: 'From new agent to Broker Associate',
+      type: 'pair',
+      ratio: '1 / 1',
       photos: [
-        { suggestion: 'First Listing', src: '/images/about/david-weis-first-listing.jpg', alt: 'David Weis at the sign for his first real estate listing', width: 1170, height: 1555, hasSmall: true },
-        { suggestion: 'Legislative Day 2023', src: '/images/about/david-weis-legislative-day-sacramento-2023.jpg', alt: 'David Weis at REALTOR® Legislative Day in Sacramento, 2023', width: 1170, height: 1163, hasSmall: true },
-        { suggestion: 'Broker caravan', src: '/images/about/david-weis-broker-caravan.jpg', alt: 'David Weis presenting a listing at a broker caravan', width: 1206, height: 1193, hasSmall: true },,
-        { suggestion: 'A sold property', src: '/images/about/david-weis-sold-property.jpg', alt: 'The two-story Third Avenue triplex in Bankers Hill, San Diego, after it sold', width: 800, height: 600 }
+        { suggestion: 'First Listing', src: '/images/about/david-weis-first-listing.jpg', alt: 'David Weis at the sign for his first real estate listing', width: 1170, height: 1555, hasSmall: true, position: 'center 40%' },
+        { suggestion: 'Broker caravan', src: '/images/about/david-weis-broker-caravan.jpg', alt: 'David Weis presenting a listing at a broker caravan', width: 1206, height: 1193, hasSmall: true },
       ],
-      captions: [{ title: 'First listing' }, { title: 'Legislative Day, Sacramento' }, { title: 'Broker caravan' }],
+      captions: [{ title: 'First listing' }],
     },
     {
       type: 'story',
@@ -198,20 +199,36 @@ export const aboutChapterB: ProjectChapter = {
       heading: 'Sometimes you say yes before you feel ready.',
       paragraphs: [
         'Early in my real estate career, I attended REALTOR® Legislative Day in Sacramento with my mom, who is also a REALTOR®.',
-        'As a brand-new agent, I somehow found myself presenting a bill to Assemblymember Chris Ward in front of members of the San Diego Association of REALTORS® leadership.',
+        'As a brand-new agent, I somehow found myself presenting a bill, the More Homes on the Market Act, to Assemblymember Chris Ward in front of members of the San Diego Association of REALTORS® leadership.',
         'I was terrified. I did it anyway.',
         'That experience became another reminder that growth usually happens somewhere just beyond comfortable.',
       ],
-      aside: {
-        suggestion: 'Mom and I at Legislative Day Sacramento - 2023',
-        src: '/images/about/david-weis-mom-legislative-day-sacramento-2023.jpg',
-        alt: 'David Weis with his mother at REALTOR® Legislative Day in Sacramento, 2023',
-        width: 2400,
-        height: 2400,
-        hasSmall: true,
-      },
-      asideRatio: '4 / 5',
-      asideCaption: 'With my mom at Legislative Day in Sacramento, 2023.',
+    },
+    {
+      type: 'pair',
+      ratio: '1 / 1',
+      photos: [
+        {
+          suggestion: 'Mom and I at Legislative Day Sacramento - 2023',
+          src: '/images/about/david-weis-mom-legislative-day-sacramento-2023.jpg',
+          alt: 'David Weis with his mother at REALTOR® Legislative Day in Sacramento, 2023',
+          width: 2400,
+          height: 2400,
+          hasSmall: true,
+        },
+        {
+          suggestion: 'Legislative Day 2023, with Assemblymember Chris Ward',
+          src: '/images/about/david-weis-legislative-day-sacramento-2023.jpg',
+          alt: 'David Weis with California State Assemblymember Chris Ward at REALTOR® Legislative Day in Sacramento, 2023',
+          width: 1170,
+          height: 1163,
+          hasSmall: true,
+        },
+      ],
+      captions: [
+        { title: 'With my mom', note: 'Legislative Day, Sacramento – 2023' },
+        { title: 'Legislative Day, Sacramento – 2023', note: 'California State Assemblymember Chris Ward, representing part of San Diego County.' },
+      ],
     },
     {
       type: 'story',
@@ -224,6 +241,7 @@ export const aboutChapterB: ProjectChapter = {
     },
     {
       type: 'story',
+      sub: true,
       heading: 'San Diego',
       paragraphs: [
         'San Diego became the place where I built much of my adult life. My career grew here. My friendships grew here.',
@@ -241,10 +259,12 @@ export const aboutChapterB: ProjectChapter = {
     },
     {
       type: 'story',
+      sub: true,
       heading: 'Palm Springs',
       paragraphs: [
         'Palm Springs started with a relationship and became a completely different chapter.',
-        'Banking led to hospitality. Hospitality led to deeper involvement in local design and architecture. The Cole led to new friendships. Querencia Palms led to even more community involvement.',
+        'Banking led to hospitality. Hospitality led to deeper involvement in local design and architecture. The Cole taught me the business side of development, from working with the City and navigating ABC licensing to permits, fees, infrastructure, and all the details that happen behind the scenes.',
+        'It also pulled me deeper into Palm Springs design, architecture, and community. Querencia Palms took that connection even further.',
         'And somewhere along the way, Palm Springs stopped being somewhere I drove to. It became home.',
       ],
     },
@@ -259,6 +279,7 @@ export const aboutChapterB: ProjectChapter = {
     },
     {
       type: 'story',
+      sub: true,
       heading: 'Big Bear',
       paragraphs: [
         'Big Bear began as an escape. Fresh air, snow, mountain trails, lake days, and a place where life moved differently.',
@@ -270,11 +291,15 @@ export const aboutChapterB: ProjectChapter = {
       type: 'gallery',
       label: 'Big Bear',
       photos: [
-        { suggestion: 'Hiking at an overlook, Big Bear', src: '/images/about/david-weis-big-bear-hiking-overlook.jpg', alt: 'David and Mark Weis with their dog at a hiking overlook above Big Bear Lake', width: 2400, height: 1978, hasSmall: true },
+        { suggestion: 'Sybil’s first mountain hike', src: '/images/about/david-weis-big-bear-hiking-overlook.jpg', alt: 'David and Mark Weis with their dog Sybil at a hiking overlook above Big Bear Lake', width: 2400, height: 1978, hasSmall: true },
         { suggestion: 'The Big Bear Turkey Trot', src: '/images/about/david-weis-big-bear-turkey-trot.jpg', alt: 'David and Mark Weis bundled up at the Big Bear Turkey Trot', width: 1440, height: 1440, hasSmall: true },
         { suggestion: 'Snowboarding in Big Bear', src: '/images/about/david-weis-big-bear-snowboarding.jpg', alt: 'Three friends in helmets on the snow in Big Bear', width: 1800, height: 2400, hasSmall: true },
       ],
-      captions: [undefined, { title: 'Turkey Trot', note: 'The coldest, windiest Turkey Trot I have ever agreed to.' }, { title: 'Snowboarding' }],
+      captions: [
+        { title: 'Sybil’s first mountain hike' },
+        { title: 'Turkey Trot', note: 'The coldest, windiest Turkey Trot I have ever agreed to.' },
+        { title: 'Snowboarding', note: 'New friends, new neighbors, and plenty of days on the mountain together.' },
+      ],
     },
     {
       type: 'story',
@@ -300,11 +325,11 @@ export const aboutChapterB: ProjectChapter = {
       type: 'gallery',
       label: 'Gay For Good',
       photos: [
-        { suggestion: 'Gay For Good toy drive', src: '/images/community/david-weis-gay-for-good-volunteer-san-diego-03.jpg', alt: 'Volunteers with Santa at the Gay For Good toy drive', width: 1206, height: 777, hasSmall: true },
+        { suggestion: 'Salvation Army holiday toy sorting', src: '/images/community/david-weis-gay-for-good-volunteer-san-diego-03.jpg', alt: 'Gay For Good volunteers with Santa at the Salvation Army holiday toy sorting', width: 1206, height: 777, hasSmall: true },
         { suggestion: 'Gay For Good Hillcrest Honors', src: '/images/about/david-weis-gay-for-good-hillcrest-honors.jpg', alt: 'David Weis and another honoree on the red carpet at the Hillcrest Honors awards', width: 797, height: 1165, position: 'center 12%' },
         { suggestion: 'Gay For Good Equality California gala', src: '/images/about/david-weis-gay-for-good-equality-california-gala.jpg', alt: 'David Weis with a friend at the Equality California gala', width: 1012, height: 1554, hasSmall: true },
       ],
-      captions: [{ title: 'Toy drive' }, { title: 'Hillcrest Honors' }, { title: 'Equality California gala' }],
+      captions: [{ title: 'Salvation Army holiday toy sorting' }, { title: 'Hillcrest Honors' }, { title: 'Equality California gala' }],
     },
     {
       type: 'story',
@@ -312,20 +337,36 @@ export const aboutChapterB: ProjectChapter = {
       heading: 'A hobby that got serious quickly.',
       paragraphs: [
         'I joined the Village Garden Club of La Jolla because I wanted something fun that had nothing to do with real estate.',
-        'I ended up volunteering on the setup committee, helping at check-in, attending nearly every workshop, arranging refreshment tables, making rosemary simple syrup for the holiday pantry, and becoming completely invested in learning about plants.',
+        'One thing I’ve learned about joining something new is to get involved early. Volunteer for something, show up, help out, and you start meeting people naturally.',
+        'So I did. I volunteered on the setup committee, helped at check-in, attended nearly every workshop, arranged refreshment tables, and made rosemary simple syrup for the holiday pantry.',
+        'For an April program with The Posy Book author Teresa Sabankaya, I designed the refreshment table arrangement to mirror the theme of her presentation, sourcing the flowers from Cork & Stem in Hillcrest, a local flower shop and wine bar.',
         'Then came the annual hat competition. I built what can only be described as a pollinator ecosystem for my head. It won Best UV Protection. And yes, it ended up in the newspaper.',
-        'The Garden Club has become one of my favorite parts of life in San Diego. It also unexpectedly changed the way I looked at the landscaping at Querencia Palms.',
+        'The Garden Club has become one of my favorite parts of life in San Diego. It unexpectedly changed the way I looked at the landscaping at Querencia Palms, too. Somewhere along the way, I became completely invested in learning about plants.',
       ],
     },
     {
-      type: 'gallery',
-      label: 'Garden Club',
+      type: 'pair',
+      ratio: '4 / 5',
       photos: [
         { suggestion: 'Garden Club May Luncheon Hat Competition', src: '/images/about/david-weis-garden-club-hat-competition.jpg', alt: 'David Weis wearing the flower-covered hat and holding a bouquet at the Village Garden Club of La Jolla’s hat competition', width: 1800, height: 2400, hasSmall: true },
         { suggestion: 'Rosemary simple syrup', src: '/images/about/david-weis-garden-club-rosemary-syrup.jpg', alt: 'Bottles of rosemary simple syrup made for the Village Garden Club of La Jolla holiday pantry sale', width: 1800, height: 2400, hasSmall: true },
-        { suggestion: 'La Jolla Light coverage', src: '/images/about/david-weis-garden-club-la-jolla-light.jpg', alt: 'The La Jolla Light photo of the Village Garden Club hat contest: six members in flowered hats, David among them holding a bouquet', width: 890, height: 699, hasSmall: true },
       ],
-      captions: [{ title: 'The hat' }, { title: 'Rosemary simple syrup' }, { title: 'La Jolla Light' }],
+      captions: [
+        { title: 'Best UV Protection', note: 'May Luncheon Hat Competition' },
+        { title: 'Rosemary simple syrup', note: 'Holiday Pantry Sale' },
+      ],
+    },
+    {
+      type: 'pair',
+      ratio: '4 / 3',
+      photos: [
+        { suggestion: 'La Jolla Light coverage', src: '/images/about/david-weis-garden-club-la-jolla-light.jpg', alt: 'The La Jolla Light photo of the Village Garden Club hat contest: six members in flowered hats, David among them holding a bouquet', width: 890, height: 699, hasSmall: true },
+        { suggestion: 'April refreshment table flower arrangement (in David’s Drive, not downloaded yet)', src: '/images/about/david-weis-garden-club-april-refreshment-table-arrangement.jpg', alt: 'The refreshment table flower arrangement David designed for the Village Garden Club’s April program with The Posy Book author Teresa Sabankaya' },
+      ],
+      captions: [
+        { title: 'Winners of May Luncheon Hat Competition', note: 'Featured in the La Jolla Light' },
+        { title: 'April refreshment table', note: 'The Posy Book program with Teresa Sabankaya' },
+      ],
     },
     {
       type: 'story',
@@ -364,7 +405,7 @@ export const aboutChapterB: ProjectChapter = {
     },
     {
       type: 'story',
-      eyebrow: 'Front Runners + the rest',
+      eyebrow: 'Community',
       heading: 'Sometimes community is just showing up.',
       paragraphs: [
         'Not every connection in my life began through work or volunteering.',
@@ -375,6 +416,7 @@ export const aboutChapterB: ProjectChapter = {
     },
     {
       type: 'strip',
+      bleed: true,
       photos: [
         { suggestion: 'Front Runners, San Diego', src: '/images/community/david-weis-front-runners-san-diego-02.jpg', alt: 'The Front Runners running group gathered on the grass in San Diego', width: 1170, height: 1147, hasSmall: true },
         { suggestion: 'Front Runners, Palm Springs', src: '/images/community/david-weis-front-runners-palm-springs.jpg', alt: 'The Front Runners running group posing together outdoors in Palm Springs, mountains and palm trees behind them', width: 1206, height: 825, hasSmall: true },
@@ -392,19 +434,38 @@ export const aboutChapterB: ProjectChapter = {
         'Working on The Cole and later Querencia Palms introduced me to a side of Palm Springs I already appreciated but had never experienced this closely.',
         'Designers, architecture, preservation, landscaping, materials, and the tiny decisions that determine whether a space feels right.',
         'H3K became an important design relationship through The Cole and the early stages of Querencia Palms.',
-        'Supporting their work at Modernism Week, touring projects like Limón, and continuing those relationships has made Palm Springs design feel less like something I admire from the outside and more like a community I have been fortunate to learn from.',
+        'Supporting their work at Modernism Week, touring projects like Limón, and continuing that relationship has made Palm Springs design feel less like something I admire from the outside and more like a community I’ve been fortunate to learn from.',
+        'Their Wine + Design events have become a must, and now their new showroom sits right across the street from my Compass office in Palm Desert, which somehow feels fitting.',
       ],
     },
     {
-      type: 'gallery',
-      label: 'Design + architecture',
+      type: 'pair',
+      ratio: '1 / 1',
+      align: 'left',
       photos: [
-        { suggestion: 'With Mark, at an H3K project', src: '/images/about/david-weis-mark-h3k-property.jpg', alt: 'David and Mark Weis at a yellow front door at the Limón property, an H3K design project in Palm Springs', width: 1800, height: 2400, hasSmall: true },
-        { suggestion: 'H3K design detail', src: '/images/about/h3k-design-detail-palm-springs.jpg', alt: 'A bathroom with palm-print wallpaper and a round mirror at an H3K project in Palm Springs', width: 1699, height: 2400, hasSmall: true },
-        { suggestion: 'H3K pool and courtyard', src: '/images/about/h3k-pool-courtyard-palm-springs.jpg', alt: 'David Weis beside the pool at the Limón property, an H3K-designed property in Palm Springs', width: 2400, height: 1800, hasSmall: true },
-        { suggestion: 'Modernism Week with Kathy', src: '/images/about/david-weis-modernism-week-kathy.jpg', alt: 'Three docents in matching palm-print shirts at a Modernism Week event in Palm Springs', width: 1800, height: 2400, hasSmall: true },
+        { suggestion: 'With Mark at Limón, Modernism Week 2024', src: '/images/about/david-weis-mark-h3k-property.jpg', alt: 'David and Mark Weis at the yellow front door of Limón, an H3K design project in Palm Springs', width: 1800, height: 2400, hasSmall: true, position: 'center 42%' },
+        { suggestion: 'David at the Limón pool', src: '/images/about/h3k-pool-courtyard-palm-springs.jpg', alt: 'David Weis beside the pool at Limón, an H3K design project in Palm Springs', width: 2400, height: 1800, hasSmall: true, position: '68% center' },
       ],
-      captions: [{ title: 'With Mark, at an H3K project' }, { title: 'Detail' }, { title: 'Pool + courtyard' }, { title: 'Modernism Week' }],
+      caption: { title: 'Modernism Week Tour 2024: Limón', note: 'An H3K design project' },
+    },
+    {
+      type: 'pair',
+      ratio: '1 / 1',
+      align: 'right',
+      photos: [
+        { suggestion: 'White tile at The Marquee at Twin Palms', src: '/images/about/h3k-marquee-twin-palms-white-tile.jpg', alt: 'A wall of white three-dimensional tile at The Marquee at Twin Palms, an H3K design project in Palm Springs', width: 1800, height: 2400, hasSmall: true },
+        { suggestion: 'With Mark in front of The Marquee at Twin Palms', src: '/images/about/david-weis-mark-h3k-marquee-twin-palms-modernism-week-2025.jpg', alt: 'David and Mark Weis on the walkway in front of The Marquee at Twin Palms, its pink breeze-block wall beside them, during Modernism Week', width: 1206, height: 1051, position: 'center 45%' },
+      ],
+      caption: { title: 'Modernism Week Tour 2025: The Marquee at Twin Palms', note: 'An H3K design project' },
+    },
+    {
+      type: 'pair',
+      ratio: '4 / 5',
+      photos: [
+        { suggestion: 'Mark, Kathy and I as Modernism Week docents', src: '/images/about/david-weis-modernism-week-kathy.jpg', alt: 'David, Mark and Kathy in matching Vista Las Palmas shirts as volunteer docents during Modernism Week in Palm Springs', width: 1800, height: 2400, hasSmall: true, position: 'center 35%' },
+        { suggestion: 'Docents in front of the pool with the mountains behind', src: '/images/about/modernism-week-vista-las-palmas-docents-pool.jpg', alt: 'Four volunteer docents standing in front of a pool in Vista Las Palmas, with palms and the San Jacinto Mountains behind them', width: 1800, height: 2400, hasSmall: true, position: 'center 60%' },
+      ],
+      caption: { title: 'Vista Las Palmas Modernism Week 2026', note: 'Volunteer docents. Helping neighbors share their homes. Spending time with new friends.' },
     },
     {
       type: 'story',
@@ -413,7 +474,7 @@ export const aboutChapterB: ProjectChapter = {
       paragraphs: [
         'Growing up, my dad was the person who could fix almost anything. Cars. Houses. Whatever needed to be figured out. And at Christmas, apparently the entire neighborhood.',
         'Our house became one of those homes people drove across town to see. Approximately 75,000 exterior lights. Neighbors participating. Limos coming down the street. And a giant custom star my dad built between the houses that was visible from what felt like half the city.',
-        'Decorating started Thanksgiving Day. We tested bulbs. Made a plan. Worked late Friday night and through the weekend. Frozen fingers. Frozen everything. And then the lights came on.',
+        'Decorating started Thanksgiving Day. We tested bulbs. Made a plan. Worked late Friday night and through the weekends until Christmas Day. Frozen fingers. Frozen everything. And then the lights came on.',
         'I loved seeing how happy it made people. That part never left me.',
       ],
     },
@@ -439,24 +500,55 @@ export const aboutChapterB: ProjectChapter = {
       ],
     },
     {
-      type: 'gallery',
-      label: 'The holiday fundraiser',
+      type: 'pair',
+      ratio: '1 / 1',
       photos: [
-        { suggestion: 'Holiday gift bag production', src: '/images/about/holiday-gift-bag-production.jpg', alt: 'David Weis beside a dining table covered in finished holiday gift bags', width: 2400, height: 2110, hasSmall: true },
-        { suggestion: 'Toy collection for the Marines', src: '/images/about/holiday-toy-collection-marines.jpg', alt: 'A Marine in dress uniform beside toys donated at the holiday fundraiser', width: 1206, height: 892, hasSmall: true },
-        { suggestion: 'Toys loaded into the Range Rover', src: '/images/about/holiday-toys-range-rover.jpg', alt: 'The back of a Range Rover packed with toys donated at the holiday fundraiser', width: 1800, height: 2400, hasSmall: true },
-        { suggestion: 'Illustrated holiday card', src: '/images/about/holiday-illustrated-card.jpg', alt: 'The illustrated 2023 holiday card showing the Kensington house', width: 2171, height: 1571, hasSmall: true },
-        { suggestion: 'Querencia Palms s’mores kit', src: '/images/about/holiday-smores-kit-querencia-palms.jpg', alt: 'Cocktail favors for the holiday fundraiser: mini bottles with candy canes and tags', width: 1800, height: 2400, hasSmall: true },
-        { suggestion: 'Holiday party portrait', src: '/images/about/holiday-party-portrait.jpg', alt: 'Guests holding donated toys at David and Mark Weis’s annual holiday fundraiser party', width: 2400, height: 1999, hasSmall: true },
+        { suggestion: 'Toy collection for the Marines', src: '/images/about/holiday-toy-collection-marines.jpg', alt: 'A Marine in dress uniform beside toys donated at the holiday fundraiser', width: 1206, height: 892, hasSmall: true, position: '30% center' },
+        { suggestion: 'Toys loaded into the Range Rover', src: '/images/about/holiday-toys-range-rover.jpg', alt: 'The back of a Range Rover packed with toys donated at the holiday fundraiser', width: 1800, height: 2400, hasSmall: true, position: 'center 55%' },
+      ],
+      captions: [
+        { title: 'Toys for Tots', note: 'Marines to collect and count the toys' },
+        { title: 'Loads of toys', note: 'Multiple truck loads to drop toys' },
       ],
     },
     {
+      type: 'photo',
+      photo: { suggestion: 'Holiday party portrait', src: '/images/about/holiday-party-portrait.jpg', alt: 'Guests holding donated toys at David and Mark Weis’s annual holiday fundraiser party', width: 2400, height: 1999, hasSmall: true },
+      ratio: '3 / 2',
+    },
+    {
       type: 'gallery',
-      label: 'The cookie competition',
+      label: 'The holiday gift bags',
       photos: [
-        { suggestion: 'Holiday cookie decorating competition entry', src: '/images/about/holiday-cookie-competition.jpg', alt: 'David Weis and two others with their decorated cookies at a holiday cookie decorating competition', width: 967, height: 1454, hasSmall: true },
+        { suggestion: 'Holiday gift bag production', src: '/images/about/holiday-gift-bag-production.jpg', alt: 'David Weis beside a dining table covered in finished holiday gift bags', width: 2400, height: 2110, hasSmall: true },
+        { suggestion: 'Gift bags with candy canes', src: '/images/about/holiday-gift-bags-candy-canes.jpg', alt: 'Rows of holiday gift bags, each topped with a candy cane', width: 1800, height: 2400, hasSmall: true },
+        { suggestion: 'Merry Christmas gift bags', src: '/images/about/holiday-gift-bags-merry-christmas.jpg', alt: 'Rows of white Merry Christmas gift bags lined up under stained-glass windows', width: 2400, height: 1800, hasSmall: true },
+        { suggestion: 'Cocktail favors from The Cole', src: '/images/about/holiday-smores-kit-querencia-palms.jpg', alt: 'Cocktail favors for the holiday fundraiser: mini bottles with candy canes and tags', width: 1800, height: 2400, hasSmall: true },
       ],
-      captions: [{ title: 'Holiday cookie competition', note: 'Also: photographic evidence that I take cookie decorating unnecessarily seriously.' }],
+    },
+    {
+      type: 'pair',
+      ratio: '18 / 13',
+      photos: [
+        { suggestion: 'Custom Christmas card 2022', src: '/images/about/holiday-card-2022-sierra-chalet.jpg', alt: 'The illustrated 2022 holiday card: David and Mark with the dogs in the snow at Sierra Chalet, a snowboard and toolbox beside the tree', width: 2400, height: 1736, hasSmall: true },
+        { suggestion: 'Custom Christmas card 2023', src: '/images/about/holiday-illustrated-card.jpg', alt: 'The illustrated 2023 holiday card: David and Mark in front of The Cole at night, with the hotel sign and a Christmas tree', width: 2171, height: 1571, hasSmall: true },
+      ],
+      captions: [
+        { title: 'Custom Christmas card 2022', note: 'Reflecting on the cabin renovation' },
+        { title: 'Custom Christmas card 2023', note: 'Reflecting on the sale of The Cole and new chapters' },
+      ],
+    },
+    {
+      type: 'pair',
+      ratio: '18 / 13',
+      photos: [
+        { suggestion: 'Custom Christmas card 2024', src: '/images/about/holiday-card-2024-kensington-canyon.jpg', alt: 'The illustrated 2024 holiday card: David and Mark with the dogs in front of the snow-dusted Kensington house', width: 2171, height: 1571, hasSmall: true },
+        { suggestion: 'Custom Christmas card 2025', src: '/images/about/holiday-card-2025-vista-voltaire.jpg', alt: 'The illustrated 2025 holiday card: David and Mark with the dog in front of the Voltaire house, surfboards by the door', width: 2100, height: 1500, hasSmall: true },
+      ],
+      captions: [
+        { title: 'Custom Christmas card 2024', note: 'Reflecting on the Kensington renovation' },
+        { title: 'Custom Christmas card 2025', note: 'Reflecting on the renovation of Voltaire' },
+      ],
     },
     {
       type: 'story',
@@ -502,8 +594,8 @@ export const aboutChapterB: ProjectChapter = {
       paragraphs: [
         'When Mark and I met, I owned a Chevy Colorado so I could haul my motorcycle and whatever else life required. Eventually, the motorcycle went. Then the truck went. We did not “need” one.',
         'For the next several years, our Range Rovers became what Mark casually referred to as our work trucks. Plants. Construction supplies. Open-house signs. Whatever fit.',
-        'I kept reminding him that most people do not consider a Range Rover a work truck.',
-        'In 2026, after becoming a Broker Associate and driving constantly between San Diego, Palm Springs, and Big Bear, I finally bought the vehicle I wanted for the job. A GMC Sierra EV. A real truck. Electric. Long range.',
+        'I kept reminding him that Range Rovers are many people’s dream cars, and he shouldn’t reference it as a work truck.',
+        'In 2026, after becoming a Broker Associate and driving constantly between San Diego, Palm Springs, and Big Bear, I finally bought the vehicle I needed for the job. A GMC Sierra EV. A real truck. Electric. Long range.',
         'And within the first two weeks, I had already made two dump runs. Case closed.',
         'Here’s to all the luxury cars that were tough enough to survive the Weis life.',
       ],

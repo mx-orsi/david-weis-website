@@ -30,6 +30,9 @@ export interface ComparePair {
  * photographic documentation (Querencia Palms' grounds) can go deeper without
  * changing the shared page structure.
  */
+/** A pair caption: a muted sentence, or a small uppercase title with a muted note under it. */
+export type PairCaption = string | { title: string; note?: string };
+
 export type ChapterBlock =
   | {
       type: 'story';
@@ -42,6 +45,10 @@ export type ChapterBlock =
       asideRatio?: string;
       /** Caption shown under the aside photo. */
       asideCaption?: string;
+      /** Heading level (2 by default; 3 when `sub` is set). */
+      level?: 2 | 3;
+      /** A sub-section of the story block before it: h3, a top rule, tighter spacing. */
+      sub?: boolean;
     }
   | {
       type: 'photo';
@@ -58,11 +65,16 @@ export type ChapterBlock =
       /** Two photos side by side, read left to right (e.g. barren → lush). */
       photos: readonly [Photo, Photo];
       ratio?: string;
-      captions?: readonly [string, string];
+      /** Under each photo: a muted sentence, or a small uppercase title with a muted note. */
+      captions?: readonly [PairCaption?, PairCaption?];
       /** Small uppercase tags shown on the photos, always visible, e.g. ['Before', 'After']. */
       labels?: readonly [string, string];
       /** Unequal columns so one photo reads larger; equal by default. */
       emphasis?: 'first' | 'second';
+      /** One caption for the pair as a whole, under both photos. */
+      caption?: { title: string; note?: string };
+      /** Pull the pair to one side at about 70% of the measure instead of filling it. */
+      align?: 'left' | 'right';
     }
   | {
       /** Oversized pull line, optionally a second line, a small note and short prose. */
@@ -95,6 +107,8 @@ export type ChapterBlock =
       labels: readonly string[];
       /** One closing sentence under the strip. */
       closing?: string;
+      /** Run edge to edge, one column per photo, instead of inside the container. */
+      bleed?: boolean;
     }
   | {
       /** A single outbound-style link with an optional muted note. Not a button. */
