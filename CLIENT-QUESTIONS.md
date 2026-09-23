@@ -63,6 +63,39 @@ fence copy makes no regulatory claims; no revenue or occupancy figures anywhere.
 
 ## Still open
 
+**From David's 2026-09-22 batch (About, Community, Holidays, Mercury Palms, The Cole marketing, work trucks, Voltaire, Kensington, Sierra Chalet, Querencia):** applied where the photos exist; placeholders print the filenames for the rest (IMAGES-NEEDED.md). Decisions and questions:
+
+- **Work-truck section order.** David's copy order and his "how to build this visually" order disagree on
+  where the Colorado-at-The-Cole photo goes. The page follows his visual sequence (Colorado + motorcycle →
+  Colorado at The Cole → Range Rover with flooring + Evoque with plants → Lowe's rental → Sierra EV), so the
+  "original truck helped build The Cole" story moved up to sit with its photo.
+- **Flooring vs. Lowe's photos.** In the Drive, "work truck 6" is the Range Rover with flooring and
+  "work truck 7" is the Lowe's truck (David's email has the numbers the other way round). The page goes by
+  what the photos show. The flooring photo is portrait, the Evoque photo is landscape, so both sit in
+  square crops rather than the "large horizontal / smaller vertical" split he described.
+- **Tesla video.** Not added (no video block; his structured plan leaves it out). Say if it should be.
+- **Kelly's name** is spelled Osbourne on the page (her handle is kellyosbourne); David wrote Osborne.
+- **The Cole chapter placement:** after "Hospitality is built in the small things." and before
+  "A property became a brand."
+- **Mercury Palms** is now fully his new copy. The old "Even great homes need another chapter." and
+  "Real estate is never really finished." sections and the painting stats (4,200 sq ft / 3 days) are gone
+  because his rewrite does not include them. The wedding photo slot is the big missing piece.
+  Memorial Day year two is a crop of the Instagram screenshot (no original in the Drive).
+- **Vista Voltaire captions.** His line was cut off ("Remove captions under 'before' and"). Read as: drop
+  the sentence captions under every Before/After pair and keep the tags. Confirm.
+- **Kensington kitchen.** Both kitchen photos load on the live site (checked 2026-09-23). The likely
+  "not working" was the uneven pair (the wider After column made the two photos different heights); the
+  Before photo now stretches to match the After. If David meant something else, a screenshot would help. The downstairs-bathroom slot now uses the
+  professional listing photo (three-pane window, round mirror); the phone photo of the four-pane bath is
+  still in the folder if that was the intended one.
+- **"PastedGraphic-3.png"** in his email did not come through. What was it?
+- **Querencia "201 is missing":** the tan-sofa photo he identified as 201 was on the page labeled 104, so
+  201 is now labeled correctly and nothing is missing; every unit label follows his key.
+- **Garden club sentence** has the comma he asked for ("…learn more about plants, quickly became…").
+- **Sierra Chalet:** nothing changed yet; the new hero, bears and before/after photos are not in the
+  download.
+
+
 **From David's About page notes (2026-09-21):** all applied. Points to confirm with him:
 
 - **Modernism Week years.** His captions say Limón was the 2024 tour, The Marquee at Twin Palms 2025,

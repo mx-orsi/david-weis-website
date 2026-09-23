@@ -56,7 +56,8 @@ export type ChapterBlock =
       ratio?: string;
       /** 'bleed' runs edge to edge; 'container' stays inside the page gutters. */
       width?: 'container' | 'bleed';
-      caption?: string;
+      /** A muted sentence, or a small uppercase title with a muted note. */
+      caption?: PairCaption;
       /** A link-arrow shown under the caption. */
       link?: { label: string; href: string; external?: boolean };
     }
@@ -75,6 +76,23 @@ export type ChapterBlock =
       caption?: { title: string; note?: string };
       /** Pull the pair to one side at about 70% of the measure instead of filling it. */
       align?: 'left' | 'right';
+    }
+  | {
+      /**
+       * Two columns of photos. One column (`fill`, by default the one with
+       * fewer photos) stretches to the other column's height and its photo is
+       * cropped to fit; the other column's tiles use `ratio`. Captions sit
+       * under each column; `caption` is one caption for the whole block.
+       */
+      type: 'collage';
+      columns: readonly [readonly Photo[], readonly Photo[]];
+      fill?: 'first' | 'second';
+      ratio?: string;
+      emphasis?: 'first' | 'second';
+      captions?: readonly [PairCaption?, PairCaption?];
+      caption?: { title: string; note?: string };
+      /** Small uppercase tags on each column's first photo, e.g. ['Before', 'After']. */
+      labels?: readonly [string?, string?];
     }
   | {
       /** Oversized pull line, optionally a second line, a small note and short prose. */
@@ -323,14 +341,14 @@ export const projects: readonly Project[] = [
               after: { suggestion: '104 Full Back patio After 1', src: '/images/querencia-landscaping/querencia-palms-104-full-back-patio-private-outdoor-space-david-weis.jpg', alt: 'Back patio of Unit 104 after, screened and softened by mature planting', width: 2048, height: 1365, hasSmall: true },
             },
             {
+              label: 'Unit 104 · Side yard',
+              before: { suggestion: '106 Primary Yard Before 1', src: '/images/querencia-landscaping/querencia-palms-104-primary-yard-before-renovation-david-weis.jpg', alt: 'Side yard of Unit 104 before planting', width: 2400, height: 1350, hasSmall: true },
+              after: { suggestion: '106 Primary Yard After 1', src: '/images/querencia-landscaping/querencia-palms-104-primary-yard-desert-landscaping-david-weis.jpg', alt: 'Side yard of Unit 104 after planting', width: 2048, height: 1365, hasSmall: true },
+            },
+            {
               label: 'Unit 106 · Back patio',
               before: { suggestion: '106 Back Patio Before 1 or 2, closest matching angle', src: '/images/querencia-landscaping/querencia-palms-106-back-patio-02-before-hardscape-david-weis.jpg', alt: 'Back patio of Unit 106 before planting', width: 2400, height: 1800, hasSmall: true },
               after: { suggestion: '106 Back Patio After 1 or 2, same angle', src: '/images/querencia-landscaping/querencia-palms-106-back-patio-02-outdoor-living-david-weis.jpg', alt: 'Back patio of Unit 106 after planting, private and green', width: 2048, height: 1365, hasSmall: true },
-            },
-            {
-              label: 'Unit 106 · Primary yard',
-              before: { suggestion: '106 Primary Yard Before 1', src: '/images/querencia-landscaping/querencia-palms-104-primary-yard-before-renovation-david-weis.jpg', alt: 'Primary yard of Unit 106 before planting', width: 2400, height: 1350, hasSmall: true },
-              after: { suggestion: '106 Primary Yard After 1', src: '/images/querencia-landscaping/querencia-palms-104-primary-yard-desert-landscaping-david-weis.jpg', alt: 'Primary yard of Unit 106 after planting', width: 2048, height: 1365, hasSmall: true },
             },
             {
               label: 'Front walkway',
@@ -354,24 +372,48 @@ export const projects: readonly Project[] = [
           ],
         },
         {
-          type: 'gallery',
-          label: 'Details from the grounds',
-          photos: [
-            { suggestion: 'Koi visible through clear water', src: '/images/querencia-landscaping/querencia-palms-floating-water-plants-desert-garden-david-weis.jpg', alt: 'Orange koi in a clear, shallow stretch of the pond between river rocks', width: 2400, height: 1800, hasSmall: true },
-            { suggestion: 'Pink water lily', src: '/images/querencia-landscaping/querencia-palms-aquatic-landscaping-tahquitz-river-estates-david-weis.jpg', alt: 'A pink water lily open on the pond, with a koi passing beneath the pads', width: 1800, height: 2400, hasSmall: true },
-            { suggestion: 'Dragonfly beside the pond', src: '/images/querencia-landscaping/querencia-palms-water-iris-koi-pond-david-weis.jpg', alt: 'An orange dragonfly resting on a wall beside the pond', width: 1800, height: 2400, hasSmall: true },
-            { suggestion: 'Orange canna', src: '/images/querencia-landscaping/querencia-palms-lotus-water-garden-palm-springs-david-weis.jpg', alt: 'An orange canna flower above a lily pad at the edge of the pond', width: 1800, height: 2400, hasSmall: true },
-            { suggestion: 'Small red aquatic bloom floating on the water', src: '/images/querencia-landscaping/querencia-palms-pond-plants-desert-oasis-david-weis.jpg', alt: 'A small red bloom on a floating aquatic plant, seen from above the water', width: 1800, height: 2400, hasSmall: true },
-            { suggestion: 'White water lily', src: '/images/querencia-landscaping/querencia-palms-papyrus-pond-landscaping-david-weis.jpg', alt: 'A white water lily open on the pond beside broad canna leaves', width: 1800, height: 2400, hasSmall: true },
-            { suggestion: 'Plants growing naturally between the rocks', src: '/images/querencia-landscaping/querencia-palms-pond-greenery-south-palm-springs-david-weis.jpg', alt: 'Koi gathered below a clump of marginal plants growing between the rocks at the pond edge', width: 1800, height: 2400, hasSmall: true, position: 'center 40%' },
+          type: 'collage',
+          columns: [
+            [
+              { suggestion: 'Koi visible through clear water', src: '/images/querencia-landscaping/querencia-palms-floating-water-plants-desert-garden-david-weis.jpg', alt: 'Orange koi in a clear, shallow stretch of the pond between river rocks', width: 2400, height: 1800, hasSmall: true },
+            ],
+            [
+              { suggestion: 'Pink water lily', src: '/images/querencia-landscaping/querencia-palms-aquatic-landscaping-tahquitz-river-estates-david-weis.jpg', alt: 'A pink water lily open on the pond, with a koi passing beneath the pads', width: 1800, height: 2400, hasSmall: true },
+              { suggestion: 'Small red aquatic bloom floating on the water', src: '/images/querencia-landscaping/querencia-palms-pond-plants-desert-oasis-david-weis.jpg', alt: 'A small red bloom on a floating aquatic plant, seen from above the water', width: 1800, height: 2400, hasSmall: true },
+            ],
           ],
+          fill: 'first',
+          emphasis: 'first',
+          ratio: '3 / 2',
+        },
+        {
+          type: 'collage',
+          columns: [
+            [
+              { suggestion: 'Dragonfly beside the pond', src: '/images/querencia-landscaping/querencia-palms-water-iris-koi-pond-david-weis.jpg', alt: 'An orange dragonfly resting on a wall beside the pond', width: 1800, height: 2400, hasSmall: true, position: 'center 12%' },
+              { suggestion: 'White water lily', src: '/images/querencia-landscaping/querencia-palms-papyrus-pond-landscaping-david-weis.jpg', alt: 'A white water lily open on the pond beside broad canna leaves', width: 1800, height: 2400, hasSmall: true },
+            ],
+            [
+              { suggestion: 'Orange canna', src: '/images/querencia-landscaping/querencia-palms-lotus-water-garden-palm-springs-david-weis.jpg', alt: 'An orange canna flower above a lily pad at the edge of the pond', width: 1800, height: 2400, hasSmall: true },
+            ],
+          ],
+          fill: 'second',
+          ratio: '3 / 2',
+        },
+        {
+          type: 'pair',
+          photos: [
+            { suggestion: 'Plants growing naturally between the rocks', src: '/images/querencia-landscaping/querencia-palms-pond-greenery-south-palm-springs-david-weis.jpg', alt: 'Koi gathered below a clump of marginal plants growing between the rocks at the pond edge', width: 1800, height: 2400, hasSmall: true, position: 'center 40%' },
+            { suggestion: 'Purple flower beside the bridge (new photo in David’s Drive)', src: '/images/querencia-landscaping/querencia-palms-purple-flower-bridge-koi-pond-david-weis.jpg', alt: 'A purple flower in bloom beside the small bridge over the Querencia Palms koi pond' }, // placeholder until uploaded
+          ],
+          ratio: '4 / 3',
         },
         {
           type: 'story',
           eyebrow: 'Learning as I went',
           heading: 'The garden club came with me.',
           paragraphs: [
-            'Around the same time, I joined the Village of La Jolla Garden Club. What began as an enjoyable way to learn more about plants quickly became surprisingly practical.',
+            'Around the same time, I joined the Village of La Jolla Garden Club. What began as an enjoyable way to learn more about plants, quickly became surprisingly practical.',
             'I found myself taking what I was learning and experimenting with it at Querencia, paying more attention to form, color, seasonal change, pruning, growth habits and how a landscape develops over time. The more I learned, the more I noticed. And the more I noticed, the more I wanted to improve.',
           ],
           aside: {
@@ -446,8 +488,7 @@ export const projects: readonly Project[] = [
        * pushed for more turnkey residences and the upstairs model, assembled
        * furniture, prepared the units, watched buyers and sold the homes.
        * Never "David designed seven interiors". Never "free furniture".
-       * Unit numbers on the photos are a best read of David's descriptions
-       * and need his confirmation (CLIENT-QUESTIONS.md).
+       * Unit numbers on the photos were corrected by David on 2026-09-22.
        */
       id: 'the-interiors',
       after: 2,
@@ -464,7 +505,7 @@ export const projects: readonly Project[] = [
         },
         {
           type: 'photo',
-          photo: { suggestion: 'Unit 206 living room', src: '/images/querencia-interiors/querencia-palms-renovated-condo-interior-south-palm-springs-david-weis.jpg', alt: 'Unit 206 at Querencia Palms: a brown leather sofa and two white armchairs against a teal, rust and mustard geometric mural', width: 1448, height: 1086, hasSmall: true },
+          photo: { suggestion: 'Unit 206 living room', src: '/images/querencia-interiors/querencia-palms-condo-interior-palm-springs-david-weis.jpg', alt: 'Unit 206 at Querencia Palms: a round black dining table with mustard chairs beside a green mural, the bar just visible', width: 2048, height: 1369, hasSmall: true },
           ratio: '16 / 9',
           caption: 'Unit 206, one of the two original models.',
         },
@@ -493,9 +534,15 @@ export const projects: readonly Project[] = [
         },
         {
           type: 'pair',
-          photos: [{ suggestion: 'Unit 104 living room', src: '/images/querencia-interiors/querencia-palms-renovated-kitchen-palm-springs-david-weis.jpg', alt: 'Unit 104 at Querencia Palms: a tan leather sofa and a round coffee table in front of a green and gold botanical mural', width: 2400, height: 1800, hasSmall: true }, { suggestion: 'Unit 202 living room', src: '/images/querencia-interiors/querencia-palms-open-concept-living-room-david-weis.jpg', alt: 'Unit 202 at Querencia Palms: a blue leather sofa and a walnut credenza in front of a bold blue, orange and brown mural', width: 2400, height: 1800, hasSmall: true, position: 'center 30%' }],
+          photos: [{ suggestion: 'Unit 104 living room', src: '/images/querencia-interiors/querencia-palms-indoor-outdoor-living-patio-doors-david-weis.jpg', alt: 'Unit 104 at Querencia Palms: a cream sofa with rust pillows on a rust rug, in front of a green and gold mural', width: 2048, height: 1368, hasSmall: true }, { suggestion: 'Unit 202 living room', src: '/images/querencia-interiors/querencia-palms-open-concept-living-room-david-weis.jpg', alt: 'Unit 202 at Querencia Palms: a blue leather sofa and a walnut credenza in front of a bold blue, orange and brown mural', width: 2400, height: 1800, hasSmall: true, position: 'center 30%' }],
           ratio: '4 / 3',
           captions: ['Unit 104, the third model.', 'Unit 202, the upstairs model.'],
+        },
+        {
+          type: 'photo',
+          photo: { suggestion: 'The view from the upstairs model (new photo in David’s Drive interiors folder)', src: '/images/querencia-interiors/querencia-palms-202-upstairs-view-mountains-david-weis.jpg', alt: 'The view from the upstairs residence at Querencia Palms, the mountains rising beyond the rooftops' }, // placeholder until uploaded
+          ratio: '16 / 9',
+          caption: 'The view from upstairs, and the reason we needed a model on the second floor.',
         },
         {
           type: 'story',
@@ -530,17 +577,48 @@ export const projects: readonly Project[] = [
           ],
         },
         {
-          type: 'gallery',
-          label: 'The seven furnished residences',
-          photos: [{ suggestion: 'Unit 105 living room', src: '/images/querencia-interiors/querencia-palms-midcentury-interior-design-palm-springs-david-weis.jpg', alt: 'Unit 105 at Querencia Palms: a white sofa and a green fluted credenza against a teal, mustard and rust geometric mural', width: 2048, height: 1367, hasSmall: true }, { suggestion: 'Unit 201 living room', src: '/images/querencia-interiors/querencia-palms-renovated-bathroom-palm-springs-david-weis.jpg', alt: 'Unit 201 at Querencia Palms: a tan leather sofa and a green credenza against a grey and beige geometric mural', width: 2048, height: 1365, hasSmall: true }, { suggestion: 'Unit 106 sitting area', src: '/images/querencia-interiors/querencia-palms-primary-bedroom-suite-condo-david-weis.jpg', alt: 'Unit 106 at Querencia Palms: two green velvet armchairs, a marble side table and a patio door to the courtyard', width: 2048, height: 1366, hasSmall: true }, { suggestion: 'Unit 204 living room', src: '/images/querencia-interiors/querencia-palms-indoor-outdoor-living-patio-doors-david-weis.jpg', alt: 'Unit 204 at Querencia Palms: a cream sofa with rust pillows on a rust rug, in front of a green and gold mural', width: 2048, height: 1368, hasSmall: true }, { suggestion: 'Unit 106 dining area', src: '/images/querencia-interiors/querencia-palms-condo-interior-palm-springs-david-weis.jpg', alt: 'Unit 106 at Querencia Palms: a round black dining table with mustard chairs beside a green mural', width: 2048, height: 1369, hasSmall: true }, { suggestion: 'Unit 206 living room', src: '/images/querencia-interiors/querencia-palms-renovated-condo-interior-south-palm-springs-david-weis.jpg', alt: 'Unit 206 at Querencia Palms: a brown leather sofa and two white armchairs against a teal, rust and mustard geometric mural', width: 1448, height: 1086, hasSmall: true }, { suggestion: 'Unit 202 living room', src: '/images/querencia-interiors/querencia-palms-open-concept-living-room-david-weis.jpg', alt: 'Unit 202 at Querencia Palms: a blue leather sofa and a walnut credenza in front of a bold blue, orange and brown mural', width: 2400, height: 1800, hasSmall: true, position: 'center 30%' }],
+          type: 'collage',
+          columns: [
+            [
+              { suggestion: 'Unit 105 living room', src: '/images/querencia-interiors/querencia-palms-midcentury-interior-design-palm-springs-david-weis.jpg', alt: 'Unit 105 at Querencia Palms: a white sofa and a green fluted credenza against a teal, mustard and rust geometric mural', width: 2048, height: 1367, hasSmall: true },
+            ],
+            [
+              { suggestion: 'Unit 106 living room', src: '/images/querencia-interiors/querencia-palms-renovated-bathroom-palm-springs-david-weis.jpg', alt: 'Unit 106 at Querencia Palms: a tan leather sofa and a green credenza against a grey and beige geometric mural', width: 2048, height: 1365, hasSmall: true },
+              { suggestion: 'Unit 106 sitting area', src: '/images/querencia-interiors/querencia-palms-primary-bedroom-suite-condo-david-weis.jpg', alt: 'Unit 106 at Querencia Palms: two green velvet armchairs, a marble side table and a patio door to the courtyard', width: 2048, height: 1366, hasSmall: true, position: 'left center' },
+            ],
+          ],
+          fill: 'first',
+          emphasis: 'first',
+          ratio: '3 / 2',
           captions: [
             { title: 'Unit 105', note: 'Graphic geometry + saturated color' },
-            { title: 'Unit 201', note: 'Warm tones + geometric restraint' },
-            { title: 'Unit 106', note: 'Soft modernism + organic neutrals' },
-            { title: 'Unit 204', note: 'Green, gold + garden-inspired color' },
-            { title: 'Unit 106', note: 'The dining side of the same residence' },
-            { title: 'Unit 206', note: 'Graphic modernism + deep contrast' },
+            { title: 'Unit 106', note: 'Warm tones + geometric restraint, and a sitting area that opens to the courtyard' },
+          ],
+        },
+        {
+          type: 'gallery',
+          label: 'More of the residences',
+          photos: [
+            { suggestion: 'Unit 202 living room', src: '/images/querencia-interiors/querencia-palms-open-concept-living-room-david-weis.jpg', alt: 'Unit 202 at Querencia Palms: a blue leather sofa and a walnut credenza in front of a bold blue, orange and brown mural', width: 2400, height: 1800, hasSmall: true, position: 'center 30%' },
+            { suggestion: 'Unit 201 living room', src: '/images/querencia-interiors/querencia-palms-renovated-kitchen-palm-springs-david-weis.jpg', alt: 'Unit 201 at Querencia Palms: a tan leather sofa and a round coffee table in front of a green and gold botanical mural', width: 2400, height: 1800, hasSmall: true },
+            { suggestion: 'Unit 104 living room', src: '/images/querencia-interiors/querencia-palms-indoor-outdoor-living-patio-doors-david-weis.jpg', alt: 'Unit 104 at Querencia Palms: a cream sofa with rust pillows on a rust rug, in front of a green and gold mural', width: 2048, height: 1368, hasSmall: true },
+          ],
+          captions: [
             { title: 'Unit 202', note: 'Desert color + mid-century energy' },
+            { title: 'Unit 201', note: 'Botanical green + gold, warm leather' },
+            { title: 'Unit 104', note: 'Green, gold + garden-inspired color' },
+          ],
+        },
+        {
+          type: 'pair',
+          photos: [
+            { suggestion: 'Unit 206 dining area', src: '/images/querencia-interiors/querencia-palms-condo-interior-palm-springs-david-weis.jpg', alt: 'Unit 206 at Querencia Palms: a round black dining table with mustard chairs beside a green mural, the bar just visible', width: 2048, height: 1369, hasSmall: true },
+            { suggestion: 'Unit 204 living room', src: '/images/querencia-interiors/querencia-palms-renovated-condo-interior-south-palm-springs-david-weis.jpg', alt: 'Unit 204 at Querencia Palms: a brown leather sofa and two white armchairs against a teal, rust and mustard geometric mural', width: 1448, height: 1086, hasSmall: true },
+          ],
+          ratio: '4 / 3',
+          captions: [
+            { title: 'Unit 206', note: 'When your dining room gets its own bar' },
+            { title: 'Unit 204', note: 'Graphic modernism + deep contrast' },
           ],
         },
         {
@@ -586,7 +664,7 @@ export const projects: readonly Project[] = [
         {
           type: 'strip',
           heading: 'Which one would you have chosen?',
-          photos: [{ suggestion: 'Unit 104 living room', src: '/images/querencia-interiors/querencia-palms-renovated-kitchen-palm-springs-david-weis.jpg', alt: 'Unit 104 at Querencia Palms: a tan leather sofa and a round coffee table in front of a green and gold botanical mural', width: 2400, height: 1800, hasSmall: true }, { suggestion: 'Unit 105 living room', src: '/images/querencia-interiors/querencia-palms-midcentury-interior-design-palm-springs-david-weis.jpg', alt: 'Unit 105 at Querencia Palms: a white sofa and a green fluted credenza against a teal, mustard and rust geometric mural', width: 2048, height: 1367, hasSmall: true }, { suggestion: 'Unit 106 sitting area', src: '/images/querencia-interiors/querencia-palms-primary-bedroom-suite-condo-david-weis.jpg', alt: 'Unit 106 at Querencia Palms: two green velvet armchairs, a marble side table and a patio door to the courtyard', width: 2048, height: 1366, hasSmall: true }, { suggestion: 'Unit 201 living room', src: '/images/querencia-interiors/querencia-palms-renovated-bathroom-palm-springs-david-weis.jpg', alt: 'Unit 201 at Querencia Palms: a tan leather sofa and a green credenza against a grey and beige geometric mural', width: 2048, height: 1365, hasSmall: true }, { suggestion: 'Unit 202 living room', src: '/images/querencia-interiors/querencia-palms-open-concept-living-room-david-weis.jpg', alt: 'Unit 202 at Querencia Palms: a blue leather sofa and a walnut credenza in front of a bold blue, orange and brown mural', width: 2400, height: 1800, hasSmall: true, position: 'center 30%' }, { suggestion: 'Unit 204 living room', src: '/images/querencia-interiors/querencia-palms-indoor-outdoor-living-patio-doors-david-weis.jpg', alt: 'Unit 204 at Querencia Palms: a cream sofa with rust pillows on a rust rug, in front of a green and gold mural', width: 2048, height: 1368, hasSmall: true }, { suggestion: 'Unit 206 living room', src: '/images/querencia-interiors/querencia-palms-renovated-condo-interior-south-palm-springs-david-weis.jpg', alt: 'Unit 206 at Querencia Palms: a brown leather sofa and two white armchairs against a teal, rust and mustard geometric mural', width: 1448, height: 1086, hasSmall: true }],
+          photos: [{ suggestion: 'Unit 104 living room', src: '/images/querencia-interiors/querencia-palms-indoor-outdoor-living-patio-doors-david-weis.jpg', alt: 'Unit 104 at Querencia Palms: a cream sofa with rust pillows on a rust rug, in front of a green and gold mural', width: 2048, height: 1368, hasSmall: true }, { suggestion: 'Unit 105 living room', src: '/images/querencia-interiors/querencia-palms-midcentury-interior-design-palm-springs-david-weis.jpg', alt: 'Unit 105 at Querencia Palms: a white sofa and a green fluted credenza against a teal, mustard and rust geometric mural', width: 2048, height: 1367, hasSmall: true }, { suggestion: 'Unit 106 living room', src: '/images/querencia-interiors/querencia-palms-renovated-bathroom-palm-springs-david-weis.jpg', alt: 'Unit 106 at Querencia Palms: a tan leather sofa and a green credenza against a grey and beige geometric mural', width: 2048, height: 1365, hasSmall: true }, { suggestion: 'Unit 201 living room', src: '/images/querencia-interiors/querencia-palms-renovated-kitchen-palm-springs-david-weis.jpg', alt: 'Unit 201 at Querencia Palms: a tan leather sofa and a round coffee table in front of a green and gold botanical mural', width: 2400, height: 1800, hasSmall: true }, { suggestion: 'Unit 202 living room', src: '/images/querencia-interiors/querencia-palms-open-concept-living-room-david-weis.jpg', alt: 'Unit 202 at Querencia Palms: a blue leather sofa and a walnut credenza in front of a bold blue, orange and brown mural', width: 2400, height: 1800, hasSmall: true, position: 'center 30%' }, { suggestion: 'Unit 204 living room', src: '/images/querencia-interiors/querencia-palms-renovated-condo-interior-south-palm-springs-david-weis.jpg', alt: 'Unit 204 at Querencia Palms: a brown leather sofa and two white armchairs against a teal, rust and mustard geometric mural', width: 1448, height: 1086, hasSmall: true }, { suggestion: 'Unit 206 dining area', src: '/images/querencia-interiors/querencia-palms-condo-interior-palm-springs-david-weis.jpg', alt: 'Unit 206 at Querencia Palms: a round black dining table with mustard chairs beside a green mural, the bar just visible', width: 2048, height: 1369, hasSmall: true }],
           labels: ['Unit 104', 'Unit 105', 'Unit 106', 'Unit 201', 'Unit 202', 'Unit 204', 'Unit 206'],
           closing: 'At Querencia, the models didn’t just show buyers where furniture could go. They helped buyers see a life there.',
         },
@@ -725,14 +803,14 @@ export const projects: readonly Project[] = [
       },
     ],
     /*
-     * Before photos of the motor lodge, from David (2026-09-15). Sits right
-     * after "Build it. Sell it. Move on." Files go in public/images/the-cole/
-     * under these names; add or remove entries to match what he sent.
-     */
-    /*
      * Before photos of the motor lodge, from David (2026-09-15). Two matched
      * pairs right after "Build it. Sell it. Move on." The before shots are
      * small web files from the time; that roughness is part of the story.
+     *
+     * Marketing chapter (David's 2026-09-22 brief): the Instagram-to-friendship
+     * story with Jonathan Bennett and Jaymes Vaughn, Kelly Osbourne and the
+     * lesson David carried into real estate marketing. Sits after "Hospitality
+     * is built in the small things."
      */
     chapters: [
       {
@@ -756,6 +834,150 @@ export const projects: readonly Project[] = [
             ],
             ratio: '4 / 3',
             captions: ['From the street, before.', 'The courtyard, mid-construction.'],
+          },
+        ],
+      },
+      {
+        id: 'marketing',
+        after: 3,
+        blocks: [
+          {
+            type: 'story',
+            eyebrow: 'Relationships + marketing',
+            heading: 'It started with an Instagram message.',
+            paragraphs: [
+              'Before The Cole had even officially opened, Jonathan Bennett reached out through the hotel’s Instagram account.',
+              'At that point, I was still figuring out what running a hotel even looked like. We were finishing details, building the brand, getting ready for guests and trying to make people notice a new little property in Palm Springs.',
+              'I knew who Jonathan was, obviously. But more than anything, I thought: this could be fun.',
+              'So I invited Jonathan and his husband, Jaymes Vaughn, to come stay with us before we opened to the public. I basically handed them the hotel. They became our first guests.',
+              'And what started as a message on Instagram became a friendship that lasted far beyond their stay.',
+            ],
+          },
+          {
+            type: 'photo',
+            photo: { suggestion: 'Jonathan Bennett and Jaymes Vaughn on Cole bicycles under the sign', src: '/images/the-cole/the-cole-hotel-first-guests-jonathan-bennett-jaymes-vaughn-bicycles.jpg', alt: 'Jonathan Bennett, Jaymes Vaughn and a friend on The Cole’s turquoise bicycles beneath the yellow and orange Cole Hotel sign', width: 1170, height: 861, hasSmall: true },
+            ratio: '4 / 3',
+            caption: 'Jonathan Bennett and Jaymes Vaughn, our first guests.',
+          },
+          {
+            type: 'story',
+            heading: 'Then COVID happened.',
+            paragraphs: [
+              'Not long afterward, COVID shut down Palm Springs hotels. For a brand-new property, it was terrifying.',
+              'We had barely opened and suddenly there were no guests to welcome, no normal hotel operation, and no way of knowing what the next several months were going to look like.',
+              'Jonathan and Jaymes were home too, creating their Quarantine Coffee show during lockdown. And then one day, there they were on camera drinking coffee out of The Cole Hotel mugs I had made.',
+              'It sounds like such a small thing. It meant a lot to me.',
+              'I had obsessed over all of those little branded details because I wanted The Cole to feel like a real brand, not simply a building with rooms for rent. And during a period when the actual hotel could not operate normally, something I had created for it was sitting in their home and becoming part of something they were creating.',
+              'There was no agreement. No product placement. No campaign. They just liked the mugs.',
+              'That was probably the first time I really understood how powerful organic brand advocacy could be.',
+            ],
+          },
+          {
+            type: 'photo',
+            photo: { suggestion: 'Quarantine Coffee with the Cole mugs (do not crop out the mugs)', src: '/images/the-cole/the-cole-hotel-quarantine-coffee-jonathan-bennett-jaymes-vaughn-mugs.jpg', alt: 'Jaymes Vaughn and Jonathan Bennett on their Quarantine Coffee show, in gloves, each holding a Cole Hotel mug, with their dog between them', width: 1102, height: 750, hasSmall: true },
+            ratio: '3 / 2',
+            caption: 'I may have been slightly too excited when I saw those mugs.',
+          },
+          {
+            type: 'story',
+            heading: 'The relationship kept growing.',
+            paragraphs: [
+              'Jonathan and Jaymes eventually made Palm Springs part of their own lives, and our friendship continued along with it.',
+              'They supported The Cole. We supported them.',
+              'They introduced friends to the hotel, sent people our way, and helped put this tiny independent property in front of people we never could have reached through conventional advertising.',
+              'But it never felt transactional. That is important to me.',
+              'I was not keeping a spreadsheet of who posted what. I liked them. They liked what we were building. And good things kept growing from that.',
+            ],
+            aside: { suggestion: 'Jaymes beside the Cole sign', src: '/images/the-cole/the-cole-hotel-jaymes-vaughn-sign.jpg', alt: 'Jaymes Vaughn sitting on the wall beside The Cole Hotel sign, palms and mountains behind', width: 1170, height: 990, hasSmall: true },
+            asideRatio: '1 / 1',
+            asideCaption: 'Jaymes, beside the sign.',
+          },
+          {
+            type: 'story',
+            heading: 'Then came Kelly.',
+            paragraphs: [
+              'One of the people introduced to The Cole through that circle was Kelly Osbourne.',
+              'I remember chatting with her while doing something considerably less glamorous than celebrity hospitality: I was deep-cleaning the hotel.',
+              'That was The Cole in a nutshell. One minute I was thinking about marketing and guest experience. The next I was cleaning something.',
+              'Kelly stayed with us, rode one of our Cole bicycles, and later shared the hotel with her audience completely on her own. Her post talked about the attention to detail, the bedding and even the biscuits.',
+              'And she made a point of saying it was not an advertisement. That last part might have meant the most to me.',
+              'Because it proved something I had been slowly learning:',
+            ],
+          },
+          {
+            type: 'callout',
+            text: 'The best marketing sometimes happens after you stop trying to market.',
+            note: 'If people genuinely enjoy an experience, they want to tell somebody.',
+          },
+          {
+            type: 'collage',
+            columns: [
+              [{ suggestion: 'Kelly Osbourne on a Cole bicycle, her dog in the basket', src: '/images/the-cole/the-cole-hotel-kelly-osbourne-bicycle.jpg', alt: 'Kelly Osbourne, in glasses and a polka-dot dress, on a Cole bicycle with her small dog in the wicker basket beneath the Cole Hotel sign', width: 1112, height: 1116, hasSmall: true }],
+              [{ suggestion: 'Her Instagram post, with the caption', src: '/images/the-cole/the-cole-hotel-kelly-osbourne-instagram-post.jpg', alt: 'Kelly Osbourne’s Instagram post about The Cole Hotel, with her caption praising the attention to detail, the sheets and the biscuits, and noting it was not an ad', width: 1112, height: 1789, hasSmall: true }],
+            ],
+            fill: 'first',
+            emphasis: 'first',
+            ratio: '5 / 8',
+            captions: ['Kelly, on one of the Cole bicycles.', 'Her post, in her own words.'],
+          },
+          {
+            type: 'story',
+            heading: 'I was learning what a brand really is.',
+            paragraphs: [
+              'Before The Cole, I probably would have thought branding meant a logo, a color palette, good photography and advertising. Those things matter.',
+              'But The Cole taught me that a brand is also everything people carry away from an experience.',
+              'The bicycle they remember riding. The cocktail they liked enough to photograph. The mug that somehow ends up sitting beside them months later. The friend they tell about the property. The way someone talks about your business when you are not in the room.',
+              'I could control the signage. I could design the collateral. I could make the mugs.',
+              'But the most valuable part was what happened once those things belonged to someone else’s experience.',
+            ],
+          },
+          {
+            type: 'callout',
+            text: 'The best marketing we had was when people talked about The Cole without us asking them to.',
+          },
+          {
+            type: 'story',
+            heading: 'It wasn’t just a hotel relationship.',
+            paragraphs: [
+              'Years later, Mark and I were standing beside Jonathan again for a completely different reason. We were there when he received his star on the Palm Springs Walk of the Stars.',
+              'By then, this was no longer a hotel marketing story. It was a friendship.',
+              'And I think that is why I look back on this chapter so differently than I would if it had simply resulted in a few successful social media posts.',
+              'One Instagram message introduced us. The Cole gave us the reason to meet. But the relationship outlasted the transaction entirely.',
+              'That has become one of the most important lessons I have carried into real estate.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '4 / 5',
+            emphasis: 'first',
+            photos: [
+              { suggestion: 'David, Jonathan and Mark at the star', src: '/images/the-cole/jonathan-bennett-walk-of-the-stars-david-weis-mark-weis.jpg', alt: 'David Weis, Jonathan Bennett and Mark Weis standing together on the red carpet beside Jonathan’s new star on the Palm Springs Walk of the Stars', width: 1800, height: 2400, hasSmall: true },
+              { suggestion: 'The star itself', src: '/images/the-cole/jonathan-bennett-walk-of-the-stars-star.jpg', alt: 'Jonathan Bennett’s star on the Palm Springs Walk of the Stars, set in the red carpet', width: 1800, height: 2400, hasSmall: true },
+            ],
+            captions: ['Years after that first Instagram message, celebrating Jonathan’s Palm Springs Walk of the Stars honor together.', undefined],
+          },
+          {
+            type: 'story',
+            eyebrow: 'The lesson',
+            heading: 'You cannot manufacture genuine enthusiasm.',
+            paragraphs: [
+              'The Cole taught me to look for opportunities. It taught me to ask. To reach out. To collaborate. To make something interesting enough that people wanted to participate.',
+              'But it also taught me that there is a difference between exposure and connection. Exposure disappears quickly. Relationships compound.',
+              'A single Instagram message became our first guests. Those guests became friends. Friends introduced other guests. Those guests shared the hotel with their audiences. That created new opportunities, events and collaborations. And years later, the people were still in our lives.',
+              'That is the type of marketing I believe in. Not forcing a brand into every interaction. Creating something good enough that people are happy to carry the story for you.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Into real estate',
+            heading: 'The property changed. The instinct didn’t.',
+            paragraphs: [
+              'I recognize the same pattern in my real estate business today.',
+              'A listing needs beautiful photography. It needs strong digital exposure. It needs thoughtful positioning. But that is only part of marketing.',
+              'I am equally interested in the relationships surrounding the property. Who should know about it? Who can introduce someone? What event could bring the right people through the door? What detail makes someone remember it later? What can we create that people actually want to share?',
+              'That thinking did not begin with Querencia Palms. I learned much of it at The Cole. Sometimes through careful planning. Sometimes through complete accident.',
+              'And sometimes because two guys started drinking coffee on the internet with my hotel mugs.',
+            ],
           },
         ],
       },
@@ -954,7 +1176,6 @@ export const projects: readonly Project[] = [
               },
             ],
             labels: ['Before', 'After'],
-            captions: ['The kitchen, before renovation.', 'The kitchen, after renovation.'],
             ratio: '4 / 3',
           },
           {
@@ -978,7 +1199,6 @@ export const projects: readonly Project[] = [
               },
             ],
             labels: ['Before', 'After'],
-            captions: ['The dining area, before.', 'The dining area and its connection to the finished kitchen.'],
             ratio: '4 / 3',
           },
           {
@@ -1012,7 +1232,6 @@ export const projects: readonly Project[] = [
               },
             ],
             labels: ['During renovation', 'After'],
-            captions: ['The living room during renovation.', 'The finished living room, with a warm palette and space to gather.'],
             ratio: '4 / 3',
           },
           {
@@ -1045,7 +1264,6 @@ export const projects: readonly Project[] = [
               },
             ],
             labels: ['Before', 'After'],
-            captions: ['The upstairs landing, before.', 'The upstairs landing, renewed.'],
             ratio: '4 / 3',
           },
           {
@@ -1069,7 +1287,6 @@ export const projects: readonly Project[] = [
               },
             ],
             labels: ['Before', 'After'],
-            captions: ['The window-lined corner, before.', 'A window-lined corner, reimagined as a place to sit and work.'],
             ratio: '4 / 3',
           },
           {
@@ -1329,11 +1546,11 @@ export const projects: readonly Project[] = [
             type: 'pair',
             photos: [
               {
-                suggestion: 'The reclaimed window in the downstairs bathroom',
-                src: '/images/kensington-canyon/kensington-canyon-stained-glass-bathroom-window-david-weis.jpg',
-                alt: 'The downstairs bathroom at Kensington Canyon with the reclaimed stained-glass window in a completely different setting.',
-                width: 1536,
-                height: 2048,
+                suggestion: 'The reclaimed window in the downstairs bathroom (listing photo; the phone photo of the four-pane bath is kensington-canyon-stained-glass-bathroom-window-david-weis.jpg)',
+                src: '/images/kensington-canyon/kensington-canyon-stained-glass-bathroom-david-weis.jpg',
+                alt: 'The downstairs bathroom at Kensington Canyon: the reclaimed three-pane stained-glass window beside a round brass mirror and a blue vanity.',
+                width: 1024,
+                height: 683,
                 hasSmall: true,
               },
               {
@@ -1362,27 +1579,28 @@ export const projects: readonly Project[] = [
             ],
           },
           {
-            type: 'pair',
-            photos: [
-              {
+            type: 'collage',
+            columns: [
+              [{
                 suggestion: 'The earlier kitchen, with its fixed peninsula',
                 src: '/images/kensington-canyon/kensington-canyon-kitchen-before-renovation-san-diego-david-weis.jpg',
                 alt: 'The Kensington Canyon kitchen before renovation, with its fixed peninsula.',
                 width: 1600,
                 height: 1200,
                 hasSmall: true,
-              },
-              {
+              }],
+              [{
                 suggestion: 'The reworked kitchen: range, stone surround, fridge, rolling island',
                 src: '/images/kensington-canyon/kensington-canyon-kitchen-wet-bar-entertaining-david-weis.jpg',
                 alt: 'The reworked Kensington Canyon kitchen with a freestanding island, a stone range surround and the fridge.',
                 width: 1024,
                 height: 683,
                 hasSmall: true,
-              },
+              }],
             ],
             labels: ['Before', 'After'],
             emphasis: 'second',
+            fill: 'first',
             captions: [
               'The earlier kitchen, with its fixed peninsula.',
               'The reworked kitchen, with a freestanding island and stone range surround.',
@@ -1919,99 +2137,170 @@ export const projects: readonly Project[] = [
     summary:
       'A home with history, personality and enormous personal meaning that continues to evolve through restoration, ownership and hospitality.',
     intro: 'Some properties are investments. Some become part of your personal history. Mercury Palms is both.',
-    sections: [
+    sections: [],
+    chapters: [
       {
-        heading: 'A house that has lived many lives.',
-        paragraphs: [
-          'Mercury Palms has a long connection to Palm Springs history, including an early association with Mercury Records co-founder Irving Green and later members of the Milanovich family. By the time Mark acquired the property, much of its original personality had been lost. His renovation brought warmth and character back through stone, wood ceilings, expansive entertaining spaces and private bedroom suites that connect directly to the outdoors. Then it became part of our story.',
-        ],
-      },
-      {
-        heading: 'This is where our life happened.',
-        paragraphs: [
-          'It was one of the first homes Mark and I shared. It was where we spent much of COVID. It was where we married, surrounded by approximately 120 friends and family before continuing the celebration at The Cole. It has hosted friends, family and vacation guests. And like any house that is truly lived in, it continues to change.',
-        ],
-      },
-      {
-        heading: 'Even great homes need another chapter.',
-        paragraphs: [
-          'In 2025, we began another round of renovation — kitchen, backsplash, fixtures, walls, surfaces worn by years of use. At one point, we painted more than 4,200 square feet of interior space in roughly three days between our regular work responsibilities, with friends joining us in the evenings. Real houses get scuffed. Finishes wear. Preservation is not preventing a house from ever changing — it is caring enough to keep bringing it back.',
-        ],
-      },
-      {
-        heading: 'Real estate is never really finished.',
-        paragraphs: [
-          'Properties evolve with the people who own them. The right renovation today may need refreshing years from now. A personal residence may become a rental; a rental may become home again. The goal is not to freeze a property in time. The goal is to protect what makes it special while allowing it to continue living.',
+        id: 'the-story',
+        after: -1,
+        blocks: [
+          {
+            type: 'story',
+            eyebrow: 'The history',
+            heading: 'A house that has lived many lives.',
+            paragraphs: [
+              'Mercury Palms has a long connection to Palm Springs history, including an early association with Mercury Records co-founder Irving Green and later members of the Milanovich family.',
+              'By the time Mark acquired the property, much of its original personality had been lost.',
+              'His renovation brought warmth and character back through stone, wood ceilings, expansive entertaining spaces and private bedroom suites that open directly to the outdoors.',
+              'And then the house began another chapter. Ours.',
+            ],
+          },
+          {
+            type: 'gallery',
+            label: 'The house',
+            photos: [
+              {
+                suggestion: 'Great room with the wood ceiling and fireplace',
+                src: '/images/mercury-palms/mercury-palms-irving-green-mercury-records-estate-david-weis.jpg',
+                alt: 'The great room at Mercury Palms with its wood cathedral ceiling, stone fireplace and deep grey sectional',
+                width: 2048,
+                height: 1365,
+                hasSmall: true,
+              },
+              {
+                suggestion: 'Covered patio with the fountain at dusk',
+                src: '/images/mercury-palms/mercury-palms-tuscan-villa-estate-palm-springs-david-weis.jpg',
+                alt: 'A covered patio at Mercury Palms at dusk, with a fountain, bougainvillea and the mountains behind the wall',
+                width: 2048,
+                height: 1365,
+                hasSmall: true,
+              },
+              {
+                suggestion: 'Pool with the yellow umbrellas',
+                src: '/images/mercury-palms/mercury-palms-game-room-bar-entertaining-david-weis.jpg',
+                alt: 'The pool at Mercury Palms in daylight with yellow umbrellas and the white villa behind',
+                width: 2048,
+                height: 1364,
+                hasSmall: true,
+              },
+              {
+                suggestion: 'Dining terrace under the palms',
+                src: '/images/mercury-palms/mercury-palms-wedding-event-venue-palm-springs-david-weis.jpg',
+                alt: 'An outdoor dining terrace at Mercury Palms under tall palms with the mountains beyond',
+                width: 2048,
+                height: 1365,
+                hasSmall: true,
+              },
+            ],
+          },
+          {
+            type: 'story',
+            heading: 'This is where our life happened.',
+            paragraphs: [
+              'Mercury Palms was one of the first homes Mark and I shared.',
+              'It was where we spent much of COVID, where friends gathered, where family stayed, and where Palm Springs started to feel less like somewhere we visited and more like home.',
+              'Most importantly, it is where we got married.',
+            ],
+          },
+          {
+            type: 'photo',
+            width: 'bleed',
+            photo: { suggestion: 'Our wedding in the backyard (Wedding in the back yard.JPG in David’s Drive)', src: '/images/mercury-palms/mercury-palms-wedding-backyard-ceremony-david-weis.jpg', alt: 'David and Mark’s wedding ceremony in the backyard at Mercury Palms, friends and family gathered under the palms' },
+            ratio: '16 / 9',
+          },
+          {
+            type: 'callout',
+            text: 'We got married right here.',
+            paragraphs: [
+              'With approximately 120 of our closest friends and family gathered in the backyard, Mark and I were married at Mercury Palms.',
+              'The ceremony happened at home, surrounded by the people who mattered most to us, before everyone continued the celebration at The Cole Hotel.',
+              'There are certainly more conventional wedding venues. But getting married in the backyard of the home where so much of our life had already happened felt exactly right.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'A tradition',
+            heading: 'And then Memorial Day became a tradition.',
+            paragraphs: [
+              'Some traditions are planned. Others just happen once, everyone has an incredible time, and suddenly you realize you are doing it again the next year.',
+              'That became Memorial Day at Mercury Palms.',
+              'What started as a weekend with friends turned into an annual tradition of pool days, dogs, food, drinks, mountain views, new friendships and the same familiar faces coming back year after year.',
+              'It became one of those weekends people started asking about before we even had the chance to plan it. And that is probably the best compliment a home can receive.',
+            ],
+          },
+          {
+            type: 'gallery',
+            label: 'Memorial Day, year by year',
+            photos: [
+              { suggestion: 'Year one: three friends with drinks in the kitchen', src: '/images/mercury-palms/mercury-palms-memorial-day-year-one-david-weis.jpg', alt: 'David, Mark and a friend raising glasses in the Mercury Palms kitchen on the first Memorial Day weekend', width: 1206, height: 1013, hasSmall: true },
+              { suggestion: 'Year two: the group by the pool', src: '/images/mercury-palms/mercury-palms-memorial-day-year-two-david-weis.jpg', alt: 'A dozen friends and three dogs gathered beside the Mercury Palms pool with the mountains behind, Memorial Day weekend year two', width: 1206, height: 917, hasSmall: true },
+              { suggestion: 'Year three: the group on the spa wall', src: '/images/mercury-palms/mercury-palms-memorial-day-year-three-david-weis.jpg', alt: 'Friends lined up along the tiled spa wall at Mercury Palms, palms and mountains behind, Memorial Day weekend year three', width: 1206, height: 1568, hasSmall: true, position: 'center 55%' },
+            ],
+            captions: [
+              { title: 'Year one', note: 'The weekend that accidentally started a tradition.' },
+              { title: 'Year two', note: 'Same house. More friends. Apparently we were doing this again.' },
+              { title: 'Year three', note: 'By year three, it was officially a thing.' },
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Today',
+            heading: 'A home that keeps evolving.',
+            paragraphs: [
+              'Like any house that is truly lived in, Mercury Palms has never stayed frozen in time.',
+              'It has been renovated, refined, filled with friends, used for celebrations, shared with vacation guests, and adapted as our lives changed.',
+              'Today, it is part of Celebrity Vacation Homes. But to us, it will always be more than a vacation rental.',
+              'It is where we spent ordinary days and unforgettable ones. Where friendships grew. Where traditions started. Where we got married.',
+              'And where a house with a long Palm Springs history became part of our own.',
+            ],
+          },
+          {
+            type: 'cta',
+            label: 'Explore Mercury Palms at Celebrity Vacation Homes',
+            href: agent.vacationRentals.url,
+            external: true,
+            note: agent.vacationRentals.note,
+          },
+          {
+            type: 'gallery',
+            label: 'More of the house',
+            photos: [
+              {
+                suggestion: 'Pool at dusk',
+                src: '/images/mercury-palms/mercury-palms-vista-las-palmas-palm-springs-david-weis.jpg',
+                alt: 'The Mercury Palms pool lit at dusk, ringed by palms with the mountains behind',
+                width: 2048,
+                height: 1365,
+                hasSmall: true,
+              },
+              {
+                suggestion: 'The tiled spa and waterfall',
+                src: '/images/mercury-palms/mercury-palms-great-room-cathedral-ceiling-david-weis.jpg',
+                alt: 'The tiled spa at Mercury Palms with water spilling into the pool',
+                width: 2048,
+                height: 1366,
+                hasSmall: true,
+              },
+              {
+                suggestion: 'The house at dusk from the pool',
+                src: '/images/mercury-palms/mercury-palms-palm-springs-private-estate-david-weis.jpg',
+                alt: 'Mercury Palms at dusk from across the pool, the house lit and palms silhouetted against the sky',
+                width: 2048,
+                height: 1365,
+                hasSmall: true,
+              },
+            ],
+          },
         ],
       },
     ],
-    stats: [
-      { value: '4,200+', label: 'Square feet of interior painted' },
-      { value: '3 days', label: 'To paint it, between work responsibilities' },
-      { value: '~120', label: 'Friends and family at our wedding here' },
-    ],
+    // 2026-09-22 brief: Mercury Palms rebuilt as a chapter-driven page. The
+    // aerial lead photo stays here; the other seven of Max's eight photos
+    // (2026-09-14, his SEO filenames) moved into the chapter's galleries.
     photos: [
-    // Max's eight photos (2026-09-14), his SEO filenames.
       {
         suggestion: 'Aerial of the villa, pool and palms',
         src: '/images/mercury-palms/mercury-palms-pool-mountain-views-palm-springs-david-weis.jpg',
         alt: 'Mercury Palms from above: the tile-roofed villa, pool and spa set among tall palms with the mountains beyond',
-        width: 2048,
-        height: 1365,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Great room with the wood ceiling and fireplace',
-        src: '/images/mercury-palms/mercury-palms-irving-green-mercury-records-estate-david-weis.jpg',
-        alt: 'The great room at Mercury Palms with its wood cathedral ceiling, stone fireplace and deep grey sectional',
-        width: 2048,
-        height: 1365,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Covered patio with the fountain at dusk',
-        src: '/images/mercury-palms/mercury-palms-tuscan-villa-estate-palm-springs-david-weis.jpg',
-        alt: 'A covered patio at Mercury Palms at dusk, with a fountain, bougainvillea and the mountains behind the wall',
-        width: 2048,
-        height: 1365,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Pool at dusk',
-        src: '/images/mercury-palms/mercury-palms-vista-las-palmas-palm-springs-david-weis.jpg',
-        alt: 'The Mercury Palms pool lit at dusk, ringed by palms with the mountains behind',
-        width: 2048,
-        height: 1365,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Pool with the yellow umbrellas',
-        src: '/images/mercury-palms/mercury-palms-game-room-bar-entertaining-david-weis.jpg',
-        alt: 'The pool at Mercury Palms in daylight with yellow umbrellas and the white villa behind',
-        width: 2048,
-        height: 1364,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'The tiled spa and waterfall',
-        src: '/images/mercury-palms/mercury-palms-great-room-cathedral-ceiling-david-weis.jpg',
-        alt: 'The tiled spa at Mercury Palms with water spilling into the pool',
-        width: 2048,
-        height: 1366,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Dining terrace under the palms',
-        src: '/images/mercury-palms/mercury-palms-wedding-event-venue-palm-springs-david-weis.jpg',
-        alt: 'An outdoor dining terrace at Mercury Palms under tall palms with the mountains beyond',
-        width: 2048,
-        height: 1365,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'The house at dusk from the pool',
-        src: '/images/mercury-palms/mercury-palms-palm-springs-private-estate-david-weis.jpg',
-        alt: 'Mercury Palms at dusk from across the pool, the house lit and palms silhouetted against the sky',
         width: 2048,
         height: 1365,
         hasSmall: true,

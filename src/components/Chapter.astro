@@ -50,17 +50,25 @@ const { chapter, slug } = Astro.props;
     }
     if (b.type === 'photo') {
       const zoomable = photoExists(b.photo.src);
+      const cap = b.caption;
+      const lightboxCaption = (typeof cap === 'string' ? cap : cap?.title) ?? b.photo.alt ?? '';
       const media = <Media photo={b.photo} ratio={b.ratio ?? '16 / 9'} sizes="100vw" />;
       const inner = (
         <figure class="ch__figure">
           {zoomable ? (
-            <a class="ch__zoom" href={withBase(b.photo.src!)} data-lightbox data-caption={b.caption ?? b.photo.alt ?? ''}>
+            <a class="ch__zoom" href={withBase(b.photo.src!)} data-lightbox data-caption={lightboxCaption}>
               {media}
             </a>
           ) : (
             media
           )}
-          {b.caption && <figcaption class="ch__caption">{b.caption}</figcaption>}
+          {typeof cap === 'string' && <figcaption class="ch__caption">{cap}</figcaption>}
+          {cap && typeof cap !== 'string' && (
+            <figcaption class="ch__caption">
+              <span class="ch__cap-title">{cap.title}</span>
+              {cap.note && <span class="ch__cap-note">{cap.note}</span>}
+            </figcaption>
+          )}
           {b.link && (
             b.link.external ? (
               <a class="link-arrow link-arrow--ext" href={b.link.href} target="_blank" rel="noopener noreferrer">
@@ -103,6 +111,51 @@ const { chapter, slug } = Astro.props;
                     </figcaption>
                   )}
                 </figure>
+              );
+            })}
+            {b.caption && (
+              <p class="ch__caption ch__pair-caption">
+                <span class="ch__cap-title">{b.caption.title}</span>
+                {b.caption.note && <span class="ch__cap-note">{b.caption.note}</span>}
+              </p>
+            )}
+          </div>
+        </div>
+      );
+    }
+    if (b.type === 'collage') {
+      const fill = b.fill ?? (b.columns[0].length > b.columns[1].length ? 'second' : 'first');
+      return (
+        <div class="container ch__block">
+          <div class:list={['ch__collage', b.emphasis && `ch__collage--emphasis-${b.emphasis}`]}>
+            {b.columns.map((col, ci) => {
+              const isFill = (ci === 0 ? 'first' : 'second') === fill;
+              const cap = b.captions?.[ci];
+              return (
+                <div class:list={['ch__collage-col', isFill && 'ch__collage-col--fill']}>
+                  <div class="ch__collage-stack">
+                    {col.map((ph, pi) => {
+                      const zoomable = photoExists(ph.src);
+                      const media = <Media photo={ph} ratio={isFill ? 'auto' : (b.ratio ?? '4 / 3')} sizes="(min-width: 900px) 50vw, 100vw" />;
+                      const tag = pi === 0 && b.labels?.[ci];
+                      return zoomable ? (
+                        <a class="ch__zoom ch__collage-item" href={withBase(ph.src!)} data-lightbox data-caption={ph.alt ?? ''}>
+                          {media}
+                          {tag && <span class="ch__pair-tag">{tag}</span>}
+                        </a>
+                      ) : (
+                        <div class="ch__collage-item">{media}{tag && <span class="ch__pair-tag">{tag}</span>}</div>
+                      );
+                    })}
+                  </div>
+                  {typeof cap === 'string' && <p class="ch__caption">{cap}</p>}
+                  {cap && typeof cap !== 'string' && (
+                    <p class="ch__caption">
+                      <span class="ch__cap-title">{cap.title}</span>
+                      {cap.note && <span class="ch__cap-note">{cap.note}</span>}
+                    </p>
+                  )}
+                </div>
               );
             })}
             {b.caption && (
@@ -254,6 +307,7 @@ const { chapter, slug } = Astro.props;
     font-size: 0.8125rem;
     letter-spacing: 0.02em;
     color: var(--muted);
+    white-space: pre-line;
   }
   /* Titled captions: a small uppercase title with a muted note under it (matches Gallery). */
   .ch__cap-title {
@@ -299,6 +353,52 @@ const { chapter, slug } = Astro.props;
   .ch__pair-caption {
     grid-column: 1 / -1;
     margin-top: 0.25rem;
+  }
+
+  /* Collage: two columns; the fill column's photo stretches to the other column's height. */
+  .ch__collage {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+  .ch__collage--emphasis-first {
+    grid-template-columns: 3fr 2fr;
+  }
+  .ch__collage--emphasis-second {
+    grid-template-columns: 2fr 3fr;
+  }
+  .ch__collage-col {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 0.75rem;
+    min-width: 0;
+    min-height: 0;
+  }
+  .ch__collage-stack {
+    display: grid;
+    gap: 1.25rem;
+    align-content: start;
+    min-height: 0;
+  }
+  .ch__collage-col--fill .ch__collage-stack {
+    grid-auto-rows: minmax(0, 1fr);
+    align-content: stretch;
+  }
+  .ch__collage-item {
+    display: block;
+    position: relative;
+    min-width: 0;
+  }
+  .ch__collage-col--fill .ch__collage-item {
+    position: relative;
+    min-height: 0;
+  }
+  .ch__collage-col--fill .ch__collage-item :global(.media) {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    aspect-ratio: auto;
   }
   .ch__pair-media {
     position: relative;
@@ -500,6 +600,14 @@ const { chapter, slug } = Astro.props;
   @media (max-width: 599px) {
     .ch__pair {
       grid-template-columns: minmax(0, 1fr);
+    }
+    .ch__collage {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .ch__collage-col--fill .ch__collage-item :global(.media) {
+      position: static;
+      height: auto;
+      aspect-ratio: 4 / 3;
     }
     .ch__strip-list {
       grid-template-columns: repeat(3, minmax(0, 1fr));

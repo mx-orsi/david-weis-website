@@ -23,6 +23,33 @@ appears; if the SEO name differs, say so and the data gets pointed at it.
 | Kensington Canyon | `public/images/kensington-canyon/` | The 2026-09-15 "web" upload was the same 1024px size as before; three new angles were added to the gallery (kitchen under the skylights, stained-glass bathroom, bedroom with fireplace) plus the stone-tub bath. **Still wanted:** the full-size MLS originals from David's Drive folder, saved under the existing filenames, to sharpen the lead. |
 | Market photos | `public/images/markets/` | **Done 2026-09-15** with Max's picks from the Unsplash shortlist: downtown San Diego at sunset, wind turbines under the snow-capped San Jacintos, Big Bear Lake from above in winter. They lead the market pages and the home cards; the earlier Unsplash shots moved to the San Diego and Palm Springs mid-page breaks. David's own photos can replace any of them under the same filenames. |
 
+## David's 2026-09-22 batch — what is placed and what is still needed from Max
+
+Most of the photos David names were already in the 2026-09-18 Drive download, so they are placed:
+The Cole marketing chapter (Jonathan + Jaymes on the bikes, the Quarantine Coffee mugs, Jaymes at
+the sign, both Kelly Osbourne images, the Walk of the Stars group and star), Mercury Palms Memorial
+Day years one to three (year two is cropped from the Instagram screenshot; year one and three are the
+originals), the Range Rover with flooring and the Lowe's rental truck for the work-truck section.
+
+**Still needed: re-download David's Drive (his newer uploads are not in the 2026-09-18 copy) and save these under the names the placeholders print.**
+
+| Page | David's file | Save as |
+| --- | --- | --- |
+| About, work trucks | Life Before Mark.JPG (Colorado + motorcycle) | `public/images/about/david-weis-chevy-colorado-motorcycle.jpg` |
+| About, work trucks | Sierra EV.jpeg | `public/images/about/david-weis-gmc-sierra-ev.jpg` |
+| About, Garden Club | April refreshment table | `public/images/about/david-weis-garden-club-april-refreshment-table-arrangement.jpg` |
+| Mercury Palms | Wedding in the back yard.JPG (the must-have) | `public/images/mercury-palms/mercury-palms-wedding-backyard-ceremony-david-weis.jpg` |
+| Mercury Palms | Memorial Day.JPG (optional wide shot) and the "new house photos" | send them over; slots will be added once seen |
+| Querencia Palms | purple flower with the bridge | `public/images/querencia-landscaping/querencia-palms-purple-flower-bridge-koi-pond-david-weis.jpg` |
+| Querencia Palms | the view from the upstairs unit (interiors folder) | `public/images/querencia-interiors/querencia-palms-202-upstairs-view-mountains-david-weis.jpg` |
+| Vista Voltaire | the "missing photos" he uploaded (fence stages 2–4, pass-through garage) | `vista-voltaire-fence-2-solid.jpg`, `vista-voltaire-fence-3-open-picket.jpg`, `vista-voltaire-fence-4-first-planting.jpg`, `vista-voltaire-pass-through-garage.jpg` under `public/images/vista-voltaire/` |
+| Sierra Chalet | the bears (exterior folder), the new before/after photos (exterior + interior), the new front hero | send them over; the lead swap and pairs get wired once seen |
+| Mercury Palms / The Cole | "Memorial Day.JPG", "The Cole Hotel - Marketing Technique …(1)" duplicates | not needed; the originals are in |
+
+Not used on purpose: the Tesla-full-of-plants video (Work Truck.MP4) and photo; David's final
+work-truck layout does not list them and the site has no video block. The Cole marketing screenshots
+other than Kelly's post (the Instagram grabs) are not used; the originals are.
+
 ## About page notes — 2026-09-21
 
 David's About notes placed eight more photos from the Drive download under `public/images/about/`:
