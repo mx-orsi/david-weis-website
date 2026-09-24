@@ -2209,9 +2209,8 @@ export const projects: readonly Project[] = [
           },
           {
             type: 'photo',
-            width: 'bleed',
             photo: { suggestion: 'Our wedding in the backyard', src: '/images/mercury-palms/mercury-palms-wedding-backyard-ceremony-david-weis.jpg', alt: 'David and Mark exchanging vows under a floral arch in the backyard at Mercury Palms, the officiant between them', width: 1600, height: 2400, hasSmall: true, position: 'center 40%' },
-            ratio: '16 / 9',
+            ratio: '3 / 2',
           },
           {
             type: 'callout',
