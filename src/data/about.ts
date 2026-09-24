@@ -361,7 +361,7 @@ export const aboutChapterB: ProjectChapter = {
       ratio: '4 / 3',
       photos: [
         { suggestion: 'La Jolla Light coverage', src: '/images/about/david-weis-garden-club-la-jolla-light.jpg', alt: 'The La Jolla Light photo of the Village Garden Club hat contest: six members in flowered hats, David among them holding a bouquet', width: 890, height: 699, hasSmall: true },
-        { suggestion: 'April refreshment table flower arrangement (in David’s Drive, not downloaded yet)', src: '/images/about/david-weis-garden-club-april-refreshment-table-arrangement.jpg', alt: 'The refreshment table flower arrangement David designed for the Village Garden Club’s April program with The Posy Book author Teresa Sabankaya' },
+        { suggestion: 'April refreshment table flower arrangement', src: '/images/about/david-weis-garden-club-april-refreshment-table-arrangement.jpg', alt: 'The refreshment table flower arrangement David designed for the Village Garden Club’s April program with The Posy Book author Teresa Sabankaya', width: 1800, height: 2400, hasSmall: true },
       ],
       captions: [
         { title: 'Winners of May Luncheon Hat Competition', note: 'Featured in the La Jolla Light' },
@@ -612,7 +612,7 @@ export const aboutChapterB: ProjectChapter = {
     },
     {
       type: 'photo',
-      photo: { suggestion: 'The Colorado with the motorcycle in the bed (Life Before Mark.JPG in David’s Drive)', src: '/images/about/david-weis-chevy-colorado-motorcycle.jpg', alt: 'David’s white Chevy Colorado with his motorcycle loaded in the bed' },
+      photo: { suggestion: 'The Colorado with the motorcycle in the bed', src: '/images/about/david-weis-chevy-colorado-motorcycle.jpg', alt: 'The white Chevy Colorado with a red motorcycle loaded in the bed, the dog sitting in the lot in front', width: 2400, height: 1800, hasSmall: true },
       ratio: '3 / 2',
       caption: 'Back when the work truck was, in fact, a work truck.',
     },
@@ -675,7 +675,7 @@ export const aboutChapterB: ProjectChapter = {
     },
     {
       type: 'photo',
-      photo: { suggestion: 'The GMC Sierra EV (Sierra EV.jpeg in David’s Drive)', src: '/images/about/david-weis-gmc-sierra-ev.jpg', alt: 'David Weis’s GMC Sierra EV' },
+      photo: { suggestion: 'The GMC Sierra EV in the drive at Sierra Chalet', src: '/images/about/david-weis-gmc-sierra-ev.jpg', alt: 'The white GMC Sierra EV parked in the drive below Sierra Chalet, pines behind', width: 2400, height: 1800, hasSmall: true, position: 'center 60%' },
       ratio: '16 / 9',
     },
     {

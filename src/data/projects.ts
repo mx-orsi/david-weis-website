@@ -404,7 +404,7 @@ export const projects: readonly Project[] = [
           type: 'pair',
           photos: [
             { suggestion: 'Plants growing naturally between the rocks', src: '/images/querencia-landscaping/querencia-palms-pond-greenery-south-palm-springs-david-weis.jpg', alt: 'Koi gathered below a clump of marginal plants growing between the rocks at the pond edge', width: 1800, height: 2400, hasSmall: true, position: 'center 40%' },
-            { suggestion: 'Purple flower beside the bridge (new photo in David’s Drive)', src: '/images/querencia-landscaping/querencia-palms-purple-flower-bridge-koi-pond-david-weis.jpg', alt: 'A purple flower in bloom beside the small bridge over the Querencia Palms koi pond' }, // placeholder until uploaded
+            { suggestion: 'Purple flower beside the bridge', src: '/images/querencia-landscaping/querencia-palms-purple-flower-bridge-koi-pond-david-weis.jpg', alt: 'A purple flower in bloom beside the small bridge over the Querencia Palms koi pond', width: 1800, height: 2400, hasSmall: true, position: 'center 60%' },
           ],
           ratio: '4 / 3',
         },
@@ -540,7 +540,7 @@ export const projects: readonly Project[] = [
         },
         {
           type: 'photo',
-          photo: { suggestion: 'The view from the upstairs model (new photo in David’s Drive interiors folder)', src: '/images/querencia-interiors/querencia-palms-202-upstairs-view-mountains-david-weis.jpg', alt: 'The view from the upstairs residence at Querencia Palms, the mountains rising beyond the rooftops' }, // placeholder until uploaded
+          photo: { suggestion: 'The view from the upstairs model', src: '/images/querencia-interiors/querencia-palms-202-upstairs-view-mountains-david-weis.jpg', alt: 'The view from the upstairs residence at Querencia Palms, the mountains rising beyond the rooftops', width: 1280, height: 960 },
           ratio: '16 / 9',
           caption: 'The view from upstairs, and the reason we needed a model on the second floor.',
         },
@@ -1347,6 +1347,9 @@ export const projects: readonly Project[] = [
                   suggestion: 'The solid fence early in construction',
                   src: '/images/vista-voltaire/vista-voltaire-fence-2-solid.jpg',
                   alt: 'The solid six-foot fence at Vista Voltaire early in construction.',
+                  width: 2048,
+                  height: 1536,
+                  hasSmall: true,
                 },
               },
               {
@@ -1356,6 +1359,9 @@ export const projects: readonly Project[] = [
                   suggestion: 'The fence reworked into an open picket design',
                   src: '/images/vista-voltaire/vista-voltaire-fence-3-open-picket.jpg',
                   alt: 'The Vista Voltaire fence reworked into an open picket design.',
+                  width: 2048,
+                  height: 1536,
+                  hasSmall: true,
                 },
               },
               {
@@ -1365,6 +1371,9 @@ export const projects: readonly Project[] = [
                   suggestion: 'The first planting along the fence line',
                   src: '/images/vista-voltaire/vista-voltaire-fence-4-first-planting.jpg',
                   alt: 'The first landscaping planted along the Vista Voltaire fence line, with young boxwoods.',
+                  width: 2048,
+                  height: 1536,
+                  hasSmall: true,
                 },
               },
               {
@@ -1395,6 +1404,9 @@ export const projects: readonly Project[] = [
               suggestion: 'Both doors open: Vista Voltaire’s pass-through garage',
               src: '/images/vista-voltaire/vista-voltaire-pass-through-garage.jpg',
               alt: 'Vista Voltaire’s pass-through garage with both overhead doors open and a vehicle parked between the openings.',
+              width: 2400,
+              height: 1800,
+              hasSmall: true,
             },
             asideRatio: '4 / 3',
             asideCaption: 'Both doors open: Vista Voltaire’s pass-through garage.',
@@ -1981,6 +1993,50 @@ export const projects: readonly Project[] = [
      * "600+".
      */
     chapters: [
+      /*
+       * Before/after pairs from David's 2026-09-24 upload (the old listing
+       * photos against the new listing photography). Sits after "Ten months.
+       * Mostly our own hands." The line under the heading is lifted from his
+       * own first section so nothing new is claimed.
+       */
+      {
+        id: 'before-after',
+        after: 1,
+        blocks: [
+          {
+            type: 'compare',
+            heading: 'The cabin we bought. The cabin we built.',
+            paragraphs: ['The property was tired. But the setting and potential were undeniable.'],
+            pairs: [
+            {
+              label: 'The cabin',
+              before: { suggestion: 'Before: the red cabin as we bought it', src: '/images/sierra-chalet/sierra-chalet-big-bear-exterior-before-renovation-02-david-weis.jpg', alt: 'Sierra Chalet before the renovation: a small red cabin in the snow with a weathered stair', width: 1170, height: 744, hasSmall: true },
+              after: { suggestion: 'After: the same side, rebuilt', src: '/images/sierra-chalet/sierra-chalet-big-bear-exterior-after-02-david-weis.jpg', alt: 'Sierra Chalet after the rebuild from the same side: grey siding, the new A-frame entry and stair', width: 2048, height: 1365, hasSmall: true },
+            },
+            {
+              label: 'The upper deck',
+              before: { suggestion: 'The old deck in snow', src: '/images/sierra-chalet/sierra-chalet-big-bear-top-deck-before-david-weis.jpg', alt: 'The old upper deck at Sierra Chalet in snow, its rough log rail looking out at the trees', width: 2228, height: 1354, hasSmall: true },
+              after: { suggestion: 'The finished upper deck', src: '/images/sierra-chalet/sierra-chalet-big-bear-top-deck-after-david-weis.jpg', alt: 'The finished upper deck at Sierra Chalet: a black dining table with yellow chairs, the pines and the lake beyond', width: 2048, height: 1365, hasSmall: true },
+            },
+            {
+              label: 'The entry',
+              before: { suggestion: 'The old entry', src: '/images/sierra-chalet/sierra-chalet-big-bear-entry-foyer-cabin-interior-david-weis.jpg', alt: 'The old knotty-pine entry at Sierra Chalet with a framed fish print on the wall', width: 1170, height: 767, hasSmall: true },
+              after: { suggestion: 'The new entry', src: '/images/sierra-chalet/sierra-chalet-big-bear-foyer-after-david-weis.jpg', alt: 'The new downstairs entry at Sierra Chalet: a Dutch door with a diamond window, pine walls and wide plank floors', width: 2048, height: 1365, hasSmall: true },
+            },
+            {
+              label: 'The kitchen',
+              before: { suggestion: 'The old kitchen', src: '/images/sierra-chalet/sierra-chalet-big-bear-renovated-kitchen-david-weis.jpg', alt: 'The old kitchen at Sierra Chalet: white appliances, pine cabinets and a stained-glass door', width: 1170, height: 756, hasSmall: true },
+              after: { suggestion: 'The new kitchen', src: '/images/sierra-chalet/sierra-chalet-big-bear-kitchen-after-david-weis.jpg', alt: 'The renovated kitchen at Sierra Chalet: green cabinets, patterned tile, orange stools at the counter under a wood ceiling', width: 2048, height: 1365, hasSmall: true },
+            },
+            {
+              label: 'The primary bedroom',
+              before: { suggestion: 'The old bedroom', src: '/images/sierra-chalet/sierra-chalet-big-bear-primary-bedroom-david-weis.jpg', alt: 'The old primary bedroom at Sierra Chalet: a metal four-poster bed on green carpet', width: 1170, height: 776, hasSmall: true },
+              after: { suggestion: 'The new bedroom', src: '/images/sierra-chalet/sierra-chalet-big-bear-primary-bedroom-after-david-weis.jpg', alt: 'The renovated primary bedroom at Sierra Chalet: patterned wallpaper, a platform bed and a sheepskin throw', width: 2048, height: 1365, hasSmall: true },
+            },
+            ],
+          },
+        ],
+      },
       {
         id: 'hands-on',
         after: 2,
@@ -2050,75 +2106,22 @@ export const projects: readonly Project[] = [
       { value: '2', label: 'Large decks constructed' },
       { value: 'Lake views', label: 'The upper deck was designed around them' },
     ],
-    // Max's photos (2026-09-15): renovation and action shots. The finished
-    // listing photography is still to come and will replace the lead and the
-    // interiors.
+    // 2026-09-24: David's listing photography (Front Hero Shot, After 1/2,
+    // Rear Exterior After, Top Deck After, the interiors) replaces the phone
+    // shots for the lead and the finished views; the renovation photos stay
+    // for the "mostly our own hands" break and the closing grid.
     photos: [
-      {
-        suggestion: 'Exterior after the rebuild, both decks complete',
-        src: '/images/sierra-chalet/sierra-chalet-big-bear-cabin-exterior-deck-david-weis.jpg',
-        alt: 'Sierra Chalet after the rebuild: the grey cabin with its new upper deck and stairs among the pines in autumn',
-        width: 2048,
-        height: 1536,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Mid-renovation, walls open',
-        src: '/images/sierra-chalet/sierra-chalet-big-bear-exterior-during-renovation-01-david-weis.jpg',
-        alt: 'Sierra Chalet mid-renovation: siding removed, the old red boards and insulation exposed, a ladder against the wall',
-        width: 2049,
-        height: 1536,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'The deck framing going up',
-        src: '/images/sierra-chalet/sierra-chalet-big-bear-exterior-during-renovation-02-david-weis.jpg',
-        alt: 'The new deck framing at Sierra Chalet going up against the blue sky, with new windows in the wall behind',
-        width: 2049,
-        height: 1536,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'The cabin in early snow',
-        src: '/images/sierra-chalet/sierra-chalet-big-bear-cabin-exterior-david-weis.jpg',
-        alt: 'Sierra Chalet in snow after the rebuild, the grey cabin with its new stairs and deck',
-        width: 2049,
-        height: 1536,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Before: the red cabin as we bought it',
-        src: '/images/sierra-chalet/sierra-chalet-big-bear-exterior-before-renovation-02-david-weis.jpg',
-        alt: 'Sierra Chalet before the renovation: a small red cabin in the snow with a weathered stair',
-        width: 1170,
-        height: 744,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'David mixing concrete',
-        src: '/images/sierra-chalet/david-weis-hands-on-renovation-sierra-chalet-big-bear-02.jpg',
-        alt: 'David Weis in a yellow shirt mixing concrete in a tub beside a pile of rock at Sierra Chalet',
-        width: 2049,
-        height: 1536,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'The dogs at the door',
-        src: '/images/sierra-chalet/sierra-chalet-big-bear-mountain-retreat-david-weis.jpg',
-        alt: 'Two dogs at the glass door at Sierra Chalet, looking out at yellow chairs on the snowy deck',
-        width: 1536,
-        height: 2048,
-        hasSmall: true,
-        position: 'center 40%',
-      },
-      {
-        suggestion: 'The carved bear at the door',
-        src: '/images/sierra-chalet/sierra-chalet-big-bear-david-weis.jpg',
-        alt: 'A carved wooden bear wearing ski goggles beside a snowboard at the Sierra Chalet door',
-        width: 1536,
-        height: 2048,
-        hasSmall: true,
-      },
+      { suggestion: 'The A-frame entry at dusk (Front Hero Shot)', src: '/images/sierra-chalet/sierra-chalet-big-bear-a-frame-front-dusk-david-weis.jpg', alt: 'Sierra Chalet at dusk: the grey cabin with its A-frame entry lit and strung with colored lights, pines behind', width: 2048, height: 1365, hasSmall: true },
+      { suggestion: 'Mid-renovation, walls open', src: '/images/sierra-chalet/sierra-chalet-big-bear-exterior-during-renovation-01-david-weis.jpg', alt: 'Sierra Chalet mid-renovation: siding removed, the old red boards and insulation exposed, a ladder against the wall', width: 2049, height: 1536, hasSmall: true },
+      { suggestion: 'The deck framing going up', src: '/images/sierra-chalet/sierra-chalet-big-bear-exterior-during-renovation-02-david-weis.jpg', alt: 'The new deck framing at Sierra Chalet going up against the blue sky, with new windows in the wall behind', width: 2049, height: 1536, hasSmall: true },
+      { suggestion: 'The cabin in early snow', src: '/images/sierra-chalet/sierra-chalet-big-bear-cabin-exterior-david-weis.jpg', alt: 'Sierra Chalet in snow after the rebuild, the grey cabin with its new stairs and deck', width: 2049, height: 1536, hasSmall: true },
+      { suggestion: 'The carved bears at the entry', src: '/images/sierra-chalet/sierra-chalet-big-bear-carved-bears-entry-david-weis.jpg', alt: 'Two carved wooden bears beside the A-frame entry at Sierra Chalet, the 1378 house number on the wall', width: 2048, height: 1365, hasSmall: true },
+      { suggestion: 'The upper deck, finished', src: '/images/sierra-chalet/sierra-chalet-big-bear-top-deck-after-david-weis.jpg', alt: 'The finished upper deck at Sierra Chalet: a black dining table with yellow chairs, the pines and the lake beyond', width: 2048, height: 1365, hasSmall: true },
+      { suggestion: 'The rear of the cabin with the screened deck', src: '/images/sierra-chalet/sierra-chalet-big-bear-rear-exterior-screened-deck-after-david-weis.jpg', alt: 'The rear of Sierra Chalet after the rebuild: the screened lower deck below the open upper deck', width: 2048, height: 1365, hasSmall: true },
+      { suggestion: 'Exterior after the rebuild, both decks complete', src: '/images/sierra-chalet/sierra-chalet-big-bear-cabin-exterior-deck-david-weis.jpg', alt: 'Sierra Chalet after the rebuild: the grey cabin with its new upper deck and stairs among the pines in autumn', width: 2048, height: 1536, hasSmall: true },
+      { suggestion: 'David mixing concrete', src: '/images/sierra-chalet/david-weis-hands-on-renovation-sierra-chalet-big-bear-02.jpg', alt: 'David Weis in a yellow shirt mixing concrete in a tub beside a pile of rock at Sierra Chalet', width: 2049, height: 1536, hasSmall: true },
+      { suggestion: 'The dogs at the door', src: '/images/sierra-chalet/sierra-chalet-big-bear-mountain-retreat-david-weis.jpg', alt: 'Two dogs at the glass door at Sierra Chalet, looking out at yellow chairs on the snowy deck', width: 1536, height: 2048, hasSmall: true, position: 'center 40%' },
+      { suggestion: 'The carved bear at the door', src: '/images/sierra-chalet/sierra-chalet-big-bear-david-weis.jpg', alt: 'A carved wooden bear wearing ski goggles beside a snowboard at the Sierra Chalet door', width: 1536, height: 2048, hasSmall: true },
     ],
     cta: { label: 'Explore Big Bear Real Estate', href: '/big-bear' },
     seo: {
@@ -2166,6 +2169,7 @@ export const projects: readonly Project[] = [
                 height: 1365,
                 hasSmall: true,
               },
+              { suggestion: 'The kitchen', src: '/images/mercury-palms/mercury-palms-kitchen-david-weis.jpg', alt: 'The Mercury Palms kitchen: honey-toned cabinetry, a granite island and stainless appliances', width: 2048, height: 1367, hasSmall: true },
               {
                 suggestion: 'Covered patio with the fountain at dusk',
                 src: '/images/mercury-palms/mercury-palms-tuscan-villa-estate-palm-springs-david-weis.jpg',
@@ -2190,6 +2194,8 @@ export const projects: readonly Project[] = [
                 height: 1365,
                 hasSmall: true,
               },
+              { suggestion: 'The game room', src: '/images/mercury-palms/mercury-palms-game-room-pool-table-fireplace-david-weis.jpg', alt: 'The game room at Mercury Palms with a pool table in front of a river-rock fireplace', width: 2048, height: 1365, hasSmall: true },
+              { suggestion: 'The lawn and bougainvillea', src: '/images/mercury-palms/mercury-palms-lawn-bougainvillea-david-weis.jpg', alt: 'The side lawn at Mercury Palms, edged with pink bougainvillea, palms and mountains beyond', width: 2048, height: 1361, hasSmall: true },
             ],
           },
           {
@@ -2204,7 +2210,7 @@ export const projects: readonly Project[] = [
           {
             type: 'photo',
             width: 'bleed',
-            photo: { suggestion: 'Our wedding in the backyard (Wedding in the back yard.JPG in David’s Drive)', src: '/images/mercury-palms/mercury-palms-wedding-backyard-ceremony-david-weis.jpg', alt: 'David and Mark’s wedding ceremony in the backyard at Mercury Palms, friends and family gathered under the palms' },
+            photo: { suggestion: 'Our wedding in the backyard', src: '/images/mercury-palms/mercury-palms-wedding-backyard-ceremony-david-weis.jpg', alt: 'David and Mark exchanging vows under a floral arch in the backyard at Mercury Palms, the officiant between them', width: 1600, height: 2400, hasSmall: true, position: 'center 40%' },
             ratio: '16 / 9',
           },
           {
@@ -2232,7 +2238,7 @@ export const projects: readonly Project[] = [
             label: 'Memorial Day, year by year',
             photos: [
               { suggestion: 'Year one: three friends with drinks in the kitchen', src: '/images/mercury-palms/mercury-palms-memorial-day-year-one-david-weis.jpg', alt: 'David, Mark and a friend raising glasses in the Mercury Palms kitchen on the first Memorial Day weekend', width: 1206, height: 1013, hasSmall: true },
-              { suggestion: 'Year two: the group by the pool', src: '/images/mercury-palms/mercury-palms-memorial-day-year-two-david-weis.jpg', alt: 'A dozen friends and three dogs gathered beside the Mercury Palms pool with the mountains behind, Memorial Day weekend year two', width: 1206, height: 917, hasSmall: true },
+              { suggestion: 'Year two: the group by the pool', src: '/images/mercury-palms/mercury-palms-memorial-day-year-two-david-weis.jpg', alt: 'A dozen friends and three dogs gathered beside the Mercury Palms pool with the mountains behind, Memorial Day weekend year two', width: 2048, height: 1565, hasSmall: true },
               { suggestion: 'Year three: the group on the spa wall', src: '/images/mercury-palms/mercury-palms-memorial-day-year-three-david-weis.jpg', alt: 'Friends lined up along the tiled spa wall at Mercury Palms, palms and mountains behind, Memorial Day weekend year three', width: 1206, height: 1568, hasSmall: true, position: 'center 55%' },
             ],
             captions: [
@@ -2288,6 +2294,9 @@ export const projects: readonly Project[] = [
                 height: 1365,
                 hasSmall: true,
               },
+              { suggestion: 'The house at dusk from the street', src: '/images/mercury-palms/mercury-palms-exterior-dusk-hedges-david-weis.jpg', alt: 'Mercury Palms at dusk from the street, its lit windows above clipped hedges and tall palms', width: 2048, height: 1365, hasSmall: true },
+              { suggestion: 'The spa under the yellow umbrellas', src: '/images/mercury-palms/mercury-palms-spa-mountain-view-david-weis.jpg', alt: 'Loungers under yellow umbrellas beside the tiled spa at Mercury Palms, mountains behind', width: 2048, height: 1364, hasSmall: true },
+              { suggestion: 'The front of the house', src: '/images/mercury-palms/mercury-palms-front-exterior-garage-david-weis.jpg', alt: 'The front of Mercury Palms between two palms, its tile roof and twin garage doors behind a low hedge', width: 2048, height: 1365, hasSmall: true },
             ],
           },
         ],

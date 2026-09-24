@@ -31,20 +31,18 @@ the sign, both Kelly Osbourne images, the Walk of the Stars group and star), Mer
 Day years one to three (year two is cropped from the Instagram screenshot; year one and three are the
 originals), the Range Rover with flooring and the Lowe's rental truck for the work-truck section.
 
-**Still needed: re-download David's Drive (his newer uploads are not in the 2026-09-18 copy) and save these under the names the placeholders print.**
-
-| Page | David's file | Save as |
-| --- | --- | --- |
-| About, work trucks | Life Before Mark.JPG (Colorado + motorcycle) | `public/images/about/david-weis-chevy-colorado-motorcycle.jpg` |
-| About, work trucks | Sierra EV.jpeg | `public/images/about/david-weis-gmc-sierra-ev.jpg` |
-| About, Garden Club | April refreshment table | `public/images/about/david-weis-garden-club-april-refreshment-table-arrangement.jpg` |
-| Mercury Palms | Wedding in the back yard.JPG (the must-have) | `public/images/mercury-palms/mercury-palms-wedding-backyard-ceremony-david-weis.jpg` |
-| Mercury Palms | Memorial Day.JPG (optional wide shot) and the "new house photos" | send them over; slots will be added once seen |
-| Querencia Palms | purple flower with the bridge | `public/images/querencia-landscaping/querencia-palms-purple-flower-bridge-koi-pond-david-weis.jpg` |
-| Querencia Palms | the view from the upstairs unit (interiors folder) | `public/images/querencia-interiors/querencia-palms-202-upstairs-view-mountains-david-weis.jpg` |
-| Vista Voltaire | the "missing photos" he uploaded (fence stages 2–4, pass-through garage) | `vista-voltaire-fence-2-solid.jpg`, `vista-voltaire-fence-3-open-picket.jpg`, `vista-voltaire-fence-4-first-planting.jpg`, `vista-voltaire-pass-through-garage.jpg` under `public/images/vista-voltaire/` |
-| Sierra Chalet | the bears (exterior folder), the new before/after photos (exterior + interior), the new front hero | send them over; the lead swap and pairs get wired once seen |
-| Mercury Palms / The Cole | "Memorial Day.JPG", "The Cole Hotel - Marketing Technique …(1)" duplicates | not needed; the originals are in |
+**Done 2026-09-24.** Max re-downloaded the Drive to `assets-source/drive-2026-09-24/`; 36 files were new
+against the earlier copies and 33 are placed: Colorado + motorcycle and the Sierra EV (About), the April
+refreshment table (About), the Mercury Palms wedding photo (full-width bleed), the Memorial Day year-two
+original (replacing the Instagram crop) and ten new house photos (six added to the two house galleries),
+the Querencia purple flower and upstairs view, the three Voltaire fence stages and the pass-through
+garage, and Sierra Chalet's listing photography (the A-frame dusk shot leads; a before/after slider
+chapter pairs the old listing photos with the new ones; the bears, upper deck and rear deck join the
+closing grid). Exported but not placed: Mercury "Memorial Day 1" (the poolside group, saved as
+`mercury-palms-memorial-day-friends-poolside-david-weis.jpg`), the Jonathan Bennett selfie
+(`the-cole-hotel-jonathan-bennett-david-weis-mark-weis-selfie.jpg`), and four Mercury interiors
+(`great-room-fireplace`, `pool-spa-yellow-umbrellas`, `pool-house-wide`, `fireplace-bookshelves`).
+The Kensington "luxury-kensington-canyon-lodging" file is the bathroom photo already on the page.
 
 Not used on purpose: the Tesla-full-of-plants video (Work Truck.MP4) and photo; David's final
 work-truck layout does not list them and the site has no video block. The Cole marketing screenshots

@@ -92,8 +92,14 @@ fence copy makes no regulatory claims; no revenue or occupancy figures anywhere.
 - **Querencia "201 is missing":** the tan-sofa photo he identified as 201 was on the page labeled 104, so
   201 is now labeled correctly and nothing is missing; every unit label follows his key.
 - **Garden club sentence** has the comma he asked for ("…learn more about plants, quickly became…").
-- **Sierra Chalet:** nothing changed yet; the new hero, bears and before/after photos are not in the
-  download.
+- **Sierra Chalet (2026-09-24):** the A-frame dusk photo leads, and a before/after slider chapter
+  ("The cabin we bought. The cabin we built.") pairs the old listing photos with his new ones: the cabin,
+  the upper deck, the entry, the kitchen, the primary bedroom. The slider heading is new wording and its
+  one line is lifted from his first section; say if he wants different words there.
+- **Mercury Palms (2026-09-24):** the wedding photo is in, full width. Year two now uses his original
+  photo. Six of the ten new house photos were added to the galleries; the other four are in the folder.
+  "Memorial Day 1" (the poolside group) was not placed, since his brief only called for the extra wide
+  shot if the layout needed it.
 
 
 **From David's About page notes (2026-09-21):** all applied. Points to confirm with him:
@@ -111,8 +117,6 @@ fence copy makes no regulatory claims; no revenue or occupancy figures anywhere.
 - **The Marquee photo of David and Mark** only exists as an Instagram screenshot (1206px wide), so it
   is cropped from that and is the softest photo on the page. The original from his phone would swap in
   under the same filename.
-- **April refreshment-table photo** is not in the 2026-09-18 Drive download; its slot prints the
-  expected filename (see IMAGES-NEEDED.md).
 - **Assemblymember caption** uses his wording, "California State Assemblymember Chris Ward,
   representing part of San Diego County." The bill name (More Homes on the Market Act) was added to
   the paragraph above it as well.
