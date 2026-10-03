@@ -22,6 +22,7 @@ export const agent = {
   /** Display format from the copy deck footer. */
   phone: '619.518.9246',
   phoneHref: 'tel:+16195189246',
+  smsHref: 'sms:+16195189246',
   phoneE164: '+1-619-518-9246',
   email: 'david@davidweis.com',
   /** Office per David's 2026-09 review. Shown on the Contact page and in structured data. */
@@ -101,7 +102,7 @@ export interface Market {
   /** Home page, section 3 */
   homeBlurb: string;
   homeCta: string;
-  /** Market page closing CTA label */
+  /** Market page Compass search button, worded per David's 2026-09-28 brief */
   propertiesCta: string;
   image: Photo;
   /** Keywords for structured data and internal search hints */
@@ -117,7 +118,7 @@ export const markets: readonly Market[] = [
     homeBlurb:
       'Coastal homes, historic neighborhoods, urban living and investment properties all exist within a few miles of one another. My experience here includes personal residences, renovation projects, short-term rentals and client representation.',
     homeCta: 'Explore San Diego',
-    propertiesCta: 'Explore San Diego Properties',
+    propertiesCta: 'Search San Diego Homes on Compass',
     image: {
       suggestion: 'Downtown San Diego from the bay at sunset',
       src: '/images/markets/san-diego-downtown-skyline-sunset.jpg',
@@ -136,7 +137,7 @@ export const markets: readonly Market[] = [
     homeBlurb:
       'Palm Springs became home through hospitality, real estate and community. From operating a boutique hotel to marketing a condominium conversion, owning vacation property and representing buyers and sellers, this is a market I have experienced from nearly every side.',
     homeCta: 'Explore Palm Springs',
-    propertiesCta: 'Explore Palm Springs Properties',
+    propertiesCta: 'Search Palm Springs Homes on Compass',
     image: {
       suggestion: 'Wind turbines with the snow-capped San Jacinto Mountains behind',
       src: '/images/markets/palm-springs-wind-turbines-san-jacinto-mountains.jpg',
@@ -156,7 +157,7 @@ export const markets: readonly Market[] = [
     homeBlurb:
       'Big Bear began as an escape and quickly became another chapter in our real estate story. Owning, rebuilding and operating property in the mountains has given me firsthand experience with vacation homes, mountain construction, seasonal demand and second-home ownership.',
     homeCta: 'Explore Big Bear',
-    propertiesCta: 'Explore Big Bear Properties',
+    propertiesCta: 'Search Big Bear Homes on Compass',
     image: {
       suggestion: 'Big Bear Lake from above with snow on the peaks',
       src: '/images/markets/big-bear-lake-snow-capped-mountains-winter.jpg',
@@ -182,5 +183,19 @@ export const finalCta = {
   cta: { label: 'Work With David', href: '/contact' },
 } as const;
 
-/** Primary nav button, desktop and mobile. */
-export const navCta = { label: 'Work With David', href: '/contact' } as const;
+/**
+ * Primary nav button, desktop and mobile. Since David's 2026-09-28 brief it
+ * opens a short menu; `href` is where the button goes without JavaScript.
+ */
+export const navCta = {
+  label: 'Work With David',
+  href: '/contact',
+  children: [
+    { label: 'Buy with David', href: '/buy' },
+    { label: 'Sell with David', href: '/sell' },
+    { label: 'Contact', href: '/contact' },
+  ],
+} as const;
+
+/** Small visible note beside every outbound Compass search button. */
+export const compassNewTabNote = 'Opens Compass in a new tab';

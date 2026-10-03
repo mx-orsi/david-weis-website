@@ -2,7 +2,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import Icon from '../../components/Icon.astro';
 import { projects } from '../../data/projects';
+import { salesPage } from '../../data/sales';
+import { withBase } from '../../lib/paths';
 
 const title = 'Real Estate Projects & Experience | David Weis';
 const description =
@@ -30,9 +33,28 @@ const description =
       ))}
     </div>
   </section>
+
+  <section class="ex-sales section section--flush-top" aria-labelledby="ex-sales-title">
+    <div class="container ex-sales__inner">
+      <h2 id="ex-sales-title" class="title-lg">{salesPage.title}</h2>
+      <p class="ex-sales__copy">{salesPage.intro[0]}</p>
+      <a class="link-arrow" href={withBase('/sales')}>{salesPage.title} <Icon name="arrow-right" /></a>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
+  .ex-sales__inner {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+    padding-top: clamp(1.5rem, 3vw, 2.5rem);
+    border-top: 1px solid var(--line-strong);
+  }
+  .ex-sales__copy {
+    color: var(--ink-2);
+    max-width: var(--measure);
+  }
   .ex__grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

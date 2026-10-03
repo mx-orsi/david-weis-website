@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import Media from '../../components/Media.astro';
+import SaleCard from '../../components/SaleCard.astro';
+import { salesPage, querenciaCaseStudy as q, sellerSales, buyerSales, saleHref, salePhotosFor } from '../../data/sales';
+import { photoExists } from '../../lib/images';
+import { withBase } from '../../lib/paths';
+
+const lead = salePhotosFor(q.slug).find((p) => photoExists(p.src));
+const qRole = [q.role, q.roleNote].filter(Boolean).join(' · ');
+---
+
+<BaseLayout title={salesPage.seo.title} description={salesPage.seo.description}>
+  <section class="sx-hero" aria-labelledby="page-title">
+    <div class="container sx-hero__grid">
+      <div class="sx-hero__head">
+        <p class="eyebrow eyebrow--dot">{salesPage.eyebrow}</p>
+        <h1 id="page-title" class="display">{salesPage.title}</h1>
+      </div>
+      <div class="prose sx-hero__intro">
+        {salesPage.intro.map((para) => <p>{para}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="sx-feature section section--flush-top" aria-labelledby="sx-feature-title">
+    <div class="container">
+      <div class:list={['sx-feature__card', !lead && 'sx-feature__card--bare']}>
+        <div class="sx-feature__copy">
+          <p class="eyebrow eyebrow--muted">{salesPage.featuredLabel}</p>
+          <h2 id="sx-feature-title" class="title-lg">{q.title}</h2>
+          <p class="sx-feature__sub">{q.subtitle} · {q.city}</p>
+          <p class="eyebrow eyebrow--muted">{qRole}</p>
+          <ul class="sx-feature__stats" aria-label="Highlights">
+            {q.highlights.map((h) => <li>{h}</li>)}
+          </ul>
+          <p class="sx-feature__text">{q.paragraphs[0]}</p>
+          <a class="btn" href={withBase(saleHref(q))}>{salesPage.cardCta}<span class="sr-only"> about {q.title}</span> <Icon name="arrow-right" /></a>
+        </div>
+        {lead && (
+          <div class="sx-feature__media">
+            <Media photo={lead} ratio="4 / 3" sizes="(min-width: 900px) 45vw, 100vw" />
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section id="seller" class="sx-group section section--flush-top" aria-labelledby="sx-seller-title">
+    <div class="container">
+      <h2 id="sx-seller-title" class="title-lg">{salesPage.sellerTitle}</h2>
+      <div class="sx-grid">
+        {sellerSales.map((s) => <SaleCard sale={s} headingLevel="h3" />)}
+      </div>
+    </div>
+  </section>
+
+  <section id="buyer" class="sx-group section section--flush-top" aria-labelledby="sx-buyer-title">
+    <div class="container">
+      <h2 id="sx-buyer-title" class="title-lg">{salesPage.buyerTitle}</h2>
+      <div class="sx-grid">
+        {buyerSales.map((s) => <SaleCard sale={s} headingLevel="h3" />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="sx-cta section section--flush-top" aria-label="Work with David">
+    <div class="container">
+      <a class="btn" href={withBase(salesPage.cta.href)}>{salesPage.cta.label} <Icon name="arrow-right" /></a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .sx-hero {
+    padding-block: clamp(3rem, 7vw, 6rem) clamp(2rem, 5vw, 4rem);
+  }
+  .sx-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: end;
+  }
+  .sx-hero__head {
+    display: grid;
+    gap: 1.4rem;
+    justify-items: start;
+  }
+  .sx-feature__card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: center;
+    padding-block: clamp(1.5rem, 3vw, 2.5rem);
+    border-block: 1px solid var(--line-strong);
+  }
+  .sx-feature__card--bare {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sx-feature__copy {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+    min-width: 0;
+  }
+  .sx-feature__sub {
+    color: var(--muted);
+  }
+  .sx-feature__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: 1rem 2rem;
+    list-style: none;
+    margin: 0.25rem 0;
+    padding: 1rem 0 0;
+    border-top: 1px solid var(--line-strong);
+    width: 100%;
+  }
+  .sx-feature__stats li {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+    font-weight: 500;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  .sx-feature__text {
+    color: var(--ink-2);
+    line-height: 1.7;
+    max-width: var(--measure);
+  }
+  .sx-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(2.5rem, 4vw, 3.5rem) 2rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+  @media (max-width: 1023px) {
+    .sx-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 899px) {
+    .sx-hero__grid,
+    .sx-feature__card {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .sx-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

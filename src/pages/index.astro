@@ -19,7 +19,7 @@ const heroWebpSmall = webpVariant(sizedVariant(agent.headshot.src, 500));
 const heroPreload = heroWebp && heroWebpSmall ? `${withBase(heroWebpSmall)} 500w, ${withBase(heroWebp)} 1000w` : undefined;
 ---
 
-<BaseLayout title={home.seo.title} description={home.seo.description}>
+<BaseLayout title={home.seo.title} description={home.seo.description} finalCta={false}>
   {heroPreload && (
     <link slot="head" rel="preload" as="image" type="image/webp" imagesrcset={heroPreload} imagesizes="(min-width: 960px) 40vw, 100vw" fetchpriority="high" />
   )}
@@ -33,6 +33,22 @@ const heroPreload = heroWebp && heroWebpSmall ? `${withBase(heroWebpSmall)} 500w
         {home.transaction.paragraphs.map((p) => <p>{p}</p>)}
         <a class="link-arrow hm-tx__cta" href={withBase(home.transaction.cta.href)}>{home.transaction.cta.label} <Icon name="arrow-right" /></a>
       </div>
+    </div>
+  </section>
+
+  <!-- What are you planning? -->
+  <section class="hm-pl section section--line" aria-labelledby="hm-pl-title">
+    <div class="container">
+      <h2 id="hm-pl-title" class="title-lg">{home.planning.title}</h2>
+      <ul class="hm-pl__grid">
+        {home.planning.cards.map((card) => (
+          <li class="hm-pl__card">
+            <h3 class="title-md">{card.title}</h3>
+            <p>{card.body}</p>
+            <a class="btn btn--ghost" href={withBase(card.cta.href)}>{card.cta.label} <Icon name="arrow-right" /></a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -139,6 +155,26 @@ const heroPreload = heroWebp && heroWebpSmall ? `${withBase(heroWebpSmall)} 500w
     margin-top: clamp(2.5rem, 5vw, 4rem);
   }
 
+  .hm-pl__grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+  .hm-pl__card {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    justify-items: start;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border: 1px solid var(--line-strong);
+  }
+  .hm-pl__card p {
+    color: var(--ink-2);
+    max-width: 52ch;
+  }
+
   .hm-mv {
     background: var(--surface-blue);
     color: var(--on-ink);
@@ -218,6 +254,11 @@ const heroPreload = heroWebp && heroWebpSmall ? `${withBase(heroWebpSmall)} 500w
     .hm-ex__grid > :global(:last-child) {
       grid-column: 1 / -1;
       max-width: calc(50% - 1rem);
+    }
+  }
+  @media (max-width: 760px) {
+    .hm-pl__grid {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
   @media (max-width: 899px) {

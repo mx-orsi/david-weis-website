@@ -28,7 +28,7 @@ const f = contact.form;
   </div>
   <div class="cf__row">
     <label class="cf__field">
-      <span>Phone</span>
+      <span>Phone (optional)</span>
       <input type="tel" name="phone" autocomplete="tel" />
     </label>
     <label class="cf__field">
@@ -56,7 +56,7 @@ const f = contact.form;
       <span>{f.submit}</span>
       <Icon name="arrow-right" />
     </button>
-    <p class="cf__note">Your details go only to David. See the <a href={withBase('/privacy-policy')}>Privacy Policy</a>.</p>
+    <p class="cf__note">{f.privacyNote} See the <a href={withBase('/privacy-policy')}>Privacy Policy</a>.</p>
   </div>
   <p class="cf__status" role="status" aria-live="polite"></p>
 </form>
@@ -67,6 +67,14 @@ const f = contact.form;
     const status = form.querySelector<HTMLElement>('.cf__status')!;
     const endpoint = form.dataset.endpoint || '';
     const email = form.dataset.email || '';
+
+    // Buy/Sell buttons link here with ?interest=Buying|Selling to preselect the field.
+    const wanted = new URLSearchParams(window.location.search).get('interest');
+    const interest = form.querySelector<HTMLSelectElement>('select[name=interest]');
+    if (wanted && interest) {
+      const match = Array.from(interest.options).find((o) => o.value.toLowerCase() === wanted.toLowerCase());
+      if (match) interest.value = match.value;
+    }
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();

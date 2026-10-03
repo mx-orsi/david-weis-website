@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServicePage from '../components/ServicePage.astro';
+import { buy } from '../data/services';
+---
+
+<BaseLayout title={buy.seo.title} description={buy.seo.description} finalCta={false}>
+  <ServicePage slug="buy" />
+</BaseLayout>

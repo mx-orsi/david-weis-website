@@ -61,7 +61,95 @@ accuracy rules are followed: Kensington's windows are "reclaimed", the kitchen k
 hardwood was restored; Voltaire had a contractor and David is never described as doing the construction;
 fence copy makes no regulatory claims; no revenue or occupancy figures anywhere.
 
+**David, 2026-09-27 and 2026-09-28 emails (Sales Experience, Buy/Sell brief, Properties, IDX):**
+built on 2026-10-02.
+
+- **Sales Experience** is live at `/sales` with one page per story at `/sales/<address>`: Querencia
+  Palms as the featured case study (his revised 2026-09-28 version, after Unit 106 closed), then
+  Seller Representation (7) and Buyer Representation (6). His copy is verbatim; three contractions
+  in body copy were spelled out to match the rest of the site ("did not"). Sale prices show as he
+  wrote them. This supersedes the deck's "no dollar figures" rule **for the sales stories only**;
+  the Experience project pages (Querencia Palms, Vista Voltaire) still carry no prices.
+- **Photos** came from his "Sales Experience" Drive folder (252 files, kept in
+  `assets-source/drive-2026-10-02-sales`) and are renamed from the address plus
+  "david-weis-san-diego-palm-springs-big-bear-compass", as he asked.
+- **Buy with David (`/buy`) and Sell with David (`/sell`)** use the brief's copy verbatim. Work With
+  David in the header is now a menu: Buy with David, Sell with David, Contact.
+- **Home page:** "What are you planning?" sits after "More than a transaction."; the page now ends on
+  one invitation ("Property is personal. Strategy should be too.") instead of two.
+- **Properties:** For Sale, In Escrow and Selected Sales. No placeholder cards remain. Selected Sales
+  links every closed transaction to its story. Current listings are manual until a feed is approved.
+- **Market pages:** the Compass buttons read "Search … Homes on Compass" with a visible "Opens Compass
+  in a new tab" note; each page links to Buy, Sell and that market's sales.
+- **Properties approach (old question 4)** is answered by the brief.
+
 ## Still open
+
+**From the 2026-09-27 / 2026-09-28 emails (ask David):**
+
+1. **GPSR / IDXcellent widget (his 2026-09-29 code) works but is not on the site yet.** Tested
+   2026-10-02: it opens on a map search that says "No Listings Found"; his listings only appear after
+   clicking its Inventory tab, and that tab includes sold listings (11 rows, all Palm Springs); it is a
+   fixed 933px wide, so it overflows a phone screen by 559px; it covers GPSR only, not San Diego or
+   Big Bear. Ask David: can the generator open on Inventory, filter to Active / Under Contract, and
+   produce a narrower or responsive size? Otherwise the options are a "View my Palm Springs MLS
+   listings" link that opens the widget in a new tab, or hand-entered listing cards.
+   **Rest of the brief (sections 6 to 8), applied 2026-10-02:** Gay For Good paragraph (present tense;
+   his older opening line "I found Gay For Good… quickly became a chapter leader" was dropped so the
+   section does not say it twice, confirm); Legislative Day sentence; work-truck sentences; Limón
+   caption now 2025; Sell card for Waverly ($7,650) and Buy card for Voltaire (no "representing my
+   husband") replaced with his new copy and buttons; new Buy/Sell page titles; contact page headline,
+   consultation line, privacy sentence, optional phone, text link, both DRE numbers, and Buy/Sell
+   buttons that preselect the form's interest field.
+   - **Bill title removed pending verification.** "More Homes on the Market Act" could not be checked
+     against original records from here, so the sentence now reads "presenting a bill to
+     Assemblymember Chris Ward". Send the confirmed title to restore it.
+   - **Voltaire full story still opens "I represented my husband…"** (his own story text, and the
+     brief wants personal investments kept distinct from client work). Only the previews changed.
+     Say if the story's opening should change too.
+   - **Modernism Week:** only Limón was changed (to 2025). The Marquee stays 2025 and the docent
+     photos stay 2026 per his earlier email, though his Drive folder labels the docent photos 2025.
+   - **Contact form delivery** still opens the visitor's email app. A form service (Formspree or
+     Basin) is needed before the launch test inquiry, and the privacy policy must name it.
+2. **4493 or 4439 Utah St?** His copy and address list say 4493; the photographer's files in his
+   Drive folder are all named "4439 Utah Street". The site uses 4493 until he confirms.
+3. **1621 Hotel Circle S #E228 has no photos.** The Drive folder is empty, so the story is text only.
+4. **Closing dates.** The brief asks for the closing date on each closed transaction. None were
+   supplied, so none are shown. Send a date per sale (month and year is enough).
+5. **Beds, baths, square footage.** Not supplied for the sales (only the three 3700 Third Ave units,
+   in folder names), so the cards show address, role and result only.
+6. **Current listings.** For Sale and In Escrow are empty and say so. Needed: either the working
+   IDXcellent iframe code, or a list of his active and under-contract listings (address, price, beds,
+   baths, sq ft, exact status, co-listing credit, link). The remaining Querencia Palms residences and
+   2487 S Gene Autry Trail, Unit A appear in his Drive "Listings" folder but were not confirmed as
+   current, so they are not shown.
+7. **Card wording vs. story, flagged per the brief ("flag conflicts, do not silently choose"):**
+   - Sell page, 3712 Third Avenue card: "Clear offer comparisons helped the seller evaluate the
+     choices". The offer-comparison spreadsheet is in the Utah Street story; the 3712 story says the
+     offers let them "weigh price alongside the terms". Fine as written, or swap the card to Utah St?
+   - Sell page, Dabney card says "the first buyers"; the story says "the first buyer".
+   - Sell page, Waverly card mentions the $2,650 only; the story has a $5,000 price increase and a
+     $2,650 reduction in selling costs.
+   - 3712 heading reads "3rd Ave" in the story and "Third Avenue" on the card and in the address list.
+   - 117 W Mojave: "Big Bear City" in the story heading, "Big Bear, CA 92314" in the address list.
+8. **Querencia Palms prices now appear on the sales case study** ($3,958,000 in closed sales; Unit 106
+   at $559,000) while the Experience project page still shows none, per the September deck. Keep both
+   as they are, or bring the results onto the project page too?
+9. **4420 Voltaire St** shows the purchase price and the $40,000 reduction on its sales story and on
+   the Buy page card; the Vista Voltaire project page still has no figures. Same question.
+10. **Story format.** The brief suggests "overview, objective, approach, outcome, photography" for each
+    story. His stories are written as continuous prose, so they are shown as written, with no added
+    sub-headings. Say if he wants them split.
+11. **Home page current-listings strip** is not built yet (the brief says "once the property content
+    is ready"). It follows the listings in item 6.
+12. **New connective wording he has not seen:** the SEO titles and descriptions for the new pages, the
+    "In Escrow" empty-state line, the labels on the related-story links ("The Palm Springs purchase
+    that completed her exchange", "What happened next: the Vista Voltaire project"), and the market
+    page headings "Sales in San Diego / Palm Springs / Big Bear".
+13. **Homes.com Platinum and the buyer-representation FAQ** should go past Compass compliance with
+    the privacy policy and disclosure.
+14. **IDX budget.** Nothing has been purchased. IDX Broker stays a fallback only, after an all-in
+    quote and his approval.
 
 **From David's 2026-09-22 batch (About, Community, Holidays, Mercury Palms, The Cole marketing, work trucks, Voltaire, Kensington, Sierra Chalet, Querencia):** applied where the photos exist; placeholders print the filenames for the rest (IMAGES-NEEDED.md). Decisions and questions:
 

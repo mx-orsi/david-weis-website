@@ -28,7 +28,7 @@ const socialLinks = social.filter((s) => s.href);
           <ul class="ct-card__list">
             <li>
               <Icon name="phone" size={16} />
-              <span><a href={agent.phoneHref}>{agent.phone}</a><small>Call or text</small></span>
+              <span><a href={agent.phoneHref}>{agent.phone}</a><small>Call, or <a href={agent.smsHref}>send a text</a></small></span>
             </li>
             <li>
               <Icon name="mail" size={16} />
@@ -42,7 +42,7 @@ const socialLinks = social.filter((s) => s.href);
               </span>
             </li>
           </ul>
-          <p class="ct-card__meta">{agent.name} · <Title /> · CA DRE #{agent.dre}</p>
+          <p class="ct-card__meta">{agent.name} · <Title /> · CA DRE #{agent.dre} · {agent.brokerage} CA DRE #{agent.brokerageDre}</p>
         </address>
         {socialLinks.length > 0 && (
           <ul class="ct__social" aria-label="Social">

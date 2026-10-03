@@ -198,8 +198,8 @@ export const aboutChapterB: ProjectChapter = {
       eyebrow: 'Learning to show up',
       heading: 'Sometimes you say yes before you feel ready.',
       paragraphs: [
-        'Early in my real estate career, I attended REALTOR® Legislative Day in Sacramento with my mom, who is also a REALTOR®.',
-        'As a brand-new agent, I somehow found myself presenting a bill, the More Homes on the Market Act, to Assemblymember Chris Ward in front of members of the San Diego Association of REALTORS® leadership.',
+        'Early in my real estate career, I attended REALTOR® Legislative Day in Sacramento with my mom, who was also a REALTOR® at the time.',
+        'As a brand-new agent, I somehow found myself presenting a bill to Assemblymember Chris Ward in front of members of the San Diego Association of REALTORS® leadership.',
         'I was terrified. I did it anyway.',
         'That experience became another reminder that growth usually happens somewhere just beyond comfortable.',
       ],
@@ -316,8 +316,7 @@ export const aboutChapterB: ProjectChapter = {
       eyebrow: 'Gay For Good',
       heading: 'Service + leadership.',
       paragraphs: [
-        'I found Gay For Good while looking for a way to volunteer and quickly became a chapter leader in San Diego.',
-        'For three years, the organization introduced me to nonprofits, volunteers, and communities throughout the region. The best part was always the same: people showing up to do something useful together.',
+        'I serve as a Gay For Good San Diego chapter leader, helping bring volunteers together to support organizations throughout the community. The work has introduced me to people and causes I might never have encountered otherwise. Whether we are packing school supplies, preparing holiday donations, or helping an event come together, the part I love most is seeing people show up for one another.',
         'Over time, I had the opportunity to represent the chapter at community events, accept recognition on its behalf, and eventually host a national Gay For Good fundraiser at Querencia Palms.',
       ],
     },
@@ -450,10 +449,10 @@ export const aboutChapterB: ProjectChapter = {
       ratio: '1 / 1',
       align: 'left',
       photos: [
-        { suggestion: 'With Mark at Limón, Modernism Week 2024', src: '/images/about/david-weis-mark-h3k-property.jpg', alt: 'David and Mark Weis at the yellow front door of Limón, an H3K design project in Palm Springs', width: 1800, height: 2400, hasSmall: true, position: 'center 42%' },
+        { suggestion: 'With Mark at Limón, Modernism Week 2025', src: '/images/about/david-weis-mark-h3k-property.jpg', alt: 'David and Mark Weis at the yellow front door of Limón, an H3K design project in Palm Springs', width: 1800, height: 2400, hasSmall: true, position: 'center 42%' },
         { suggestion: 'David at the Limón pool', src: '/images/about/h3k-pool-courtyard-palm-springs.jpg', alt: 'David Weis beside the pool at Limón, an H3K design project in Palm Springs', width: 2400, height: 1800, hasSmall: true, position: '68% center' },
       ],
-      caption: { title: 'Modernism Week Tour 2024: Limón', note: 'An H3K design project' },
+      caption: { title: 'Modernism Week Tour 2025: Limón', note: 'An H3K design project' },
     },
     {
       type: 'pair',
@@ -668,7 +667,7 @@ export const aboutChapterB: ProjectChapter = {
       paragraphs: [
         'By 2026, I had become a Broker Associate and was driving constantly between San Diego, Palm Springs and Big Bear.',
         'Listings. Projects. Vacation rentals. Open houses. Construction. Properties that needed something moved from one city to another.',
-        'At some point I had to admit what Mark had apparently known all along. We needed a truck.',
+        'After years of being told we did not need a truck, I finally bought one.',
         'So I bought a GMC Sierra EV. A real truck. Electric. Long range. Plenty of room.',
         'Finally, a vehicle actually designed for the life we were already living.',
       ],
@@ -680,7 +679,7 @@ export const aboutChapterB: ProjectChapter = {
     },
     {
       type: 'callout',
-      text: 'Two weeks later, I had already made two dump runs.',
+      text: 'Two dump runs in the first two weeks felt like a fairly good argument.',
       note: 'Case closed.',
       paragraphs: ['Here’s to all the luxury cars that were tough enough to survive the Weis life.'],
     },

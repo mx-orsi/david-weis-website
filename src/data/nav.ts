@@ -32,7 +32,10 @@ export const nav: readonly NavItem[] = [
     id: 'experience',
     label: 'Experience',
     href: '/experience',
-    children: projects.map((p) => ({ label: p.name, href: projectHref(p), meta: p.place })),
+    children: [
+      { label: 'Sales experience', href: '/sales', meta: 'Client stories' },
+      ...projects.map((p) => ({ label: p.name, href: projectHref(p), meta: p.place })),
+    ],
   },
   { label: 'Properties', href: '/properties' },
   { label: 'Contact', href: '/contact' },
@@ -43,7 +46,10 @@ export const footerLinks: readonly NavChild[] = [
   { label: 'About', href: '/about' },
   ...markets.map((m) => ({ label: m.name, href: m.href })),
   { label: 'Experience', href: '/experience' },
+  { label: 'Sales experience', href: '/sales' },
   { label: 'Properties', href: '/properties' },
+  { label: 'Buy with David', href: '/buy' },
+  { label: 'Sell with David', href: '/sell' },
   { label: 'Contact', href: '/contact' },
 ];
 

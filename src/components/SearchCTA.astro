@@ -8,7 +8,7 @@
  * If an IDX embed becomes available, replace the markup and keep the props.
  */
 import Icon from './Icon.astro';
-import { agent, getMarket, type MarketSlug } from '../data/site';
+import { agent, getMarket, compassNewTabNote, type MarketSlug } from '../data/site';
 
 interface Props {
   market?: MarketSlug;
@@ -23,10 +23,34 @@ const href = m ? m.searchHref : agent.compassProfile;
 const text = label ?? (m ? m.propertiesCta : 'View all listings on Compass');
 const isLink = variant === 'link';
 const classes = isLink ? ['link-arrow', 'link-arrow--ext', className] : ['btn', variant === 'primary' ? '' : `btn--${variant}`, className];
+const noteId = m ? `scta-note-${m.slug}` : undefined;
 ---
 
-<a href={href} class:list={classes} target="_blank" rel="noopener noreferrer" data-search-cta={m?.slug ?? 'all'} {...rest}>
-  <span>{text}</span>
-  <Icon name="arrow-ext" />
-  <span class="sr-only">(opens Compass in a new tab)</span>
-</a>
+{m ? (
+  <span class="scta">
+    <a href={href} class:list={classes} target="_blank" rel="noopener noreferrer" data-search-cta={m.slug} aria-describedby={noteId} {...rest}>
+      <span>{text}</span>
+      <Icon name="arrow-ext" />
+    </a>
+    <small class="scta__note" id={noteId}>{compassNewTabNote}</small>
+  </span>
+) : (
+  <a href={href} class:list={classes} target="_blank" rel="noopener noreferrer" data-search-cta="all" {...rest}>
+    <span>{text}</span>
+    <Icon name="arrow-ext" />
+    <span class="sr-only">(opens Compass in a new tab)</span>
+  </a>
+)}
+
+<style>
+  .scta {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .scta__note {
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+</style>

@@ -29,6 +29,9 @@ export interface MarketPageContent {
   /** Slugs from projects.ts */
   featuredProjects: readonly string[];
   featuredTitle: string;
+  /** UI labels for the sales block before the closing CTA. */
+  salesTitle: string;
+  salesAllLabel: string;
   seo: { title: string; description: string };
 }
 
@@ -73,6 +76,8 @@ export const marketPages: Record<MarketSlug, MarketPageContent> = {
     },
     featuredProjects: ['vista-voltaire', 'kensington-canyon', 'belmont-beach-house'],
     featuredTitle: 'Featured experience',
+    salesTitle: 'Sales in San Diego',
+    salesAllLabel: 'All sales experience',
     seo: {
       title: 'San Diego Real Estate | David Weis',
       description:
@@ -116,6 +121,8 @@ export const marketPages: Record<MarketSlug, MarketPageContent> = {
     },
     featuredProjects: ['querencia-palms', 'the-cole', 'mercury-palms'],
     featuredTitle: 'Featured experience',
+    salesTitle: 'Sales in Palm Springs',
+    salesAllLabel: 'All sales experience',
     seo: {
       title: 'Palm Springs Real Estate | David Weis',
       description:
@@ -159,6 +166,8 @@ export const marketPages: Record<MarketSlug, MarketPageContent> = {
     },
     featuredProjects: ['sierra-chalet'],
     featuredTitle: 'Featured experience',
+    salesTitle: 'Sales in Big Bear',
+    salesAllLabel: 'All sales experience',
     seo: {
       title: 'Big Bear Real Estate | David Weis',
       description:

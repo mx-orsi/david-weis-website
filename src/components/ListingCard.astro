@@ -1,8 +1,7 @@
 ---
 /**
- * ListingCard — one property card for the Properties page (for sale or
- * sold). Fields come from src/data/listings.ts; placeholder entries render
- * with a visible "Placeholder" tag until real listings are entered.
+ * ListingCard — one active or in-escrow listing on the Properties page.
+ * Fields come from src/data/listings.ts. `status` is shown exactly as given.
  */
 import Icon from './Icon.astro';
 import Media from './Media.astro';
@@ -11,7 +10,7 @@ import { agent } from '../data/site';
 
 interface Props {
   listing: Listing;
-  /** CTA label; omit for sold cards */
+  /** CTA label */
   cta?: string;
 }
 const { listing: l, cta } = Astro.props;
@@ -23,16 +22,16 @@ const facts = [
 ];
 ---
 
-<article class:list={['lc', l.placeholder && 'lc--placeholder']} aria-label={`${l.address}, ${l.city}`}>
+<article class="lc" aria-label={`${l.address}, ${l.city}`}>
   <div class="lc__media">
     <Media photo={l.photo} ratio="4 / 3" sizes="(min-width: 1024px) 33vw, (min-width: 700px) 50vw, 100vw" />
     <span class="lc__status">{l.status}</span>
-    {l.placeholder && <span class="lc__tag">Placeholder</span>}
   </div>
   <div class="lc__body">
     <p class="lc__price">{l.price}</p>
     <h3 class="lc__address">{l.address}</h3>
     <p class="lc__city">{l.city}</p>
+    {l.note && <p class="lc__note">{l.note}</p>}
     <dl class="lc__facts">
       {facts.map((f) => (
         <div>
@@ -59,24 +58,16 @@ const facts = [
   .lc__media {
     position: relative;
   }
-  .lc__status,
-  .lc__tag {
+  .lc__status {
     position: absolute;
     top: 0.75rem;
+    left: 0.75rem;
     padding: 0.4em 0.75em;
     font-size: 0.625rem;
     font-weight: 500;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-  }
-  .lc__status {
-    left: 0.75rem;
     background: var(--ink);
-    color: var(--on-ink);
-  }
-  .lc__tag {
-    right: 0.75rem;
-    background: var(--blue);
     color: var(--on-ink);
   }
   .lc__body {
@@ -99,7 +90,8 @@ const facts = [
     line-height: 1.4;
     letter-spacing: 0;
   }
-  .lc__city {
+  .lc__city,
+  .lc__note {
     font-size: 0.875rem;
     color: var(--muted);
   }
@@ -123,10 +115,6 @@ const facts = [
     font-size: 0.625rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--muted);
-  }
-  .lc--placeholder .lc__price,
-  .lc--placeholder .lc__address {
     color: var(--muted);
   }
 </style>

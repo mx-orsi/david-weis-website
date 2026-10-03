@@ -23,6 +23,22 @@ export const home = {
     ],
     cta: { label: 'Meet David', href: '/about' } as Cta,
   },
+  /** David's 2026-09-28 brief: sits after the introduction and before the markets. */
+  planning: {
+    title: 'What are you planning?',
+    cards: [
+      {
+        title: 'Buying a home',
+        body: 'A first home, a different way of life, or a property with potential. I help you look beyond the listing, understand the tradeoffs, and move forward with a clear strategy.',
+        cta: { label: 'Buy with David', href: '/buy' } as Cta,
+      },
+      {
+        title: 'Selling a property',
+        body: 'Thoughtful preparation, professional photography and video, purposeful marketing, and an advocate who stays involved through closing. It starts with understanding what matters most to you.',
+        cta: { label: 'Sell with David', href: '/sell' } as Cta,
+      },
+    ],
+  },
   markets: {
     title: 'Three markets. Three different ways of life.',
     intro:

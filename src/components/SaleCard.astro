@@ -1,0 +1,93 @@
+---
+/**
+ * SaleCard — one Sales Experience story as a card. Lead photo only when one
+ * exists (never a placeholder). `compact` drops the preview paragraph for
+ * grids on other pages.
+ */
+import Icon from './Icon.astro';
+import Media from './Media.astro';
+import type { Sale } from '../data/sales';
+import { saleHref, salesPage, salePhotosFor } from '../data/sales';
+import { photoExists } from '../lib/images';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  sale: Sale;
+  compact?: boolean;
+  headingLevel?: 'h2' | 'h3' | 'h4';
+  class?: string;
+}
+const { sale: s, compact = false, headingLevel = 'h3', class: className } = Astro.props;
+const Heading = headingLevel;
+const lead = salePhotosFor(s.slug).find((p) => photoExists(p.src));
+const href = withBase(saleHref(s));
+const titleId = `sale-card-${s.slug}${compact ? '-c' : ''}`;
+const role = [s.role, s.roleNote].filter(Boolean).join(' · ');
+const result = [s.result, s.resultNote].filter(Boolean).join(' · ');
+---
+
+<article class:list={['sc', className]} aria-labelledby={titleId}>
+  {lead && (
+    <a class="sc__media" href={href} tabindex="-1" aria-hidden="true">
+      <Media photo={lead} ratio="4 / 3" sizes="(min-width: 1024px) 33vw, (min-width: 700px) 50vw, 100vw" />
+    </a>
+  )}
+  <div class:list={['sc__body', !lead && 'sc__body--bare']}>
+    <p class="eyebrow eyebrow--muted">{role}</p>
+    <Heading class="sc__title" id={titleId}>
+      <a href={href}>{s.title}</a>
+    </Heading>
+    <p class="sc__city">{s.city}</p>
+    <p class="sc__result">{result}</p>
+    {!compact && <p class="sc__copy">{s.preview ?? s.paragraphs[0]}</p>}
+    <a class="link-arrow" href={href}>{salesPage.cardCta}<span class="sr-only"> about {s.title}</span> <Icon name="arrow-right" /></a>
+  </div>
+</article>
+
+<style>
+  .sc {
+    display: grid;
+    gap: 1.1rem;
+    align-content: start;
+    min-width: 0;
+  }
+  .sc__media {
+    display: block;
+    text-decoration: none;
+  }
+  .sc__body {
+    display: grid;
+    gap: 0.5rem;
+    justify-items: start;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-strong);
+  }
+  .sc__title {
+    font-size: clamp(1.4rem, 2vw, 1.75rem);
+    line-height: 1.1;
+  }
+  .sc__title a {
+    text-decoration: none;
+  }
+  .sc__title a:hover {
+    color: var(--blue);
+  }
+  .sc__city {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  .sc__result {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.25;
+    margin-top: 0.25rem;
+  }
+  .sc__copy {
+    margin: 0.35rem 0;
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+    max-width: 52ch;
+  }
+</style>

@@ -1,0 +1,311 @@
+---
+/**
+ * ServicePage — the shared template for Buy with David (/buy) and Sell with
+ * David (/sell). All copy comes from src/data/services.ts; the three practice
+ * cards link to the matching stories in sales.ts.
+ */
+import Icon from './Icon.astro';
+import Media from './Media.astro';
+import Story from './Story.astro';
+import { services } from '../data/services';
+import { getSale, saleHref, saleLead } from '../data/sales';
+import { siteUrl } from '../data/site';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  slug: 'buy' | 'sell';
+}
+const { slug } = Astro.props;
+const c = services[slug];
+/** UI label (not client copy): heading over the FAQ pairs. */
+const faqLabel = 'Frequently asked questions';
+const half = Math.ceil(c.sections.length / 2);
+const before = c.sections.slice(0, half);
+const after = c.sections.slice(half);
+const cards = c.practice.cards.map((card) => {
+  const sale = getSale(card.sale);
+  return { ...card, href: saleHref(sale), photo: saleLead(card.sale) };
+});
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: c.faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: c.name, item: `${siteUrl}/${slug}` },
+    ],
+  },
+];
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+
+<article class="sp">
+  <header class="sp-hero">
+    <div class="container">
+      <p class="eyebrow eyebrow--dot">{c.name}</p>
+      <div class="sp-hero__grid">
+        <h1 class="display">{c.title}</h1>
+        <div class="sp-hero__copy">
+          {c.intro.map((p) => <p class="lede">{p}</p>)}
+          <div class="sp-hero__actions">
+            <a class="btn" href={withBase(c.primary.href)}>{c.primary.label} <Icon name="arrow-right" /></a>
+            <a class="btn btn--ghost" href={c.secondary.href}>{c.secondary.label}</a>
+          </div>
+          <p class="sp-hero__note">{c.supporting}</p>
+        </div>
+      </div>
+    </div>
+    <div class="container sp-hero__lead">
+      <Media photo={c.photos.lead} ratio="21 / 9" priority sizes="100vw" />
+    </div>
+  </header>
+
+  <div class="sp-body">
+    {before.map((s, i) => (
+      <section class="sp-section" aria-labelledby={`${slug}-s${i}`}>
+        <div class="container">
+          <Story heading={s.heading} paragraphs={s.paragraphs} layout="split" id={`${slug}-s${i}`}>
+            {s.highlight && (
+              <aside class="sp-hl" aria-label={s.highlight.title}>
+                <p class="eyebrow">{s.highlight.eyebrow}</p>
+                <p class="sp-hl__title">{s.highlight.title}</p>
+                {s.highlight.paragraphs.map((p) => <p>{p}</p>)}
+                <p class="sp-hl__note">{s.highlight.note}</p>
+              </aside>
+            )}
+          </Story>
+        </div>
+      </section>
+    ))}
+
+    {after.map((s, i) => (
+      <section class="sp-section" aria-labelledby={`${slug}-s${half + i}`}>
+        <div class="container">
+          <Story heading={s.heading} paragraphs={s.paragraphs} layout="split" id={`${slug}-s${half + i}`}>
+            {s.highlight && (
+              <aside class="sp-hl" aria-label={s.highlight.title}>
+                <p class="eyebrow">{s.highlight.eyebrow}</p>
+                <p class="sp-hl__title">{s.highlight.title}</p>
+                {s.highlight.paragraphs.map((p) => <p>{p}</p>)}
+                <p class="sp-hl__note">{s.highlight.note}</p>
+              </aside>
+            )}
+          </Story>
+        </div>
+      </section>
+    ))}
+
+    <section class="sp-practice" aria-labelledby={`${slug}-practice`}>
+      <div class="container">
+        <h2 id={`${slug}-practice`} class="title-lg">{c.practice.heading}</h2>
+        <ul class="sp-cards">
+          {cards.map((card) => (
+            <li class="sp-card">
+              {card.photo && <Media photo={card.photo} ratio="3 / 2" sizes="(min-width: 900px) 33vw, 100vw" />}
+              <h3 class="title-md">{card.title}</h3>
+              <p class="sp-card__kicker">{card.kicker}</p>
+              {card.body.map((p) => <p class="sp-card__body">{p}</p>)}
+              <a class="link-arrow" href={withBase(card.href)}>{c.practice.cardCta} <Icon name="arrow-right" /><span class="sr-only"> about {card.title}</span></a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="sp-faq" aria-labelledby={`${slug}-faq`}>
+      <div class="container split">
+        <div class="sp-faq__head">
+          <h2 id={`${slug}-faq`} class="title-lg">{faqLabel}</h2>
+          <Media photo={c.photos.portrait} ratio="4 / 5" class="sp-portrait" sizes="(min-width: 900px) 320px, 60vw" />
+        </div>
+        <div class="sp-faq__list">
+          {c.faqs.map((f) => (
+            <div class="sp-faq__item">
+              <h3 class="title-md">{f.q}</h3>
+              <p>{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="sp-close" aria-labelledby={`${slug}-close`}>
+    <div class="container sp-close__inner">
+      <div class="sp-close__copy">
+        <h2 id={`${slug}-close`} class="title-lg">{c.closing.title}</h2>
+        <p>{c.closing.body}</p>
+      </div>
+      <a class="btn btn--light" href={withBase(c.closing.cta.href)}>{c.closing.cta.label} <Icon name="arrow-right" /></a>
+    </div>
+  </section>
+</article>
+
+<style>
+  .sp-hero {
+    padding-block: clamp(3rem, 7vw, 6rem) 0;
+  }
+  .sp-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+    margin-top: 1.25rem;
+  }
+  .sp-hero__copy {
+    display: grid;
+    gap: 1.1rem;
+    justify-items: start;
+  }
+  .sp-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+  .sp-hero__note {
+    font-size: 0.875rem;
+    color: var(--muted);
+    max-width: 52ch;
+  }
+  .sp-hero__lead {
+    margin-top: clamp(2.5rem, 5vw, 4.5rem);
+  }
+  .sp-body {
+    display: grid;
+    gap: clamp(3.5rem, 7vw, 6.5rem);
+    padding-block: clamp(3.5rem, 7vw, 6.5rem);
+  }
+  .sp-faq__head {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    align-content: start;
+  }
+  .sp-faq__head :global(.sp-portrait) {
+    max-width: 320px;
+    width: 100%;
+  }
+  .sp-hl {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: 1rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    background: var(--blue-tint);
+    border: 1px solid var(--line-strong);
+    border-left: 3px solid var(--blue);
+  }
+  .sp-hl p {
+    margin: 0;
+  }
+  .sp-hl__title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .sp-hl__note {
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+  .sp-cards {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+  .sp-card {
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+    justify-items: start;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    border: 1px solid var(--line-strong);
+  }
+  .sp-card :global(.media) {
+    margin-bottom: 0.5rem;
+  }
+  .sp-card__kicker {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.35rem;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+  .sp-card__body {
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+  }
+  .sp-card .link-arrow {
+    margin-top: 0.5rem;
+    min-height: 44px;
+    align-items: center;
+  }
+  .sp-faq__list {
+    display: grid;
+    gap: 2rem;
+    max-width: var(--measure);
+  }
+  .sp-faq__item {
+    display: grid;
+    gap: 0.6rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .sp-faq__item:last-child {
+    border-bottom: 0;
+  }
+  .sp-faq__item p {
+    color: var(--ink-2);
+  }
+  .sp-close {
+    background: var(--surface-ink);
+    color: var(--on-ink);
+    padding-block: clamp(4rem, 8vw, 7rem);
+  }
+  .sp-close__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  .sp-close__copy {
+    display: grid;
+    gap: 1rem;
+    max-width: 44rem;
+  }
+  .sp-close__copy p {
+    color: var(--on-ink-muted);
+    font-size: 1.0625rem;
+  }
+
+  @media (max-width: 899px) {
+    .sp-hero__grid,
+    .sp-cards,
+    .sp-close__inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .sp-hero__actions {
+      flex-direction: column;
+      align-self: stretch;
+      width: 100%;
+    }
+    .sp-hero__actions :global(.btn),
+    .sp-close :global(.btn) {
+      width: 100%;
+    }
+  }
+</style>

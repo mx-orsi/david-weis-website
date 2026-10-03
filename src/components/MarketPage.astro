@@ -13,6 +13,8 @@ import SearchCTA from './SearchCTA.astro';
 import { getMarket, siteUrl, type MarketSlug } from '../data/site';
 import { marketPages } from '../data/marketPages';
 import { getProject } from '../data/projects';
+import { salesInMarket, saleHref } from '../data/sales';
+import { navCta } from '../data/site';
 import { withBase } from '../lib/paths';
 
 interface Props {
@@ -21,6 +23,8 @@ interface Props {
 const { slug } = Astro.props;
 const m = getMarket(slug);
 const c = marketPages[slug];
+const marketSales = salesInMarket(slug);
+const [buyLink, sellLink] = navCta.children;
 const featured = c.featuredProjects.map(getProject);
 const [first, ...restSections] = c.sections;
 
@@ -100,10 +104,34 @@ const breadcrumbJsonLd = {
     )}
   </div>
 
+  {marketSales.length > 0 && (
+    <section class="mp-sales" aria-labelledby={`${slug}-sales`}>
+      <div class="container">
+        <div class="mp-featured__head">
+          <h2 id={`${slug}-sales`} class="title-lg">{c.salesTitle}</h2>
+          <a class="link-arrow" href={withBase('/sales')}>{c.salesAllLabel} <Icon name="arrow-right" /></a>
+        </div>
+        <ul class="mp-sales__list">
+          {marketSales.map((s) => (
+            <li>
+              <a class="mp-sales__row" href={withBase(saleHref(s))}>
+                <span class="mp-sales__title">{s.title}</span>
+                <span class="mp-sales__role">{s.role}</span>
+                <span class="mp-sales__result">{s.result}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
   <section class="mp-cta" aria-label={`${m.name} properties`}>
     <div class="container mp-cta__inner">
       <SearchCTA market={slug} />
       <a class="btn btn--ghost" href={withBase('/contact')}>Work With David</a>
+      <a class="btn btn--ghost" href={withBase(buyLink.href)}>{buyLink.label}</a>
+      <a class="btn btn--ghost" href={withBase(sellLink.href)}>{sellLink.label}</a>
     </div>
   </section>
 </article>
@@ -157,6 +185,39 @@ const breadcrumbJsonLd = {
   .mp-featured__grid--single {
     grid-template-columns: minmax(0, 1fr);
   }
+  .mp-sales {
+    border-top: 1px solid var(--line);
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+  }
+  .mp-sales__list {
+    list-style: none;
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--line-strong);
+  }
+  .mp-sales__row {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr) minmax(0, 1.5fr);
+    gap: 1rem;
+    align-items: baseline;
+    min-height: 44px;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line-strong);
+    text-decoration: none;
+    color: var(--ink-2);
+  }
+  .mp-sales__row:hover .mp-sales__title {
+    color: var(--blue);
+    text-decoration: underline;
+  }
+  .mp-sales__title {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    color: var(--ink);
+  }
+  .mp-sales__result {
+    color: var(--ink);
+    font-weight: 500;
+  }
   .mp-cta {
     border-top: 1px solid var(--line);
     padding-block: clamp(2.5rem, 5vw, 4rem);
@@ -176,6 +237,12 @@ const breadcrumbJsonLd = {
     .mp-hero__grid,
     .mp-featured__grid {
       grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 699px) {
+    .mp-sales__row {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.25rem;
     }
   }
   @media (max-width: 560px) {

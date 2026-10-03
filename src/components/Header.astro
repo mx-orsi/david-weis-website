@@ -64,8 +64,20 @@ const inGroup = (children: readonly { href: string }[]) => children.some((c) => 
             </li>
           )
         )}
-        <li class="nav__item nav__item--cta">
-          <a class="btn btn--sm" href={withBase(navCta.href)}>{navCta.label}</a>
+        <li class="nav__item nav__item--cta nav__item--group" data-nav-group>
+          <button type="button" class="btn btn--sm nav__toggle nav__cta-btn" aria-expanded="false" aria-controls="nav-cta">
+            <span>{navCta.label}</span>
+            <Icon name="chevron-down" size={14} />
+          </button>
+          <ul class="nav__panel nav__panel--end" id="nav-cta">
+            {navCta.children.map((c) => (
+              <li>
+                <a href={withBase(c.href)} aria-current={isCurrent(c.href) ? 'page' : undefined}>
+                  <span>{c.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </li>
       </ul>
     </nav>
@@ -280,6 +292,19 @@ const inGroup = (children: readonly { href: string }[]) => children.some((c) => 
   .nav__item--cta {
     margin-left: 0.5rem;
   }
+  .nav__cta-btn {
+    cursor: pointer;
+    gap: 0.5em;
+  }
+  .nav__panel--end {
+    left: auto;
+    right: 0;
+    min-width: 13rem;
+  }
+  .nav__panel--end::before {
+    left: 0;
+    right: 0;
+  }
 
   .hdr__menu {
     display: none;
@@ -337,8 +362,13 @@ const inGroup = (children: readonly { href: string }[]) => children.some((c) => 
     }
     .nav__item--cta .btn {
       width: 100%;
+      justify-content: space-between;
+      min-height: 48px;
       padding: 1em 1.4em;
       font-size: 0.8125rem;
+    }
+    .nav__item--cta .nav__panel {
+      margin: 0.25rem 0 0;
     }
     .nav__row {
       justify-content: space-between;
