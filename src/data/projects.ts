@@ -855,7 +855,7 @@ export const projects: readonly Project[] = [
           },
           {
             type: 'photo',
-            photo: { suggestion: 'Jonathan Bennett and Jaymes Vaughn on Cole bicycles under the sign', src: '/images/the-cole/the-cole-hotel-first-guests-jonathan-bennett-jaymes-vaughn-bicycles.jpg', alt: 'Jonathan Bennett, Jaymes Vaughn and a friend on The Cole’s turquoise bicycles beneath the yellow and orange Cole Hotel sign', width: 1170, height: 861, hasSmall: true },
+            photo: { suggestion: 'Jonathan Bennett and Jaymes Vaughn on Cole bicycles under the sign', src: '/images/the-cole/the-cole-hotel-first-guests-jonathan-bennett-jaymes-vaughn-bicycles-david-weis.jpg', alt: 'Jonathan Bennett, Jaymes Vaughn and a friend on The Cole’s turquoise bicycles beneath the yellow and orange Cole Hotel sign', width: 1170, height: 861, hasSmall: true },
             ratio: '4 / 3',
             caption: 'Jonathan Bennett and Jaymes Vaughn, our first guests.',
           },
@@ -874,7 +874,7 @@ export const projects: readonly Project[] = [
           },
           {
             type: 'photo',
-            photo: { suggestion: 'Quarantine Coffee with the Cole mugs (do not crop out the mugs)', src: '/images/the-cole/the-cole-hotel-quarantine-coffee-jonathan-bennett-jaymes-vaughn-mugs.jpg', alt: 'Jaymes Vaughn and Jonathan Bennett on their Quarantine Coffee show, in gloves, each holding a Cole Hotel mug, with their dog between them', width: 1102, height: 750, hasSmall: true },
+            photo: { suggestion: 'Quarantine Coffee with the Cole mugs (do not crop out the mugs)', src: '/images/the-cole/the-cole-hotel-quarantine-coffee-jonathan-bennett-jaymes-vaughn-mugs-david-weis.jpg', alt: 'Jaymes Vaughn and Jonathan Bennett on their Quarantine Coffee show, in gloves, each holding a Cole Hotel mug, with their dog between them', width: 1102, height: 750, hasSmall: true },
             ratio: '3 / 2',
             caption: 'I may have been slightly too excited when I saw those mugs.',
           },
@@ -888,7 +888,7 @@ export const projects: readonly Project[] = [
               'But it never felt transactional. That is important to me.',
               'I was not keeping a spreadsheet of who posted what. I liked them. They liked what we were building. And good things kept growing from that.',
             ],
-            aside: { suggestion: 'Jaymes beside the Cole sign', src: '/images/the-cole/the-cole-hotel-jaymes-vaughn-sign.jpg', alt: 'Jaymes Vaughn sitting on the wall beside The Cole Hotel sign, palms and mountains behind', width: 1170, height: 990, hasSmall: true },
+            aside: { suggestion: 'Jaymes beside the Cole sign', src: '/images/the-cole/the-cole-hotel-jaymes-vaughn-sign-david-weis.jpg', alt: 'Jaymes Vaughn sitting on the wall beside The Cole Hotel sign, palms and mountains behind', width: 1170, height: 990, hasSmall: true },
             asideRatio: '1 / 1',
             asideCaption: 'Jaymes, beside the sign.',
           },
@@ -912,8 +912,8 @@ export const projects: readonly Project[] = [
           {
             type: 'collage',
             columns: [
-              [{ suggestion: 'Kelly Osbourne on a Cole bicycle, her dog in the basket', src: '/images/the-cole/the-cole-hotel-kelly-osbourne-bicycle.jpg', alt: 'Kelly Osbourne, in glasses and a polka-dot dress, on a Cole bicycle with her small dog in the wicker basket beneath the Cole Hotel sign', width: 1112, height: 1116, hasSmall: true }],
-              [{ suggestion: 'Her Instagram post, with the caption', src: '/images/the-cole/the-cole-hotel-kelly-osbourne-instagram-post.jpg', alt: 'Kelly Osbourne’s Instagram post about The Cole Hotel, with her caption praising the attention to detail, the sheets and the biscuits, and noting it was not an ad', width: 1112, height: 1789, hasSmall: true }],
+              [{ suggestion: 'Kelly Osbourne on a Cole bicycle, her dog in the basket', src: '/images/the-cole/the-cole-hotel-kelly-osbourne-bicycle-david-weis.jpg', alt: 'Kelly Osbourne, in glasses and a polka-dot dress, on a Cole bicycle with her small dog in the wicker basket beneath the Cole Hotel sign', width: 1112, height: 1116, hasSmall: true }],
+              [{ suggestion: 'Her Instagram post, with the caption', src: '/images/the-cole/the-cole-hotel-kelly-osbourne-instagram-post-david-weis.jpg', alt: 'Kelly Osbourne’s Instagram post about The Cole Hotel, with her caption praising the attention to detail, the sheets and the biscuits, and noting it was not an ad', width: 1112, height: 1789, hasSmall: true }],
             ],
             fill: 'first',
             emphasis: 'first',
@@ -952,7 +952,7 @@ export const projects: readonly Project[] = [
             emphasis: 'first',
             photos: [
               { suggestion: 'David, Jonathan and Mark at the star', src: '/images/the-cole/jonathan-bennett-walk-of-the-stars-david-weis-mark-weis.jpg', alt: 'David Weis, Jonathan Bennett and Mark Weis standing together on the red carpet beside Jonathan’s new star on the Palm Springs Walk of the Stars', width: 1800, height: 2400, hasSmall: true },
-              { suggestion: 'The star itself', src: '/images/the-cole/jonathan-bennett-walk-of-the-stars-star.jpg', alt: 'Jonathan Bennett’s star on the Palm Springs Walk of the Stars, set in the red carpet', width: 1800, height: 2400, hasSmall: true },
+              { suggestion: 'The star itself', src: '/images/the-cole/jonathan-bennett-walk-of-the-stars-star-david-weis.jpg', alt: 'Jonathan Bennett’s star on the Palm Springs Walk of the Stars, set in the red carpet', width: 1800, height: 2400, hasSmall: true },
             ],
             captions: ['Years after that first Instagram message, celebrating Jonathan’s Palm Springs Walk of the Stars honor together.', undefined],
           },
@@ -1345,7 +1345,7 @@ export const projects: readonly Project[] = [
                 caption: 'The solid fence early in construction.',
                 photo: {
                   suggestion: 'The solid fence early in construction',
-                  src: '/images/vista-voltaire/vista-voltaire-fence-2-solid.jpg',
+                  src: '/images/vista-voltaire/vista-voltaire-fence-2-solid-david-weis.jpg',
                   alt: 'The solid six-foot fence at Vista Voltaire early in construction.',
                   width: 2048,
                   height: 1536,
@@ -1357,7 +1357,7 @@ export const projects: readonly Project[] = [
                 caption: 'The fence being reworked into an open picket design.',
                 photo: {
                   suggestion: 'The fence reworked into an open picket design',
-                  src: '/images/vista-voltaire/vista-voltaire-fence-3-open-picket.jpg',
+                  src: '/images/vista-voltaire/vista-voltaire-fence-3-open-picket-david-weis.jpg',
                   alt: 'The Vista Voltaire fence reworked into an open picket design.',
                   width: 2048,
                   height: 1536,
@@ -1369,7 +1369,7 @@ export const projects: readonly Project[] = [
                 caption: 'The first planting added greenery, but not yet the screening we wanted.',
                 photo: {
                   suggestion: 'The first planting along the fence line',
-                  src: '/images/vista-voltaire/vista-voltaire-fence-4-first-planting.jpg',
+                  src: '/images/vista-voltaire/vista-voltaire-fence-4-first-planting-david-weis.jpg',
                   alt: 'The first landscaping planted along the Vista Voltaire fence line, with young boxwoods.',
                   width: 2048,
                   height: 1536,
@@ -1402,7 +1402,7 @@ export const projects: readonly Project[] = [
             ],
             aside: {
               suggestion: 'Both doors open: Vista Voltaire’s pass-through garage',
-              src: '/images/vista-voltaire/vista-voltaire-pass-through-garage.jpg',
+              src: '/images/vista-voltaire/vista-voltaire-pass-through-garage-david-weis.jpg',
               alt: 'Vista Voltaire’s pass-through garage with both overhead doors open and a vehicle parked between the openings.',
               width: 2400,
               height: 1800,
@@ -1460,7 +1460,7 @@ export const projects: readonly Project[] = [
     photos: [
       {
         suggestion: 'Front facade, straight on: red door, pergola, walkway lined with lantana',
-        src: '/images/vista-voltaire/vista-voltaire-exterior-above-ocean-beach-san-diego.jpg',
+        src: '/images/vista-voltaire/vista-voltaire-exterior-above-ocean-beach-san-diego-david-weis.jpg',
         alt: 'Vista Voltaire after the restoration: a white two-story home in Ocean Beach with black-trimmed windows, a wood front door under a pergola, red steps and a walkway lined with flowering lantana',
         width: 2048,
         height: 1367,
@@ -1886,7 +1886,7 @@ export const projects: readonly Project[] = [
     photos: [
       {
         suggestion: 'Aerial of Mission Beach',
-        src: '/images/belmont-beach-house/belmont-beach-house-mission-beach-aerial-san-diego.jpg',
+        src: '/images/belmont-beach-house/belmont-beach-house-mission-beach-aerial-san-diego-david-weis.jpg',
         alt: 'Mission Beach from the air: the long strand, the surf and the boardwalk with the city beyond',
         width: 2048,
         height: 1536,
@@ -1894,7 +1894,7 @@ export const projects: readonly Project[] = [
       },
       {
         suggestion: 'The house with its rooftop deck',
-        src: '/images/belmont-beach-house/belmont-beach-house-exterior-mission-beach-san-diego.jpg',
+        src: '/images/belmont-beach-house/belmont-beach-house-exterior-mission-beach-san-diego-david-weis.jpg',
         alt: 'Belmont Beach House from above: a terracotta three-story home with a rooftop deck among the palms of Mission Beach',
         width: 1239,
         height: 1130,
@@ -1902,7 +1902,7 @@ export const projects: readonly Project[] = [
       },
       {
         suggestion: 'Aerial of Mission Bay',
-        src: '/images/belmont-beach-house/belmont-beach-house-mission-bay-aerial-san-diego.jpg',
+        src: '/images/belmont-beach-house/belmont-beach-house-mission-bay-aerial-san-diego-david-weis.jpg',
         alt: 'Mission Bay from the air, with sailboats moored along the sand and the city behind',
         width: 2048,
         height: 1536,

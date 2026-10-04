@@ -5,7 +5,7 @@
 // WebP through <picture> and the -800 pair when the Photo has `hasSmall`), so
 // run this whenever a new JPEG photo is added:  npm run images
 import sharp from 'sharp';
-import { existsSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -13,6 +13,14 @@ const dir = fileURLToPath(new URL('../public/images/', import.meta.url));
 const force = process.argv.includes('--force');
 let made = 0;
 const kb = (n) => Math.round(statSync(n).size / 1024);
+// WebP at quality 78; photos that still come out over 300 KB (gravel, foliage,
+// other fine detail) are re-encoded at 66, which is visually the same.
+const HEAVY = 300 * 1024;
+const writeWebp = async (image, out) => {
+  let buf = await image.clone().webp({ quality: 78, effort: 5 }).toBuffer();
+  if (buf.length > HEAVY) buf = await image.clone().webp({ quality: 66, effort: 6, smartSubsample: true }).toBuffer();
+  writeFileSync(out, buf);
+};
 const stale = (out, src) => force || !existsSync(out) || statSync(out).mtimeMs < statSync(src).mtimeMs;
 
 for (const entry of readdirSync(dir, { recursive: true })) {
@@ -32,7 +40,7 @@ for (const entry of readdirSync(dir, { recursive: true })) {
         if (!stale(small, src)) continue;
         await sharp(src).rotate().resize({ width: target }).jpeg({ quality: 82, mozjpeg: true }).toFile(small);
         const smallWebp = small.replace(/\.jpg$/, '.webp');
-        await sharp(small).webp({ quality: 78, effort: 5 }).toFile(smallWebp);
+        await writeWebp(sharp(src).rotate().resize({ width: target }), smallWebp);
         console.log(`${f}: ${kb(src)} KB → ${kb(small)} KB at ${target}px, ${kb(smallWebp)} KB webp`);
         made++;
       }
@@ -40,7 +48,7 @@ for (const entry of readdirSync(dir, { recursive: true })) {
 
     const out = join(dir, f.replace(/\.jpe?g$/i, '.webp'));
     if (!stale(out, src)) continue;
-    await sharp(src).rotate().webp({ quality: 78, effort: 5 }).toFile(out);
+    await writeWebp(sharp(src).rotate(), out);
     console.log(`${f}: ${kb(src)} KB → ${kb(out)} KB webp`);
     made++;
   } catch (e) {

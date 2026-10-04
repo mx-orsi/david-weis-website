@@ -188,7 +188,7 @@ export const finalCta = {
  * opens a short menu; `href` is where the button goes without JavaScript.
  */
 export const navCta = {
-  label: 'Work With David',
+  label: 'Contact David',
   href: '/contact',
   children: [
     { label: 'Contact', href: '/contact' },

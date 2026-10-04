@@ -450,7 +450,7 @@ export const aboutChapterB: ProjectChapter = {
       align: 'left',
       photos: [
         { suggestion: 'With Mark at Limón, Modernism Week 2025', src: '/images/about/david-weis-mark-h3k-property.jpg', alt: 'David and Mark Weis at the yellow front door of Limón, an H3K design project in Palm Springs', width: 1800, height: 2400, hasSmall: true, position: 'center 42%' },
-        { suggestion: 'David at the Limón pool', src: '/images/about/h3k-pool-courtyard-palm-springs.jpg', alt: 'David Weis beside the pool at Limón, an H3K design project in Palm Springs', width: 2400, height: 1800, hasSmall: true, position: '68% center' },
+        { suggestion: 'David at the Limón pool', src: '/images/about/h3k-pool-courtyard-palm-springs-david-weis.jpg', alt: 'David Weis beside the pool at Limón, an H3K design project in Palm Springs', width: 2400, height: 1800, hasSmall: true, position: '68% center' },
       ],
       caption: { title: 'Modernism Week Tour 2025: Limón', note: 'An H3K design project' },
     },
@@ -459,7 +459,7 @@ export const aboutChapterB: ProjectChapter = {
       ratio: '1 / 1',
       align: 'right',
       photos: [
-        { suggestion: 'White tile at The Marquee at Twin Palms', src: '/images/about/h3k-marquee-twin-palms-white-tile.jpg', alt: 'A wall of white three-dimensional tile at The Marquee at Twin Palms, an H3K design project in Palm Springs', width: 1800, height: 2400, hasSmall: true },
+        { suggestion: 'White tile at The Marquee at Twin Palms', src: '/images/about/h3k-marquee-twin-palms-white-tile-david-weis.jpg', alt: 'A wall of white three-dimensional tile at The Marquee at Twin Palms, an H3K design project in Palm Springs', width: 1800, height: 2400, hasSmall: true },
         { suggestion: 'With Mark in front of The Marquee at Twin Palms', src: '/images/about/david-weis-mark-h3k-marquee-twin-palms-modernism-week-2025.jpg', alt: 'David and Mark Weis on the walkway in front of The Marquee at Twin Palms, its pink breeze-block wall beside them, during Modernism Week', width: 1206, height: 1051, position: 'center 45%' },
       ],
       caption: { title: 'Modernism Week Tour 2025: The Marquee at Twin Palms', note: 'An H3K design project' },
@@ -469,7 +469,7 @@ export const aboutChapterB: ProjectChapter = {
       ratio: '4 / 5',
       photos: [
         { suggestion: 'Mark, Kathy and I as Modernism Week docents', src: '/images/about/david-weis-modernism-week-kathy.jpg', alt: 'David, Mark and Kathy in matching Vista Las Palmas shirts as volunteer docents during Modernism Week in Palm Springs', width: 1800, height: 2400, hasSmall: true, position: 'center 35%' },
-        { suggestion: 'Docents in front of the pool with the mountains behind', src: '/images/about/modernism-week-vista-las-palmas-docents-pool.jpg', alt: 'Four volunteer docents standing in front of a pool in Vista Las Palmas, with palms and the San Jacinto Mountains behind them', width: 1800, height: 2400, hasSmall: true, position: 'center 60%' },
+        { suggestion: 'Docents in front of the pool with the mountains behind', src: '/images/about/modernism-week-vista-las-palmas-docents-pool-david-weis.jpg', alt: 'Four volunteer docents standing in front of a pool in Vista Las Palmas, with palms and the San Jacinto Mountains behind them', width: 1800, height: 2400, hasSmall: true, position: 'center 60%' },
       ],
       caption: { title: 'Vista Las Palmas Modernism Week 2026', note: 'Volunteer docents. Helping neighbors share their homes. Spending time with new friends.' },
     },
@@ -509,8 +509,8 @@ export const aboutChapterB: ProjectChapter = {
       type: 'pair',
       ratio: '1 / 1',
       photos: [
-        { suggestion: 'Toy collection for the Marines', src: '/images/about/holiday-toy-collection-marines.jpg', alt: 'A Marine in dress uniform beside toys donated at the holiday fundraiser', width: 1206, height: 892, hasSmall: true, position: '30% center' },
-        { suggestion: 'Toys loaded into the Range Rover', src: '/images/about/holiday-toys-range-rover.jpg', alt: 'The back of a Range Rover packed with toys donated at the holiday fundraiser', width: 1800, height: 2400, hasSmall: true, position: 'center 55%' },
+        { suggestion: 'Toy collection for the Marines', src: '/images/about/holiday-toy-collection-marines-david-weis.jpg', alt: 'A Marine in dress uniform beside toys donated at the holiday fundraiser', width: 1206, height: 892, hasSmall: true, position: '30% center' },
+        { suggestion: 'Toys loaded into the Range Rover', src: '/images/about/holiday-toys-range-rover-david-weis.jpg', alt: 'The back of a Range Rover packed with toys donated at the holiday fundraiser', width: 1800, height: 2400, hasSmall: true, position: 'center 55%' },
       ],
       captions: [
         { title: 'Toys for Tots', note: 'Marines to collect and count the toys' },
@@ -519,7 +519,7 @@ export const aboutChapterB: ProjectChapter = {
     },
     {
       type: 'photo',
-      photo: { suggestion: 'Holiday party portrait', src: '/images/about/holiday-party-portrait.jpg', alt: 'Guests holding donated toys at David and Mark Weis’s annual holiday fundraiser party', width: 2400, height: 1999, hasSmall: true, position: 'center top' },
+      photo: { suggestion: 'Holiday party portrait', src: '/images/about/holiday-party-portrait-david-weis.jpg', alt: 'Guests holding donated toys at David and Mark Weis’s annual holiday fundraiser party', width: 2400, height: 1999, hasSmall: true, position: 'center top' },
       ratio: '4 / 3',
       caption: { title: 'Toys for Kids', note: '2025' },
     },
@@ -527,18 +527,18 @@ export const aboutChapterB: ProjectChapter = {
       type: 'gallery',
       label: 'The holiday gift bags',
       photos: [
-        { suggestion: 'Holiday gift bag production', src: '/images/about/holiday-gift-bag-production.jpg', alt: 'David Weis beside a dining table covered in finished holiday gift bags', width: 2400, height: 2110, hasSmall: true },
-        { suggestion: 'Gift bags with candy canes', src: '/images/about/holiday-gift-bags-candy-canes.jpg', alt: 'Rows of holiday gift bags, each topped with a candy cane', width: 1800, height: 2400, hasSmall: true },
-        { suggestion: 'Merry Christmas gift bags', src: '/images/about/holiday-gift-bags-merry-christmas.jpg', alt: 'Rows of white Merry Christmas gift bags lined up under stained-glass windows', width: 2400, height: 1800, hasSmall: true },
-        { suggestion: 'Cocktail favors from The Cole', src: '/images/about/holiday-smores-kit-querencia-palms.jpg', alt: 'Cocktail favors for the holiday fundraiser: mini bottles with candy canes and tags', width: 1800, height: 2400, hasSmall: true },
+        { suggestion: 'Holiday gift bag production', src: '/images/about/holiday-gift-bag-production-david-weis.jpg', alt: 'David Weis beside a dining table covered in finished holiday gift bags', width: 2400, height: 2110, hasSmall: true },
+        { suggestion: 'Gift bags with candy canes', src: '/images/about/holiday-gift-bags-candy-canes-david-weis.jpg', alt: 'Rows of holiday gift bags, each topped with a candy cane', width: 1800, height: 2400, hasSmall: true },
+        { suggestion: 'Merry Christmas gift bags', src: '/images/about/holiday-gift-bags-merry-christmas-david-weis.jpg', alt: 'Rows of white Merry Christmas gift bags lined up under stained-glass windows', width: 2400, height: 1800, hasSmall: true },
+        { suggestion: 'Cocktail favors from The Cole', src: '/images/about/holiday-smores-kit-querencia-palms-david-weis.jpg', alt: 'Cocktail favors for the holiday fundraiser: mini bottles with candy canes and tags', width: 1800, height: 2400, hasSmall: true },
       ],
     },
     {
       type: 'pair',
       ratio: '18 / 13',
       photos: [
-        { suggestion: 'Custom Christmas card 2022', src: '/images/about/holiday-card-2022-sierra-chalet.jpg', alt: 'The illustrated 2022 holiday card: David and Mark with the dogs in the snow at Sierra Chalet, a snowboard and toolbox beside the tree', width: 2400, height: 1736, hasSmall: true },
-        { suggestion: 'Custom Christmas card 2023', src: '/images/about/holiday-card-2023-kensington-canyon.jpg', alt: 'The illustrated 2023 holiday card: David and Mark with the dogs in front of the snow-dusted Kensington house', width: 2171, height: 1571, hasSmall: true },
+        { suggestion: 'Custom Christmas card 2022', src: '/images/about/holiday-card-2022-sierra-chalet-david-weis.jpg', alt: 'The illustrated 2022 holiday card: David and Mark with the dogs in the snow at Sierra Chalet, a snowboard and toolbox beside the tree', width: 2400, height: 1736, hasSmall: true },
+        { suggestion: 'Custom Christmas card 2023', src: '/images/about/holiday-card-2023-kensington-canyon-david-weis.jpg', alt: 'The illustrated 2023 holiday card: David and Mark with the dogs in front of the snow-dusted Kensington house', width: 2171, height: 1571, hasSmall: true },
       ],
       captions: [
         { title: 'Custom Christmas card 2022', note: 'Reflecting on the cabin renovation' },
@@ -549,8 +549,8 @@ export const aboutChapterB: ProjectChapter = {
       type: 'pair',
       ratio: '18 / 13',
       photos: [
-        { suggestion: 'Custom Christmas card 2024', src: '/images/about/holiday-card-2024-the-cole.jpg', alt: 'The illustrated 2024 holiday card: David and Mark in front of The Cole at night, with the hotel sign and a Christmas tree', width: 2171, height: 1571, hasSmall: true },
-        { suggestion: 'Custom Christmas card 2025', src: '/images/about/holiday-card-2025-vista-voltaire.jpg', alt: 'The illustrated 2025 holiday card: David and Mark with the dog in front of the Voltaire house, surfboards by the door', width: 2100, height: 1500, hasSmall: true },
+        { suggestion: 'Custom Christmas card 2024', src: '/images/about/holiday-card-2024-the-cole-david-weis.jpg', alt: 'The illustrated 2024 holiday card: David and Mark in front of The Cole at night, with the hotel sign and a Christmas tree', width: 2171, height: 1571, hasSmall: true },
+        { suggestion: 'Custom Christmas card 2025', src: '/images/about/holiday-card-2025-vista-voltaire-david-weis.jpg', alt: 'The illustrated 2025 holiday card: David and Mark with the dog in front of the Voltaire house, surfboards by the door', width: 2100, height: 1500, hasSmall: true },
       ],
       captions: [
         { title: 'Custom Christmas card 2024', note: 'Reflecting on the sale of The Cole and new chapters' },
