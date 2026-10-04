@@ -1,6 +1,7 @@
 /**
- * Navigation model. Markets and Experience are expandable groups; their
+ * Navigation model. Markets and Projects are expandable groups; their
  * children come from the market and project data so menus stay in sync.
+ * Contact has no item of its own: it is the first entry under Work With David.
  */
 import { markets, navCta } from './site';
 import { projects, projectHref } from './projects';
@@ -30,7 +31,7 @@ export const nav: readonly NavItem[] = [
   },
   {
     id: 'experience',
-    label: 'Experience',
+    label: 'Projects',
     href: '/experience',
     children: [
       { label: 'Sales experience', href: '/sales', meta: 'Client stories' },
@@ -38,14 +39,13 @@ export const nav: readonly NavItem[] = [
     ],
   },
   { label: 'Properties', href: '/properties' },
-  { label: 'Contact', href: '/contact' },
 ];
 
 /** Footer link list: one flat column. */
 export const footerLinks: readonly NavChild[] = [
   { label: 'About', href: '/about' },
   ...markets.map((m) => ({ label: m.name, href: m.href })),
-  { label: 'Experience', href: '/experience' },
+  { label: 'Projects', href: '/experience' },
   { label: 'Sales experience', href: '/sales' },
   { label: 'Properties', href: '/properties' },
   { label: 'Buy with David', href: '/buy' },

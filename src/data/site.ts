@@ -191,9 +191,9 @@ export const navCta = {
   label: 'Work With David',
   href: '/contact',
   children: [
+    { label: 'Contact', href: '/contact' },
     { label: 'Buy with David', href: '/buy' },
     { label: 'Sell with David', href: '/sell' },
-    { label: 'Contact', href: '/contact' },
   ],
 } as const;
 
