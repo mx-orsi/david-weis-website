@@ -156,7 +156,7 @@ export const aboutChapterB: ProjectChapter = {
         { suggestion: 'The Cole Hotel - Mark and I before', src: '/images/about/david-weis-mark-the-cole-before.jpg', alt: 'David and Mark Weis at The Cole Hotel property before its renovation', width: 2400, height: 2038, hasSmall: true },
         {
           suggestion: 'The Cole Hotel sign against palms and sky',
-          src: '/images/the-cole/the-cole-palm-springs-pool-desert-oasis-david-weis.jpg',
+          src: '/images/the-cole/the-cole-hotel-roadside-sign-palm-springs-david-weis.jpg',
           alt: 'The Cole Hotel roadside sign in yellow, orange and turquoise, with tall palms behind it against a clear sky',
           width: 1511,
           height: 2400,
@@ -254,7 +254,7 @@ export const aboutChapterB: ProjectChapter = {
       photos: [
         { suggestion: 'Front Runners, San Diego', src: '/images/community/david-weis-front-runners-san-diego-02.jpg', alt: 'The Front Runners running group gathered on the grass in San Diego', width: 1170, height: 1147, hasSmall: true },
         { suggestion: 'Boating in San Diego', src: '/images/about/david-weis-boating-san-diego.jpg', alt: 'David Weis boating on the water in San Diego', width: 1600, height: 1600, hasSmall: true },
-        { suggestion: 'Beach sunset with the dog', src: '/images/about/david-weis-beach-sunset-dog.jpg', alt: 'David Weis with his dog on the beach at sunset', width: 1800, height: 2400, hasSmall: true },
+        { suggestion: 'Beach sunset with the dog', src: '/images/about/david-weis-beach-sunset-dog.jpg', alt: 'David Weis’s dog silhouetted on the beach at sunset', width: 1800, height: 2400, hasSmall: true },
       ],
     },
     {
@@ -530,7 +530,7 @@ export const aboutChapterB: ProjectChapter = {
         { suggestion: 'Holiday gift bag production', src: '/images/about/holiday-gift-bag-production-david-weis.jpg', alt: 'David Weis beside a dining table covered in finished holiday gift bags', width: 2400, height: 2110, hasSmall: true },
         { suggestion: 'Gift bags with candy canes', src: '/images/about/holiday-gift-bags-candy-canes-david-weis.jpg', alt: 'Rows of holiday gift bags, each topped with a candy cane', width: 1800, height: 2400, hasSmall: true },
         { suggestion: 'Merry Christmas gift bags', src: '/images/about/holiday-gift-bags-merry-christmas-david-weis.jpg', alt: 'Rows of white Merry Christmas gift bags lined up under stained-glass windows', width: 2400, height: 1800, hasSmall: true },
-        { suggestion: 'Cocktail favors from The Cole', src: '/images/about/holiday-smores-kit-querencia-palms-david-weis.jpg', alt: 'Cocktail favors for the holiday fundraiser: mini bottles with candy canes and tags', width: 1800, height: 2400, hasSmall: true },
+        { suggestion: 'Cocktail favors from The Cole', src: '/images/about/holiday-cocktail-favors-candy-canes-david-weis.jpg', alt: 'Cocktail favors for the holiday fundraiser: mini bottles with candy canes and tags', width: 1800, height: 2400, hasSmall: true },
       ],
     },
     {

@@ -18,6 +18,13 @@ export function webpVariant(src: string | undefined): string | undefined {
   return existsSync(join(process.cwd(), 'public', webp)) ? webp : undefined;
 }
 
+/** The .avif sibling, generated only for photos whose WebP is still heavy. */
+export function avifVariant(src: string | undefined): string | undefined {
+  if (!src || !/\.jpe?g$/i.test(src)) return undefined;
+  const avif = src.replace(/\.jpe?g$/i, '.avif');
+  return existsSync(join(process.cwd(), 'public', avif)) ? avif : undefined;
+}
+
 /** Path of the `-<width>` variant of a photo, e.g. foo.jpg → foo-800.jpg */
 export function sizedVariant(src: string, width: number): string {
   return src.replace(/(\.[a-z0-9]+)$/i, `-${width}$1`);

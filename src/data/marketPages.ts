@@ -157,7 +157,7 @@ export const marketPages: Record<MarketSlug, MarketPageContent> = {
     ],
     photo: {
       suggestion: 'David on a mountain bike at the South Shore trail map',
-      src: '/images/sierra-chalet/sierra-chalet-big-bear-cabin-renovation-david-weis.jpg',
+      src: '/images/sierra-chalet/sierra-chalet-big-bear-mountain-biking-south-shore-trails-david-weis.jpg',
       alt: 'David Weis on a mountain bike beside the Welcome to the South Shore trail map in Big Bear, pines behind',
       width: 2048,
       height: 1776,

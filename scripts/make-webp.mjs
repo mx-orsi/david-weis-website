@@ -1,4 +1,5 @@
-// Generate a .webp sibling for every .jpg in public/images, plus -800 and
+// Generate a .webp sibling for every .jpg in public/images (and .avif for the
+// heaviest photos), plus -800 and
 // -1600 (px wide) JPEG + WebP pairs for photos wider than that, so phones and
 // laptops get a right-sized file through srcset. Skips up-to-date files; pass --force to redo
 // all. Components pick the variants up automatically (Media.astro serves the
@@ -47,10 +48,27 @@ for (const entry of readdirSync(dir, { recursive: true })) {
     }
 
     const out = join(dir, f.replace(/\.jpe?g$/i, '.webp'));
-    if (!stale(out, src)) continue;
-    await writeWebp(sharp(src).rotate(), out);
-    console.log(`${f}: ${kb(src)} KB → ${kb(out)} KB webp`);
-    made++;
+    if (stale(out, src)) {
+      await writeWebp(sharp(src).rotate(), out);
+      console.log(`${f}: ${kb(src)} KB → ${kb(out)} KB webp`);
+      made++;
+    }
+
+    // Photos whose WebP is still heavy at any size also get AVIF at every
+    // size (a third to a half smaller again); Media.astro offers it first.
+    if (/-(800|1600)\.jpe?g$/i.test(f)) continue;
+    const family = [undefined, 800, 1600]
+      .map((w) => ({ w, webp: w ? out.replace(/\.webp$/, `-${w}.webp`) : out }))
+      .filter((v) => existsSync(v.webp));
+    if (!family.some((v) => statSync(v.webp).size > HEAVY)) continue;
+    for (const { w, webp } of family) {
+      const avif = webp.replace(/\.webp$/, '.avif');
+      if (!stale(avif, src)) continue;
+      const image = w ? sharp(src).rotate().resize({ width: w }) : sharp(src).rotate();
+      await image.avif({ quality: 50, effort: 4 }).toFile(avif);
+      console.log(`${f}${w ? ` at ${w}px` : ''}: ${kb(webp)} KB webp → ${kb(avif)} KB avif`);
+      made++;
+    }
   } catch (e) {
     // Skip unreadable/corrupt source files (e.g. stray 0-byte uploads in raw
     // drop folders) instead of aborting the whole run.

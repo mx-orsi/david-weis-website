@@ -375,7 +375,7 @@ export const projects: readonly Project[] = [
           type: 'collage',
           columns: [
             [
-              { suggestion: 'Koi visible through clear water', src: '/images/querencia-landscaping/querencia-palms-floating-water-plants-desert-garden-david-weis.jpg', alt: 'Orange koi in a clear, shallow stretch of the pond between river rocks', width: 2400, height: 1800, hasSmall: true },
+              { suggestion: 'Koi visible through clear water', src: '/images/querencia-landscaping/querencia-palms-koi-pond-river-rocks-desert-garden-david-weis.jpg', alt: 'Orange koi in a clear, shallow stretch of the pond between river rocks', width: 2400, height: 1800, hasSmall: true },
             ],
             [
               { suggestion: 'Pink water lily', src: '/images/querencia-landscaping/querencia-palms-aquatic-landscaping-tahquitz-river-estates-david-weis.jpg', alt: 'A pink water lily open on the pond, with a koi passing beneath the pads', width: 1800, height: 2400, hasSmall: true },
@@ -390,11 +390,11 @@ export const projects: readonly Project[] = [
           type: 'collage',
           columns: [
             [
-              { suggestion: 'Dragonfly beside the pond', src: '/images/querencia-landscaping/querencia-palms-water-iris-koi-pond-david-weis.jpg', alt: 'An orange dragonfly resting on a wall beside the pond', width: 1800, height: 2400, hasSmall: true, position: 'center 12%' },
-              { suggestion: 'White water lily', src: '/images/querencia-landscaping/querencia-palms-papyrus-pond-landscaping-david-weis.jpg', alt: 'A white water lily open on the pond beside broad canna leaves', width: 1800, height: 2400, hasSmall: true },
+              { suggestion: 'Dragonfly beside the pond', src: '/images/querencia-landscaping/querencia-palms-orange-dragonfly-block-wall-pond-david-weis.jpg', alt: 'An orange dragonfly resting on a wall beside the pond', width: 1800, height: 2400, hasSmall: true, position: 'center 12%' },
+              { suggestion: 'White water lily', src: '/images/querencia-landscaping/querencia-palms-white-water-lily-pond-landscaping-david-weis.jpg', alt: 'A white water lily open on the pond beside broad canna leaves', width: 1800, height: 2400, hasSmall: true },
             ],
             [
-              { suggestion: 'Orange canna', src: '/images/querencia-landscaping/querencia-palms-lotus-water-garden-palm-springs-david-weis.jpg', alt: 'An orange canna flower above a lily pad at the edge of the pond', width: 1800, height: 2400, hasSmall: true },
+              { suggestion: 'Orange canna', src: '/images/querencia-landscaping/querencia-palms-orange-canna-pond-edge-palm-springs-david-weis.jpg', alt: 'An orange canna flower above a lily pad at the edge of the pond', width: 1800, height: 2400, hasSmall: true },
             ],
           ],
           fill: 'second',
@@ -468,8 +468,8 @@ export const projects: readonly Project[] = [
           type: 'photo',
           photo: {
             suggestion: 'The mural with the mature landscaping in front of it (Mural After). No text over this image.',
-            src: '/images/querencia-landscaping/querencia-palms-mural-courtyard-art-palm-springs-david-weis.jpg',
-            alt: 'The Querencia Palms mural with mature planting grown in along its base',
+            src: '/images/querencia-landscaping/querencia-palms-aerial-view-street-corner-palm-springs-david-weis.jpg',
+            alt: 'Querencia Palms from above at the street corner: the residences, covered parking, pool and mural wall among tall palms',
             width: 2048,
             height: 1365,
             hasSmall: true,
@@ -534,7 +534,7 @@ export const projects: readonly Project[] = [
         },
         {
           type: 'pair',
-          photos: [{ suggestion: 'Unit 104 living room', src: '/images/querencia-interiors/querencia-palms-indoor-outdoor-living-patio-doors-david-weis.jpg', alt: 'Unit 104 at Querencia Palms: a cream sofa with rust pillows on a rust rug, in front of a green and gold mural', width: 2048, height: 1368, hasSmall: true }, { suggestion: 'Unit 202 living room', src: '/images/querencia-interiors/querencia-palms-open-concept-living-room-david-weis.jpg', alt: 'Unit 202 at Querencia Palms: a blue leather sofa and a walnut credenza in front of a bold blue, orange and brown mural', width: 2400, height: 1800, hasSmall: true, position: 'center 30%' }],
+          photos: [{ suggestion: 'Unit 104 living room', src: '/images/querencia-interiors/querencia-palms-104-living-room-cream-sofa-green-gold-mural-david-weis.jpg', alt: 'Unit 104 at Querencia Palms: a cream sofa with rust pillows on a rust rug, in front of a green and gold mural', width: 2048, height: 1368, hasSmall: true }, { suggestion: 'Unit 202 living room', src: '/images/querencia-interiors/querencia-palms-open-concept-living-room-david-weis.jpg', alt: 'Unit 202 at Querencia Palms: a blue leather sofa and a walnut credenza in front of a bold blue, orange and brown mural', width: 2400, height: 1800, hasSmall: true, position: 'center 30%' }],
           ratio: '4 / 3',
           captions: ['Unit 104, the third model.', 'Unit 202, the upstairs model.'],
         },
@@ -583,8 +583,8 @@ export const projects: readonly Project[] = [
               { suggestion: 'Unit 105 living room', src: '/images/querencia-interiors/querencia-palms-midcentury-interior-design-palm-springs-david-weis.jpg', alt: 'Unit 105 at Querencia Palms: a white sofa and a green fluted credenza against a teal, mustard and rust geometric mural', width: 2048, height: 1367, hasSmall: true },
             ],
             [
-              { suggestion: 'Unit 106 living room', src: '/images/querencia-interiors/querencia-palms-renovated-bathroom-palm-springs-david-weis.jpg', alt: 'Unit 106 at Querencia Palms: a tan leather sofa and a green credenza against a grey and beige geometric mural', width: 2048, height: 1365, hasSmall: true },
-              { suggestion: 'Unit 106 sitting area', src: '/images/querencia-interiors/querencia-palms-primary-bedroom-suite-condo-david-weis.jpg', alt: 'Unit 106 at Querencia Palms: two green velvet armchairs, a marble side table and a patio door to the courtyard', width: 2048, height: 1366, hasSmall: true, position: 'left center' },
+              { suggestion: 'Unit 106 living room', src: '/images/querencia-interiors/querencia-palms-106-living-room-leather-sofa-geometric-mural-palm-springs-david-weis.jpg', alt: 'Unit 106 at Querencia Palms: a tan leather sofa and a green credenza against a grey and beige geometric mural', width: 2048, height: 1365, hasSmall: true },
+              { suggestion: 'Unit 106 sitting area', src: '/images/querencia-interiors/querencia-palms-106-sitting-area-green-armchairs-david-weis.jpg', alt: 'Unit 106 at Querencia Palms: two green velvet armchairs, a marble side table and a patio door to the courtyard', width: 2048, height: 1366, hasSmall: true, position: 'left center' },
             ],
           ],
           fill: 'first',
@@ -600,8 +600,8 @@ export const projects: readonly Project[] = [
           label: 'More of the residences',
           photos: [
             { suggestion: 'Unit 202 living room', src: '/images/querencia-interiors/querencia-palms-open-concept-living-room-david-weis.jpg', alt: 'Unit 202 at Querencia Palms: a blue leather sofa and a walnut credenza in front of a bold blue, orange and brown mural', width: 2400, height: 1800, hasSmall: true, position: 'center 30%' },
-            { suggestion: 'Unit 201 living room', src: '/images/querencia-interiors/querencia-palms-renovated-kitchen-palm-springs-david-weis.jpg', alt: 'Unit 201 at Querencia Palms: a tan leather sofa and a round coffee table in front of a green and gold botanical mural', width: 2400, height: 1800, hasSmall: true },
-            { suggestion: 'Unit 104 living room', src: '/images/querencia-interiors/querencia-palms-indoor-outdoor-living-patio-doors-david-weis.jpg', alt: 'Unit 104 at Querencia Palms: a cream sofa with rust pillows on a rust rug, in front of a green and gold mural', width: 2048, height: 1368, hasSmall: true },
+            { suggestion: 'Unit 201 living room', src: '/images/querencia-interiors/querencia-palms-201-living-room-leather-sofa-botanical-mural-palm-springs-david-weis.jpg', alt: 'Unit 201 at Querencia Palms: a tan leather sofa and a round coffee table in front of a green and gold botanical mural', width: 2400, height: 1800, hasSmall: true },
+            { suggestion: 'Unit 104 living room', src: '/images/querencia-interiors/querencia-palms-104-living-room-cream-sofa-green-gold-mural-david-weis.jpg', alt: 'Unit 104 at Querencia Palms: a cream sofa with rust pillows on a rust rug, in front of a green and gold mural', width: 2048, height: 1368, hasSmall: true },
           ],
           captions: [
             { title: 'Unit 202', note: 'Desert color + mid-century energy' },
@@ -664,7 +664,7 @@ export const projects: readonly Project[] = [
         {
           type: 'strip',
           heading: 'Which one would you have chosen?',
-          photos: [{ suggestion: 'Unit 104 living room', src: '/images/querencia-interiors/querencia-palms-indoor-outdoor-living-patio-doors-david-weis.jpg', alt: 'Unit 104 at Querencia Palms: a cream sofa with rust pillows on a rust rug, in front of a green and gold mural', width: 2048, height: 1368, hasSmall: true }, { suggestion: 'Unit 105 living room', src: '/images/querencia-interiors/querencia-palms-midcentury-interior-design-palm-springs-david-weis.jpg', alt: 'Unit 105 at Querencia Palms: a white sofa and a green fluted credenza against a teal, mustard and rust geometric mural', width: 2048, height: 1367, hasSmall: true }, { suggestion: 'Unit 106 living room', src: '/images/querencia-interiors/querencia-palms-renovated-bathroom-palm-springs-david-weis.jpg', alt: 'Unit 106 at Querencia Palms: a tan leather sofa and a green credenza against a grey and beige geometric mural', width: 2048, height: 1365, hasSmall: true }, { suggestion: 'Unit 201 living room', src: '/images/querencia-interiors/querencia-palms-renovated-kitchen-palm-springs-david-weis.jpg', alt: 'Unit 201 at Querencia Palms: a tan leather sofa and a round coffee table in front of a green and gold botanical mural', width: 2400, height: 1800, hasSmall: true }, { suggestion: 'Unit 202 living room', src: '/images/querencia-interiors/querencia-palms-open-concept-living-room-david-weis.jpg', alt: 'Unit 202 at Querencia Palms: a blue leather sofa and a walnut credenza in front of a bold blue, orange and brown mural', width: 2400, height: 1800, hasSmall: true, position: 'center 30%' }, { suggestion: 'Unit 204 living room', src: '/images/querencia-interiors/querencia-palms-renovated-condo-interior-south-palm-springs-david-weis.jpg', alt: 'Unit 204 at Querencia Palms: a brown leather sofa and two white armchairs against a teal, rust and mustard geometric mural', width: 1448, height: 1086, hasSmall: true }, { suggestion: 'Unit 206 dining area', src: '/images/querencia-interiors/querencia-palms-condo-interior-palm-springs-david-weis.jpg', alt: 'Unit 206 at Querencia Palms: a round black dining table with mustard chairs beside a green mural, the bar just visible', width: 2048, height: 1369, hasSmall: true }],
+          photos: [{ suggestion: 'Unit 104 living room', src: '/images/querencia-interiors/querencia-palms-104-living-room-cream-sofa-green-gold-mural-david-weis.jpg', alt: 'Unit 104 at Querencia Palms: a cream sofa with rust pillows on a rust rug, in front of a green and gold mural', width: 2048, height: 1368, hasSmall: true }, { suggestion: 'Unit 105 living room', src: '/images/querencia-interiors/querencia-palms-midcentury-interior-design-palm-springs-david-weis.jpg', alt: 'Unit 105 at Querencia Palms: a white sofa and a green fluted credenza against a teal, mustard and rust geometric mural', width: 2048, height: 1367, hasSmall: true }, { suggestion: 'Unit 106 living room', src: '/images/querencia-interiors/querencia-palms-106-living-room-leather-sofa-geometric-mural-palm-springs-david-weis.jpg', alt: 'Unit 106 at Querencia Palms: a tan leather sofa and a green credenza against a grey and beige geometric mural', width: 2048, height: 1365, hasSmall: true }, { suggestion: 'Unit 201 living room', src: '/images/querencia-interiors/querencia-palms-201-living-room-leather-sofa-botanical-mural-palm-springs-david-weis.jpg', alt: 'Unit 201 at Querencia Palms: a tan leather sofa and a round coffee table in front of a green and gold botanical mural', width: 2400, height: 1800, hasSmall: true }, { suggestion: 'Unit 202 living room', src: '/images/querencia-interiors/querencia-palms-open-concept-living-room-david-weis.jpg', alt: 'Unit 202 at Querencia Palms: a blue leather sofa and a walnut credenza in front of a bold blue, orange and brown mural', width: 2400, height: 1800, hasSmall: true, position: 'center 30%' }, { suggestion: 'Unit 204 living room', src: '/images/querencia-interiors/querencia-palms-renovated-condo-interior-south-palm-springs-david-weis.jpg', alt: 'Unit 204 at Querencia Palms: a brown leather sofa and two white armchairs against a teal, rust and mustard geometric mural', width: 1448, height: 1086, hasSmall: true }, { suggestion: 'Unit 206 dining area', src: '/images/querencia-interiors/querencia-palms-condo-interior-palm-springs-david-weis.jpg', alt: 'Unit 206 at Querencia Palms: a round black dining table with mustard chairs beside a green mural, the bar just visible', width: 2048, height: 1369, hasSmall: true }],
           labels: ['Unit 104', 'Unit 105', 'Unit 106', 'Unit 201', 'Unit 202', 'Unit 204', 'Unit 206'],
           closing: 'At Querencia, the models didn’t just show buyers where furniture could go. They helped buyers see a life there.',
         },
@@ -689,14 +689,14 @@ export const projects: readonly Project[] = [
       {
         suggestion: 'A private primary yard with the planting grown in',
         src: '/images/querencia-landscaping/querencia-palms-105-primary-yard-desert-landscaping-david-weis.jpg',
-        alt: 'A private yard at Querencia Palms with established planting and a mountain view',
+        alt: 'A private yard at Querencia Palms with a flagstone path, a rock-lined stream and established planting',
         width: 2048,
         height: 1365,
         hasSmall: true,
       },
       {
         suggestion: 'A front patio arrival with mature planting',
-        src: '/images/querencia-landscaping/querencia-palms-106-front-patio-koi-pond-views-david-weis.jpg',
+        src: '/images/querencia-landscaping/querencia-palms-106-front-patio-outdoor-seating-david-weis.jpg',
         alt: 'The front patio of a Querencia Palms residence framed by mature planting',
         width: 2048,
         height: 1365,
@@ -704,7 +704,7 @@ export const projects: readonly Project[] = [
       },
       {
         suggestion: 'Breezeway with the painted mural',
-        src: '/images/querencia-palms/querencia-palms-bbq-courtyard-community-amenities-david-weis.jpg',
+        src: '/images/querencia-palms/querencia-palms-mural-breezeway-love-where-you-live-david-weis.jpg',
         alt: 'The covered breezeway at Querencia Palms with the painted mural reading Querencia Palms, love where you live',
         width: 2048,
         height: 1365,
@@ -728,7 +728,7 @@ export const projects: readonly Project[] = [
       },
       {
         suggestion: 'Pool in afternoon sun with the mountains behind',
-        src: '/images/querencia-palms/querencia-palms-gated-covered-parking-palm-springs-david-weis.jpg',
+        src: '/images/querencia-palms/querencia-palms-pool-spa-mountain-views-palm-springs-david-weis.jpg',
         alt: 'The Querencia Palms pool in afternoon sun with the mountains behind and a blue umbrella at the edge',
         width: 2400,
         height: 1600,
@@ -999,7 +999,7 @@ export const projects: readonly Project[] = [
       },
       {
         suggestion: 'A guest suite: teal sectional, yellow pillows, the Cole sign on the TV',
-        src: '/images/the-cole/the-cole-san-jacinto-mountain-views-palm-springs-david-weis.jpg',
+        src: '/images/the-cole/the-cole-hotel-guest-suite-teal-sectional-palm-springs-david-weis.jpg',
         alt: 'A guest suite at The Cole with a teal sectional and yellow pillows, a walnut barrel chair, a kitchenette and palms and mountains through the corner windows',
         width: 2400,
         height: 1680,
@@ -1007,7 +1007,7 @@ export const projects: readonly Project[] = [
       },
       {
         suggestion: 'The Cole Hotel sign against palms and sky',
-        src: '/images/the-cole/the-cole-palm-springs-pool-desert-oasis-david-weis.jpg',
+        src: '/images/the-cole/the-cole-hotel-roadside-sign-palm-springs-david-weis.jpg',
         alt: 'The Cole Hotel roadside sign in yellow, orange and turquoise, with tall palms behind it against a clear sky',
         width: 1511,
         height: 2400,
@@ -1031,7 +1031,7 @@ export const projects: readonly Project[] = [
       },
       {
         suggestion: 'A branded espresso cup on a balcony rail above the pool',
-        src: '/images/the-cole/the-cole-midcentury-hotel-hugh-kaptur-1959-david-weis.jpg',
+        src: '/images/the-cole/the-cole-hotel-espresso-cup-balcony-pool-palm-springs-david-weis.jpg',
         alt: 'A Cole Hotel branded espresso cup and saucer on a balcony table, with the pool, palms and mountains beyond',
         width: 1174,
         height: 1270,
@@ -1039,7 +1039,7 @@ export const projects: readonly Project[] = [
       },
       {
         suggestion: 'A pool corner at dusk with the Cole sign lit beyond the wall',
-        src: '/images/the-cole/the-cole-hotel-pool-san-jacinto-mountain-views-david-weis.jpg',
+        src: '/images/the-cole/the-cole-hotel-pool-deck-lounger-cabana-dusk-palm-springs-david-weis.jpg',
         alt: 'A corner of the Cole pool at dusk, a lounger and cabana in the foreground and the lit Cole sign rising beyond the block wall',
         width: 2400,
         height: 1680,
@@ -1603,7 +1603,7 @@ export const projects: readonly Project[] = [
               }],
               [{
                 suggestion: 'The reworked kitchen: range, stone surround, fridge, rolling island',
-                src: '/images/kensington-canyon/kensington-canyon-kitchen-wet-bar-entertaining-david-weis.jpg',
+                src: '/images/kensington-canyon/kensington-canyon-kitchen-rolling-island-stone-range-david-weis.jpg',
                 alt: 'The reworked Kensington Canyon kitchen with a freestanding island, a stone range surround and the fridge.',
                 width: 1024,
                 height: 683,
@@ -1630,7 +1630,7 @@ export const projects: readonly Project[] = [
             ],
             aside: {
               suggestion: 'The rolling tool-chest kitchen island, cropped to the island',
-              src: '/images/kensington-canyon/kensington-canyon-estate-canyon-views-san-diego-david-weis.jpg',
+              src: '/images/kensington-canyon/kensington-canyon-kitchen-river-rock-range-wall-san-diego-david-weis.jpg',
               alt: 'The kitchen at Kensington Canyon: a river-rock wall behind the range, grey cabinets and the rolling tool-chest island with its butcher-block top',
               width: 1024,
               height: 683,
@@ -1837,7 +1837,7 @@ export const projects: readonly Project[] = [
     photos: [
       {
         suggestion: 'Front exterior from the street',
-        src: '/images/kensington-canyon/kensington-canyon-spanish-architecture-san-diego-david-weis.jpg',
+        src: '/images/kensington-canyon/kensington-canyon-tudor-exterior-san-diego-david-weis.jpg',
         alt: 'Kensington Canyon from the street: a brick and half-timbered Tudor with a red door, behind a river-rock wall and dark picket fence',
         width: 1024,
         height: 683,
@@ -1910,7 +1910,7 @@ export const projects: readonly Project[] = [
       },
       {
         suggestion: 'Living room and dining',
-        src: '/images/belmont-beach-house/belmont-beach-house-steps-to-the-sand-san-diego-david-weis.jpg',
+        src: '/images/belmont-beach-house/belmont-beach-house-living-room-sectional-mission-beach-san-diego-david-weis.jpg',
         alt: 'The living room at Belmont Beach House: a grey sectional, a wood coffee table, the dining table and the stairs beyond',
         width: 2048,
         height: 1365,
@@ -1926,7 +1926,7 @@ export const projects: readonly Project[] = [
       },
       {
         suggestion: 'Bedroom',
-        src: '/images/belmont-beach-house/belmont-beach-house-near-belmont-park-boardwalk-david-weis.jpg',
+        src: '/images/belmont-beach-house/belmont-beach-house-bedroom-blue-linens-mission-beach-david-weis.jpg',
         alt: 'A bedroom at Belmont Beach House with a white bed, blue linens and a ceiling fan',
         width: 2048,
         height: 1365,
@@ -1934,7 +1934,7 @@ export const projects: readonly Project[] = [
       },
       {
         suggestion: 'Kitchen counter with bar seating',
-        src: '/images/belmont-beach-house/belmont-beach-house-oceanfront-deck-mission-beach-david-weis.jpg',
+        src: '/images/belmont-beach-house/belmont-beach-house-kitchen-granite-bar-mission-beach-david-weis.jpg',
         alt: 'The kitchen counter at Belmont Beach House with bar seating',
         width: 2048,
         height: 1365,
@@ -2025,7 +2025,7 @@ export const projects: readonly Project[] = [
             },
             {
               label: 'The kitchen',
-              before: { suggestion: 'The old kitchen', src: '/images/sierra-chalet/sierra-chalet-big-bear-renovated-kitchen-david-weis.jpg', alt: 'The old kitchen at Sierra Chalet: white appliances, pine cabinets and a stained-glass door', width: 1170, height: 756, hasSmall: true },
+              before: { suggestion: 'The old kitchen', src: '/images/sierra-chalet/sierra-chalet-big-bear-kitchen-before-renovation-david-weis.jpg', alt: 'The old kitchen at Sierra Chalet: white appliances, pine cabinets and a stained-glass door', width: 1170, height: 756, hasSmall: true },
               after: { suggestion: 'The new kitchen', src: '/images/sierra-chalet/sierra-chalet-big-bear-kitchen-after-david-weis.jpg', alt: 'The renovated kitchen at Sierra Chalet: green cabinets, patterned tile, orange stools at the counter under a wood ceiling', width: 2048, height: 1365, hasSmall: true },
             },
             {
@@ -2054,7 +2054,7 @@ export const projects: readonly Project[] = [
           {
             type: 'pair',
             photos: [
-              { suggestion: 'IMG_7676: the plywood ramp and the small wooden stops', src: '/images/sierra-chalet/sierra-chalet-big-bear-deck-framing-renovation-david-weis.jpg', width: 1536, height: 2049, hasSmall: true, alt: 'A sheet of plywood laid up the hillside at Sierra Chalet as a ramp, with small wooden stops screwed to it' },
+              { suggestion: 'IMG_7676: the plywood ramp and the small wooden stops', src: '/images/sierra-chalet/sierra-chalet-big-bear-hot-tub-plywood-ramp-hillside-david-weis.jpg', width: 1536, height: 2049, hasSmall: true, alt: 'A sheet of plywood laid up the hillside at Sierra Chalet as a ramp, with small wooden stops screwed to it' },
               { suggestion: 'IMG_7677: the wrapped hot tub partway up the ramp', src: '/images/sierra-chalet/sierra-chalet-big-bear-deck-construction-david-weis.jpg', width: 1536, height: 2049, hasSmall: true, alt: 'The wrapped hot tub partway up the plywood ramp on the Sierra Chalet hillside' },
             ],
             ratio: '3 / 4',
@@ -2066,7 +2066,7 @@ export const projects: readonly Project[] = [
           },
           {
             type: 'photo',
-            photo: { suggestion: 'IMG_7682: David beside the hot tub after it made it onto the lower porch', src: '/images/sierra-chalet/sierra-chalet-big-bear-cabin-deck-mountain-views-david-weis.jpg', width: 2049, height: 1536, hasSmall: true, alt: 'David Weis standing beside the hot tub after it reached the lower screened porch at Sierra Chalet' },
+            photo: { suggestion: 'IMG_7682: David beside the hot tub after it made it onto the lower porch', src: '/images/sierra-chalet/sierra-chalet-big-bear-hot-tub-screened-porch-david-weis.jpg', width: 2049, height: 1536, hasSmall: true, alt: 'David Weis standing beside the hot tub after it reached the lower screened porch at Sierra Chalet' },
             ratio: '4 / 3',
             caption: 'Made it.',
           },
@@ -2163,7 +2163,7 @@ export const projects: readonly Project[] = [
             photos: [
               {
                 suggestion: 'Great room with the wood ceiling and fireplace',
-                src: '/images/mercury-palms/mercury-palms-irving-green-mercury-records-estate-david-weis.jpg',
+                src: '/images/mercury-palms/mercury-palms-great-room-cathedral-ceiling-irving-green-estate-david-weis.jpg',
                 alt: 'The great room at Mercury Palms with its wood cathedral ceiling, stone fireplace and deep grey sectional',
                 width: 2048,
                 height: 1365,
@@ -2172,7 +2172,7 @@ export const projects: readonly Project[] = [
               { suggestion: 'The kitchen', src: '/images/mercury-palms/mercury-palms-kitchen-david-weis.jpg', alt: 'The Mercury Palms kitchen: honey-toned cabinetry, a granite island and stainless appliances', width: 2048, height: 1367, hasSmall: true },
               {
                 suggestion: 'Covered patio with the fountain at dusk',
-                src: '/images/mercury-palms/mercury-palms-tuscan-villa-estate-palm-springs-david-weis.jpg',
+                src: '/images/mercury-palms/mercury-palms-covered-patio-fountain-dusk-palm-springs-david-weis.jpg',
                 alt: 'A covered patio at Mercury Palms at dusk, with a fountain, bougainvillea and the mountains behind the wall',
                 width: 2048,
                 height: 1365,
@@ -2180,7 +2180,7 @@ export const projects: readonly Project[] = [
               },
               {
                 suggestion: 'Pool with the yellow umbrellas',
-                src: '/images/mercury-palms/mercury-palms-game-room-bar-entertaining-david-weis.jpg',
+                src: '/images/mercury-palms/mercury-palms-pool-yellow-umbrellas-villa-palm-springs-david-weis.jpg',
                 alt: 'The pool at Mercury Palms in daylight with yellow umbrellas and the white villa behind',
                 width: 2048,
                 height: 1364,
@@ -2279,7 +2279,7 @@ export const projects: readonly Project[] = [
               },
               {
                 suggestion: 'The tiled spa and waterfall',
-                src: '/images/mercury-palms/mercury-palms-great-room-cathedral-ceiling-david-weis.jpg',
+                src: '/images/mercury-palms/mercury-palms-tiled-spa-waterfall-pool-david-weis.jpg',
                 alt: 'The tiled spa at Mercury Palms with water spilling into the pool',
                 width: 2048,
                 height: 1366,
