@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Gallery from '../../components/Gallery.astro';
 import Icon from '../../components/Icon.astro';
-import Lightbox from '../../components/Lightbox.astro';
+import SaleGallery from '../../components/SaleGallery.astro';
+import SaleLightbox from '../../components/SaleLightbox.astro';
+import SaleUnitTiles from '../../components/SaleUnitTiles.astro';
 import Media from '../../components/Media.astro';
-import { allSales, getSale, querenciaCaseStudy, saleHref, salePhotosFor, salesPage } from '../../data/sales';
-import type { Sale } from '../../data/sales';
+import { allSales, getSale, querenciaCaseStudy, saleHref, saleGroupsFor, saleLocation, salePhotosFor, salePreview, salesPage } from '../../data/sales';
 import { salesUi } from '../../data/salesUi';
 import { siteUrl } from '../../data/site';
 import { photoExists } from '../../lib/images';
@@ -26,6 +26,19 @@ const next = allSales[(idx + 1) % allSales.length];
 
 const photos = salePhotosFor(sale.slug).filter((p) => photoExists(p.src));
 const [lead, ...rest] = photos;
+const groups = saleGroupsFor(sale.slug)
+  .map((g) => ({ ...g, photos: g.photos.filter((p) => photoExists(p.src)) }))
+  .filter((g) => g.photos.length > 0);
+// Querencia: the unit tiles replace the general gallery. Other stories: grouped when groups exist.
+const showUnits = !!q && q.units.length > 0;
+const galleryPhotos = showUnits || groups.length > 0 ? [] : rest;
+const toSet = (list: readonly { src?: string; alt?: string }[]) =>
+  list.map((p) => ({ src: p.src!, alt: p.alt ?? '' }));
+const sets: Record<string, { src: string; alt: string }[]> = {};
+if (galleryPhotos.length) sets.gallery = toSet(galleryPhotos);
+for (const g of groups) sets[`${showUnits ? 'unit' : 'group'}-${g.id}`] = toSet(g.photos);
+const hasLightbox = Object.keys(sets).length > 0;
+const closedLine = sale.closed ? `${salesUi.closedWord} ${sale.closed}` : '';
 const role = [sale.role, sale.roleNote].filter(Boolean).join(' · ');
 const result = [sale.result, sale.resultNote].filter(Boolean).join(' · ');
 
@@ -35,7 +48,7 @@ const trim = (text: string, max = 155) => {
   return cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:.\s]+$/, '') + '…';
 };
 const title = `${sale.title}, ${sale.city} | ${sale.role} | David Weis`;
-const description = trim(sale.preview ?? sale.paragraphs[0]);
+const description = trim(salePreview(sale));
 
 const links: { href: string; label: string }[] = [];
 if (sale.project) links.push({ href: `/experience/${sale.project.slug}`, label: sale.project.label });
@@ -67,20 +80,20 @@ const breadcrumbJsonLd = {
         </nav>
         <p class="eyebrow eyebrow--dot">{role}</p>
         <h1 id="page-title" class="title-xl">{sale.title}</h1>
-        <p class="sd-hero__city">{sale.city}{q && <> · {q.subtitle}</>}</p>
+        <p class="sd-hero__city">{saleLocation(sale)}{q && <> · {q.subtitle}</>}</p>
         {q ? (
           <ul class="sd-hero__stats" aria-label="Highlights">
             {q.highlights.map((h) => <li>{h}</li>)}
           </ul>
         ) : (
-          <p class="sd-hero__result">{result}</p>
+          <p class="sd-hero__result">{result}{closedLine && <span class="sd-hero__closed"> · {closedLine}</span>}</p>
         )}
         {q && (
           <div class="sd-phases">
             <h2 class="eyebrow eyebrow--muted">{salesUi.closedResidences}</h2>
             <ul>
-              {q.phases.map((ph) => (
-                <li>{ph.name}: {ph.units.length === 1 ? 'Unit' : 'Units'} {ph.units.join(', ')}</li>
+              {q.phases.map((ph, i) => (
+                <li>{ph.name}: {ph.units.length === 1 ? 'Unit' : 'Units'} {ph.units.join(', ')}{i === q.phases.length - 1 && q.phasesNote ? `, ${q.phasesNote}` : ''}</li>
               ))}
             </ul>
           </div>
@@ -102,10 +115,35 @@ const breadcrumbJsonLd = {
       </div>
     </section>
 
-    {rest.length > 0 && (
+    {showUnits && q && (
+      <section class="sd-units section section--flush-top" aria-labelledby="sd-units-title">
+        <div class="container">
+          <h2 id="sd-units-title" class="title-lg">{salesUi.soldResidences}</h2>
+          <SaleUnitTiles units={q.units} groups={groups} headingId="sd-units-title" />
+        </div>
+      </section>
+    )}
+
+    {galleryPhotos.length > 0 && (
       <section class="sd-gallery section section--flush-top" aria-label={salesUi.photos}>
         <div class="container">
-          <Gallery photos={rest} label={salesUi.photos} />
+          <SaleGallery photos={galleryPhotos} set="gallery" label={salesUi.photos} />
+        </div>
+      </section>
+    )}
+
+    {!showUnits && groups.length > 0 && (
+      <section class="sd-groups section section--flush-top" aria-label={salesUi.photos}>
+        <div class="container">
+          {groups.map((g) => (
+            <div class="sd-group">
+              <div class="sd-group__head">
+                <h2 class="sd-group__title">{g.label}</h2>
+                {g.note && <p class="sd-group__note">{g.note}</p>}
+              </div>
+              <SaleGallery photos={g.photos} set={`group-${g.id}`} label={g.label} />
+            </div>
+          ))}
         </div>
       </section>
     )}
@@ -140,7 +178,7 @@ const breadcrumbJsonLd = {
     </div>
   </footer>
 
-  {rest.length > 0 && <Lightbox />}
+  {hasLightbox && <SaleLightbox {sets} />}
 </BaseLayout>
 
 <style>
@@ -200,6 +238,42 @@ const breadcrumbJsonLd = {
   }
   .sd-phases li {
     color: var(--ink-2);
+  }
+  .sd-hero__closed {
+    color: var(--muted);
+    font-size: 0.55em;
+    letter-spacing: 0;
+  }
+  .sd-units .container,
+  .sd-groups .container {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .sd-groups .container {
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+  .sd-group {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .sd-group__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-strong);
+  }
+  .sd-group__title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+    font-weight: 500;
+    line-height: 1.1;
+  }
+  .sd-group__note {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--muted);
   }
   .sd-lead {
     margin-top: clamp(1rem, 3vw, 2rem);

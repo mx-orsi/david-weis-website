@@ -1,33 +1,45 @@
 ---
-/** AreaCard — a featured neighborhood on a market page. */
+/** AreaCard — a featured neighborhood on a market page. `closing` is the centered, full-width line beneath the grid. */
 import type { Area } from '../data/marketPages';
 
 interface Props {
   area: Area;
+  variant?: 'card' | 'closing';
 }
-const { area } = Astro.props;
+const { area, variant = 'card' } = Astro.props;
+const Tag = variant === 'closing' ? 'div' : 'li';
 ---
 
-<li class="ac">
-  <h3 class="ac__name">{area.name}</h3>
+<Tag class:list={['ac', variant === 'closing' && 'ac--closing']}>
+  <h3 class="ac__name title-md">{area.name}</h3>
   <p class="ac__text">{area.text}</p>
-</li>
+</Tag>
 
 <style>
   .ac {
     display: grid;
-    gap: 0.5rem;
+    gap: 0.6rem;
     align-content: start;
-    padding-top: 1.1rem;
+    padding-top: 1.25rem;
     border-top: 1px solid var(--line-strong);
   }
   .ac__name {
-    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.005em;
   }
   .ac__text {
     font-size: 0.9375rem;
     line-height: 1.65;
     color: var(--ink-2);
     max-width: 40ch;
+  }
+  .ac--closing {
+    margin-top: 2.5rem;
+    justify-items: center;
+    text-align: center;
+  }
+  .ac--closing .ac__text {
+    max-width: 56ch;
   }
 </style>

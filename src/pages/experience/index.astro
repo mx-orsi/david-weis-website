@@ -2,9 +2,11 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import SaleHeroGrid from '../../components/SaleHeroGrid.astro';
 import Icon from '../../components/Icon.astro';
 import { projects } from '../../data/projects';
 import { salesPage } from '../../data/sales';
+import { salesUi } from '../../data/salesUi';
 import { withBase } from '../../lib/paths';
 
 const title = 'Real Estate Projects & Experience | David Weis';
@@ -38,7 +40,8 @@ const description =
     <div class="container ex-sales__inner">
       <h2 id="ex-sales-title" class="title-lg">{salesPage.title}</h2>
       <p class="ex-sales__copy">{salesPage.intro[0]}</p>
-      <a class="link-arrow" href={withBase('/sales')}>{salesPage.title} <Icon name="arrow-right" /></a>
+      <SaleHeroGrid />
+      <a class="link-arrow" href={withBase('/sales')}>{salesUi.seeAllStories} <Icon name="arrow-right" /></a>
     </div>
   </section>
 </BaseLayout>

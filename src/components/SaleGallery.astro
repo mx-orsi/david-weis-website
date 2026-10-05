@@ -1,0 +1,121 @@
+---
+/**
+ * SaleGallery: every tile the same size (3:2, cropped to fit), set in columns
+ * that sit half a tile apart so the photos stagger instead of lining up.
+ * Three columns on desktop (middle column dropped half a tile), two on
+ * phones (second column dropped). One or two photos always use the two-column
+ * pattern. Each tile opens SaleLightbox on its `set` at its own position.
+ *
+ * Layout: a grid of half-tile rows; every tile spans two rows and is placed
+ * by --r3 / --r2 (row) and --c3 / --c2 (column), so the tile order in the
+ * DOM matches the reading order. Photos that are not on disk are skipped.
+ */
+import Media from './Media.astro';
+import type { Photo } from '../data/types';
+import { photoExists } from '../lib/images';
+
+interface Props {
+  photos: readonly Photo[];
+  /** Lightbox set id, shared with the SaleLightbox sets prop. */
+  set: string;
+  label: string;
+}
+const { photos, set, label } = Astro.props;
+const shown = photos.filter((p) => photoExists(p.src));
+const few = shown.length <= 2;
+const tile = (i: number) => {
+  const c3 = i % 3;
+  const c2 = i % 2;
+  return `--c3:${c3 + 1};--r3:${Math.floor(i / 3) * 2 + (c3 === 1 ? 2 : 1)};--c2:${c2 + 1};--r2:${Math.floor(i / 2) * 2 + (c2 === 1 ? 2 : 1)}`;
+};
+---
+
+{shown.length > 0 && (
+  <div class:list={['sg-wrap', shown.length === 1 && 'sg-wrap--one']}>
+  <ul class:list={['sg', few && 'sg--few', shown.length === 1 && 'sg--one']} aria-label={label}>
+    {shown.map((ph, i) => (
+      <li class="sg__tile" style={tile(i)}>
+        <button type="button" class="sg__btn" data-sl-set={set} data-sl-index={i} aria-label={`${label}: photo ${i + 1} of ${shown.length}${ph.alt ? `, ${ph.alt}` : ''}`}>
+          <Media photo={ph} ratio="3 / 2" sizes="(min-width: 900px) 30vw, 48vw" class="sg__media" />
+        </button>
+      </li>
+    ))}
+  </ul>
+  </div>
+)}
+
+<style>
+  .sg {
+    --gap: 0.75rem;
+    --cols: 2;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    gap: var(--gap);
+    /* row unit: half a tile (tile height is two thirds of the column width) */
+    --unit: calc(((100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols) * 2 / 3 - var(--gap)) / 2);
+    grid-auto-rows: var(--unit);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .sg-wrap {
+    container-type: inline-size;
+  }
+  .sg__tile {
+    grid-column: var(--c2);
+    grid-row: var(--r2) / span 2;
+    min-width: 0;
+    min-height: 0;
+  }
+  .sg__btn {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: var(--line);
+    cursor: zoom-in;
+    overflow: hidden;
+  }
+  .sg__btn:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+  .sg__btn :global(.sg__media) {
+    height: 100%;
+    transition: transform 0.4s ease;
+  }
+  .sg__btn:hover :global(.sg__media) {
+    transform: scale(1.03);
+  }
+  .sg--one {
+    --cols: 1;
+  }
+  .sg--one .sg__tile {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+  @media (min-width: 900px) {
+    .sg {
+      --gap: 1.25rem;
+    }
+    .sg:not(.sg--few) {
+      --cols: 3;
+    }
+    .sg:not(.sg--few) .sg__tile {
+      grid-column: var(--c3);
+      grid-row: var(--r3) / span 2;
+    }
+    .sg-wrap--one {
+      max-width: 50%;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sg__btn :global(.sg__media) {
+      transition: none;
+    }
+    .sg__btn:hover :global(.sg__media) {
+      transform: none;
+    }
+  }
+</style>

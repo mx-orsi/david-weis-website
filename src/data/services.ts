@@ -70,7 +70,7 @@ export const sell: ServicePageContent = {
   primary: { label: 'Discuss Your Property', href: '/contact?interest=Selling' },
   secondary: callOrText,
   supporting:
-    'Start with a complimentary, no-pressure consultation. You do not need to be ready to list to have a useful conversation.',
+    'Start with a complimentary, no-pressure consultation. You don’t have to be ready to list to have a useful conversation.',
   sections: [
     {
       heading: 'A practical plan before anything goes on the market',
@@ -222,10 +222,11 @@ export const buy: ServicePageContent = {
     },
     {
       heading: 'A search without pressure',
+      // Revised by David 2026-10-04; his contractions are kept as written.
       paragraphs: [
-        'Sometimes buyers fall in love with the first place they see. Sometimes they need time, reassurance, and a few comparisons before they feel confident.',
-        'I listen, refine the search, and give honest feedback. When a property appears to fit, I will explain why. When something deserves caution, I will say that too.',
-        'You should feel supported in making a decision, not rushed into making mine.',
+        'Sometimes buyers know immediately when a property feels right. Other times, it takes seeing a few homes, comparing the tradeoffs, and talking things through before the answer becomes clear.',
+        'I listen, refine the search, and give you my perspective along the way. If I see something I think is a great fit, I’ll tell you why. If I see something that concerns me, I’ll tell you that too.',
+        'I would rather help you walk away from the wrong property than talk you into one just to get a deal done.',
       ],
     },
     {
@@ -286,7 +287,7 @@ export const buy: ServicePageContent = {
     },
   ],
   closing: {
-    title: 'You do not need every answer before we talk.',
+    title: 'You don’t need every answer before we talk.',
     body: 'Tell me what you are considering, what you are excited about, and what is giving you pause. That is a good place to begin.',
     cta: { label: 'Plan Your Purchase', href: '/contact?interest=Buying' },
   },
@@ -301,12 +302,11 @@ export const buy: ServicePageContent = {
     },
     portrait: {
       suggestion: 'Current professional portrait of David',
-      src: '/images/querencia-landscaping/querencia-palms-david-weis-realtor-mural-palm-springs.jpg',
-      alt: 'David Weis standing beside the Querencia Palms mural in Palm Springs, surrounded by flowering desert planting',
-      width: 2048,
-      height: 1365,
+      src: '/images/about/david-weis-compass-broker-associate-querencia-palms-entry-portrait.jpg',
+      alt: 'David Weis in a black shirt walking through the entry at Querencia Palms in Palm Springs',
+      width: 960,
+      height: 1200,
       hasSmall: true,
-      position: '82% center',
     },
   },
 };

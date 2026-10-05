@@ -7,7 +7,8 @@
 import Icon from './Icon.astro';
 import Media from './Media.astro';
 import type { Sale } from '../data/sales';
-import { saleHref, salesPage, salePhotosFor } from '../data/sales';
+import { saleHref, salesPage, salePhotosFor, saleLocation, salePreview } from '../data/sales';
+import { salesUi } from '../data/salesUi';
 import { photoExists } from '../lib/images';
 import { withBase } from '../lib/paths';
 
@@ -37,9 +38,10 @@ const result = [s.result, s.resultNote].filter(Boolean).join(' · ');
     <Heading class="sc__title" id={titleId}>
       <a href={href}>{s.title}</a>
     </Heading>
-    <p class="sc__city">{s.city}</p>
+    <p class="sc__city">{saleLocation(s)}</p>
     <p class="sc__result">{result}</p>
-    {!compact && <p class="sc__copy">{s.preview ?? s.paragraphs[0]}</p>}
+    {s.closed && <p class="sc__closed">{salesUi.closedWord} {s.closed}</p>}
+    {!compact && <p class="sc__copy">{salePreview(s)}</p>}
     <a class="link-arrow" href={href}>{salesPage.cardCta}<span class="sr-only"> about {s.title}</span> <Icon name="arrow-right" /></a>
   </div>
 </article>
@@ -73,6 +75,10 @@ const result = [s.result, s.resultNote].filter(Boolean).join(' · ');
     color: var(--blue);
   }
   .sc__city {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  .sc__closed {
     font-size: 0.875rem;
     color: var(--muted);
   }

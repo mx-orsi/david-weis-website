@@ -10,6 +10,9 @@
 import type { ProjectChapter } from './projects';
 import type { Cta, Photo, Stat } from './types';
 
+/** Spread into a `sub` story block to open it as a full-width band (read by Chapter.astro; kept out of projects.ts's type). */
+const band = { band: true } as const;
+
 export const about = {
   seo: {
     title: 'About David Weis | California Broker Associate',
@@ -117,15 +120,14 @@ export const aboutChapterA: ProjectChapter = {
     {
       type: 'photo',
       photo: {
-        suggestion: 'David at the Querencia Palms mural, among the lantana',
-        src: '/images/querencia-landscaping/querencia-palms-david-weis-realtor-mural-palm-springs.jpg',
-        alt: 'David Weis standing in front of the Querencia Palms mural in Palm Springs, surrounded by orange and yellow lantana in bloom',
+        suggestion: 'David beside the Querencia Palms mural: QUERENCIA PALMS, LOVE WHERE YOU LIVE',
+        src: '/images/about/david-weis-querencia-palms-mural-love-where-you-live.jpg',
+        alt: 'David Weis in a black shirt, hands in his pockets, standing at the right of the Querencia Palms mural, whose lettering reads QUERENCIA PALMS and LOVE WHERE YOU LIVE',
         width: 2048,
         height: 1365,
         hasSmall: true,
-        position: 'center 38%',
       } as Photo,
-      ratio: '21 / 9',
+      ratio: '3 / 2',
     },
   ],
 };
@@ -166,7 +168,7 @@ export const aboutChapterB: ProjectChapter = {
         { suggestion: 'The Cole Hotel - Mark and I when sold', src: '/images/about/david-weis-mark-the-cole-when-sold.jpg', alt: 'David and Mark Weis at The Cole Hotel on the day it sold', width: 2053, height: 2303, hasSmall: true },
         { suggestion: 'Our wedding reception at The Cole', src: '/images/about/david-weis-mark-wedding-the-cole.jpg', alt: 'David and Mark Weis at their wedding reception, held at The Cole Hotel in Palm Springs', width: 2400, height: 1600, hasSmall: true },
       ],
-      captions: [{ title: 'Before' }, { title: 'The Cole' }, { title: 'The day it sold' }, { title: 'Our wedding reception at The Cole' }],
+      captions: [{ title: 'Before The Cole became The Cole' }, { title: 'The sign that became the brand' }, { title: 'The day we closed the chapter' }, { title: 'Our wedding reception at The Cole' }],
     },
     {
       type: 'cta',
@@ -191,7 +193,7 @@ export const aboutChapterB: ProjectChapter = {
         { suggestion: 'First Listing', src: '/images/about/david-weis-first-listing.jpg', alt: 'David Weis at the sign for his first real estate listing', width: 1170, height: 1555, hasSmall: true, position: 'center 40%' },
         { suggestion: 'Broker caravan', src: '/images/about/david-weis-broker-caravan.jpg', alt: 'David Weis presenting a listing at a broker caravan', width: 1206, height: 1193, hasSmall: true },
       ],
-      captions: [{ title: 'First listing' }],
+      captions: [{ title: 'First listing' }, { title: 'Creating maximum exposure for my listings' }],
     },
     {
       type: 'story',
@@ -226,7 +228,7 @@ export const aboutChapterB: ProjectChapter = {
         },
       ],
       captions: [
-        { title: 'With my mom', note: 'Legislative Day, Sacramento – 2023' },
+        { title: 'My first Legislative Day', note: 'Sacramento · 2023 · With my mom, a licensed real estate agent' },
         { title: 'Legislative Day, Sacramento – 2023', note: 'California State Assemblymember Chris Ward, representing part of San Diego County.' },
       ],
     },
@@ -242,6 +244,7 @@ export const aboutChapterB: ProjectChapter = {
     {
       type: 'story',
       sub: true,
+      ...band,
       heading: 'San Diego',
       paragraphs: [
         'San Diego became the place where I built much of my adult life. My career grew here. My friendships grew here.',
@@ -260,6 +263,7 @@ export const aboutChapterB: ProjectChapter = {
     {
       type: 'story',
       sub: true,
+      ...band,
       heading: 'Palm Springs',
       paragraphs: [
         'Palm Springs started with a relationship and became a completely different chapter.',
@@ -280,6 +284,7 @@ export const aboutChapterB: ProjectChapter = {
     {
       type: 'story',
       sub: true,
+      ...band,
       heading: 'Big Bear',
       paragraphs: [
         'Big Bear began as an escape. Fresh air, snow, mountain trails, lake days, and a place where life moved differently.',
@@ -296,9 +301,9 @@ export const aboutChapterB: ProjectChapter = {
         { suggestion: 'Snowboarding in Big Bear', src: '/images/about/david-weis-big-bear-snowboarding.jpg', alt: 'Three friends in helmets on the snow in Big Bear', width: 1800, height: 2400, hasSmall: true },
       ],
       captions: [
-        { title: 'Sybil’s first mountain hike' },
-        { title: 'Turkey Trot', note: 'The coldest, windiest Turkey Trot I have ever agreed to.' },
-        { title: 'Snowboarding', note: 'New friends, new neighbors, and plenty of days on the mountain together.' },
+        { title: 'Sybil’s first mountain hike', note: 'Apparently four legs did not make the climb any easier.' },
+        { title: 'The coldest turkey trot ever', note: 'Freezing, windy, uphill, and somehow we still came back smiling.' },
+        { title: 'Days on the mountain', note: 'New friends, new neighbors, and one more reason Big Bear started feeling like home.' },
       ],
     },
     {
@@ -641,7 +646,6 @@ export const aboutChapterB: ProjectChapter = {
     {
       type: 'pair',
       ratio: '1 / 1',
-      emphasis: 'first',
       photos: [
         { suggestion: 'The Range Rover loaded with flooring', src: '/images/about/david-weis-range-rover-flooring-work-truck.jpg', alt: 'The open tailgate of a white Range Rover with boxes of flooring stacked inside', width: 1802, height: 2400, hasSmall: true, position: 'center 55%' },
         { suggestion: 'The Evoque convertible packed with plants', src: '/images/about/david-weis-range-rover-work-truck.jpg', alt: 'Houseplants filling the seats of the convertible Range Rover Evoque', width: 2400, height: 1690, hasSmall: true },

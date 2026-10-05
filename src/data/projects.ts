@@ -49,6 +49,8 @@ export type ChapterBlock =
       level?: 2 | 3;
       /** A sub-section of the story block before it: h3, a top rule, tighter spacing. */
       sub?: boolean;
+      /** With `sub`: open on a full-width blue band (About's three markets). */
+      band?: boolean;
     }
   | {
       type: 'photo';
@@ -162,6 +164,8 @@ export interface Project {
   place: string;
   /** Project page eyebrow, after the place: "Palm Springs · Condominium Conversion" */
   kind: string;
+  /** Card eyebrow place when it should be more specific than `place` ("Ocean Beach"). */
+  cardPlace?: string;
   /** Experience landing card label */
   kindIndex: string;
   /** Home teaser card label (falls back to `kind`) */
@@ -197,7 +201,7 @@ export const projects: readonly Project[] = [
     kindIndex: '14-Residence Condominium Conversion',
     kindTeaser: 'Condominium Conversion',
     summary:
-      'A condominium conversion that tested almost every part of my real estate skill set, from pricing and staging to landscaping, marketing, brokerage and patience.',
+      'A 14-residence condominium conversion that brought together development, pricing, staging, landscaping, marketing, sales strategy, and the patience to navigate the unexpected.',
     teaser:
       'A 14-residence condominium conversion that became a lesson in patience, presentation, pricing and relentless marketing.',
     teaserCta: 'Explore the Project',
@@ -755,10 +759,10 @@ export const projects: readonly Project[] = [
     market: 'palm-springs',
     place: 'Palm Springs',
     kind: 'Hospitality',
-    kindIndex: 'Boutique Hotel',
+    kindIndex: 'Boutique Hotel · Bar · Restaurant',
     kindTeaser: 'Boutique Hospitality',
     summary:
-      'A real estate investment that became an operating hotel, and ultimately one of the most formative business experiences of my career.',
+      'A real estate investment that became a boutique hotel, bar and restaurant, and ultimately one of the most formative business experiences of my career.',
     teaser:
       'What began as a real estate investment became an operating business — and one of the most formative experiences of my career.',
     teaserCta: 'Explore the Story',
@@ -1068,10 +1072,12 @@ export const projects: readonly Project[] = [
     market: 'san-diego',
     place: 'San Diego',
     kind: 'Renovation + Ownership',
-    kindIndex: '1924 Restoration',
+    cardPlace: 'Ocean Beach',
+    // No historic designation: never call this house "historic" (David, 2026-10-04).
+    kindIndex: '1924 Character Restoration',
     kindTeaser: 'Renovation + Vacation Rental',
     summary:
-      'A historic Ocean Beach home originally restored for resale that ultimately found a second life as a high-performing vacation rental.',
+      'A 1924 Ocean Beach home restored with resale in mind, then repositioned as a high-performing vacation rental when the market changed.',
     teaser: 'A restored 1924 home that proved sometimes the best real estate decision is knowing when not to sell.',
     teaserCta: 'Explore the Project',
     intro:
@@ -1480,9 +1486,11 @@ export const projects: readonly Project[] = [
     market: 'san-diego',
     place: 'San Diego',
     kind: 'Restoration + Ownership',
-    kindIndex: 'Historic Residence',
+    cardPlace: 'Kensington',
+    // No historic designation: never call this house "historic" (David, 2026-10-04).
+    kindIndex: 'Character Home',
     summary:
-      'A deeply personal home and extensive renovation that taught me the value of preserving character while making an older property work beautifully for modern life.',
+      'A deeply personal home and extensive renovation centered on preserving its character while making an older property work beautifully for modern living and hospitality.',
     intro:
       'Of all the properties in our portfolio, Kensington Canyon may be the most personal to me. For a long time, it was simply home.',
     sections: [],
@@ -1848,7 +1856,7 @@ export const projects: readonly Project[] = [
     seo: {
       title: 'Kensington Canyon San Diego | David Weis',
       description:
-        'Explore Kensington Canyon, a historic San Diego residence restored with a focus on preserving character while adapting the home for modern living and vacation rental ownership.',
+        'Explore Kensington Canyon, a San Diego residence restored with a focus on preserving character while adapting the home for modern living and vacation rental ownership.',
     },
   },
   {
@@ -1857,9 +1865,10 @@ export const projects: readonly Project[] = [
     market: 'san-diego',
     place: 'San Diego',
     kind: 'Coastal Investment',
+    cardPlace: 'Mission Beach',
     kindIndex: 'Coastal Investment Property',
     summary:
-      'A rare Mission Beach property that became an ongoing lesson in balancing personal use, rental strategy and preservation of the asset.',
+      'A Mission Beach property that became a hands-on lesson in balancing personal use, vacation-rental strategy, guest experience, and the long-term care of a coastal home.',
     intro:
       'Some properties are difficult to replace. Belmont Beach House is one of them. Its proximity to the beach, views and setting in Mission Beach make it the kind of asset you think very carefully about before selling.',
     sections: [
@@ -1956,7 +1965,7 @@ export const projects: readonly Project[] = [
     kind: 'Cabin Restoration',
     kindIndex: 'Cabin Restoration',
     summary:
-      'Ten months of hands-on work transformed a deteriorated mountain cabin into one of the projects I am proudest to say I physically helped rebuild.',
+      'Ten months of hands-on work transformed a deteriorated mountain cabin into one of the most personal projects I’ve taken on, with lessons in renovation, mountain ownership, and knowing when to bring in the right expert.',
     intro: 'This is the project that taught me what renovation feels like when you are actually covered in it.',
     sections: [
       {
@@ -2138,7 +2147,7 @@ export const projects: readonly Project[] = [
     kind: 'Private Residence + Hospitality',
     kindIndex: 'Private Residence + Vacation Home',
     summary:
-      'A home with history, personality and enormous personal meaning that continues to evolve through restoration, ownership and hospitality.',
+      'Originally part of a vacation-rental portfolio, Mercury Palms became our home during COVID and the building of The Cole, then the setting for our wedding, annual gatherings, and its next chapter in hospitality.',
     intro: 'Some properties are investments. Some become part of your personal history. Mercury Palms is both.',
     sections: [],
     chapters: [

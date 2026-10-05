@@ -24,9 +24,15 @@ const { slug } = Astro.props;
 const m = getMarket(slug);
 const c = marketPages[slug];
 const marketSales = salesInMarket(slug);
-const [buyLink, sellLink] = navCta.children;
+const ctaLinks = navCta.children;
 const featured = c.featuredProjects.map(getProject);
 const [first, ...restSections] = c.sections;
+const namedAreas = c.areas?.items.filter((a) => !a.closing) ?? [];
+const closingAreas = c.areas?.items.filter((a) => a.closing) ?? [];
+// Neighborhoods with closed sales: unique areas in data order, each linking to the first story for it.
+const recentAreas = c.recentSales.enabled
+  ? [...new Map(marketSales.filter((x) => x.area).map((x) => [x.area as string, x])).values()]
+  : [];
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -83,8 +89,36 @@ const breadcrumbJsonLd = {
         <div class="container">
           <h2 id={`${slug}-areas`} class="title-lg">{c.areas.title}</h2>
           <ul class="mp-areas__grid">
-            {c.areas.items.map((a) => <AreaCard area={a} />)}
+            {namedAreas.map((a) => <AreaCard area={a} />)}
           </ul>
+          {closingAreas.map((a) => <AreaCard area={a} variant="closing" />)}
+          {recentAreas.length > 0 && (
+            <div class="mp-recent">
+              <h3 class="mp-recent__label" id={`${slug}-recent`}>{c.recentSales.label}</h3>
+              <ul class="mp-recent__list" aria-labelledby={`${slug}-recent`}>
+                {recentAreas.map((x) => (
+                  <li><a href={withBase(saleHref(x))}>{x.area}</a></li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </section>
+    )}
+
+    {!c.areas && recentAreas.length > 0 && (
+      <section aria-label={c.recentSales.label}>
+        <div class="container">
+        {recentAreas.length > 0 && (
+          <div class="mp-recent">
+            <h3 class="mp-recent__label" id={`${slug}-recent`}>{c.recentSales.label}</h3>
+            <ul class="mp-recent__list" aria-labelledby={`${slug}-recent`}>
+              {recentAreas.map((x) => (
+                <li><a href={withBase(saleHref(x))}>{x.area}</a></li>
+              ))}
+            </ul>
+          </div>
+        )}
         </div>
       </section>
     )}
@@ -129,9 +163,9 @@ const breadcrumbJsonLd = {
   <section class="mp-cta" aria-label={`${m.name} properties`}>
     <div class="container mp-cta__inner">
       <SearchCTA market={slug} />
-      <a class="btn btn--ghost" href={withBase('/contact')}>Work With David</a>
-      <a class="btn btn--ghost" href={withBase(buyLink.href)}>{buyLink.label}</a>
-      <a class="btn btn--ghost" href={withBase(sellLink.href)}>{sellLink.label}</a>
+      <div class="mp-cta__actions">
+        {ctaLinks.map((l) => <a class="btn btn--ghost" href={withBase(l.href)}>{l.label}</a>)}
+      </div>
     </div>
   </section>
 </article>
@@ -162,12 +196,47 @@ const breadcrumbJsonLd = {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 2rem;
+    gap: 2.5rem clamp(1.5rem, 3vw, 2.5rem);
     margin-top: 2.5rem;
   }
-  .mp-areas__grid > :global(li:nth-child(5)) {
-    grid-column: 1 / -1;
-    max-width: 44ch;
+  .mp-recent {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.25rem 1.25rem;
+    margin-top: clamp(1.5rem, 3vw, 2.25rem);
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+  .mp-recent__label {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .mp-recent__list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 1.5rem;
+  }
+  .mp-recent__list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+    text-decoration: underline;
+    text-decoration-color: var(--line-control);
+    text-underline-offset: 0.25em;
+  }
+  .mp-recent__list a:hover {
+    color: var(--blue);
+    text-decoration-color: var(--blue);
   }
   .mp-featured__head {
     display: flex;
@@ -225,6 +294,13 @@ const breadcrumbJsonLd = {
   .mp-cta__inner {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.25rem 2rem;
+  }
+  .mp-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.75rem;
   }
 
@@ -250,6 +326,14 @@ const breadcrumbJsonLd = {
       grid-template-columns: minmax(0, 1fr);
     }
     .mp-cta__inner {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .mp-cta__inner :global(.scta) {
+      display: flex;
+      align-items: stretch;
+    }
+    .mp-cta__actions {
       flex-direction: column;
     }
     .mp-cta__inner :global(.btn) {

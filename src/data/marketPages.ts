@@ -14,6 +14,8 @@ export interface MarketSection {
 export interface Area {
   name: string;
   text: string;
+  /** Rendered as a centered, full-width closing line beneath the named areas. */
+  closing?: boolean;
 }
 
 export interface MarketPageContent {
@@ -32,6 +34,8 @@ export interface MarketPageContent {
   /** UI labels for the sales block before the closing CTA. */
   salesTitle: string;
   salesAllLabel: string;
+  /** Quiet inline list of the neighborhoods with closed sales, linking to each story. */
+  recentSales: { enabled: boolean; label: string };
   seo: { title: string; description: string };
 }
 
@@ -71,13 +75,14 @@ export const marketPages: Record<MarketSlug, MarketPageContent> = {
         { name: 'Mission Beach', text: 'A highly specialized coastal market where lifestyle, vacation rental potential, parking, location and long-term ownership strategy all matter.' },
         { name: 'Ocean Beach', text: 'An eclectic coastal community where redevelopment pressure and preservation often exist side by side.' },
         { name: 'La Jolla', text: "One of San Diego's most established coastal markets, with extraordinary variety in architecture, location and price." },
-        { name: 'Greater San Diego', text: 'My business is not limited to those neighborhoods. I represent clients throughout the region based on their goals and the property itself.' },
+        { name: 'Greater San Diego', closing: true, text: 'My business is not limited to those neighborhoods. I represent clients throughout the region based on their goals and the property itself.' },
       ],
     },
     featuredProjects: ['vista-voltaire', 'kensington-canyon', 'belmont-beach-house'],
-    featuredTitle: 'Featured experience',
+    featuredTitle: 'Beyond representation',
     salesTitle: 'Sales in San Diego',
     salesAllLabel: 'All sales experience',
+    recentSales: { enabled: true, label: 'Recent sales in' },
     seo: {
       title: 'San Diego Real Estate | David Weis',
       description:
@@ -120,9 +125,10 @@ export const marketPages: Record<MarketSlug, MarketPageContent> = {
       hasSmall: true,
     },
     featuredProjects: ['querencia-palms', 'the-cole', 'mercury-palms'],
-    featuredTitle: 'Featured experience',
+    featuredTitle: 'Beyond representation',
     salesTitle: 'Sales in Palm Springs',
     salesAllLabel: 'All sales experience',
+    recentSales: { enabled: false, label: 'Recent sales in' },
     seo: {
       title: 'Palm Springs Real Estate | David Weis',
       description:
@@ -165,9 +171,10 @@ export const marketPages: Record<MarketSlug, MarketPageContent> = {
       position: 'center 40%',
     },
     featuredProjects: ['sierra-chalet'],
-    featuredTitle: 'Featured experience',
+    featuredTitle: 'Mountain ownership, firsthand.',
     salesTitle: 'Sales in Big Bear',
     salesAllLabel: 'All sales experience',
+    recentSales: { enabled: false, label: 'Recent sales in' },
     seo: {
       title: 'Big Bear Real Estate | David Weis',
       description:

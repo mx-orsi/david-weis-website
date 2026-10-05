@@ -1,0 +1,160 @@
+---
+/**
+ * SaleLightbox: one dialog per sale page. Opens any element marked
+ * `data-sl-set="<set id>"` (and `data-sl-index` for the photo to start on) and
+ * cycles within that set only, so a unit tile shows that unit's photos and a
+ * residence gallery shows that residence's photos. Sets are passed as props.
+ * Esc and the backdrop close it; Left and Right arrows (or the buttons) move;
+ * focus returns to the opener.
+ */
+import Icon from './Icon.astro';
+import { withBase } from '../lib/paths';
+import { salesUi } from '../data/salesUi';
+
+export interface SaleLightboxPhoto {
+  src: string;
+  alt: string;
+}
+interface Props {
+  sets: Record<string, readonly SaleLightboxPhoto[]>;
+}
+const { sets } = Astro.props;
+const resolved = Object.fromEntries(
+  Object.entries(sets).map(([id, list]) => [id, list.map((p) => ({ src: withBase(p.src), alt: p.alt }))]),
+);
+---
+
+<dialog class="sl" data-sl-dialog aria-label={salesUi.lightboxLabel}>
+  <button type="button" class="sl__btn sl__close" data-sl-close aria-label={salesUi.close}>
+    <Icon name="close" />
+  </button>
+  <img class="sl__img" data-sl-img alt="" />
+  <div class="sl__bar">
+    <button type="button" class="sl__btn" data-sl-prev aria-label={salesUi.previousPhoto}>
+      <Icon name="arrow-left" size={18} />
+    </button>
+    <p class="sl__count" data-sl-count aria-live="polite"></p>
+    <button type="button" class="sl__btn" data-sl-next aria-label={salesUi.nextPhoto}>
+      <Icon name="arrow-right" size={18} />
+    </button>
+  </div>
+  <script is:inline type="application/json" data-sl-data set:html={JSON.stringify(resolved)} />
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-sl-dialog]');
+  if (dialog) {
+    const img = dialog.querySelector<HTMLImageElement>('[data-sl-img]')!;
+    const count = dialog.querySelector<HTMLElement>('[data-sl-count]')!;
+    const data: Record<string, { src: string; alt: string }[]> = JSON.parse(
+      dialog.querySelector('[data-sl-data]')!.textContent || '{}',
+    );
+    let list: { src: string; alt: string }[] = [];
+    let i = 0;
+    let opener: HTMLElement | null = null;
+
+    const show = (n: number) => {
+      i = (n + list.length) % list.length;
+      img.src = list[i].src;
+      img.alt = list[i].alt;
+      count.textContent = `${i + 1} / ${list.length}`;
+    };
+    const single = () => list.length < 2;
+    const sync = () => {
+      dialog.querySelectorAll<HTMLElement>('[data-sl-prev],[data-sl-next]').forEach((b) => (b.hidden = single()));
+    };
+
+    document.addEventListener('click', (e) => {
+      const el = (e.target as HTMLElement).closest<HTMLElement>('[data-sl-set]');
+      if (!el) return;
+      const set = data[el.dataset.slSet!];
+      if (!set?.length) return;
+      e.preventDefault();
+      opener = el;
+      list = set;
+      sync();
+      show(Number(el.dataset.slIndex ?? 0));
+      dialog.showModal();
+    });
+    dialog.querySelector('[data-sl-prev]')!.addEventListener('click', () => show(i - 1));
+    dialog.querySelector('[data-sl-next]')!.addEventListener('click', () => show(i + 1));
+    dialog.querySelector('[data-sl-close]')!.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('keydown', (e) => {
+      if (single()) return;
+      if (e.key === 'ArrowLeft') show(i - 1);
+      if (e.key === 'ArrowRight') show(i + 1);
+    });
+    dialog.addEventListener('close', () => {
+      img.src = '';
+      opener?.focus();
+      opener = null;
+    });
+  }
+</script>
+
+<style>
+  .sl {
+    position: relative;
+    max-width: min(92vw, 1400px);
+    max-height: 94vh;
+    margin: auto;
+    padding: 3rem 1rem 1rem;
+    border: 0;
+    background: transparent;
+    color: #ffffff;
+  }
+  .sl[open] {
+    display: grid;
+    gap: 0.75rem;
+    justify-items: center;
+  }
+  .sl::backdrop {
+    background: rgba(10, 11, 13, 0.92);
+  }
+  .sl__img {
+    display: block;
+    max-width: 100%;
+    max-height: 74vh;
+    width: auto;
+    height: auto;
+  }
+  .sl__bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .sl__count {
+    margin: 0;
+    min-width: 5ch;
+    text-align: center;
+    font-size: 0.8125rem;
+    color: #ffffff;
+  }
+  .sl__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #ffffff;
+    cursor: pointer;
+  }
+  .sl__btn[hidden] {
+    display: none;
+  }
+  .sl__close {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+  }
+  .sl__btn:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+  }
+</style>

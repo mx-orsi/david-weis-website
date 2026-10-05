@@ -33,7 +33,17 @@ const { chapter, slug } = Astro.props;
     const hid = `${slug}-${chapter.id}-${i}`;
     if (b.type === 'story') {
       const asideRatio = b.asideRatio ?? '4 / 5';
-      const level = b.level ?? (b.sub ? 3 : 2);
+      const band = (b as { band?: boolean }).band === true;
+      const level = b.level ?? (b.sub && !band ? 3 : 2);
+      if (band) {
+        return (
+          <div class="ch__band">
+            <div class="container ch__band-inner">
+              <Story heading={b.heading} paragraphs={b.paragraphs} eyebrow={b.eyebrow} layout="split" level={level} id={hid} class="ch__band-story" />
+            </div>
+          </div>
+        );
+      }
       return b.aside ? (
         <div class="container ch__block ch__aside">
           <Story heading={b.heading} paragraphs={b.paragraphs} eyebrow={b.eyebrow} level={level} id={hid} />
@@ -329,6 +339,29 @@ const { chapter, slug } = Astro.props;
     margin-top: calc(-1 * clamp(1.75rem, 4vw, 3.75rem));
     padding-top: clamp(1.5rem, 3vw, 2.25rem);
     border-top: 1px solid var(--line-strong);
+  }
+
+  /* Market band: a full-width deep-blue chapter opener with the market name in the large serif title. */
+  .ch__band {
+    width: 100%;
+    margin-top: clamp(1rem, 3vw, 2.5rem);
+    padding-block: clamp(3rem, 7vw, 6rem);
+    background: var(--surface-blue);
+    color: var(--on-ink);
+  }
+  .ch__band-inner {
+    min-width: 0;
+  }
+  .ch__band :global(.story__title) {
+    max-width: none;
+    color: var(--on-ink);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.015em;
+    overflow-wrap: anywhere;
+  }
+  .ch__band :global(.prose p) {
+    color: #e3e7ef;
   }
 
   .ch__pair {

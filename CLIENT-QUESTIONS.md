@@ -83,7 +83,36 @@ built on 2026-10-02.
   in a new tab" note; each page links to Buy, Sell and that market's sales.
 - **Properties approach (old question 4)** is answered by the brief.
 
+**David, 2026-10-04 reply (applied 2026-10-05):** Utah St is 4493; closing month and year added to
+every sale and each Querencia unit; neighborhoods added (his list); bill title stays off the Chris Ward
+story; "represented my husband" removed from the full Voltaire story (it now opens "I represented an
+experienced investor…"); prices stay off the Experience project pages; Hotel Circle photos staged;
+Chicago St leads with his "Main Pic"; 3700 Third Ave photos split by residence; story galleries are
+uniform and staggered; Querencia has "and counting" plus a tile per sold unit that opens every photo
+of that unit; the My Work page has a sales hero grid; Buy/Sell wording updates; market page titles,
+card text, Featured Areas restyle, "Recent sales in" row and button layout; About top portrait, wide
+mural photo, captions, blue market dividers and even Range Rover pair. Voltaire and Kensington are
+never called "historic" (no designation). A Word document for Compass compliance was generated.
+
 ## Still open
+
+**From his 2026-10-04 reply (ask David):**
+
+- **Photo labels.** The file he labeled "About Page" is a portrait against geometric wallpaper; it is
+  now the photo at the top of About (his sentence about the top photo was unfinished). The wide
+  "QUERENCIA PALMS / LOVE WHERE YOU LIVE" photo in "Always building something" is the unlabeled
+  `david-weis-realtor-compass-palm-springs-05.jpg`. Confirm both.
+- **Querencia unit specs** (beds, baths, sq ft, sold price) came from his GPSR MLS inventory because
+  his mailing screenshot did not come through; the prices total his $3,958,000. Confirm against the mailing.
+- **Organizations blocks and pages** (Gay For Good, Garden Club, Vista Las Palmas + ONE-PS) are not
+  built; waiting on his stories and photo picks.
+- **Current listings.** His MLS inventory shows three active Palm Springs listings (588 E San Lorenzo
+  #204 $569,000; 2487 S Gene Autry Trl #A $545,000; 2324 Camino Vida $1,395,000). Not shown until he
+  confirms and says whether to enter them by hand.
+- **Widget size.** No fixed size fits a phone; ask GPSR for a responsive or roughly 360px-wide version
+  that opens on Inventory with Active / Under Contract only.
+- **"Recent sales in" on San Diego** includes Clairemont (Belden St), which was not in his example list.
+- **Voltaire story opening** was reworded, not deleted, so the "him" in later paragraphs still reads.
 
 **From the 2026-09-27 / 2026-09-28 emails (ask David):**
 

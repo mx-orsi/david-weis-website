@@ -1,0 +1,104 @@
+---
+/**
+ * SaleHeroGrid: every sales story as an image tile on /experience. Caption is
+ * the neighborhood and city, then who David represented in muted gray. The
+ * whole tile links to the story. A story without a photo gets a text-only tile.
+ */
+import Media from './Media.astro';
+import { allSales, saleHref, saleLead, saleLocation, saleRepresented } from '../data/sales';
+import { photoExists } from '../lib/images';
+import { withBase } from '../lib/paths';
+
+const order = [...allSales.filter((s) => s.side === 'seller'), ...allSales.filter((s) => s.side === 'buyer')];
+const tiles = order.map((s) => {
+  const p = saleLead(s.slug);
+  return { s, photo: p && photoExists(p.src) ? p : undefined };
+});
+---
+
+<ul class="shg">
+  {tiles.map(({ s, photo }) => (
+    <li>
+      <a class:list={['shg__tile', !photo && 'shg__tile--text']} href={withBase(saleHref(s))} aria-label={`${s.title}, ${saleLocation(s)}. ${saleRepresented(s)}`}>
+        {photo && (
+          <span class="shg__media">
+            <Media photo={{ ...photo, alt: '' }} ratio="4 / 3" sizes="(min-width: 1024px) 25vw, 50vw" class="shg__img" />
+          </span>
+        )}
+        <span class="shg__loc">{saleLocation(s)}</span>
+        <span class="shg__rep">{saleRepresented(s)}</span>
+        {!photo && <span class="shg__addr">{s.title}</span>}
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .shg {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2rem 1.25rem;
+  }
+  .shg li {
+    min-width: 0;
+  }
+  .shg__tile {
+    display: grid;
+    gap: 0.2rem;
+    align-content: start;
+    min-height: 44px;
+    text-decoration: none;
+  }
+  .shg__tile--text {
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-strong);
+  }
+  .shg__media {
+    display: block;
+    overflow: hidden;
+    margin-bottom: 0.6rem;
+  }
+  .shg__media :global(.shg__img) {
+    transition: transform 0.4s ease;
+  }
+  .shg__tile:hover .shg__media :global(.shg__img),
+  .shg__tile:focus-visible .shg__media :global(.shg__img) {
+    transform: scale(1.04);
+  }
+  .shg__loc {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .shg__tile:hover .shg__loc,
+  .shg__tile:focus-visible .shg__loc {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .shg__rep,
+  .shg__addr {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  @media (max-width: 899px) {
+    .shg {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.75rem 0.9rem;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .shg__media :global(.shg__img) {
+      transition: none;
+    }
+    .shg__tile:hover .shg__media :global(.shg__img),
+    .shg__tile:focus-visible .shg__media :global(.shg__img) {
+      transform: none;
+    }
+  }
+</style>

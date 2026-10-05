@@ -36,7 +36,7 @@ const titleId = `project-card-${p.slug}-${variant}`;
   <div class="pc__body">
     <p class="pc__eyebrow eyebrow eyebrow--muted">
       {number && <span class="pc__num">{number}</span>}
-      {p.place} · {label}
+      {teaser ? p.place : (p.cardPlace ?? p.place)} · {label}
     </p>
     <Heading class="pc__title" id={titleId}>
       <a href={href}>{p.name}</a>

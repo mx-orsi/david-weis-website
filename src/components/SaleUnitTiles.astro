@@ -1,0 +1,164 @@
+---
+/**
+ * SaleUnitTiles: one tile per sold Querencia Palms residence, in closing
+ * order. Each tile shows the unit's lead photo and its figures, and is a real
+ * button that opens SaleLightbox on that unit's photos only (set `unit-<n>`).
+ * A unit without photos gets a text-only tile that is not interactive.
+ */
+import Media from './Media.astro';
+import type { QuerenciaUnit } from '../data/sales';
+import type { PhotoGroup } from '../data/salePhotos';
+import { salesUi } from '../data/salesUi';
+import { photoExists } from '../lib/images';
+
+interface Props {
+  units: readonly QuerenciaUnit[];
+  groups: readonly PhotoGroup[];
+  headingId: string;
+}
+const { units, groups, headingId } = Astro.props;
+const tiles = units.map((u) => {
+  const photos = (groups.find((g) => g.id === u.unit)?.photos ?? []).filter((p) => photoExists(p.src));
+  const n = photos.length;
+  return {
+    u,
+    lead: photos[0],
+    n,
+    name: `${salesUi.unitWord} ${u.unit}`,
+    facts: `${u.beds} ${salesUi.bedWord} · ${u.baths} ${salesUi.bathWord} · ${u.sqft} ${salesUi.sqftWord}`,
+    count: `${n} ${n === 1 ? salesUi.photoWord : salesUi.photosWord}`,
+  };
+});
+---
+
+<ul class="ut" aria-labelledby={headingId}>
+  {tiles.map(({ u, lead, n, name, facts, count }) => {
+    const body = (
+      <>
+        {lead && (
+          <span class="ut__media">
+            <Media photo={lead} ratio="4 / 3" sizes="(min-width: 1024px) 30vw, (min-width: 600px) 45vw, 92vw" class="ut__img" />
+            <span class="ut__count">{count}</span>
+          </span>
+        )}
+        <span class="ut__body">
+          <span class="ut__name">{name}</span>
+          <span class="ut__facts">{facts}</span>
+          <span class="ut__price">{salesUi.soldWord} {u.price}</span>
+          <span class="ut__closed">{salesUi.closedWord} {u.closed}</span>
+        </span>
+      </>
+    );
+    return (
+      <li class="ut__item">
+        {n > 0 ? (
+          <button type="button" class="ut__tile" data-sl-set={`unit-${u.unit}`} data-sl-index="0" aria-label={`${name}: ${salesUi.viewAll} ${n} ${n === 1 ? salesUi.photoWord : salesUi.photosWord}. ${facts}. ${salesUi.soldWord} ${u.price}. ${salesUi.closedWord} ${u.closed}.`}>
+            {body}
+          </button>
+        ) : (
+          <div class="ut__tile ut__tile--text">{body}</div>
+        )}
+      </li>
+    );
+  })}
+</ul>
+
+<style>
+  .ut {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.25rem) 1.5rem;
+  }
+  .ut__item {
+    min-width: 0;
+  }
+  .ut__tile {
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .ut__tile--text {
+    cursor: default;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-strong);
+  }
+  .ut__tile:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 4px;
+  }
+  .ut__media {
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+  .ut__media :global(.ut__img) {
+    transition: transform 0.4s ease;
+  }
+  button.ut__tile:hover .ut__media :global(.ut__img) {
+    transform: scale(1.03);
+  }
+  .ut__count {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0.35rem 0.7rem;
+    background: #ffffff;
+    color: var(--ink);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .ut__body {
+    display: grid;
+    gap: 0.3rem;
+  }
+  .ut__name {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+  button.ut__tile:hover .ut__name {
+    color: var(--blue);
+  }
+  .ut__facts,
+  .ut__closed {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  .ut__price {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  @media (max-width: 1023px) {
+    .ut {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 599px) {
+    .ut {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ut__media :global(.ut__img) {
+      transition: none;
+    }
+    button.ut__tile:hover .ut__media :global(.ut__img) {
+      transform: none;
+    }
+  }
+</style>

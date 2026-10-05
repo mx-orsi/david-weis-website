@@ -13,7 +13,8 @@
  */
 import type { MarketSlug } from './site';
 import type { Photo } from './types';
-import { salePhotos } from './salePhotos';
+import { salePhotos, salePhotoGroups } from './salePhotos';
+import type { PhotoGroup } from './salePhotos';
 
 export type SaleSide = 'seller' | 'buyer';
 
@@ -35,6 +36,10 @@ export interface Sale {
   result: string;
   /** Second half of David's result line, e.g. "$10,000 Above Asking". */
   resultNote?: string;
+  /** Closing month and year, from David's 2026-10-04 email. */
+  closed?: string;
+  /** Neighborhood, from David's 2026-10-04 list. Shown as "Hillcrest, San Diego" with the market name. */
+  area?: string;
   /** Full story. The first paragraph doubles as the card preview unless `preview` is set. */
   paragraphs: readonly string[];
   /** Card and search-result preview when the story's opening line should not lead. */
@@ -43,6 +48,22 @@ export interface Sale {
   project?: { slug: string; label: string };
   /** Another story in the same client journey. */
   related?: { slug: string; label: string };
+}
+
+/**
+ * One closed Querencia Palms residence. Closing months are from David's
+ * 2026-10-04 email. Beds, baths, square footage and price are from his own
+ * MLS (GPSR) inventory, read 2026-10-05; the seven prices total his
+ * $3,958,000. He has been asked to confirm them against his mailing.
+ */
+export interface QuerenciaUnit {
+  unit: string;
+  phase: string;
+  beds: number;
+  baths: number;
+  sqft: string;
+  price: string;
+  closed: string;
 }
 
 export const salesPage = {
@@ -70,8 +91,12 @@ export const querenciaCaseStudy: Sale & {
   subtitle: string;
   highlights: readonly string[];
   phases: readonly { name: string; units: readonly string[] }[];
+  /** Appended after the last phase so readers know more residences are coming. */
+  phasesNote: string;
+  units: readonly QuerenciaUnit[];
 } = {
   slug: 'querencia-palms',
+  area: 'Tahquitz River Estates',
   title: 'Querencia Palms',
   city: 'Palm Springs',
   market: 'palm-springs',
@@ -88,6 +113,16 @@ export const querenciaCaseStudy: Sale & {
     { name: 'Phase I', units: ['102', '206'] },
     { name: 'Phase II', units: ['104', '105', '201', '202'] },
     { name: 'Phase III', units: ['106'] },
+  ],
+  phasesNote: 'and counting',
+  units: [
+    { unit: '102', phase: 'Phase I', beds: 2, baths: 2, sqft: '1,066', price: '$549,000', closed: 'May 2026' },
+    { unit: '206', phase: 'Phase I', beds: 2, baths: 2, sqft: '1,275', price: '$599,000', closed: 'May 2026' },
+    { unit: '202', phase: 'Phase II', beds: 2, baths: 2, sqft: '1,100', price: '$524,000', closed: 'June 2026' },
+    { unit: '201', phase: 'Phase II', beds: 2, baths: 2, sqft: '1,200', price: '$539,000', closed: 'June 2026' },
+    { unit: '104', phase: 'Phase II', beds: 2, baths: 2, sqft: '1,200', price: '$599,000', closed: 'August 2026' },
+    { unit: '105', phase: 'Phase II', beds: 2, baths: 2, sqft: '1,210', price: '$589,000', closed: 'August 2026' },
+    { unit: '106', phase: 'Phase III', beds: 2, baths: 2, sqft: '1,150', price: '$559,000', closed: 'September 2026' },
   ],
   paragraphs: [
     "My involvement in Querencia Palms began with the property's acquisition and continued through its transformation from a 12-unit property into a 14-residence condominium community. Working closely with the seller and condominium conversion consultants throughout the process, I provided detailed knowledge of the property, including the koi pond, private patios, and updated unit configuration, helping the team account for its features and changes.",
@@ -110,6 +145,8 @@ export const sales: readonly Sale[] = [
   // ── Listing side ────────────────────────────────────────────────────────
   {
     slug: '3712-third-ave-unit-3',
+    closed: 'April 2023',
+    area: 'Hillcrest',
     title: '3712 3rd Ave, Unit 3',
     city: 'San Diego',
     market: 'san-diego',
@@ -126,6 +163,8 @@ export const sales: readonly Sale[] = [
   },
   {
     slug: '2556-chicago-st-unit-8',
+    closed: 'April 2024',
+    area: 'Bay Park',
     title: '2556 Chicago St, Unit 8',
     city: 'San Diego',
     market: 'san-diego',
@@ -142,6 +181,8 @@ export const sales: readonly Sale[] = [
   },
   {
     slug: '10782-dabney-dr-unit-9',
+    closed: 'September 2024',
+    area: 'Mira Mesa',
     title: '10782 Dabney Dr, Unit 9',
     city: 'San Diego',
     market: 'san-diego',
@@ -157,6 +198,8 @@ export const sales: readonly Sale[] = [
   },
   {
     slug: '117-w-mojave-blvd',
+    closed: 'October 2024',
+    area: 'Big Bear City',
     title: '117 W Mojave Blvd',
     city: 'Big Bear City',
     market: 'big-bear',
@@ -173,6 +216,8 @@ export const sales: readonly Sale[] = [
   },
   {
     slug: '4493-utah-st',
+    closed: 'December 2024',
+    area: 'North Park',
     title: '4493 Utah St',
     city: 'San Diego',
     market: 'san-diego',
@@ -189,6 +234,8 @@ export const sales: readonly Sale[] = [
   },
   {
     slug: '3700-third-ave',
+    closed: 'August 2025',
+    area: 'Hillcrest',
     title: '3700 Third Ave',
     city: 'San Diego',
     market: 'san-diego',
@@ -208,6 +255,8 @@ export const sales: readonly Sale[] = [
   },
   {
     slug: '5300-e-waverly-dr-unit-c13',
+    closed: 'January 2026',
+    area: 'Tahquitz Creek Golf',
     title: '5300 E Waverly Dr, Unit C13',
     city: 'Palm Springs',
     market: 'palm-springs',
@@ -225,6 +274,8 @@ export const sales: readonly Sale[] = [
   // ── Buyer side ──────────────────────────────────────────────────────────
   {
     slug: '425-w-beech-st-415',
+    closed: 'February 2024',
+    area: 'Little Italy',
     title: '425 W Beech St #415',
     city: 'San Diego',
     market: 'san-diego',
@@ -241,6 +292,8 @@ export const sales: readonly Sale[] = [
   },
   {
     slug: '1111-e-palm-canyon-dr-344',
+    closed: 'May 2024',
+    area: 'Twin Palms',
     title: '1111 E Palm Canyon Dr #344',
     city: 'Palm Springs',
     market: 'palm-springs',
@@ -261,6 +314,8 @@ export const sales: readonly Sale[] = [
   },
   {
     slug: '7068-belden-st',
+    closed: 'June 2024',
+    area: 'Clairemont',
     title: '7068 Belden St',
     city: 'San Diego',
     market: 'san-diego',
@@ -278,6 +333,8 @@ export const sales: readonly Sale[] = [
   },
   {
     slug: '4420-voltaire-st',
+    closed: 'March 2025',
+    area: 'Point Loma Heights',
     title: '4420 Voltaire St',
     city: 'San Diego',
     market: 'san-diego',
@@ -290,7 +347,7 @@ export const sales: readonly Sale[] = [
     preview:
       'An investment property needs to make sense beyond the asking price. I helped evaluate renovation potential, projected resale value, and potential alternative uses.',
     paragraphs: [
-      'I represented my husband, an experienced investor who had bought and sold more than 30 homes and apartment buildings, in acquiring this property for renovation.',
+      'I represented an experienced investor, who had bought and sold more than 30 homes and apartment buildings, in acquiring this property for renovation.',
       "My involvement included evaluating the investment itself. Alongside researching the property's history, I helped prepare projections of its potential resale value after renovation. Those estimates gave him a basis to compare the anticipated sale price with acquisition and renovation costs and assess whether a flip made financial sense. I also explored whether a multifamily conversion or adding an accessory dwelling unit could offer additional value.",
       'During the inspection process, I raised concerns about additional repairs and the costs they would introduce. Those negotiations resulted in a $40,000 price reduction from $1.5 million, leaving more funds available for the renovation.',
       "The purchase took nearly five months, with the trustee's sale process and an escrow that fell through contributing to the extended timeline. Throughout those delays, I kept him informed and remained focused on securing terms that supported the project.",
@@ -300,6 +357,8 @@ export const sales: readonly Sale[] = [
   },
   {
     slug: '1621-hotel-circle-s-e228',
+    closed: 'November 2025',
+    area: 'Mission Valley',
     title: '1621 Hotel Circle S #E228',
     city: 'San Diego',
     market: 'san-diego',
@@ -317,6 +376,8 @@ export const sales: readonly Sale[] = [
   },
   {
     slug: '4494-mentone-st-6',
+    closed: 'April 2026',
+    area: 'Point Loma Heights',
     title: '4494 Mentone St #6',
     city: 'San Diego',
     market: 'san-diego',
@@ -356,5 +417,13 @@ export function getSale(slug: string): Sale {
 export const salesInMarket = (market: MarketSlug) => allSales.filter((s) => s.market === market);
 
 /** Photos for a story; empty until they are staged. Components skip the media when there are none. */
+/** "Hillcrest, San Diego": the caption David asked for on the sale hero tiles. */
+const marketNames: Record<MarketSlug, string> = { 'san-diego': 'San Diego', 'palm-springs': 'Palm Springs', 'big-bear': 'Big Bear' };
+export const saleLocation = (s: Sale) => (s.area ? `${s.area}, ${marketNames[s.market]}` : s.city);
+export const saleRepresented = (s: Sale) => (s.side === 'buyer' ? 'Represented Buyer' : 'Represented Seller');
+
 export const salePhotosFor = (slug: string): readonly Photo[] => salePhotos[slug] ?? [];
 export const saleLead = (slug: string): Photo | undefined => salePhotosFor(slug)[0];
+
+/** Photos split into labelled sets: the three 3700 Third Ave residences, each Querencia Palms unit. */
+export const saleGroupsFor = (slug: string): readonly PhotoGroup[] => salePhotoGroups[slug] ?? [];
