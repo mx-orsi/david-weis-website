@@ -498,6 +498,247 @@ export const stories: readonly StoryPage[] = [
         'How David Weis found community in San Diego through Gay for Good: a first project priming 20 Habitat for Humanity playhouses, roughly three years as a Chapter Leader, and a Pride fundraiser at Querencia Palms.',
     },
   },
+  {
+    // David's 2026-10-05 email gives notes and direction for most sections
+    // rather than finished copy, so this page is drafted in his voice from
+    // those notes (facts, jokes and the closing lines are his). Flagged for
+    // his review in CLIENT-QUESTIONS.md.
+    slug: 'garden-club',
+    crumb: 'Garden Club',
+    eyebrow: 'Village Garden Club of La Jolla',
+    title: 'Finding something just for me',
+    intro:
+      'What started as an attempt to finally learn why our landscaping kept dying became one of the most unexpected and rewarding parts of my life.',
+    lead: { suggestion: 'The April floral arrangement David created', src: '/images/garden-club/david-weis-village-garden-club-la-jolla-april-floral-arrangement.jpg', alt: 'Small vases of garden roses, ranunculus and greenery on the refreshment table beside a card reading Floral Arrangement Designed by David Weis', width: 1800, height: 2400, hasSmall: true, position: 'center 42%' },
+    leadRatio: '3 / 2',
+    chapters: [
+      {
+        id: 'the-story',
+        after: -1,
+        blocks: [
+          {
+            type: 'story',
+            eyebrow: 'How this started',
+            heading: 'What do I actually like doing?',
+            paragraphs: [
+              'By 2024, life was finally starting to feel calmer. [The Cole](/experience/the-cole) was behind us, the major renovations were finished, and for the first time in a while I could sit with a question people kept asking me: what do you actually enjoy doing?',
+              'Everyone seemed to have golf, tennis or pickleball. I have never been particularly drawn to any of them.',
+              'But plants had quietly been following me around for years.',
+              'At The Cole, the landscaping company was not maintaining the property the way it needed to be maintained. I was not killing the plants. I was relying on landscapers who were supposed to be caring for them. Toward the end of operating the hotel, I found myself outside at night watering plants, training vines and trying to keep everything looking alive and beautiful.',
+              'Later, at [Mercury Palms](/experience/mercury-palms), Mark and I completely reworked the landscaping. There were trips with the Tesla absolutely packed with bougainvillea, purple hopseed and whatever else would fit, sometimes to the point that the doors barely closed.',
+              'Over time, I became increasingly frustrated when plants would die without anyone telling us. A sprinkler would keep faithfully watering a patch of empty dirt where a plant used to be.',
+              'I had also always loved houseplants, flowers, watching things grow and seeing a landscape transform.',
+              'Eventually it clicked: maybe this is actually one of my interests.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Finding the club',
+            heading: 'So I joined a garden club.',
+            paragraphs: [
+              'I started searching for something focused on landscaping. There is not really a “landscape club,” but there was the Village Garden Club of La Jolla.',
+              'I applied.',
+              'Months later, I got a call inviting me to one of the meetings that was open to prospective members. That was also when I learned membership normally required a sponsor.',
+              'The meeting cost about $30 to attend, and my first reaction was honest: $30 for a garden club meeting?!',
+              'Then I arrived.',
+              'The speaker, the tables, the refreshments, the floral arrangements, the food and the attention to every detail completely changed my perception. It felt magical.',
+              'I attended several meetings, met members, eventually found a sponsor, and was fortunate to be invited to join in 2025.',
+              'The club has roughly 300 women and a handful of men. I grew up around women, so that did not intimidate me in the slightest. What struck me far more was how kind, knowledgeable and welcoming everyone was.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Getting involved',
+            heading: 'I didn’t want to just show up.',
+            paragraphs: [
+              'I wanted to participate, not just attend meetings, so I joined the Setup Committee.',
+              'Setup means arriving around 7:30 in the morning and working until about 9:30 getting the room ready before the meeting begins: tables, decorations, refreshments, signage and all the small details that make a meeting feel special.',
+              'That is part of what I love about the club. There is an enormous amount of effort behind something that looks effortless when everyone walks into the room.',
+              'I have also helped with check-in and attended nearly every workshop I could get to.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Learning things I actually use',
+            heading: 'Turns out, almost everything applies to my life.',
+            paragraphs: [
+              'I joined thinking I would learn more about plants. Instead, I keep leaving meetings with information that applies directly to my homes, properties and projects.',
+              'Irrigation. Soil and plant health. Seed starting. Dahlias. Floral design. Herbs and natural wellness. Wildfire preparation and Zone Zero. Pollinator-friendly landscaping. Beneficial insects. Natural pest management. Koi ponds. Plant propagation. Drought-conscious landscaping.',
+              'A lot of it has shaped the way I think about [Querencia Palms](/experience/querencia-palms): the landscaping, the irrigation, the pollinators, the plant selection and even the koi pond ecosystem. One speaker who specialized in koi ponds could not have come at a better time, because I was actively dealing with the pond and the landscaping there.',
+              'One of the simplest lessons was also one of the most useful: know your sprinklers.',
+              'Garden Club knowledge keeps turning into practical property knowledge.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '4 / 3',
+            photos: [
+              { suggestion: 'Best of the Best Seeds workshop', src: '/images/garden-club/village-garden-club-la-jolla-best-of-the-best-seeds-workshop-david-weis.jpg', alt: 'Members around a table of seed trays and labeled stakes at the Best of the Best Seeds workshop', width: 2400, height: 1800, hasSmall: true },
+              { suggestion: 'The mini seed garden', src: '/images/garden-club/village-garden-club-la-jolla-seed-starting-mini-garden-david-weis.jpg', alt: 'A tray of freshly planted seed cells beside the workshop handout and a pen', width: 1800, height: 2400, hasSmall: true, position: 'center 40%' },
+            ],
+            captions: [{ title: 'Best of the Best Seeds', note: 'Seed starting, and a miniature seed garden to take home.' }],
+          },
+          {
+            type: 'story',
+            eyebrow: '2026',
+            heading: 'I don’t even have a rose garden.',
+            paragraphs: [
+              '2026 opened with a program called Natural Rose Gardening, taught by Rita Perwich.',
+              'I opened the yearbook beforehand and thought: I probably won’t have a rose garden, but I’m sure I’ll learn something.',
+              'I should know better by now. I filled another entire page with notes.',
+              'What fascinated me most was not actually roses. It was beneficial insects, natural predators, reducing pesticide dependence, ladybugs, hummingbirds, praying mantises and how a garden works as an ecosystem.',
+              'I immediately started thinking about Querencia Palms. Instead of always reacting to pests chemically, how could the landscape itself become healthier?',
+              'So, naturally, I went home and ordered 1,500 ladybugs.',
+              'I kept them cool until the right time of evening, misted the landscaping so there was moisture, and released them throughout Querencia Palms.',
+            ],
+          },
+          {
+            type: 'callout',
+            text: 'Apparently my takeaway from Natural Rose Gardening was that Querencia Palms needed 1,500 new employees.',
+          },
+          {
+            type: 'gallery',
+            label: 'The ladybugs',
+            photos: [
+              { suggestion: 'David holding the ladybug bag at Querencia', src: '/images/garden-club/david-weis-ladybug-release-querencia-palms-palm-springs.jpg', alt: 'David Weis holding up a mesh bag of ladybugs and a spray bottle in the courtyard at Querencia Palms at dusk', width: 1800, height: 2400, hasSmall: true },
+              { suggestion: 'Close-up of the bag', src: '/images/garden-club/ladybugs-bag-1500-querencia-palms-david-weis.jpg', alt: 'A close-up of the mesh bag crowded with 1,500 ladybugs', width: 1800, height: 2400, hasSmall: true },
+              { suggestion: 'Ladybugs crawling through the landscaping', src: '/images/garden-club/ladybugs-released-querencia-palms-landscaping-david-weis.jpg', alt: 'Ladybugs crawling over leaves and the edge of a planter at Querencia Palms after their release', width: 2400, height: 1800, hasSmall: true },
+            ],
+            captions: [
+              { title: 'The order', note: 'Apparently my takeaway from Natural Rose Gardening was: order 1,500 ladybugs.' },
+              { title: 'The bag', note: 'Waiting for their evening release.' },
+              { title: 'The release', note: 'Putting the lesson into practice at Querencia Palms.' },
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'April',
+            heading: 'One Gay for Good event led to this.',
+            paragraphs: [
+              'Shortly before I was responsible for the Garden Club refreshment-table arrangement, [Gay for Good](/gay-for-good) held a Volunteer Appreciation Social at Cork & Stem. While I was there, I discovered the small flower shop inside.',
+              'When it came time to make the arrangement, I immediately thought of them. I went back specifically because I wanted to support the business again, and I picked out the flowers myself.',
+              'That month’s speaker was connected to The Posy Book and the language of flowers, so I designed the arrangement to complement the program.',
+              'I did not set out to prove anything about my flower skills. I just liked that the theme, a shop I had discovered through Gay for Good and a meeting I cared about all came together in one arrangement.',
+            ],
+            aside: { suggestion: 'The Gay for Good social at Cork & Stem', src: '/images/gay-for-good/david-weis-gay-for-good-volunteer-appreciation-social-cork-and-stem.jpg', alt: 'David Weis beside a friend holding a bouquet at the Gay for Good volunteer appreciation social at Cork & Stem', width: 1005, height: 1394, hasSmall: true },
+            asideCaption: 'The Gay for Good social at Cork & Stem, where this started.',
+          },
+          {
+            type: 'pair',
+            ratio: '4 / 5',
+            photos: [
+              { suggestion: 'The finished arrangement', src: '/images/about/david-weis-garden-club-april-refreshment-table-arrangement.jpg', alt: 'The refreshment table flower arrangement David designed for the Village Garden Club’s April program with The Posy Book author Teresa Sabankaya', width: 1800, height: 2400, hasSmall: true },
+              { suggestion: 'The Modern Coastal Posy card', src: '/images/garden-club/village-garden-club-la-jolla-modern-coastal-posy-card-david-weis.jpg', alt: 'The printed card for the arrangement: A Modern Coastal Posy, a nod to floriography, the language of flowers', width: 2400, height: 1921, hasSmall: true },
+            ],
+            captions: [{ title: 'The April arrangement', note: 'Flowers from Cork & Stem, chosen to match the program.' }, { title: 'A Modern Coastal Posy', note: 'The card that went with it.' }],
+          },
+          {
+            type: 'story',
+            eyebrow: 'May',
+            heading: 'Then there was the hat.',
+            paragraphs: [
+              'At the May luncheon, the club held its first hat competition. I decided I wanted to compete for Best Pollinator.',
+              'Why? Because I had recently donated sperm to friends who wanted a child, and their son had been born. By my reasoning, I was literally a pollinator.',
+              'I built the entire hat around a pollinator ecosystem: a purple umbrella, flowers, moss, greenery and bees. I had bought roughly 100 tiny sparkling bees for the project and did not need all of them, so I handed the extras out to members around the room. I figured I was pollinating the design throughout the club too.',
+              'I entered hoping for Best Pollinator. Instead, I won Best UV Protection. Which is even funnier when you remember the hat was basically a giant flower-covered umbrella.',
+              'The La Jolla Light later covered the event and included me and the hat in its photo gallery.',
+            ],
+          },
+          {
+            type: 'gallery',
+            label: 'Building the hat',
+            photos: [
+              { suggestion: 'The sparkling bees', src: '/images/garden-club/david-weis-garden-club-hat-competition-sparkling-bees.jpg', alt: 'A pile of tiny gold and black sparkling bee charms on a wood table', width: 1800, height: 2400, hasSmall: true },
+              { suggestion: 'The purple umbrella', src: '/images/garden-club/david-weis-garden-club-hat-competition-purple-umbrella-start.jpg', alt: 'A small purple umbrella on a table with moss and a few flowers beside it', width: 1800, height: 2400, hasSmall: true },
+              { suggestion: 'Flowers and moss going on', src: '/images/garden-club/david-weis-garden-club-hat-competition-flowers-moss-construction.jpg', alt: 'The purple umbrella being covered with pink flowers, moss and bees', width: 1800, height: 2400, hasSmall: true },
+              { suggestion: 'The finished hat', src: '/images/garden-club/david-weis-garden-club-hat-competition-finished-pollinator-hat.jpg', alt: 'The finished pollinator hat from the side: a purple umbrella covered in flowers, lavender and greenery', width: 2400, height: 1800, hasSmall: true },
+              { suggestion: 'David wearing the hat', src: '/images/about/david-weis-garden-club-hat-competition.jpg', alt: 'David Weis wearing the flower-covered hat and holding a bouquet at the Village Garden Club of La Jolla’s hat competition', width: 1800, height: 2400, hasSmall: true },
+              { suggestion: 'The La Jolla Light', src: '/images/about/david-weis-garden-club-la-jolla-light.jpg', alt: 'The La Jolla Light photo of the Village Garden Club hat contest: six members in flowered hats, David among them holding a bouquet', width: 890, height: 699, hasSmall: true },
+            ],
+            captions: [
+              { title: 'The bees', note: 'Roughly 100 tiny sparkling bees. Not all of them made it onto the hat.' },
+              { title: 'The umbrella', note: 'Every pollinator ecosystem starts somewhere.' },
+              { title: 'Construction', note: 'Flowers, moss, greenery, bees.' },
+              { title: 'The finished hat' },
+              { title: 'Best UV Protection', note: 'Not the category I entered.' },
+              { title: 'The La Jolla Light', note: 'Yes, it ended up in the newspaper.' },
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Workshops',
+            heading: 'There is always something else to learn.',
+            paragraphs: [
+              'Best of the Best Seeds: we learned seed starting and created miniature seed gardens to take home.',
+              'Dig Into Dahlias: I learned how to grow and care for dahlias and left with bulbs.',
+              'Holiday Woodland Centerpiece: René van Rems demonstrated approachable holiday floral design. One lesson I particularly liked was how a simple carry box can turn flowers into a thoughtful gift.',
+              'The Gardener Exchange Table: one of my favorite traditions. Members bring cuttings and plants from their own gardens and share them with other members. I love the idea that something growing in one member’s garden can end up growing in another’s.',
+            ],
+          },
+          {
+            type: 'gallery',
+            label: 'Workshops',
+            photos: [
+              { suggestion: 'Dig Into Dahlias workshop', src: '/images/garden-club/village-garden-club-la-jolla-dig-into-dahlias-workshop-david-weis.jpg', alt: 'The Dig Into Dahlias workshop at the Village Garden Club of La Jolla' },
+              { suggestion: 'Holiday Woodland Centerpiece with René van Rems', src: '/images/garden-club/village-garden-club-la-jolla-holiday-woodland-centerpiece-rene-van-rems-david-weis.jpg', alt: 'The Holiday Woodland Centerpiece workshop with René van Rems' },
+              { suggestion: 'The Gardener Exchange Table', src: '/images/garden-club/village-garden-club-la-jolla-gardener-exchange-table-david-weis.jpg', alt: 'Cuttings and plants laid out on the Gardener Exchange Table' },
+            ],
+            captions: [{ title: 'Dig Into Dahlias' }, { title: 'Holiday Woodland Centerpiece' }, { title: 'The Gardener Exchange Table' }],
+          },
+          {
+            type: 'story',
+            eyebrow: 'The holiday pantry',
+            heading: 'Apparently I make simple syrup now.',
+            paragraphs: [
+              'For the Holiday Pantry Sale, I made rosemary simple syrup, designed the packaging and labels and brought it to the event.',
+              'It sold out almost immediately.',
+            ],
+            aside: { suggestion: 'Rosemary simple syrup', src: '/images/about/david-weis-garden-club-rosemary-syrup.jpg', alt: 'Bottles of rosemary simple syrup made for the Village Garden Club of La Jolla holiday pantry sale', width: 1800, height: 2400, hasSmall: true },
+            asideCaption: 'Rosemary simple syrup for the Holiday Pantry Sale.',
+          },
+          {
+            type: 'gallery',
+            label: 'Garden Club inspiration',
+            photos: [
+              { suggestion: 'Mandarin pumpkins on the October refreshments table', src: '/images/garden-club/village-garden-club-la-jolla-refreshments-table-october-mandarin-pumpkins-david-weis.jpg', alt: 'Mandarin oranges dressed as tiny pumpkins on the October refreshments table, flowers behind', width: 1800, height: 2400, hasSmall: true },
+              { suggestion: 'Vegetable character on the November table', src: '/images/garden-club/village-garden-club-la-jolla-refreshments-table-november-david-weis.jpg', alt: 'A turkey made of carrots, peppers, celery and a yellow squash on the November refreshments table', width: 1206, height: 1766, hasSmall: true },
+              { suggestion: 'Flower-shaped crostini', src: '/images/garden-club/village-garden-club-la-jolla-refreshments-table-flower-crostini-david-weis.jpg', alt: 'Flower-shaped tomato, mozzarella and basil crostini arranged on a botanical plate', width: 1800, height: 2400, hasSmall: true },
+              { suggestion: 'A decorated holiday cake', src: '/images/garden-club/village-garden-club-la-jolla-holiday-cake-members-david-weis.jpg', alt: 'A coconut-covered holiday cake topped with tiny deer and rosemary on a cake stand', width: 1800, height: 2400, hasSmall: true },
+            ],
+            captions: [{ title: 'Garden Club inspiration', note: 'The creativity around these tables is endless. These were made by other members; I saved the photos because I loved seeing what they created.' }],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Why it matters',
+            heading: 'A little sparkle in my life.',
+            paragraphs: [
+              'I joined because I wanted to understand landscaping better. What I found was community, creativity, new friendships, mentors, practical knowledge, a hobby that has nothing to do with real estate, inspiration I can actually use and another way to care for the places around me.',
+              'I love arriving early to help set up. I love learning from people who know dramatically more than I do. I love the workshops. I love discovering a plant I have never seen and immediately wondering where I could put one.',
+              'I love walking into a meeting convinced the topic probably has nothing to do with my life and walking out with a page of notes.',
+              'Sometimes those notes turn into a floral arrangement. Sometimes they influence Querencia Palms. And apparently sometimes they result in 1,500 ladybugs showing up at a condominium community.',
+              'I joined because I thought I needed a hobby. I stayed because I found a community of incredibly generous people who are constantly willing to share what they know.',
+              'I am still very much learning. That is probably what I love most about it.',
+              'The Village Garden Club of La Jolla has become one of those unexpected little things that adds genuine sparkle to my life, and I feel incredibly lucky to be part of it.',
+            ],
+          },
+          {
+            type: 'links',
+            heading: 'Keep reading',
+            items: [
+              { label: 'About David', href: '/about' },
+              { label: 'Gay for Good', href: '/gay-for-good' },
+              { label: 'Querencia Palms', href: '/experience/querencia-palms' },
+            ],
+          },
+        ],
+      },
+    ],
+    seo: {
+      title: 'Village Garden Club of La Jolla | David Weis',
+      description:
+        'David Weis on joining the Village Garden Club of La Jolla: setup mornings, workshops, a floral arrangement, a hat competition, 1,500 ladybugs at Querencia Palms and a community he never expected to find.',
+    },
+  },
 ];
 
 export function getStory(slug: string): StoryPage {

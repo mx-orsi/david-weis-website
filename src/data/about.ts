@@ -340,41 +340,16 @@ export const aboutChapterB: ProjectChapter = {
       side: 'left',
     },
     {
-      type: 'story',
+      // 2026-10-05: the full Garden Club story moved to /garden-club; About keeps a short card (teaser copy drafted, for David's review).
+      type: 'teaser',
       eyebrow: 'Village Garden Club of La Jolla',
-      heading: 'A hobby that got serious quickly.',
+      heading: 'Finding something just for me.',
       paragraphs: [
-        'I joined the Village Garden Club of La Jolla because I wanted something fun that had nothing to do with real estate.',
-        'One thing I’ve learned about joining something new is to get involved early. Volunteer for something, show up, help out, and you start meeting people naturally.',
-        'So I did. I volunteered on the setup committee, helped at check-in, attended nearly every workshop, arranged refreshment tables, and made rosemary simple syrup for the holiday pantry.',
-        'For an April program with The Posy Book author Teresa Sabankaya, I designed the refreshment table arrangement to mirror the theme of her presentation, sourcing the flowers from Cork & Stem in Hillcrest, a local flower shop and wine bar.',
-        'Then came the annual hat competition. I built what can only be described as a pollinator ecosystem for my head. It won Best UV Protection. And yes, it ended up in the newspaper.',
-        'The Garden Club has become one of my favorite parts of life in San Diego. It unexpectedly changed the way I looked at the landscaping at Querencia Palms, too. Somewhere along the way, I became completely invested in learning about plants.',
+        'I joined because I wanted to finally understand why our landscaping kept dying. What I found was a community, a creative outlet and an enormous amount of practical knowledge, plus a hat competition, 1,500 ladybugs and a floral arrangement I am still a little proud of.',
       ],
-    },
-    {
-      type: 'pair',
-      ratio: '4 / 5',
-      photos: [
-        { suggestion: 'Garden Club May Luncheon Hat Competition', src: '/images/about/david-weis-garden-club-hat-competition.jpg', alt: 'David Weis wearing the flower-covered hat and holding a bouquet at the Village Garden Club of La Jolla’s hat competition', width: 1800, height: 2400, hasSmall: true },
-        { suggestion: 'Rosemary simple syrup', src: '/images/about/david-weis-garden-club-rosemary-syrup.jpg', alt: 'Bottles of rosemary simple syrup made for the Village Garden Club of La Jolla holiday pantry sale', width: 1800, height: 2400, hasSmall: true },
-      ],
-      captions: [
-        { title: 'Best UV Protection', note: 'May Luncheon Hat Competition' },
-        { title: 'Rosemary simple syrup', note: 'Holiday Pantry Sale' },
-      ],
-    },
-    {
-      type: 'pair',
+      cta: { label: 'Read the story', href: '/garden-club' },
+      photo: { suggestion: 'Garden Club May Luncheon Hat Competition', src: '/images/about/david-weis-garden-club-hat-competition.jpg', alt: 'David Weis wearing the flower-covered hat and holding a bouquet at the Village Garden Club of La Jolla’s hat competition', width: 1800, height: 2400, hasSmall: true, position: 'center 30%' },
       ratio: '4 / 3',
-      photos: [
-        { suggestion: 'La Jolla Light coverage', src: '/images/about/david-weis-garden-club-la-jolla-light.jpg', alt: 'The La Jolla Light photo of the Village Garden Club hat contest: six members in flowered hats, David among them holding a bouquet', width: 890, height: 699, hasSmall: true },
-        { suggestion: 'April refreshment table flower arrangement', src: '/images/about/david-weis-garden-club-april-refreshment-table-arrangement.jpg', alt: 'The refreshment table flower arrangement David designed for the Village Garden Club’s April program with The Posy Book author Teresa Sabankaya', width: 1800, height: 2400, hasSmall: true },
-      ],
-      captions: [
-        { title: 'Winners of May Luncheon Hat Competition', note: 'Featured in the La Jolla Light' },
-        { title: 'April refreshment table', note: 'The Posy Book program with Teresa Sabankaya' },
-      ],
     },
     {
       type: 'story',
