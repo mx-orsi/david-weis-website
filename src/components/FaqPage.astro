@@ -167,7 +167,7 @@ const contactHref = isHub ? '/contact' : `/contact?location=${encodeURIComponent
             <a class="link-arrow" href={`mailto:${agent.email}`}>{faqHubUi.closing.emailLabel} {agent.email} <Icon name="arrow-right" /></a>
           </>
         ) : (
-          <a class="link-arrow" href={withBase('/properties')}>{page.closing!.secondary} <Icon name="arrow-right" /></a>
+          <a class="link-arrow" href={withBase(`${market!.href}#properties`)}>{page.closing!.secondary} <Icon name="arrow-right" /></a>
         )}
       </div>
     </div>

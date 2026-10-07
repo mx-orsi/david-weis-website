@@ -140,9 +140,6 @@ shows only the documented 2025 figures, and the Gay for Good page uses his past-
   publication, flip `showReviewed` in `src/data/faq.ts` and the date appears. Regulatory answers
   (rental licensing, representation, insurance, ADUs, chain controls, Forest Service cabins) should
   be re-checked periodically; each carries its own `reviewed` date.
-- **FAQ page copy vs. existing Buy/Sell FAQs.** `/buy` and `/sell` keep their earlier FAQ pairs (with
-  FAQPage JSON-LD from the September build). The new brief says not to add FAQ schema; say if the
-  old pairs should be removed or the schema dropped.
 - **444 photos.** The finished photos are 1024 to 1600px web exports; the yellow-door hero is soft at
   full width. Does he have the photographer's originals from the 2020 listing shoot?
 - **Modernism Week years** (still open from September): his email says 2024/2025/2026, his Drive
