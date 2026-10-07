@@ -458,88 +458,19 @@ export const aboutChapterB: ProjectChapter = {
       caption: { title: 'Vista Las Palmas Modernism Week 2026', note: 'Volunteer docents. Helping neighbors share their homes. Spending time with new friends.' },
     },
     {
-      type: 'story',
-      eyebrow: 'A family tradition',
-      heading: 'Christmas was never going to be subtle.',
+      // 2026-10-05: the holiday section moved to /holiday-tradition; About keeps David's teaser.
+      type: 'teaser',
+      eyebrow: 'A holiday tradition',
+      heading: 'Christmas has never been subtle.',
       paragraphs: [
-        'Growing up, my dad was the person who could fix almost anything. Cars. Houses. Whatever needed to be figured out. And at Christmas, apparently the entire neighborhood.',
-        'Our house became one of those homes people drove across town to see. Approximately 75,000 exterior lights. Neighbors participating. Limos coming down the street. And a giant custom star my dad built between the houses that was visible from what felt like half the city.',
-        'Decorating started Thanksgiving Day. We tested bulbs. Made a plan. Worked late Friday night and through the weekends until Christmas Day. Frozen fingers. Frozen everything. And then the lights came on.',
-        'I loved seeing how happy it made people. That part never left me.',
+        'Mark had already been hosting his annual holiday party and toy fundraiser for years before we met. I grew up in a family where Christmas meant tens of thousands of lights, weeks of preparation and a house people drove across town to see.',
+        'When our lives came together, apparently neither of us was destined for a quiet Christmas.',
+        'Today, it is one of our favorite traditions to continue together, with friends filling the house, toys piling up, creative projects that somehow get more elaborate every year and another chapter of our life becoming part of the holidays.',
       ],
-    },
-    {
-      type: 'story',
-      heading: 'Then Mark had his own tradition.',
-      paragraphs: [
-        'Long before we met, Mark had started an annual holiday fundraiser. Together, we continued it and watched it grow into one of the traditions our friends talk about all year.',
-        'The party is a lot of work. I apparently inherited an inability to do Christmas casually.',
-        'But every year, the house fills with friends, toys pile up for children in the community, and we remember why we keep doing it.',
-        'By 2024, more than 200 guests helped donate nearly 300 toys. In 2025, our 15th annual holiday fundraiser collected more than 230 toys.',
-      ],
-    },
-    {
-      type: 'story',
-      heading: 'If you’re going to give someone something, make it worth keeping.',
-      paragraphs: [
-        'The gifts became their own tradition.',
-        'One year, I used miniature liquor bottles left over from The Cole and paired each with a seasonal cocktail recipe, candy, and a small business card. Another year became hot cocoa kits.',
-        'Then Querencia Palms gave me an excuse to go completely overboard with custom s’mores kits. More than 100 bags. Jumbo s’mores. A full-size Hershey bar. A retractable metal roasting stick. Custom tags. Querencia Palms branding. And a QR code tucked in without making the gift feel like an advertisement.',
-        'People sent me pictures and videos later of themselves actually using them. That was exactly the point.',
-        'I want people to notice my branding. I never want the branding to ruin the gift.',
-      ],
-    },
-    {
-      type: 'pair',
-      ratio: '1 / 1',
-      photos: [
-        { suggestion: 'Toy collection for the Marines', src: '/images/about/holiday-toy-collection-marines-david-weis.jpg', alt: 'A Marine in dress uniform beside toys donated at the holiday fundraiser', width: 1206, height: 892, hasSmall: true, position: '30% center' },
-        { suggestion: 'Toys loaded into the Range Rover', src: '/images/about/holiday-toys-range-rover-david-weis.jpg', alt: 'The back of a Range Rover packed with toys donated at the holiday fundraiser', width: 1800, height: 2400, hasSmall: true, position: 'center 55%' },
-      ],
-      captions: [
-        { title: 'Toys for Tots', note: 'Marines to collect and count the toys' },
-        { title: 'Loads of toys', note: 'Multiple truck loads to drop toys' },
-      ],
-    },
-    {
-      type: 'photo',
-      photo: { suggestion: 'Holiday party portrait', src: '/images/about/holiday-party-portrait-david-weis.jpg', alt: 'Guests holding donated toys at David and Mark Weis’s annual holiday fundraiser party', width: 2400, height: 1999, hasSmall: true, position: 'center top' },
+      cta: { label: 'Explore our holiday tradition', href: '/holiday-tradition' },
+      photo: { suggestion: 'Guests holding donated toys at the party', src: '/images/about/holiday-party-portrait-david-weis.jpg', alt: 'Guests holding donated toys at David and Mark Weis’s annual holiday fundraiser party', width: 2400, height: 1999, hasSmall: true, position: 'center 30%' },
       ratio: '4 / 3',
-      caption: { title: 'Toys for Kids', note: '2025' },
-    },
-    {
-      type: 'gallery',
-      label: 'The holiday gift bags',
-      photos: [
-        { suggestion: 'Holiday gift bag production', src: '/images/about/holiday-gift-bag-production-david-weis.jpg', alt: 'David Weis beside a dining table covered in finished holiday gift bags', width: 2400, height: 2110, hasSmall: true },
-        { suggestion: 'Gift bags with candy canes', src: '/images/about/holiday-gift-bags-candy-canes-david-weis.jpg', alt: 'Rows of holiday gift bags, each topped with a candy cane', width: 1800, height: 2400, hasSmall: true },
-        { suggestion: 'Merry Christmas gift bags', src: '/images/about/holiday-gift-bags-merry-christmas-david-weis.jpg', alt: 'Rows of white Merry Christmas gift bags lined up under stained-glass windows', width: 2400, height: 1800, hasSmall: true },
-        { suggestion: 'Cocktail favors from The Cole', src: '/images/about/holiday-cocktail-favors-candy-canes-david-weis.jpg', alt: 'Cocktail favors for the holiday fundraiser: mini bottles with candy canes and tags', width: 1800, height: 2400, hasSmall: true },
-      ],
-    },
-    {
-      type: 'pair',
-      ratio: '18 / 13',
-      photos: [
-        { suggestion: 'Custom Christmas card 2022', src: '/images/about/holiday-card-2022-sierra-chalet-david-weis.jpg', alt: 'The illustrated 2022 holiday card: David and Mark with the dogs in the snow at Sierra Chalet, a snowboard and toolbox beside the tree', width: 2400, height: 1736, hasSmall: true },
-        { suggestion: 'Custom Christmas card 2023', src: '/images/about/holiday-card-2023-kensington-canyon-david-weis.jpg', alt: 'The illustrated 2023 holiday card: David and Mark with the dogs in front of the snow-dusted Kensington house', width: 2171, height: 1571, hasSmall: true },
-      ],
-      captions: [
-        { title: 'Custom Christmas card 2022', note: 'Reflecting on the cabin renovation' },
-        { title: 'Custom Christmas card 2023', note: 'Reflecting on the Kensington renovation' },
-      ],
-    },
-    {
-      type: 'pair',
-      ratio: '18 / 13',
-      photos: [
-        { suggestion: 'Custom Christmas card 2024', src: '/images/about/holiday-card-2024-the-cole-david-weis.jpg', alt: 'The illustrated 2024 holiday card: David and Mark in front of The Cole at night, with the hotel sign and a Christmas tree', width: 2171, height: 1571, hasSmall: true },
-        { suggestion: 'Custom Christmas card 2025', src: '/images/about/holiday-card-2025-vista-voltaire-david-weis.jpg', alt: 'The illustrated 2025 holiday card: David and Mark with the dog in front of the Voltaire house, surfboards by the door', width: 2100, height: 1500, hasSmall: true },
-      ],
-      captions: [
-        { title: 'Custom Christmas card 2024', note: 'Reflecting on the sale of The Cole and new chapters' },
-        { title: 'Custom Christmas card 2025', note: 'Reflecting on the renovation of Voltaire' },
-      ],
+      side: 'left',
     },
     {
       type: 'story',
