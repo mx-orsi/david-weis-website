@@ -28,16 +28,8 @@ const cards = c.practice.cards.map((card) => {
   return { ...card, href: saleHref(sale), photo: saleLead(card.sale) };
 });
 
+// No FAQPage schema: David's FAQ brief (2026-10-05) asks for none on the site.
 const jsonLd = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: c.faqs.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  },
   {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
