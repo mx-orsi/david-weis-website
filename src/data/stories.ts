@@ -310,6 +310,194 @@ export const stories: readonly StoryPage[] = [
         'Why a three-market real estate business, years of vehicle wear and a need for a dedicated company vehicle led David Weis to choose an electric GMC Sierra pickup.',
     },
   },
+  {
+    slug: 'gay-for-good',
+    crumb: 'Gay for Good',
+    eyebrow: 'Community · Service · San Diego',
+    title: 'Gay for Good',
+    intro: 'Finding my people by showing up for others.',
+    lead: { suggestion: 'David under the GAYFORGOOD.ORG booth canopy', src: '/images/gay-for-good/david-weis-gay-for-good-san-diego-booth-big-gay-picnic.jpg', alt: 'David Weis and volunteers at the Gay for Good booth under its GAYFORGOOD.ORG canopy at the Big Gay Picnic in San Diego', width: 1206, height: 1002, hasSmall: true, position: 'center 40%' },
+    leadRatio: '16 / 9',
+    chapters: [
+      {
+        id: 'the-story',
+        after: -1,
+        blocks: [
+          {
+            type: 'story',
+            eyebrow: 'How it started',
+            heading: 'I’ve always believed in getting involved.',
+            paragraphs: [
+              'My mom deserves a lot of the credit for that. She was the kind of person who could walk into a room knowing nobody and leave having talked to everyone. Growing up, she was constantly encouraging me to join things, volunteer, meet people and participate instead of standing on the sidelines.',
+              'I volunteered in different ways over the years, from the Humane Society and library work to being a Big Brother. I valued all of it, but I also learned something about myself: doing the exact same volunteer job every week could eventually start feeling a little like having another job.',
+              'What I wanted was community, variety and the chance to experience more of the city while actually doing something useful.',
+              'In 2023, I found Gay for Good.',
+              'And almost immediately, I knew I had found something different.',
+            ],
+          },
+          {
+            type: 'story',
+            heading: 'It started with 20 playhouses.',
+            paragraphs: [
+              'My first Gay for Good project was with Habitat for Humanity.',
+              'We spent the morning priming 20 playhouses that would later be painted and delivered throughout San Diego. I remember leaving that event thinking: this is exactly what I was looking for.',
+              'It wasn’t one organization asking volunteers to perform the same task over and over. Gay for Good worked throughout the community, introducing volunteers to different nonprofits, different causes and different parts of San Diego.',
+              'One weekend might involve Habitat for Humanity. Another could mean packing food, preparing school supplies, supporting Pride, helping an animal organization or showing up for a community event I might never have discovered otherwise.',
+              'You could make an impact, meet people and learn more about the city at the same time.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '3 / 2',
+            emphasis: 'first',
+            photos: [
+              { suggestion: 'The Habitat for Humanity playhouse group photo', src: '/images/gay-for-good/gay-for-good-san-diego-habitat-for-humanity-playhouses-first-project-david-weis.jpg', alt: 'Gay for Good volunteers kneeling and standing together at the Habitat for Humanity playhouse build in San Diego, David Weis among them', width: 1170, height: 766, hasSmall: true },
+              { suggestion: 'A finished playhouse', src: '/images/gay-for-good/gay-for-good-san-diego-habitat-for-humanity-painted-playhouse-david-weis.jpg', alt: 'A painted Habitat for Humanity playhouse beside a Gay for Good Volunteer With Us banner', width: 1170, height: 874, hasSmall: true },
+            ],
+            captions: [{ title: 'The first one', note: 'My first Gay for Good project: helping prime 20 Habitat for Humanity playhouses in 2023.' }],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Chapter Leader',
+            heading: 'Then they asked me to lead.',
+            paragraphs: [
+              'Not long after joining, I was approached about becoming a Chapter Leader for Gay for Good San Diego.',
+              'I said yes.',
+              'At first, I was still one of the newer people in the organization, so there was definitely some learning as I went. But that became part of what I loved about the role.',
+              'Leadership did not mean standing around telling people what to do. It meant showing up early, helping organize projects, welcoming the person who came alone, working alongside everyone else, building relationships with community partners and making sure people wanted to come back.',
+              'Over roughly three years as a Chapter Leader, Gay for Good became one of the most meaningful parts of my life in San Diego.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '4 / 3',
+            emphasis: 'second',
+            photos: [
+              { suggestion: 'David at the back-to-school project', src: '/images/gay-for-good/gay-for-good-san-diego-chicano-federation-back-to-school-backpacks-david-weis.jpg', alt: 'David Weis in a Gay for Good shirt in a room full of donated backpacks at the back-to-school project', width: 1206, height: 889, hasSmall: true },
+              { suggestion: 'The large group with the vertical Volunteer With Us banner', src: '/images/gay-for-good/gay-for-good-san-diego-volunteers-group-banner-david-weis.jpg', alt: 'A large group of Gay for Good San Diego volunteers gathered around the Volunteer With Us banner on a lawn', width: 2048, height: 1446, hasSmall: true },
+            ],
+            captions: [{ title: 'From volunteer to Chapter Leader' }, { title: 'The best part was always the people' }],
+          },
+          {
+            type: 'callout',
+            text: 'San Diego became our project list.',
+          },
+          {
+            type: 'gallery',
+            label: 'San Diego became our project list',
+            photos: [
+              { suggestion: 'Packing boxes for the Salvation Army', src: '/images/gay-for-good/gay-for-good-san-diego-salvation-army-food-boxes-david-weis.jpg', alt: 'David Weis packing food boxes beside a Salvation Army volunteer for the Toys for Joy holiday project', width: 1206, height: 866, hasSmall: true },
+              { suggestion: 'Backpacks and school supplies', src: '/images/gay-for-good/gay-for-good-san-diego-back-to-school-volunteers-david-weis.jpg', alt: 'Gay for Good volunteers posing with donated backpacks at the Chicano Federation back-to-school project', width: 1206, height: 884, hasSmall: true },
+              { suggestion: 'David with the purple flower at the Walk to End Alzheimer’s', src: '/images/gay-for-good/david-weis-gay-for-good-walk-to-end-alzheimers-san-diego.jpg', alt: 'David Weis holding a purple pinwheel flower on the lawn at the Walk to End Alzheimer’s in San Diego', width: 1800, height: 2400, hasSmall: true, position: 'center 30%' },
+              { suggestion: 'The Love Letters booth at Pride by the Beach', src: '/images/gay-for-good/gay-for-good-pride-by-the-beach-oceanside-love-letters-david-weis.jpg', alt: 'David Weis and Gay for Good volunteers at the Love Letters booth at Pride by the Beach in Oceanside', width: 1170, height: 1033, hasSmall: true },
+            ],
+            captions: [
+              { title: '71 food boxes + more than 1,000 toys', note: 'A holiday project with The Salvation Army’s Toys for Joy program.' },
+              { title: '200+ backpacks', note: 'Helping prepare students for the school year with Chicano Federation.' },
+              { title: 'Walk to End Alzheimer’s', note: 'Sometimes volunteering means building something. Sometimes it means simply showing up for a cause that matters.' },
+              { title: 'Pride at the Beach', note: 'Connecting with the community while helping create a place for people to leave themselves a little kindness.' },
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'More than volunteering',
+            heading: 'It never felt like just volunteering.',
+            paragraphs: [
+              'One of the reasons Gay for Good worked so well for me is that the volunteering was only part of it.',
+              'People came alone. People brought friends. People met someone during a project and saw them again at the next one. Eventually the unfamiliar faces stopped being unfamiliar.',
+              'That was exactly what I needed when I came back to San Diego.',
+              'Life had taken my high school friends and me in different directions, and after several years consumed by [The Cole](/experience/the-cole), renovations and everything happening in Palm Springs, I realized I needed to intentionally rebuild a community here.',
+              'Gay for Good gave me a way to do that without networking for the sake of networking. We were all there because we wanted to help with something. Friendship happened naturally around it.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '4 / 3',
+            photos: [
+              { suggestion: 'The volunteer appreciation social at the restaurant', src: '/images/gay-for-good/gay-for-good-san-diego-volunteer-appreciation-social-restaurant-david-weis.jpg', alt: 'David Weis and two friends laughing at a patio table during the Gay for Good volunteer appreciation social', width: 2400, height: 1800, hasSmall: true },
+              { suggestion: 'The casual group at an outdoor event', src: '/images/gay-for-good/gay-for-good-san-diego-animal-rescue-volunteers-david-weis.jpg', alt: 'Four Gay for Good volunteers in sunglasses with their arms around one another at an outdoor animal rescue event', width: 2400, height: 1800, hasSmall: true },
+            ],
+            caption: { title: 'The people were the reward' },
+          },
+          {
+            type: 'story',
+            eyebrow: 'Pride',
+            heading: 'Pride, visibility and belonging.',
+            paragraphs: [
+              'Gay for Good also gave me another way to participate in the LGBTQ+ community that felt natural to me.',
+              'Pride events became opportunities to represent the organization, meet potential volunteers and remind people that community can mean more than attending a celebration. It can mean finding people to serve alongside all year.',
+              'Some of our biggest events were loud, colorful and packed with people. Others were six or ten volunteers working in a back room somewhere.',
+              'Both mattered.',
+            ],
+          },
+          {
+            type: 'gallery',
+            label: 'Pride events',
+            photos: [
+              { suggestion: 'The booth at the Big Gay Picnic', src: '/images/gay-for-good/gay-for-good-san-diego-big-gay-picnic-volunteers-david-weis.jpg', alt: 'Gay for Good volunteers lined up under the booth canopy at the Big Gay Picnic in San Diego', width: 2400, height: 1800, hasSmall: true },
+              { suggestion: 'Oceanside Pride', src: '/images/gay-for-good/gay-for-good-oceanside-pride-by-the-beach-david-weis.jpg', alt: 'David Weis and two friends in rainbow medals at Oceanside Pride by the Beach', width: 1170, height: 964, hasSmall: true },
+              { suggestion: 'The large Pride flags', src: '/images/gay-for-good/gay-for-good-san-diego-big-gay-picnic-pride-flags-david-weis.jpg', alt: 'Volunteers raising large rainbow Pride flags while setting up for the Big Gay Picnic', width: 1440, height: 1081, hasSmall: true },
+            ],
+            captions: [{ title: 'Big Gay Picnic' }, { title: 'Oceanside Pride' }, { title: 'Setting up' }],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Full circle',
+            heading: 'And eventually, it followed me back to Palm Springs.',
+            paragraphs: [
+              'One of the moments that meant the most came toward the end of my time as a Chapter Leader.',
+              'During Palm Springs Pride, we hosted a Gay for Good social and fundraiser at [Querencia Palms](/experience/querencia-palms).',
+              'By then, two completely different parts of my life had collided in the best possible way.',
+              'I had spent years helping build a community through Gay for Good. At the same time, Querencia Palms had become a place where I was pouring everything I knew about real estate, hospitality, design and creating a sense of belonging.',
+              'The name Querencia means a place from which one’s strength is drawn. A place where you feel safe and most yourself.',
+              'Having Gay for Good chapters and volunteers gathering there during Pride made that meaning feel unusually real.',
+              'People came from different chapters, many meeting one another for the first time, to raise money, tell stories, laugh and celebrate an organization built around showing up for others.',
+              'For me, it felt very full circle.',
+            ],
+          },
+          {
+            type: 'photo',
+            ratio: '16 / 10',
+            photo: { suggestion: 'David speaking to the group at Querencia Palms', src: '/images/gay-for-good/david-weis-speaking-gay-for-good-fundraiser-querencia-palms-palm-springs-pride.jpg', alt: 'David Weis speaking to Gay for Good volunteers gathered on the walkway at Querencia Palms during the Palm Springs Pride fundraiser', width: 1206, height: 902, hasSmall: true },
+          },
+          {
+            type: 'photo',
+            ratio: '16 / 10',
+            photo: { suggestion: 'The group in front of the Querencia mural', src: '/images/gay-for-good/gay-for-good-palm-springs-pride-fundraiser-querencia-palms-mural-david-weis.jpg', alt: 'David Weis and two Gay for Good friends in front of the Querencia Palms mural at the Palm Springs Pride fundraiser', width: 1206, height: 899, hasSmall: true },
+            caption: { title: 'Three years later, two communities came together.' },
+          },
+          {
+            type: 'story',
+            eyebrow: 'What I took with me',
+            heading: 'Community does not usually happen by accident.',
+            paragraphs: [
+              'Gay for Good reminded me that community does not usually happen by accident.',
+              'Someone organizes the event. Someone sends the invitation. Someone shows up early. Someone welcomes the new person who does not know anybody yet.',
+              'And then, eventually, people belong.',
+              'I joined because I wanted to volunteer and meet some new people.',
+              'I ended up spending roughly three years as a Chapter Leader, discovering organizations throughout San Diego, making friendships I still value, and learning a lot about what it takes to bring people together.',
+              'My mom probably would have loved that.',
+              'And she probably would have reminded me that this is exactly why she kept telling me to join things.',
+            ],
+          },
+          {
+            type: 'links',
+            heading: 'Keep reading',
+            items: [
+              { label: 'About David', href: '/about' },
+              { label: 'Querencia Palms', href: '/experience/querencia-palms' },
+              { label: 'San Diego real estate', href: '/san-diego' },
+            ],
+          },
+        ],
+      },
+    ],
+    seo: {
+      title: 'Gay for Good San Diego | David Weis',
+      description:
+        'How David Weis found community in San Diego through Gay for Good: a first project priming 20 Habitat for Humanity playhouses, roughly three years as a Chapter Leader, and a Pride fundraiser at Querencia Palms.',
+    },
+  },
 ];
 
 export function getStory(slug: string): StoryPage {

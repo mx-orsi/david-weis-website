@@ -327,23 +327,17 @@ export const aboutChapterB: ProjectChapter = {
       ],
     },
     {
-      type: 'story',
-      eyebrow: 'Gay For Good',
-      heading: 'Service + leadership.',
+      // 2026-10-05: the full Gay for Good story moved to /gay-for-good; About keeps David's card.
+      type: 'teaser',
+      eyebrow: 'Gay for Good',
+      heading: 'Three years of showing up.',
       paragraphs: [
-        'I serve as a Gay For Good San Diego chapter leader, helping bring volunteers together to support organizations throughout the community. The work has introduced me to people and causes I might never have encountered otherwise. Whether we are packing school supplies, preparing holiday donations, or helping an event come together, the part I love most is seeing people show up for one another.',
-        'Over time, I had the opportunity to represent the chapter at community events, accept recognition on its behalf, and eventually host a national Gay For Good fundraiser at Querencia Palms.',
+        'I joined Gay for Good looking for a more meaningful way to volunteer and meet people in San Diego. My first project was helping prime 20 Habitat for Humanity playhouses. Not long after, I became a Chapter Leader and spent roughly three years helping connect volunteers with organizations and causes throughout the region.',
       ],
-    },
-    {
-      type: 'gallery',
-      label: 'Gay For Good',
-      photos: [
-        { suggestion: 'Salvation Army holiday toy sorting', src: '/images/community/david-weis-gay-for-good-volunteer-san-diego-03.jpg', alt: 'Gay For Good volunteers with Santa at the Salvation Army holiday toy sorting', width: 1206, height: 777, hasSmall: true },
-        { suggestion: 'Gay For Good Hillcrest Honors', src: '/images/about/david-weis-gay-for-good-hillcrest-honors.jpg', alt: 'David Weis and another honoree on the red carpet at the Hillcrest Honors awards', width: 797, height: 1165, position: 'center 12%' },
-        { suggestion: 'Gay For Good Equality California gala', src: '/images/about/david-weis-gay-for-good-equality-california-gala.jpg', alt: 'David Weis with a friend at the Equality California gala', width: 1012, height: 1554, hasSmall: true, position: 'center top' },
-      ],
-      captions: [{ title: 'Salvation Army holiday toy sorting' }, { title: 'Hillcrest Honors' }, { title: 'Equality California gala' }],
+      cta: { label: 'Read the story', href: '/gay-for-good' },
+      photo: { suggestion: 'The Habitat for Humanity playhouse group photo', src: '/images/gay-for-good/gay-for-good-san-diego-habitat-for-humanity-playhouses-first-project-david-weis.jpg', alt: 'Gay for Good volunteers kneeling and standing together at the Habitat for Humanity playhouse build in San Diego, David Weis among them', width: 1170, height: 766, hasSmall: true },
+      ratio: '3 / 2',
+      side: 'left',
     },
     {
       type: 'story',
