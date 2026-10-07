@@ -19,7 +19,7 @@ const tiles = order.map((s) => {
 <ul class="shg">
   {tiles.map(({ s, photo }) => (
     <li>
-      <a class:list={['shg__tile', !photo && 'shg__tile--text']} href={withBase(saleHref(s))} aria-label={`${s.title}, ${saleLocation(s)}. ${saleRepresented(s)}`}>
+      <a class:list={['shg__tile', !photo && 'shg__tile--text']} href={withBase(saleHref(s))}>
         {photo && (
           <span class="shg__media">
             <Media photo={{ ...photo, alt: '' }} ratio="4 / 3" sizes="(min-width: 1024px) 25vw, 50vw" class="shg__img" />
@@ -27,7 +27,7 @@ const tiles = order.map((s) => {
         )}
         <span class="shg__loc">{saleLocation(s)}</span>
         <span class="shg__rep">{saleRepresented(s)}</span>
-        {!photo && <span class="shg__addr">{s.title}</span>}
+        {photo ? <span class="sr-only">{s.title}</span> : <span class="shg__addr">{s.title}</span>}
       </a>
     </li>
   ))}
