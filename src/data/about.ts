@@ -122,9 +122,9 @@ export const aboutChapterA: ProjectChapter = {
       photo: {
         suggestion: 'David beside the Querencia Palms mural: QUERENCIA PALMS, LOVE WHERE YOU LIVE',
         src: '/images/about/david-weis-querencia-palms-mural-love-where-you-live.jpg',
-        alt: 'David Weis in a black shirt, hands in his pockets, standing at the right of the Querencia Palms mural, whose lettering reads QUERENCIA PALMS and LOVE WHERE YOU LIVE',
+        alt: 'David Weis standing at the right of the Querencia Palms mural, its lettering and the words Love Where You Live beside him',
         width: 2048,
-        height: 1365,
+        height: 1352,
         hasSmall: true,
       } as Photo,
       ratio: '3 / 2',
@@ -259,6 +259,11 @@ export const aboutChapterB: ProjectChapter = {
         { suggestion: 'Boating in San Diego', src: '/images/about/david-weis-boating-san-diego.jpg', alt: 'David Weis boating on the water in San Diego', width: 1600, height: 1600, hasSmall: true },
         { suggestion: 'Beach sunset with the dog', src: '/images/about/david-weis-beach-sunset-dog.jpg', alt: 'David Weis’s dog silhouetted on the beach at sunset', width: 1800, height: 2400, hasSmall: true },
       ],
+      captions: [
+        { title: 'Friendships that started with a run', note: 'San Diego Front Runners' },
+        { title: 'Saying yes to San Diego', note: 'Building friendships through all the ridiculous possibilities this city gives us.' },
+        { title: 'The moments worth remembering', note: 'Sunsets, beach walks, and the people I love most.' },
+      ],
     },
     {
       type: 'story',
@@ -279,6 +284,11 @@ export const aboutChapterB: ProjectChapter = {
         { suggestion: 'Vista Las Palmas fall social', src: '/images/community/david-weis-vista-las-palmas-fall-social-palm-springs.jpg', alt: 'David Weis, Mark and neighbors at a Vista Las Palmas fall social gathering beside a lit pool at night', width: 2335, height: 2400, hasSmall: true },
         { suggestion: 'A Palm Springs bike ride', src: '/images/about/david-weis-palm-springs-bike-ride.jpg', alt: 'David and Mark Weis with their bikes in front of the Elvis Honeymoon Hideaway in Palm Springs', width: 2400, height: 1800, hasSmall: true },
         { suggestion: 'Front Runners, Palm Springs', src: '/images/community/david-weis-front-runners-palm-springs.jpg', alt: 'The Front Runners running group posing together outdoors in Palm Springs, mountains and palm trees behind them', width: 1206, height: 825, hasSmall: true },
+      ],
+      captions: [
+        { title: 'Showing up for the neighborhood', note: 'Vista Las Palmas community social' },
+        { title: 'Modernism adventures', note: 'Biking through the neighborhood past the Elvis Honeymoon Hideaway' },
+        { title: 'Friendships that started with a run', note: 'Palm Springs Front Runners' },
       ],
     },
     {

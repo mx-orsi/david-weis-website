@@ -20,18 +20,25 @@ const { units, groups, headingId } = Astro.props;
 const tiles = units.map((u) => {
   const photos = (groups.find((g) => g.id === u.unit)?.photos ?? []).filter((p) => photoExists(p.src));
   const n = photos.length;
+  const hero = u.hero && photoExists(u.hero.src) ? u.hero : undefined;
   return {
     u,
-    lead: photos[0],
+    lead: hero ?? photos[0],
     n,
     name: `${salesUi.unitWord} ${u.unit}`,
     facts: `${u.beds} ${salesUi.bedWord} · ${u.baths} ${salesUi.bathWord} · ${u.sqft} ${salesUi.sqftWord}`,
     count: `${n} ${n === 1 ? salesUi.photoWord : salesUi.photosWord}`,
   };
 });
+/** David's layout (2026-10-05): a heading per phase, then that phase's tiles centered two to a row. */
+const phases = [...new Set(units.map((u) => u.phase))].map((phase) => ({ phase, tiles: tiles.filter((t) => t.u.phase === phase) }));
 ---
 
-<ul class="ut" aria-labelledby={headingId}>
+<div class="ut-phases" aria-labelledby={headingId}>
+{phases.map(({ phase, tiles }) => (
+<section class="ut-phase" aria-label={phase}>
+<h3 class="ut-phase__title">{phase}</h3>
+<ul class="ut">
   {tiles.map(({ u, lead, n, name, facts, count }) => {
     const body = (
       <>
@@ -62,18 +69,48 @@ const tiles = units.map((u) => {
     );
   })}
 </ul>
+</section>
+))}
+</div>
 
 <style>
+  .ut-phases {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+  .ut-phase {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: center;
+  }
+  .ut-phase__title {
+    width: 100%;
+    max-width: 56rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--line-strong);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+  }
   .ut {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    max-width: 56rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: clamp(1.5rem, 3vw, 2.25rem) 1.5rem;
   }
   .ut__item {
     min-width: 0;
+    flex: 0 1 calc(50% - 0.75rem);
+    max-width: 26rem;
   }
   .ut__tile {
     display: grid;
@@ -143,14 +180,10 @@ const tiles = units.map((u) => {
     font-size: 1.1rem;
     font-weight: 500;
   }
-  @media (max-width: 1023px) {
-    .ut {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
   @media (max-width: 599px) {
-    .ut {
-      grid-template-columns: minmax(0, 1fr);
+    .ut__item {
+      flex-basis: 100%;
+      max-width: none;
     }
   }
   @media (prefers-reduced-motion: reduce) {

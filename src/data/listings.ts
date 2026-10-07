@@ -101,8 +101,66 @@ export const properties = {
   },
 } as const;
 
-/** David's active listings. Empty until he confirms the list (see CLIENT-QUESTIONS.md). */
-export const activeListings: readonly Listing[] = [];
+/**
+ * David's active listings, entered by hand (his 2026-10-05 go-ahead). Facts
+ * are from his GPSR MLS inventory on 2026-10-05. THESE DO NOT UPDATE
+ * THEMSELVES: change price and status here, and move a listing to sales.ts
+ * when it closes. No San Diego or Big Bear listings yet.
+ */
+export const activeListings: readonly Listing[] = [
+  {
+    id: 'gpsr-26868985',
+    address: '588 E San Lorenzo Rd #204',
+    city: 'Palm Springs',
+    market: 'palm-springs',
+    price: '$569,000',
+    beds: '2',
+    baths: '2',
+    sqft: '1,210',
+    status: 'For Sale',
+    note: 'Querencia Palms',
+    photo: {
+      suggestion: 'Unit 204 living room',
+      src: '/images/querencia-interiors/querencia-palms-renovated-condo-interior-south-palm-springs-david-weis.jpg',
+      alt: 'Living room of Unit 204 at Querencia Palms in Palm Springs with a cream sofa, rust rug and a green and gold mural',
+      width: 1448,
+      height: 1086,
+      hasSmall: true,
+    },
+  },
+  {
+    id: 'gpsr-26950635',
+    address: '2487 S Gene Autry Trl #A',
+    city: 'Palm Springs',
+    market: 'palm-springs',
+    price: '$545,000',
+    beds: '2',
+    baths: '2',
+    sqft: '1,180',
+    status: 'For Sale',
+    photo: {
+      suggestion: 'Open-concept living and dining area',
+      src: '/images/listings/2487-s-gene-autry-trl-unit-a-palm-springs-ca-92264-living-dining-david-weis-san-diego-palm-springs-big-bear-compass.jpg',
+      alt: 'Open-concept living and dining area of the condo at 2487 S Gene Autry Trail #A in Palm Springs',
+      width: 2400,
+      height: 1600,
+      hasSmall: true,
+    },
+  },
+  {
+    id: 'gpsr-26993075',
+    address: '2324 Camino Vida',
+    city: 'Palm Springs',
+    market: 'palm-springs',
+    price: '$1,395,000',
+    beds: '3',
+    baths: '3',
+    sqft: '2,593',
+    status: 'For Sale',
+    // No photo yet: David has been asked for the listing photography.
+    photo: { suggestion: 'Listing photo of 2324 Camino Vida' },
+  },
+];
 
 /** David's listings under contract. Listing side only. */
 export const escrowListings: readonly Listing[] = [];

@@ -94,25 +94,27 @@ card text, Featured Areas restyle, "Recent sales in" row and button layout; Abou
 mural photo, captions, blue market dividers and even Range Rover pair. Voltaire and Kensington are
 never called "historic" (no designation). A Word document for Compass compliance was generated.
 
+**David, 2026-10-05 reply (applied 2026-10-06):** Querencia unit tiles grouped by phase (I: 102, 206 ·
+II: 202, 201 then 105, 104 · III: 106), each led by the unit's wallpaper-and-sofa hero shot from his
+Interiors folder (102 has none, so it keeps its own living room; 106 uses the sofa photo); 3700 Third
+Ave shows the main house first and the small unit is 140, not 104 (files renamed); My Work grid reads
+"Represented Seller · Developer Sales" for Querencia; the About mural photo is now the non-smiling
+shot (`…san-diego-13.jpg`); San Diego and Palm Springs gallery captions added; the Voltaire story is
+his new five-paragraph version; three Palm Springs listings are on Properties by hand (#204, 2487 S
+Gene Autry #A, 2324 Camino Vida) with facts from his MLS inventory. Unit details confirmed accurate.
+He dropped the GPSR widget ("I don't think I want it") and will look for an IDX he likes.
+
 ## Still open
 
-**From his 2026-10-04 reply (ask David):**
+**From his 2026-10-05 reply (ask David):**
 
-- **Photo labels.** The file he labeled "About Page" is a portrait against geometric wallpaper; it is
-  now the photo at the top of About (his sentence about the top photo was unfinished). The wide
-  "QUERENCIA PALMS / LOVE WHERE YOU LIVE" photo in "Always building something" is the unlabeled
-  `david-weis-realtor-compass-palm-springs-05.jpg`. Confirm both.
-- **Querencia unit specs** (beds, baths, sq ft, sold price) came from his GPSR MLS inventory because
-  his mailing screenshot did not come through; the prices total his $3,958,000. Confirm against the mailing.
-- **Organizations blocks and pages** (Gay For Good, Garden Club, Vista Las Palmas + ONE-PS) are not
-  built; waiting on his stories and photo picks.
-- **Current listings.** His MLS inventory shows three active Palm Springs listings (588 E San Lorenzo
-  #204 $569,000; 2487 S Gene Autry Trl #A $545,000; 2324 Camino Vida $1,395,000). Not shown until he
-  confirms and says whether to enter them by hand.
-- **Widget size.** No fixed size fits a phone; ask GPSR for a responsive or roughly 360px-wide version
-  that opens on Inventory with Active / Under Contract only.
-- **"Recent sales in" on San Diego** includes Clairemont (Belden St), which was not in his example list.
-- **Voltaire story opening** was reworded, not deleted, so the "him" in later paragraphs still reads.
+- **2324 Camino Vida has no photo** on its For Sale card. Needs the listing photography.
+- **Listing links.** The three For Sale cards link to his Compass profile; send each listing's Compass
+  URL to deep-link them. They must be updated by hand when price or status changes.
+- **Equality California.** His unfinished "photo at the top" sentence was, he thinks, about the
+  Equality California gala photo in Gay For Good. What did he want changed there?
+- **Organizations pages**: he is working on the stories and photo picks.
+- **Compliance Word document** was never attached to the 2026-10-05 email; it is on Max's Desktop.
 
 **From the 2026-09-27 / 2026-09-28 emails (ask David):**
 

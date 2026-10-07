@@ -24,7 +24,7 @@ const facts = [
 
 <article class="lc" aria-label={`${l.address}, ${l.city}`}>
   <div class="lc__media">
-    <Media photo={l.photo} ratio="4 / 3" sizes="(min-width: 1024px) 33vw, (min-width: 700px) 50vw, 100vw" />
+    {l.photo.src && <Media photo={l.photo} ratio="4 / 3" sizes="(min-width: 1024px) 33vw, (min-width: 700px) 50vw, 100vw" />}
     <span class="lc__status">{l.status}</span>
   </div>
   <div class="lc__body">

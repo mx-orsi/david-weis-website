@@ -79,12 +79,12 @@ export const salePhotos: Record<string, readonly Photo[]> = {
     { suggestion: 'Garage', src: '/images/sales/4493-utah-st/4493-utah-st-san-diego-ca-92116-garage-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Detached garage with a wood door beside a paved path at 4493 Utah St in San Diego', width: 2400, height: 1600, hasSmall: true },
   ],
   '3700-third-ave': [
-    { suggestion: 'Unit 104 · living room', src: '/images/sales/3700-third-ave/3700-third-ave-san-diego-ca-92103-unit-104-living-room-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Living room in Unit 104 with a teal sofa and a kitchen island with stools at 3700 Third Ave in San Diego', width: 1440, height: 960, hasSmall: true },
-    { suggestion: 'Unit 104 · living room', src: '/images/sales/3700-third-ave/3700-third-ave-san-diego-ca-92103-unit-104-living-room-2-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Living room in Unit 104 with a teal sofa and abstract art at 3700 Third Ave in San Diego', width: 1440, height: 960, hasSmall: true },
-    { suggestion: 'Unit 104 · living room', src: '/images/sales/3700-third-ave/3700-third-ave-san-diego-ca-92103-unit-104-living-room-3-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Living room in Unit 104 with a teal sofa beside a black front door at 3700 Third Ave in San Diego', width: 1440, height: 960, hasSmall: true },
-    { suggestion: 'Unit 104 · kitchen', src: '/images/sales/3700-third-ave/3700-third-ave-san-diego-ca-92103-unit-104-kitchen-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Kitchen in Unit 104 with white cabinets, a gas range and a patterned backsplash at 3700 Third Ave in San Diego', width: 1440, height: 960, hasSmall: true },
-    { suggestion: 'Unit 104 · bedroom', src: '/images/sales/3700-third-ave/3700-third-ave-san-diego-ca-92103-unit-104-bedroom-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Bedroom in Unit 104 with an upholstered headboard and a wall-mounted air conditioner at 3700 Third Ave in San Diego', width: 1440, height: 960, hasSmall: true },
-    { suggestion: 'Unit 104 · bathroom', src: '/images/sales/3700-third-ave/3700-third-ave-san-diego-ca-92103-unit-104-bathroom-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Bathroom in Unit 104 with a double vanity and gold fixtures at 3700 Third Ave in San Diego', width: 1440, height: 960, hasSmall: true },
+    { suggestion: 'Unit 140 · living room', src: '/images/sales/3700-third-ave/3700-third-ave-san-diego-ca-92103-unit-140-living-room-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Living room in Unit 140 with a teal sofa and a kitchen island with stools at 3700 Third Ave in San Diego', width: 1440, height: 960, hasSmall: true },
+    { suggestion: 'Unit 140 · living room', src: '/images/sales/3700-third-ave/3700-third-ave-san-diego-ca-92103-unit-140-living-room-2-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Living room in Unit 140 with a teal sofa and abstract art at 3700 Third Ave in San Diego', width: 1440, height: 960, hasSmall: true },
+    { suggestion: 'Unit 140 · living room', src: '/images/sales/3700-third-ave/3700-third-ave-san-diego-ca-92103-unit-140-living-room-3-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Living room in Unit 140 with a teal sofa beside a black front door at 3700 Third Ave in San Diego', width: 1440, height: 960, hasSmall: true },
+    { suggestion: 'Unit 140 · kitchen', src: '/images/sales/3700-third-ave/3700-third-ave-san-diego-ca-92103-unit-140-kitchen-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Kitchen in Unit 140 with white cabinets, a gas range and a patterned backsplash at 3700 Third Ave in San Diego', width: 1440, height: 960, hasSmall: true },
+    { suggestion: 'Unit 140 · bedroom', src: '/images/sales/3700-third-ave/3700-third-ave-san-diego-ca-92103-unit-140-bedroom-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Bedroom in Unit 140 with an upholstered headboard and a wall-mounted air conditioner at 3700 Third Ave in San Diego', width: 1440, height: 960, hasSmall: true },
+    { suggestion: 'Unit 140 · bathroom', src: '/images/sales/3700-third-ave/3700-third-ave-san-diego-ca-92103-unit-140-bathroom-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Bathroom in Unit 140 with a double vanity and gold fixtures at 3700 Third Ave in San Diego', width: 1440, height: 960, hasSmall: true },
     { suggestion: 'Unit 142 · exterior', src: '/images/sales/3700-third-ave/3700-third-ave-san-diego-ca-92103-unit-142-exterior-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Exterior entry and stairway of the two-story building that holds Unit 142 at 3700 Third Ave in San Diego', width: 800, height: 600 },
     { suggestion: 'Unit 142 · living room', src: '/images/sales/3700-third-ave/3700-third-ave-san-diego-ca-92103-unit-142-living-room-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Living room in Unit 142 with a leather sofa opening to a kitchen counter with stools at 3700 Third Ave in San Diego', width: 800, height: 600 },
     { suggestion: 'Unit 142 · kitchen', src: '/images/sales/3700-third-ave/3700-third-ave-san-diego-ca-92103-unit-142-kitchen-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Kitchen in Unit 142 with white cabinets, patterned backsplash tile and a gas range at 3700 Third Ave in San Diego', width: 800, height: 600 },
@@ -189,7 +189,7 @@ export const salePhotos: Record<string, readonly Photo[]> = {
 
 /** A labelled set of photos inside one story. */
 export interface PhotoGroup {
-  /** Stable id: 'unit-104', 'main-house', or the Querencia unit number ('102'). */
+  /** Stable id: 'unit-140', 'main-house', or the Querencia unit number ('102'). */
   id: string;
   label: string;
   /** Beds, baths and square footage as David filed them. */
@@ -214,9 +214,9 @@ const qp = salePhotos['querencia-palms'] ?? [];
 
 export const salePhotoGroups: Record<string, readonly PhotoGroup[]> = {
   '3700-third-ave': [
-    { id: 'unit-104', label: 'Unit 104', note: '1 bed, 1 bath, 592 sq ft', photos: unit104 },
-    { id: 'unit-142', label: 'Unit 142', note: '2 bed, 2 bath, 740 sq ft', photos: unit142 },
     { id: 'main-house', label: 'Main House', note: '2 bed, 2 bath, 1,223 sq ft', photos: mainHouse },
+    { id: 'unit-140', label: 'Unit 140', note: '1 bed, 1 bath, 592 sq ft', photos: unit104 },
+    { id: 'unit-142', label: 'Unit 142', note: '2 bed, 2 bath, 740 sq ft', photos: unit142 },
   ],
   'querencia-palms': [
     {
@@ -314,7 +314,7 @@ export const salePhotoGroups: Record<string, readonly PhotoGroup[]> = {
     },
     {
       id: '104',
-      label: 'Unit 104',
+      label: 'Unit 140',
       photos: [
         qp[3]!,
         { suggestion: 'Unit 104 · living room, sofa', src: '/images/sales/querencia-palms/588-e-san-lorenzo-rd-unit-104-palm-springs-ca-92264-living-room-mural-sofa-close-david-weis-san-diego-palm-springs-big-bear-compass.jpg', alt: 'Cream sofa with orange pillows against a green and gold mural in Unit 104 at Querencia Palms, 588 E San Lorenzo Rd in Palm Springs', width: 1600, height: 1069, hasSmall: true },

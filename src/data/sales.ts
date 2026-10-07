@@ -40,6 +40,8 @@ export interface Sale {
   closed?: string;
   /** Neighborhood, from David's 2026-10-04 list. Shown as "Hillcrest, San Diego" with the market name. */
   area?: string;
+  /** Appended to "Represented Seller" on the My Work grid, e.g. "Developer Sales". */
+  representedNote?: string;
   /** Full story. The first paragraph doubles as the card preview unless `preview` is set. */
   paragraphs: readonly string[];
   /** Card and search-result preview when the story's opening line should not lead. */
@@ -64,6 +66,8 @@ export interface QuerenciaUnit {
   sqft: string;
   price: string;
   closed: string;
+  /** Tile photo: the unit's wallpaper-and-sofa hero shot from David's Interiors folder (his 2026-10-05 note). */
+  hero?: Photo;
 }
 
 export const salesPage = {
@@ -97,6 +101,7 @@ export const querenciaCaseStudy: Sale & {
 } = {
   slug: 'querencia-palms',
   area: 'Tahquitz River Estates',
+  representedNote: 'Developer Sales',
   title: 'Querencia Palms',
   city: 'Palm Springs',
   market: 'palm-springs',
@@ -117,12 +122,18 @@ export const querenciaCaseStudy: Sale & {
   phasesNote: 'and counting',
   units: [
     { unit: '102', phase: 'Phase I', beds: 2, baths: 2, sqft: '1,066', price: '$549,000', closed: 'May 2026' },
-    { unit: '206', phase: 'Phase I', beds: 2, baths: 2, sqft: '1,275', price: '$599,000', closed: 'May 2026' },
-    { unit: '202', phase: 'Phase II', beds: 2, baths: 2, sqft: '1,100', price: '$524,000', closed: 'June 2026' },
-    { unit: '201', phase: 'Phase II', beds: 2, baths: 2, sqft: '1,200', price: '$539,000', closed: 'June 2026' },
-    { unit: '104', phase: 'Phase II', beds: 2, baths: 2, sqft: '1,200', price: '$599,000', closed: 'August 2026' },
-    { unit: '105', phase: 'Phase II', beds: 2, baths: 2, sqft: '1,210', price: '$589,000', closed: 'August 2026' },
-    { unit: '106', phase: 'Phase III', beds: 2, baths: 2, sqft: '1,150', price: '$559,000', closed: 'September 2026' },
+    { unit: '206', phase: 'Phase I', beds: 2, baths: 2, sqft: '1,275', price: '$599,000', closed: 'May 2026',
+      hero: { suggestion: 'Unit 206 living room', src: '/images/querencia-interiors/querencia-palms-condo-interior-palm-springs-david-weis.jpg', alt: 'Unit 206 living and dining area at Querencia Palms with a patterned mural wall and a sofa', width: 2048, height: 1369, hasSmall: true } },
+    { unit: '202', phase: 'Phase II', beds: 2, baths: 2, sqft: '1,100', price: '$524,000', closed: 'June 2026',
+      hero: { suggestion: 'Unit 202 living room', src: '/images/querencia-interiors/querencia-palms-open-concept-living-room-david-weis.jpg', alt: 'Unit 202 open-plan living room at Querencia Palms with a bold geometric mural, sofa and dining table', width: 2400, height: 1800, hasSmall: true } },
+    { unit: '201', phase: 'Phase II', beds: 2, baths: 2, sqft: '1,200', price: '$539,000', closed: 'June 2026',
+      hero: { suggestion: 'Unit 201 living room', src: '/images/querencia-interiors/querencia-palms-201-living-room-leather-sofa-botanical-mural-palm-springs-david-weis.jpg', alt: 'Unit 201 living room at Querencia Palms with a leather sofa in front of a botanical mural', width: 2400, height: 1800, hasSmall: true } },
+    { unit: '105', phase: 'Phase II', beds: 2, baths: 2, sqft: '1,210', price: '$589,000', closed: 'August 2026',
+      hero: { suggestion: 'Unit 105 living room', src: '/images/querencia-interiors/querencia-palms-midcentury-interior-design-palm-springs-david-weis.jpg', alt: 'Unit 105 living room at Querencia Palms with a white sofa and a teal, mustard and rust geometric mural', width: 2048, height: 1367, hasSmall: true } },
+    { unit: '104', phase: 'Phase II', beds: 2, baths: 2, sqft: '1,200', price: '$599,000', closed: 'August 2026',
+      hero: { suggestion: 'Unit 104 living room', src: '/images/querencia-interiors/querencia-palms-104-living-room-cream-sofa-green-gold-mural-david-weis.jpg', alt: 'Unit 104 living room at Querencia Palms with a cream sofa and a green and gold mural', width: 2048, height: 1368, hasSmall: true } },
+    { unit: '106', phase: 'Phase III', beds: 2, baths: 2, sqft: '1,150', price: '$559,000', closed: 'September 2026',
+      hero: { suggestion: 'Unit 106 living room', src: '/images/querencia-interiors/querencia-palms-106-living-room-leather-sofa-geometric-mural-palm-springs-david-weis.jpg', alt: 'Unit 106 living room at Querencia Palms with a leather sofa in front of a geometric mural', width: 2048, height: 1365, hasSmall: true } },
   ],
   paragraphs: [
     "My involvement in Querencia Palms began with the property's acquisition and continued through its transformation from a 12-unit property into a 14-residence condominium community. Working closely with the seller and condominium conversion consultants throughout the process, I provided detailed knowledge of the property, including the koi pond, private patios, and updated unit configuration, helping the team account for its features and changes.",
@@ -347,11 +358,11 @@ export const sales: readonly Sale[] = [
     preview:
       'An investment property needs to make sense beyond the asking price. I helped evaluate renovation potential, projected resale value, and potential alternative uses.',
     paragraphs: [
-      'I represented an experienced investor, who had bought and sold more than 30 homes and apartment buildings, in acquiring this property for renovation.',
-      "My involvement included evaluating the investment itself. Alongside researching the property's history, I helped prepare projections of its potential resale value after renovation. Those estimates gave him a basis to compare the anticipated sale price with acquisition and renovation costs and assess whether a flip made financial sense. I also explored whether a multifamily conversion or adding an accessory dwelling unit could offer additional value.",
-      'During the inspection process, I raised concerns about additional repairs and the costs they would introduce. Those negotiations resulted in a $40,000 price reduction from $1.5 million, leaving more funds available for the renovation.',
-      "The purchase took nearly five months, with the trustee's sale process and an escrow that fell through contributing to the extended timeline. Throughout those delays, I kept him informed and remained focused on securing terms that supported the project.",
-      "We ultimately completed the purchase with a lower acquisition cost and a clearer understanding of the property's possibilities, ready to begin its transformation.",
+      'I represented an experienced investor who had bought and sold more than 30 homes and apartment buildings in acquiring this property for renovation.',
+      "My involvement went beyond negotiating the purchase. I researched the property's history and helped prepare projections of its potential resale value after renovation, giving the buyer a basis to compare the anticipated sale price against acquisition and renovation costs and determine whether the project made financial sense. I also explored the potential value of a multifamily conversion or accessory dwelling unit, subject to feasibility and approvals.",
+      'During inspections, I identified additional repair and cost concerns that changed the economics of the project. I brought those issues back into the negotiation and secured a $40,000 price reduction from the original $1.5 million price, preserving more capital for the renovation ahead.',
+      "The purchase took nearly five months, with the trustee's sale process and an escrow that fell through contributing to the extended timeline. Throughout the delays, I kept the buyer informed and remained focused on securing terms that supported the project.",
+      "We ultimately completed the purchase at a lower acquisition cost, with a clearer understanding of the property's risks, possibilities, and potential before beginning its transformation.",
     ],
     project: { slug: 'vista-voltaire', label: 'What happened next: the Vista Voltaire project' },
   },
@@ -420,7 +431,8 @@ export const salesInMarket = (market: MarketSlug) => allSales.filter((s) => s.ma
 /** "Hillcrest, San Diego": the caption David asked for on the sale hero tiles. */
 const marketNames: Record<MarketSlug, string> = { 'san-diego': 'San Diego', 'palm-springs': 'Palm Springs', 'big-bear': 'Big Bear' };
 export const saleLocation = (s: Sale) => (s.area ? `${s.area}, ${marketNames[s.market]}` : s.city);
-export const saleRepresented = (s: Sale) => (s.side === 'buyer' ? 'Represented Buyer' : 'Represented Seller');
+export const saleRepresented = (s: Sale) =>
+  (s.side === 'buyer' ? 'Represented Buyer' : 'Represented Seller') + (s.representedNote ? ` · ${s.representedNote}` : '');
 
 export const salePhotosFor = (slug: string): readonly Photo[] => salePhotos[slug] ?? [];
 export const saleLead = (slug: string): Photo | undefined => salePhotosFor(slug)[0];
