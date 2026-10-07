@@ -68,12 +68,16 @@ const f = contact.form;
     const endpoint = form.dataset.endpoint || '';
     const email = form.dataset.email || '';
 
-    // Buy/Sell buttons link here with ?interest=Buying|Selling to preselect the field.
-    const wanted = new URLSearchParams(window.location.search).get('interest');
-    const interest = form.querySelector<HTMLSelectElement>('select[name=interest]');
-    if (wanted && interest) {
-      const match = Array.from(interest.options).find((o) => o.value.toLowerCase() === wanted.toLowerCase());
-      if (match) interest.value = match.value;
+    // Buy/Sell buttons link here with ?interest=Buying|Selling, and the market
+    // FAQ guides with ?location=Palm%20Springs, to preselect those fields.
+    const params = new URLSearchParams(window.location.search);
+    for (const name of ['interest', 'location']) {
+      const wanted = params.get(name);
+      const select = form.querySelector<HTMLSelectElement>(`select[name=${name}]`);
+      if (wanted && select) {
+        const match = Array.from(select.options).find((o) => o.value.toLowerCase() === wanted.toLowerCase());
+        if (match) select.value = match.value;
+      }
     }
 
     form.addEventListener('submit', async (e) => {

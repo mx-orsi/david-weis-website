@@ -1,0 +1,141 @@
+---
+/**
+ * FaqList — one group of answers as native <details> disclosures, each
+ * anchored by its stable id so other pages can deep-link to a single
+ * answer. The question stays a real heading (h3) inside the summary; the
+ * full answer text is in the HTML, never fetched. Expand/collapse-all and
+ * open-on-hash live in FaqPage.astro, which owns the page-level script.
+ */
+import Icon from './Icon.astro';
+import type { FaqItem } from '../data/faq';
+import { hasInline, renderInline } from '../lib/inline';
+
+interface Props {
+  items: readonly FaqItem[];
+  /** Optional category heading (h2) above the group, used on the hub. */
+  heading?: string;
+  headingId?: string;
+  /** Question heading level: h3 under the hub's category h2s, h2 on the market guides. */
+  level?: 2 | 3;
+}
+const { items, heading, headingId, level = 3 } = Astro.props;
+const Q = level === 2 ? 'h2' : 'h3';
+/** UI label (not client copy): prefix before the primary-source links. */
+const sourceLabel = 'Official guidance';
+---
+
+<div class="faql">
+  {heading && <h2 id={headingId} class="title-md faql__heading">{heading}</h2>}
+  <div class="faql__list">
+    {items.map((i) => {
+      const sources = (i.sources ?? []).filter((s) => s.url);
+      return (
+        <details class="faqi" id={i.id} data-faq-item>
+          <summary class="faqi__summary">
+            <Q class="faqi__q">{i.question}</Q>
+            <Icon name="chevron-down" class="faqi__chev" size={18} />
+          </summary>
+          <div class="faqi__body">
+            {i.answer.map((p) => (hasInline(p) ? <p set:html={renderInline(p)} /> : <p>{p}</p>))}
+            {sources.length > 0 && (
+              <p class="faqi__src">
+                <span class="faqi__src-label">{sourceLabel}</span>
+                {sources.map((s) => (
+                  <a class="link-arrow link-arrow--ext" href={s.url} target="_blank" rel="noopener noreferrer">
+                    {s.label} <Icon name="arrow-ext" size={12} /><span class="sr-only"> (opens in a new tab)</span>
+                  </a>
+                ))}
+              </p>
+            )}
+          </div>
+        </details>
+      );
+    })}
+  </div>
+</div>
+
+<style>
+  .faql {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .faql__heading {
+    max-width: 20ch;
+  }
+  .faql__list {
+    border-top: 1px solid var(--line-strong);
+  }
+  .faqi {
+    border-bottom: 1px solid var(--line-strong);
+    /* Keep a deep-linked answer clear of the sticky header. */
+    scroll-margin-top: 6rem;
+  }
+  .faqi__summary {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: 44px;
+    padding-block: 1.1rem;
+    cursor: pointer;
+    list-style: none;
+  }
+  .faqi__summary::-webkit-details-marker {
+    display: none;
+  }
+  .faqi__summary:hover .faqi__q {
+    color: var(--blue);
+  }
+  .faqi__summary:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .faqi__q {
+    font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+    line-height: 1.25;
+    text-wrap: pretty;
+    transition: color 0.2s var(--ease);
+  }
+  .faqi__chev {
+    flex: none;
+    margin-top: 0.35rem;
+    color: var(--muted);
+    transition: transform 0.2s var(--ease);
+  }
+  .faqi[open] .faqi__chev {
+    transform: rotate(180deg);
+  }
+  .faqi__body {
+    display: grid;
+    gap: 0.9rem;
+    max-width: var(--measure);
+    padding-bottom: 1.75rem;
+  }
+  .faqi__body p {
+    color: var(--ink-2);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  .faqi__body a:not(.link-arrow) {
+    color: var(--ink);
+  }
+  .faqi__src {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.25rem;
+    margin-top: 0.25rem;
+  }
+  .faqi__src-label {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .faqi__src .link-arrow {
+    min-height: 44px;
+  }
+</style>

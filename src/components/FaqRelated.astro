@@ -1,0 +1,81 @@
+---
+/**
+ * FaqRelated — "Questions buyers/sellers ask": a compact list of deep links
+ * into the FAQ hub and market guides, rendered after the Buy/Sell page's own
+ * question pairs. The selection lives in faqServiceLinks (src/data/faq.ts).
+ */
+import { faqAnchor, faqItem, faqServiceLinks, type FaqPageSlug } from '../data/faq';
+import { getMarket } from '../data/site';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  slug: 'buy' | 'sell';
+}
+const { slug } = Astro.props;
+const c = faqServiceLinks[slug];
+const where = (p: FaqPageSlug) => (p === 'faq' ? 'Real estate FAQs' : `${getMarket(p).name} FAQs`);
+const links = c.items.map((l) => ({ ...l, item: faqItem(l.page, l.id), where: where(l.page), href: withBase(faqAnchor(l.page, l.id)) }));
+---
+
+<section class="faqr" aria-labelledby={`${slug}-faq-related`}>
+  <div class="container split">
+    <div class="faqr__head">
+      <p class="eyebrow eyebrow--dot">Related answers</p>
+      <h2 id={`${slug}-faq-related`} class="title-md">{c.heading}</h2>
+    </div>
+    <ul class="faqr__list">
+      {links.map((l) => (
+        <li class="faqr__item">
+          <a href={l.href}>{l.item.question}</a>
+          <span class="faqr__where">{l.where}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .faqr__head {
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+    justify-items: start;
+  }
+  .faqr__head h2 {
+    max-width: 16ch;
+  }
+  .faqr__list {
+    list-style: none;
+    display: grid;
+    max-width: var(--measure);
+    border-top: 1px solid var(--line-strong);
+  }
+  .faqr__item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1.5rem;
+    padding-block: 0.9rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .faqr__item a {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    line-height: 1.3;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .faqr__item a:hover {
+    color: var(--blue);
+  }
+  .faqr__where {
+    flex: none;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+</style>

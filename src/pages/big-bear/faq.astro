@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqPage from '../../components/FaqPage.astro';
+import { faqPage } from '../../data/faq';
+
+const p = faqPage('big-bear');
+---
+
+<BaseLayout title={p.seo.title} description={p.seo.description} finalCta={false}>
+  <FaqPage slug="big-bear" />
+</BaseLayout>

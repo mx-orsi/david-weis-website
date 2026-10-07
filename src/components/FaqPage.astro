@@ -1,0 +1,501 @@
+---
+/**
+ * FaqPage — the hub (/faq) and the three market guides (/<market>/faq),
+ * generated from src/data/faq.ts. The hub adds the market cards, the
+ * category headings, the "by market" directory and a client-side keyword
+ * filter; every page carries the author line, the note and its own closing
+ * contact block. Expand/collapse-all, open-on-hash and the filter are
+ * progressive: the controls stay hidden until the script runs.
+ */
+import FaqList from './FaqList.astro';
+import Icon from './Icon.astro';
+import PageHero from './PageHero.astro';
+import {
+  faqAnchor,
+  faqAuthorLine,
+  faqExcerpt,
+  faqHubUi,
+  faqItems,
+  faqItemsFor,
+  faqMarketCards,
+  faqNote,
+  faqPage,
+  showReviewed,
+  type FaqPageSlug,
+} from '../data/faq';
+import { agent, getMarket, siteUrl } from '../data/site';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  slug: FaqPageSlug;
+}
+const { slug } = Astro.props;
+const page = faqPage(slug);
+const items = faqItemsFor(slug);
+const isHub = slug === 'faq';
+const market = isHub ? undefined : getMarket(slug);
+const [lede, ...moreIntro] = page.intro;
+
+/** Hub: categories in data order, each with its questions. */
+const categories = isHub
+  ? [...new Set(items.map((i) => i.category))].map((category) => ({ category, items: items.filter((i) => i.category === category) }))
+  : [];
+const categoryId = (c: string) => `faq-${c.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
+
+/** Hub: the local questions grouped under each market, and the search index of all answers. */
+const directory = faqMarketCards.map((m) => ({ ...m, path: faqPage(m.slug).path, items: faqItemsFor(m.slug) }));
+const where = (p: FaqPageSlug, category: string) => (p === 'faq' ? category : getMarket(p).name);
+const stripLinks = (s: string) => s.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+const searchIndex = isHub
+  ? faqItems.map((i) => ({
+      q: i.question,
+      w: where(i.page, i.category),
+      e: faqExcerpt(i),
+      h: withBase(faqAnchor(i.page, i.id)),
+      t: [i.question, where(i.page, i.category), ...i.answer.map(stripLinks)].join(' ').toLowerCase(),
+    }))
+  : [];
+
+const latestReviewed = items.reduce((a, i) => (i.reviewed > a ? i.reviewed : a), '');
+const reviewedLabel = showReviewed && latestReviewed
+  ? new Date(`${latestReviewed}T00:00:00`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+  : '';
+
+const hubCrumb = 'Real estate FAQs';
+const crumbs = isHub
+  ? [{ label: 'Home', href: withBase('/') }, { label: hubCrumb }]
+  : [{ label: 'Home', href: withBase('/') }, { label: market!.name, href: withBase(market!.href) }, { label: 'FAQs' }];
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: isHub
+    ? [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+        { '@type': 'ListItem', position: 2, name: hubCrumb, item: `${siteUrl}${page.path}` },
+      ]
+    : [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+        { '@type': 'ListItem', position: 2, name: market!.name, item: `${siteUrl}${market!.href}` },
+        { '@type': 'ListItem', position: 3, name: page.title, item: `${siteUrl}${page.path}` },
+      ],
+};
+const contactHref = isHub ? '/contact' : `/contact?location=${encodeURIComponent(market!.name)}`;
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
+
+<article class="faq" data-faq-page>
+  <PageHero eyebrow={page.eyebrow} title={page.title} intro={lede} crumbs={crumbs} size={isHub ? 'display' : 'xl'} />
+  <div class="container faq__intro">
+    {moreIntro.map((p) => <p class="lede lede--wide">{p}</p>)}
+    <p class="faq__author">
+      {faqAuthorLine}
+      {reviewedLabel && <span class="faq__reviewed">Last reviewed {reviewedLabel}</span>}
+    </p>
+  </div>
+
+  {isHub && (
+    <section class="faq__markets" aria-label="FAQ guides by market">
+      <ul class="container faq-cards">
+        {directory.map((m) => (
+          <li class="faq-card">
+            <h2 class="title-md">{m.name}</h2>
+            <p>{m.text}</p>
+            <a class="btn" href={withBase(m.path)}>{m.button} <Icon name="arrow-right" /></a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <section class="faq__answers" aria-label="Questions and answers">
+    <div class="container">
+      <div class="faq__tools">
+        <button type="button" class="faq__toggle" hidden data-faq-toggle data-expand={faqHubUi.expandAll} data-collapse={faqHubUi.collapseAll} aria-controls="faq-answers" aria-expanded="false">
+          {faqHubUi.expandAll}
+        </button>
+      </div>
+      <div class="faq__groups" id="faq-answers">
+        {isHub ? (
+          categories.map((c) => <FaqList items={c.items} heading={c.category} headingId={categoryId(c.category)} />)
+        ) : (
+          <FaqList items={items} level={2} />
+        )}
+      </div>
+    </div>
+  </section>
+
+  {isHub && (
+    <section class="section section--line faq__dir" aria-labelledby="faq-directory">
+      <div class="container">
+        <h2 id="faq-directory" class="title-lg">{faqHubUi.directoryTitle}</h2>
+        <div class="faq-dir">
+          {directory.map((m) => (
+            <div class="faq-dir__col">
+              <h3 class="faq-dir__market"><a href={withBase(m.path)}>{m.name}</a></h3>
+              <ul class="faq-dir__list">
+                {m.items.map((i) => (
+                  <li><a href={withBase(faqAnchor(m.slug, i.id))}>{i.question}</a></li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div class="faq-search" hidden data-faq-search data-no-results={faqHubUi.noResults}>
+          <label class="faq-search__label" for="faq-search-input">{faqHubUi.searchLabel}</label>
+          <input class="faq-search__input" id="faq-search-input" type="search" placeholder={faqHubUi.searchPlaceholder} autocomplete="off" spellcheck="false" />
+          <div class="faq-search__results" aria-live="polite" data-faq-results></div>
+        </div>
+        <script type="application/json" id="faq-index" is:inline set:html={JSON.stringify(searchIndex).replace(/</g, '\\u003c')} />
+      </div>
+    </section>
+  )}
+
+  <section class="section section--line faq__close" aria-labelledby="faq-close">
+    <div class="container faq-close">
+      <p class="faq__note">{faqNote}</p>
+      <div class="faq-close__copy">
+        <h2 id="faq-close" class="title-lg">{isHub ? faqHubUi.closing.heading : page.closing!.heading}</h2>
+        <p class="lede">{isHub ? faqHubUi.closing.text : page.closing!.text}</p>
+      </div>
+      <div class="faq-close__ctas">
+        <a class="btn" href={withBase(contactHref)}>{isHub ? faqHubUi.closing.button : page.closing!.primary} <Icon name="arrow-right" /></a>
+        {isHub ? (
+          <>
+            <a class="link-arrow" href={agent.phoneHref}>{faqHubUi.closing.callLabel} {agent.phone} <Icon name="arrow-right" /></a>
+            <a class="link-arrow" href={`mailto:${agent.email}`}>{faqHubUi.closing.emailLabel} {agent.email} <Icon name="arrow-right" /></a>
+          </>
+        ) : (
+          <a class="link-arrow" href={withBase('/properties')}>{page.closing!.secondary} <Icon name="arrow-right" /></a>
+        )}
+      </div>
+    </div>
+  </section>
+</article>
+
+<script>
+  const page = document.querySelector<HTMLElement>('[data-faq-page]');
+  if (page) {
+    const details = Array.from(page.querySelectorAll<HTMLDetailsElement>('details[data-faq-item]'));
+
+    // Expand all / Collapse all: injected behaviour, so the button only shows once this runs.
+    const toggle = page.querySelector<HTMLButtonElement>('[data-faq-toggle]');
+    if (toggle && details.length > 0) {
+      const sync = () => {
+        const allOpen = details.every((d) => d.open);
+        toggle.textContent = allOpen ? toggle.dataset.collapse || '' : toggle.dataset.expand || '';
+        toggle.setAttribute('aria-expanded', String(allOpen));
+      };
+      toggle.addEventListener('click', () => {
+        const open = !details.every((d) => d.open);
+        details.forEach((d) => (d.open = open));
+        sync();
+      });
+      details.forEach((d) => d.addEventListener('toggle', sync));
+      toggle.hidden = false;
+      sync();
+    }
+
+    // Deep links (/palm-springs/faq#fee-land-vs-leased-land) open the answer they point at.
+    const openHash = () => {
+      const id = decodeURIComponent(location.hash.slice(1));
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (target instanceof HTMLDetailsElement && target.hasAttribute('data-faq-item')) {
+        target.open = true;
+        target.scrollIntoView({ block: 'start' });
+      }
+    };
+    openHash();
+    window.addEventListener('hashchange', openHash);
+
+    // Hub only: keyword filter over every answer, rendered from the prebuilt index.
+    const search = page.querySelector<HTMLElement>('[data-faq-search]');
+    const index = document.getElementById('faq-index');
+    if (search && index) {
+      type Entry = { q: string; w: string; e: string; h: string; t: string };
+      const data = JSON.parse(index.textContent || '[]') as Entry[];
+      const input = search.querySelector<HTMLInputElement>('input')!;
+      const results = search.querySelector<HTMLElement>('[data-faq-results]')!;
+      const noResults = search.dataset.noResults || '';
+      const render = () => {
+        const words = input.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+        results.replaceChildren();
+        if (words.length === 0) return;
+        const hits = data.filter((d) => words.every((w) => d.t.includes(w)));
+        if (hits.length === 0) {
+          const p = document.createElement('p');
+          p.className = 'faq-search__empty';
+          p.textContent = noResults;
+          results.append(p);
+          return;
+        }
+        const ul = document.createElement('ul');
+        ul.className = 'faq-search__list';
+        for (const d of hits) {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = d.h;
+          a.textContent = d.q;
+          const w = document.createElement('span');
+          w.className = 'faq-search__where';
+          w.textContent = d.w;
+          const e = document.createElement('p');
+          e.className = 'faq-search__excerpt';
+          e.textContent = d.e;
+          li.append(a, w, e);
+          ul.append(li);
+        }
+        results.append(ul);
+      };
+      input.addEventListener('input', render);
+      search.hidden = false;
+    }
+  }
+</script>
+
+<style>
+  .faq__intro {
+    display: grid;
+    gap: 1rem;
+    margin-top: calc(-1 * clamp(1rem, 3vw, 2.5rem));
+    padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  .faq__author {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+
+  .faq-cards {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .faq-card {
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+    justify-items: start;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    border: 1px solid var(--line-strong);
+  }
+  .faq-card p {
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+  .faq-card .btn {
+    margin-top: 0.5rem;
+  }
+
+  .faq__answers {
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .faq__tools {
+    display: flex;
+    justify-content: flex-end;
+    min-height: 44px;
+    margin-bottom: 0.5rem;
+  }
+  .faq__toggle {
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.8125rem;
+    letter-spacing: 0.03em;
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: 0.25em;
+    cursor: pointer;
+  }
+  .faq__toggle[hidden] {
+    display: none;
+  }
+  .faq__toggle:hover {
+    color: var(--blue);
+    text-decoration-color: currentColor;
+  }
+  .faq__groups {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .faq-dir {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem 2rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+  .faq-dir__col {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line-strong);
+  }
+  .faq-dir__market {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .faq-dir__market a {
+    text-decoration: none;
+  }
+  .faq-dir__market a:hover {
+    color: var(--blue);
+  }
+  .faq-dir__list {
+    list-style: none;
+    display: grid;
+    gap: 0.2rem;
+  }
+  .faq-dir__list a {
+    display: inline-block;
+    padding-block: 0.45rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .faq-dir__list a:hover {
+    color: var(--blue);
+  }
+
+  .faq-search {
+    display: grid;
+    gap: 0.6rem;
+    max-width: 34rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+  .faq-search[hidden] {
+    display: none;
+  }
+  .faq-search__label {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .faq-search__input {
+    width: 100%;
+    padding: 0.85rem 0.95rem;
+    font: inherit;
+    font-size: 0.9375rem;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line-control);
+    border-radius: var(--radius);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .faq-search__input:focus-visible {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.14);
+  }
+  .faq-search__results:empty {
+    display: none;
+  }
+  .faq-search__results {
+    margin-top: 0.75rem;
+  }
+  .faq-search__results :global(.faq-search__empty) {
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+  .faq-search__results :global(.faq-search__list) {
+    list-style: none;
+    display: grid;
+    border-top: 1px solid var(--line-strong);
+  }
+  .faq-search__results :global(li) {
+    display: grid;
+    gap: 0.25rem;
+    padding-block: 0.9rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .faq-search__results :global(li > a) {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  .faq-search__results :global(li > a:hover) {
+    color: var(--blue);
+  }
+  .faq-search__results :global(.faq-search__where) {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .faq-search__results :global(.faq-search__excerpt) {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+
+  .faq-close {
+    display: grid;
+    gap: 1.5rem;
+    justify-items: start;
+    max-width: 44rem;
+  }
+  .faq__note {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: var(--measure);
+    margin-bottom: clamp(1.5rem, 4vw, 3rem);
+  }
+  .faq-close__copy {
+    display: grid;
+    gap: 1rem;
+  }
+  .faq-close__copy h2 {
+    max-width: 20ch;
+  }
+  .faq-close__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    margin-top: 0.5rem;
+  }
+  .faq-close__ctas .link-arrow {
+    min-height: 44px;
+  }
+
+  @media (max-width: 899px) {
+    .faq-cards,
+    .faq-dir {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 540px) {
+    .faq-close__ctas {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+    }
+    .faq-close__ctas :global(.btn) {
+      width: 100%;
+    }
+  }
+</style>

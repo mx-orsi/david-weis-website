@@ -194,6 +194,7 @@ export const navCta = {
     { label: 'Contact', href: '/contact' },
     { label: 'Buy with David', href: '/buy' },
     { label: 'Sell with David', href: '/sell' },
+    { label: 'Real Estate FAQs', href: '/faq' },
   ],
 } as const;
 

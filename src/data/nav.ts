@@ -59,6 +59,7 @@ export const footerLinks: readonly NavChild[] = [
   { label: 'Properties', href: '/properties' },
   { label: 'Buy with David', href: '/buy' },
   { label: 'Sell with David', href: '/sell' },
+  { label: 'Real Estate FAQs', href: '/faq' },
   { label: 'Contact', href: '/contact' },
 ];
 

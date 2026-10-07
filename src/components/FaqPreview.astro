@@ -1,0 +1,89 @@
+---
+/**
+ * FaqPreview — the three-question teaser on each market page, sitting just
+ * before the closing invitation. Questions and the "All … FAQs" label come
+ * from src/data/faq.ts; each question deep-links to its answer on the
+ * market's FAQ guide.
+ */
+import Icon from './Icon.astro';
+import { faqAnchor, faqExcerpt, faqHubUi, faqItem, faqMarketPreviews, faqPage } from '../data/faq';
+import type { MarketSlug } from '../data/site';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  slug: MarketSlug;
+}
+const { slug } = Astro.props;
+const preview = faqMarketPreviews[slug];
+const items = preview.ids.map((id) => faqItem(slug, id));
+---
+
+<section class="faqp" aria-labelledby={`${slug}-faq`}>
+  <div class="container">
+    <div class="faqp__head">
+      <p class="eyebrow eyebrow--dot">Questions</p>
+      <h2 id={`${slug}-faq`} class="title-lg">{preview.heading}</h2>
+    </div>
+    <ul class="faqp__list">
+      {items.map((i) => (
+        <li class="faqp__item">
+          <a class="faqp__q" href={withBase(faqAnchor(slug, i.id))}>{i.question}</a>
+          <p class="faqp__excerpt">{faqExcerpt(i)}</p>
+        </li>
+      ))}
+    </ul>
+    <a class="link-arrow" href={withBase(faqPage(slug).path)}>{faqHubUi.allLabel[slug]} <Icon name="arrow-right" /></a>
+  </div>
+</section>
+
+<style>
+  .faqp {
+    border-top: 1px solid var(--line);
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+  }
+  .faqp__head {
+    display: grid;
+    gap: 0.9rem;
+    justify-items: start;
+  }
+  .faqp__head h2 {
+    max-width: 20ch;
+  }
+  .faqp__list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    margin-block: clamp(1.75rem, 4vw, 2.75rem) 1.75rem;
+  }
+  .faqp__item {
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line-strong);
+  }
+  .faqp__q {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    line-height: 1.25;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .faqp__q:hover {
+    color: var(--blue);
+  }
+  .faqp__excerpt {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .faqp .link-arrow {
+    min-height: 44px;
+  }
+  @media (max-width: 899px) {
+    .faqp__list {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>
