@@ -1,5 +1,5 @@
 /**
- * The seven Experience projects. Every project page is rendered from this
+ * The Experience projects (seven from the deck plus 444 W Stevens, 2026-10). Every project page is rendered from this
  * file by src/components/ProjectPage.astro; the cards on Home, Experience
  * and the market pages by ProjectCard.astro. Copy is the approved deck.
  *
@@ -137,6 +137,34 @@ export type ChapterBlock =
       href: string;
       external?: boolean;
       note?: string;
+    }
+  | {
+      /**
+       * A preview card for a story that lives on its own page (About's
+       * community cards): eyebrow, heading, a short paragraph or two, a
+       * link-arrow and a photo beside the copy.
+       */
+      type: 'teaser';
+      eyebrow: string;
+      heading: string;
+      paragraphs: readonly string[];
+      cta: { label: string; href: string };
+      photo: Photo;
+      /** CSS aspect ratio for the photo (default '4 / 3'). */
+      ratio?: string;
+      /** Which side the photo sits on at desktop widths (default 'right'). */
+      side?: 'left' | 'right';
+    }
+  | {
+      /** A small muted line, e.g. a representation disclosure. May contain [label](href) links. */
+      type: 'note';
+      text: string;
+    }
+  | {
+      /** A compact row of internal link-arrows ("Keep reading"). */
+      type: 'links';
+      heading?: string;
+      items: readonly { label: string; href: string }[];
     }
   | {
       /** A sequence of stages stepped through manually: one large photo with
@@ -2328,6 +2356,367 @@ export const projects: readonly Project[] = [
       title: 'Mercury Palms Palm Springs | David Weis',
       description:
         'Explore Mercury Palms, a historic Palm Springs residence shaped by restoration, personal history, hospitality and years of evolving ownership.',
+    },
+  },
+  {
+    // David's 2026-10-05 brief: the first down-to-the-studs renovation he lived
+    // through, built as a chapter-driven story. Copy is his, verbatim. Rules
+    // from the brief: no building-code numbers, no universal "grandfathered"
+    // claims, never imply David represented the purchase or sale.
+    slug: '444-w-stevens',
+    name: '444 W Stevens',
+    market: 'palm-springs',
+    place: 'Palm Springs',
+    kind: 'Full-Home Renovation + Casita Addition',
+    kindIndex: 'Full-Home Renovation + Casita Addition',
+    summary:
+      'The first full-scale residential renovation I experienced from demolition through completion, just down the street from Mercury Palms, and one of the projects that permanently changed the way I evaluate a property.',
+    intro: 'The project that changed the way I look at a house.',
+    sections: [],
+    chapters: [
+      {
+        id: 'the-story',
+        after: -1,
+        blocks: [
+          {
+            type: 'story',
+            eyebrow: 'Palm Springs, 2019',
+            heading: 'It never really got a name. We just called it 444.',
+            paragraphs: [
+              'In 2019, while we were building [The Cole](/experience/the-cole), Mark was also completely renovating a house just down the street from [Mercury Palms](/experience/mercury-palms).',
+              'This was the first time I had been this close to a true down-to-the-studs residential renovation. I already understood homes, investments, costs and the importance of making improvements that actually add value. But watching a property come almost completely apart, and then seeing every decision required to put it back together, was different.',
+              'What still amazes me is that Mark was doing this at the same time we were converting an apartment property into The Cole Hotel.',
+              'Two major projects. Two completely different sets of problems. Contractors, materials, schedules, design decisions and all of the things that inevitably do not go according to plan.',
+              'And somehow he was still making trips between Palm Springs and San Diego so we could spend time together.',
+              'Seeing him manage all of it gave me an enormous amount of respect for what he does. Mark has an ability to walk into a property and see what it could be long before most people can see past what is already there.',
+              '444 was one of the first times I got to watch that happen from beginning to end.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '3 / 2',
+            labels: ['Before', 'The finished house'],
+            photos: [
+              { suggestion: 'Exterior before', src: '/images/444-w-stevens/444-w-stevens-palm-springs-street-view-before-david-weis.jpg', alt: 'The front of 444 W Stevens before the renovation: a low stucco house behind gravel, boulders and palms, a Range Rover parked at the curb', width: 2400, height: 1800, hasSmall: true },
+              { suggestion: 'Exterior after', src: '/images/444-w-stevens/444-w-stevens-palm-springs-street-view-after-david-weis.jpg', alt: 'The finished front of 444 W Stevens from the street: new desert landscaping, boulders and cactus in front of the white midcentury house', width: 1024, height: 682 },
+            ],
+          },
+          {
+            type: 'story',
+            heading: "We didn't need a bigger house. We needed a better one.",
+            paragraphs: [
+              'One of the biggest lessons from 444 was realizing how dramatically you can change a home without simply making it larger.',
+              'Walls came down.',
+              'The kitchen opened up.',
+              'Large sections of the back of the house became sliding glass doors.',
+              'Suddenly the pool, backyard and interior all felt connected.',
+              'The square footage was not what made the house impressive. The way the square footage worked was.',
+              'That sounds obvious now, but watching the transformation happen in real time completely changed the way I started looking at floor plans.',
+              'Even today, when I walk through a property with a buyer, I am not only seeing the room that is there. I am looking at circulation, sightlines, outdoor connections and whether the problem is really the size of the house or simply how the space is being used.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '3 / 2',
+            labels: ['Before', 'Opening the floor plan'],
+            photos: [
+              { suggestion: 'Kitchen before', src: '/images/444-w-stevens/444-w-stevens-palm-springs-kitchen-before-david-weis.jpg', alt: 'The original galley kitchen at 444 W Stevens: flat wood cabinets, a dark counter and a sliding door to the pool', width: 2400, height: 1800, hasSmall: true },
+              { suggestion: 'Kitchen after', src: '/images/444-w-stevens/444-w-stevens-palm-springs-kitchen-after-david-weis.jpg', alt: 'The renovated kitchen at 444 W Stevens: white quartz counters, a gas range under a mirrored backsplash and the pool framed by the window', width: 1344, height: 896, hasSmall: true },
+            ],
+            caption: { title: 'Opening up the house', note: 'The footprint did not need to change nearly as much as the way the spaces related to one another.' },
+          },
+          {
+            type: 'story',
+            eyebrow: 'Design details',
+            heading: 'Then came the details.',
+            paragraphs: [
+              'This was also where I really started having fun with design.',
+              'I began noticing how one material could completely change a space, why some improvements created far more impact than others, and how much the details matter once the larger architectural decisions are right.',
+              'A project can have expensive finishes everywhere and still feel forgettable.',
+              'Then one thoughtful material choice can become the thing you remember years later.',
+              'That lesson really started clicking for me at 444.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '3 / 2',
+            labels: ['Before', 'The finished house'],
+            photos: [
+              { suggestion: 'Living area down to the studs', src: '/images/444-w-stevens/444-w-stevens-palm-springs-living-room-down-to-the-studs-david-weis.jpg', alt: 'The living area at 444 W Stevens stripped to the studs, open framing and a ladder in the middle of the room', width: 2400, height: 1800, hasSmall: true },
+              { suggestion: 'Living room after', src: '/images/444-w-stevens/444-w-stevens-palm-springs-living-room-after-david-weis.jpg', alt: 'The finished living room at 444 W Stevens: a white sectional, orange chairs, blue wallpaper and sliding glass doors to the pool', width: 1024, height: 682 },
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Pool + backyard',
+            heading: 'Sometimes the smartest renovation decision is what you leave alone.',
+            paragraphs: [
+              'The backyard became one of the biggest transformations at 444, but it also taught me that renovation does not always mean tearing everything out and starting over.',
+              'The existing pool had value beyond simply having water in the ground.',
+              'Its original depth and configuration were already established, so rather than unnecessarily disturbing the entire pool and potentially triggering a much larger reconstruction and permitting process, we made a deliberate decision to work with what was already there.',
+              'That lesson has stayed with me:',
+              'Before removing something, understand exactly what you may be giving up.',
+              'Instead of forcing a spa into the existing pool, we added a large separate jacuzzi immediately beside it.',
+              'And I think it actually made the backyard better.',
+              'Having two distinct bodies of water created a much more substantial, resort-like setting and gave the backyard another architectural element instead of simply modifying what was already there.',
+              'We also added a Baja shelf.',
+              'That was another detail that showed me how one relatively small design decision can completely change the way a pool is used. A Baja shelf creates a place to lounge in the water instead of simply swimming through it. It makes the pool feel more inviting and gives people an entirely different way to enjoy the space.',
+              'Then came the tile.',
+              'I found a sparkling blue starburst tile that I absolutely loved, and during that process I learned that pool tile did not have to stay inside the pool.',
+              'We carried it vertically onto the exterior wall of the jacuzzi.',
+              'I loved it.',
+              'It was one of my first experiences seeing how a material selection I made could become an architectural feature rather than simply a finish.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '3 / 2',
+            labels: ['Before', 'Under construction'],
+            photos: [
+              { suggestion: 'Pool and covered patio before', src: '/images/444-w-stevens/444-w-stevens-palm-springs-covered-patio-pool-before-david-weis.jpg', alt: 'The original pool at 444 W Stevens seen from under the covered patio, lawn and palms beyond', width: 2400, height: 1800, hasSmall: true },
+              { suggestion: 'Pool during construction', src: '/images/444-w-stevens/444-w-stevens-palm-springs-pool-during-construction-david-weis.jpg', alt: 'The emptied pool at 444 W Stevens during construction, with the new jacuzzi being formed beside it', width: 1800, height: 2400, hasSmall: true, position: 'center 60%' },
+            ],
+          },
+          {
+            type: 'photo',
+            ratio: '16 / 10',
+            photo: { suggestion: 'Finished pool and spa', src: '/images/444-w-stevens/444-w-stevens-palm-springs-pool-spa-baja-shelf-after-david-weis.jpg', alt: 'The finished pool at 444 W Stevens with the separate raised jacuzzi, its wall faced in sparkling blue starburst tile, and inflatable swans on the water', width: 2400, height: 1910, hasSmall: true, position: 'center 55%' },
+            caption: { title: 'Knowing what to change, and what not to', note: 'We preserved what already worked, then transformed the experience around it with a separate oversized jacuzzi, Baja shelf and one of my favorite material selections from the project.' },
+          },
+          {
+            type: 'story',
+            eyebrow: 'The entry canopy',
+            heading: 'The canopy changed the entire front of the house.',
+            paragraphs: [
+              "One of Mark's best ideas was the new entry canopy.",
+              'The original front elevation was fine. There was nothing terribly wrong with it.',
+              'But the canopy gave the house an identity.',
+              'It created a long, dramatic approach to the entrance, framed the architecture and introduced warmth through the tongue-and-groove wood ceiling overhead.',
+              'Once it was finished, it looked like it had always belonged there.',
+              'That is good design to me.',
+              'Not adding something simply because you can.',
+              'Adding something that makes the whole house make more sense.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '3 / 2',
+            labels: ['Before', 'The finished house'],
+            photos: [
+              { suggestion: 'Front entry before', src: '/images/444-w-stevens/444-w-stevens-palm-springs-front-elevation-before-david-weis.jpg', alt: 'The original front entry at 444 W Stevens: a dark door with a starburst, a narrow walkway and a tall palm', width: 2400, height: 1800, hasSmall: true },
+              { suggestion: 'Finished canopy with the wood ceiling', src: '/images/444-w-stevens/444-w-stevens-palm-springs-entry-canopy-tongue-and-groove-ceiling-david-weis.jpg', alt: 'The finished entry canopy at 444 W Stevens from the side, its tongue-and-groove wood ceiling glowing above the yellow double doors', width: 2400, height: 1800, hasSmall: true },
+            ],
+            caption: { title: 'The detail that defined 444', note: "Mark's entry canopy completely changed the arrival experience. The tongue-and-groove ceiling became one of my favorite parts of the house." },
+          },
+          {
+            type: 'photo',
+            width: 'bleed',
+            ratio: '16 / 9',
+            photo: { suggestion: 'David at the property during major construction', src: '/images/444-w-stevens/david-weis-444-w-stevens-palm-springs-renovation-under-construction.jpg', alt: 'David Weis standing beside the emptied pool at 444 W Stevens, the house behind him stripped to its frame and the backyard dug up', width: 2400, height: 1800, hasSmall: true, position: 'center 40%' },
+            caption: { title: 'Under construction' },
+          },
+          {
+            type: 'story',
+            eyebrow: 'The casita',
+            heading: "Adding the casita taught me that \u201cthere's room for it\u201d is only the beginning.",
+            paragraphs: [
+              'Before 444, I understood setbacks and building requirements in the general way most property owners do.',
+              'You cannot simply build wherever you want.',
+              'Actually going through the process taught me how much more there is to it.',
+              'Where could the casita physically sit on the lot?',
+              'How far did it need to be from the main house?',
+              'What were the property-line setbacks?',
+              'How would lot coverage be affected?',
+              'How would utilities reach it?',
+              'Could the existing systems support another structure?',
+              'Suddenly, every blank area on the site plan had rules attached to it.',
+              'Going through the City process taught me about building separation, setbacks and how much site planning determines what is realistically possible before construction even begins.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '3 / 2',
+            labels: ['Before', 'Building the casita'],
+            photos: [
+              { suggestion: 'The corner of the yard where the casita would go', src: '/images/444-w-stevens/444-w-stevens-palm-springs-casita-site-before-david-weis.jpg', alt: 'The backyard at 444 W Stevens before the renovation, the pool and lawn in front of the side of the house where the casita was later built', width: 2400, height: 1800, hasSmall: true },
+              { suggestion: 'Casita under construction (expected file: 444-w-stevens-palm-springs-casita-under-construction-david-weis.jpg)', src: '/images/444-w-stevens/444-w-stevens-palm-springs-casita-under-construction-david-weis.jpg', alt: 'The casita at 444 W Stevens under construction' },
+            ],
+          },
+          {
+            type: 'story',
+            sub: true,
+            heading: "And then I learned what \u201cgrandfathered\u201d actually means.",
+            paragraphs: [
+              'One of the most valuable lessons was understanding the difference between an existing structure and new construction on the same property.',
+              'The original house already existed legally with systems and conditions that had been in place for years.',
+              'The new casita did not automatically inherit all of those same allowances.',
+              'Because it was new construction, its utilities, connections and systems had to be evaluated under the requirements applicable to the new work.',
+              'That meant thinking about things like electrical capacity, plumbing, service connections, routing and whether the existing property infrastructure could support what we wanted to add.',
+              'That distinction sounds painfully technical until you are actually building something.',
+              'Then it matters a lot.',
+              'It taught me something I still think about when evaluating property today:',
+              'An existing house and a new structure can live on the same parcel and still face very different requirements.',
+              'A large backyard does not automatically mean casita.',
+              'An empty side yard does not automatically mean ADU.',
+              'Before I start telling someone what they may be able to build, I want to understand the zoning, setbacks, building separation, utility situation and what the City will actually allow.',
+              'Because there is a huge difference between seeing potential and understanding what it takes to make that potential real.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '3 / 2',
+            photos: [
+              { suggestion: 'Finished casita bedroom', src: '/images/444-w-stevens/444-w-stevens-palm-springs-casita-bedroom-after-david-weis.jpg', alt: 'The finished casita bedroom at 444 W Stevens: a geometric blue accent wall, a teal chair and a bed under a round mirror', width: 1280, height: 854, hasSmall: true },
+              { suggestion: 'Finished casita bathroom', src: '/images/444-w-stevens/444-w-stevens-palm-springs-casita-bathroom-after-david-weis.jpg', alt: 'The finished casita bathroom at 444 W Stevens with a dark-tiled walk-in shower and a floating vanity', width: 1280, height: 854, hasSmall: true },
+            ],
+            caption: { title: 'Adding square footage was the easy idea. Figuring out how to legally build it was the education.', note: 'The casita taught me about setbacks, building separation, utilities, permitting and the important difference between existing conditions and new construction.' },
+          },
+          {
+            type: 'story',
+            eyebrow: 'Home, briefly',
+            heading: 'And yes, we actually lived here.',
+            paragraphs: [
+              'When Mark and I officially made the move to Palm Springs and I became a Personal Banker at Chase, we lived at 444 through a big part of this chapter.',
+              'And somehow, even then, our lives operated basically the same way they sometimes do now:',
+              'We lived in whichever one of our houses happened to be available.',
+              'One holiday season, every other property was occupied.',
+              '444 was staged for sale.',
+              'So we moved into the staged house.',
+              "You're technically not supposed to use staging furniture.",
+              'But when times are tough\u2026 \ud83d\ude02',
+              'We were extremely careful, lived very cleanly and treated everything like we were staying in a showroom.',
+              "What they didn't know didn't hurt them.",
+              'It still makes me laugh because it perfectly describes that period of our lives.',
+              'We were building a hotel, renovating houses, working our regular jobs, driving between cities and somehow making the logistics work.',
+            ],
+          },
+          {
+            type: 'photo',
+            ratio: '16 / 10',
+            photo: { suggestion: 'Another strong finished interior', src: '/images/444-w-stevens/444-w-stevens-palm-springs-family-room-fireplace-after-david-weis.jpg', alt: 'The finished family room at 444 W Stevens: a stone fireplace, white sofas and the dog on the rug, with the pool through the glass', width: 1280, height: 854, hasSmall: true },
+            caption: { title: 'The finished house' },
+          },
+          {
+            type: 'story',
+            eyebrow: 'The difficult sale',
+            heading: 'Then came the part of real estate nobody likes talking about.',
+            paragraphs: [
+              'Mark had sold his Big Boy Estate property in Vista Las Palmas to help provide capital for the acquisition and redevelopment of The Cole.',
+              'The Cole construction took longer and became more difficult than expected.',
+              'We dealt with serious contractor problems, delays and costs that were never part of the original plan.',
+              'Eventually, we had to make another difficult decision.',
+              'We sold 444.',
+              'And the timing was terrible.',
+              'It was 2020 and COVID was beginning.',
+              'We had just watched this house become something beautiful, and suddenly we were making a decision that had very little to do with whether we loved it.',
+              'We needed to look at the bigger picture.',
+              'To this day, Mark sometimes says he wishes he had never sold it.',
+              'And I always remind him:',
+              '444 helped us finish something even bigger.',
+              '[The Cole](/experience/the-cole) exists on the other side of a lot of difficult decisions like that.',
+              'You cannot look back years later, knowing everything you know now, and fairly judge a decision that had to be made with the information and circumstances you had then.',
+              'That lesson has probably influenced the way I advise real estate clients more than almost anything else on this page.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Broker perspective',
+            heading: 'Sometimes the best decision still sucks.',
+            paragraphs: [
+              'Real estate is financial, but it is rarely only financial.',
+              'A seller may know intellectually that selling is the right decision and still hate letting the house go.',
+              'An investor may love a property and still need to admit the numbers no longer make sense.',
+              'A buyer may be scared to move forward because they are imagining every possible version of what could happen next.',
+              'I do not think my job is to tell someone how they should feel about any of that.',
+              'My job is to understand what matters to them, look at the situation from every angle I can, and help separate the emotion of the moment from the consequences of the decision.',
+              'Sometimes that means showing someone why holding a property makes sense.',
+              'Sometimes it means showing them why selling it could create the opportunity for something larger.',
+              '444 taught me both.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '3 / 2',
+            photos: [
+              { suggestion: 'Dining room and kitchen after', src: '/images/444-w-stevens/444-w-stevens-palm-springs-dining-room-kitchen-after-david-weis.jpg', alt: 'The finished dining room at 444 W Stevens, a wood table set for six beside the open kitchen', width: 1600, height: 1066, hasSmall: true },
+              { suggestion: 'Entry and living room after', src: '/images/444-w-stevens/444-w-stevens-palm-springs-entry-living-room-after-david-weis.jpg', alt: 'The entry at 444 W Stevens looking into the living room, orange chairs around a glass coffee table and the pool beyond', width: 1280, height: 854, hasSmall: true },
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'After you sell',
+            heading: "Eventually, it becomes someone else's house.",
+            paragraphs: [
+              'One of the strange parts of renovating something you care about is driving past it years later.',
+              'You notice what changed.',
+              'Sometimes you love it.',
+              'Sometimes you think:',
+              'Why would you do that?',
+              'The beautiful tongue-and-groove ceiling we loved?',
+              'Painted white.',
+              'That one still hurts a little. \ud83d\ude02',
+              'But that is ownership.',
+              'We got to create our version of 444.',
+              'The next owners get to create theirs.',
+              'You take the memories, the experience and hopefully the return on the investment, and then you move on to the next project.',
+              'And in our case, there were plenty of next ones.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'What 444 taught me',
+            heading: 'What 444 gave me',
+            paragraphs: [
+              'This is the project where renovation stopped being something I simply understood conceptually and became something I had lived through.',
+              'I saw what happens after the walls come down.',
+              'I watched excellent ideas become expensive realities.',
+              'I learned how much impact layout can have without dramatically increasing square footage.',
+              'I developed more confidence in my own design instincts.',
+              'I learned how setbacks, building separation, utilities and permitting affect development potential.',
+              'I learned that sometimes preserving an existing condition is smarter than rebuilding it simply because you can.',
+              'I saw firsthand how materials, landscaping, architecture and indoor-outdoor flow affect the way a property feels.',
+              'And I learned that sometimes the value of a property is not only measured by what you eventually sell it for.',
+              'Sometimes it is measured by what that sale allows you to build next.',
+            ],
+          },
+          {
+            type: 'photo',
+            ratio: '3 / 2',
+            photo: { suggestion: 'Closing image: the finished front elevation', src: '/images/444-w-stevens/444-w-stevens-palm-springs-front-entry-canopy-yellow-doors-after-david-weis.jpg', alt: 'The finished front of 444 W Stevens straight on: the entry canopy with its wood ceiling above yellow double doors, cactus and palms in the yard', width: 1024, height: 684 },
+            caption: { title: '444 W Stevens Road \u00b7 Palm Springs', note: 'The first full-scale residential renovation I experienced from demolition through completion, and one of the projects that permanently changed the way I evaluate a property.' },
+          },
+          {
+            type: 'note',
+            text: 'Project note: 444 W Stevens Road is included here as part of my personal real estate and renovation experience. I did not act as the real estate agent or broker representing its purchase or sale.',
+          },
+          {
+            type: 'links',
+            heading: 'Keep reading',
+            items: [
+              { label: 'The Cole', href: '/experience/the-cole' },
+              { label: 'Mercury Palms', href: '/experience/mercury-palms' },
+              { label: 'Palm Springs real estate', href: '/palm-springs' },
+              { label: 'All projects', href: '/experience' },
+            ],
+          },
+        ],
+      },
+    ],
+    photos: [
+      {
+        suggestion: 'Hero: the finished front elevation with the yellow double doors and canopy',
+        src: '/images/444-w-stevens/444-w-stevens-palm-springs-front-entry-canopy-yellow-doors-after-david-weis.jpg',
+        alt: 'The finished front of 444 W Stevens in Palm Springs: the new entry canopy with its tongue-and-groove wood ceiling above yellow double doors',
+        width: 1024,
+        height: 684,
+        position: 'center 45%',
+      },
+    ],
+    cta: { label: 'Explore Palm Springs Real Estate', href: '/palm-springs' },
+    seo: {
+      title: '444 W Stevens Renovation | David Weis Palm Springs Real Estate',
+      description:
+        'A down-to-the-studs Palm Springs renovation that taught David Weis about design, construction, casita development, permitting, utilities, pool planning and the realities behind major real estate projects.',
     },
   },
 ];

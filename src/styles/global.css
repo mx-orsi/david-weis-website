@@ -512,3 +512,15 @@ sup.reg {
     animation: none !important;
   }
 }
+
+/* Inline links inside authored copy (src/lib/inline.ts). */
+.prose a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--blue);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+.prose a:hover {
+  color: var(--blue);
+}

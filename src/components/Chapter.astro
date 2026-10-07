@@ -18,6 +18,7 @@ import Story from './Story.astro';
 import type { ProjectChapter } from '../data/projects';
 import { withBase } from '../lib/paths';
 import { photoExists } from '../lib/images';
+import { hasInline, renderInline } from '../lib/inline';
 
 interface Props {
   chapter: ProjectChapter;
@@ -186,7 +187,7 @@ const { chapter, slug } = Astro.props;
           {b.note && <p class="ch__note">{b.note}</p>}
           {b.paragraphs && (
             <div class="prose ch__pull-prose">
-              {b.paragraphs.map((p) => <p>{p}</p>)}
+              {b.paragraphs.map((p) => (hasInline(p) ? <p set:html={renderInline(p)} /> : <p>{p}</p>))}
             </div>
           )}
         </div>
@@ -248,6 +249,43 @@ const { chapter, slug } = Astro.props;
             {b.external && <span class="sr-only"> (opens in a new tab)</span>}
           </a>
           {b.note && <p class="ch__cta-note">{b.note}</p>}
+        </div>
+      );
+    }
+    if (b.type === 'teaser') {
+      return (
+        <div class:list={['container', 'ch__block', 'ch__teaser', b.side === 'left' && 'ch__teaser--left']}>
+          <div class="ch__teaser-copy">
+            <Story heading={b.heading} paragraphs={b.paragraphs} eyebrow={b.eyebrow} level={2} id={hid}>
+              <p class="ch__teaser-cta">
+                <a class="link-arrow" href={withBase(b.cta.href)}>{b.cta.label} <Icon name="arrow-right" /></a>
+              </p>
+            </Story>
+          </div>
+          <a class="ch__teaser-media" href={withBase(b.cta.href)} tabindex="-1" aria-hidden="true">
+            <Media photo={b.photo} ratio={b.ratio ?? '4 / 3'} sizes="(min-width: 900px) 45vw, 100vw" />
+          </a>
+        </div>
+      );
+    }
+    if (b.type === 'note') {
+      return (
+        <div class="container ch__block ch__note-block">
+          <p class="ch__small-note" set:html={renderInline(b.text)} />
+        </div>
+      );
+    }
+    if (b.type === 'links') {
+      return (
+        <div class="container ch__block ch__links">
+          {b.heading && <p class="eyebrow eyebrow--muted">{b.heading}</p>}
+          <ul class="ch__links-list">
+            {b.items.map((l) => (
+              <li>
+                <a class="link-arrow" href={withBase(l.href)}>{l.label} <Icon name="arrow-right" /></a>
+              </li>
+            ))}
+          </ul>
         </div>
       );
     }
@@ -451,6 +489,59 @@ const { chapter, slug } = Astro.props;
     pointer-events: none;
   }
 
+  /* Teaser: copy beside a photo that links to the story's own page. */
+  .ch__teaser {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+    padding-top: clamp(1.5rem, 3vw, 2.5rem);
+    border-top: 1px solid var(--line-strong);
+  }
+  .ch__teaser--left .ch__teaser-copy {
+    order: 2;
+  }
+  .ch__teaser :global(.story__title) {
+    max-width: 18ch;
+  }
+  .ch__teaser-cta {
+    margin-top: 0.5rem;
+  }
+  .ch__teaser-media {
+    display: block;
+    min-width: 0;
+  }
+  @media (max-width: 899px) {
+    .ch__teaser {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .ch__teaser--left .ch__teaser-copy {
+      order: 0;
+    }
+  }
+  .ch__note-block {
+    margin-top: calc(-1 * clamp(1.5rem, 3vw, 3rem));
+  }
+  .ch__small-note {
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: var(--measure);
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+  .ch__links {
+    display: grid;
+    gap: 0.9rem;
+  }
+  .ch__links-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    padding: 0;
+    margin: 0;
+  }
   .ch__cta {
     display: grid;
     gap: 0.5rem;

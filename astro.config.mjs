@@ -43,6 +43,8 @@ export default defineConfig({
   // The Projects showcase became the Experience section; keep the old link alive.
   redirects: {
     '/projects': '/experience',
+    // David's suggested URL for the 444 W Stevens story (2026-10-05 brief).
+    '/projects/444-w-stevens-palm-springs': '/experience/444-w-stevens',
   },
   integrations: [
     {
