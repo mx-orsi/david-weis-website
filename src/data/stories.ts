@@ -1,0 +1,323 @@
+/**
+ * Personal story pages that hang off About, each rendered by
+ * src/components/StoryPage.astro at /<slug>. Copy is David's, from his
+ * 2026-10-05 briefs, verbatim; chapter blocks use the same vocabulary as the
+ * project pages (see ChapterBlock in projects.ts). About shows a short
+ * `teaser` block for each story instead of the full section.
+ */
+import type { ProjectChapter } from './projects';
+import type { Photo } from './types';
+
+export interface StoryPage {
+  slug: string;
+  /** Short nav / breadcrumb label when the title is a sentence. */
+  crumb?: string;
+  eyebrow: string;
+  title: string;
+  /** Lede under the title; extra paragraphs render below the hero at lede size. */
+  intro: string | readonly string[];
+  /** Smaller H1 for sentence-length titles (default 'display'). */
+  titleSize?: 'xl' | 'display';
+  lead?: Photo;
+  leadRatio?: string;
+  leadCaption?: { title: string; note?: string };
+  chapters: readonly ProjectChapter[];
+  closing?: {
+    eyebrow?: string;
+    heading: string;
+    paragraphs: readonly string[];
+    cta?: { label: string; href: string };
+    links?: readonly { label: string; href: string }[];
+  };
+  /** The sitewide "Real estate rarely gives you only one option." band (default on). */
+  finalCta?: boolean;
+  seo: { title: string; description: string };
+}
+
+/* Photos shared with About (public/images/about), by filename. */
+const truckPhotos = {
+  colorado: { suggestion: 'The Colorado with the motorcycle in the bed', src: '/images/about/david-weis-chevy-colorado-motorcycle.jpg', alt: 'The white Chevy Colorado with a red motorcycle loaded in the bed, the dog sitting in the lot in front', width: 2400, height: 1800, hasSmall: true },
+  coloradoCole: { suggestion: 'The Colorado at The Cole with ladders', src: '/images/about/david-weis-chevy-colorado.jpg', alt: 'The white Chevy Colorado with a ladder in the bed outside The Cole Hotel, beside a Range Rover', width: 1624, height: 826, hasSmall: true },
+  flooring: { suggestion: 'The Range Rover loaded with flooring', src: '/images/about/david-weis-range-rover-flooring-work-truck.jpg', alt: 'The open tailgate of a white Range Rover with boxes of flooring stacked inside', width: 1802, height: 2400, hasSmall: true, position: 'center 55%' },
+  evoque: { suggestion: 'The Evoque convertible packed with plants', src: '/images/about/david-weis-range-rover-work-truck.jpg', alt: 'Houseplants filling the seats of the convertible Range Rover Evoque', width: 2400, height: 1690, hasSmall: true },
+  lowes: { suggestion: 'The Lowe’s rental truck with lumber', src: '/images/about/david-weis-lowes-rental-truck-lumber.jpg', alt: 'A Lowe’s rental pickup with long boards hanging out of the bed, a red flag tied to the end', width: 1800, height: 2400, hasSmall: true },
+  sierra: { suggestion: 'The GMC Sierra EV in the drive at Sierra Chalet', src: '/images/about/david-weis-gmc-sierra-ev.jpg', alt: 'The white GMC Sierra EV parked in the drive below Sierra Chalet, pines behind', width: 2400, height: 1800, hasSmall: true, position: 'center 60%' },
+  // Not photographed yet (David's 2026-10-05 brief asks for these); the slot prints the expected filename.
+  bed: { suggestion: 'The Sierra’s bed loaded with property supplies', src: '/images/work-truck/david-weis-gmc-sierra-ev-truck-bed-loaded.jpg', alt: 'The bed of the GMC Sierra EV loaded with supplies' },
+  listing: { suggestion: 'The Sierra parked at a listing or property', src: '/images/work-truck/david-weis-gmc-sierra-ev-at-listing.jpg', alt: 'The GMC Sierra EV parked in front of a listing' },
+  dump: { suggestion: 'The dump run: debris in the bed', src: '/images/work-truck/david-weis-gmc-sierra-ev-dump-run.jpg', alt: 'The GMC Sierra EV with its bed full of debris on a dump run' },
+  garage: { suggestion: 'The one inch of garage clearance', src: '/images/work-truck/david-weis-gmc-sierra-ev-garage-clearance.jpg', alt: 'The GMC Sierra EV parked in the garage with about an inch of clearance to the shelving' },
+} satisfies Record<string, Photo>;
+
+export const stories: readonly StoryPage[] = [
+  {
+    slug: 'work-truck',
+    crumb: 'The work truck',
+    eyebrow: 'Tools of the trade',
+    title: 'I could have bought another car I wanted. I bought the truck I needed.',
+    titleSize: 'xl',
+    intro: [
+      'There were a lot of electric cars I wanted. There were also already five cars in our garage.',
+      'By 2026, my real estate business had expanded across San Diego, Palm Springs and Big Bear, and the amount of driving, hauling and wear I was putting on our personal vehicles was becoming impossible to ignore.',
+      'For once, adding another fun car was not the answer.',
+      'The business needed a truck.',
+    ],
+    lead: truckPhotos.sierra,
+    chapters: [
+      {
+        id: 'the-story',
+        after: -1,
+        blocks: [
+          {
+            type: 'story',
+            eyebrow: 'Before all of this',
+            heading: 'I actually started with the practical answer.',
+            paragraphs: [
+              'When Mark and I met, I already owned a Chevy Colorado.',
+              'At the time I also had a motorcycle, so the setup made perfect sense. The motorcycle could go in the bed, Sybil could come along, and if something needed to be moved or picked up, I had a vehicle that was actually designed for it.',
+              'The Colorado eventually became part of building [The Cole](/experience/the-cole) too.',
+              'Ladders. Materials. Supplies. Whatever needed to make the trip.',
+              'I never really thought of it as a “work vehicle.”',
+              'It was simply the useful car.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '3 / 2',
+            emphasis: 'first',
+            photos: [truckPhotos.colorado, truckPhotos.coloradoCole],
+            captions: [
+              { title: 'The Colorado', note: 'In retrospect, we should have kept it.' },
+              { title: 'The Cole', note: 'Before I realized how useful this truck actually was.' },
+            ],
+          },
+          {
+            type: 'story',
+            sub: true,
+            heading: 'This decision aged terribly.',
+            paragraphs: [
+              'Eventually the motorcycle went away.',
+              'Then the Colorado went away.',
+              'And somehow we convinced ourselves that because I no longer had a motorcycle, we no longer needed a truck.',
+              'What we failed to account for was basically everything else in our lives.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'The wrong tools for the job',
+            heading: 'Mark kept calling them work trucks.',
+            paragraphs: [
+              'As our projects grew, Mark started casually referring to the Range Rovers as our “work trucks.”',
+              'I objected repeatedly.',
+              'Range Rovers are dream cars for a lot of people.',
+              'Mark saw cargo space.',
+            ],
+          },
+          {
+            type: 'callout',
+            text: 'Mark: “It’s a work truck.”',
+            second: 'Me: “It is literally a Range Rover.”',
+          },
+          {
+            type: 'pair',
+            ratio: '4 / 5',
+            photos: [truckPhotos.flooring, truckPhotos.evoque],
+            captions: [
+              { title: 'The Range Rover years', note: 'Beautiful. Luxurious. Apparently also construction equipment.' },
+              { title: 'The Evoque convertible', note: 'Apparently “convertible” also means “landscape vehicle.”' },
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '4 / 5',
+            align: 'left',
+            photos: [
+              truckPhotos.lowes,
+              { suggestion: 'Open-house signs, plants or property supplies in a Range Rover', src: '/images/work-truck/david-weis-range-rover-open-house-signs-supplies.jpg', alt: 'Open-house signs and property supplies packed into a Range Rover' },
+            ],
+            captions: [
+              { title: 'Sometimes even we had limits', note: 'A rare moment of appropriate vehicle selection.' },
+              { title: 'Signs, plants, supplies', note: 'Whatever would fit. And sometimes things that absolutely should not have.' },
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Three markets',
+            heading: 'The miles started adding up.',
+            paragraphs: [
+              'By 2026, my business looked very different.',
+              'I was working across San Diego, Palm Springs and Big Bear.',
+              'That means a lot more driving than the occasional trip to show a house.',
+              'Listings. Open houses. Inspections. Client appointments. Vendor meetings. Property projects. Vacation rentals. Signs. Supplies.',
+              'And plenty of trips where something needed to come with me.',
+              'The mileage started adding up quickly.',
+              'But mileage is only one way you experience what all of that driving costs.',
+              'There are tires. Maintenance. Rock chips. Windshield damage. Depreciation. Interior wear.',
+              'And the constant reality that a vehicle you personally care about is absorbing thousands of business miles.',
+              'I was using our personal vehicles to support a business that had grown well beyond occasional local driving.',
+              'At some point, that stopped making sense.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Thinking like a business owner',
+            heading: 'Mileage worked. Until I started looking at the whole picture.',
+            paragraphs: [
+              'For years, I handled my business driving through mileage.',
+              'It was easy and straightforward.',
+              'But as the amount of driving and vehicle wear increased, I started paying much closer attention to what those miles actually represented.',
+              'Tires, maintenance and repairs were real expenses, even if I was accounting for vehicle use through mileage rather than separately deducting every individual cost.',
+              'At the same time, I had formed an LLC and was becoming much more intentional about how I structured the business.',
+              'I started looking at the possibility of having a dedicated company vehicle instead of continuing to put business wear onto cars that were primarily ours personally.',
+              'The more I looked at it, the more obvious the answer became.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'The fun answer was not the right answer',
+            heading: 'There were definitely other cars I wanted.',
+            paragraphs: [
+              'Once I knew I wanted my next vehicle to be electric, there was no shortage of cars I could have talked myself into.',
+              'There were several I genuinely wanted.',
+              'The problem was that we already had five cars.',
+              'Another car that was simply fun, beautiful or interesting was not filling any real gap.',
+              'I needed to be realistic.',
+              'If I was going to add another vehicle, it needed to do something the other five could not.',
+            ],
+          },
+          {
+            type: 'callout',
+            text: 'The garage did not need another fun car.',
+            second: 'The business needed a truck.',
+          },
+          {
+            type: 'story',
+            heading: 'Practical won.',
+            paragraphs: [
+              'Once I stopped asking what I wanted and started asking what the business actually needed, the list became pretty clear.',
+              'I needed something that could haul property supplies, carry signs and equipment, handle dump runs, survive landscaping projects, move things between properties, absorb thousands of business miles, make the drive between San Diego, Palm Springs and Big Bear comfortably, and do all of that without turning another luxury SUV into construction equipment.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Practical didn’t have to mean boring',
+            heading: 'I still wanted an EV.',
+            paragraphs: [
+              'Being practical did not mean abandoning everything I wanted.',
+              'I still wanted the next vehicle to be electric.',
+              'With the amount of driving I do between markets, an EV made sense to explore, but it also needed enough usable range that my workday would not revolve around finding chargers.',
+              'Whatever I chose had to work as a real vehicle first.',
+              'Not as an experiment.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'The Sierra EV',
+            heading: 'The answer was a 2026 GMC Sierra EV AT4 Extended Range.',
+            paragraphs: [
+              'The Sierra checked a strangely specific combination of boxes.',
+              'It was an actual pickup.',
+              'It gave me the cargo capability we had spent years pretending our SUVs possessed.',
+              'It was electric.',
+              'It had the range to make my three-market life realistic.',
+              'And it was comfortable enough that hours behind the wheel between San Diego, Palm Springs and Big Bear did not feel like punishment.',
+              'It ended up being the rare situation where the responsible choice was also something I was genuinely excited about.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '3 / 2',
+            photos: [truckPhotos.bed, truckPhotos.listing],
+            captions: [
+              { title: 'The Sierra', note: 'Finally, the right tool for the job.' },
+              { title: 'Three markets', note: 'San Diego. Palm Springs. Big Bear. Repeat.' },
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Built for the business',
+            heading: 'This one had a job from day one.',
+            paragraphs: [
+              'Unlike the other cars in our garage, I bought the Sierra with a very specific purpose.',
+              'It became the dedicated work vehicle.',
+              'Property runs. Open houses. Signs. Supplies. Landscaping. Inspections. Trips between markets.',
+              'Whatever the work required that day.',
+              'After years of trying to protect our personal vehicles while simultaneously filling them with things that absolutely did not belong inside them, I finally had a vehicle whose job was to take the abuse.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Case closed',
+            heading: 'Two dump runs in the first two weeks.',
+            paragraphs: [
+              'It did not take long to find out whether I had made the right decision.',
+              'Within the first couple of weeks, the Sierra had already made two dump runs.',
+              'After years of putting construction materials, plants, signs and whatever else would fit inside luxury SUVs, seeing actual debris sitting in an actual pickup bed was strangely satisfying.',
+              'Apparently we did need a truck.',
+              'Case closed.',
+            ],
+          },
+          {
+            type: 'photo',
+            ratio: '16 / 10',
+            photo: truckPhotos.dump,
+            caption: { title: 'Two weeks in', note: 'Already making dump runs.' },
+          },
+          {
+            type: 'story',
+            sub: true,
+            heading: 'There was one minor issue.',
+            paragraphs: [
+              'Apparently “Will it fit in the garage?” should have been slightly higher on the research list.',
+              'It fits.',
+              'By about an inch.',
+              'Which is technically all the clearance you need.',
+            ],
+            aside: truckPhotos.garage,
+            asideRatio: '4 / 3',
+            asideCaption: 'Garage clearance. One inch is still clearance.',
+          },
+          {
+            type: 'story',
+            eyebrow: 'The less exciting decision',
+            heading: 'Sometimes growing the business means buying what you need instead of what you want.',
+            paragraphs: [
+              'There is absolutely a version of me who would have preferred another fun car.',
+              'But building a business has made me much more aware of the difference between something I want and something the business genuinely needs.',
+              'Working three markets means miles.',
+              'Owning and managing properties means things constantly need to move.',
+              'Running a business means thinking differently about equipment, expenses and where the wear should actually go.',
+              'And already owning five cars makes buying a sixth because I simply like it a fairly difficult argument to make with a straight face.',
+              'So I bought the truck.',
+              'Ironically, it may have become one of my favorite vehicles anyway.',
+            ],
+          },
+          {
+            type: 'links',
+            heading: 'Keep reading',
+            items: [
+              { label: 'About David', href: '/about' },
+              { label: 'The Cole', href: '/experience/the-cole' },
+              { label: 'Sierra Chalet', href: '/experience/sierra-chalet' },
+            ],
+          },
+        ],
+      },
+    ],
+    seo: {
+      title: 'Why I Bought a Work Truck | David Weis',
+      description:
+        'Why a three-market real estate business, years of vehicle wear and a need for a dedicated company vehicle led David Weis to choose an electric GMC Sierra pickup.',
+    },
+  },
+];
+
+export function getStory(slug: string): StoryPage {
+  const s = stories.find((x) => x.slug === slug);
+  if (!s) throw new Error(`Unknown story: ${slug}`);
+  return s;
+}
+
+export function storyHref(s: Pick<StoryPage, 'slug'>): string {
+  return `/${s.slug}`;
+}

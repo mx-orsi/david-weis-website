@@ -45,7 +45,7 @@ const inGroup = (children: readonly { href: string }[]) => children.some((c) => 
               <ul class="nav__panel" id={`nav-${item.id}`}>
                 {item.href && (
                   <li class="nav__panel-all">
-                    <a href={withBase(item.href)}>All {item.label.toLowerCase()}</a>
+                    <a href={withBase(item.href)}>{item.allLabel ?? `All ${item.label.toLowerCase()}`}</a>
                   </li>
                 )}
                 {item.children.map((c) => (

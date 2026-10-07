@@ -5,6 +5,7 @@
  */
 import { markets, navCta } from './site';
 import { projects, projectHref } from './projects';
+import { stories, storyHref } from './stories';
 
 export interface NavChild {
   label: string;
@@ -18,12 +19,20 @@ export interface NavItem {
   href?: string;
   /** Required for groups; used for aria-controls ids. */
   id?: string;
+  /** Label of the group's own page inside its panel (default "All <label>"). */
+  allLabel?: string;
   children?: readonly NavChild[];
 }
 
 export const nav: readonly NavItem[] = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
+  {
+    id: 'about',
+    label: 'About',
+    href: '/about',
+    allLabel: 'About David',
+    children: stories.map((s) => ({ label: s.crumb ?? s.title, href: storyHref(s) })),
+  },
   {
     id: 'markets',
     label: 'Markets',

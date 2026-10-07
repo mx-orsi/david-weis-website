@@ -1,0 +1,140 @@
+---
+/**
+ * StoryPage — the structure every personal story page shares (Gay for Good,
+ * Garden Club, Vista Las Palmas, the holiday tradition, the work truck).
+ * Content comes from src/data/stories.ts: an opener with eyebrow, title and
+ * intro, an optional lead photo, then chapter blocks (Chapter.astro, the same
+ * vocabulary About and the project pages use), then an optional closing
+ * section with CTAs. Stories hang off About in the nav and breadcrumb.
+ */
+import Chapter from './Chapter.astro';
+import Icon from './Icon.astro';
+import Lightbox from './Lightbox.astro';
+import Media from './Media.astro';
+import PageHero from './PageHero.astro';
+import Story from './Story.astro';
+import type { StoryPage } from '../data/stories';
+import { siteUrl } from '../data/site';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  story: StoryPage;
+}
+const { story: s } = Astro.props;
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+    { '@type': 'ListItem', position: 2, name: 'About', item: `${siteUrl}/about` },
+    { '@type': 'ListItem', position: 3, name: s.title, item: `${siteUrl}/${s.slug}` },
+  ],
+};
+const [lede, ...moreIntro] = typeof s.intro === 'string' ? [s.intro] : s.intro;
+const crumbs = [
+  { label: 'Home', href: withBase('/') },
+  { label: 'About', href: withBase('/about') },
+  { label: s.crumb ?? s.title },
+];
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
+
+<article class="sp">
+  <PageHero eyebrow={s.eyebrow} title={s.title} intro={lede} crumbs={crumbs} size={s.titleSize ?? 'display'} />
+  {moreIntro.length > 0 && (
+    <div class="container sp__intro">
+      {moreIntro.map((p) => <p class="lede lede--wide">{p}</p>)}
+    </div>
+  )}
+
+  {s.lead && (
+    <div class="container sp__lead">
+      <Media photo={s.lead} ratio={s.leadRatio ?? '21 / 9'} priority sizes="100vw" />
+      {s.leadCaption && (
+        <p class="sp__lead-caption">
+          <span class="sp__cap-title">{s.leadCaption.title}</span>
+          {s.leadCaption.note && <span class="sp__cap-note">{s.leadCaption.note}</span>}
+        </p>
+      )}
+    </div>
+  )}
+
+  <div class="sp__body">
+    {s.chapters.map((c) => <Chapter chapter={c} slug={s.slug} />)}
+  </div>
+
+  {s.closing && (
+    <section class="section section--line" aria-labelledby={`${s.slug}-close`}>
+      <div class="container sp__close">
+        <Story eyebrow={s.closing.eyebrow} heading={s.closing.heading} paragraphs={s.closing.paragraphs} id={`${s.slug}-close`}>
+          {(s.closing.cta || s.closing.links) && (
+            <div class="sp__close-ctas">
+              {s.closing.cta && (
+                <a class="btn" href={withBase(s.closing.cta.href)}>{s.closing.cta.label} <Icon name="arrow-right" /></a>
+              )}
+              {s.closing.links?.map((l) => (
+                <a class="link-arrow" href={withBase(l.href)}>{l.label} <Icon name="arrow-right" /></a>
+              ))}
+            </div>
+          )}
+        </Story>
+      </div>
+    </section>
+  )}
+
+  <Lightbox />
+</article>
+
+<style>
+  .sp__intro {
+    display: grid;
+    gap: 1rem;
+    margin-top: calc(-1 * clamp(1rem, 3vw, 2.5rem));
+    padding-bottom: clamp(2rem, 5vw, 4rem);
+  }
+  .sp__lead {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .sp__lead-caption {
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+  .sp__cap-title {
+    display: block;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .sp__cap-note {
+    display: block;
+    margin-top: 0.2rem;
+  }
+  .sp__body {
+    display: grid;
+    gap: clamp(3.5rem, 7vw, 6.5rem);
+    padding-block: clamp(3.5rem, 7vw, 6.5rem);
+  }
+  .sp__close {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+    max-width: 44rem;
+  }
+  .sp__close :global(.story__title) {
+    max-width: 20ch;
+  }
+  .sp__close-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+</style>

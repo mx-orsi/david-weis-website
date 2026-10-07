@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StoryPage from '../components/StoryPage.astro';
+import { stories, type StoryPage as StoryData } from '../data/stories';
+
+export function getStaticPaths() {
+  return stories.map((s) => ({ params: { story: s.slug }, props: { story: s } }));
+}
+
+interface Props {
+  story: StoryData;
+}
+const { story } = Astro.props;
+---
+
+<BaseLayout title={story.seo.title} description={story.seo.description} ogImage={story.lead?.src} finalCta={story.finalCta ?? true}>
+  <StoryPage story={story} />
+</BaseLayout>
