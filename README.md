@@ -25,13 +25,16 @@ Requires Node 22.12+.
 | Home | `/` | Seven short sections from the deck; full stories live on interior pages |
 | About | `/about` | Chapter-driven (`Chapter.astro`, two chapters around the career grid): the personal story, The Cole, community, markets and closing |
 | Markets | `/san-diego`, `/palm-springs`, `/big-bear` | Shared `MarketPage` template |
-| Experience | `/experience` | Landing with all seven project cards |
+| Stories | `/work-truck`, `/gay-for-good`, `/garden-club`, `/holiday-tradition`, `/vista-las-palmas` | Personal stories off About, one shared `StoryPage` generated from `stories.ts` |
+| FAQs | `/faq`, `/san-diego/faq`, `/palm-springs/faq`, `/big-bear/faq` | Hub and three market guides generated from `faq.ts` (one record per answer) |
+| Experience | `/experience` | Landing with all eight project cards |
 | Project pages | `/experience/<slug>` | One shared `ProjectPage` structure, generated from `projects.ts` |
 | Properties | `/properties` | Featured listings grid + Compass link + selected sales (each block removable) |
 | Contact | `/contact` | Form (Name, Email, Phone, Interested In, Location, Message) + direct details |
 | Privacy Policy | `/privacy-policy` | Draft stub, noindexed until Compass approves it |
 | 404 | `/404` | |
 | `/projects` | redirect → `/experience` | Keeps the old preview link alive |
+| `/projects/444-w-stevens-palm-springs` | redirect → `/experience/444-w-stevens` | David's suggested URL for the 444 story |
 
 ## Where things live
 

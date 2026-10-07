@@ -9,6 +9,47 @@ in, add it to `public/images/` and give the matching `Photo` entry in
 originals preferred for the wide slots; we crop. No text baked into images.
 Filenames lowercase and hyphen-separated with the market or project name.
 
+## David's 2026-10-05 story pages — what is placed and what is still needed (2026-10-07)
+
+All 216 new Drive files were downloaded to `assets-source/drive-2026-10-06/`. Placed with
+descriptive filenames: 36 photos under `public/images/444-w-stevens/`, 19 under
+`public/images/gay-for-good/`, 16 under `public/images/garden-club/`, 4 Cole wedding photos under
+`public/images/vista-las-palmas/`, the dog-with-toys photo under `public/images/holiday-tradition/`.
+The truck, holiday, Vista Las Palmas and Garden Club pages also reuse photos already in
+`public/images/about`, `community` and `mercury-palms`. Every slot below is a labeled placeholder that
+prints its expected filename; drop the file in under that name (normalized to 2400px) and it appears.
+
+| Page | Expected file (under `public/images/…`) | Subject |
+| --- | --- | --- |
+| 444 W Stevens | `444-w-stevens/444-w-stevens-palm-springs-casita-under-construction-david-weis.jpg` | the casita being built |
+| 444 W Stevens | (better versions) the 1024–1600px finished photos, same filenames | photographer's originals from the 2020 listing shoot, especially the yellow-door front |
+| Work truck | `work-truck/david-weis-gmc-sierra-ev-dump-run.jpg` | debris in the bed at the dump |
+| Work truck | `work-truck/david-weis-gmc-sierra-ev-garage-clearance.jpg` | the one inch to the shelving |
+| Work truck | `work-truck/david-weis-gmc-sierra-ev-truck-bed-loaded.jpg` | the bed loaded with supplies |
+| Work truck | `work-truck/david-weis-gmc-sierra-ev-at-listing.jpg` | the Sierra at a listing or property |
+| Work truck | `work-truck/david-weis-range-rover-open-house-signs-supplies.jpg` | signs, plants or supplies in a Range Rover |
+| Garden Club | `garden-club/village-garden-club-la-jolla-dig-into-dahlias-workshop-david-weis.jpg` | Dig Into Dahlias |
+| Garden Club | `garden-club/village-garden-club-la-jolla-holiday-woodland-centerpiece-rene-van-rems-david-weis.jpg` | René van Rems centerpiece workshop |
+| Garden Club | `garden-club/village-garden-club-la-jolla-gardener-exchange-table-david-weis.jpg` | the exchange table |
+| Holiday | `holiday-tradition/weis-family-childhood-christmas-lights-house.jpg` | the childhood house lit up |
+| Holiday | `holiday-tradition/weis-family-christmas-star-built-by-dad.jpg` | dad's custom star |
+| Holiday | `holiday-tradition/mark-weis-annual-holiday-party-early-years.jpg` | Mark's party before David |
+| Holiday | `holiday-tradition/david-and-mark-weis-annual-holiday-toy-fundraiser-party.jpg` | David and Mark at the party, people and toys behind |
+| Holiday | `holiday-tradition/holiday-toy-fundraiser-early-in-the-night-david-weis.jpg` | the first toys arriving |
+| Holiday | `holiday-tradition/hot-cocoa-kit-holiday-favors-david-weis.jpg` | the hot cocoa kits |
+| Holiday | `holiday-tradition/querencia-palms-smores-kits-assembly-david-weis.jpg` | assembling the s'mores kits |
+| Holiday | `holiday-tradition/querencia-palms-smores-kit-custom-tag-qr-code-david-weis.jpg` | the custom tag |
+| Holiday | `holiday-tradition/querencia-palms-smores-kits-friends-roasting-david-weis.jpg` | friends using them |
+| Holiday | `holiday-tradition/david-and-mark-weis-christmas.jpg` | a warm closing photo of David and Mark |
+| Vista Las Palmas | `vista-las-palmas/vista-las-palmas-spring-social-palm-springs-david-weis.jpg` | Spring Social |
+| Vista Las Palmas | `vista-las-palmas/vista-las-palmas-summer-social-palm-springs-david-weis.jpg` | Summer Social |
+| Vista Las Palmas | `vista-las-palmas/vista-las-palmas-halloween-pet-parade-palm-springs-david-weis.jpg` | Halloween Pet Parade |
+| Vista Las Palmas | `vista-las-palmas/vista-las-palmas-neighbors-foundation-event-signage-david-weis.jpg` | VLPNF signage or website work |
+
+Also wanted but with no slot yet: bike rides and NODA committee photos (Vista Las Palmas), a Sierra
+interior (work truck), the Cork & Stem shop (Garden Club). The two white "Merry Christmas" gift-bag
+photos sit in the s'mores gallery as "the finished kits"; if they are a different year's favors, say so.
+
 ## Incoming from David (2026-09-15 email) — slots are prepped
 
 Every slot below already exists on the site as a labeled placeholder that

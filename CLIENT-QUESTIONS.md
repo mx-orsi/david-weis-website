@@ -104,7 +104,54 @@ his new five-paragraph version; three Palm Springs listings are on Properties by
 Gene Autry #A, 2324 Camino Vida) with facts from his MLS inventory. Unit details confirmed accurate.
 He dropped the GPSR widget ("I don't think I want it") and will look for an IDX he likes.
 
+**David, 2026-10-05 and 2026-10-06 emails (applied 2026-10-07):** seven briefs built as pages.
+444 W Stevens is a project page at `/experience/444-w-stevens` (his suggested
+`/projects/444-w-stevens-palm-springs/` redirects there); the disclosure line is at the bottom and no
+building-code figures or "grandfathered" legal claims were added. Five personal stories hang off About
+at his URLs: `/work-truck`, `/gay-for-good`, `/garden-club`, `/holiday-tradition`, `/vista-las-palmas`;
+About keeps a short card for each (his teaser copy where he supplied it) and the header's About entry
+is now a dropdown listing them. The FAQ hub (`/faq`) and the three market guides
+(`/san-diego/faq`, `/palm-springs/faq`, `/big-bear/faq`) are generated from one answer file
+(`src/data/faq.ts`): no FAQ or QAPage schema, official-source links on regulatory answers, the author
+line on every page, "Last reviewed" hidden until he signs off (`showReviewed`). The high-res buy-side
+photos replaced the web exports for all six buy-side sales. Copy is his, verbatim, except the Garden
+Club page, which his email gave as notes rather than finished copy; it is drafted in his voice from
+those notes and needs his read. Three decisions taken without him: the award wording follows the
+trophy ("ONE-PS Neighborhoods of Distinction, Vista Las Palmas, 2025 Honor Award"), the Holiday page
+shows only the documented 2025 figures, and the Gay for Good page uses his past-tense copy.
+
 ## Still open
+
+**From his 2026-10-05 and 2026-10-06 emails (ask David):**
+
+- **Gay for Good tense.** The new page copy says "toward the end of my time as a Chapter Leader" and
+  "roughly three years" (past tense). Is he still a Chapter Leader, or did he serve through 2026?
+- **Holiday numbers.** Only the 2025 post is documented (15th annual, more than 230 toys). Confirm or
+  drop "2024: 200+ friends, nearly 300 toys"; the page shows 2025 only until then.
+- **Award wording.** The trophy reads "ONE-PS Neighborhoods of Distinction, Vista Las Palmas, 2025
+  Honor Award, Vista Las Palmas Neighbors Foundation". The site now uses that wording instead of
+  "Neighborhood of Distinction Award". OK?
+- **Garden Club copy.** Drafted from his notes; needs his read (facts to confirm: joined 2025, the
+  $30 prospective-member meeting, roughly 300 women and a handful of men, Rita Perwich, René van
+  Rems, Best UV Protection, the La Jolla Light gallery of June 10, 2026).
+- **Garden Club, the sperm-donor line.** Kept as he asked; confirm he is comfortable with it on a
+  Compass-affiliated site.
+- **FAQ sign-off.** The answers are live without a "Last reviewed" date. Once he has read them for
+  publication, flip `showReviewed` in `src/data/faq.ts` and the date appears. Regulatory answers
+  (rental licensing, representation, insurance, ADUs, chain controls, Forest Service cabins) should
+  be re-checked periodically; each carries its own `reviewed` date.
+- **FAQ page copy vs. existing Buy/Sell FAQs.** `/buy` and `/sell` keep their earlier FAQ pairs (with
+  FAQPage JSON-LD from the September build). The new brief says not to add FAQ schema; say if the
+  old pairs should be removed or the schema dropped.
+- **444 photos.** The finished photos are 1024 to 1600px web exports; the yellow-door hero is soft at
+  full width. Does he have the photographer's originals from the 2020 listing shoot?
+- **Modernism Week years** (still open from September): his email says 2024/2025/2026, his Drive
+  folders say 2025 for the docent photos.
+- **Photos still owed** are listed by page in IMAGES-NEEDED.md (444 casita under construction;
+  Holiday childhood lights, dad's star, David and Mark at the party, Mark's early parties, cocoa kits,
+  s'mores assembly/tag/friends; Vista Las Palmas Spring and Summer socials, Pet Parade, VLPNF signage;
+  Work truck dump run, garage clearance, loaded bed, truck at a listing, signs in the Range Rover;
+  Garden Club Dahlias, van Rems centerpiece, exchange table).
 
 **From his 2026-10-05 reply (ask David):**
 
