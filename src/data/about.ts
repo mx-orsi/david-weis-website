@@ -352,39 +352,17 @@ export const aboutChapterB: ProjectChapter = {
       ratio: '4 / 3',
     },
     {
-      type: 'story',
-      eyebrow: 'Vista Las Palmas + ONE-PS',
+      // 2026-10-05: Vista Las Palmas / ONE-PS moved to /vista-las-palmas; About keeps David's teaser.
+      type: 'teaser',
+      eyebrow: 'Palm Springs community',
       heading: 'The neighborhood I call home.',
       paragraphs: [
-        'In Palm Springs, my community involvement became even more local.',
-        'I serve on the board of the Vista Las Palmas Neighbors Foundation and have enjoyed helping with neighborhood events, communication, and projects designed to make it easier for neighbors to stay connected.',
-        'Being part of ONE-PS and seeing Vista Las Palmas recognized as a Neighborhood of Distinction made that involvement especially meaningful.',
-        'It is one thing to sell real estate in a neighborhood. It is another to help care about what happens there after the closing.',
+        'Vista Las Palmas became much more than the neighborhood where I live. Some of the biggest chapters of our Palm Springs life happened here, from renovations and COVID to our wedding, annual traditions and friendships with neighbors.',
+        'Eventually, enjoying the neighborhood turned into wanting to help care for it. That involvement led to the Vista Las Palmas Neighbors Foundation, representing the neighborhood through ONE-PS, and opportunities to contribute beyond our own streets.',
       ],
-    },
-    {
-      type: 'gallery',
-      label: 'Vista Las Palmas',
-      photos: [
-        {
-          suggestion: 'The award presentation',
-          src: '/images/community/david-weis-one-ps-neighborhood-of-distinction-award-palm-springs.jpg',
-          alt: 'David Weis on stage at the ONE-PS awards as the Neighborhood of Distinction Award is presented',
-          width: 2400,
-          height: 1996,
-          hasSmall: true,
-        },
-        {
-          suggestion: 'The Neighborhood of Distinction Award',
-          src: '/images/community/vista-las-palmas-neighborhood-of-distinction-award-david-weis.jpg',
-          alt: 'The ONE-PS Neighborhood of Distinction Award for Vista Las Palmas, a crystal trophy set beside a pool with the mountains behind',
-          width: 1800,
-          height: 2400,
-          hasSmall: true,
-        },
-        { suggestion: 'Vista Las Palmas neighborhood event', src: '/images/about/david-weis-vista-las-palmas-neighborhood-event.jpg', alt: 'Neighbors gathered at a spa with the mountains behind them at a Vista Las Palmas neighborhood event', width: 1206, height: 1568, hasSmall: true },
-      ],
-      captions: [{ title: 'ONE-PS', note: 'Neighborhood of Distinction Award' }, { title: 'The award' }, { title: 'Annual traditions' }],
+      cta: { label: 'Explore my Palm Springs community story', href: '/vista-las-palmas' },
+      photo: { suggestion: 'The Fall Social', src: '/images/community/david-weis-vista-las-palmas-fall-social-palm-springs.jpg', alt: 'David Weis, Mark and neighbors at a Vista Las Palmas fall social gathering beside a lit pool at night', width: 2335, height: 2400, hasSmall: true, position: 'center 40%' },
+      ratio: '4 / 3',
     },
     {
       type: 'story',
