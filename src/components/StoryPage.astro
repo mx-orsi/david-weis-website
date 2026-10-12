@@ -137,4 +137,12 @@ const crumbs = [
     gap: 1.5rem;
     margin-top: 0.5rem;
   }
+  /* The CTAs sit inside the Story's .prose, whose link rule would paint the button's label ink on ink. */
+  .sp__close :global(.prose .sp__close-ctas .btn) {
+    color: var(--on-ink);
+    text-decoration: none;
+  }
+  .sp__close :global(.prose .sp__close-ctas .link-arrow) {
+    text-decoration: none;
+  }
 </style>

@@ -328,11 +328,12 @@ export const aboutChapterB: ProjectChapter = {
     },
     {
       // 2026-10-05: the full Gay for Good story moved to /gay-for-good; About keeps David's card.
+      // 2026-10-08: David's card copy (he is still a Chapter Leader).
       type: 'teaser',
       eyebrow: 'Gay for Good',
-      heading: 'Three years of showing up.',
+      heading: 'Still showing up.',
       paragraphs: [
-        'I joined Gay for Good looking for a more meaningful way to volunteer and meet people in San Diego. My first project was helping prime 20 Habitat for Humanity playhouses. Not long after, I became a Chapter Leader and spent roughly three years helping connect volunteers with organizations and causes throughout the region.',
+        'I joined Gay for Good looking for a more meaningful way to volunteer and meet people in San Diego. My first project was helping prime 20 Habitat for Humanity playhouses. Not long after, I became a Chapter Leader, and I’m still actively involved—helping connect volunteers with organizations and causes throughout the region.',
       ],
       cta: { label: 'Read the story', href: '/gay-for-good' },
       photo: { suggestion: 'The Habitat for Humanity playhouse group photo', src: '/images/gay-for-good/gay-for-good-san-diego-habitat-for-humanity-playhouses-first-project-david-weis.jpg', alt: 'Gay for Good volunteers kneeling and standing together at the Habitat for Humanity playhouse build in San Diego, David Weis among them', width: 1170, height: 766, hasSmall: true },
@@ -433,7 +434,7 @@ export const aboutChapterB: ProjectChapter = {
         { suggestion: 'Mark, Kathy and I as Modernism Week docents', src: '/images/about/david-weis-modernism-week-kathy.jpg', alt: 'David, Mark and Kathy in matching Vista Las Palmas shirts as volunteer docents during Modernism Week in Palm Springs', width: 1800, height: 2400, hasSmall: true, position: 'center 35%' },
         { suggestion: 'Docents in front of the pool with the mountains behind', src: '/images/about/modernism-week-vista-las-palmas-docents-pool-david-weis.jpg', alt: 'Four volunteer docents standing in front of a pool in Vista Las Palmas, with palms and the San Jacinto Mountains behind them', width: 1800, height: 2400, hasSmall: true, position: 'center 60%' },
       ],
-      caption: { title: 'Vista Las Palmas Modernism Week 2026', note: 'Volunteer docents. Helping neighbors share their homes. Spending time with new friends.' },
+      caption: { title: 'Vista Las Palmas Modernism Week 2025', note: 'Volunteer docents. Helping neighbors share their homes. Spending time with new friends.' },
     },
     {
       // 2026-10-05: the holiday section moved to /holiday-tradition; About keeps David's teaser.

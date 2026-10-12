@@ -94,7 +94,7 @@ export const stories: readonly StoryPage[] = [
               { suggestion: 'The Habitat for Humanity playhouse group photo', src: '/images/gay-for-good/gay-for-good-san-diego-habitat-for-humanity-playhouses-first-project-david-weis.jpg', alt: 'Gay for Good volunteers kneeling and standing together at the Habitat for Humanity playhouse build in San Diego, David Weis among them', width: 1170, height: 766, hasSmall: true },
               { suggestion: 'A finished playhouse', src: '/images/gay-for-good/gay-for-good-san-diego-habitat-for-humanity-painted-playhouse-david-weis.jpg', alt: 'A painted Habitat for Humanity playhouse beside a Gay for Good Volunteer With Us banner', width: 1170, height: 874, hasSmall: true },
             ],
-            captions: [{ title: 'The first one', note: 'My first Gay for Good project: helping prime 20 Habitat for Humanity playhouses in 2023.' }],
+            captions: [{ title: 'The first one', note: 'My first Gay for Good project: helping prime 20 Habitat for Humanity playhouses in 2023.' }, { title: 'The finished playhouses' }],
           },
           {
             type: 'story',
@@ -105,7 +105,7 @@ export const stories: readonly StoryPage[] = [
               'I said yes.',
               'At first, I was still one of the newer people in the organization, so there was definitely some learning as I went. But that became part of what I loved about the role.',
               'Leadership did not mean standing around telling people what to do. It meant showing up early, helping organize projects, welcoming the person who came alone, working alongside everyone else, building relationships with community partners and making sure people wanted to come back.',
-              'Over roughly three years as a Chapter Leader, Gay for Good became one of the most meaningful parts of my life in San Diego.',
+              'I’m still actively involved with Gay for Good San Diego as a Chapter Leader. Over the past three years, it has become one of the most meaningful parts of my life in San Diego.',
             ],
           },
           {
@@ -116,7 +116,7 @@ export const stories: readonly StoryPage[] = [
               { suggestion: 'David at the back-to-school project', src: '/images/gay-for-good/gay-for-good-san-diego-chicano-federation-back-to-school-backpacks-david-weis.jpg', alt: 'David Weis in a Gay for Good shirt in a room full of donated backpacks at the back-to-school project', width: 1206, height: 889, hasSmall: true },
               { suggestion: 'The large group with the vertical Volunteer With Us banner', src: '/images/gay-for-good/gay-for-good-san-diego-volunteers-group-banner-david-weis.jpg', alt: 'A large group of Gay for Good San Diego volunteers gathered around the Volunteer With Us banner on a lawn', width: 2048, height: 1446, hasSmall: true },
             ],
-            captions: [{ title: 'From volunteer to Chapter Leader' }, { title: 'The best part was always the people' }],
+            captions: [{ title: 'From volunteer to Chapter Leader' }, { title: 'The best part is always the people' }],
           },
           {
             type: 'callout',
@@ -177,15 +177,17 @@ export const stories: readonly StoryPage[] = [
               { suggestion: 'The booth at the Big Gay Picnic', src: '/images/gay-for-good/gay-for-good-san-diego-big-gay-picnic-volunteers-david-weis.jpg', alt: 'Gay for Good volunteers lined up under the booth canopy at the Big Gay Picnic in San Diego', width: 2400, height: 1800, hasSmall: true },
               { suggestion: 'Oceanside Pride', src: '/images/gay-for-good/gay-for-good-oceanside-pride-by-the-beach-david-weis.jpg', alt: 'David Weis and two friends in rainbow medals at Oceanside Pride by the Beach', width: 1170, height: 964, hasSmall: true },
               { suggestion: 'The large Pride flags', src: '/images/gay-for-good/gay-for-good-san-diego-big-gay-picnic-pride-flags-david-weis.jpg', alt: 'Volunteers raising large rainbow Pride flags while setting up for the Big Gay Picnic', width: 1440, height: 1081, hasSmall: true },
+              // 2026-10-08: David asked for the Equality California gala photo back (it was on About before the story moved).
+              { suggestion: 'The Equality California gala', src: '/images/about/david-weis-gay-for-good-equality-california-gala.jpg', alt: 'David Weis dressed up at the Equality California gala in San Diego', width: 1012, height: 1554, hasSmall: true, position: 'center 30%' },
             ],
-            captions: [{ title: 'Big Gay Picnic' }, { title: 'Oceanside Pride' }, { title: 'Setting up' }],
+            captions: [{ title: 'Big Gay Picnic' }, { title: 'Oceanside Pride' }, { title: 'Setting up' }, { title: 'Equality California gala' }],
           },
           {
             type: 'story',
             eyebrow: 'Full circle',
             heading: 'And eventually, it followed me back to Palm Springs.',
             paragraphs: [
-              'One of the moments that meant the most came toward the end of my time as a Chapter Leader.',
+              'One of the moments that has meant the most came during my time as a Chapter Leader.',
               'During Palm Springs Pride, we hosted a Gay for Good social and fundraiser at [Querencia Palms](/experience/querencia-palms).',
               'By then, two completely different parts of my life had collided in the best possible way.',
               'I had spent years helping build a community through Gay for Good. At the same time, Querencia Palms had become a place where I was pouring everything I knew about real estate, hospitality, design and creating a sense of belonging.',
@@ -215,10 +217,17 @@ export const stories: readonly StoryPage[] = [
               'Someone organizes the event. Someone sends the invitation. Someone shows up early. Someone welcomes the new person who does not know anybody yet.',
               'And then, eventually, people belong.',
               'I joined because I wanted to volunteer and meet some new people.',
-              'I ended up spending roughly three years as a Chapter Leader, discovering organizations throughout San Diego, making friendships I still value, and learning a lot about what it takes to bring people together.',
+              'I ended up becoming a Chapter Leader, and I’m still involved today—helping connect volunteers with organizations throughout San Diego, making friendships I still value, and learning a lot about what it takes to bring people together.',
               'My mom probably would have loved that.',
               'And she probably would have reminded me that this is exactly why she kept telling me to join things.',
             ],
+          },
+          {
+            type: 'cta',
+            label: 'Gay for Good San Diego',
+            href: 'https://gayforgood.org/sandiego/',
+            external: true,
+            note: 'Volunteer with the chapter.',
           },
           {
             type: 'links',
@@ -235,7 +244,7 @@ export const stories: readonly StoryPage[] = [
     seo: {
       title: 'Gay for Good San Diego | David Weis',
       description:
-        'How David Weis found community in San Diego through Gay for Good: a first project priming 20 Habitat for Humanity playhouses, roughly three years as a Chapter Leader, and a Pride fundraiser at Querencia Palms.',
+        'How David Weis found community in San Diego through Gay for Good: a first project priming 20 Habitat for Humanity playhouses, three years and counting as a Chapter Leader, and a Pride fundraiser at Querencia Palms.',
     },
   },
   {
@@ -932,16 +941,21 @@ export const stories: readonly StoryPage[] = [
             ],
           },
           {
+            // 2026-10-08: David's rework: the pool large and uncropped, the before photo between the two canopy photos, his own construction photo dropped.
+            type: 'photo',
+            ratio: '5 / 4',
+            photo: { suggestion: 'The pool', src: '/images/444-w-stevens/444-w-stevens-palm-springs-pool-spa-baja-shelf-after-david-weis.jpg', alt: 'The finished pool at 444 W Stevens with the separate raised jacuzzi faced in blue starburst tile', width: 2400, height: 1910, hasSmall: true },
+            caption: { title: 'Rethinking the backyard' },
+          },
+          {
             type: 'gallery',
             label: '444 W Stevens',
             photos: [
-              { suggestion: '444 before', src: '/images/444-w-stevens/444-w-stevens-palm-springs-street-view-before-david-weis.jpg', alt: 'The front of 444 W Stevens before the renovation: a low stucco house behind gravel, boulders and palms', width: 2400, height: 1800, hasSmall: true },
-              { suggestion: 'David at the gutted property', src: '/images/444-w-stevens/david-weis-444-w-stevens-palm-springs-renovation-under-construction.jpg', alt: 'David Weis standing beside the emptied pool at 444 W Stevens, the house behind him stripped to its frame', width: 2400, height: 1800, hasSmall: true },
               { suggestion: 'The canopy', src: '/images/444-w-stevens/444-w-stevens-palm-springs-entry-canopy-tongue-and-groove-ceiling-david-weis.jpg', alt: 'The finished entry canopy at 444 W Stevens, its tongue-and-groove wood ceiling glowing above the yellow double doors', width: 2400, height: 1800, hasSmall: true },
-              { suggestion: 'The pool', src: '/images/444-w-stevens/444-w-stevens-palm-springs-pool-spa-baja-shelf-after-david-weis.jpg', alt: 'The finished pool at 444 W Stevens with the separate raised jacuzzi faced in blue starburst tile', width: 2400, height: 1910, hasSmall: true },
+              { suggestion: '444 before', src: '/images/444-w-stevens/444-w-stevens-palm-springs-street-view-before-david-weis.jpg', alt: 'The front of 444 W Stevens before the renovation: a low stucco house behind gravel, boulders and palms', width: 2400, height: 1800, hasSmall: true },
               { suggestion: 'The finished house', src: '/images/444-w-stevens/444-w-stevens-palm-springs-front-entry-canopy-yellow-doors-after-david-weis.jpg', alt: 'The finished front of 444 W Stevens: the entry canopy above yellow double doors', width: 1024, height: 684 },
             ],
-            captions: [{ title: 'Before' }, { title: 'Under construction' }, { title: 'The canopy' }, { title: 'Rethinking the backyard' }, { title: 'The finished house' }],
+            captions: [{ title: 'The canopy' }, { title: 'Before' }, { title: 'The finished house' }],
           },
           {
             type: 'cta',

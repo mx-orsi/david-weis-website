@@ -26,7 +26,7 @@ Grouped by who has to act. Tick items off as they land.
 - [ ] **Confirm:** The Cole logo use, Querencia Palms link, Celebrity Vacation
       Homes wording and link.
 - [ ] **Update Compass profile** contact email from davidweis.net to .com.
-- [ ] **Domain access:** confirm where davidweis.com DNS is managed.
+- [ ] **Domain access:** davidweis.com nameservers are GoDaddy (ns71/ns72.domaincontrol.com) as of 2026-10-07; it forwards to the Compass profile. Need the GoDaddy login. David mentioned a partial Squarespace setup on 2026-10-07; confirm nothing there is being paid for.
 
 ## 2. Build
 

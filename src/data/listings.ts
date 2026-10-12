@@ -119,6 +119,8 @@ export const activeListings: readonly Listing[] = [
     sqft: '1,210',
     status: 'For Sale',
     note: 'Querencia Palms',
+    // Homes.com listing page (David's 2026-10-08 choice: visitors get the Matterport tour there).
+    href: 'https://www.homes.com/property/588-e-san-lorenzo-rd-palm-springs-ca-unit-204/5t7hldqmc1s9m/',
     photo: {
       suggestion: 'Unit 204 living room',
       src: '/images/querencia-interiors/querencia-palms-renovated-condo-interior-south-palm-springs-david-weis.jpg',
@@ -138,6 +140,7 @@ export const activeListings: readonly Listing[] = [
     baths: '2',
     sqft: '1,180',
     status: 'For Sale',
+    href: 'https://www.homes.com/property/2487-s-gene-autry-trail-palm-springs-ca-unit-a/8dnpl39e2lnp4/',
     photo: {
       suggestion: 'Open-concept living and dining area',
       src: '/images/listings/2487-s-gene-autry-trl-unit-a-palm-springs-ca-92264-living-dining-david-weis-san-diego-palm-springs-big-bear-compass.jpg',
@@ -152,13 +155,22 @@ export const activeListings: readonly Listing[] = [
     address: '2324 Camino Vida',
     city: 'Palm Springs',
     market: 'palm-springs',
-    price: '$1,395,000',
+    // Price reduced per David's 2026-10-08 email (was $1,395,000).
+    price: '$1,345,000',
     beds: '3',
     baths: '3',
     sqft: '2,593',
     status: 'For Sale',
-    // No photo yet: David has been asked for the listing photography.
-    photo: { suggestion: 'Listing photo of 2324 Camino Vida' },
+    href: 'https://www.homes.com/property/2324-camino-vida-palm-springs-ca/1lg404ey8rdeq/',
+    // Lead photo from David's 50-photo listing set (assets-source/drive-2026-10-11/Sales Experience/Listing Side/2324 Camino Vida).
+    photo: {
+      suggestion: 'Front exterior of 2324 Camino Vida',
+      src: '/images/listings/2324-camino-vida-palm-springs-ca-92264-exterior-david-weis-san-diego-palm-springs-big-bear-compass.jpg',
+      alt: 'Front exterior of 2324 Camino Vida, a Charles Du Bois desert modern home in Canyon Estates, Palm Springs',
+      width: 2048,
+      height: 1535,
+      hasSmall: true,
+    },
   },
 ];
 
