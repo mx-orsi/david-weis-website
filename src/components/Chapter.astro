@@ -319,6 +319,122 @@ const { chapter, slug } = Astro.props;
         </div>
       );
     }
+    if (b.type === 'audio') {
+      return (
+        <div class="container ch__block">
+          <section class="ch__audio" aria-labelledby={b.heading ? hid : undefined}>
+            {b.eyebrow && <p class="ch__quote-eyebrow">{b.eyebrow}</p>}
+            {b.heading && <h2 id={hid} class="title-md ch__audio-title">{b.heading}</h2>}
+            {b.intro && (
+              <div class="ch__audio-intro">
+                {b.intro.map((p) => (hasInline(p) ? <p set:html={renderInline(p)} /> : <p>{p}</p>))}
+              </div>
+            )}
+            <div class="ch__audio-tracks">
+              {b.tracks.map((t) => (
+                <div class="ch__track">
+                  <h3 class="ch__track-title">{t.title}</h3>
+                  {t.subtitle && <p class="ch__track-sub">{t.subtitle}</p>}
+                  <audio controls preload="none" src={withBase(t.src)} data-ch-audio aria-label={t.title}></audio>
+                  {t.transcript && t.transcript.length > 0 ? (
+                    <div class="ch__transcript">
+                      <p class="ch__transcript-label">Transcript</p>
+                      {t.transcript.map((line) => <p>{line}</p>)}
+                    </div>
+                  ) : (
+                    <p class="ch__transcript-pending">Transcript to follow.</p>
+                  )}
+                </div>
+              ))}
+            </div>
+            {b.note && <p class="ch__audio-note">{b.note}</p>}
+          </section>
+        </div>
+      );
+    }
+    if (b.type === 'document') {
+      const zoomable = photoExists(b.preview.src);
+      const ratio = b.preview.width && b.preview.height ? `${b.preview.width} / ${b.preview.height}` : '4 / 3';
+      const media = <Media photo={b.preview} ratio={ratio} sizes="(min-width: 960px) 60vw, 100vw" />;
+      return (
+        <div class="container ch__block ch__doc">
+          <div class="ch__doc-copy">
+            {b.heading && <h3 class="title-md ch__doc-title" id={hid}>{b.heading}</h3>}
+            {b.paragraphs && (
+              <div class="prose">
+                {b.paragraphs.map((p) => (hasInline(p) ? <p set:html={renderInline(p)} /> : <p>{p}</p>))}
+              </div>
+            )}
+            <a class="btn" href={withBase(b.download.href)} download>{b.download.label} <Icon name="arrow-right" /></a>
+          </div>
+          <figure class="ch__figure ch__doc-figure">
+            {zoomable ? (
+              <a class="ch__zoom" href={withBase(b.preview.src!)} data-lightbox data-caption={b.caption?.title ?? b.preview.alt ?? ''}>
+                {media}
+              </a>
+            ) : (
+              media
+            )}
+            {b.caption && (
+              <figcaption class="ch__caption">
+                <span class="ch__cap-title">{b.caption.title}</span>
+                {b.caption.note && <span class="ch__cap-note">{b.caption.note}</span>}
+              </figcaption>
+            )}
+          </figure>
+        </div>
+      );
+    }
+    if (b.type === 'faq') {
+      return (
+        <div class="container ch__block ch__faq">
+          {b.heading && <h2 id={hid} class="title-lg ch__faq-title">{b.heading}</h2>}
+          {b.intro && (
+            <div class="prose">
+              {b.intro.map((p) => (hasInline(p) ? <p set:html={renderInline(p)} /> : <p>{p}</p>))}
+            </div>
+          )}
+          <div class="ch__faq-list">
+            {b.items.map((it) => (
+              <details class="ch__faq-item">
+                <summary class="ch__faq-q"><span>{it.q}</span><span class="ch__faq-icon" aria-hidden="true"></span></summary>
+                <div class="prose ch__faq-a">
+                  {it.a.map((p) => (hasInline(p) ? <p set:html={renderInline(p)} /> : <p>{p}</p>))}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      );
+    }
+    if (b.type === 'quote') {
+      return (
+        <div class="container ch__block">
+          <section class="ch__quote" aria-labelledby={hid}>
+            <div class="ch__quote-copy">
+              {b.eyebrow && <p class="ch__quote-eyebrow">{b.eyebrow}</p>}
+              <h2 id={hid} class="title-lg ch__quote-title">{b.heading}</h2>
+              {b.paragraphs?.map((p) => (hasInline(p) ? <p class="ch__quote-p" set:html={renderInline(p)} /> : <p class="ch__quote-p">{p}</p>))}
+            </div>
+            <figure class="ch__quote-fig">
+              <blockquote class="ch__quote-text">{b.quote}</blockquote>
+              <figcaption class="ch__quote-attr">{b.attribution}</figcaption>
+              {b.cta && (
+                <a
+                  class="btn ch__quote-btn"
+                  href={b.cta.external ? b.cta.href : withBase(b.cta.href)}
+                  target={b.cta.external ? '_blank' : undefined}
+                  rel={b.cta.external ? 'noopener noreferrer' : undefined}
+                >
+                  {b.cta.label} <Icon name="arrow-ext" />
+                  {b.cta.external && <span class="sr-only"> (opens in a new tab)</span>}
+                </a>
+              )}
+            </figure>
+          </section>
+        </div>
+      );
+    }
     return null;
   })}
 </section>
@@ -333,6 +449,15 @@ const { chapter, slug } = Astro.props;
       btn.setAttribute('aria-pressed', open ? 'false' : 'true');
     });
   }
+</script>
+
+<script>
+  // One recording at a time: starting a player pauses the others.
+  document.addEventListener('play', (e) => {
+    const t = e.target;
+    if (!(t instanceof HTMLAudioElement) || !t.hasAttribute('data-ch-audio')) return;
+    for (const a of document.querySelectorAll<HTMLAudioElement>('audio[data-ch-audio]')) if (a !== t) a.pause();
+  }, true);
 </script>
 
 <style>
@@ -806,6 +931,253 @@ const { chapter, slug } = Astro.props;
     .ch__strip-label {
       font-size: 0.5625rem;
       padding: 0.45em 0.5em;
+    }
+  }
+  /* Audio panel */
+  .ch__audio {
+    background: var(--surface-blue);
+    color: var(--on-ink);
+    padding: clamp(1.75rem, 5vw, 4rem);
+    display: grid;
+    gap: 1.5rem;
+  }
+  .ch__audio-title {
+    color: var(--on-ink);
+  }
+  .ch__audio-intro {
+    display: grid;
+    gap: 1rem;
+    max-width: var(--measure);
+  }
+  .ch__audio-intro p {
+    color: rgb(255 255 255 / 0.88);
+    line-height: 1.75;
+  }
+  .ch__audio :global(a) {
+    color: #c8d8ff;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.18em;
+  }
+  .ch__audio :global(a:hover) {
+    color: #fff;
+  }
+  .ch__audio :global(a:focus-visible),
+  .ch__audio audio:focus-visible {
+    outline: 2px solid #c8d8ff;
+    outline-offset: 3px;
+  }
+  .ch__audio-tracks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+  }
+  .ch__track {
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    min-width: 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgb(255 255 255 / 0.25);
+  }
+  .ch__track-title {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(1.4rem, 2.4vw, 1.75rem);
+    line-height: 1.15;
+    color: var(--on-ink);
+  }
+  .ch__track-sub {
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    color: rgb(255 255 255 / 0.75);
+  }
+  .ch__track audio {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 0.25rem;
+  }
+  .ch__transcript {
+    display: grid;
+    gap: 0.5rem;
+    font-size: 0.9375rem;
+    color: rgb(255 255 255 / 0.88);
+  }
+  .ch__transcript-label {
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c8d8ff;
+  }
+  .ch__transcript-pending {
+    font-size: 0.8125rem;
+    color: rgb(255 255 255 / 0.7);
+  }
+  .ch__audio-note {
+    font-size: 0.8125rem;
+    color: rgb(255 255 255 / 0.75);
+    max-width: var(--measure);
+  }
+
+  /* Document (PDF ad): copy and download beside an enlargeable preview. */
+  .ch__doc {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+  .ch__doc-copy {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+  }
+  .ch__doc-figure :global(.media) {
+    border: 1px solid var(--line);
+  }
+  .ch__doc .btn {
+    color: var(--on-ink);
+  }
+  @media (max-width: 899px) {
+    .ch__doc {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  /* FAQ accordions */
+  .ch__faq {
+    display: grid;
+    gap: 1.25rem;
+    max-width: 60rem;
+  }
+  .ch__faq-list {
+    border-top: 1px solid var(--line-strong);
+  }
+  .ch__faq-item {
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .ch__faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    line-height: 1.25;
+    color: var(--ink);
+  }
+  .ch__faq-q::-webkit-details-marker {
+    display: none;
+  }
+  .ch__faq-q:hover {
+    color: var(--blue);
+  }
+  .ch__faq-q:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+  .ch__faq-icon {
+    position: relative;
+    flex: none;
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+  .ch__faq-icon::before,
+  .ch__faq-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.2s var(--ease);
+  }
+  .ch__faq-icon::after {
+    transform: rotate(90deg);
+  }
+  .ch__faq-item[open] .ch__faq-icon::after {
+    transform: rotate(0deg);
+  }
+  .ch__faq-a {
+    padding-bottom: 1.5rem;
+  }
+
+  /* Quote panel (member spotlight) */
+  .ch__quote {
+    background: var(--surface-blue);
+    color: var(--on-ink);
+    padding: clamp(1.75rem, 5vw, 4.5rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+  }
+  .ch__quote-copy {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+  }
+  .ch__quote-eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c8d8ff;
+  }
+  .ch__quote-title {
+    color: var(--on-ink);
+    max-width: 14ch;
+  }
+  .ch__quote-p {
+    color: rgb(255 255 255 / 0.88);
+    line-height: 1.75;
+    max-width: var(--measure);
+  }
+  .ch__quote :global(a) {
+    color: #c8d8ff;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.18em;
+  }
+  .ch__quote-fig {
+    margin: 0;
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+    padding-left: clamp(1.25rem, 3vw, 2.5rem);
+    border-left: 2px solid #c8d8ff;
+  }
+  .ch__quote-text {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(1.6rem, 3vw, 2.5rem);
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  .ch__quote-attr {
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c8d8ff;
+  }
+  .ch__quote-btn {
+    background: var(--on-ink);
+    border-color: var(--on-ink);
+    color: var(--ink);
+  }
+  .ch__quote-btn:hover {
+    background: #c8d8ff;
+    border-color: #c8d8ff;
+    color: var(--ink);
+  }
+  @media (max-width: 899px) {
+    .ch__quote {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>
