@@ -177,36 +177,29 @@ shows only the documented 2025 figures, and the Gay for Good page uses his past-
 
 ## Still open
 
-**From his 2026-10-08 to 2026-10-10 emails (ask David, 2026-10-11):**
+**From his 2026-10-08 to 2026-10-10 emails (Max reviewed 2026-10-12; in the reply email):**
 
-- **Gay for Good caption.** "The people were the reward" was left as written; say if it should read
-  "are" now that the page is present tense. The Querencia speaking photo appears twice on the page
-  (the Chapter Leader pair and the Full circle hero), exactly as his brief lays it out; fine?
-- **Garden Club wording that is not his:** the Mercury Palms callback sentence in "It keeps following
-  me to other places" and the short photo captions under the Kensington, Big Bear, Cole and Mercury
-  Palms photos are drafted from his notes. The closing photo beside "I'm still learning" is his
-  Querencia entry portrait.
-- **444 sliders.** "Before and after." and its one line are new wording; the three pairs are the
-  closest matches (front entry, street, kitchen). Say if any should go.
-- **Holiday.** "The 15th annual celebration." stays under 2025 with the toy count removed; drop it too?
-  The caption on "First Holiday Party" is drafted.
-- **Vista Las Palmas.** The Modernism Week after party photo is a 502px phone image; a larger original
-  would help. "Docent training · At Querencia Palms" is a drafted caption. Spring Social still needs a
-  photo.
-- **DBA page.** Which radio revision is final, or keep both; real transcripts for both spots; dates for
-  the speed networking and holiday gatherings; a working member-spotlight link (the Facebook post could
-  not be verified signed out, so the button is omitted and the quote stays); the Guide to Pride ad is
-  shown as created, with the old agent details, per his instructions; inline business links use the
-  site's house style (ink text, blue underline), not the blue text the instructions asked for.
-- **Legal pages (Compass to approve):** the form service name (Formspree or Basin, not chosen), whether
-  GA4 or a Compass pixel will run (a ready paragraph is commented out in the privacy policy source),
-  the iHomeFinder go-live date and what its registration collects, whether leads route through Zapier,
-  the MLS attribution wording for the Terms page, and whether Compass wants its own terms linked. Both
-  pages keep their blue "before launch" box and noindex until approved.
-- **IDX, next batch.** Waiting on MLS approval and the vendor setup notes; Max has the admin login.
-  Google Analytics: none exists yet; creating a GA4 property triggers the pixel disclosure.
-- **Hosting.** Cloudflare Pages needs Max to log Wrangler in once (the token on this Mac expired in
-  August); GitHub Pages with the custom domain remains the fallback that needs no new login.
+- **DBA event dates** for the speed networking and holiday gatherings (cards stay undated until then).
+- **DBA spotlight link.** The Facebook post could not be verified signed out, so the button is omitted
+  and the quote stays. Asked whether DBA restored the article.
+- **Vista Las Palmas photos.** A larger after-party original (the Drive copy is 502px; the older
+  750px file is the same shot with a third person, so no sharper crop exists) and a Spring Social photo.
+  Drive re-checked 2026-10-12: neither is there.
+- **Work truck photos,** no rush: dump run, signs or supplies in a Range Rover. Not in the Drive.
+- **Read Garden Club and DBA.** Covers the drafted Mercury Palms sentence and four photo captions on
+  Garden Club, the 444 "Before and after." heading, and the older Garden Club facts (joined 2025, the
+  $30 meeting, roughly 300 women, Rita Perwich, René van Rems, the La Jolla Light date, the
+  sperm-donor line).
+
+**Settled by Max, 2026-10-12 (not asked):** "The people were the reward" stays as written; the
+speaking photo appearing twice is fine; "The 15th annual celebration." stays; DBA links keep the house
+style; DBA radio: both versions stay as labeled per his instructions file; 2024 holiday numbers and the
+award wording stay as they are; FAQ sign-off stays on David's own list.
+
+**Max to do after the email goes out:** accept the GoDaddy delegate invite; change the iHomeFinder
+password; set up Cloudflare Pages (David's choice); create a Formspree form and set
+`PUBLIC_FORM_ENDPOINT`; create GA4; send the legal pages to Compass; test the iHomeFinder to Compass
+Zap once the search is live.
 
 **From his 2026-10-05 and 2026-10-06 emails (ask David):**
 
