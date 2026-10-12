@@ -15,6 +15,12 @@ export const contact = {
     title: 'Start a conversation.',
     body: 'Your initial consultation is complimentary. There is no pressure to have everything figured out before reaching out.',
     privacyNote: 'Your message will be used to respond to your inquiry.',
+    consent: {
+      label:
+        'I agree to be contacted by David Weis, Compass via call, email and text for real estate services. To opt out, reply STOP at any time. For help, reply HELP. Message and data rates may apply. Message frequency may vary.',
+      privacy: 'See the Privacy Policy.',
+      missing: "Check the consent box or leave the phone field empty if you'd rather not be called or texted.",
+    },
     submit: 'Send Message',
     interestedIn: ['Buying', 'Selling', 'Investing', 'Relocating', 'Evaluating a property I own', 'Not sure yet'],
     locations: ['San Diego', 'Palm Springs', 'Big Bear', 'More than one', 'Not sure yet'],

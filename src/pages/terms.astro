@@ -1,0 +1,118 @@
+---
+/**
+ * Terms of Use: requested by Compass compliance (2026-10) ahead of the
+ * iHomeFinder property search. Kept out of the sitemap and noindexed, like
+ * the Privacy Policy, until both are approved.
+ */
+import LegalDoc from '../components/LegalDoc.astro';
+import Title from '../components/Title.astro';
+import { agent, legal } from '../data/site';
+import { withBase } from '../lib/paths';
+
+const title = 'Terms of Use | David Weis';
+const description = 'Terms of use for davidweis.com: informational purposes, property listing data, accounts, intellectual property, accessibility and fair housing.';
+const updated = 'October 11, 2026';
+---
+
+<LegalDoc {title} {description} heading="Terms of Use" {updated}>
+  <div class="pp__todo" slot="todo">
+    <strong>Before launch:</strong> Have Compass compliance approve these terms, then remove this box.
+    <ul>
+      <li>[confirm: iHomeFinder's required IDX and MLS attribution wording, which may need to appear here or on the search pages]</li>
+      <li>[confirm: the MLS names (for example SDMLS, CRMLS) to list once the search is live]</li>
+      <li>[confirm: whether Compass wants its own terms linked from this page]</li>
+    </ul>
+  </div>
+
+  <p class="lede lede--wide">These terms cover your use of davidweis.com. By using the site, you agree to them.</p>
+
+  <h2>Acceptance</h2>
+  <p>
+    This website is operated by {agent.name}, a licensed real estate <Title /> in California (DRE #{agent.dre}), affiliated with
+    {agent.brokerage} (DRE #{agent.brokerageDre}). If you do not agree with these terms, please do not use the site. Our
+    <a href={withBase('/privacy-policy')}>Privacy Policy</a> explains how we handle your information.
+  </p>
+
+  <h2>Informational purposes, no advice</h2>
+  <p>
+    Everything on this site is general information. It is not legal, tax, financial or investment advice, and nothing here is an
+    offer, a contract or a promise of any result. Talk to a qualified attorney, tax professional or lender about your situation, and
+    verify anything that matters to you on your own, including prices, measurements, schools, zoning and permits.
+  </p>
+
+  <h2>Property listings and search data</h2>
+  <p>
+    Listing information comes from the multiple listing service (MLS) and other sources we believe are reliable, but it is not
+    guaranteed. It can change or be withdrawn without notice, and it may be out of date. Square footage and other measurements are
+    approximate.
+  </p>
+  <p>
+    Listing data is provided for your personal, non-commercial use, to identify properties you may be interested in purchasing. You
+    may not use it for any other purpose, or copy, scrape or resell it. Some listings may be held by brokerages other than
+    {agent.brokerage}.
+  </p>
+  <p>{legal.disclaimer}</p>
+
+  <h2>Accounts and saved searches</h2>
+  <p>
+    If you register for the property search to save searches or favorites, give us accurate information and keep your login private.
+    You are responsible for activity under your account. We may close or restrict an account that is misused. You can ask us to
+    delete your account at any time by emailing <a href={`mailto:${agent.email}`}>{agent.email}</a>. The property search is
+    operated by iHomeFinder, and its handling of your information is described in our Privacy Policy.
+  </p>
+
+  <h2>Intellectual property</h2>
+  <p>
+    The photographs, copy, design and logos on this site belong to {agent.name}, {agent.brokerage} or the people who created or
+    licensed them, and are protected by copyright and trademark law. You may not copy, republish or use them commercially without
+    written permission. Compass, REALTOR®, the Equal Housing Opportunity logo and other third-party names and marks belong to their
+    owners.
+  </p>
+
+  <h2>Links to other sites</h2>
+  <p>
+    The site links to other websites, including compass.com. We do not control them and are not responsible for their content or
+    practices. A link is not an endorsement.
+  </p>
+
+  <h2>Accessibility</h2>
+  <p>
+    This site is built to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA, and works with a keyboard alone. If
+    you find a barrier, email <a href={`mailto:${agent.email}`}>{agent.email}</a> with the page and what happened, and we will work
+    to fix it and help you get the information another way.
+  </p>
+
+  <h2>Fair housing</h2>
+  <p>
+    We are committed to the Fair Housing Act and to equal housing opportunity for everyone, regardless of race, color, religion,
+    sex, handicap, familial status, national origin or any other characteristic protected by federal, state or local law. We aim
+    to be accurate and honest in everything we publish about properties and services.
+  </p>
+
+  <h2>No unlawful use</h2>
+  <p>
+    Please do not use the site to break the law, interfere with how it works, try to get into systems or data you are not meant to
+    reach, send spam, or collect information about other people.
+  </p>
+
+  <h2>Disclaimer of warranties and limitation of liability</h2>
+  <p>
+    The site and its content are provided "as is" and "as available," without warranties of any kind, express or implied. To the
+    fullest extent the law allows, {agent.name} and {agent.brokerage} are not liable for indirect, incidental or consequential
+    damages, or for losses that come from relying on the site's content or from the site being unavailable. Nothing here limits
+    rights that cannot be limited under California law.
+  </p>
+
+  <h2>Governing law</h2>
+  <p>These terms are governed by the laws of the State of California, without regard to its conflict of laws rules.</p>
+
+  <h2>Changes</h2>
+  <p>We may update these terms. The revised version will be posted here with a new "last updated" date. Continued use means you accept the changes.</p>
+
+  <h2>Contact</h2>
+  <p>
+    {agent.name}, <Title /> (DRE #{agent.dre})<br />
+    {agent.brokerage} (DRE #{agent.brokerageDre}), {agent.office.street}, {agent.office.city}, {agent.office.state} {agent.office.zip}<br />
+    <a href={`mailto:${agent.email}`}>{agent.email}</a> · <a href={agent.phoneHref}>{agent.phone}</a>
+  </p>
+</LegalDoc>

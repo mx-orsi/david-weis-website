@@ -1,0 +1,77 @@
+---
+/**
+ * LegalDoc — shared shell for the Privacy Policy and Terms pages: noindex
+ * layout, heading, "last updated" line, an optional blue "Before launch" box
+ * (slot "todo") and the document body (default slot).
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  heading: string;
+  updated: string;
+}
+const { title, description, heading, updated } = Astro.props;
+---
+
+<BaseLayout {title} {description} noindex finalCta={false}>
+  <article class="pp section">
+    <div class="container pp__doc">
+      <p class="eyebrow eyebrow--dot">Legal</p>
+      <h1 class="title-xl">{heading}</h1>
+      <p class="pp__updated">Draft · Last updated {updated}</p>
+      <slot name="todo" />
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .pp__doc {
+    max-width: 72ch;
+    margin-inline: auto;
+    display: grid;
+    gap: 1rem;
+  }
+  .pp__updated {
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .pp__todo {
+    padding: 1.25rem 1.5rem;
+    margin-block: 0.5rem 1rem;
+    border: 1px solid var(--blue);
+    background: var(--blue-tint);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .pp__todo ul {
+    margin-top: 0.5rem;
+  }
+  .pp__doc h2 {
+    font-size: 1.75rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .pp__doc p,
+  .pp__doc li {
+    color: var(--ink-2);
+    line-height: 1.75;
+  }
+  .pp__todo li {
+    line-height: 1.6;
+  }
+  .pp__doc ul {
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .pp__doc a {
+    color: var(--ink);
+  }
+</style>

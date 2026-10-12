@@ -1,33 +1,31 @@
 ---
 /**
- * Privacy Policy — a stub draft. The contact form collects name, email and
- * phone, so the site needs a policy; Compass requires an approved one before
- * launch. Adapted from the July 2026 draft in the earlier project folder.
- * Kept out of the sitemap and noindexed until it is approved.
+ * Privacy Policy: a draft for Compass compliance review (updated 2026-10-11
+ * with their list: SMS language, property search, tracking, hosting, fair
+ * housing). Kept out of the sitemap and noindexed until it is approved.
  */
-import BaseLayout from '../layouts/BaseLayout.astro';
+import LegalDoc from '../components/LegalDoc.astro';
 import Title from '../components/Title.astro';
 import { agent } from '../data/site';
+import { withBase } from '../lib/paths';
 
 const title = 'Privacy Policy | David Weis';
 const description = 'Privacy policy for davidweis.com: what information the site collects through its contact form, how it is used and the choices you have.';
-const updated = 'September 12, 2026';
+const updated = 'October 11, 2026';
 ---
 
-<BaseLayout {title} {description} noindex finalCta={false}>
-  <article class="pp section">
-    <div class="container pp__doc">
-      <p class="eyebrow eyebrow--dot">Legal</p>
-      <h1 class="title-xl">Privacy Policy</h1>
-      <p class="pp__updated">Draft · Last updated {updated}</p>
+<LegalDoc {title} {description} heading="Privacy Policy" {updated}>
+  <div class="pp__todo" slot="todo">
+    <strong>Before launch:</strong> Compass compliance must approve this policy (ideally counsel too). Then remove this box.
+    <ul>
+      <li>[confirm: which form service will receive contact form messages (Formspree, Basin or other), so it can be named]</li>
+      <li>[confirm: whether Google Analytics 4 or a Compass pixel will be enabled; if yes, swap in the commented paragraph in the Analytics section]</li>
+      <li>[confirm: iHomeFinder go-live date and what its registration collects; remove the "once the search is live" note then]</li>
+      <li>[confirm: whether leads really route through Zapier to the Compass CRM]</li>
+    </ul>
+  </div>
 
-      <div class="pp__todo">
-        <strong>Before launch:</strong> Compass requires agent sites to carry an approved privacy policy. Have this draft reviewed by
-        Compass compliance and, ideally, by counsel. Confirm the analytics and form-handling details once those services are
-        connected. Remove this box when the policy is approved.
-      </div>
-
-      <p class="lede lede--wide">This policy explains what information is collected through davidweis.com, why, and what choices you have.</p>
+  <p class="lede lede--wide">This policy explains what information is collected through davidweis.com, why, and what choices you have.</p>
 
       <h2>Who we are</h2>
       <p>
@@ -43,8 +41,8 @@ const updated = 'September 12, 2026';
           you select and anything you write in the message field of the contact form.
         </li>
         <li>
-          <strong>Information collected automatically.</strong> Standard server and analytics data such as IP address, browser and
-          device type, pages viewed and referring URL.
+          <strong>Information collected automatically.</strong> Standard server log data such as IP address, browser and device
+          type, pages viewed and referring URL. See "Hosting" and "Analytics and tracking" below.
         </li>
       </ul>
       <p>
@@ -63,9 +61,10 @@ const updated = 'September 12, 2026';
 
       <h2>Who we share it with</h2>
       <p>
-        We share information only with service providers who help operate this business, such as form handling, email, customer
-        relationship management and analytics, and with {agent.brokerage} as our responsible broker where required for a
-        transaction or by brokerage policy. We may also disclose information where required by law.
+        We share information only with service providers who help operate this business: the form service that delivers your
+        message to us, iHomeFinder (which runs the property search), Zapier (which can relay leads to our customer relationship
+        management system), and {agent.brokerage}, our responsible broker, where required for a transaction or by brokerage
+        policy. We may also disclose information where required by law. We do not sell your information.
       </p>
 
       <h2>Your California privacy rights</h2>
@@ -77,10 +76,69 @@ const updated = 'September 12, 2026';
         <a href={agent.phoneHref}>{agent.phone}</a>. We will verify your identity before acting on the request.
       </p>
 
+      <h2>Text messages and mobile information</h2>
+      <p>
+        No mobile information will be shared with third parties/affiliates for marketing/promotional purposes. All the above
+        categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third
+        parties.
+      </p>
+      <p>
+        If you give us your phone number, the contact form asks you to agree to be contacted by call, email and text. We text only
+        people who have agreed. To stop texts, reply STOP at any time. For help, reply HELP. Message and data rates may apply, and
+        message frequency may vary. You can also email <a href={`mailto:${agent.email}`}>{agent.email}</a> to opt out.
+      </p>
+      <p>We keep a record of your consent, and we never share it.</p>
+
+      <h2>Property search and saved searches</h2>
+      <p><em>This section applies once the property search is live on this site.</em></p>
+      <p>
+        The property search is operated by iHomeFinder. When you register, it collects what you enter, usually your name, email
+        address and phone number, plus the searches you save, the homes you favorite and how you use the search. iHomeFinder and
+        {agent.brokerage} receive your lead details so we can follow up. Zapier may relay those details to our customer
+        relationship management system at {agent.brokerage}. We do not sell this information. iHomeFinder handles it under its own
+        privacy policy as well.
+      </p>
+
+      <h2>Analytics and tracking</h2>
+      <p>
+        This site does not currently use analytics or advertising pixels. If that changes, we will update this section before the
+        tools are turned on.
+      </p>
+      {/*
+        READY-TO-USE TEXT for when Google Analytics 4 and/or a Compass pixel are enabled. Replace the paragraph above with this,
+        then update the "Cookies" note and the blue box.
+
+        <p>
+          This site uses Google Analytics 4 to count visits and see which pages are useful. It collects your IP address (shortened
+          where possible), device and browser type, pages viewed and referring site, using cookies or similar technologies. It
+          does not collect your name or contact details. [If used:] The site also uses a Compass tracking pixel, which tells Compass
+          that you visited and which pages you viewed, so Compass can measure and improve its services and show relevant ads.
+        </p>
+        <p>
+          To opt out of Google Analytics, install the
+          <a href="https://tools.google.com/dlpage/gaoptout">Google Analytics opt-out browser add-on</a>, or block cookies in your
+          browser settings. You can also turn on the Global Privacy Control signal in your browser, which we will honor. To opt out
+          of the Compass pixel, email {agent.email} or use the opt-out controls on compass.com. We do not sell your information, and
+          you can ask us to stop sharing it for advertising at any time.
+        </p>
+      */}
+
       <h2>Cookies</h2>
       <p>
-        This site may use cookies and similar technologies for basic functionality and analytics. Most browsers let you refuse or
-        delete cookies; doing so may affect how parts of the site work.
+        The site itself needs no cookies to work. The property search and any tools we add later may set cookies. Most browsers
+        let you refuse or delete cookies; doing so may affect how parts of the site work.
+      </p>
+
+      <h2>Hosting</h2>
+      <p>
+        The site is hosted on Cloudflare Pages (during preview, GitHub Pages). Like most hosts, they keep standard server logs such
+        as IP address, browser type and the pages requested, to deliver the site and keep it secure.
+      </p>
+
+      <h2>Fair housing</h2>
+      <p>
+        We are committed to equal housing opportunity. {agent.brokerage} abides by Equal Housing Opportunity laws, and we
+        treat everyone fairly and honestly. See our <a href={withBase('/terms')}>Terms of Use</a> for more.
       </p>
 
       <h2>Security and retention</h2>
@@ -101,49 +159,4 @@ const updated = 'September 12, 2026';
         {agent.brokerage}, {agent.office.street}, {agent.office.city}, {agent.office.state} {agent.office.zip}<br />
         <a href={`mailto:${agent.email}`}>{agent.email}</a> · <a href={agent.phoneHref}>{agent.phone}</a>
       </p>
-    </div>
-  </article>
-</BaseLayout>
-
-<style>
-  .pp__doc {
-    max-width: 72ch;
-    margin-inline: auto;
-    display: grid;
-    gap: 1rem;
-  }
-  .pp__updated {
-    font-size: 0.6875rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .pp__todo {
-    padding: 1.25rem 1.5rem;
-    margin-block: 0.5rem 1rem;
-    border: 1px solid var(--blue);
-    background: var(--blue-tint);
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: var(--ink-2);
-  }
-  .pp__doc h2 {
-    font-size: 1.75rem;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--line);
-  }
-  .pp__doc p,
-  .pp__doc li {
-    color: var(--ink-2);
-    line-height: 1.75;
-  }
-  .pp__doc ul {
-    padding-left: 1.2rem;
-    display: grid;
-    gap: 0.5rem;
-  }
-  .pp__doc a {
-    color: var(--ink);
-  }
-</style>
+</LegalDoc>

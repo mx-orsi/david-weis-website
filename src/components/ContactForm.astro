@@ -15,7 +15,7 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
 const f = contact.form;
 ---
 
-<form class="cf" method="post" action={endpoint || undefined} data-endpoint={endpoint} data-email={agent.email} novalidate>
+<form class="cf" method="post" action={endpoint || undefined} data-endpoint={endpoint} data-email={agent.email} data-consent-missing={f.consent.missing} novalidate>
   <div class="cf__row">
     <label class="cf__field">
       <span>Name</span>
@@ -51,6 +51,12 @@ const f = contact.form;
   <div class="cf__hp" aria-hidden="true">
     <label>Leave this field empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
   </div>
+  <div class="cf__consent">
+    <input id="cf-consent" type="checkbox" name="consent" value="yes" />
+    <label for="cf-consent">
+      {f.consent.label} <a href={withBase('/privacy-policy')}>{f.consent.privacy}</a>
+    </label>
+  </div>
   <div class="cf__foot">
     <button class="btn" type="submit">
       <span>{f.submit}</span>
@@ -67,6 +73,7 @@ const f = contact.form;
     const status = form.querySelector<HTMLElement>('.cf__status')!;
     const endpoint = form.dataset.endpoint || '';
     const email = form.dataset.email || '';
+    const consentMissing = form.dataset.consentMissing || '';
 
     // Buy/Sell buttons link here with ?interest=Buying|Selling, and the market
     // FAQ guides with ?location=Palm%20Springs, to preselect those fields.
@@ -90,7 +97,16 @@ const f = contact.form;
       }
       const data = new FormData(form);
       if ((data.get('_gotcha') as string)?.length) return; // bot
+      const hasPhone = ((data.get('phone') as string) || '').trim().length > 0;
+      const consented = data.get('consent') === 'yes';
+      if (hasPhone && !consented) {
+        status.dataset.state = 'error';
+        status.textContent = consentMissing;
+        form.querySelector<HTMLInputElement>('input[name=consent]')?.focus();
+        return;
+      }
       const fields = Object.fromEntries(data.entries()) as Record<string, string>;
+      fields.consent = consented ? 'yes' : 'no';
       const button = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
 
       if (endpoint) {
@@ -122,6 +138,7 @@ const f = contact.form;
         fields.phone ? `Phone: ${fields.phone}` : '',
         `Interested in: ${fields.interest}`,
         `Location: ${fields.location}`,
+        `Consent to call/email/text: ${fields.consent}`,
         '',
         fields.message,
       ]
@@ -185,6 +202,31 @@ const f = contact.form;
     width: 1px;
     height: 1px;
     overflow: hidden;
+  }
+  .cf__consent {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+    align-items: start;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .cf .cf__consent input {
+    width: 1.125rem;
+    height: 1.125rem;
+    padding: 0;
+    margin: 0.1rem 0 0;
+    accent-color: var(--blue);
+    cursor: pointer;
+  }
+  .cf .cf__consent input:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+    box-shadow: none;
+  }
+  .cf__consent a {
+    color: var(--ink-2);
   }
   .cf__foot {
     display: flex;

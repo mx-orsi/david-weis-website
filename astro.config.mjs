@@ -55,7 +55,7 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
-      filter: (page) => !page.includes('/privacy-policy'),
+      filter: (page) => !page.includes('/privacy-policy') && !page.includes('/terms'),
       serialize: (item) => {
         const img = pageImages(item.url);
         return img.length ? { ...item, img } : item;
