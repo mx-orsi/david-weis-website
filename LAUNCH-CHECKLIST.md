@@ -22,11 +22,14 @@ Grouped by who has to act. Tick items off as they land.
 - [ ] **Realtor.com profile URL** — the last footer link. Ask David to paste
       the address from his own browser (Realtor.com blocks us).
 - [ ] **Compass compliance sign-off** on the footer disclosure, the wordmark
-      placement and the privacy policy.
+      placement, the privacy policy and the Terms of Use (both drafted 2026-10-11 from
+      Compass's own list; each page carries a blue box of unconfirmed items).
 - [ ] **Confirm:** The Cole logo use, Querencia Palms link, Celebrity Vacation
       Homes wording and link.
 - [ ] **Update Compass profile** contact email from davidweis.net to .com.
-- [ ] **Domain access:** davidweis.com nameservers are GoDaddy (ns71/ns72.domaincontrol.com) as of 2026-10-07; it forwards to the Compass profile. Need the GoDaddy login. David mentioned a partial Squarespace setup on 2026-10-07; confirm nothing there is being paid for.
+- [ ] **Domain access:** davidweis.com nameservers are GoDaddy (ns71/ns72.domaincontrol.com) as of 2026-10-07; it forwards to the Compass profile. David sent Max a GoDaddy delegate invite on 2026-10-08: Max must accept it. David is cancelling the Squarespace subscription that was billing him.
+- [ ] **IDX (iHomeFinder):** David signed up on 2026-10-08 (both MLSs, $154/month). MLS access submitted; Max has an admin login (change the password on first sign-in). Vendor setup notes to come. Build list: home hero with combined search, market searches and featured areas, separate Active and Pending feeds, search-result URLs on davidweis.com, lead-nurture prompt after three listing views, Google Analytics, Compass CRM sync (Zapier two-step Zap first; research in `assets-source/drive-2026-10-10-dba/`).
+- [ ] **David to read:** the Garden Club page (his Section 5 feature plus the drafted bits flagged in `CLIENT-QUESTIONS.md`) and the new Desert Business Association page.
 
 ## 2. Build
 
@@ -44,7 +47,8 @@ Grouped by who has to act. Tick items off as they land.
       violations on every page at desktop and phone widths; no horizontal
       overflow at 390px.
 - [ ] **Form service.** Create a Formspree or Basin form, set
-      `PUBLIC_FORM_ENDPOINT` in `.env` and in the deploy environment.
+      `PUBLIC_FORM_ENDPOINT` in `.env` and in the deploy environment, and name it in
+      the privacy policy. The form now sends `consent: yes|no` from the SMS checkbox.
 - [ ] Swap placeholders for photos as they arrive (data edits only).
 - [x] Weekly rebuild workflow (`.github/workflows/weekly-rebuild.yml`) so new
       reviews reach the site without a manual deploy. Needs Actions enabled on
@@ -52,22 +56,26 @@ Grouped by who has to act. Tick items off as they land.
 
 ## 3. Launch plumbing
 
-- [ ] Choose production host: GitHub Pages with a custom domain (free, already
-      wired), or Netlify/Cloudflare Pages if forms or redirects are wanted.
+- [ ] Production host: **Cloudflare Pages** (David's choice, 2026-10-08; iHomeFinder confirmed
+      compatibility). Max must log Wrangler in once on this Mac (token expired August 2026), create
+      the Pages project from the GitHub repo, and move the weekly rebuild to a Cloudflare deploy hook.
+      GitHub Pages with the custom domain stays the fallback (already wired, HTTPS, no new login).
 - [ ] Point davidweis.com at the host; add HTTPS; keep www and apex both working.
 - [ ] Production build uses root paths automatically (no `SITE_BASE`), which
       also removes the `noindex` tag. Verify after the first deploy.
 - [x] Branded 1200×630 share image (`david-weis-share-image.jpg`).
-- [ ] Remove `noindex` from the privacy policy once approved.
+- [ ] Remove `noindex` (and the blue boxes) from the privacy policy and Terms of Use once approved;
+      add `/terms` to the sitemap filter exception at the same time.
 - [ ] Google Search Console: verify, submit `/sitemap-index.xml`.
 - [ ] Google Business Profile: link the site; confirm Suite 210 matches.
-- [ ] Analytics (GA4 or a privacy-light option like Plausible) if David wants numbers.
+- [ ] Analytics: David expects Google Analytics with the IDX. Nobody has created a GA4 property
+      yet. Creating one triggers the pixel disclosure: swap in the commented paragraph in
+      `src/pages/privacy-policy.astro`.
 
 ## 4. Final QA before go-live
 
 - [ ] Re-run the axe audit and the screenshot pass after photos land.
-      (2026-09-12: axe clean on home and About at 1440 and 390 with the
-      testimonials section in.)
+      (2026-10-11: axe clean on every changed page at 1440 and 390, no horizontal overflow.)
 - [x] Lighthouse pass (2026-09-12): desktop 100/100/100/100 on home; mobile performance 97 home, 98 San Diego, 96 project page, all other categories 100. CSS is inlined, photos ship as WebP with the hero preloaded. Re-run after photos land.
 - [ ] Real-device check on iPhone and Android, Safari and Chrome.
 - [ ] Every link clicked, every Compass link opens the right area.

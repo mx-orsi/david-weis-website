@@ -25,13 +25,14 @@ Requires Node 22.12+.
 | Home | `/` | Seven short sections from the deck; full stories live on interior pages |
 | About | `/about` | Chapter-driven (`Chapter.astro`, two chapters around the career grid): the personal story, The Cole, community, markets and closing |
 | Markets | `/san-diego`, `/palm-springs`, `/big-bear` | Shared `MarketPage` template |
-| Stories | `/work-truck`, `/gay-for-good`, `/garden-club`, `/holiday-tradition`, `/vista-las-palmas` | Personal stories off About, one shared `StoryPage` generated from `stories.ts` |
+| Stories | `/gay-for-good`, `/garden-club`, `/holiday-tradition`, `/vista-las-palmas`, `/desert-business-association`, `/work-truck` | Personal stories off About, one shared `StoryPage` generated from `stories.ts` (the DBA story lives in `dba.ts`) |
 | FAQs | `/faq`, `/san-diego/faq`, `/palm-springs/faq`, `/big-bear/faq` | Hub and three market guides generated from `faq.ts` (one record per answer) |
 | Experience | `/experience` | Landing with all eight project cards |
 | Project pages | `/experience/<slug>` | One shared `ProjectPage` structure, generated from `projects.ts` |
 | Properties | `/properties` | Featured listings grid + Compass link + selected sales (each block removable) |
 | Contact | `/contact` | Form (Name, Email, Phone, Interested In, Location, Message) + direct details |
-| Privacy Policy | `/privacy-policy` | Draft stub, noindexed until Compass approves it |
+| Privacy Policy | `/privacy-policy` | Draft, noindexed until Compass approves it (`LegalDoc.astro` shell) |
+| Terms of Use | `/terms` | Draft, noindexed until Compass approves it |
 | 404 | `/404` | |
 | `/projects` | redirect → `/experience` | Keeps the old preview link alive |
 | `/projects/444-w-stevens-palm-springs` | redirect → `/experience/444-w-stevens` | David's suggested URL for the 444 story |
@@ -96,7 +97,10 @@ public/images/       ← headshot, logos, compliance marks, Unsplash market phot
   Before/After shown on the images and `emphasis` to size one larger),
   `callout`, `compare` (before/after sliders), `gallery` (irregular editorial
   grid), `strip` (hover/tap-to-reveal labels), `cta` (a single outbound-style
-  link with an optional note, not a button) and `sequence` (stages a visitor
+  link with an optional note, not a button), `tiles` (two square story cards side
+  by side, About's community stories), `audio`, `document`, `faq` and `quote`
+  (built for the DBA page: native players, an enlargeable PDF preview with a
+  download, details/summary accordions, a navy quote panel) and `sequence` (stages a visitor
   steps through manually — one large photo, small numbered stage buttons and
   Previous/Next, rendered by `Sequence.astro`; the Vista Voltaire fence is the
   first). Querencia Palms' grounds chapter is the first deep-dive; any

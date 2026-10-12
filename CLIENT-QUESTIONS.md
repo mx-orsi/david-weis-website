@@ -5,6 +5,61 @@ file whenever he answers something.
 
 ## Answered
 
+**David, 2026-10-08 to 2026-10-10 emails (applied 2026-10-11):** his line-by-line preview review,
+the Gay for Good and Garden Club rewrites, the Compass compliance list, the iHomeFinder demo notes and
+the About restructure.
+
+- **IDX:** David bought iHomeFinder himself (both MLSs, $154/month, his approval). MLS access is
+  submitted; Max has an admin login (not recorded anywhere). Integration is the next batch: home hero
+  with a combined search, market-specific searches and featured areas, separate Active and Pending
+  feeds, search URLs on davidweis.com, the lead-nurture prompt after three listing views, Google
+  Analytics, and a Compass CRM sync. CRM research is in `assets-source/drive-2026-10-10-dba/` (gitignored):
+  iHomeFinder has a Zapier "New Lead" trigger and Zapier lists a Compass "Create a New Lead" action; a
+  two-step Zap is the path to test first.
+- **Hosting:** Cloudflare Pages per David (iHomeFinder confirmed it works). He sent Max the GoDaddy
+  delegate invite and is cancelling Squarespace.
+- **Gay for Good:** he is still a Chapter Leader. New copy in, present tense throughout, the Querencia
+  speaking photo paired with the banner group (and again as the Full circle hero, as his brief asks),
+  "The best part is always the people", "The finished playhouses", the Equality California gala photo
+  back in the Pride gallery, his new About card and the gayforgood.org/sandiego link.
+- **Garden Club:** his "Replace Section 5" feature is built as the heart of the page, reusing the
+  Querencia sliders and pond photos from the project page (now shared data). His seven layout notes
+  applied (bees and umbrella even, three hat photos in a row, "Not planned, but still a winner!", the
+  La Jolla Light photo wide, the three workshop photo blocks removed, the syrup tag copy, the
+  inspiration caption centered and bold with looser spacing). He was confused by the "mark anything
+  that isn't you" request: explained in the 2026-10-11 reply.
+- **Vista Las Palmas:** title "One of the places I call home."; the three-market paragraph near the
+  top; the Mercury Palms opener; the softened closing; wedding photo centered; Cole captions; the
+  444 gallery reworked (pool large and uncropped, before between the canopy photos, David's photo
+  dropped); the Neighbors photo removed and the new Fall Social large; after party and docent training
+  fill the Summer and Pet Parade slots; "Hosts opened their home / We got to help show them off"; the
+  "What I've helped with" photo; the award pair rebuilt so everyone fits with the award beside it; the
+  closing button label fixed (it rendered ink on ink).
+- **Holiday:** dad's photo pair removed; "First Holiday Party" beside Mark's tradition; "The party"
+  block removed; the early-in-the-night photo removed and Sybil's photo large; the toy count removed
+  (the "15th annual" line stays); Marines and Range Rover captions; "Before anyone arrives" photo
+  centered; the cocoa kit photo plus spoons and marshmallows; his four 2025 gift-bag photos with his
+  captions matched to what each photo shows; the cookie competition photo closes the page, no caption.
+- **Work truck:** Colorado pair the same size; the Compass-office and Big Bear snow photos in the
+  Sierra pair; the garage-clearance photo plus a three-up of the close-ups.
+- **444 W Stevens:** "Casita After" fills the casita slot (no "during" exists); "The Finished House"
+  sits beside the front-door before; three pairs that line up (front entry, street, kitchen) are
+  sliders at the end of the page.
+- **Properties:** 2324 Camino Vida is $1,345,000 with his lead photo; all three listings link to
+  Homes.com (Matterport).
+- **3700 Third Ave:** Unit 142's tenth photo removed so the three columns balance.
+- **Home:** the Buy/Sell card borders use the blue of "The people made it home."
+- **About:** the deep-blue market bands are thin rules with the market name in blue; Gay for Good and
+  Garden Club sit as two squares under San Diego, the Palm Springs community story and the new DBA page
+  under Palm Springs; docents were 2025 only.
+- **Desert Business Association:** built from his instructions file (the ChatGPT HTML was reference
+  only) at `/desert-business-association`, in the About menu after Vista Las Palmas.
+- **Compliance:** the Compass list is in: privacy policy additions (the verbatim mobile-information
+  statement, SMS consent, property search, analytics, hosting), a Terms of Use page, the SMS consent
+  checkbox on the contact form, Fair Housing lines. Both legal pages stay noindexed and carry a blue
+  box listing what is unconfirmed. ADA: every page passes an automated WCAG 2.2 AA audit at desktop and
+  phone widths, sliders and accordions are keyboard operable, and a skip link exists.
+
 **David, 2026-09-04 and 2026-09-08 emails**
 
 - **Email:** `david@davidweis.com` only. The Compass address is gone from the site.
@@ -122,10 +177,39 @@ shows only the documented 2025 figures, and the Gay for Good page uses his past-
 
 ## Still open
 
+**From his 2026-10-08 to 2026-10-10 emails (ask David, 2026-10-11):**
+
+- **Gay for Good caption.** "The people were the reward" was left as written; say if it should read
+  "are" now that the page is present tense. The Querencia speaking photo appears twice on the page
+  (the Chapter Leader pair and the Full circle hero), exactly as his brief lays it out; fine?
+- **Garden Club wording that is not his:** the Mercury Palms callback sentence in "It keeps following
+  me to other places" and the short photo captions under the Kensington, Big Bear, Cole and Mercury
+  Palms photos are drafted from his notes. The closing photo beside "I'm still learning" is his
+  Querencia entry portrait.
+- **444 sliders.** "Before and after." and its one line are new wording; the three pairs are the
+  closest matches (front entry, street, kitchen). Say if any should go.
+- **Holiday.** "The 15th annual celebration." stays under 2025 with the toy count removed; drop it too?
+  The caption on "First Holiday Party" is drafted.
+- **Vista Las Palmas.** The Modernism Week after party photo is a 502px phone image; a larger original
+  would help. "Docent training · At Querencia Palms" is a drafted caption. Spring Social still needs a
+  photo.
+- **DBA page.** Which radio revision is final, or keep both; real transcripts for both spots; dates for
+  the speed networking and holiday gatherings; a working member-spotlight link (the Facebook post could
+  not be verified signed out, so the button is omitted and the quote stays); the Guide to Pride ad is
+  shown as created, with the old agent details, per his instructions; inline business links use the
+  site's house style (ink text, blue underline), not the blue text the instructions asked for.
+- **Legal pages (Compass to approve):** the form service name (Formspree or Basin, not chosen), whether
+  GA4 or a Compass pixel will run (a ready paragraph is commented out in the privacy policy source),
+  the iHomeFinder go-live date and what its registration collects, whether leads route through Zapier,
+  the MLS attribution wording for the Terms page, and whether Compass wants its own terms linked. Both
+  pages keep their blue "before launch" box and noindex until approved.
+- **IDX, next batch.** Waiting on MLS approval and the vendor setup notes; Max has the admin login.
+  Google Analytics: none exists yet; creating a GA4 property triggers the pixel disclosure.
+- **Hosting.** Cloudflare Pages needs Max to log Wrangler in once (the token on this Mac expired in
+  August); GitHub Pages with the custom domain remains the fallback that needs no new login.
+
 **From his 2026-10-05 and 2026-10-06 emails (ask David):**
 
-- **Gay for Good tense.** The new page copy says "toward the end of my time as a Chapter Leader" and
-  "roughly three years" (past tense). Is he still a Chapter Leader, or did he serve through 2026?
 - **Holiday numbers.** Only the 2025 post is documented (15th annual, more than 230 toys). Confirm or
   drop "2024: 200+ friends, nearly 300 toys"; the page shows 2025 only until then.
 - **Award wording.** The trophy reads "ONE-PS Neighborhoods of Distinction, Vista Las Palmas, 2025
@@ -140,25 +224,12 @@ shows only the documented 2025 figures, and the Gay for Good page uses his past-
   publication, flip `showReviewed` in `src/data/faq.ts` and the date appears. Regulatory answers
   (rental licensing, representation, insurance, ADUs, chain controls, Forest Service cabins) should
   be re-checked periodically; each carries its own `reviewed` date.
-- **444 photos.** The finished photos are 1024 to 1600px web exports; the yellow-door hero is soft at
-  full width. Does he have the photographer's originals from the 2020 listing shoot?
-- **Modernism Week years** (still open from September): his email says 2024/2025/2026, his Drive
-  folders say 2025 for the docent photos.
-- **Photos still owed** are listed by page in IMAGES-NEEDED.md (444 casita under construction;
-  Holiday childhood lights, dad's star, David and Mark at the party, Mark's early parties, cocoa kits,
-  s'mores assembly/tag/friends; Vista Las Palmas Spring and Summer socials, Pet Parade, VLPNF signage;
-  Work truck dump run, garage clearance, loaded bed, truck at a listing, signs in the Range Rover;
-  Garden Club Dahlias, van Rems centerpiece, exchange table).
+- **Photos still owed** are listed in IMAGES-NEEDED.md (work truck dump run and Range Rover signs;
+  Vista Las Palmas Spring Social).
 
 **From his 2026-10-05 reply (ask David):**
 
-- **2324 Camino Vida has no photo** on its For Sale card. Needs the listing photography.
-- **Listing links.** The three For Sale cards link to his Compass profile; send each listing's Compass
-  URL to deep-link them. They must be updated by hand when price or status changes.
-- **Equality California.** His unfinished "photo at the top" sentence was, he thinks, about the
-  Equality California gala photo in Gay For Good. What did he want changed there?
 - **Organizations pages**: he is working on the stories and photo picks.
-- **Compliance Word document** was never attached to the 2026-10-05 email; it is on Max's Desktop.
 
 **From the 2026-09-27 / 2026-09-28 emails (ask David):**
 
