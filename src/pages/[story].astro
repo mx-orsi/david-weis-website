@@ -13,6 +13,6 @@ interface Props {
 const { story } = Astro.props;
 ---
 
-<BaseLayout title={story.seo.title} description={story.seo.description} ogImage={story.lead?.src} finalCta={story.finalCta ?? true}>
+<BaseLayout title={story.seo.title} description={story.seo.description} ogImage={story.lead?.src ?? story.ogImage} finalCta={story.finalCta ?? true}>
   <StoryPage story={story} />
 </BaseLayout>

@@ -195,6 +195,42 @@ export type ChapterBlock =
       heading: string;
       intro?: readonly string[];
       stages: readonly { title: string; caption: string; photo: Photo }[];
+    }
+  | {
+      /** A dark blue panel with native audio players, one per track, and optional transcripts. */
+      type: 'audio';
+      eyebrow?: string;
+      heading?: string;
+      /** Paragraphs may contain [label](href) links (rendered light blue on the panel). */
+      intro?: readonly string[];
+      tracks: readonly { title: string; subtitle?: string; src: string; transcript?: readonly string[] }[];
+      note?: string;
+    }
+  | {
+      /** A document (e.g. a PDF ad): an enlargeable preview image, a download button and a caption. */
+      type: 'document';
+      heading?: string;
+      paragraphs?: readonly string[];
+      preview: Photo;
+      download: { label: string; href: string };
+      caption?: { title: string; note?: string };
+    }
+  | {
+      /** Native details/summary accordions. Answers may contain [label](href) links. */
+      type: 'faq';
+      heading?: string;
+      intro?: readonly string[];
+      items: readonly { q: string; a: readonly string[] }[];
+    }
+  | {
+      /** A dark blue panel for an attributed quotation (member spotlight). */
+      type: 'quote';
+      eyebrow?: string;
+      heading: string;
+      paragraphs?: readonly string[];
+      quote: string;
+      attribution: string;
+      cta?: { label: string; href: string; external?: boolean };
     };
 
 export interface ProjectChapter {
@@ -2536,7 +2572,7 @@ export const projects: readonly Project[] = [
             labels: ['Before', 'The finished house'],
             photos: [
               { suggestion: 'Front entry before', src: '/images/444-w-stevens/444-w-stevens-palm-springs-front-elevation-before-david-weis.jpg', alt: 'The original front entry at 444 W Stevens: a dark door with a starburst, a narrow walkway and a tall palm', width: 2400, height: 1800, hasSmall: true },
-              { suggestion: 'Finished canopy with the wood ceiling', src: '/images/444-w-stevens/444-w-stevens-palm-springs-entry-canopy-tongue-and-groove-ceiling-david-weis.jpg', alt: 'The finished entry canopy at 444 W Stevens from the side, its tongue-and-groove wood ceiling glowing above the yellow double doors', width: 2400, height: 1800, hasSmall: true },
+              { suggestion: 'The Finished House (David’s renamed Drive photo)', src: '/images/444-w-stevens/444-w-stevens-palm-springs-entry-canopy-after-david-weis.jpg', alt: 'The finished front of 444 W Stevens from the lawn: the new entry canopy with its wood ceiling above the yellow double doors', width: 1344, height: 896, hasSmall: true },
             ],
             caption: { title: 'The detail that defined 444', note: "Mark's entry canopy completely changed the arrival experience. The tongue-and-groove ceiling became one of my favorite parts of the house." },
           },
@@ -2568,10 +2604,10 @@ export const projects: readonly Project[] = [
           {
             type: 'pair',
             ratio: '3 / 2',
-            labels: ['Before', 'Building the casita'],
+            labels: ['Before', 'The casita'],
             photos: [
               { suggestion: 'The corner of the yard where the casita would go', src: '/images/444-w-stevens/444-w-stevens-palm-springs-casita-site-before-david-weis.jpg', alt: 'The backyard at 444 W Stevens before the renovation, the pool and lawn in front of the side of the house where the casita was later built', width: 2400, height: 1800, hasSmall: true },
-              { suggestion: 'Casita under construction (expected file: 444-w-stevens-palm-springs-casita-under-construction-david-weis.jpg)', src: '/images/444-w-stevens/444-w-stevens-palm-springs-casita-under-construction-david-weis.jpg', alt: 'The casita at 444 W Stevens under construction' },
+              { suggestion: 'The finished casita beside the pool (David’s “Casita After”)', src: '/images/444-w-stevens/444-w-stevens-palm-springs-casita-after-pool-david-weis.jpg', alt: 'The finished casita at 444 W Stevens beside the pool, its white walls and glass doors facing the water', width: 1344, height: 896, hasSmall: true },
             ],
           },
           {
@@ -2709,6 +2745,29 @@ export const projects: readonly Project[] = [
               'I saw firsthand how materials, landscaping, architecture and indoor-outdoor flow affect the way a property feels.',
               'And I learned that sometimes the value of a property is not only measured by what you eventually sell it for.',
               'Sometimes it is measured by what that sale allows you to build next.',
+            ],
+          },
+          {
+            // 2026-10-08: David asked whether any of his before/after pairs line up for sliders like the Querencia koi pond. These three come closest.
+            type: 'compare',
+            heading: 'Before and after.',
+            paragraphs: ['The pairs that line up closely enough to compare in place.'],
+            pairs: [
+              {
+                label: 'The front entry',
+                before: { suggestion: 'Front entry before', src: '/images/444-w-stevens/444-w-stevens-palm-springs-front-elevation-before-david-weis.jpg', alt: 'The original front entry at 444 W Stevens: a dark door with a starburst, a narrow walkway and a tall palm', width: 2400, height: 1800, hasSmall: true },
+                after: { suggestion: 'Front entry after', src: '/images/444-w-stevens/444-w-stevens-palm-springs-front-entry-canopy-yellow-doors-after-david-weis.jpg', alt: 'The finished front of 444 W Stevens straight on: the entry canopy above yellow double doors', width: 1024, height: 684 },
+              },
+              {
+                label: 'From the street',
+                before: { suggestion: 'Street view before', src: '/images/444-w-stevens/444-w-stevens-palm-springs-street-view-before-david-weis.jpg', alt: 'The front of 444 W Stevens before the renovation: a low stucco house behind gravel, boulders and palms', width: 2400, height: 1800, hasSmall: true },
+                after: { suggestion: 'Street view after', src: '/images/444-w-stevens/444-w-stevens-palm-springs-street-view-after-david-weis.jpg', alt: 'The finished front of 444 W Stevens from the street: new desert landscaping, boulders and cactus in front of the white midcentury house', width: 1024, height: 682 },
+              },
+              {
+                label: 'The kitchen',
+                before: { suggestion: 'Kitchen before', src: '/images/444-w-stevens/444-w-stevens-palm-springs-kitchen-before-david-weis.jpg', alt: 'The original galley kitchen at 444 W Stevens: flat wood cabinets, a dark counter and a sliding door to the pool', width: 2400, height: 1800, hasSmall: true },
+                after: { suggestion: 'Kitchen after', src: '/images/444-w-stevens/444-w-stevens-palm-springs-kitchen-after-david-weis.jpg', alt: 'The renovated kitchen at 444 W Stevens: white quartz counters, a gas range under a mirrored backsplash and the pool framed by the window', width: 1344, height: 896, hasSmall: true },
+              },
             ],
           },
           {

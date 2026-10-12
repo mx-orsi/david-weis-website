@@ -266,6 +266,30 @@ export const aboutChapterB: ProjectChapter = {
       ],
     },
     {
+      // 2026-10-10: David's About notes. The two San Diego community stories as squares side by side under the San Diego band.
+      type: 'tiles',
+      items: [
+        {
+          eyebrow: 'Gay for Good',
+          heading: 'Still showing up.',
+          paragraphs: [
+            'I joined Gay for Good looking for a more meaningful way to volunteer and meet people in San Diego. My first project was helping prime 20 Habitat for Humanity playhouses. Not long after, I became a Chapter Leader, and I’m still actively involved—helping connect volunteers with organizations and causes throughout the region.',
+          ],
+          cta: { label: 'Read the story', href: '/gay-for-good' },
+          photo: { suggestion: 'The Habitat for Humanity playhouse group photo', src: '/images/gay-for-good/gay-for-good-san-diego-habitat-for-humanity-playhouses-first-project-david-weis.jpg', alt: 'Gay for Good volunteers kneeling and standing together at the Habitat for Humanity playhouse build in San Diego, David Weis among them', width: 1170, height: 766, hasSmall: true, position: '60% center' },
+        },
+        {
+          eyebrow: 'Village Garden Club of La Jolla',
+          heading: 'Finding something just for me.',
+          paragraphs: [
+            'I joined because I wanted to finally understand why our landscaping kept dying. What I found was a community, a creative outlet and an enormous amount of practical knowledge, plus a hat competition, 1,500 ladybugs and a floral arrangement I am still a little proud of.',
+          ],
+          cta: { label: 'Read the story', href: '/garden-club' },
+          photo: { suggestion: 'Garden Club May Luncheon Hat Competition', src: '/images/about/david-weis-garden-club-hat-competition.jpg', alt: 'David Weis wearing the flower-covered hat and holding a bouquet at the Village Garden Club of La Jolla’s hat competition', width: 1800, height: 2400, hasSmall: true, position: 'center 30%' },
+        },
+      ],
+    },
+    {
       type: 'story',
       sub: true,
       ...band,
@@ -289,6 +313,30 @@ export const aboutChapterB: ProjectChapter = {
         { title: 'Showing up for the neighborhood', note: 'Vista Las Palmas community social' },
         { title: 'Modernism adventures', note: 'Biking through the neighborhood past the Elvis Honeymoon Hideaway' },
         { title: 'Friendships that started with a run', note: 'Palm Springs Front Runners' },
+      ],
+    },
+    {
+      // 2026-10-10: the Palm Springs community story and the DBA page as squares side by side under the Palm Springs band.
+      type: 'tiles',
+      items: [
+        {
+          eyebrow: 'Palm Springs community',
+          heading: 'One of the places I call home.',
+          paragraphs: [
+            'Vista Las Palmas became much more than the neighborhood where I live. Some of the biggest chapters of our Palm Springs life happened here, from renovations and COVID to our wedding, annual traditions and friendships with neighbors. That involvement led to the Vista Las Palmas Neighbors Foundation and representing the neighborhood through ONE-PS.',
+          ],
+          cta: { label: 'Explore my Palm Springs community story', href: '/vista-las-palmas' },
+          photo: { suggestion: 'The Fall Social', src: '/images/community/david-weis-vista-las-palmas-fall-social-palm-springs.jpg', alt: 'David Weis, Mark and neighbors at a Vista Las Palmas fall social gathering beside a lit pool at night', width: 2335, height: 2400, hasSmall: true, position: 'center 40%' },
+        },
+        {
+          eyebrow: 'Desert Business Association',
+          heading: 'I went in with a question and left with an introduction.',
+          paragraphs: [
+            'A meeting at City Hall about marketing Querencia Palms turned into an introduction to the Desert Business Association, the LGBTQ+ chamber of commerce for the Coachella Valley, and to a business community I already knew more of than I realized.',
+          ],
+          cta: { label: 'Read the story', href: '/desert-business-association' },
+          photo: { suggestion: 'David at a DBA gathering at Boozehounds', src: '/images/dba/david-weis-dba-boozehounds.jpg', alt: 'David Weis with a fellow attendee holding a Diversity is Groovy for Business sign at a DBA gathering at Boozehounds', width: 1206, height: 1805, hasSmall: true, position: 'center 30%' },
+        },
       ],
     },
     {
@@ -325,45 +373,6 @@ export const aboutChapterB: ProjectChapter = {
         'Community has always mattered to me, partly because I spent so much of my childhood arriving somewhere new.',
         'As an adult, I learned that belonging is not something you simply find. You help create it.',
       ],
-    },
-    {
-      // 2026-10-05: the full Gay for Good story moved to /gay-for-good; About keeps David's card.
-      // 2026-10-08: David's card copy (he is still a Chapter Leader).
-      type: 'teaser',
-      eyebrow: 'Gay for Good',
-      heading: 'Still showing up.',
-      paragraphs: [
-        'I joined Gay for Good looking for a more meaningful way to volunteer and meet people in San Diego. My first project was helping prime 20 Habitat for Humanity playhouses. Not long after, I became a Chapter Leader, and I’m still actively involved—helping connect volunteers with organizations and causes throughout the region.',
-      ],
-      cta: { label: 'Read the story', href: '/gay-for-good' },
-      photo: { suggestion: 'The Habitat for Humanity playhouse group photo', src: '/images/gay-for-good/gay-for-good-san-diego-habitat-for-humanity-playhouses-first-project-david-weis.jpg', alt: 'Gay for Good volunteers kneeling and standing together at the Habitat for Humanity playhouse build in San Diego, David Weis among them', width: 1170, height: 766, hasSmall: true },
-      ratio: '3 / 2',
-      side: 'left',
-    },
-    {
-      // 2026-10-05: the full Garden Club story moved to /garden-club; About keeps a short card (teaser copy drafted, for David's review).
-      type: 'teaser',
-      eyebrow: 'Village Garden Club of La Jolla',
-      heading: 'Finding something just for me.',
-      paragraphs: [
-        'I joined because I wanted to finally understand why our landscaping kept dying. What I found was a community, a creative outlet and an enormous amount of practical knowledge, plus a hat competition, 1,500 ladybugs and a floral arrangement I am still a little proud of.',
-      ],
-      cta: { label: 'Read the story', href: '/garden-club' },
-      photo: { suggestion: 'Garden Club May Luncheon Hat Competition', src: '/images/about/david-weis-garden-club-hat-competition.jpg', alt: 'David Weis wearing the flower-covered hat and holding a bouquet at the Village Garden Club of La Jolla’s hat competition', width: 1800, height: 2400, hasSmall: true, position: 'center 30%' },
-      ratio: '4 / 3',
-    },
-    {
-      // 2026-10-05: Vista Las Palmas / ONE-PS moved to /vista-las-palmas; About keeps David's teaser.
-      type: 'teaser',
-      eyebrow: 'Palm Springs community',
-      heading: 'The neighborhood I call home.',
-      paragraphs: [
-        'Vista Las Palmas became much more than the neighborhood where I live. Some of the biggest chapters of our Palm Springs life happened here, from renovations and COVID to our wedding, annual traditions and friendships with neighbors.',
-        'Eventually, enjoying the neighborhood turned into wanting to help care for it. That involvement led to the Vista Las Palmas Neighbors Foundation, representing the neighborhood through ONE-PS, and opportunities to contribute beyond our own streets.',
-      ],
-      cta: { label: 'Explore my Palm Springs community story', href: '/vista-las-palmas' },
-      photo: { suggestion: 'The Fall Social', src: '/images/community/david-weis-vista-las-palmas-fall-social-palm-springs.jpg', alt: 'David Weis, Mark and neighbors at a Vista Las Palmas fall social gathering beside a lit pool at night', width: 2335, height: 2400, hasSmall: true, position: 'center 40%' },
-      ratio: '4 / 3',
     },
     {
       type: 'story',

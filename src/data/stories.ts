@@ -6,6 +6,8 @@
  * `teaser` block for each story instead of the full section.
  */
 import type { ProjectChapter } from './projects';
+import { querenciaComparePairs, querenciaPondDetailBlocks } from './projects';
+import { dbaStory } from './dba';
 import type { Photo } from './types';
 
 export interface StoryPage {
@@ -19,6 +21,8 @@ export interface StoryPage {
   /** Smaller H1 for sentence-length titles (default 'display'). */
   titleSize?: 'xl' | 'display';
   lead?: Photo;
+  /** Share image when the page has no lead photo. */
+  ogImage?: string;
   leadRatio?: string;
   leadCaption?: { title: string; note?: string };
   chapters: readonly ProjectChapter[];
@@ -46,7 +50,13 @@ const truckPhotos = {
   bed: { suggestion: 'The Sierra’s bed loaded with property supplies', src: '/images/work-truck/david-weis-gmc-sierra-ev-truck-bed-loaded.jpg', alt: 'The bed of the GMC Sierra EV loaded with supplies' },
   listing: { suggestion: 'The Sierra parked at a listing or property', src: '/images/work-truck/david-weis-gmc-sierra-ev-at-listing.jpg', alt: 'The GMC Sierra EV parked in front of a listing' },
   dump: { suggestion: 'The dump run: debris in the bed', src: '/images/work-truck/david-weis-gmc-sierra-ev-dump-run.jpg', alt: 'The GMC Sierra EV with its bed full of debris on a dump run' },
-  garage: { suggestion: 'The one inch of garage clearance', src: '/images/work-truck/david-weis-gmc-sierra-ev-garage-clearance.jpg', alt: 'The GMC Sierra EV parked in the garage with about an inch of clearance to the shelving' },
+  garage: { suggestion: 'The one inch of garage clearance', src: '/images/work-truck/david-weis-gmc-sierra-ev-garage-clearance.jpg', alt: 'The GMC Sierra EV parked in the garage, its tailgate an inch from the shelving', width: 1800, height: 2400, hasSmall: true },
+  // David's 2026-10-08 extras: the Sierra in the snow at Big Bear and beside a Range Rover at the Compass office in Palm Desert.
+  snow: { suggestion: 'The Sierra under the carport in the Big Bear snow', src: '/images/work-truck/david-weis-gmc-sierra-ev-snow-big-bear-carport.jpg', alt: 'The GMC Sierra EV dusted with snow under the carport at night in Big Bear', width: 1800, height: 2400, hasSmall: true, position: 'center 60%' },
+  office: { suggestion: 'The Sierra beside a Range Rover at the Compass office in Palm Desert', src: '/images/work-truck/david-weis-gmc-sierra-ev-range-rover-compass-office-palm-desert.jpg', alt: 'The white GMC Sierra EV parked beside a white Range Rover in front of the yellow Compass office in Palm Desert', width: 2400, height: 1800, hasSmall: true },
+  clearanceShelf: { suggestion: 'The tailgate under the garage shelf', src: '/images/work-truck/david-weis-gmc-sierra-ev-garage-clearance-shelf.jpg', alt: 'The Sierra’s tailgate tucked just under the garage shelving', width: 2400, height: 1800, hasSmall: true },
+  clearanceMirror: { suggestion: 'The mirror beside the garage wall', src: '/images/work-truck/david-weis-gmc-sierra-ev-garage-clearance-mirror.jpg', alt: 'The Sierra’s side mirror a hand’s width from the garage wall', width: 1800, height: 2400, hasSmall: true },
+  clearanceDoor: { suggestion: 'The nose of the truck at the garage door track', src: '/images/work-truck/david-weis-gmc-sierra-ev-garage-clearance-door.jpg', alt: 'The front of the Sierra just clear of the garage door track', width: 1800, height: 2400, hasSmall: true },
 } satisfies Record<string, Photo>;
 
 export const stories: readonly StoryPage[] = [
@@ -113,7 +123,8 @@ export const stories: readonly StoryPage[] = [
             ratio: '4 / 3',
             emphasis: 'second',
             photos: [
-              { suggestion: 'David at the back-to-school project', src: '/images/gay-for-good/gay-for-good-san-diego-chicano-federation-back-to-school-backpacks-david-weis.jpg', alt: 'David Weis in a Gay for Good shirt in a room full of donated backpacks at the back-to-school project', width: 1206, height: 889, hasSmall: true },
+              // David's 2026-10-08 brief pairs the Querencia speaking photo with the banner group here (the same photo also leads "Full circle" below, as he asked).
+              { suggestion: 'David speaking to the group at Querencia Palms', src: '/images/gay-for-good/david-weis-speaking-gay-for-good-fundraiser-querencia-palms-palm-springs-pride.jpg', alt: 'David Weis speaking to Gay for Good volunteers gathered on the walkway at Querencia Palms during the Palm Springs Pride fundraiser', width: 1206, height: 902, hasSmall: true },
               { suggestion: 'The large group with the vertical Volunteer With Us banner', src: '/images/gay-for-good/gay-for-good-san-diego-volunteers-group-banner-david-weis.jpg', alt: 'A large group of Gay for Good San Diego volunteers gathered around the Volunteer With Us banner on a lawn', width: 2048, height: 1446, hasSmall: true },
             ],
             captions: [{ title: 'From volunteer to Chapter Leader' }, { title: 'The best part is always the people' }],
@@ -328,17 +339,78 @@ export const stories: readonly StoryPage[] = [
             captions: [{ title: 'Best of the Best Seeds', note: 'Seed starting, and a miniature seed garden to take home.' }],
           },
           {
+            // 2026-10-08: David's "Replace Section 5" brief. His copy; the Querencia sliders and pond photos are shared with the project page.
             type: 'story',
-            eyebrow: '2026',
-            heading: 'I don’t even have a rose garden.',
+            eyebrow: 'Querencia Palms',
+            heading: 'The garden became my classroom, too.',
             paragraphs: [
-              '2026 opened with a program called Natural Rose Gardening, taught by Rita Perwich.',
-              'I opened the yearbook beforehand and thought: I probably won’t have a rose garden, but I’m sure I’ll learn something.',
-              'I should know better by now. I filled another entire page with notes.',
-              'What fascinated me most was not actually roses. It was beneficial insects, natural predators, reducing pesticide dependence, ladybugs, hummingbirds, praying mantises and how a garden works as an ecosystem.',
-              'I immediately started thinking about Querencia Palms. Instead of always reacting to pests chemically, how could the landscape itself become healthier?',
-              'So, naturally, I went home and ordered 1,500 ladybugs.',
-              'I kept them cool until the right time of evening, misted the landscaping so there was moisture, and released them throughout Querencia Palms.',
+              'One of the things I didn’t expect when I joined the Village Garden Club was how often something I heard at a meeting would follow me home.',
+              'I would arrive thinking I was there to learn about one particular subject. Then someone would mention irrigation, soil, plant health, beneficial insects, propagation or the way a landscape changes through the seasons, and I would start seeing those ideas everywhere.',
+              '[Querencia Palms](/experience/querencia-palms) became one of the places where I could put that curiosity into practice.',
+            ],
+            aside: { suggestion: 'David among the mature plantings along the Querencia walkway', src: '/images/querencia-landscaping/querencia-palms-walkway-gated-community-south-palm-springs-david-weis.jpg', alt: 'David Weis standing among the mature plantings along the Querencia Palms front walkway', width: 2048, height: 1365, hasSmall: true, position: '72% center' },
+            asideRatio: '4 / 5',
+            asideCaption: 'Among the plantings along the Querencia Palms walkway.',
+          },
+          {
+            type: 'story',
+            eyebrow: 'The koi pond',
+            heading: 'A pond that needed a second chance.',
+            paragraphs: [
+              'When we were preparing Querencia Palms for its grand opening, landscaping was supposed to be one of the things I didn’t have to worry about. Two days before the event, I arrived to find that much of the greenery around the koi pond had been pulled out and discarded.',
+              'They weren’t weeds. They were aquatic and marginal plants that had been intentionally planted around the pond.',
+              'I spent the next two weeks watering the remaining roots and new growth every day, trying to bring the area back. It worked. Then the landscaping crew removed it again.',
+              'That was the moment I realized I couldn’t keep watching the landscape disappear. I took over much of the landscape work myself, and what started as damage control gradually became something I looked forward to.',
+              'The pond winds through the community, alongside private patios, beneath palms and past two waterfalls. At first, much of it was rock, water and fish. I wanted it to feel more like a garden you discovered as you moved through the property.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '3 / 2',
+            photos: [
+              { suggestion: 'The koi pond stripped bare two days before the grand opening', src: '/images/querencia-landscaping/querencia-palms-102-koi-pond-during-renovation-david-weis.jpg', alt: 'The Querencia Palms koi pond stripped to rock and water after the plantings were removed', width: 1800, height: 2400, hasSmall: true, position: 'center 55%' },
+              { suggestion: 'The same stretch of pond today', src: '/images/querencia-landscaping/querencia-palms-104-koi-pond-palm-springs-david-weis.jpg', alt: 'The Querencia Palms koi pond today, its banks planted with lilies, cannas and papyrus', width: 2048, height: 1365, hasSmall: true },
+            ],
+            captions: [{ title: 'Two days before the grand opening' }, { title: 'The same stretch of pond today' }],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Looking closer',
+            heading: 'Learning to look closer.',
+            paragraphs: [
+              'The Garden Club gave me more ways to think about what I was seeing. I started paying closer attention to growth habits, seasonal change, color, texture, irrigation and the differences between plants that simply look good together and plants that can thrive together.',
+              'When spring brought more aquatic plants into season, I began driving to Cherry Valley to visit the nursery and choose them individually: water lilies, cannas, papyrus and flowering marginal plants. I brought them back to Palm Springs and worked out where each one belonged.',
+              'I wasn’t just trying to add greenery. I was learning to think about how a planting would look from a patio, along a walkway, beside a waterfall and through the seasons.',
+              'That changed how I saw the whole property. The pond wasn’t separate from the homes around it. Every plant affected someone’s view, privacy, walk home or experience of the community.',
+            ],
+          },
+          {
+            type: 'compare',
+            heading: 'The difference wasn’t subtle.',
+            paragraphs: [
+              'As the landscape matured, places that had once felt exposed began to feel private, established and alive. The buildings didn’t change. The experience of being there did.',
+            ],
+            pairs: querenciaComparePairs,
+          },
+          {
+            type: 'callout',
+            text: 'Eventually, I started looking forward to the smallest changes.',
+            paragraphs: [
+              'A new flower. A plant finally taking hold. The first water lily opening. A dragonfly appearing beside the pond.',
+              'Those details have almost nothing to do with a property on paper. But they have everything to do with creating a place someone wants to come home to.',
+            ],
+          },
+          ...querenciaPondDetailBlocks,
+          {
+            type: 'story',
+            eyebrow: 'One meeting',
+            heading: 'One meeting, 1,500 new employees.',
+            paragraphs: [
+              'In 2026, Rita Perwich presented Natural Rose Gardening. I opened the yearbook beforehand and thought something along the lines of: I probably won’t have a rose garden, but I’m sure I’ll learn something.',
+              'I should know better by now. I filled another page with notes.',
+              'What caught my attention was learning about beneficial insects, natural predators and how a healthy garden can work with nature. I immediately started thinking about Querencia Palms and the garden pests we’d been dealing with. What could we encourage in the landscape instead of always reaching for a chemical solution?',
+              'Naturally, I went home and ordered 1,500 ladybugs.',
+              'I kept them cool until the right time, misted the landscaping and released them through the grounds.',
             ],
           },
           {
@@ -354,10 +426,59 @@ export const stories: readonly StoryPage[] = [
               { suggestion: 'Ladybugs crawling through the landscaping', src: '/images/garden-club/ladybugs-released-querencia-palms-landscaping-david-weis.jpg', alt: 'Ladybugs crawling over leaves and the edge of a planter at Querencia Palms after their release', width: 2400, height: 1800, hasSmall: true },
             ],
             captions: [
-              { title: 'The order', note: 'Apparently my takeaway from Natural Rose Gardening was: order 1,500 ladybugs.' },
+              { title: 'The order', note: 'I left a meeting excited to try something new and see what happened.' },
               { title: 'The bag', note: 'Waiting for their evening release.' },
               { title: 'The release', note: 'Putting the lesson into practice at Querencia Palms.' },
             ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Beyond Querencia',
+            heading: 'It keeps following me to other places.',
+            paragraphs: [
+              'I’ve found myself carrying that same curiosity into the homes we care for through Celebrity Vacation Homes. At [Kensington](/experience/kensington-canyon), I’ve been out doing landscaping. At our [Big Bear cabin](/experience/sierra-chalet), I was pouring concrete. And at [The Cole](/experience/the-cole), I stood in the dirt looking at the space that would eventually become the pool.',
+              'Those projects aren’t all gardening, and the Garden Club didn’t teach me how to do every part of them. But the club keeps waking up that part of me that wants to understand a place, learn what it needs and see what it could become.',
+              // Drafted from David's note asking for a brief Mercury Palms callback here.
+              'It probably started at [Mercury Palms](/experience/mercury-palms), where Mark and I reworked the landscaping ourselves and made trips with the Tesla packed with bougainvillea, purple hopseed and whatever else would fit, sometimes so full the doors barely closed.',
+              'I’m still the person who spots an empty patch of dirt and starts imagining what might grow there.',
+            ],
+          },
+          {
+            type: 'collage',
+            columns: [
+              [
+                { suggestion: 'Landscaping at Kensington Canyon', src: '/images/kensington-canyon/kensington-canyon-landscaping-renovation-david-weis.jpg', alt: 'Garden planting in progress beside Kensington Canyon’s brick exterior, with bagged soil, potted plants and stone borders', width: 1800, height: 2400, hasSmall: true },
+              ],
+              [
+                { suggestion: 'David mixing concrete at the Big Bear cabin', src: '/images/sierra-chalet/david-weis-hands-on-renovation-sierra-chalet-big-bear-02.jpg', alt: 'David Weis in a yellow shirt mixing concrete in a tub beside a pile of rock at Sierra Chalet', width: 2049, height: 1536, hasSmall: true },
+                { suggestion: 'David and Mark in the dirt at The Cole before the pool', src: '/images/about/david-weis-mark-the-cole-before.jpg', alt: 'David and Mark Weis standing in the bare dirt at The Cole Hotel property before its renovation, where the pool area would be built', width: 2400, height: 2038, hasSmall: true },
+              ],
+            ],
+            fill: 'first',
+            ratio: '3 / 2',
+            captions: [{ title: 'Kensington Canyon', note: 'Out doing the landscaping.' }, { title: 'Big Bear and The Cole', note: 'Pouring concrete at the cabin, and standing in the dirt where the pool would go.' }],
+          },
+          {
+            type: 'pair',
+            ratio: '4 / 3',
+            photos: [
+              { suggestion: 'The Evoque convertible packed with plants', src: '/images/about/david-weis-range-rover-work-truck.jpg', alt: 'Houseplants filling the seats of the convertible Range Rover Evoque', width: 2400, height: 1690, hasSmall: true },
+              { suggestion: 'The lawn and bougainvillea at Mercury Palms', src: '/images/mercury-palms/mercury-palms-lawn-bougainvillea-david-weis.jpg', alt: 'The side lawn at Mercury Palms, edged with pink bougainvillea, palms and mountains beyond', width: 2048, height: 1361, hasSmall: true },
+            ],
+            caption: { title: 'Mercury Palms', note: 'Trips packed with plants, and the landscaping they became.' },
+          },
+          {
+            type: 'story',
+            eyebrow: 'Still learning',
+            heading: 'I’m still learning.',
+            paragraphs: [
+              'That curiosity now leads me to explore plant propagation, pollinator-friendly planting, beneficial insects, plant health and how to choose plants for the conditions they’ll actually live in. I can go from learning something at a meeting to wondering how it applies at Querencia, at home or at one of our vacation rentals.',
+              'I love that I’m still a beginner. I can learn about one plant or one garden practice and suddenly have ten new questions. How does this grow? What does it need? Where would it thrive? What would happen if I tried it here?',
+              'The Garden Club has made learning feel like part of the fun, and the properties around me have become places to keep noticing, experimenting and growing.',
+            ],
+            aside: { suggestion: 'David at the Querencia Palms entry', src: '/images/about/david-weis-compass-broker-associate-querencia-palms-entry-portrait.jpg', alt: 'David Weis standing at the planted entry to Querencia Palms', width: 960, height: 1200 },
+            asideRatio: '4 / 5',
+            asideAlign: 'center',
           },
           {
             type: 'story',
@@ -394,24 +515,37 @@ export const stories: readonly StoryPage[] = [
             ],
           },
           {
-            type: 'gallery',
-            label: 'Building the hat',
+            // 2026-10-08: bees and umbrella even; the three hat photos in a row; the La Jolla Light photo wide so everyone fits.
+            type: 'pair',
+            ratio: '4 / 5',
             photos: [
               { suggestion: 'The sparkling bees', src: '/images/garden-club/david-weis-garden-club-hat-competition-sparkling-bees.jpg', alt: 'A pile of tiny gold and black sparkling bee charms on a wood table', width: 1800, height: 2400, hasSmall: true },
               { suggestion: 'The purple umbrella', src: '/images/garden-club/david-weis-garden-club-hat-competition-purple-umbrella-start.jpg', alt: 'A small purple umbrella on a table with moss and a few flowers beside it', width: 1800, height: 2400, hasSmall: true },
-              { suggestion: 'Flowers and moss going on', src: '/images/garden-club/david-weis-garden-club-hat-competition-flowers-moss-construction.jpg', alt: 'The purple umbrella being covered with pink flowers, moss and bees', width: 1800, height: 2400, hasSmall: true },
-              { suggestion: 'The finished hat', src: '/images/garden-club/david-weis-garden-club-hat-competition-finished-pollinator-hat.jpg', alt: 'The finished pollinator hat from the side: a purple umbrella covered in flowers, lavender and greenery', width: 2400, height: 1800, hasSmall: true },
-              { suggestion: 'David wearing the hat', src: '/images/about/david-weis-garden-club-hat-competition.jpg', alt: 'David Weis wearing the flower-covered hat and holding a bouquet at the Village Garden Club of La Jolla’s hat competition', width: 1800, height: 2400, hasSmall: true },
-              { suggestion: 'The La Jolla Light', src: '/images/about/david-weis-garden-club-la-jolla-light.jpg', alt: 'The La Jolla Light photo of the Village Garden Club hat contest: six members in flowered hats, David among them holding a bouquet', width: 890, height: 699, hasSmall: true },
             ],
             captions: [
               { title: 'The bees', note: 'Roughly 100 tiny sparkling bees. Not all of them made it onto the hat.' },
               { title: 'The umbrella', note: 'Every pollinator ecosystem starts somewhere.' },
+            ],
+          },
+          {
+            type: 'gallery',
+            label: 'The hat',
+            photos: [
+              { suggestion: 'Flowers and moss going on', src: '/images/garden-club/david-weis-garden-club-hat-competition-flowers-moss-construction.jpg', alt: 'The purple umbrella being covered with pink flowers, moss and bees', width: 1800, height: 2400, hasSmall: true, position: 'center 45%' },
+              { suggestion: 'The finished hat', src: '/images/garden-club/david-weis-garden-club-hat-competition-finished-pollinator-hat.jpg', alt: 'The finished pollinator hat from the side: a purple umbrella covered in flowers, lavender and greenery', width: 2400, height: 1800, hasSmall: true },
+              { suggestion: 'David wearing the hat', src: '/images/about/david-weis-garden-club-hat-competition.jpg', alt: 'David Weis wearing the flower-covered hat and holding a bouquet at the Village Garden Club of La Jolla’s hat competition', width: 1800, height: 2400, hasSmall: true, position: 'center 25%' },
+            ],
+            captions: [
               { title: 'Construction', note: 'Flowers, moss, greenery, bees.' },
               { title: 'The finished hat' },
-              { title: 'Best UV Protection', note: 'Not the category I entered.' },
-              { title: 'The La Jolla Light', note: 'Yes, it ended up in the newspaper.' },
+              { title: 'Best UV Protection', note: 'Not planned, but still a winner!' },
             ],
+          },
+          {
+            type: 'photo',
+            ratio: '4 / 3',
+            photo: { suggestion: 'The La Jolla Light', src: '/images/about/david-weis-garden-club-la-jolla-light.jpg', alt: 'The La Jolla Light photo of the Village Garden Club hat contest: six members in flowered hats, David among them holding a bouquet', width: 890, height: 699, hasSmall: true },
+            caption: { title: 'The La Jolla Light', note: 'Yes, it ended up in the newspaper.' },
           },
           {
             type: 'story',
@@ -425,22 +559,14 @@ export const stories: readonly StoryPage[] = [
             ],
           },
           {
-            type: 'gallery',
-            label: 'Workshops',
-            photos: [
-              { suggestion: 'Dig Into Dahlias workshop', src: '/images/garden-club/village-garden-club-la-jolla-dig-into-dahlias-workshop-david-weis.jpg', alt: 'The Dig Into Dahlias workshop at the Village Garden Club of La Jolla' },
-              { suggestion: 'Holiday Woodland Centerpiece with René van Rems', src: '/images/garden-club/village-garden-club-la-jolla-holiday-woodland-centerpiece-rene-van-rems-david-weis.jpg', alt: 'The Holiday Woodland Centerpiece workshop with René van Rems' },
-              { suggestion: 'The Gardener Exchange Table', src: '/images/garden-club/village-garden-club-la-jolla-gardener-exchange-table-david-weis.jpg', alt: 'Cuttings and plants laid out on the Gardener Exchange Table' },
-            ],
-            captions: [{ title: 'Dig Into Dahlias' }, { title: 'Holiday Woodland Centerpiece' }, { title: 'The Gardener Exchange Table' }],
-          },
-          {
             type: 'story',
             eyebrow: 'The holiday pantry',
             heading: 'Apparently I make simple syrup now.',
             paragraphs: [
               'For the Holiday Pantry Sale, I made rosemary simple syrup, designed the packaging and labels and brought it to the event.',
               'It sold out almost immediately.',
+              // The tag copy, added at David's request (2026-10-08).
+              'The tag read: “This rosemary simple syrup is a sweet herbal syrup with the essence of a Mediterranean summer. Stir into lemonade, flavor a cocktail, glaze a cake, or churn it into a sorbet. So refreshing!”',
             ],
             aside: { suggestion: 'Rosemary simple syrup', src: '/images/about/david-weis-garden-club-rosemary-syrup.jpg', alt: 'Bottles of rosemary simple syrup made for the Village Garden Club of La Jolla holiday pantry sale', width: 1800, height: 2400, hasSmall: true },
             asideCaption: 'Rosemary simple syrup for the Holiday Pantry Sale.',
@@ -454,7 +580,8 @@ export const stories: readonly StoryPage[] = [
               { suggestion: 'Flower-shaped crostini', src: '/images/garden-club/village-garden-club-la-jolla-refreshments-table-flower-crostini-david-weis.jpg', alt: 'Flower-shaped tomato, mozzarella and basil crostini arranged on a botanical plate', width: 1800, height: 2400, hasSmall: true },
               { suggestion: 'A decorated holiday cake', src: '/images/garden-club/village-garden-club-la-jolla-holiday-cake-members-david-weis.jpg', alt: 'A coconut-covered holiday cake topped with tiny deer and rosemary on a cake stand', width: 1800, height: 2400, hasSmall: true },
             ],
-            captions: [{ title: 'Garden Club inspiration', note: 'The creativity around these tables is endless. These were made by other members; I saved the photos because I loved seeing what they created.' }],
+            caption: { title: 'Garden Club inspiration', note: 'The creativity around these tables is endless. These were made by other members; I saved the photos because I loved seeing what they created.' },
+            spacing: 'loose',
           },
           {
             type: 'story',
@@ -527,18 +654,6 @@ export const stories: readonly StoryPage[] = [
             ],
           },
           {
-            type: 'pair',
-            ratio: '4 / 3',
-            photos: [
-              { suggestion: 'The childhood house lit up', src: '/images/holiday-tradition/weis-family-childhood-christmas-lights-house.jpg', alt: 'David’s childhood home covered in Christmas lights' },
-              { suggestion: 'The custom star my dad built', src: '/images/holiday-tradition/weis-family-christmas-star-built-by-dad.jpg', alt: 'The giant custom Christmas star David’s dad built' },
-            ],
-            captions: [
-              { title: 'Growing up', note: 'Subtle was not really our thing.' },
-              { title: 'Dad’s star', note: 'Built by hand. Of course.' },
-            ],
-          },
-          {
             type: 'story',
             eyebrow: 'Another tradition',
             heading: 'Then I met someone who already had one of his own.',
@@ -553,9 +668,9 @@ export const stories: readonly StoryPage[] = [
               'Over time, the decorating, preparation, invitations, gifts, toys and little details became something we worked on together.',
               'It became one of the traditions we share.',
             ],
-            aside: { suggestion: 'Mark’s party in the early years', src: '/images/holiday-tradition/mark-weis-annual-holiday-party-early-years.jpg', alt: 'Mark’s annual holiday party in the years before David joined it' },
-            asideRatio: '4 / 3',
-            asideCaption: 'The party. One of Mark’s traditions that became one of ours.',
+            aside: { suggestion: 'David and Mark at their first holiday party together', src: '/images/holiday-tradition/david-and-mark-weis-first-holiday-party-together.jpg', alt: 'David and Mark Weis side by side at their first holiday party together', width: 2160, height: 2400, hasSmall: true },
+            asideRatio: '4 / 5',
+            asideCaption: 'Our first holiday party together. One of Mark’s traditions that became one of ours.',
           },
           {
             type: 'story',
@@ -573,35 +688,31 @@ export const stories: readonly StoryPage[] = [
             ],
           },
           {
-            type: 'photo',
-            ratio: '16 / 10',
-            photo: { suggestion: 'David and Mark at the party with friends and toys behind them', src: '/images/holiday-tradition/david-and-mark-weis-annual-holiday-toy-fundraiser-party.jpg', alt: 'David and Mark Weis at their annual holiday party, friends and donated toys behind them' },
-            caption: { title: 'The party', note: 'One of Mark’s traditions that became one of ours.' },
-          },
-          {
             type: 'story',
             sub: true,
             heading: '2025',
-            paragraphs: ['The 15th annual celebration. More than 230 toys.'],
+            paragraphs: ['The 15th annual celebration.'],
           },
           {
             type: 'callout',
             text: 'Watching the pile grow never gets old.',
           },
           {
-            type: 'gallery',
-            label: 'The toys',
+            type: 'photo',
+            ratio: '5 / 4',
+            photo: { suggestion: 'The dog with the toy pile', src: '/images/holiday-tradition/holiday-toy-fundraiser-dog-with-toy-pile-david-weis.jpg', alt: 'The dog in a red jacket sitting in front of the pile of donated toys under the Merry sign', width: 2222, height: 2400, hasSmall: true },
+            caption: { title: 'A few hours later', note: 'This is the point.' },
+          },
+          {
+            type: 'pair',
+            ratio: '4 / 3',
             photos: [
-              { suggestion: 'Early in the evening, the first toys arriving', src: '/images/holiday-tradition/holiday-toy-fundraiser-early-in-the-night-david-weis.jpg', alt: 'The first donated toys arriving early in the evening at the holiday party' },
-              { suggestion: 'The dog with the toy pile', src: '/images/holiday-tradition/holiday-toy-fundraiser-dog-with-toy-pile-david-weis.jpg', alt: 'The dog in a red jacket sitting in front of the pile of donated toys under the Merry sign', width: 2222, height: 2400, hasSmall: true },
               { suggestion: 'The Marine beside the toys', src: '/images/about/holiday-toy-collection-marines-david-weis.jpg', alt: 'A Marine in dress uniform beside toys donated at the holiday fundraiser', width: 1206, height: 892, hasSmall: true, position: '30% center' },
               { suggestion: 'Toys loaded into the Range Rover', src: '/images/about/holiday-toys-range-rover-david-weis.jpg', alt: 'The back of a Range Rover packed with toys donated at the holiday fundraiser', width: 1800, height: 2400, hasSmall: true, position: 'center 55%' },
             ],
             captions: [
-              { title: 'Early in the night' },
-              { title: 'A few hours later', note: 'This is the point.' },
-              { title: 'The Marines', note: 'Collecting and counting the toys.' },
-              { title: 'Somehow all of this still has to leave the house' },
+              { title: 'The Marines have arrived', note: 'Collecting our guests’ Toys for Tots donations.' },
+              { title: 'Santa drives a Range Rover', note: 'When the Marines couldn’t join us, we made the delivery.' },
             ],
           },
           {
@@ -619,6 +730,7 @@ export const stories: readonly StoryPage[] = [
             ],
             aside: { suggestion: 'David beside the table of finished gift bags', src: '/images/about/holiday-gift-bag-production-david-weis.jpg', alt: 'David Weis beside a dining table covered in finished holiday gift bags', width: 2400, height: 2110, hasSmall: true },
             asideRatio: '4 / 3',
+            asideAlign: 'center',
             asideCaption: 'Preparation. A dining table briefly becomes a production line.',
           },
           {
@@ -657,8 +769,21 @@ export const stories: readonly StoryPage[] = [
               'Another year became hot cocoa kits.',
               'Apparently once I decided the favors needed a theme, there was no going back.',
             ],
-            aside: { suggestion: 'The hot cocoa kits', src: '/images/holiday-tradition/hot-cocoa-kit-holiday-favors-david-weis.jpg', alt: 'The hot cocoa kit holiday favors' },
+            aside: { suggestion: 'The hot cocoa kits', src: '/images/holiday-tradition/hot-cocoa-kit-holiday-favors-david-weis.jpg', alt: 'The hot cocoa kit holiday favors lined up on a table', width: 2400, height: 1800, hasSmall: true },
+            asideRatio: '4 / 3',
             asideCaption: 'Hot cocoa kits.',
+          },
+          {
+            type: 'pair',
+            ratio: '1 / 1',
+            photos: [
+              { suggestion: 'The mini metal Christmas spoons', src: '/images/holiday-tradition/hot-cocoa-kit-mini-metal-spoons-david-weis.jpg', alt: 'Mini metal Christmas spoons with snowflake, tree and star handles arranged in a circle', width: 1206, height: 1384, hasSmall: true },
+              { suggestion: 'Individually wrapped mini marshmallows', src: '/images/holiday-tradition/hot-cocoa-kit-mini-marshmallows-david-weis.jpg', alt: 'Mugs of mini marshmallows and individually wrapped marshmallow packets on a wood tray', width: 1125, height: 962, hasSmall: true },
+            ],
+            captions: [
+              { title: 'The spoons', note: 'Even the spoons got dressed for Christmas.' },
+              { title: 'The marshmallows', note: 'Because marshmallows are nonnegotiable.' },
+            ],
           },
           {
             type: 'story',
@@ -678,16 +803,16 @@ export const stories: readonly StoryPage[] = [
             type: 'gallery',
             label: 'The s’mores kits',
             photos: [
-              { suggestion: 'Assembling the s’mores kits', src: '/images/holiday-tradition/querencia-palms-smores-kits-assembly-david-weis.jpg', alt: 'The Querencia Palms s’mores kits being assembled' },
-              { suggestion: 'The finished kits lined up', src: '/images/about/holiday-gift-bags-merry-christmas-david-weis.jpg', alt: 'Rows of white Merry Christmas gift bags lined up under stained-glass windows', width: 2400, height: 1800, hasSmall: true },
-              { suggestion: 'Close-up of the custom tag', src: '/images/holiday-tradition/querencia-palms-smores-kit-custom-tag-qr-code-david-weis.jpg', alt: 'A close-up of the custom Querencia Palms tag on a s’mores kit' },
-              { suggestion: 'Friends actually making the s’mores', src: '/images/holiday-tradition/querencia-palms-smores-kits-friends-roasting-david-weis.jpg', alt: 'Friends roasting marshmallows with the Querencia Palms s’mores kits' },
+              { suggestion: 'Packing the kits at the dining table', src: '/images/holiday-tradition/querencia-palms-smores-kits-packing-dining-table-david-weis.jpg', alt: 'David Weis at the dining table packing the Querencia Palms s’mores kits, boxes of supplies beside him', width: 2400, height: 1800, hasSmall: true },
+              { suggestion: 'Buckets of roasting sticks with tags', src: '/images/holiday-tradition/querencia-palms-smores-kit-roasting-sticks-holiday-gift-david-weis.jpg', alt: 'Four galvanized buckets of retractable roasting sticks, each tagged with a ribbon', width: 1206, height: 1265, hasSmall: true },
+              { suggestion: 'The finished gift bags filling the dining table', src: '/images/holiday-tradition/holiday-gift-bags-finished-dining-table-david-weis.jpg', alt: 'David Weis beside the dining table covered in finished holiday gift bags', width: 2400, height: 2110, hasSmall: true },
+              { suggestion: 'A s’more being made with the kit', src: '/images/holiday-tradition/querencia-palms-smores-kit-in-action-holiday-gift-david-weis.jpg', alt: 'A s’more on a plate beside the Querencia Palms tag and its QR code, hot cocoa in hand', width: 1206, height: 2104, hasSmall: true, position: 'center 40%' },
             ],
             captions: [
-              { title: 'Assembly' },
-              { title: 'Querencia Palms', note: 'More than 100 s’mores kits because ten apparently would have been too reasonable.' },
-              { title: 'The tag' },
-              { title: 'The best part', note: 'People actually used them.' },
+              { title: 'Packing the kits', note: 'This seemed like a much quicker project in my head.' },
+              { title: 'Roasting sticks', note: 'I wasn’t sending you home with homework and no supplies.' },
+              { title: 'Finished gift bags', note: 'Apparently, “a little something” requires the entire dining table.' },
+              { title: 'S’mores in action', note: 'This is exactly why I make them.' },
             ],
           },
           {
@@ -768,12 +893,9 @@ export const stories: readonly StoryPage[] = [
               '“So what are we doing for Christmas this year?”',
               'And it starts all over again.',
             ],
-          },
-          {
-            type: 'photo',
-            ratio: '3 / 2',
-            photo: { suggestion: 'A warm David + Mark holiday photo to close', src: '/images/holiday-tradition/david-and-mark-weis-christmas.jpg', alt: 'David and Mark Weis together at Christmas' },
-            caption: { title: 'The cards', note: 'One year at a time.' },
+            aside: { suggestion: 'The holiday cookie competition', src: '/images/holiday-tradition/holiday-cookie-competition-david-weis.jpg', alt: 'David Weis and two friends holding up decorated cookies at the holiday cookie competition', width: 967, height: 1454 },
+            asideRatio: '4 / 5',
+            asideAlign: 'center',
           },
           {
             type: 'links',
@@ -797,11 +919,12 @@ export const stories: readonly StoryPage[] = [
     slug: 'vista-las-palmas',
     crumb: 'Vista Las Palmas',
     eyebrow: 'Palm Springs community',
-    title: 'The neighborhood I call home.',
+    title: 'One of the places I call home.',
     titleSize: 'xl',
     intro: [
       'Palm Springs entered my life through real estate.',
       'But somewhere along the way, it became much more than that.',
+      'My life and work take me between San Diego, Palm Springs and Big Bear. Each has become part of my story, but Vista Las Palmas holds some especially personal chapters: our wedding, friendships, annual traditions and a growing connection to the community around us.',
       'Vista Las Palmas became home. Properties became settings for some of the biggest chapters of our lives. Neighbors became friends. Annual gatherings became traditions. And eventually I found myself wanting to contribute to the community that had given us so much.',
       'This is the part of Palm Springs that cannot really be explained through a listing.',
       'You have to live it.',
@@ -818,9 +941,8 @@ export const stories: readonly StoryPage[] = [
             eyebrow: 'Where it started',
             heading: 'First, there was Mercury Palms.',
             paragraphs: [
-              '[Mercury Palms](/experience/mercury-palms) was already part of Mark’s vacation-rental portfolio when our lives began coming together.',
-              'Over time, it became much more than that.',
-              'During the years we were building The Cole, Mercury Palms increasingly became our home. Then COVID arrived, and like so many people, suddenly our relationship with “home” changed completely.',
+              '[Mercury Palms](/experience/mercury-palms) was already part of Mark’s vacation-rental portfolio when our lives began coming together. It remains a vacation rental, and it has also been the setting for some of the most personal chapters of our lives.',
+              'During the years we were building The Cole, we spent more and more time here. Then came COVID, our wedding and the traditions that keep bringing us back.',
               'We spent a huge part of that strange period here.',
               'Vista Las Palmas stopped being a neighborhood where we owned a property and became the place where our actual daily life was happening.',
               'We learned the streets. We met neighbors. We worked on the landscaping. We spent endless time around the pool and backyard. Friends and family came through. Ordinary days started piling up into memories.',
@@ -848,6 +970,7 @@ export const stories: readonly StoryPage[] = [
               'For one night, they became two parts of the same celebration.',
             ],
             aside: { suggestion: 'The ceremony in the backyard', src: '/images/mercury-palms/mercury-palms-wedding-backyard-ceremony-david-weis.jpg', alt: 'David and Mark exchanging vows under a floral arch in the backyard at Mercury Palms, the officiant between them', width: 1600, height: 2400, hasSmall: true, position: 'center 40%' },
+            asideAlign: 'center',
             asideCaption: 'The ceremony, in the backyard at Mercury Palms.',
           },
           {
@@ -888,7 +1011,7 @@ export const stories: readonly StoryPage[] = [
               { suggestion: 'David and Mark at The Cole before', src: '/images/about/david-weis-mark-the-cole-before.jpg', alt: 'David and Mark Weis at The Cole Hotel property before its renovation', width: 2400, height: 2038, hasSmall: true },
               { suggestion: 'David and Mark at The Cole when it sold', src: '/images/about/david-weis-mark-the-cole-when-sold.jpg', alt: 'David and Mark Weis at The Cole Hotel on the day it sold', width: 2053, height: 2303, hasSmall: true },
             ],
-            captions: [{ title: 'Before' }, { title: 'The day it sold' }],
+            captions: [{ title: 'Before The Cole became The Cole' }, { title: 'The day we closed the chapter' }],
           },
           {
             type: 'cta',
@@ -1013,21 +1136,24 @@ export const stories: readonly StoryPage[] = [
             ],
           },
           {
+            type: 'photo',
+            ratio: '3 / 2',
+            photo: { suggestion: 'The Fall Social (David’s 2026-10-08 upload)', src: '/images/vista-las-palmas/vista-las-palmas-fall-social-palm-springs-david-weis.jpg', alt: 'David Weis with a neighbor beside the lit pool at the Vista Las Palmas Fall Social, the party behind them', width: 2400, height: 1800, hasSmall: true },
+          },
+          {
             type: 'gallery',
             label: 'Neighborhood socials',
             photos: [
               { suggestion: 'The Fall Social', src: '/images/community/david-weis-vista-las-palmas-fall-social-palm-springs.jpg', alt: 'David Weis, Mark and neighbors at a Vista Las Palmas fall social gathering beside a lit pool at night', width: 2335, height: 2400, hasSmall: true },
-              { suggestion: 'Neighbors at a spa with the mountains behind', src: '/images/about/david-weis-vista-las-palmas-neighborhood-event.jpg', alt: 'Neighbors gathered at a spa with the mountains behind them at a Vista Las Palmas neighborhood event', width: 1206, height: 1568, hasSmall: true },
               { suggestion: 'The Spring Social', src: '/images/vista-las-palmas/vista-las-palmas-spring-social-palm-springs-david-weis.jpg', alt: 'Neighbors at the Vista Las Palmas Spring Social' },
-              { suggestion: 'The Summer Social', src: '/images/vista-las-palmas/vista-las-palmas-summer-social-palm-springs-david-weis.jpg', alt: 'Neighbors at the Vista Las Palmas Summer Social' },
-              { suggestion: 'The Halloween Pet Parade', src: '/images/vista-las-palmas/vista-las-palmas-halloween-pet-parade-palm-springs-david-weis.jpg', alt: 'Dogs in costume at the Vista Las Palmas Halloween Pet Parade' },
+              { suggestion: 'The Modernism Week after party', src: '/images/vista-las-palmas/vista-las-palmas-modernism-week-after-party-david-weis.jpg', alt: 'David and Mark Weis in front of the Modernism Week step-and-repeat at the Vista Las Palmas after party', width: 502, height: 893, position: 'center 30%' },
+              { suggestion: 'Docent training at Querencia Palms', src: '/images/vista-las-palmas/vista-las-palmas-modernism-week-docent-training-querencia-palms-david-weis.jpg', alt: 'Modernism Week docent volunteers lined up in front of the Querencia Palms mural', width: 2400, height: 1800, hasSmall: true },
             ],
             captions: [
               { title: 'Fall Social', note: 'Season starting again in Vista Las Palmas.' },
-              { title: 'Neighbors' },
               { title: 'Spring Social', note: 'Starting another season together.' },
-              { title: 'Summer Social', note: 'Palm Springs residents apparently will socialize at any temperature.' },
-              { title: 'Halloween Pet Parade', note: 'One of those neighborhood traditions that is impossible not to love.' },
+              { title: 'Modernism Week after party' },
+              { title: 'Docent training', note: 'At Querencia Palms.' },
             ],
           },
           {
@@ -1050,7 +1176,7 @@ export const stories: readonly StoryPage[] = [
               { suggestion: 'Docents in front of the pool', src: '/images/about/modernism-week-vista-las-palmas-docents-pool-david-weis.jpg', alt: 'Four volunteer docents standing in front of a pool in Vista Las Palmas, with palms and the San Jacinto Mountains behind them', width: 1800, height: 2400, hasSmall: true, position: 'center 40%' },
               { suggestion: 'With Mark at Limón', src: '/images/about/david-weis-mark-h3k-property.jpg', alt: 'David and Mark Weis at the yellow front door of Limón, an H3K design project in Palm Springs', width: 1800, height: 2400, hasSmall: true, position: 'center 42%' },
             ],
-            captions: [{ title: 'Volunteer docents', note: 'Helping neighbors share their homes during Modernism Week.' }, { title: 'Vista Las Palmas' }, { title: 'Limón', note: 'An H3K design project on the Modernism Week tour.' }],
+            captions: [{ title: 'Volunteer docents', note: 'Helping neighbors share their homes during Modernism Week.' }, { title: 'Hosts opened their home', note: 'We got to help show them off.' }, { title: 'Limón', note: 'An H3K design project on the Modernism Week tour.' }],
           },
           {
             type: 'story',
@@ -1078,9 +1204,9 @@ export const stories: readonly StoryPage[] = [
               'Event signage: Pet Parade and other event materials.',
               'Communications: helping make information clearer, more useful and more consistent.',
             ],
-            aside: { suggestion: 'VLPNF signage or website work', src: '/images/vista-las-palmas/vista-las-palmas-neighbors-foundation-event-signage-david-weis.jpg', alt: 'Event signage David helped make for the Vista Las Palmas Neighbors Foundation' },
+            aside: { suggestion: 'What I’ve helped with (David’s 2026-10-08 upload)', src: '/images/vista-las-palmas/vista-las-palmas-neighbors-foundation-event-signage-david-weis.jpg', alt: 'A Vista Las Palmas Neighbors Foundation event under the palms: a vintage convertible, tents and neighbors gathered in the street', width: 2400, height: 1800, hasSmall: true },
             asideRatio: '4 / 3',
-            asideCaption: 'Signage for the Pet Parade and other neighborhood events.',
+            asideCaption: 'Neighborhood events, signage and the work behind them.',
           },
           {
             type: 'story',
@@ -1110,13 +1236,18 @@ export const stories: readonly StoryPage[] = [
             ],
           },
           {
-            type: 'pair',
-            ratio: '4 / 5',
-            emphasis: 'first',
-            photos: [
-              { suggestion: 'The award presentation', src: '/images/community/david-weis-one-ps-neighborhood-of-distinction-award-palm-springs.jpg', alt: 'Vista Las Palmas Neighbors Foundation board members, David Weis among them, on stage at the ONE-PS awards with the Neighborhoods of Distinction award', width: 2400, height: 1996, hasSmall: true },
-              { suggestion: 'The award', src: '/images/community/vista-las-palmas-neighborhood-of-distinction-award-david-weis.jpg', alt: 'The ONE-PS Neighborhoods of Distinction 2025 Honor Award for Vista Las Palmas, a crystal trophy set beside a pool with the mountains behind', width: 1800, height: 2400, hasSmall: true },
+            type: 'collage',
+            columns: [
+              [
+                { suggestion: 'The award presentation', src: '/images/community/david-weis-one-ps-neighborhood-of-distinction-award-palm-springs.jpg', alt: 'Vista Las Palmas Neighbors Foundation board members, David Weis among them, on stage at the ONE-PS awards with the Neighborhoods of Distinction award', width: 2400, height: 1996, hasSmall: true },
+              ],
+              [
+                { suggestion: 'The award', src: '/images/community/vista-las-palmas-neighborhood-of-distinction-award-david-weis.jpg', alt: 'The ONE-PS Neighborhoods of Distinction 2025 Honor Award for Vista Las Palmas, a crystal trophy set beside a pool with the mountains behind', width: 1800, height: 2400, hasSmall: true },
+              ],
             ],
+            fill: 'second',
+            ratio: '6 / 5',
+            emphasis: 'first',
             captions: [
               { title: 'ONE-PS Neighborhoods of Distinction', note: '2025 Honor Award, presented to the Vista Las Palmas Neighbors Foundation.' },
               { title: 'The award' },
@@ -1165,12 +1296,12 @@ export const stories: readonly StoryPage[] = [
     ],
     closing: {
       eyebrow: 'Home',
-      heading: 'More than where I live.',
+      heading: 'A neighborhood that became part of our lives.',
       paragraphs: [
         'Vista Las Palmas has held an enormous amount of our life.',
         'Renovations. COVID. The early years of my relationship with Mark. Our wedding. Annual Memorial Day weekends. Neighborhood socials. Friendships. Projects. The ordinary days in between all of them.',
         'What started with owning property here became something I care much more deeply about.',
-        'I am proud of where I live, but even more grateful for the people who made me feel like I belong here.',
+        'I’m proud to be part of Vista Las Palmas and grateful for the people who have made us feel so connected to it.',
         'And I’m excited to see where saying yes takes me next.',
       ],
       cta: { label: 'Explore Palm Springs Real Estate', href: '/palm-springs' },
@@ -1178,15 +1309,18 @@ export const stories: readonly StoryPage[] = [
         { label: 'Mercury Palms', href: '/experience/mercury-palms' },
         { label: 'The Cole', href: '/experience/the-cole' },
         { label: '444 W Stevens', href: '/experience/444-w-stevens' },
+        { label: 'Desert Business Association', href: '/desert-business-association' },
         { label: 'About David', href: '/about' },
       ],
     },
     seo: {
       title: 'Vista Las Palmas Palm Springs | David Weis',
       description:
-        'David Weis shares how Vista Las Palmas became home, from Mercury Palms, The Cole and 444 W Stevens to neighborhood traditions, VLPNF and involvement with ONE-PS.',
+        'David Weis shares how Vista Las Palmas became one of the places he calls home, from Mercury Palms, The Cole and 444 W Stevens to neighborhood traditions, VLPNF and involvement with ONE-PS.',
     },
   },
+  // David's 2026-10-10 brief: the Desert Business Association story sits with the Palm Springs community stories.
+  dbaStory,
   {
     slug: 'work-truck',
     crumb: 'The work truck',
@@ -1221,7 +1355,6 @@ export const stories: readonly StoryPage[] = [
           {
             type: 'pair',
             ratio: '3 / 2',
-            emphasis: 'first',
             photos: [truckPhotos.colorado, truckPhotos.coloradoCole],
             captions: [
               { title: 'The Colorado', note: 'In retrospect, we should have kept it.' },
@@ -1364,7 +1497,7 @@ export const stories: readonly StoryPage[] = [
           {
             type: 'pair',
             ratio: '3 / 2',
-            photos: [truckPhotos.bed, truckPhotos.listing],
+            photos: [truckPhotos.office, truckPhotos.snow],
             captions: [
               { title: 'The Sierra', note: 'Finally, the right tool for the job.' },
               { title: 'Three markets', note: 'San Diego. Palm Springs. Big Bear. Repeat.' },
@@ -1411,8 +1544,14 @@ export const stories: readonly StoryPage[] = [
               'Which is technically all the clearance you need.',
             ],
             aside: truckPhotos.garage,
-            asideRatio: '4 / 3',
+            asideRatio: '3 / 4',
             asideCaption: 'Garage clearance. One inch is still clearance.',
+          },
+          {
+            type: 'gallery',
+            label: 'Garage clearance',
+            photos: [truckPhotos.clearanceShelf, truckPhotos.clearanceMirror, truckPhotos.clearanceDoor],
+            captions: [{ title: 'The shelf' }, { title: 'The mirror' }, { title: 'The door' }],
           },
           {
             type: 'story',
