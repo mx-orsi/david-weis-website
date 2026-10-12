@@ -46,7 +46,7 @@ const { chapter, slug } = Astro.props;
         );
       }
       return b.aside ? (
-        <div class="container ch__block ch__aside">
+        <div class:list={['container', 'ch__block', 'ch__aside', b.asideAlign === 'center' && 'ch__aside--center']}>
           <Story heading={b.heading} paragraphs={b.paragraphs} eyebrow={b.eyebrow} level={level} id={hid} />
           <figure class="ch__aside-figure">
             <Media photo={b.aside} ratio={asideRatio} sizes="(min-width: 960px) 40vw, 100vw" class="ch__aside-photo" />
@@ -212,7 +212,30 @@ const { chapter, slug } = Astro.props;
     if (b.type === 'gallery') {
       return (
         <div class="container ch__block">
-          <Gallery photos={b.photos} captions={b.captions} label={b.label} />
+          <Gallery photos={b.photos} captions={b.captions} label={b.label} caption={b.caption} spacing={b.spacing} />
+        </div>
+      );
+    }
+    if (b.type === 'tiles') {
+      return (
+        <div class="container ch__block">
+          <ul class="ch__tiles" style={`--tile-cols: ${b.items.length}`}>
+            {b.items.map((t, j) => (
+              <li class="ch__tile">
+                <a class="ch__tile-media" href={withBase(t.cta.href)} tabindex="-1" aria-hidden="true">
+                  <Media photo={t.photo} ratio="1 / 1" sizes="(min-width: 900px) 45vw, 100vw" />
+                </a>
+                <div class="ch__tile-copy">
+                  <p class="eyebrow">{t.eyebrow}</p>
+                  <h3 class="title-md ch__tile-title" id={`${hid}-${j}`}>{t.heading}</h3>
+                  <div class="prose">
+                    {t.paragraphs.map((p) => (hasInline(p) ? <p set:html={renderInline(p)} /> : <p>{p}</p>))}
+                  </div>
+                  <a class="link-arrow" href={withBase(t.cta.href)}>{t.cta.label} <Icon name="arrow-right" /></a>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       );
     }
@@ -335,6 +358,45 @@ const { chapter, slug } = Astro.props;
     justify-self: end;
     width: 100%;
   }
+  .ch__aside--center {
+    align-items: center;
+  }
+
+  /* Tiles: square cards side by side (About's community stories). */
+  .ch__tiles {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(var(--tile-cols, 2), minmax(0, 1fr));
+    gap: clamp(1.5rem, 4vw, 3rem);
+    padding: 0;
+    margin: 0;
+  }
+  .ch__tile {
+    display: grid;
+    gap: 1.1rem;
+    align-content: start;
+    min-width: 0;
+  }
+  .ch__tile-media {
+    display: block;
+    min-width: 0;
+  }
+  .ch__tile-copy {
+    display: grid;
+    gap: 0.75rem;
+    justify-items: start;
+  }
+  .ch__tile-title {
+    max-width: 18ch;
+  }
+  .ch__tile-copy .prose p {
+    font-size: 0.9375rem;
+  }
+  @media (max-width: 699px) {
+    .ch__tiles {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
 
   .ch__figure {
     margin: 0;
@@ -379,27 +441,31 @@ const { chapter, slug } = Astro.props;
     border-top: 1px solid var(--line-strong);
   }
 
-  /* Market band: a full-width deep-blue chapter opener with the market name in the large serif title. */
+  /*
+   * Market band: the market name in blue serif between a thin rule above and
+   * below, with the caption in regular black (David's 2026-10-10 note; it
+   * replaced the deep-blue full-width band).
+   */
   .ch__band {
     width: 100%;
     margin-top: clamp(1rem, 3vw, 2.5rem);
-    padding-block: clamp(3rem, 7vw, 6rem);
-    background: var(--surface-blue);
-    color: var(--on-ink);
   }
   .ch__band-inner {
     min-width: 0;
+    padding-block: clamp(2rem, 4vw, 3rem);
+    border-top: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line-strong);
   }
   .ch__band :global(.story__title) {
     max-width: none;
-    color: var(--on-ink);
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    line-height: 0.95;
+    color: var(--blue);
+    font-size: clamp(2.75rem, 6.5vw, 5rem);
+    line-height: 0.98;
     letter-spacing: -0.015em;
     overflow-wrap: anywhere;
   }
   .ch__band :global(.prose p) {
-    color: #e3e7ef;
+    color: var(--ink);
   }
 
   .ch__pair {

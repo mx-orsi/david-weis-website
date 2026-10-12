@@ -19,9 +19,13 @@ interface Props {
   photos: readonly Photo[];
   captions?: readonly (GalleryCaption | undefined)[];
   label: string;
+  /** One centered caption under the whole grid: bold title line, muted note. */
+  caption?: GalleryCaption;
+  /** 'loose' widens the gap between tiles a little. */
+  spacing?: 'loose';
   class?: string;
 }
-const { photos, captions, label, class: className } = Astro.props;
+const { photos, captions, label, caption, spacing, class: className } = Astro.props;
 
 const shapes = ['wide', 'small', 'small', 'tall', 'small', 'tall', 'wide'] as const;
 const ratios: Record<(typeof shapes)[number], string> = { tall: '4 / 5', wide: '4 / 3', small: '1 / 1' };
@@ -35,7 +39,7 @@ const shapeFor = (j: number): (typeof shapes)[number] | 'third' | 'half' =>
 const ratioFor = (s: ReturnType<typeof shapeFor>) => (s === 'third' ? '4 / 3' : s === 'half' ? '3 / 2' : ratios[s]);
 ---
 
-<div class:list={['gal', className]} role="group" aria-label={label}>
+<div class:list={['gal', spacing === 'loose' && 'gal--loose', className]} role="group" aria-label={label}>
   {photos.map((ph, j) => {
     const shape = shapeFor(j);
     const cap = captions?.[j];
@@ -64,6 +68,12 @@ const ratioFor = (s: ReturnType<typeof shapeFor>) => (s === 'third' ? '4 / 3' : 
       <div class={`gal__item gal__item--${shape}`}>{media}</div>
     );
   })}
+  {caption && (
+    <p class="gal__group-caption">
+      <strong class="gal__group-title">{caption.title}</strong>
+      {caption.note && <span class="gal__group-note">{caption.note}</span>}
+    </p>
+  )}
 </div>
 
 <style>
@@ -86,6 +96,25 @@ const ratioFor = (s: ReturnType<typeof shapeFor>) => (s === 'third' ? '4 / 3' : 
   }
   .gal :global(.gal__item--half) {
     grid-column: span 3;
+  }
+  .gal--loose {
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+  }
+  .gal__group-caption {
+    grid-column: 1 / -1;
+    justify-self: center;
+    text-align: center;
+    max-width: 52ch;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .gal__group-title {
+    display: block;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
   }
   .gal__figure {
     margin: 0;
