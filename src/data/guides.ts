@@ -47,6 +47,8 @@ export interface Guide {
   choices?: { heading: string; items: readonly GuideChoice[] };
   sections: readonly GuideSection[];
   faqs: { heading: string; items: readonly { q: string; a: string }[] };
+  /** Wide photo of the destination that closes the guide, above the planning form (Max, 2026-10-16). */
+  closing: { photo: Photo; caption: string };
   /** Internal links under the guide: area pages, seller resources and related FAQs. */
   related: { heading: string; links: readonly { label: string; href: string }[] };
   inquiry: {
@@ -189,6 +191,18 @@ export const guides: readonly Guide[] = [
           a: 'Verify that for the specific property before buying. Local rules, HOA restrictions, lease terms, and permit availability can affect your options.',
         },
       ],
+    },
+    closing: {
+      photo: {
+        suggestion: 'Mid-century home with the San Jacinto Mountains behind it',
+        src: '/images/palm-springs-mid-century-home-real-estate.jpg',
+        alt: 'White mid-century modern home with palm trees and desert landscaping in Palm Springs, California',
+        width: 1600,
+        height: 1200,
+        hasSmall: true,
+        position: 'center 60%',
+      },
+      caption: 'Palm Springs',
     },
     related: {
       heading: 'More on this site',

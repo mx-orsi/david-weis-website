@@ -142,6 +142,11 @@ const para = (p: string) => (hasInline(p) ? { html: renderInline(p) } : { text: 
     </div>
   </div>
 
+  <div class="container gp__closing">
+    <Media photo={g.closing.photo} ratio="21 / 9" sizes="100vw" />
+    <p class="gp__pic-label">{g.closing.caption}</p>
+  </div>
+
   <section class="gp__inquiry" aria-labelledby={`${formId}-heading`}>
     <div class="container gp__inquiry-grid">
       <div class="gp__inquiry-copy">
@@ -330,6 +335,11 @@ const para = (p: string) => (hasInline(p) ? { html: renderInline(p) } : { text: 
   .gp__faq-list p {
     color: var(--ink-2);
     max-width: 68ch;
+  }
+  .gp__closing {
+    display: grid;
+    gap: 0.6rem;
+    padding-bottom: clamp(3rem, 6vw, 5rem);
   }
   .gp__inquiry {
     background: var(--surface-2);
