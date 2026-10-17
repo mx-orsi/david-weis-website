@@ -191,9 +191,18 @@ shift the layout or break when RealSatisfied is slow.
 
 ## Contact form
 
-`ContactForm.astro` posts JSON to `PUBLIC_FORM_ENDPOINT` (set it in `.env`, for
-example a Formspree or Basin URL). When unset, submitting opens the visitor's
-email app with the message pre-filled, so the form always works.
+`ContactForm.astro` and the guide form (`GuideForm.astro`) post JSON to
+`integrations.formEndpoint` in `src/data/integrations.ts` (a Formspree URL; the
+`PUBLIC_FORM_ENDPOINT` env var overrides it). When empty, submitting opens the
+visitor's email app with the message pre-filled, so the form always works; the
+guide form labels that clearly as an email option. The GA4 ID lives in the
+same file.
+
+## Guides
+
+Evergreen planning articles live in `src/data/guides.ts` and render at
+`/guides/<slug>`. Tag a guide with `markets` and `services` and the matching
+market and Buy/Sell pages pick up a "Planning guides" teaser automatically.
 
 ## Preview hosting (GitHub Pages)
 

@@ -197,8 +197,8 @@ style; DBA radio: both versions stay as labeled per his instructions file; 2024 
 award wording stay as they are; FAQ sign-off stays on David's own list.
 
 **Max to do after the email goes out:** accept the GoDaddy delegate invite; change the iHomeFinder
-password; set up Cloudflare Pages (David's choice); create a Formspree form and set
-`PUBLIC_FORM_ENDPOINT`; create GA4; send the legal pages to Compass; test the iHomeFinder to Compass
+password; set up Cloudflare Pages (David's choice); create a Formspree form and send Claude the URL
+(it goes in `src/data/integrations.ts`); create GA4 and send the G- ID; send the legal pages to Compass; test the iHomeFinder to Compass
 Zap once the search is live.
 
 **From his 2026-10-05 and 2026-10-06 emails (ask David):**

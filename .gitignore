@@ -33,3 +33,6 @@ assets-source/community-raw/
 
 # Full Drive downloads from David; never published, compared against staged photos
 assets-source/drive-*/
+
+# Client emails and attachments (raw source, not committed)
+assets-source/emails/

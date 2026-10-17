@@ -46,9 +46,15 @@ Grouped by who has to act. Tick items off as they land.
 - [x] Accessibility: axe-core (WCAG 2.2 AA + best practice) reports zero
       violations on every page at desktop and phone widths; no horizontal
       overflow at 390px.
-- [ ] **Form service.** Create a Formspree or Basin form, set
-      `PUBLIC_FORM_ENDPOINT` in `.env` and in the deploy environment, and name it in
-      the privacy policy. The form now sends `consent: yes|no` from the SMS checkbox.
+- [ ] **Form service.** Create a Formspree form (recipient david@davidweis.com) and paste its URL
+      into `formEndpoint` in `src/data/integrations.ts`; both the contact form and the guide's
+      Plan My Move form switch over. Name Formspree in the privacy policy. Then send one test
+      from each form, marked TEST, and confirm receipt, reply-to and the `source` field.
+- [ ] **Guide (sell San Diego, buy Palm Springs)** built 2026-10-16 from David's handoff
+      (`/guides/sell-san-diego-buy-palm-springs`). Before launch: David approves the copy, the
+      three-choice cards and the /guides index intro; set `published` to the real go-live date;
+      after launch inspect the URL in Search Console. Explore Palm Springs Homes points at
+      `/palm-springs` until the iHomeFinder search exists.
 - [ ] Swap placeholders for photos as they arrive (data edits only).
 - [x] Weekly rebuild workflow (`.github/workflows/weekly-rebuild.yml`) so new
       reviews reach the site without a manual deploy. Needs Actions enabled on
@@ -68,9 +74,11 @@ Grouped by who has to act. Tick items off as they land.
       add `/terms` to the sitemap filter exception at the same time.
 - [ ] Google Search Console: verify, submit `/sitemap-index.xml`.
 - [ ] Google Business Profile: link the site; confirm Suite 210 matches.
-- [ ] Analytics: David expects Google Analytics with the IDX. Nobody has created a GA4 property
-      yet. Creating one triggers the pixel disclosure: swap in the commented paragraph in
-      `src/pages/privacy-policy.astro`.
+- [ ] Analytics: create the GA4 property, paste the G- ID into `gaMeasurementId` in
+      `src/data/integrations.ts` (the tag renders on production builds only, never the preview),
+      and swap in the commented paragraph in `src/pages/privacy-policy.astro`. In GA4, mark
+      `plan_move_submit_success` as a key event. Guide events: `plan_move_click`,
+      `plan_move_submit_success`, `contact_click` (method only; no personal data is ever sent).
 
 ## 4. Final QA before go-live
 

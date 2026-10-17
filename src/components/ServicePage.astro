@@ -8,6 +8,7 @@ import Icon from './Icon.astro';
 import Media from './Media.astro';
 import Story from './Story.astro';
 import FaqRelated from './FaqRelated.astro';
+import GuideLinks from './GuideLinks.astro';
 import { services } from '../data/services';
 import { getSale, saleHref, saleLead } from '../data/sales';
 import { siteUrl } from '../data/site';
@@ -134,6 +135,8 @@ const jsonLd = [
     </section>
 
     <FaqRelated slug={slug} />
+
+    <GuideLinks for={slug} />
   </div>
 
   <section class="sp-close" aria-labelledby={`${slug}-close`}>

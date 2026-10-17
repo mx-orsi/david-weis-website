@@ -18,7 +18,8 @@ export function renderInline(text: string): string {
       const external = /^https?:/.test(href);
       const url = external ? href : withBase(href);
       const rel = external ? ' target="_blank" rel="noopener noreferrer"' : '';
-      return `<a href="${escape(url)}"${rel}>${escape(label)}</a>`;
+      const note = external ? '<span class="sr-only"> (opens in a new tab)</span>' : '';
+      return `<a href="${escape(url)}"${rel}>${escape(label)}${note}</a>`;
     }
     return escape(plain ?? m);
   });

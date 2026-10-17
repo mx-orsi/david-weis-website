@@ -1,0 +1,392 @@
+---
+/**
+ * GuidePage — layout for every guide in src/data/guides.ts, in the order
+ * David's 2026-10-16 brief sets: hero and intro with a small Plan My Move
+ * button, the San Diego / Palm Springs image pair, jump links, the optional
+ * three-choice summary, the numbered sections in a reading column, related
+ * links, the questions (visible text, h3 under an h2), the inquiry form, and
+ * the author and disclosure note. The sitewide brokerage disclosure stays in
+ * the footer.
+ */
+import GuideForm from './GuideForm.astro';
+import Icon from './Icon.astro';
+import Media from './Media.astro';
+import PageHero from './PageHero.astro';
+import { agent, siteUrl } from '../data/site';
+import { formatGuideDate, guideHref, guidesIndex, type Guide } from '../data/guides';
+import { withBase } from '../lib/paths';
+import { hasInline, renderInline } from '../lib/inline';
+
+interface Props {
+  guide: Guide;
+}
+const { guide: g } = Astro.props;
+const url = `${siteUrl}${guideHref(g)}`;
+const formId = 'plan-my-move';
+const [lede, ...moreIntro] = g.intro;
+const byline = `By ${agent.name} | ${agent.titleShort}, ${agent.brokerage} | DRE #${agent.dre}`;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: g.title,
+    description: g.seo.description,
+    datePublished: g.published,
+    dateModified: g.reviewed ?? g.published,
+    mainEntityOfPage: url,
+    image: g.images.map((p) => new URL(p.src!, siteUrl).href),
+    author: { '@type': 'Person', name: agent.name, jobTitle: agent.titleShort, url: `${siteUrl}/about` },
+    publisher: { '@id': `${siteUrl}/#agent` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Guides', item: `${siteUrl}/guides` },
+      { '@type': 'ListItem', position: 3, name: g.crumb, item: url },
+    ],
+  },
+];
+const crumbs = [
+  { label: 'Home', href: withBase('/') },
+  { label: 'Guides', href: withBase('/guides') },
+  { label: g.crumb },
+];
+const para = (p: string) => (hasInline(p) ? { html: renderInline(p) } : { text: p });
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+
+<article class="gp">
+  <PageHero eyebrow={g.eyebrow} title={g.title} intro={lede} crumbs={crumbs} size="xl">
+    <a slot="actions" class="btn btn--sm" href={`#${formId}`} data-track="plan_move_click">{g.inquiry.primary} <Icon name="arrow-right" /></a>
+  </PageHero>
+
+  <div class="container gp__intro">
+    {moreIntro.map((p) => <p class="lede lede--wide">{p}</p>)}
+    <p class="gp__byline">
+      <span>{byline}</span>
+      <span>Published <time datetime={g.published}>{formatGuideDate(g.published)}</time></span>
+      {g.reviewed && <span>Reviewed <time datetime={g.reviewed}>{formatGuideDate(g.reviewed)}</time></span>}
+    </p>
+  </div>
+
+  <div class="container gp__pair">
+    {g.images.map((p, i) => (
+      <div class="gp__pic">
+        <Media photo={p} ratio="4 / 3" priority={i === 0} sizes="(min-width: 900px) 45vw, 100vw" />
+        <p class="gp__pic-label">{i === 0 ? 'San Diego' : 'Palm Springs'}</p>
+      </div>
+    ))}
+  </div>
+
+  <div class="container gp__body">
+    <nav class="gp__toc" aria-label="On this page">
+      <p class="eyebrow eyebrow--muted">On this page</p>
+      <ol>
+        {g.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading.replace(/^\d+\.\s*/, '')}</a></li>)}
+        <li><a href="#questions">{g.faqs.heading}</a></li>
+        <li><a href={`#${formId}-heading`}>{g.inquiry.heading}</a></li>
+      </ol>
+    </nav>
+
+    <div class="gp__main">
+      {g.choices && (
+        <section class="gp__choices" aria-labelledby="choices">
+          <h2 id="choices" class="eyebrow">{g.choices.heading}</h2>
+          <ul>
+            {g.choices.items.map((c) => (
+              <li>
+                <h3>{c.title}</h3>
+                <p>{c.body}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {g.sections.map((s) => (
+        <section class="gp__section" aria-labelledby={s.id}>
+          <h2 id={s.id} class="title-md">{s.heading}</h2>
+          <div class="prose gp__prose">
+            {s.paragraphs.map((p) => {
+              const r = para(p);
+              return r.html ? <p set:html={r.html} /> : <p>{r.text}</p>;
+            })}
+          </div>
+        </section>
+      ))}
+
+      <section class="gp__related" aria-labelledby="related">
+        <h2 id="related" class="eyebrow">{g.related.heading}</h2>
+        <ul>
+          {g.related.links.map((l) => (
+            <li><a class="link-arrow" href={withBase(l.href)}>{l.label} <Icon name="arrow-right" /></a></li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="gp__section gp__faq" aria-labelledby="questions">
+        <h2 id="questions" class="title-md">{g.faqs.heading}</h2>
+        <div class="gp__faq-list">
+          {g.faqs.items.map((f) => (
+            <div>
+              <h3>{f.q}</h3>
+              <p>{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <section class="gp__inquiry" aria-labelledby={`${formId}-heading`}>
+    <div class="container gp__inquiry-grid">
+      <div class="gp__inquiry-copy">
+        <p class="eyebrow eyebrow--dot">{guidesIndex.eyebrow}</p>
+        <h2 id={`${formId}-heading`} class="title-lg">{g.inquiry.heading}</h2>
+        {g.inquiry.body.map((p) => <p>{p}</p>)}
+        <a class="link-arrow" href={withBase(g.inquiry.secondary.href)}>{g.inquiry.secondary.label} <Icon name="arrow-right" /></a>
+      </div>
+      <GuideForm guide={g} id={formId} />
+    </div>
+  </section>
+
+  <footer class="container gp__foot">
+    <p class="gp__byline">
+      <span>{byline}</span>
+      <span>Published <time datetime={g.published}>{formatGuideDate(g.published)}</time></span>
+    </p>
+    <p class="gp__footnote">{g.footnote}</p>
+  </footer>
+</article>
+
+<script>
+  type Gtag = (...args: unknown[]) => void;
+  document.querySelectorAll<HTMLElement>('[data-track]').forEach((el) =>
+    el.addEventListener('click', () => {
+      const gtag = (window as unknown as { gtag?: Gtag }).gtag;
+      if (gtag) gtag('event', el.dataset.track!, { source: document.title });
+    }),
+  );
+</script>
+
+<style>
+  /* The guide's H1 is a full question; give it more room than the short page titles. */
+  .gp :global(.ph__copy h1) {
+    max-width: 24ch;
+  }
+  .gp__intro {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: calc(-1 * clamp(0.5rem, 2vw, 1.5rem));
+    padding-bottom: clamp(2rem, 4vw, 3rem);
+  }
+  .gp__byline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+  .gp__pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+  .gp__pic {
+    display: grid;
+    gap: 0.6rem;
+  }
+  .gp__pic-label {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .gp__body {
+    display: grid;
+    grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    padding-block: clamp(3rem, 6vw, 5.5rem);
+  }
+  .gp__toc {
+    position: sticky;
+    top: 6.5rem;
+    align-self: start;
+    display: grid;
+    gap: 0.9rem;
+  }
+  .gp__toc ol {
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+  .gp__toc a {
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+  .gp__toc a:hover {
+    color: var(--blue);
+    text-decoration: underline;
+  }
+  .gp__main {
+    display: grid;
+    gap: clamp(2.75rem, 5vw, 4rem);
+    max-width: 44rem;
+  }
+  .gp__section {
+    display: grid;
+    gap: 1.25rem;
+    scroll-margin-top: 6.5rem;
+  }
+  .gp__section h2,
+  .gp__faq h2 {
+    scroll-margin-top: 6.5rem;
+  }
+  .gp__prose {
+    max-width: 68ch;
+  }
+  .gp__prose p,
+  .gp__faq-list p {
+    font-size: 1.125rem;
+    line-height: 1.75;
+  }
+  .gp__prose :global(a) {
+    color: var(--blue);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .gp__choices {
+    display: grid;
+    gap: 1rem;
+  }
+  .gp__choices ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+  }
+  .gp__choices li {
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+    padding: 1.25rem;
+    background: var(--surface-2);
+    border-top: 2px solid var(--blue);
+  }
+  .gp__choices h3 {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .gp__choices p {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .gp__related {
+    display: grid;
+    gap: 1rem;
+    padding-block: 1.5rem;
+    border-block: 1px solid var(--line);
+  }
+  .gp__related ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem 2rem;
+    padding: 0;
+    margin: 0;
+  }
+  .gp__faq-list {
+    display: grid;
+    gap: 1.75rem;
+  }
+  .gp__faq-list div {
+    display: grid;
+    gap: 0.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line-strong);
+  }
+  .gp__faq-list h3 {
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+  .gp__faq-list p {
+    color: var(--ink-2);
+    max-width: 68ch;
+  }
+  .gp__inquiry {
+    background: var(--surface-2);
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+    scroll-margin-top: 5rem;
+  }
+  .gp__inquiry-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+  .gp__inquiry-copy {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+  }
+  .gp__inquiry-copy p {
+    color: var(--ink-2);
+    max-width: 44ch;
+  }
+  .gp__inquiry :global(.gf) {
+    scroll-margin-top: 6rem;
+  }
+  .gp__foot {
+    display: grid;
+    gap: 0.75rem;
+    padding-block: 2rem clamp(2.5rem, 5vw, 4rem);
+  }
+  .gp__footnote {
+    max-width: 80ch;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  @media (max-width: 899px) {
+    .gp__body,
+    .gp__inquiry-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .gp__toc {
+      position: static;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .gp__choices ul {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .gp__pair,
+    .gp__related ul {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .gp__prose p,
+    .gp__faq-list p {
+      font-size: 1.0625rem;
+    }
+  }
+</style>

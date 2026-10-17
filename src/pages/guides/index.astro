@@ -1,0 +1,28 @@
+---
+/** Guides index: every guide in src/data/guides.ts, newest first. */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import GuideCards from '../../components/GuideCards.astro';
+import { guides, guidesIndex } from '../../data/guides';
+import { withBase } from '../../lib/paths';
+
+const list = [...guides].sort((a, b) => b.published.localeCompare(a.published));
+---
+
+<BaseLayout title={guidesIndex.seo.title} description={guidesIndex.seo.description}>
+  <PageHero
+    eyebrow={guidesIndex.eyebrow}
+    title={guidesIndex.title}
+    intro={guidesIndex.intro}
+    crumbs={[{ label: 'Home', href: withBase('/') }, { label: 'Guides' }]}
+  />
+  <div class="container guides-index">
+    <GuideCards guides={list} />
+  </div>
+</BaseLayout>
+
+<style>
+  .guides-index {
+    padding-bottom: clamp(3.5rem, 7vw, 6rem);
+  }
+</style>

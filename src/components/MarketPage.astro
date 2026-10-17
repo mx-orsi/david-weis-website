@@ -11,6 +11,7 @@ import AreaCard from './AreaCard.astro';
 import ProjectCard from './ProjectCard.astro';
 import SearchCTA from './SearchCTA.astro';
 import FaqPreview from './FaqPreview.astro';
+import GuideLinks from './GuideLinks.astro';
 import { getMarket, siteUrl, type MarketSlug } from '../data/site';
 import { marketPages } from '../data/marketPages';
 import { getProject } from '../data/projects';
@@ -162,6 +163,8 @@ const breadcrumbJsonLd = {
   )}
 
   <FaqPreview slug={slug} />
+
+  <GuideLinks for={slug} />
 
   <section class="mp-cta" id="properties" aria-label={`${m.name} properties`}>
     <div class="container mp-cta__inner">

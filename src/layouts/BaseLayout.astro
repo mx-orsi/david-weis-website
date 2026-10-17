@@ -12,6 +12,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FinalCta from '../components/FinalCta.astro';
 import { agent, siteUrl, social } from '../data/site';
+import { integrations } from '../data/integrations';
 import { withBase, isPreviewBuild } from '../lib/paths';
 
 interface Props {
@@ -24,9 +25,14 @@ interface Props {
   noindex?: boolean;
   /** The sitewide "Real estate rarely gives you only one option." band before the footer. */
   finalCta?: boolean;
+  /** Open Graph type: "article" for the guides, "website" everywhere else. */
+  ogType?: 'website' | 'article';
 }
 
-const { title, description, ogImage = '/images/david-weis-share-image.jpg', noindex = false, finalCta = true } = Astro.props;
+const { title, description, ogImage = '/images/david-weis-share-image.jpg', noindex = false, finalCta = true, ogType = 'website' } = Astro.props;
+
+/** GA4 runs on production only, so preview visits never count. */
+const gaId = isPreviewBuild ? '' : integrations.gaMeasurementId;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? siteUrl);
 const ogImageURL = new URL(withBase(ogImage), Astro.site ?? siteUrl);
@@ -98,7 +104,7 @@ const jsonLd = {
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#ffffff" />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={`${agent.name} · ${agent.title} · ${agent.brokerage}`} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -114,6 +120,17 @@ const jsonLd = {
     <meta name="twitter:image" content={ogImageURL} />
 
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+    {gaId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script is:inline define:vars={{ gaId }}>
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function gtag() { window.dataLayer.push(arguments); };
+          window.gtag("js", new Date());
+          window.gtag("config", gaId);
+        </script>
+      </>
+    )}
     <slot name="head" />
   </head>
   <body>

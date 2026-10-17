@@ -1,0 +1,50 @@
+---
+/**
+ * GuideLinks — "Planning guides" teaser for market and service pages. Lists
+ * the guides tagged for that page in src/data/guides.ts and renders nothing
+ * when there are none, so a page picks up a guide as soon as one is tagged.
+ */
+import GuideCards from './GuideCards.astro';
+import Icon from './Icon.astro';
+import { guidesFor, guidesIndex } from '../data/guides';
+import type { MarketSlug } from '../data/site';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  for: MarketSlug | 'buy' | 'sell';
+}
+const key = Astro.props.for;
+const list = guidesFor(key);
+---
+
+{list.length > 0 && (
+  <section class="gl" aria-labelledby={`${key}-guides`}>
+    <div class="container gl__inner">
+      <div class="gl__head">
+        <p class="eyebrow eyebrow--dot">{guidesIndex.eyebrow}</p>
+        <h2 id={`${key}-guides`} class="title-lg">{guidesIndex.teaserHeading}</h2>
+      </div>
+      <GuideCards guides={list} level={3} />
+      <a class="link-arrow" href={withBase('/guides')}>All guides <Icon name="arrow-right" /></a>
+    </div>
+  </section>
+)}
+
+<style>
+  .gl {
+    border-top: 1px solid var(--line);
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+  }
+  .gl__inner {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+    justify-items: start;
+  }
+  .gl__inner > :global(.gc) {
+    width: 100%;
+  }
+  .gl__head {
+    display: grid;
+    gap: 0.9rem;
+  }
+</style>

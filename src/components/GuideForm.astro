@@ -1,0 +1,378 @@
+---
+/**
+ * GuideForm — the move-planning request at the end of a guide, fields and
+ * messages exactly as David's 2026-10-16 brief sets them. It posts to the
+ * same endpoint as the contact form (src/data/integrations.ts) with fixed
+ * source metadata, and only shows the success message after the endpoint
+ * confirms. Without an endpoint the button is relabeled as an email option
+ * and opening the draft never claims the request was sent.
+ *
+ * Analytics (when GA4 is on): plan_move_submit_success on a confirmed send,
+ * contact_click on the direct options. No names, emails, phone numbers or
+ * free text are ever sent to analytics.
+ */
+import Icon from './Icon.astro';
+import { agent } from '../data/site';
+import { contact } from '../data/contact';
+import { integrations } from '../data/integrations';
+import type { Guide } from '../data/guides';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  guide: Guide;
+  id: string;
+}
+const { guide, id } = Astro.props;
+const q = guide.inquiry;
+const endpoint = integrations.formEndpoint;
+const consent = contact.form.consent;
+
+/** UI copy from the brief (Part 2, section 4). */
+const ui = {
+  intro: 'Share a few details so I can understand where you are in the process.',
+  success: 'Thanks. Your move-planning request has been sent to David.',
+  failure: "Your request wasn't sent. Please try again or use the direct contact options below.",
+  privacy: 'Your details will be used to respond to this inquiry.',
+  emailButton: 'Email my plan to David',
+  emailNote: 'This opens your email app with your answers filled in. Your request is sent when you send that email.',
+  emailOpened: `Your email app should open with a draft to ${agent.email}. Your request is sent once you send that email.`,
+  stages: ['Planning', 'Preparing to sell', 'Listed', 'Under contract'],
+  agentOptions: ['Yes', 'No', 'Prefer to discuss'],
+};
+
+/** Next 24 months from the build date; the weekly rebuild keeps the list current. */
+const now = new Date();
+const months = Array.from({ length: 24 }, (_, i) =>
+  new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + i, 1)).toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' }),
+);
+---
+
+<form
+  class="gf"
+  id={id}
+  method="post"
+  action={endpoint || undefined}
+  data-endpoint={endpoint}
+  data-email={agent.email}
+  data-source={q.source}
+  data-success={ui.success}
+  data-failure={ui.failure}
+  data-opened={ui.emailOpened}
+  data-consent-missing={consent.missing}
+  novalidate
+>
+  <p class="gf__intro">{ui.intro}</p>
+  <input type="hidden" name="source" value={q.source} />
+  <input type="hidden" name="location" value={q.location} />
+  <input type="hidden" name="interest" value={q.interest} />
+  <input type="hidden" name="_subject" value={`Move-planning request: ${q.source}`} />
+
+  <div class="gf__row">
+    <label class="gf__field">
+      <span>Name</span>
+      <input type="text" name="name" autocomplete="name" required />
+    </label>
+    <label class="gf__field">
+      <span>Email</span>
+      <input type="email" name="email" autocomplete="email" required />
+    </label>
+  </div>
+  <div class="gf__row">
+    <label class="gf__field">
+      <span>Target move month</span>
+      <select name="move_month" required>
+        <option value="">Choose a month</option>
+        <option>Not sure yet</option>
+        {months.map((m) => <option>{m}</option>)}
+      </select>
+    </label>
+    <label class="gf__field">
+      <span>Phone (optional)</span>
+      <input type="tel" name="phone" autocomplete="tel" />
+    </label>
+  </div>
+  <div class="gf__row">
+    <label class="gf__field">
+      <span>San Diego neighborhood (optional)</span>
+      <input type="text" name="san_diego_neighborhood" autocomplete="address-level3" />
+    </label>
+    <label class="gf__field">
+      <span>Where are you in the process? (optional)</span>
+      <select name="stage">
+        <option value="">Choose one</option>
+        {ui.stages.map((v) => <option>{v}</option>)}
+      </select>
+    </label>
+  </div>
+  <label class="gf__field">
+    <span>What are you looking for in Palm Springs? (optional)</span>
+    <input type="text" name="looking_for" maxlength="300" />
+  </label>
+  <fieldset class="gf__field gf__radios">
+    <legend>Already working with an agent? (optional)</legend>
+    <div>
+      {ui.agentOptions.map((v) => (
+        <label><input type="radio" name="has_agent" value={v} /> {v}</label>
+      ))}
+    </div>
+  </fieldset>
+
+  <div class="gf__hp" aria-hidden="true">
+    <label>Leave this field empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+  </div>
+  <div class="gf__consent">
+    <input id={`${id}-consent`} type="checkbox" name="consent" value="yes" />
+    <label for={`${id}-consent`}>{consent.label}</label>
+  </div>
+
+  <div class="gf__foot">
+    <button class="btn" type="submit">
+      <span>{endpoint ? q.primary : ui.emailButton}</span>
+      <Icon name="arrow-right" />
+    </button>
+    <p class="gf__note">
+      {!endpoint && <>{ui.emailNote} </>}
+      {ui.privacy} See the <a href={withBase('/privacy-policy')}>Privacy Policy</a>.
+    </p>
+  </div>
+  <p class="gf__status" role="status" aria-live="polite" tabindex="-1"></p>
+
+  <ul class="gf__direct" aria-label="Contact David directly">
+    <li><a href={agent.phoneHref} data-contact="phone">Call {agent.phone}</a></li>
+    <li><a href={agent.smsHref} data-contact="text">Text {agent.phone}</a></li>
+    <li><a href={`mailto:${agent.email}`} data-contact="email">Email {agent.email}</a></li>
+  </ul>
+</form>
+
+<script>
+  type Gtag = (...args: unknown[]) => void;
+  const track = (name: string, params: Record<string, string> = {}) => {
+    const gtag = (window as unknown as { gtag?: Gtag }).gtag;
+    if (gtag) gtag('event', name, params);
+  };
+
+  for (const form of document.querySelectorAll<HTMLFormElement>('.gf')) {
+    const d = form.dataset;
+    const status = form.querySelector<HTMLElement>('.gf__status')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    const show = (state: 'ok' | 'error', text: string) => {
+      status.dataset.state = state;
+      status.textContent = text;
+      status.focus();
+    };
+
+    form.querySelectorAll<HTMLAnchorElement>('[data-contact]').forEach((a) =>
+      a.addEventListener('click', () => track('contact_click', { method: a.dataset.contact || '', source: d.source || '' })),
+    );
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = '';
+      status.dataset.state = '';
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const data = new FormData(form);
+      if ((data.get('_gotcha') as string)?.length) return; // bot
+      const hasPhone = ((data.get('phone') as string) || '').trim().length > 0;
+      const consented = data.get('consent') === 'yes';
+      if (hasPhone && !consented) {
+        show('error', d.consentMissing || '');
+        form.querySelector<HTMLInputElement>('input[name=consent]')?.focus();
+        return;
+      }
+      const fields = Object.fromEntries(data.entries()) as Record<string, string>;
+      fields.consent = consented ? 'yes' : 'no';
+
+      if (d.endpoint) {
+        button.disabled = true;
+        try {
+          const res = await fetch(d.endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify(fields),
+          });
+          if (!res.ok) throw new Error(String(res.status));
+          form.reset();
+          show('ok', d.success || '');
+          track('plan_move_submit_success', { source: d.source || '' });
+        } catch {
+          show('error', d.failure || '');
+        } finally {
+          button.disabled = false;
+        }
+        return;
+      }
+
+      // No endpoint: an email draft, labeled as such. Never the success message.
+      const labels: Record<string, string> = {
+        name: 'Name', email: 'Email', phone: 'Phone', move_month: 'Target move month',
+        san_diego_neighborhood: 'San Diego neighborhood', stage: 'Where I am in the process',
+        looking_for: 'Looking for in Palm Springs', has_agent: 'Already working with an agent',
+        consent: 'Consent to call/email/text', source: 'Source',
+      };
+      const body = Object.entries(labels)
+        .filter(([k]) => fields[k])
+        .map(([k, l]) => `${l}: ${fields[k]}`)
+        .join('\n');
+      window.location.href = `mailto:${d.email}?subject=${encodeURIComponent(fields._subject || 'Move-planning request')}&body=${encodeURIComponent(body)}`;
+      show('ok', d.opened || '');
+    });
+  }
+</script>
+
+<style>
+  .gf {
+    display: grid;
+    gap: 1.1rem;
+  }
+  .gf__intro {
+    color: var(--ink-2);
+  }
+  .gf__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .gf__field {
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+  }
+  .gf__field > span,
+  .gf__radios legend {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .gf__radios {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .gf__radios legend {
+    padding: 0;
+    margin-bottom: 0.6rem;
+  }
+  .gf__radios div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  }
+  .gf__radios label {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.9375rem;
+    cursor: pointer;
+  }
+  .gf input[type='text'],
+  .gf input[type='email'],
+  .gf input[type='tel'],
+  .gf select {
+    width: 100%;
+    padding: 0.85rem 0.95rem;
+    font: inherit;
+    font-size: 0.9375rem;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line-control);
+    border-radius: var(--radius);
+    transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  }
+  .gf input[type='radio'],
+  .gf input[type='checkbox'] {
+    width: 1.125rem;
+    height: 1.125rem;
+    margin: 0;
+    accent-color: var(--blue);
+    cursor: pointer;
+  }
+  .gf input:focus-visible,
+  .gf select:focus-visible {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.14);
+  }
+  .gf input[type='radio']:focus-visible,
+  .gf input[type='checkbox']:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+    box-shadow: none;
+  }
+  .gf__hp {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .gf__consent {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+    align-items: start;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .gf__consent input {
+    margin-top: 0.1rem !important;
+  }
+  .gf__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    margin-top: 0.25rem;
+  }
+  .gf__note {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    max-width: 40ch;
+    line-height: 1.5;
+  }
+  .gf__note a {
+    color: var(--ink-2);
+  }
+  .gf__status:empty {
+    display: none;
+  }
+  .gf__status {
+    padding: 0.9rem 1rem;
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    color: var(--ink-2);
+  }
+  .gf__status[data-state='error'] {
+    border-color: var(--blue);
+  }
+  .gf__direct {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    padding: 1rem 0 0;
+    border-top: 1px solid var(--line);
+    font-size: 0.875rem;
+  }
+  .gf__direct a {
+    color: var(--ink-2);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .gf__direct a:hover {
+    color: var(--blue);
+  }
+  @media (max-width: 560px) {
+    .gf__row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

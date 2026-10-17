@@ -1,17 +1,18 @@
 ---
 /**
  * ContactForm — fields per the copy deck: Name, Email, Phone, Interested In,
- * Location, Message. If PUBLIC_FORM_ENDPOINT is set at build time (a
- * Formspree or Basin URL) the form posts there as JSON. Without it,
+ * Location, Message. If integrations.formEndpoint is set (a Formspree or
+ * Basin URL, see src/data/integrations.ts) the form posts there as JSON. Without it,
  * submitting opens the visitor's email app with the message pre-filled, so
  * the form is never a dead end. Includes a honeypot field for spam.
  */
 import Icon from './Icon.astro';
 import { agent } from '../data/site';
 import { contact } from '../data/contact';
+import { integrations } from '../data/integrations';
 import { withBase } from '../lib/paths';
 
-const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
+const endpoint = integrations.formEndpoint;
 const f = contact.form;
 ---
 
