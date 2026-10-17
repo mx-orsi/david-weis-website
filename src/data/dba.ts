@@ -175,8 +175,25 @@ export const dbaStory: StoryPage = {
             'It was another way a relationship from the hotel years continued into a new project.',
           ],
           tracks: [
-            { title: 'Querencia Palms · Version 1', subtitle: 'Radio advertisement · 29 seconds', src: '/files/querencia-palms-radio-version-1.mp3' },
-            { title: 'Querencia Palms · Version 2', subtitle: 'Radio advertisement · 29 seconds', src: '/files/querencia-palms-radio-version-2.mp3' },
+            // Transcripts made 2026-10-16 with whisper.cpp (small.en) on this Mac, names
+            // corrected by ear. Max to listen once and confirm before launch.
+            {
+              title: 'Querencia Palms · Version 1',
+              subtitle: 'Radio advertisement · 29 seconds',
+              src: '/files/querencia-palms-radio-version-1.mp3',
+              transcript: [
+                "At Querencia Palms, home is more than just a place. Our fully renovated condo community is inspired by the many meanings of querencia, a place where one feels safe, authentic, and truly at home. Mountain views, full amenities, and a setting that's part Melrose Place, part Tales of the City. See for yourself: contact David Weis and tour Querencia today. Find Querencia on the As Heard On page from KGAY.",
+              ],
+            },
+            {
+              title: 'Querencia Palms · Version 2',
+              subtitle: 'Radio advertisement · 29 seconds',
+              src: '/files/querencia-palms-radio-version-2.mp3',
+              // Archived ad: the spoken price stays verbatim, under the archive note below.
+              transcript: [
+                "There's a condo development whose name says it all: Querencia Palms. Nestled in South Palm Springs, Querencia Palms is a fully renovated boutique condo community. One- and two-bedroom condos are on sale now from the mid-400s. Querencia Palms, where you and your neighbors will build community in a setting that's part Melrose Place, part Tales of the City. See for yourself: contact David Weis and tour Querencia today. Find Querencia on the As Heard On KGAY page.",
+              ],
+            },
           ],
           note: 'From the Querencia Palms campaign archive. These recordings are shared as examples of past advertising.',
         },
