@@ -5,6 +5,43 @@ file whenever he answers something.
 
 ## Answered
 
+**David, 2026-10-12 to 2026-10-14 emails (built 2026-10-22):** "Close to the LAST Website Update!"
+(the 32-section accuracy review), "Belmont Beach House" and "A couple more Updates". Email text is
+saved in `assets-source/emails/2026-10-22-david-batch/` (gitignored); his photos are in
+`assets-source/drive-2026-10-22/`.
+
+- **Roles, everywhere:** The Cole = Mark developed it, David was General Manager. Querencia = David
+  represents Mark, the seller, through Compass, and personally restored the koi pond and garden
+  ("Garden and koi pond restoration" replaces the landscape label). Celebrity Vacation Homes = Mark's
+  business, David manages operations (his sentence now sits under both CVH buttons). 444 = Mark's
+  renovation, David lived there, did not represent it. The Experience card labels are his.
+- **Built from his copy:** The Cole's General Manager chapter (Freddie's Kitchen at the Cole), the
+  COVID welcome kit (photo credit Nadine Conger), the archived ratings (July 29, 2021) and three guest
+  cards (Lisa's "owner" line and reservation number left out), the wedding reception and the Sonder
+  handover; Querencia's Modernism Week landscaping story, "I brought it back to life.", the
+  conversion-documentation and furniture wording, the pricing sentence; the work truck garage section
+  and the October 2026 outage; the full Belmont story; 444's staging-joke replacement and
+  existing-conditions framing; Garden Club, Gay for Good, About and Sell corrections; Waverly ($5,000 +
+  $2,650 = $7,650), Belden, Mentone and 3700 Third Ave fixes; Ocean Beach for 4420 Voltaire.
+- **Oct 14 layout notes:** Palm Springs shows four project cards two by two (444 added); "From parking
+  lot."; the selfie stacked above the star; the Voltaire after photo under the before; the on-site photo
+  centered; Sierra's closing photos two across; the 444 demolition photo with "From open-air patios to
+  soaring ceilings."; "The koi pond, brought to life."; his Cole and Tesla photos on Garden Club; the
+  San Diego Belmont card uses the house photo.
+- **Querencia unit links:** each sold unit on /sales/querencia-palms has an anchor (#unit-102 and so
+  on) and a "View Unit N photos & details on QuerenciaPalms.com" link to
+  `querenciapalms.com/two-bedrooms-floorplans/N`. /sales shows all seven units with prices above
+  "Read the full story". The production URLs only work after davidweis.com launches.
+- **Technical:** the sitemap no longer stamps every page with the build date; share images carry their
+  own description instead of the headshot's.
+- **Wording I wrote, for his read:** the 3700 Third Ave opening sentence (leads with the result), the
+  softened Mentone showing line, the Belmont section headings and eyebrows, the vehicle-to-home caveat
+  sentence on the work truck page, the Sierra Chalet link label, and the merged Kensington paragraph.
+  Short one-line paragraphs in his new copy were combined, as his section 30 asks.
+- **Belmont photos:** the garage, balcony, rooftop, beach-gear and aerial photos come from the Celebrity
+  Vacation Homes listing gallery (saved in `assets-source/cvh-belmont-2026-10-22/`). He should confirm
+  the red-umbrella deck is Belmont's rooftop.
+
 **David, 2026-10-18 email "IDX - CRM" (logged 2026-10-22):** after iHomeFinder's webinar he will
 **not** use its CRM features beyond two things: tracking visitor activity on the website, and sending
 the automated initial and follow-up emails. Newsletters and everything else stay in the **Compass
@@ -201,6 +238,26 @@ trophy ("ONE-PS Neighborhoods of Distinction, Vista Las Palmas, 2025 Honor Award
 shows only the documented 2025 figures, and the Gay for Good page uses his past-tense copy.
 
 ## Still open
+
+**From his 2026-10-12 to 2026-10-14 emails (ask David):**
+
+- **Modernism Week Launch year.** The site says "our October 18 Modernism Week Launch" with no year,
+  as his instructions asked, until he confirms it.
+- **Vicious Fishes.** Their praise is inside his story, not a standalone testimonial. Are they OK with
+  it?
+- **Unit 106** is shown as closed September 2026 (his date: September 28, 2026). The $3,958,000 total
+  is the sum of the seven prices; confirm against the closing records.
+- **4420 Voltaire "trustee's sale"** wording is unchanged; confirm the transaction records support it.
+- **Archived review links.** No individual review URLs were supplied, and the screenshots carry Lisa's
+  "owner" line and reservation number, so the cards have no "View archived review" link. Send original
+  URLs if he wants links.
+- **DBA spotlight article** (chambermate, May 4, 2026) says he "co-developed" The Cole. Leave the button
+  off until DBA corrects it; same correction for his Compass bio.
+- **Celebrity Vacation Homes listing** (his section 13): "Private porch", "Bicycles" and the Jersey Court
+  directions should be checked by whoever maintains it.
+- **Still to do on our side:** his section 31 blog stories (after he reviews these corrections), the
+  contact form and privacy checks (after Formspree, Analytics and the Compass review), and the domain
+  cutover.
 
 **From his 2026-10-08 to 2026-10-10 emails (Max reviewed 2026-10-12; in the reply email):**
 
