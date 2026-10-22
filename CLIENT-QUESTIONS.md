@@ -15,9 +15,20 @@ Dashboard**. He is importing his contacts into iHomeFinder and will say when tha
   Compass trigger and an iHomeFinder action; not yet confirmed to exist. Check before he builds it.
 - Privacy policy updated the same day: iHomeFinder's automated emails, Zapier sync, newsletters via
   Compass (blue-box items added for Compass review).
-- His attachment "PastedGraphic-3.png" did not come through (same as an earlier email). Ask Max to
-  save it to `assets-source/emails/` if it matters.
-- Max also received an iHomeFinder training email; not yet shared.
+- His "PastedGraphic-3.png" attachment is not important (Max, 2026-10-22). Dropped.
+- **iHomeFinder training (David's forward of 2026-10-16):** he missed the Thursday Control Panel
+  training and is watching the recording
+  (https://ihomefinder.zoom.us/rec/share/P0xuTuXonxseSEAu7ig4EO5hGH4N2xZ-r8G-WYDKW36Agg7L-Afk9Ho1gZu4o_2w.PTE1hjaouQ0uAUjs).
+  More videos: https://www.ihomefinder.training/training-videos/ (Control Panel Navigation Overview,
+  Market Creation Tools, Lead Lists, How Website and Property Search Generate Business). Questions go to
+  customersuccess@ihomefinder.com.
+- **What matters for our build (iHomeFinder's own docs, 2026-10-22):** Version 10 embeds the search
+  directly on any site, no frame or subdomain, so listings index on davidweis.com. Widgets come from
+  Control Panel > Setup > Website > Widgets as JavaScript embed codes. The base URL set in the Control
+  Panel must exactly match the site's address, https included, or nothing displays, so the search
+  cannot be tested on the GitHub Pages preview. Plan: test it on the Cloudflare pages.dev address
+  (base URL set there temporarily), then switch the base URL to https://davidweis.com at launch.
+  Setup article: https://kb.ihomefinder.com/s/article/Optima-IDX-Setup.
 
 **David, 2026-10-08 to 2026-10-10 emails (applied 2026-10-11):** his line-by-line preview review,
 the Gay for Good and Garden Club rewrites, the Compass compliance list, the iHomeFinder demo notes and
