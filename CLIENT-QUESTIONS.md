@@ -5,6 +5,20 @@ file whenever he answers something.
 
 ## Answered
 
+**David, 2026-10-18 email "IDX - CRM" (logged 2026-10-22):** after iHomeFinder's webinar he will
+**not** use its CRM features beyond two things: tracking visitor activity on the website, and sending
+the automated initial and follow-up emails. Newsletters and everything else stay in the **Compass
+Dashboard**. He is importing his contacts into iHomeFinder and will say when that is done. He is
+**looking into Zapier himself** to keep the two CRMs synced.
+- Open: which direction the sync runs. Our earlier research found an iHomeFinder "New Lead" trigger
+  and a Compass "Create a New Lead" action (iHomeFinder to Compass). Compass to iHomeFinder needs a
+  Compass trigger and an iHomeFinder action; not yet confirmed to exist. Check before he builds it.
+- Privacy policy updated the same day: iHomeFinder's automated emails, Zapier sync, newsletters via
+  Compass (blue-box items added for Compass review).
+- His attachment "PastedGraphic-3.png" did not come through (same as an earlier email). Ask Max to
+  save it to `assets-source/emails/` if it matters.
+- Max also received an iHomeFinder training email; not yet shared.
+
 **David, 2026-10-08 to 2026-10-10 emails (applied 2026-10-11):** his line-by-line preview review,
 the Gay for Good and Garden Club rewrites, the Compass compliance list, the iHomeFinder demo notes and
 the About restructure.

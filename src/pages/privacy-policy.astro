@@ -21,7 +21,8 @@ const updated = 'October 11, 2026';
       <li>[confirm: which form service will receive contact form messages (Formspree, Basin or other), so it can be named]</li>
       <li>[confirm: whether Google Analytics 4 or a Compass pixel will be enabled; if yes, swap in the commented paragraph in the Analytics section]</li>
       <li>[confirm: iHomeFinder go-live date and what its registration collects; remove the "once the search is live" note then]</li>
-      <li>[confirm: whether leads really route through Zapier to the Compass CRM]</li>
+      <li>[confirm: the Zapier sync between iHomeFinder and the Compass CRM (David is setting it up, 2026-10-18), and which direction(s) it runs]</li>
+      <li>[confirm: the wording of iHomeFinder's automated welcome and follow-up emails, and that each carries an unsubscribe link]</li>
     </ul>
   </div>
 
@@ -94,9 +95,11 @@ const updated = 'October 11, 2026';
       <p>
         The property search is operated by iHomeFinder. When you register, it collects what you enter, usually your name, email
         address and phone number, plus the searches you save, the homes you favorite and how you use the search. iHomeFinder and
-        {agent.brokerage} receive your lead details so we can follow up. Zapier may relay those details to our customer
-        relationship management system at {agent.brokerage}. We do not sell this information. iHomeFinder handles it under its own
-        privacy policy as well.
+        {agent.brokerage} receive your lead details so we can follow up. After you register, iHomeFinder may send you a welcome
+        email and follow-up emails about homes and searches you saved; every one includes a link to unsubscribe. Zapier may keep
+        your contact details in sync between iHomeFinder and our customer relationship management system at {agent.brokerage},
+        which handles any newsletter we send. We do not sell this information. iHomeFinder handles it under its own privacy policy
+        as well.
       </p>
 
       <h2>Analytics and tracking</h2>
