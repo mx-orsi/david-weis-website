@@ -5,6 +5,15 @@ file whenever he answers something.
 
 ## Answered
 
+**Max, 2026-10-22 (field guide steps 1 to 3):** the DBA radio transcripts are confirmed by ear and stay
+as they are, including Version 2's "from the mid-400s" line. GoDaddy delegate invite accepted. In
+iHomeFinder (client #231381): **MLS Setup's board dropdown is empty**, so neither MLS is provisioned on
+the account yet (Kathy signed Oct 12; iHomeFinder's side is still pending). The **IDX page's Platform is
+set to "WordPress (Optima Express Plugin)"**; ours is not WordPress, so it must change to **Other**
+before setup. Version 10 is shown as recommended. David's MLS Agent ID and Office ID for each board are
+not in any of his emails: ask David, or iHomeFinder support can find them from one active listing's MLS
+number.
+
 **David, 2026-10-12 to 2026-10-14 emails (built 2026-10-22):** "Close to the LAST Website Update!"
 (the 32-section accuracy review), "Belmont Beach House" and "A couple more Updates". Email text is
 saved in `assets-source/emails/2026-10-22-david-batch/` (gitignored); his photos are in
