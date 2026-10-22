@@ -50,6 +50,7 @@ const truckPhotos = {
   bed: { suggestion: 'The Sierra’s bed loaded with property supplies', src: '/images/work-truck/david-weis-gmc-sierra-ev-truck-bed-loaded.jpg', alt: 'The bed of the GMC Sierra EV loaded with supplies' },
   listing: { suggestion: 'The Sierra parked at a listing or property', src: '/images/work-truck/david-weis-gmc-sierra-ev-at-listing.jpg', alt: 'The GMC Sierra EV parked in front of a listing' },
   dump: { suggestion: 'The dump run: debris in the bed', src: '/images/work-truck/david-weis-gmc-sierra-ev-dump-run.jpg', alt: 'The GMC Sierra EV with its bed full of debris on a dump run' },
+  outage: { suggestion: 'The Sierra at the cabin, bed loaded with tools and lumber', src: '/images/work-truck/gmc-sierra-ev-tools-lumber-sierra-chalet-power-outage-david-weis.jpg', alt: 'The GMC Sierra EV’s open tailgate at the cabin, a plank of lumber across the bed with a circular saw, a level and a toolbox beside it', width: 1800, height: 2400, hasSmall: true },
   garage: { suggestion: 'The one inch of garage clearance', src: '/images/work-truck/david-weis-gmc-sierra-ev-garage-clearance.jpg', alt: 'The GMC Sierra EV parked in the garage, its tailgate an inch from the shelving', width: 1800, height: 2400, hasSmall: true },
   // David's 2026-10-08 extras: the Sierra in the snow at Big Bear and beside a Range Rover at the Compass office in Palm Desert.
   snow: { suggestion: 'The Sierra under the carport in the Big Bear snow', src: '/images/work-truck/david-weis-gmc-sierra-ev-snow-big-bear-carport.jpg', alt: 'The GMC Sierra EV dusted with snow under the carport at night in Big Bear', width: 1800, height: 2400, hasSmall: true, position: 'center 60%' },
@@ -78,7 +79,7 @@ export const stories: readonly StoryPage[] = [
             eyebrow: 'How it started',
             heading: 'I’ve always believed in getting involved.',
             paragraphs: [
-              'My mom deserves a lot of the credit for that. She was the kind of person who could walk into a room knowing nobody and leave having talked to everyone. Growing up, she was constantly encouraging me to join things, volunteer, meet people and participate instead of standing on the sidelines.',
+              'My mom deserves a lot of the credit for that. She is the kind of person who can walk into a room knowing nobody and leave having talked to everyone. Growing up, she was constantly encouraging me to join things, volunteer, meet people and participate instead of standing on the sidelines.',
               'I volunteered in different ways over the years, from the Humane Society and library work to being a Big Brother. I valued all of it, but I also learned something about myself: doing the exact same volunteer job every week could eventually start feeling a little like having another job.',
               'What I wanted was community, variety and the chance to experience more of the city while actually doing something useful.',
               'In 2023, I found Gay for Good.',
@@ -198,7 +199,7 @@ export const stories: readonly StoryPage[] = [
             eyebrow: 'Full circle',
             heading: 'And eventually, it followed me back to Palm Springs.',
             paragraphs: [
-              'One of the moments that has meant the most came during my time as a Chapter Leader.',
+              'One of the moments that has meant the most came after I became a Chapter Leader.',
               'During Palm Springs Pride, we hosted a Gay for Good social and fundraiser at [Querencia Palms](/experience/querencia-palms).',
               'By then, two completely different parts of my life had collided in the best possible way.',
               'I had spent years helping build a community through Gay for Good. At the same time, Querencia Palms had become a place where I was pouring everything I knew about real estate, hospitality, design and creating a sense of belonging.',
@@ -229,8 +230,9 @@ export const stories: readonly StoryPage[] = [
               'And then, eventually, people belong.',
               'I joined because I wanted to volunteer and meet some new people.',
               'I ended up becoming a Chapter Leader, and I’m still involved today—helping connect volunteers with organizations throughout San Diego, making friendships I still value, and learning a lot about what it takes to bring people together.',
-              'My mom probably would have loved that.',
-              'And she probably would have reminded me that this is exactly why she kept telling me to join things.',
+              // David's 2026-10-12 closing; his mom is alive and still licensed.
+              'My mom was right about getting involved.',
+              'I went looking for a way to volunteer and found a community I am grateful to be part of.',
             ],
           },
           {
@@ -284,7 +286,7 @@ export const stories: readonly StoryPage[] = [
               'By 2024, life was finally starting to feel calmer. [The Cole](/experience/the-cole) was behind us, the major renovations were finished, and for the first time in a while I could sit with a question people kept asking me: what do you actually enjoy doing?',
               'Everyone seemed to have golf, tennis or pickleball. I have never been particularly drawn to any of them.',
               'But plants had quietly been following me around for years.',
-              'At The Cole, the landscaping company was not maintaining the property the way it needed to be maintained. I was not killing the plants. I was relying on landscapers who were supposed to be caring for them. Toward the end of operating the hotel, I found myself outside at night watering plants, training vines and trying to keep everything looking alive and beautiful.',
+              'At The Cole, the landscaping company was not maintaining the property the way it needed to be maintained. We were paying for landscape care, but I kept finding neglected plants and empty spaces nobody had mentioned. I wanted to understand enough to recognize problems earlier and ask better questions. Toward the end of operating the hotel, I found myself outside at night watering plants, training vines and trying to keep everything looking alive and beautiful.',
               'Later, at [Mercury Palms](/experience/mercury-palms), Mark and I completely reworked the landscaping. There were trips with the Tesla absolutely packed with bougainvillea, purple hopseed and whatever else would fit, sometimes to the point that the doors barely closed.',
               'Over time, I became increasingly frustrated when plants would die without anyone telling us. A sprinkler would keep faithfully watering a patch of empty dirt where a plant used to be.',
               'I had also always loved houseplants, flowers, watching things grow and seeing a landscape transform.',
@@ -314,7 +316,7 @@ export const stories: readonly StoryPage[] = [
               'I wanted to participate, not just attend meetings, so I joined the Setup Committee.',
               'Setup means arriving around 7:30 in the morning and working until about 9:30 getting the room ready before the meeting begins: tables, decorations, refreshments, signage and all the small details that make a meeting feel special.',
               'That is part of what I love about the club. There is an enormous amount of effort behind something that looks effortless when everyone walks into the room.',
-              'I have also helped with check-in and attended nearly every workshop I could get to.',
+              'I also help with check-in and attend the workshops whenever I can.',
             ],
           },
           {
@@ -357,7 +359,7 @@ export const stories: readonly StoryPage[] = [
             eyebrow: 'The koi pond',
             heading: 'A pond that needed a second chance.',
             paragraphs: [
-              'When we were preparing Querencia Palms for its grand opening, landscaping was supposed to be one of the things I didn’t have to worry about. Two days before the event, I arrived to find that much of the greenery around the koi pond had been pulled out and discarded.',
+              'When we were preparing Querencia Palms for our October 18 Modernism Week Launch, landscaping was supposed to be one of the things I didn’t have to worry about. Two days before the event, I arrived to find that much of the greenery around the koi pond had been pulled out and discarded.',
               'They weren’t weeds. They were aquatic and marginal plants that had been intentionally planted around the pond.',
               'I spent the next two weeks watering the remaining roots and new growth every day, trying to bring the area back. It worked. Then the landscaping crew removed it again.',
               'That was the moment I realized I couldn’t keep watching the landscape disappear. I took over much of the landscape work myself, and what started as damage control gradually became something I looked forward to.',
@@ -368,10 +370,11 @@ export const stories: readonly StoryPage[] = [
             type: 'pair',
             ratio: '3 / 2',
             photos: [
-              { suggestion: 'The koi pond stripped bare two days before the grand opening', src: '/images/querencia-landscaping/querencia-palms-102-koi-pond-during-renovation-david-weis.jpg', alt: 'The Querencia Palms koi pond stripped to rock and water after the plantings were removed', width: 1800, height: 2400, hasSmall: true, position: 'center 55%' },
+              { suggestion: 'The koi pond stripped bare two days before the Modernism Week Launch', src: '/images/querencia-landscaping/querencia-palms-102-koi-pond-during-renovation-david-weis.jpg', alt: 'The Querencia Palms koi pond stripped to rock and water after the plantings were removed', width: 1800, height: 2400, hasSmall: true, position: 'center 55%' },
               { suggestion: 'The same stretch of pond today', src: '/images/querencia-landscaping/querencia-palms-104-koi-pond-palm-springs-david-weis.jpg', alt: 'The Querencia Palms koi pond today, its banks planted with lilies, cannas and papyrus', width: 2048, height: 1365, hasSmall: true },
             ],
-            captions: [{ title: 'Two days before the grand opening' }, { title: 'The same stretch of pond today' }],
+            // David's 2026-10-14 note: the right-hand photo is not the same stretch.
+            captions: [{ title: 'Two days before the Modernism Week Launch' }, { title: 'The koi pond, brought to life.' }],
           },
           {
             type: 'story',
@@ -451,7 +454,8 @@ export const stories: readonly StoryPage[] = [
               ],
               [
                 { suggestion: 'David mixing concrete at the Big Bear cabin', src: '/images/sierra-chalet/david-weis-hands-on-renovation-sierra-chalet-big-bear-02.jpg', alt: 'David Weis in a yellow shirt mixing concrete in a tub beside a pile of rock at Sierra Chalet', width: 2049, height: 1536, hasSmall: true },
-                { suggestion: 'David and Mark in the dirt at The Cole before the pool', src: '/images/about/david-weis-mark-the-cole-before.jpg', alt: 'David and Mark Weis standing in the bare dirt at The Cole Hotel property before its renovation, where the pool area would be built', width: 2400, height: 2038, hasSmall: true },
+                // David's 2026-10-14 pick for The Cole in this collage.
+                { suggestion: 'David in the dirt at The Cole before the pool', src: '/images/the-cole/the-cole-hotel-before-renovation-palm-springs-david-weis-02.jpg', alt: 'David Weis standing in the dirt courtyard at The Cole during construction, beside the pool excavation framed in lumber', width: 2400, height: 1800, hasSmall: true },
               ],
             ],
             fill: 'first',
@@ -460,9 +464,10 @@ export const stories: readonly StoryPage[] = [
           },
           {
             type: 'pair',
-            ratio: '4 / 3',
+            ratio: '4 / 5',
             photos: [
-              { suggestion: 'The Evoque convertible packed with plants', src: '/images/about/david-weis-range-rover-work-truck.jpg', alt: 'Houseplants filling the seats of the convertible Range Rover Evoque', width: 2400, height: 1690, hasSmall: true },
+              // David's 2026-10-14 swap: the Tesla with the actual Mercury Palms plants.
+              { suggestion: 'The Tesla packed with plants for Mercury Palms', src: '/images/garden-club/david-weis-tesla-plants-mercury-palms-landscaping.jpg', alt: 'The open hatch of a white Tesla packed with plants for the Mercury Palms landscaping', width: 917, height: 1715, position: 'center 40%' },
               { suggestion: 'The lawn and bougainvillea at Mercury Palms', src: '/images/mercury-palms/mercury-palms-lawn-bougainvillea-david-weis.jpg', alt: 'The side lawn at Mercury Palms, edged with pink bougainvillea, palms and mountains beyond', width: 2048, height: 1361, hasSmall: true },
             ],
             caption: { title: 'Mercury Palms', note: 'Trips packed with plants, and the landscaping they became.' },
@@ -963,7 +968,7 @@ export const stories: readonly StoryPage[] = [
               'Approximately 120 of our friends and family gathered with us at Mercury Palms for our wedding.',
               'It felt right that something so important happened at home.',
               'This house had already held so much of our life together, and suddenly the backyard was filled with almost everyone we loved.',
-              'After the ceremony, our guests were shuttled from Mercury Palms to [The Cole](/experience/the-cole) for the reception.',
+              'After the ceremony, our guests were shuttled from Mercury Palms to [The Cole](/experience/the-cole#wedding) for the reception.',
               'Looking back, I love that those two properties were connected by our wedding day.',
               'Mercury Palms was where we had built a home.',
               'The Cole was where we had poured an enormous amount of ourselves into building a business.',
@@ -983,6 +988,10 @@ export const stories: readonly StoryPage[] = [
               { suggestion: 'The dinner table', src: '/images/vista-las-palmas/david-and-mark-weis-wedding-reception-the-cole-hotel-dinner-table.jpg', alt: 'A long white reception table set with flowers at The Cole Hotel, the sign and palms behind', width: 1600, height: 2400, hasSmall: true },
             ],
             captions: [{ title: 'From home to The Cole', note: 'Our wedding at Mercury Palms, followed by the reception at The Cole.' }],
+          },
+          {
+            type: 'links',
+            items: [{ label: 'The reception at The Cole: the gifts, the misters and the motorcycles', href: '/experience/the-cole#wedding' }],
           },
           {
             type: 'story',
@@ -1039,13 +1048,9 @@ export const stories: readonly StoryPage[] = [
             paragraphs: [
               'Even then, our housing situation worked suspiciously like it sometimes still does today:',
               'We lived in whichever one of our properties happened to be available.',
-              'One holiday season, everything else was occupied and 444 had already been staged for sale.',
-              'So we lived in the staged house.',
-              'Very carefully.',
-              'Technically, staging furniture is not supposed to become your actual living-room furniture.',
-              'But when times are tough… 😂',
-              'Looking back, it feels like a preview of everything that came later.',
-              'Multiple properties. Projects happening at the same time. Driving between cities. Constantly solving whatever problem appeared next.',
+              // David's 2026-10-12 review: the staged-house joke is removed everywhere.
+              'During one holiday season, the other homes were occupied and 444 was already staged for sale. We stayed there carefully, figuring out how to live around the presentation.',
+              'It was an early preview of our life together: more than one project, more than one city, and a housing plan that could change with the calendar.',
               'And somehow building a life together right in the middle of it.',
             ],
           },
@@ -1449,10 +1454,8 @@ export const stories: readonly StoryPage[] = [
             paragraphs: [
               'Once I knew I wanted my next vehicle to be electric, there was no shortage of cars I could have talked myself into.',
               'There were several I genuinely wanted.',
-              'The problem was that we already had five cars.',
-              'Another car that was simply fun, beautiful or interesting was not filling any real gap.',
-              'I needed to be realistic.',
-              'If I was going to add another vehicle, it needed to do something the other five could not.',
+              'But another car that was simply fun, beautiful or interesting was not filling any real gap.',
+              'I needed to be realistic. If I was going to add another vehicle, it needed to do something the others could not.',
             ],
           },
           {
@@ -1504,6 +1507,30 @@ export const stories: readonly StoryPage[] = [
             ],
           },
           {
+            // David's 2026-10-12 review: the garage section sits after the
+            // choice and before the truck proves itself. One inch is Belmont only.
+            type: 'story',
+            eyebrow: 'Where it lives',
+            heading: 'Apparently, garage space was another consideration.',
+            paragraphs: [
+              'The Sierra is a big truck. I knew that when I bought it, but figuring out where to park it among our properties has been entertaining.',
+              'At [Belmont Beach House](/experience/belmont-beach-house), I have approximately one inch of clearance in the garage.',
+              'At [Vista Voltaire](/experience/vista-voltaire), the garage is a pass-through, so I essentially use it as a carport. I leave the back door open and let the truck bed extend into the side yard.',
+              '[Mercury Palms](/experience/mercury-palms) has an enormous garage, but somehow the Sierra still manages to occupy almost the entire thing, with just enough room to walk around it.',
+              'Kensington Canyon? Not a chance.',
+              'Apparently, buying the practical vehicle didn’t mean it was going to be practical to park.',
+            ],
+            aside: truckPhotos.garage,
+            asideRatio: '3 / 4',
+            asideCaption: 'Belmont Beach House. One inch is still clearance.',
+          },
+          {
+            type: 'gallery',
+            label: 'Garage clearance at Belmont Beach House',
+            photos: [truckPhotos.clearanceShelf, truckPhotos.clearanceMirror, truckPhotos.clearanceDoor],
+            captions: [{ title: 'The shelf' }, { title: 'The mirror' }, { title: 'The door' }],
+          },
+          {
             type: 'story',
             eyebrow: 'Built for the business',
             heading: 'This one had a job from day one.',
@@ -1534,24 +1561,20 @@ export const stories: readonly StoryPage[] = [
             caption: { title: 'Two weeks in', note: 'Already making dump runs.' },
           },
           {
+            // David's 2026-10-12 review: the October 2026 outage. The truck
+            // powered Mark's tools, never the whole chalet.
             type: 'story',
-            sub: true,
-            heading: 'There was one minor issue.',
+            eyebrow: 'October 2026',
+            heading: 'Fortunately, he had brought the power with him.',
             paragraphs: [
-              'Apparently “Will it fit in the garage?” should have been slightly higher on the research list.',
-              'It fits.',
-              'By about an inch.',
-              'Which is technically all the clearance you need.',
+              'During the October 2026 weather, Mark took the Sierra up to [Sierra Chalet](/experience/sierra-chalet) to secure the property. When he arrived, the power was out.',
+              'Fortunately, the truck could supply what his tools needed. He plugged in and got on with the work, including shaving down doors.',
+              'I bought it because the business needed a truck. Apparently, the cabin needed a power supply too.',
+              'With the appropriate professionally installed [vehicle-to-home equipment](https://gmenergy.gm.com/vehicle-to-home), the Sierra can also provide backup power to a home during an outage. That takes additional equipment, and what it can run depends on the home’s electrical demands and the battery’s charge.',
             ],
-            aside: truckPhotos.garage,
+            aside: truckPhotos.outage,
             asideRatio: '3 / 4',
-            asideCaption: 'Garage clearance. One inch is still clearance.',
-          },
-          {
-            type: 'gallery',
-            label: 'Garage clearance',
-            photos: [truckPhotos.clearanceShelf, truckPhotos.clearanceMirror, truckPhotos.clearanceDoor],
-            captions: [{ title: 'The shelf' }, { title: 'The mirror' }, { title: 'The door' }],
+            asideCaption: 'At the cabin. If this doesn’t spell work truck…',
           },
           {
             type: 'story',

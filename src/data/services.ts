@@ -93,7 +93,8 @@ export const sell: ServicePageContent = {
       paragraphs: [
         'I cover professional photography and videography because the first impression of your property deserves more than a few quick photos.',
         'From there, I build the marketing around what makes the property compelling: its architecture, setting, outdoor space, improvements, or the way the rooms work together. The writing and visuals should help buyers understand the home, not bury it beneath a collection of familiar adjectives.',
-        'My experience building and marketing The Cole Hotel, and later bringing Querencia Palms to market, taught me how much thoughtful presentation can contribute to the way a property is understood.',
+        // Cole wording per David's 2026-10-12 review (General Manager, never builder).
+        'My experience managing and marketing The Cole Hotel, followed by representing the seller at Querencia Palms, taught me how much thoughtful presentation changes the way people understand a property.',
       ],
       highlight: {
         eyebrow: 'An additional investment in your listing',

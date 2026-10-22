@@ -50,7 +50,7 @@ export const marketPages: Record<MarketSlug, MarketPageContent> = {
       {
         heading: 'One city. Completely different markets.',
         paragraphs: [
-          'San Diego resists simple generalizations. A historic home in Kensington behaves differently from a coastal investment property in Mission Beach. Ocean Beach has different buyers than La Jolla. A condominium downtown requires a different strategy from a single-family home miles away. That is why I approach this market neighborhood by neighborhood and property by property rather than trying to make one strategy fit everything.',
+          'San Diego resists simple generalizations. A character-rich home in Kensington behaves differently from a coastal investment property in Mission Beach. Ocean Beach has different buyers than La Jolla. A condominium downtown requires a different strategy from a single-family home miles away. That is why I approach this market neighborhood by neighborhood and property by property rather than trying to make one strategy fit everything.',
         ],
       },
       {
@@ -100,7 +100,7 @@ export const marketPages: Record<MarketSlug, MarketPageContent> = {
       {
         heading: 'I came for a relationship. I stayed for the city.',
         paragraphs: [
-          'I originally moved from San Diego to Palm Springs because constantly traveling between the two cities was becoming impossible. What followed was a completely different chapter: banking, hospitality, hotel operations, vacation rentals, development projects, community involvement and real estate. Palm Springs became the place where many of those experiences finally came together.',
+          'I originally moved from San Diego to Palm Springs because constantly traveling between the two cities was becoming impossible. What followed was a completely different chapter: banking, hospitality, hotel operations, vacation rentals, renovation projects, community involvement and real estate. Palm Springs became the place where many of those experiences finally came together.',
         ],
       },
       {
@@ -112,7 +112,10 @@ export const marketPages: Record<MarketSlug, MarketPageContent> = {
       {
         heading: 'My Palm Springs experience',
         paragraphs: [
-          'My Palm Springs background includes operating The Cole Hotel, selling and marketing the Querencia Palms condominium conversion, owning and operating vacation property, renovating residences and representing traditional buyers and sellers. Those experiences have placed me on nearly every side of a Palm Springs property decision. That is exactly why I enjoy this market so much.',
+          // Roles per David's 2026-10-12 review: Cole = hospitality management, Querencia =
+          // seller representation, marketing + restoration, 444 = personal renovation
+          // experience, Mercury = shared home + hospitality.
+          'My Palm Springs background includes managing The Cole Hotel as its General Manager, representing the seller at Querencia Palms through its marketing and garden restoration, living through the renovation of 444 W Stevens, sharing a home and hospitality at Mercury Palms, and representing traditional buyers and sellers. Those experiences have placed me on nearly every side of a Palm Springs property decision. That is exactly why I enjoy this market so much.',
         ],
       },
     ],
@@ -124,7 +127,8 @@ export const marketPages: Record<MarketSlug, MarketPageContent> = {
       height: 1200,
       hasSmall: true,
     },
-    featuredProjects: ['querencia-palms', 'the-cole', 'mercury-palms'],
+    // Four cards, two by two (David, 2026-10-14).
+    featuredProjects: ['querencia-palms', 'the-cole', 'mercury-palms', '444-w-stevens'],
     featuredTitle: 'Beyond representation',
     salesTitle: 'Sales in Palm Springs',
     salesAllLabel: 'All sales experience',

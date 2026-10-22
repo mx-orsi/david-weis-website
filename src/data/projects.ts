@@ -45,6 +45,9 @@ export type ChapterBlock =
       asideRatio?: string;
       /** Caption shown under the aside photo. */
       asideCaption?: string;
+      /** A second photo stacked under the aside (e.g. the after to its before), with its own caption. */
+      asideMore?: Photo;
+      asideMoreCaption?: string;
       /** Vertical alignment of the aside photo against the prose (default 'start'). */
       asideAlign?: 'start' | 'center';
       /** Heading level (2 by default; 3 when `sub` is set). */
@@ -223,6 +226,24 @@ export type ChapterBlock =
       items: readonly { q: string; a: readonly string[] }[];
     }
   | {
+      /**
+       * Historical platform ratings in compact columns (The Cole, David's
+       * 2026-10-12 review): a one-sentence statement, four columns on desktop,
+       * two per row on phones, and a small dated note. Never averaged.
+       */
+      type: 'ratings';
+      statement: string;
+      items: readonly { platform: string; rating: string; detail?: string }[];
+      note?: string;
+    }
+  | {
+      /** Matching testimonial cards: quote, name, platform and score. Text only, never screenshots. */
+      type: 'reviews';
+      heading?: string;
+      paragraphs?: readonly string[];
+      items: readonly { quote: string; author: string; source: string; score: string; date?: string }[];
+    }
+  | {
       /** A dark blue panel for an attributed quotation (member spotlight). */
       type: 'quote';
       eyebrow?: string;
@@ -257,6 +278,10 @@ export interface Project {
   kindTeaser?: string;
   /** Experience landing and market page cards */
   summary: string;
+  /** Card photo when the page's lead photo should not be the card's (Belmont, David's 2026-10-13 note). */
+  cardPhoto?: Photo;
+  /** Card link label on Experience and market pages (default "View Project"). */
+  cardCta?: string;
   /** Home teaser card copy and CTA */
   teaser?: string;
   teaserCta?: string;
@@ -267,6 +292,8 @@ export interface Project {
   /** Optional deep-dive chapters, each inserted after `sections[chapter.after]`, in array order. */
   chapters?: readonly ProjectChapter[];
   stats?: readonly Stat[];
+  /** Closing photo grid two across instead of four or five (Sierra Chalet, David's 2026-10-14 note). */
+  largeGallery?: boolean;
   /** photos[0] leads the page and the cards; the rest become image breaks. */
   photos: readonly Photo[];
   logo?: { src: string; alt: string; width: number; height: number };
@@ -362,35 +389,38 @@ export const projects: readonly Project[] = [
     market: 'palm-springs',
     place: 'Palm Springs',
     kind: 'Condominium Conversion',
-    kindIndex: '14-Residence Condominium Conversion',
+    kindIndex: 'Seller Representation · Marketing · Garden Restoration',
     kindTeaser: 'Condominium Conversion',
     summary:
-      'A 14-residence condominium conversion that brought together development, pricing, staging, landscaping, marketing, sales strategy, and the patience to navigate the unexpected.',
+      'A 14-residence condominium conversion where I represent the seller through Compass: pricing, staging, garden and koi pond restoration, marketing, sales strategy, and the patience to navigate the unexpected.',
     teaser:
       'A 14-residence condominium conversion that became a lesson in patience, presentation, pricing and relentless marketing.',
     teaserCta: 'Explore the Project',
     intro:
       'A 14-residence condominium conversion in South Palm Springs became one of the most demanding and rewarding projects of my career. It reinforced something I will probably carry with me forever: when the market does not immediately agree with you, the answer is not always to lower the price. Sometimes you need to make the product better, tell the story differently and find the people who understand what you created.',
-    // Wording per David's 2026-09-13 email: "Landscape stewardship + aquatic
-    // planting", never "landscape design" or "landscape architecture".
-    roles: ['Brokerage', 'Pricing strategy', 'Staging + presentation', 'Landscape stewardship + aquatic planting', 'Marketing + events'],
+    // Role labels per David's 2026-10-12 review: seller representation through
+    // Compass, and "Garden and Koi Pond Restoration" (never "landscape design",
+    // "landscape oversight" or developer/owner wording).
+    roles: ['Seller representation', 'Pricing strategy', 'Staging + presentation', 'Garden and koi pond restoration', 'Marketing + events'],
     sections: [
       {
         heading: 'It was supposed to move quickly.',
         paragraphs: [
           'When the property was purchased, much of the condominium conversion process was already underway. The expectation was that finishing the project and selling the residences would be relatively straightforward. By late 2025, we were preparing for launch. Then the market changed. Sales slowed dramatically across the area, and the immediate demand we expected simply was not there.',
+          'I represent my husband Mark, the seller, through Compass. Alongside the sales and marketing work, I personally restored the koi pond and created the garden that became such an important part of the community’s presentation.',
         ],
       },
       {
         heading: 'The market said wait. Everyone else said drop the price.',
         paragraphs: [
           'We priced the residences where we believed the value made sense for renovated fee-land condominiums in South Palm Springs. As the units sat, opinions came quickly: reduce the prices, clear the inventory, take the loss and move on. There were moments when the pressure became enormous. But I kept coming back to the same question: was the product wrong, or had we not yet done enough to show people why it was worth buying? I believed it was the second.',
+          'A price adjustment is sometimes the right decision. At Querencia, I also believed we needed to improve how buyers experienced the homes before treating price as the only explanation for the response.',
         ],
       },
       {
         heading: 'Make the property impossible to ignore.',
         paragraphs: [
-          'That meant getting involved in nearly every detail, starting with the grounds. I took over much of the landscape oversight and spent months bringing color, life and maturity back into the property. What happened around the koi pond turned into a story of its own.',
+          'That meant getting involved in nearly every detail, starting with the grounds. I took over the garden and koi pond restoration myself and spent months bringing color, life and maturity back into the property. What happened around the koi pond turned into a story of its own.',
         ],
       },
       {
@@ -444,17 +474,19 @@ export const projects: readonly Project[] = [
             position: 'center 55%',
           },
           ratio: '16 / 9',
-          caption: 'Two days before the grand opening.',
+          caption: 'Two days before our October 18 Modernism Week Launch.',
         },
         {
           type: 'story',
           eyebrow: 'The grounds',
-          heading: 'I never planned to become the gardener.',
+          // David's 2026-10-12 review: this is the October 18 Modernism Week
+          // Launch, not the September 27 soft launch. No year until he confirms it.
+          heading: 'The timing couldn’t have been worse.',
           paragraphs: [
-            'When we were preparing Querencia Palms for its grand opening, landscaping was supposed to be one of the things I did not have to worry about. Two days before the event, I arrived to find that much of the greenery around the koi pond had been pulled out and thrown away.',
-            'They were not weeds. They were aquatic and marginal plants that had been intentionally planted around the pond.',
+            'Two days before our October 18 Modernism Week Launch, established landscaping was removed from the property, including much of the greenery around the koi pond. They were not weeds. They were aquatic and marginal plants that had been intentionally planted around the pond.',
+            'After everything that had gone into preparing Querencia Palms, watching greenery disappear right before such an important event was incredibly frustrating.',
             'I spent the next two weeks watering the remaining roots and new growth every day, trying to bring the area back. It worked. Then the landscaping crew removed it again.',
-            'That was the moment I realized I could not keep watching the landscape disappear. I ended the relationship with the landscaping company and took over much of the work myself.',
+            'It became another reason I was determined to bring the landscaping back and create the garden I knew this community deserved.',
           ],
         },
         {
@@ -471,6 +503,19 @@ export const projects: readonly Project[] = [
         },
         {
           type: 'story',
+          eyebrow: 'Garden and koi pond restoration',
+          heading: 'I brought it back to life.',
+          paragraphs: [
+            'The koi pond had been cleaned out and refreshed, but then the ongoing care fell away. The water began turning green, and the garden was nowhere near what I knew it could become.',
+            'So I took over.',
+            'I personally restored the pond and built the garden around it, buying plants and supplies, making trips to Cherry Valley to select aquatic plants, and putting in the consistent care needed to bring it back.',
+            'This was not something I supervised from a distance. I did the work, and I am incredibly proud of what it became.',
+            'When Vicious Fishes returned to service the pond, they told me it looked better than when they had maintained it years earlier. They even said they would hire me if I ever wanted a part-time job. Coming from people who do this professionally, that meant a lot.',
+            'The pond’s routine care is now back with the professionals, and the garden’s regular maintenance is being handed back to the landscapers. I still enjoy tending things when I am there, but the restoration and the ongoing maintenance are different chapters.',
+          ],
+        },
+        {
+          type: 'story',
           heading: 'What started as damage control became an obsession.',
           paragraphs: [
             'At first, I was simply trying to get the property back to where it had been. Then something changed. The plants started responding. The grounds became greener. Owners, buyers and visitors began commenting on how much they loved it. And I started seeing what the property could become.',
@@ -479,7 +524,7 @@ export const projects: readonly Project[] = [
         },
         {
           type: 'story',
-          eyebrow: 'The koi pond',
+          eyebrow: 'Cherry Valley',
           heading: 'From rocks and water to a living garden.',
           paragraphs: [
             'Winter made the transformation slow at first. There were not many aquatic plants available, so I worked with what I could find and waited for the seasons to change.',
@@ -513,7 +558,7 @@ export const projects: readonly Project[] = [
           eyebrow: 'Learning as I went',
           heading: 'The garden club came with me.',
           paragraphs: [
-            'Around the same time, I joined the Village of La Jolla Garden Club. What began as an enjoyable way to learn more about plants, quickly became surprisingly practical.',
+            'Around the same time, I joined the Village Garden Club of La Jolla. What began as an enjoyable way to learn more about plants, quickly became surprisingly practical.',
             'I found myself taking what I was learning and experimenting with it at Querencia, paying more attention to form, color, seasonal change, pruning, growth habits and how a landscape develops over time. The more I learned, the more I noticed. And the more I noticed, the more I wanted to improve.',
           ],
           aside: {
@@ -663,7 +708,7 @@ export const projects: readonly Project[] = [
           heading: 'Control the presentation. Give the buyer the upside.',
           paragraphs: [
             'I had already experienced what happens when expensive staging does not actually serve the property. Furniture can be the wrong scale. The design can fight the architecture. The style can feel disconnected from the likely buyer. A room can technically be staged and still show worse because of it.',
-            'At Querencia, we wanted control. Mark selected the furniture, wallpaper and overall design direction for the residences. I assembled the furniture, cleaned and prepared the units, helped determine when we needed another model and paid close attention to how buyers responded as they toured.',
+            'At Querencia, we wanted control. Mark led the furniture and wallpaper selections. I assembled furniture and helped get each residence ready to show, while paying attention to the questions buyers asked and how they responded to the finished spaces.',
             'If something was not working, we could change it. If a room needed a stronger point of view, we could give it one. And if buyers loved the finished result, there was another advantage: they could keep it.',
           ],
         },
@@ -855,7 +900,7 @@ export const projects: readonly Project[] = [
     market: 'palm-springs',
     place: 'Palm Springs',
     kind: 'Hospitality',
-    kindIndex: 'Boutique Hotel · Bar · Restaurant',
+    kindIndex: 'General Management · Hospitality · Marketing',
     kindTeaser: 'Boutique Hospitality',
     summary:
       'A real estate investment that became a boutique hotel, bar and restaurant, and ultimately one of the most formative business experiences of my career.',
@@ -869,6 +914,7 @@ export const projects: readonly Project[] = [
         heading: 'Build it. Sell it. Move on.',
         paragraphs: [
           'My husband, Mark, acquired and transformed the former motor lodge into what became The Cole Hotel. The intention was ultimately to sell the completed property. Then buyer demand disappeared. Instead of leaving the building waiting for the market to return, we decided to prove what it could become. We would operate the hotel and build a track record.',
+          'Mark developed The Cole, and I served as its General Manager. My responsibilities extended from hotel operations and guest experience to managing the bar, coordinating restaurant operations, marketing, and the systems that kept everything running.',
         ],
       },
       {
@@ -933,7 +979,50 @@ export const projects: readonly Project[] = [
               { suggestion: 'The courtyard dug up mid-construction', src: '/images/the-cole/the-cole-hotel-before-renovation-palm-springs-david-weis-02.jpg', alt: 'The courtyard of the motor lodge torn up during construction, with the pool excavation framed in lumber', width: 2400, height: 1800, hasSmall: true },
             ],
             ratio: '4 / 3',
-            captions: ['From the street, before.', 'The courtyard, mid-construction.'],
+            captions: ['From the street, before.', 'From parking lot.'],
+          },
+        ],
+      },
+      {
+        /* David's 2026-10-12 review: his General Manager scope. He coordinated
+         * operations; never owner, chef or licensee of the restaurant. */
+        id: 'operations',
+        after: 1,
+        blocks: [
+          {
+            type: 'story',
+            eyebrow: 'General Manager',
+            heading: 'It wasn’t just the rooms.',
+            paragraphs: [
+              'As General Manager, my responsibilities extended well beyond the hotel itself. I managed the bar and coordinated the setup and operations for the pop-up restaurants we hosted, followed by our full-time restaurant, Freddie’s Kitchen at the Cole.',
+              'That meant much more than making sure guests had somewhere to eat. I entered menu items into our systems, ran reports, handled accounting details, and prepared periodic invoices to reconcile restaurant proceeds and the associated tax amounts that needed to be transferred.',
+              'Every business operating within the property had its own moving parts, and those details needed to work together.',
+              'Guests saw a hotel, a bar, and restaurants sharing one property. Behind the scenes, someone had to make sure the systems worked together too.',
+            ],
+            aside: { suggestion: 'The cocktails sign and courtyard bar seating, misters running', src: '/images/the-cole/the-cole-hotel-restaurant-bar-courtyard-david-weis.jpg', alt: 'The Cole’s courtyard bar: a vertical Cocktails sign, yellow stools at high tables and misters drifting across the stairs', width: 2400, height: 1676, hasSmall: true },
+            asideRatio: '4 / 3',
+            asideAlign: 'center',
+          },
+        ],
+      },
+      {
+        id: 'welcome-kits',
+        after: 3,
+        blocks: [
+          {
+            type: 'story',
+            eyebrow: 'COVID welcome kits',
+            heading: 'A better welcome, with fewer questions left unanswered.',
+            paragraphs: [
+              'During COVID, I put together welcome kits that combined practical essentials with the information guests needed to settle in.',
+              'There was a face mask, branded hand sanitizer, a property map, and a QR code connecting guests to our custom room and property guides. For guests traveling with dogs, we included pet-waste bags too.',
+              'The digital guide explained the minibar, television, and midcentury clock radio, and connected guests with our room-service communication system.',
+              'I wanted guests to have useful information within reach without making them stand at the front desk trying to remember a long list of instructions. It was another one of those small details that made a big difference in how the property operated.',
+            ],
+            aside: { suggestion: 'The COVID welcome kit on the bar (photo: Nadine Conger)', src: '/images/the-cole/the-cole-hotel-covid-welcome-kit-mask-hand-sanitizer-qr-code-palm-springs-david-weis.jpg', alt: 'The Cole welcome kit on the bar: a face mask in a sleeve with a QR code card reading Be aware, not afraid, beside a bottle of Cole hand sanitizer', width: 1024, height: 731, hasSmall: true },
+            asideRatio: '1024 / 731',
+            asideAlign: 'center',
+            asideCaption: 'The Cole welcome kit. Practical essentials in hand, with room and property information one scan away. Photo: Nadine Conger.',
           },
         ],
       },
@@ -1047,14 +1136,20 @@ export const projects: readonly Project[] = [
             ],
           },
           {
-            type: 'pair',
-            ratio: '4 / 5',
-            emphasis: 'first',
-            photos: [
-              { suggestion: 'David, Jonathan and Mark at the star', src: '/images/the-cole/jonathan-bennett-walk-of-the-stars-david-weis-mark-weis.jpg', alt: 'David Weis, Jonathan Bennett and Mark Weis standing together on the red carpet beside Jonathan’s new star on the Palm Springs Walk of the Stars', width: 1800, height: 2400, hasSmall: true },
-              { suggestion: 'The star itself', src: '/images/the-cole/jonathan-bennett-walk-of-the-stars-star-david-weis.jpg', alt: 'Jonathan Bennett’s star on the Palm Springs Walk of the Stars, set in the red carpet', width: 1800, height: 2400, hasSmall: true },
+            // David's 2026-10-14 note: the selfie stacks above the star, and the
+            // two together match the height of the vertical photo.
+            type: 'collage',
+            columns: [
+              [{ suggestion: 'David, Jonathan and Mark at the star', src: '/images/the-cole/jonathan-bennett-walk-of-the-stars-david-weis-mark-weis.jpg', alt: 'David Weis, Jonathan Bennett and Mark Weis standing together on the red carpet beside Jonathan’s new star on the Palm Springs Walk of the Stars', width: 1800, height: 2400, hasSmall: true }],
+              [
+                { suggestion: 'Selfie with Jonathan on the day', src: '/images/the-cole/the-cole-hotel-jonathan-bennett-david-weis-mark-weis-selfie.jpg', alt: 'A selfie of David Weis, Jonathan Bennett and Mark Weis on Palm Canyon Drive on the day of Jonathan’s star ceremony', width: 1800, height: 2400, hasSmall: true, position: 'center 35%' },
+                { suggestion: 'The star itself', src: '/images/the-cole/jonathan-bennett-walk-of-the-stars-star-david-weis.jpg', alt: 'Jonathan Bennett’s star on the Palm Springs Walk of the Stars, set in the red carpet', width: 1800, height: 2400, hasSmall: true },
+              ],
             ],
-            captions: ['Years after that first Instagram message, celebrating Jonathan’s Palm Springs Walk of the Stars honor together.', undefined],
+            fill: 'first',
+            ratio: '1 / 1',
+            // One caption under both columns keeps their bottoms level.
+            caption: { title: 'Walk of the Stars', note: 'Years after that first Instagram message, celebrating Jonathan’s Palm Springs Walk of the Stars honor together.' },
           },
           {
             type: 'story',
@@ -1081,11 +1176,109 @@ export const projects: readonly Project[] = [
           },
         ],
       },
+      {
+        /* David's 2026-10-12 review. Attribution: Mark installed the misters,
+         * Bob and Ben gifted the fans, David customized them and made the gift
+         * sets. 60 is the number of gift sets, not of guests. The 2,000 water
+         * bottles were an earlier hotel order. Wedding, Sonder handover and the
+         * eventual sale stay distinct. */
+        id: 'wedding',
+        after: 3,
+        blocks: [
+          {
+            type: 'story',
+            eyebrow: 'Our wedding',
+            heading: 'The reception happened here, too.',
+            paragraphs: [
+              'Mark and I got married in the backyard at [Mercury Palms](/experience/mercury-palms), then shuttled our guests to The Cole for the reception.',
+              'Friends and family were staying at both properties, and for many of them it was their first time seeing the hotel. I wanted them to experience the place we had put so much into. Naturally, I found a few more things to prepare.',
+              'I put together 60 Cole-branded espresso-cup-and-saucer gift sets, with drink tickets guests could use throughout the weekend outside the open-bar hours. I liked the idea that they could enjoy the weekend and take a little piece of The Cole home with them.',
+            ],
+          },
+          {
+            type: 'story',
+            heading: 'Then there was the weather.',
+            paragraphs: [
+              'It was 116 degrees that day. Mark installed misters around the house for the ceremony and above the hotel’s pool area for the reception. Of everything we prepared, that may have been the most appreciated decision of the entire weekend.',
+              'Through our hotel work, including an order for 2,000 water bottles, we had gotten to know Bob and Ben at [Roadrunner Print & Ship](https://www.roadrunnerprintandship.com/). They had recently opened their store and generously gifted us 100 personal electric misting fans for the wedding.',
+              'I personalized them with stickers and filled them with eucalyptus-lavender water. Because apparently planning for the heat wasn’t enough. I was also worrying about everyone smelling fresh.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '3 / 4',
+            photos: [
+              { suggestion: 'Cole espresso cups, saucers and drink tickets', src: '/images/the-cole/the-cole-hotel-wedding-guest-gifts-espresso-cups-drink-tickets-david-weis.jpg', alt: 'Cole-branded espresso cups on saucers, each wrapped in cellophane with a yellow ribbon and drink tickets, lined up as wedding guest gifts', width: 960, height: 1792, hasSmall: true, position: 'center 60%' },
+              { suggestion: 'The electric misting fans', src: '/images/the-cole/the-cole-hotel-wedding-misting-fans-roadrunner-print-and-ship-david-weis.jpg', alt: 'Rows of personal electric misting fans in pink, purple, blue and green, packed in a box for the wedding guests', width: 1800, height: 2400, hasSmall: true },
+            ],
+            captions: [
+              { title: 'A little piece of The Cole', note: 'Sixty personalized gift sets for our wedding guests.' },
+              { title: 'Saved by the misters', note: 'One hundred personal fans gifted by Bob and Ben at Roadrunner Print & Ship.' },
+            ],
+          },
+          {
+            type: 'story',
+            heading: 'The key had already gone ahead.',
+            paragraphs: [
+              'We had thought about the guests, the gifts, the drinks, the misters, the fans, and the shuttles. After the last shuttle left, Mark and I planned to drive ourselves to the hotel in the Range Rover and enjoy a few quiet minutes together.',
+              'The key had already gone ahead. So we rode our motorcycles to The Cole in our wedding suits. In 116-degree weather.',
+              'That was one way to make an entrance.',
+            ],
+            aside: { suggestion: 'David and Mark in wedding suits with the motorcycles', src: '/images/the-cole/the-cole-hotel-wedding-motorcycles-david-weis-mark-weis.jpg', alt: 'David and Mark Weis in their wedding suits and helmets beside two motorcycles, in black and white', width: 1600, height: 2400, hasSmall: true },
+            asideRatio: '4 / 5',
+            asideAlign: 'center',
+            asideCaption: 'The grand arrival. Wedding suits, motorcycles, and 116 degrees. The Range Rover key had other plans.',
+          },
+          {
+            type: 'story',
+            eyebrow: 'The next chapter',
+            heading: 'Then we started packing.',
+            paragraphs: [
+              'Almost as soon as the celebration was over, we started packing up the hotel for Sonder to take over management. One enormous personal milestone ran straight into the next business chapter.',
+              'There wasn’t much time to stand still and take it all in.',
+            ],
+          },
+        ],
+      },
+      {
+        /* Historical ratings from the archive David supplied (2026-10-12):
+         * hotel ratings from his time as GM, never brokerage reviews, never
+         * averaged, and HotelTonight is a percentage, not a star score. Lisa's
+         * review called David an owner; that part is left out on purpose. */
+        id: 'guest-ratings',
+        after: 4,
+        blocks: [
+          {
+            type: 'ratings',
+            statement: 'During my time as General Manager, The Cole earned 5.0/5 on Tripadvisor, 4.92/5 on Airbnb, 4.7/5 on Google, and 100% “Liked It” on HotelTonight.',
+            items: [
+              { platform: 'Tripadvisor', rating: '5.0/5', detail: '19 reviews' },
+              { platform: 'Airbnb', rating: '4.92/5', detail: 'Overall rating' },
+              { platform: 'Google', rating: '4.7/5', detail: '54 reviews' },
+              { platform: 'HotelTonight', rating: '100%', detail: '“Liked It” · 19 ratings' },
+            ],
+            note: 'Historical guest ratings archived July 29, 2021.',
+          },
+          {
+            type: 'reviews',
+            heading: 'What guests remembered.',
+            paragraphs: [
+              'I put a lot of thought into how the hotel worked, from check-in and room information to the bar, restaurant coordination, and the little details guests might never realize someone had planned.',
+              'What meant the most was hearing that guests noticed the people and attention behind their stay.',
+            ],
+            items: [
+              { quote: 'Exceptional service from the moment I called to make a reservation with the GM David, to the very last minute of our stay.', author: 'Nima Vakili', source: 'Google', score: '5/5' },
+              { quote: 'Staff and GM are stellar and top notch!!', author: 'Sean Mees', source: 'Google', score: '5/5' },
+              { quote: 'David … was so nice and accommodating, truly the main reason why the hotel was So outstanding.', author: 'Lisa', source: 'Booking.com', date: 'July 1, 2020', score: '10/10' },
+            ],
+          },
+        ],
+      },
     ],
     stats: [
       { value: '30', label: 'Rooms' },
       { value: '10 days', label: 'Open before the COVID-19 shutdown' },
-      { value: 'Five-star', label: 'Rated across its major guest platforms' },
+      { value: 'General Manager', label: 'Hotel, bar + restaurant operations' },
     ],
     // Max's six photos (2026-09-14), his SEO filenames.
     photos: [
@@ -1173,7 +1366,7 @@ export const projects: readonly Project[] = [
     kindIndex: '1924 Character Restoration',
     kindTeaser: 'Renovation + Vacation Rental',
     summary:
-      'A 1924 Ocean Beach home restored with resale in mind, then repositioned as a high-performing vacation rental when the market changed.',
+      'A 1924 Ocean Beach home restored with resale in mind, then repositioned as a vacation rental when the market changed.',
     teaser: 'A restored 1924 home that proved sometimes the best real estate decision is knowing when not to sell.',
     teaserCta: 'Explore the Project',
     intro:
@@ -1225,6 +1418,9 @@ export const projects: readonly Project[] = [
             },
             asideRatio: '4 / 3',
             asideCaption: 'The house before renovation.',
+            // David's 2026-10-14 note: the before looked alone beside all that text.
+            asideMore: { suggestion: 'The house after renovation', src: '/images/vista-voltaire/vista-voltaire-front-exterior-after-renovation-david-weis.jpg', alt: 'Vista Voltaire after renovation: the white two-story home with a red front door behind a green lawn and palms', width: 2048, height: 1367, hasSmall: true },
+            asideMoreCaption: 'The house after renovation.',
           },
           {
             type: 'story',
@@ -1245,6 +1441,7 @@ export const projects: readonly Project[] = [
               hasSmall: true,
             },
             asideRatio: '4 / 3',
+            asideAlign: 'center',
             asideCaption: 'On site during the renovation.',
           },
           {
@@ -1557,7 +1754,7 @@ export const projects: readonly Project[] = [
     stats: [
       { value: '1924', label: 'Year the home was built' },
       { value: 'Ocean Beach', label: 'San Diego' },
-      { value: 'Celebrity Vacation Homes', label: 'Operated under our own management' },
+      { value: 'Celebrity Vacation Homes', label: 'Mark’s vacation-rental business, which I manage' },
     ],
     photos: [
       {
@@ -1584,7 +1781,7 @@ export const projects: readonly Project[] = [
     kind: 'Restoration + Ownership',
     cardPlace: 'Kensington',
     // No historic designation: never call this house "historic" (David, 2026-10-04).
-    kindIndex: 'Character Home',
+    kindIndex: 'Character-Preserving Renovation',
     summary:
       'A deeply personal home and extensive renovation centered on preserving its character while making an older property work beautifully for modern living and hospitality.',
     intro:
@@ -1913,19 +2110,12 @@ export const projects: readonly Project[] = [
           },
           {
             type: 'story',
+            // David's 2026-10-12 review: the private-use and vacation-rental passages combined.
             heading: 'Then we had to learn how to share it.',
             paragraphs: [
-              'After putting so much of ourselves into Kensington Canyon, opening it to vacation guests was another adjustment.',
-              'This was not simply a furnished property. It was a home we had lived in, worked on, and made our own.',
-              'We created owner’s storage, put away sentimental belongings, and worked out how the house could welcome other families without losing its place in our own lives.',
+              'After putting so much of ourselves into Kensington Canyon, opening it to vacation guests was another adjustment. This was not simply a furnished property. It was a home we had lived in, worked on, and made our own.',
+              'We created owner’s storage, put away sentimental belongings, and worked out how the house could welcome other families without losing its place in our own lives. It is not easy to hand your home to strangers. But while you are somewhere else, another family is making memories in a home that otherwise might have been sitting empty.',
               'The renovation taught me how personal improving a property can be. Sharing it taught me that ownership sometimes requires a different kind of flexibility.',
-            ],
-          },
-          {
-            type: 'story',
-            heading: 'Then home became an asset.',
-            paragraphs: [
-              'Eventually, Kensington Canyon became part of our vacation rental portfolio. That transition taught me something entirely different. It is not easy to hand your home to strangers. But you also realize that while you are somewhere else, another family is making memories in a home that otherwise might have been sitting empty.',
             ],
           },
           {
@@ -1956,101 +2146,190 @@ export const projects: readonly Project[] = [
     },
   },
   {
+    /*
+     * David's 2026-10-13 replacement story. Rules from his brief: 2018
+     * introduced, 2019 began managing, October 2026 Honeywell automation;
+     * "steps from the beach", never "beachfront"; no renovation narrative,
+     * returns, guarantees, temperatures, savings or access codes; guest
+     * feedback stays respectful. Garage, balcony, rooftop and beach-gear
+     * photos come from the Celebrity Vacation Homes listing (2026-10-22).
+     */
     slug: 'belmont-beach-house',
     name: 'Belmont Beach House',
     market: 'san-diego',
-    place: 'San Diego',
-    kind: 'Coastal Investment',
+    place: 'Mission Beach',
+    kind: 'Hospitality & Property Operations',
     cardPlace: 'Mission Beach',
-    kindIndex: 'Coastal Investment Property',
+    kindIndex: 'Hospitality & Property Operations',
     summary:
-      'A Mission Beach property that became a hands-on lesson in balancing personal use, vacation-rental strategy, guest experience, and the long-term care of a coastal home.',
-    intro:
-      'Some properties are difficult to replace. Belmont Beach House is one of them. Its proximity to the beach, views and setting in Mission Beach make it the kind of asset you think very carefully about before selling.',
-    sections: [
+      'The first property I began managing for Mark, in 2019. Years of coastal upkeep, guest feedback, local partnerships, and smarter systems taught me how much goes into making a beach stay feel easy.',
+    cardCta: 'Read the Belmont story',
+    intro: 'My first property to manage. A lot more than handing over the keys.',
+    sections: [],
+    chapters: [
       {
-        heading: 'Finding the right way to use it.',
-        paragraphs: [
-          "For several years, we experimented with a hybrid model: longer-term tenants during the winter, short-term rental operation during San Diego's strongest summer season. Financially, the strategy worked. Operationally, it taught us something else: the longer someone stays in a property, the more the relationship begins to resemble traditional tenancy rather than hospitality — and the property is cared for very differently under each.",
-        ],
-      },
-      {
-        heading: 'Simplify the strategy.',
-        paragraphs: [
-          'As Celebrity Vacation Homes evolved, we decided to move toward operating Belmont Beach House as a dedicated year-round vacation rental. A consistent operating model creates clearer expectations, tighter control of the home and an opportunity to market the property as part of a larger hospitality brand.',
-        ],
-      },
-      {
-        heading: 'Maximum income is not always maximum value.',
-        paragraphs: [
-          'The best operating strategy considers more than gross rent: wear, risk, management, owner access, and future resale value. Sometimes a strategy that looks great on a spreadsheet becomes less attractive once you experience what it does to the property. Ownership means constantly balancing income today with the asset you want to own tomorrow.',
+        id: 'the-story',
+        after: -1,
+        blocks: [
+          {
+            type: 'note',
+            text: 'My role: Property management and guest-experience operations for Mark’s vacation-rental business, separate from my brokerage work with Compass.',
+          },
+          {
+            type: 'story',
+            eyebrow: 'Since 2019',
+            heading: 'The beach was the attraction.',
+            paragraphs: [
+              'I was introduced to Belmont Beach House in 2018 and started managing it for Mark in 2019. It was the first property I took on for him, and I was genuinely excited.',
+              'Three bedrooms, the beach just steps away, cruisers in the garage, and plenty of beach gear. A lot of guests arrived in a good mood before they had even unpacked. They were here to spend time together, get outside, and enjoy Mission Beach. I loved helping make that happen.',
+              'What I came to appreciate over the years was everything required to keep delivering that experience. Belmont hasn’t needed the kind of major renovation some of our other projects have. Its improvements have been more gradual: better maintenance, clearer information, a different approach to amenities, and systems that make the property easier to manage.',
+              'The beach was the attraction. Making the stay work became my responsibility.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Coastal maintenance',
+            heading: 'The beach is wonderful. It also comes home with everyone.',
+            paragraphs: [
+              'One of the first things I learned was that a beach house has its own version of wear and tear. Rust needed attention. Sand worked its way into the carpets. Beach gear came back wet or sandy. The garage could need a proper cleanup before it looked ready for another arrival.',
+              'Keeping the house looking good meant paying attention beyond the rooms guests photographed.',
+              'It also gave me a much greater appreciation for the housekeeping team. A turnover wasn’t simply changing sheets and wiping counters. There was extra time spent dealing with sand, organizing equipment, and sometimes hosing down the garage so the next guests could arrive to the same welcoming experience.',
+              'I learned to look at the property as a whole. What needed cleaning? What needed maintenance? What was becoming harder to keep ready between stays? Those questions became just as important as whether the living room looked good.',
+            ],
+          },
+          {
+            type: 'pair',
+            ratio: '3 / 2',
+            photos: [
+              { suggestion: 'The living room', src: '/images/belmont-beach-house/belmont-beach-house-living-room-sectional-mission-beach-san-diego-david-weis.jpg', alt: 'The living room at Belmont Beach House: a grey sectional, a wood coffee table, the dining table and the stairs beyond', width: 2048, height: 1365, hasSmall: true },
+              { suggestion: 'The garage with the beach gear', src: '/images/belmont-beach-house/belmont-beach-house-garage-beach-gear-mission-beach-david-weis.jpg', alt: 'The Belmont Beach House garage, swept clean, with beach chairs, boogie boards and bicycles along the back wall below a storage shelf', width: 1200, height: 800, hasSmall: true },
+            ],
+            caption: { title: 'What comes back from the beach', note: 'Keeping the house ready meant caring for more than the rooms in the listing photos.' },
+          },
+          {
+            type: 'story',
+            eyebrow: 'The bicycle program',
+            heading: 'Guests wanted a bike ride. They didn’t need us to own the bikes.',
+            paragraphs: [
+              'Originally, we kept beach cruisers in the garage for guests to use. I loved the idea of people arriving, grabbing a bicycle, and heading out to explore.',
+              'But owning the bikes meant keeping them ready. Tires went flat. Chains needed attention. Drinks got spilled. A bicycle could look perfectly fine sitting in the garage and still need something addressed before the next person rode it. An amenity that was supposed to make the stay easier had become another thing to check and maintain.',
+              'Eventually, I found a guest-rental program through [San Diego Bike Rentals](https://sandiegobikerentals.com/). We pay a set monthly fee so our guests can use the equipment included in our arrangement without a separate rental charge. Instead of maintaining our own small fleet, we could connect guests with a local business set up to provide the experience.',
+              'That made the arrangement much easier to manage without taking away something guests enjoyed. We kept the bike ride. We changed how we provided it.',
+              'That lesson has stayed with me. A good amenity isn’t just something you offer once. You need a practical way to keep delivering it.',
+            ],
+            aside: { suggestion: 'One of the original cruisers with the beach gear', src: '/images/belmont-beach-house/belmont-beach-house-beach-cruiser-boogie-boards-beach-chairs-david-weis.jpg', alt: 'A beach cruiser hanging on the garage wall at Belmont Beach House above boogie boards, beach chairs, an umbrella and a volleyball', width: 1200, height: 900, hasSmall: true },
+            asideRatio: '4 / 3',
+            asideAlign: 'center',
+            asideCaption: 'A better way to keep the amenity. Moving from bicycles we maintained to a local rental program for our guests.',
+          },
+          {
+            type: 'story',
+            eyebrow: 'Explaining the home clearly',
+            heading: 'A rooftop terrace is not a ground-floor patio.',
+            paragraphs: [
+              'Belmont has a two-car garage at ground level, a second-floor balcony with a barbecue and seating, and a rooftop terrace with ocean and bay views. To me, that sounded like a pretty good selection of spaces.',
+              'What surprised me was how often someone still expected a ground-floor patio. The house didn’t have one. And no matter how much I liked the balcony or rooftop, neither was a substitute for the particular experience that guest had pictured.',
+              'That changed how I thought about presenting the property. It wasn’t enough to show the beautiful outdoor spaces. I needed to explain where they were, how guests reached them, and how the house actually worked. I became more deliberate about the descriptions, photographs, and information guests received before arriving.',
+              'Not because there was anything wrong with the layout, but because the right expectations make an enormous difference. I wanted people to arrive at the house they were expecting.',
+            ],
+          },
+          {
+            type: 'gallery',
+            label: 'The three levels',
+            photos: [
+              { suggestion: 'Ground level: the private garage', src: '/images/belmont-beach-house/belmont-beach-house-ground-level-two-car-garage-mission-beach-david-weis.jpg', alt: 'The ground level of Belmont Beach House from the alley: two white garage doors set into the tan stucco', width: 1920, height: 1280, hasSmall: true },
+              { suggestion: 'Second level: the balcony and barbecue', src: '/images/belmont-beach-house/belmont-beach-house-second-floor-balcony-barbecue-david-weis.jpg', alt: 'The second-floor balcony at Belmont Beach House with a gas barbecue, a high table and two stools, palms and neighboring homes beyond', width: 1920, height: 1280, hasSmall: true },
+              { suggestion: 'Rooftop: ocean and bay views', src: '/images/belmont-beach-house/belmont-beach-house-rooftop-terrace-ocean-bay-views-david-weis.jpg', alt: 'The rooftop terrace at Belmont Beach House: a dining table and wicker chairs under a red umbrella, with views toward the water', width: 1200, height: 800, hasSmall: true },
+            ],
+            captions: [
+              { title: 'Private garage', note: 'Ground level' },
+              { title: 'Balcony & barbecue', note: 'Second level' },
+              { title: 'Ocean & bay views', note: 'Rooftop' },
+            ],
+          },
+          {
+            type: 'note',
+            text: 'The living spaces are upstairs. Outdoor areas include the balcony and rooftop terrace, not a ground-floor patio.',
+          },
+          {
+            type: 'story',
+            eyebrow: 'Parking and arrival',
+            heading: 'The garage was an amenity. Explaining it was part of the service.',
+            paragraphs: [
+              'Parking quickly became another detail I learned not to take for granted. Having a two-car garage was a real advantage, but simply putting “garage parking” in the listing didn’t answer every question. Guests still needed to know how to reach it, whether their vehicle would fit comfortably, and how to park without making it difficult to unload or move around.',
+              'Over time, our arrival information became more specific because I had seen where people got confused. I wanted guests to know where they were going before they arrived, rather than find themselves tired, unfamiliar with the neighborhood, and trying to work out which entrance they were supposed to use.',
+              'That kind of information rarely makes the highlight reel. It can make a very big difference at the beginning of someone’s vacation.',
+            ],
+            aside: { suggestion: 'The walkway and stairs up to the front door', src: '/images/belmont-beach-house/belmont-beach-house-mission-beach-san-diego-david-weis.jpg', alt: 'The side walkway and exterior stairs leading up to the entry at Belmont Beach House', width: 2048, height: 1365, hasSmall: true },
+            asideRatio: '4 / 3',
+            asideAlign: 'center',
+            asideCaption: 'A better arrival starts before check-in. Clear directions, practical parking information, and fewer things to figure out at the door.',
+          },
+          {
+            type: 'story',
+            eyebrow: 'Guest-specific access',
+            heading: 'Some of the best improvements never appeared in the listing photos.',
+            paragraphs: [
+              'In the earlier years, changing access between stays involved much more manual coordination. It was another task that needed to fit around departures, cleaning, and the next arrival.',
+              'As the technology improved, we were able to move to individual codes for each guest stay. That made access easier to manage instead of relying on a process that required so much repeated attention.',
+              'It’s not the feature someone usually chooses a beach house for. But it matters to how the property operates and how organized the arrival feels. The longer I’ve managed Belmont, the more I’ve appreciated improvements like that. They may not change the photographs, but they change the work behind the stay.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'October 2026 · The next improvement',
+            heading: 'The house shouldn’t need the same settings between every stage of a stay.',
+            paragraphs: [
+              'Heating and cooling were another part of the operation I wanted to manage more deliberately. A home occupied by guests, a home being cleaned, and a home sitting empty aren’t all in the same situation. Yet without a coordinated system, adjusting the temperature became another thing someone needed to remember.',
+              'In October 2026, we put our Honeywell thermostat integration into operation, connecting temperature adjustments with our booking and housekeeping workflow. Settings now adjust around check-in, checkout, and the completion of housekeeping.',
+              'For me, the goal is straightforward: coordinate guest comfort with sensible operation between stays, rather than leave everything dependent on another manual task.',
+              'It follows the same thinking that has guided Belmont from the beginning. Pay attention to what keeps coming up, then find a better way to handle it.',
+            ],
+          },
+          {
+            type: 'story',
+            eyebrow: 'Why I still love it',
+            heading: 'I still love what people come here for.',
+            paragraphs: [
+              'The part that excited me at the beginning hasn’t changed. People arrive ready for a beach vacation. They want to get outside, spend time together, and enjoy being somewhere different.',
+              'Over the years, I’ve learned how much attention goes into making those simple things feel simple. Sometimes it means a clearer photograph. Sometimes it means better directions, a local rental partnership, or a system that takes one more repetitive task off the list.',
+              'Belmont hasn’t needed a dramatic renovation for the experience to keep improving. The work has been in how we care for it, explain it, and help people enjoy it.',
+              'It was the first property I managed for Mark, and I’m still finding ways to make it better.',
+            ],
+          },
+          {
+            type: 'photo',
+            ratio: '3 / 2',
+            photo: { suggestion: 'The rooftop terrace set for dinner', src: '/images/belmont-beach-house/belmont-beach-house-rooftop-terrace-dining-red-umbrella-david-weis.jpg', alt: 'The rooftop terrace at Belmont Beach House: a long dining table with wicker chairs and pink cushions under a red umbrella, the water in the distance', width: 1200, height: 800, hasSmall: true },
+            caption: { title: 'The part guests came for', note: 'The work behind the stay is what helps them enjoy it.' },
+          },
+          {
+            type: 'links',
+            items: [
+              { label: 'Explore my San Diego experience', href: '/san-diego' },
+              { label: 'Why I bought a work truck', href: '/work-truck' },
+            ],
+          },
+          {
+            type: 'cta',
+            label: 'View Belmont Beach House on Celebrity Vacation Homes',
+            href: 'https://celebrityvacationhomes.com/en/belmont-beach-house-celebrity-vacation-homes',
+            external: true,
+            note: 'A vacation-rental listing operated by Mark’s business, not a property I represent for sale.',
+          },
         ],
       },
     ],
-    // Max's photos (2026-09-14 and 2026-09-15). The aerial of the beach leads; the house and Mission Bay pair up; interiors close.
     photos: [
-      {
-        suggestion: 'Aerial of Mission Beach',
-        src: '/images/belmont-beach-house/belmont-beach-house-mission-beach-aerial-san-diego-david-weis.jpg',
-        alt: 'Mission Beach from the air: the long strand, the surf and the boardwalk with the city beyond',
-        width: 2048,
-        height: 1536,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'The house with its rooftop deck',
-        src: '/images/belmont-beach-house/belmont-beach-house-exterior-mission-beach-san-diego-david-weis.jpg',
-        alt: 'Belmont Beach House from above: a terracotta three-story home with a rooftop deck among the palms of Mission Beach',
-        width: 1239,
-        height: 1130,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Aerial of Mission Bay',
-        src: '/images/belmont-beach-house/belmont-beach-house-mission-bay-aerial-san-diego-david-weis.jpg',
-        alt: 'Mission Bay from the air, with sailboats moored along the sand and the city behind',
-        width: 2048,
-        height: 1536,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Living room and dining',
-        src: '/images/belmont-beach-house/belmont-beach-house-living-room-sectional-mission-beach-san-diego-david-weis.jpg',
-        alt: 'The living room at Belmont Beach House: a grey sectional, a wood coffee table, the dining table and the stairs beyond',
-        width: 2048,
-        height: 1365,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Kitchen open to the living room',
-        src: '/images/belmont-beach-house/belmont-beach-house-san-diego-coastal-property-david-weis.jpg',
-        alt: 'The kitchen at Belmont Beach House, open to the living room with a granite island and white cabinets',
-        width: 2048,
-        height: 1365,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Bedroom',
-        src: '/images/belmont-beach-house/belmont-beach-house-bedroom-blue-linens-mission-beach-david-weis.jpg',
-        alt: 'A bedroom at Belmont Beach House with a white bed, blue linens and a ceiling fan',
-        width: 2048,
-        height: 1365,
-        hasSmall: true,
-      },
-      {
-        suggestion: 'Kitchen counter with bar seating',
-        src: '/images/belmont-beach-house/belmont-beach-house-kitchen-granite-bar-mission-beach-david-weis.jpg',
-        alt: 'The kitchen counter at Belmont Beach House with bar seating',
-        width: 2048,
-        height: 1365,
-        hasSmall: true,
-      },
+      { suggestion: 'Belmont Beach House from above: balconies and the rooftop terrace', src: '/images/belmont-beach-house/belmont-beach-house-aerial-balconies-rooftop-terrace-mission-beach-david-weis.jpg', alt: 'Belmont Beach House from above: a three-story tan home with balconies and a rooftop terrace among the palms of Mission Beach', width: 1920, height: 1440, hasSmall: true },
     ],
+    // David's 2026-10-13 note: the San Diego page card uses the house, not the ocean.
+    cardPhoto: { suggestion: 'The house with its balconies and rooftop deck', src: '/images/belmont-beach-house/belmont-beach-house-exterior-mission-beach-san-diego-david-weis.jpg', alt: 'Belmont Beach House from above: a terracotta three-story home with balconies and a rooftop deck among the palms of Mission Beach', width: 1239, height: 1130, hasSmall: true },
     cta: { label: 'Explore San Diego Real Estate', href: '/san-diego' },
     seo: {
-      title: 'Belmont Beach House San Diego | David Weis',
+      title: 'Belmont Beach House | Mission Beach | David Weis',
       description:
-        'Explore the ownership and investment strategy behind Belmont Beach House, a Mission Beach property balancing vacation rental operations, preservation and long-term value.',
+        'David Weis shares his experience managing Belmont Beach House in Mission Beach, from coastal maintenance and guest amenities to communication and smart-home systems.',
     },
   },
   {
@@ -2203,9 +2482,16 @@ export const projects: readonly Project[] = [
             type: 'callout',
             text: 'It wasn’t a renovation I watched happen. I was physically part of it.',
           },
+          {
+            // David's 2026-10-12 review: a contextual link to the Sierra EV outage story.
+            type: 'links',
+            heading: 'Keep reading',
+            items: [{ label: 'October 2026: the work truck that powered Mark’s tools at the cabin', href: '/work-truck' }],
+          },
         ],
       },
     ],
+    largeGallery: true,
     stats: [
       { value: '10 months', label: 'Of hands-on work' },
       { value: '2', label: 'Large decks constructed' },
@@ -2223,10 +2509,10 @@ export const projects: readonly Project[] = [
       { suggestion: 'The carved bears at the entry', src: '/images/sierra-chalet/sierra-chalet-big-bear-carved-bears-entry-david-weis.jpg', alt: 'Two carved wooden bears beside the A-frame entry at Sierra Chalet, the 1378 house number on the wall', width: 2048, height: 1365, hasSmall: true },
       { suggestion: 'The upper deck, finished', src: '/images/sierra-chalet/sierra-chalet-big-bear-top-deck-after-david-weis.jpg', alt: 'The finished upper deck at Sierra Chalet: a black dining table with yellow chairs, the pines and the lake beyond', width: 2048, height: 1365, hasSmall: true },
       { suggestion: 'The rear of the cabin with the screened deck', src: '/images/sierra-chalet/sierra-chalet-big-bear-rear-exterior-screened-deck-after-david-weis.jpg', alt: 'The rear of Sierra Chalet after the rebuild: the screened lower deck below the open upper deck', width: 2048, height: 1365, hasSmall: true },
-      { suggestion: 'Exterior after the rebuild, both decks complete', src: '/images/sierra-chalet/sierra-chalet-big-bear-cabin-exterior-deck-david-weis.jpg', alt: 'Sierra Chalet after the rebuild: the grey cabin with its new upper deck and stairs among the pines in autumn', width: 2048, height: 1536, hasSmall: true },
       { suggestion: 'David mixing concrete', src: '/images/sierra-chalet/david-weis-hands-on-renovation-sierra-chalet-big-bear-02.jpg', alt: 'David Weis in a yellow shirt mixing concrete in a tub beside a pile of rock at Sierra Chalet', width: 2049, height: 1536, hasSmall: true },
       { suggestion: 'The dogs at the door', src: '/images/sierra-chalet/sierra-chalet-big-bear-mountain-retreat-david-weis.jpg', alt: 'Two dogs at the glass door at Sierra Chalet, looking out at yellow chairs on the snowy deck', width: 1536, height: 2048, hasSmall: true, position: 'center 40%' },
       { suggestion: 'The carved bear at the door', src: '/images/sierra-chalet/sierra-chalet-big-bear-david-weis.jpg', alt: 'A carved wooden bear wearing ski goggles beside a snowboard at the Sierra Chalet door', width: 1536, height: 2048, hasSmall: true },
+      { suggestion: 'Exterior after the rebuild, both decks complete', src: '/images/sierra-chalet/sierra-chalet-big-bear-cabin-exterior-deck-david-weis.jpg', alt: 'Sierra Chalet after the rebuild: the grey cabin with its new upper deck and stairs among the pines in autumn', width: 2048, height: 1536, hasSmall: true },
     ],
     cta: { label: 'Explore Big Bear Real Estate', href: '/big-bear' },
     seo: {
@@ -2241,7 +2527,7 @@ export const projects: readonly Project[] = [
     market: 'palm-springs',
     place: 'Palm Springs',
     kind: 'Private Residence + Hospitality',
-    kindIndex: 'Private Residence + Vacation Home',
+    kindIndex: 'A Shared Home · Hospitality Experience',
     summary:
       'Originally part of a vacation-rental portfolio, Mercury Palms became our home during COVID and the building of The Cole, then the setting for our wedding, annual gatherings, and its next chapter in hospitality.',
     intro: 'Some properties are investments. Some become part of your personal history. Mercury Palms is both.',
@@ -2322,7 +2608,8 @@ export const projects: readonly Project[] = [
             text: 'We got married right here.',
             paragraphs: [
               'With approximately 120 of our closest friends and family gathered in the backyard, Mark and I were married at Mercury Palms.',
-              'The ceremony happened at home, surrounded by the people who mattered most to us, before everyone continued the celebration at The Cole Hotel.',
+              // David's 2026-10-12 review: make the Mercury ceremony / Cole reception link explicit.
+              'The ceremony happened at home, surrounded by the people who mattered most to us, before everyone continued the celebration at [The Cole Hotel](/experience/the-cole#wedding).',
               'There are certainly more conventional wedding venues. But getting married in the backyard of the home where so much of our life had already happened felt exactly right.',
             ],
           },
@@ -2436,7 +2723,7 @@ export const projects: readonly Project[] = [
     market: 'palm-springs',
     place: 'Palm Springs',
     kind: 'Full-Home Renovation + Casita Addition',
-    kindIndex: 'Full-Home Renovation + Casita Addition',
+    kindIndex: 'Residential Renovation Experience',
     summary:
       'The first full-scale residential renovation I experienced from demolition through completion, just down the street from Mercury Palms, and one of the projects that permanently changed the way I evaluate a property.',
     intro: 'The project that changed the way I look at a house.',
@@ -2510,9 +2797,11 @@ export const projects: readonly Project[] = [
             ratio: '3 / 2',
             labels: ['Before', 'The finished house'],
             photos: [
-              { suggestion: 'Living area down to the studs', src: '/images/444-w-stevens/444-w-stevens-palm-springs-living-room-down-to-the-studs-david-weis.jpg', alt: 'The living area at 444 W Stevens stripped to the studs, open framing and a ladder in the middle of the room', width: 2400, height: 1800, hasSmall: true },
+              // David's 2026-10-14 swap: the demolition photo with the open ceiling and patio slider.
+              { suggestion: 'Living area during demolition', src: '/images/444-w-stevens/444-w-stevens-palm-springs-living-area-demolition-david-weis.jpg', alt: 'The living area at 444 W Stevens during demolition: the ceiling opened to the rafters, walls stripped and sliding doors to the patio', width: 2400, height: 1800, hasSmall: true },
               { suggestion: 'Living room after', src: '/images/444-w-stevens/444-w-stevens-palm-springs-living-room-after-david-weis.jpg', alt: 'The finished living room at 444 W Stevens: a white sectional, orange chairs, blue wallpaper and sliding glass doors to the pool', width: 1024, height: 682 },
             ],
+            caption: { title: 'From open-air patios to soaring ceilings.' },
           },
           {
             type: 'story',
@@ -2613,16 +2902,17 @@ export const projects: readonly Project[] = [
           {
             type: 'story',
             sub: true,
-            heading: "And then I learned what \u201cgrandfathered\u201d actually means.",
+            // David's 2026-10-12 review: educational framing only; never claim a
+            // specific component was grandfathered without property records.
+            heading: 'Existing conditions are not the same as new work.',
             paragraphs: [
-              'One of the most valuable lessons was understanding the difference between an existing structure and new construction on the same property.',
-              'The original house already existed legally with systems and conditions that had been in place for years.',
-              'The new casita did not automatically inherit all of those same allowances.',
-              'Because it was new construction, its utilities, connections and systems had to be evaluated under the requirements applicable to the new work.',
+              'The renovation taught me to distinguish existing conditions from proposed new work.',
+              'Before assuming something could stay, be extended, or be recreated, we needed to understand the requirements that applied to that specific project.',
+              'Because the casita was new construction, its utilities, connections and systems had to be evaluated under the requirements applicable to the new work.',
               'That meant thinking about things like electrical capacity, plumbing, service connections, routing and whether the existing property infrastructure could support what we wanted to add.',
               'That distinction sounds painfully technical until you are actually building something.',
               'Then it matters a lot.',
-              'It taught me something I still think about when evaluating property today:',
+              'That experience changed the questions I ask when evaluating a property.',
               'An existing house and a new structure can live on the same parcel and still face very different requirements.',
               'A large backyard does not automatically mean casita.',
               'An empty side yard does not automatically mean ADU.',
@@ -2647,14 +2937,9 @@ export const projects: readonly Project[] = [
               'When Mark and I officially made the move to Palm Springs and I became a Personal Banker at Chase, we lived at 444 through a big part of this chapter.',
               'And somehow, even then, our lives operated basically the same way they sometimes do now:',
               'We lived in whichever one of our houses happened to be available.',
-              'One holiday season, every other property was occupied.',
-              '444 was staged for sale.',
-              'So we moved into the staged house.',
-              "You're technically not supposed to use staging furniture.",
-              'But when times are tough\u2026 \ud83d\ude02',
-              'We were extremely careful, lived very cleanly and treated everything like we were staying in a showroom.',
-              "What they didn't know didn't hurt them.",
-              'It still makes me laugh because it perfectly describes that period of our lives.',
+              // David's 2026-10-12 review replaces the staging-company joke.
+              'During one holiday season, the other homes were occupied and 444 was already staged for sale. We stayed there carefully, figuring out how to live around the presentation.',
+              'It was an early preview of our life together: more than one project, more than one city, and a housing plan that could change with the calendar.',
               'We were building a hotel, renovating houses, working our regular jobs, driving between cities and somehow making the logistics work.',
             ],
           },

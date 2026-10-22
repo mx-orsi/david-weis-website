@@ -23,7 +23,7 @@ export const about = {
     eyebrow: 'About David',
     title: 'Real estate made sense once everything else came together.',
     intro:
-      'My path into real estate was not particularly traditional. Before becoming a Broker Associate, I worked in hospitality, payroll, human resources, banking, operations, property management, and small-business ownership. I have renovated homes, operated a hotel, managed vacation rentals, worked alongside development projects, and owned property in the same markets where I now represent clients. Looking back, none of those experiences were unrelated. They became the way I understand real estate today.',
+      'My path into real estate was not particularly traditional. Before becoming a Broker Associate, I worked in hospitality, payroll, human resources, banking, operations, property management, and small-business ownership. I have renovated homes, managed a hotel as its General Manager, managed vacation rentals, worked alongside development projects, and owned property in the same markets where I now represent clients. Looking back, none of those experiences were unrelated. They became the way I understand real estate today.',
   },
   stats: [
     { value: '50+', label: 'Moves' },
@@ -200,7 +200,7 @@ export const aboutChapterB: ProjectChapter = {
       eyebrow: 'Learning to show up',
       heading: 'Sometimes you say yes before you feel ready.',
       paragraphs: [
-        'Early in my real estate career, I attended REALTOR® Legislative Day in Sacramento with my mom, who was also a REALTOR® at the time.',
+        'Early in my real estate career, I attended REALTOR® Legislative Day in Sacramento with my mom, who is also a licensed real estate agent.',
         'As a brand-new agent, I somehow found myself presenting a bill to Assemblymember Chris Ward in front of members of the San Diego Association of REALTORS® leadership.',
         'I was terrified. I did it anyway.',
         'That experience became another reminder that growth usually happens somewhere just beyond comfortable.',
@@ -296,7 +296,7 @@ export const aboutChapterB: ProjectChapter = {
       heading: 'Palm Springs',
       paragraphs: [
         'Palm Springs started with a relationship and became a completely different chapter.',
-        'Banking led to hospitality. Hospitality led to deeper involvement in local design and architecture. The Cole taught me the business side of development, from working with the City and navigating ABC licensing to permits, fees, infrastructure, and all the details that happen behind the scenes.',
+        'Banking led to hospitality. Hospitality led to deeper involvement in local design and architecture. The Cole taught me the business side of hospitality, from working with the City and navigating ABC licensing to permits, fees, infrastructure, and all the details that happen behind the scenes.',
         'It also pulled me deeper into Palm Springs design, architecture, and community. Querencia Palms took that connection even further.',
         'And somewhere along the way, Palm Springs stopped being somewhere I drove to. It became home.',
       ],
@@ -369,7 +369,7 @@ export const aboutChapterB: ProjectChapter = {
       eyebrow: 'Community',
       heading: 'I have never been very good at just joining something.',
       paragraphs: [
-        'I tend to get involved. Sometimes that means volunteering. Sometimes it means joining a committee. Sometimes it means arriving at 7:30 in the morning to help set up a Garden Club meeting that does not end until 1:00.',
+        'I tend to get involved. Sometimes that means volunteering. Sometimes it means joining a committee. Sometimes it means helping set up a Garden Club meeting from about 7:30 to 9:30 in the morning, before the regular meeting begins.',
         'Community has always mattered to me, partly because I spent so much of my childhood arriving somewhere new.',
         'As an adult, I learned that belonging is not something you simply find. You help create it.',
       ],
@@ -413,7 +413,8 @@ export const aboutChapterB: ProjectChapter = {
         'Designers, architecture, preservation, landscaping, materials, and the tiny decisions that determine whether a space feels right.',
         'H3K became an important design relationship through The Cole and the early stages of Querencia Palms.',
         'Supporting their work at Modernism Week, touring projects like Limón, and continuing that relationship has made Palm Springs design feel less like something I admire from the outside and more like a community I’ve been fortunate to learn from.',
-        'Their Wine + Design events have become a must, and now their new showroom sits right across the street from my Compass office in Palm Desert, which somehow feels fitting.',
+        // Office wording per David's 2026-10-12 review: La Jolla is his assigned office.
+        'Their Wine + Design events have become a must, and now their new showroom sits right across the street from the Compass office in Palm Desert, which somehow feels fitting. While my assigned Compass office is in La Jolla, I also have access to other Compass offices, including Palm Desert, which is especially convenient when working across Southern California.',
       ],
     },
     {

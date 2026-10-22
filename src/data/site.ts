@@ -42,11 +42,11 @@ export const agent = {
   },
   /** Outbound destination for "View all listings on Compass" (Compass has no embeddable IDX). */
   compassProfile: 'https://www.compass.com/agents/david-weis/',
-  /** David's short-term rentals run through this separate business, not Compass. */
+  /** Mark's vacation-rental business, which David manages separately from Compass (wording: David, 2026-10-12). */
   vacationRentals: {
     name: 'Celebrity Vacation Homes',
     url: 'https://celebrityvacationhomes.com',
-    note: 'Independently operated. Compass is not involved in rentals.',
+    note: 'Celebrity Vacation Homes is my husband Mark’s vacation-rental business. I manage its day-to-day operations separately from my real estate work with Compass.',
   },
 } as const;
 

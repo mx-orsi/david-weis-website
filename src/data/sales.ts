@@ -68,7 +68,11 @@ export interface QuerenciaUnit {
   closed: string;
   /** Tile photo: the unit's wallpaper-and-sofa hero shot from David's Interiors folder (his 2026-10-05 note). */
   hero?: Photo;
+  /** The unit's residence page on QuerenciaPalms.com (David's 2026-10-14 cross-linking brief). */
+  listingUrl: string;
 }
+
+const qpUnit = (unit: string) => `https://www.querenciapalms.com/two-bedrooms-floorplans/${unit}`;
 
 export const salesPage = {
   seo: {
@@ -108,7 +112,7 @@ export const querenciaCaseStudy: Sale & {
   fullAddress: '588 E San Lorenzo Rd, Palm Springs, CA 92264',
   subtitle: '588 E San Lorenzo Rd',
   side: 'seller',
-  role: 'Sales & Marketing',
+  role: 'Seller Representation',
   roleNote: '14-Residence Condominium Conversion',
   result: 'Seven Full-Price Sales',
   resultNote: '50% Sold · $3,958,000 in Closed Sales',
@@ -121,25 +125,29 @@ export const querenciaCaseStudy: Sale & {
   ],
   phasesNote: 'and counting',
   units: [
-    { unit: '102', phase: 'Phase I', beds: 2, baths: 2, sqft: '1,066', price: '$549,000', closed: 'May 2026' },
-    { unit: '206', phase: 'Phase I', beds: 2, baths: 2, sqft: '1,275', price: '$599,000', closed: 'May 2026',
+    { unit: '102', listingUrl: qpUnit('102'), phase: 'Phase I', beds: 2, baths: 2, sqft: '1,066', price: '$549,000', closed: 'May 2026' },
+    { unit: '206', listingUrl: qpUnit('206'), phase: 'Phase I', beds: 2, baths: 2, sqft: '1,275', price: '$599,000', closed: 'May 2026',
       hero: { suggestion: 'Unit 206 living room', src: '/images/querencia-interiors/querencia-palms-condo-interior-palm-springs-david-weis.jpg', alt: 'Unit 206 living and dining area at Querencia Palms with a patterned mural wall and a sofa', width: 2048, height: 1369, hasSmall: true } },
-    { unit: '202', phase: 'Phase II', beds: 2, baths: 2, sqft: '1,100', price: '$524,000', closed: 'June 2026',
+    { unit: '202', listingUrl: qpUnit('202'), phase: 'Phase II', beds: 2, baths: 2, sqft: '1,100', price: '$524,000', closed: 'June 2026',
       hero: { suggestion: 'Unit 202 living room', src: '/images/querencia-interiors/querencia-palms-open-concept-living-room-david-weis.jpg', alt: 'Unit 202 open-plan living room at Querencia Palms with a bold geometric mural, sofa and dining table', width: 2400, height: 1800, hasSmall: true } },
-    { unit: '201', phase: 'Phase II', beds: 2, baths: 2, sqft: '1,200', price: '$539,000', closed: 'June 2026',
+    { unit: '201', listingUrl: qpUnit('201'), phase: 'Phase II', beds: 2, baths: 2, sqft: '1,200', price: '$539,000', closed: 'June 2026',
       hero: { suggestion: 'Unit 201 living room', src: '/images/querencia-interiors/querencia-palms-201-living-room-leather-sofa-botanical-mural-palm-springs-david-weis.jpg', alt: 'Unit 201 living room at Querencia Palms with a leather sofa in front of a botanical mural', width: 2400, height: 1800, hasSmall: true } },
-    { unit: '105', phase: 'Phase II', beds: 2, baths: 2, sqft: '1,210', price: '$589,000', closed: 'August 2026',
+    { unit: '105', listingUrl: qpUnit('105'), phase: 'Phase II', beds: 2, baths: 2, sqft: '1,210', price: '$589,000', closed: 'August 2026',
       hero: { suggestion: 'Unit 105 living room', src: '/images/querencia-interiors/querencia-palms-midcentury-interior-design-palm-springs-david-weis.jpg', alt: 'Unit 105 living room at Querencia Palms with a white sofa and a teal, mustard and rust geometric mural', width: 2048, height: 1367, hasSmall: true } },
-    { unit: '104', phase: 'Phase II', beds: 2, baths: 2, sqft: '1,200', price: '$599,000', closed: 'August 2026',
+    { unit: '104', listingUrl: qpUnit('104'), phase: 'Phase II', beds: 2, baths: 2, sqft: '1,200', price: '$599,000', closed: 'August 2026',
       hero: { suggestion: 'Unit 104 living room', src: '/images/querencia-interiors/querencia-palms-104-living-room-cream-sofa-green-gold-mural-david-weis.jpg', alt: 'Unit 104 living room at Querencia Palms with a cream sofa and a green and gold mural', width: 2048, height: 1368, hasSmall: true } },
-    { unit: '106', phase: 'Phase III', beds: 2, baths: 2, sqft: '1,150', price: '$559,000', closed: 'September 2026',
+    { unit: '106', listingUrl: qpUnit('106'), phase: 'Phase III', beds: 2, baths: 2, sqft: '1,150', price: '$559,000', closed: 'September 2026',
       hero: { suggestion: 'Unit 106 living room', src: '/images/querencia-interiors/querencia-palms-106-living-room-leather-sofa-geometric-mural-palm-springs-david-weis.jpg', alt: 'Unit 106 living room at Querencia Palms with a leather sofa in front of a geometric mural', width: 2048, height: 1365, hasSmall: true } },
   ],
   paragraphs: [
-    "My involvement in Querencia Palms began with the property's acquisition and continued through its transformation from a 12-unit property into a 14-residence condominium community. Working closely with the seller and condominium conversion consultants throughout the process, I provided detailed knowledge of the property, including the koi pond, private patios, and updated unit configuration, helping the team account for its features and changes.",
-    "I also contributed to preparing the project-specific purchase and sale agreement submitted to the California Department of Real Estate for use in the sales process. That involvement deepened my understanding of legal phasing and its implications for the developer's HOA assessment obligations on unsold residences.",
+    // Role and conversion wording per David's 2026-10-12 review: he represents
+    // Mark, the seller, and supplied property facts; the consultants handled
+    // the documents and decisions. Never "prepared the purchase agreement".
+    "I represent my husband Mark, the seller, through Compass. Alongside the sales and marketing work, I personally restored the koi pond and created the garden that became such an important part of the community's presentation.",
+    'I helped the condominium-conversion consultants gather and organize the property information they needed: unit counts, year built, square footage, and details about amenities such as the koi pond, pumps, and waterfalls. On a project with that many moving parts, keeping the information accurate and the questions moving was a contribution in itself.',
+    'The consultants handled the documents and decisions. My role was supplying property facts and keeping the details coordinated. Being involved also allowed me to follow the process closely and understand how a condominium conversion differs from new construction.',
     "That foundation carried into my leadership of the sales and marketing effort. I redesigned and fully built out the existing website and developed brochures, property videos, and individual listing campaigns around each residence's distinct appeal. My familiarity with the property and its conversion helped me explain the project to prospective buyers, agents, and lenders.",
-    'Building initial momentum required persistence and adaptation. Through events, direct agent outreach, and seller-approved launch incentives, we ultimately received multiple full-price offers on the same day. As our first model residences sold, we prepared new upstairs and downstairs models so buyers could continue experiencing the different layouts and possibilities. I also helped with landscaping and staging so the outdoor spaces felt as thoughtfully prepared as the residences themselves.',
+    'Building initial momentum required persistence and adaptation. Through events, direct agent outreach, and seller-approved launch incentives, we ultimately received multiple full-price offers on the same day. As our first model residences sold, we prepared new upstairs and downstairs models so buyers could continue experiencing the different layouts and possibilities. I also restored the koi pond and garden and helped prepare the staging, so the outdoor spaces felt as thoughtfully prepared as the residences themselves.',
     'We strategically set aside selected residences to lease during the initial sales period. Having people already living in the community allowed prospective buyers to experience it firsthand and feel more comfortable becoming early owners. Those residences are being offered for sale as their leases expire.',
     "Unit 201's sale began with a Facebook post announcing my broker's license. A prospective buyer reached out looking for a financial advisor, and I connected him with a fellow Vista Las Palmas Neighbors Foundation board member. During their visit to Palm Springs, the buyers toured Querencia. Purchasing locally had been a two-year plan, but I helped them explore how buying a residence as a rental could fit their goals sooner. They moved forward with Unit 201 at full price.",
     "The initial closings brought the complexities of a condominium conversion into focus. Title needed to confirm newly assigned assessor's parcel numbers. The building's lender needed signatures from multiple beneficiaries to authorize the release of individual residences from the lien securing the building's loan, while escrow worked through the related lender signoff requirements. After Unit 206 closed, another parcel-number change surfaced on Unit 102's scheduled closing day. At 4 p.m. on a Friday, the seller contacted Riverside County directly, helping us obtain the updated parcel numbers for all 14 residences. Title and escrow worked through the new information, allowing Unit 102 to close that same day.",
@@ -255,9 +263,10 @@ export const sales: readonly Sale[] = [
     role: 'Seller Representation',
     roleNote: 'Triplex',
     result: 'Sold for $2,275,000',
-    resultNote: '$20,000 Below Final Asking',
+    // David's 2026-10-12 review: lead with the result and the coordination,
+    // not the below-asking figure.
     paragraphs: [
-      'Following the successful Utah Street sale, the same agent referred me to represent this renovated Hillcrest triplex. Operating as a popular vacation rental, the property required careful coordination throughout the sales process.',
+      'This renovated Hillcrest triplex sold for $2,275,000 while it continued operating as a popular vacation rental, which required careful coordination throughout the sales process. The same agent who referred the Utah Street sellers referred me to represent it.',
       'With guests staying across three separate residences, showing the entire property together was often difficult. I arranged access around bookings, frequently touring one unit at a time. For serious, qualified buyers, I secured approval for limited showings during guest stays, keeping interruptions to a minimum.',
       "My experience managing The Cole Hotel and operating rental properties helped me navigate those competing needs. I also provided additional rental-income information to help buyers evaluate the investment and identified work the seller completed to improve the property's presentation.",
       "As market conditions shifted, we adjusted the pricing strategy and maintained consistent marketing through a longer summer sales period. The process required persistence, flexibility, and close attention to both the sellers' goals and the business still operating on the property.",
@@ -278,7 +287,7 @@ export const sales: readonly Sale[] = [
     paragraphs: [
       'My clients chose me after attending an open house and seeing how I presented the property, answered questions, and engaged with visitors. When it was time to sell their own condo, they wanted that same attention and preparation.',
       "With a family member still living in the home, showings and inspections required thoughtful coordination. I worked around the resident's needs and, when an inspector needed to return at short notice, brought flowers to thank them for their flexibility.",
-      'The original accepted offer was $260,000, but escrow stretched to 86 days. I maintained pressure to resolve outstanding issues and renegotiated the terms to address the impact on my sellers. Those negotiations secured a $5,000 increase in the purchase price and a $2,650 reduction in selling costs, improving their proceeds while bringing a challenging transaction to completion.',
+      'The original accepted offer was $260,000, but escrow stretched to 86 days. I maintained pressure to resolve outstanding issues and renegotiated the terms to address the impact on my sellers. The extension negotiation increased the sale price by $5,000, and a separate commission renegotiation reduced selling costs by $2,650, a combined $7,650 improvement for the seller.',
     ],
   },
 
@@ -338,14 +347,14 @@ export const sales: readonly Sale[] = [
     paragraphs: [
       'Helping my client relocate to San Diego meant introducing him to the practical differences between neighborhoods, from commute routes and nearby amenities to how each location could fit his daily routine.',
       'When our initial negotiations on this Clairemont home did not come together, we stepped back and continued exploring other properties. I stayed in communication with the listing agent, keeping the opportunity open. Weeks later, we returned to negotiations and reached an agreement.',
-      "The seller's planned move out of state came with an unusual complication: finding somewhere to house his three wolves. It was my first time seeing a wolf in person, and the experience felt straight out of Twilight. Along with concerns about the cost of buying back into San Diego if the move did not work out, those logistics gave him second thoughts about selling. He ultimately chose to proceed after weighing the potential financial consequences of canceling.",
+      "The seller's out-of-state move created additional logistical challenges. I stayed focused on the terms, communication, and timing that could move the purchase forward while protecting my client's position.",
       'The purchase included a seller rent-back with a firm move-out deadline, giving my client a clear date to plan around before taking possession. He has since transformed the property through his own renovation skills and vision, making the home distinctly his.',
     ],
   },
   {
     slug: '4420-voltaire-st',
     closed: 'March 2025',
-    area: 'Point Loma Heights',
+    area: 'Ocean Beach',
     title: '4420 Voltaire St',
     city: 'San Diego',
     market: 'san-diego',
@@ -400,7 +409,7 @@ export const sales: readonly Sale[] = [
     resultNote: '$8,000 Credit at Closing',
     paragraphs: [
       'After several successful transactions for people in his circle, a fellow agent referred this first-time buyer to me. He approached homeownership thoughtfully and found a condo he could picture himself in, with friends already living in the building.',
-      'Even arranging the initial showing required follow-up after delayed responses from the listing side. Communication was limited to text, making it harder to have direct conversations and resolve questions. I worked through those obstacles while keeping my client informed.',
+      'Even arranging the initial showing took persistent follow-up, and most of the communication happened by text. I kept the questions moving while keeping my client informed.',
       "When the sellers selected another offer, we discussed a backup strategy and stayed engaged. That escrow later encountered problems with the HOA's pet restrictions, reinforcing the importance of reviewing the condominium documents carefully. When the opportunity reopened, we pursued it again.",
       'With two earlier escrows having fallen through, I submitted a letter explaining how I would guide my client through the purchase and help bring the transaction to closing. I also connected him with a lender who completed his preapproval late in the evening so we could submit an offer, and an insurance broker who helped him obtain coverage at a favorable price.',
       'Protecting his earnest money was a priority throughout the transaction. Before removing contingencies, we reviewed inspection reports, condominium documents, insurance, and potential concerns together. I wanted him to understand what he was accepting, consider the possible scenarios, and have his questions answered before taking that next step.',
