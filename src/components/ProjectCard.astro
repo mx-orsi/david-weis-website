@@ -24,14 +24,14 @@ const Heading = headingLevel;
 const teaser = variant === 'teaser';
 const label = teaser ? (p.kindTeaser ?? p.kind) : p.kindIndex;
 const copy = teaser ? (p.teaser ?? p.summary) : p.summary;
-const cta = teaser ? (p.teaserCta ?? 'View Project') : 'View Project';
+const cta = teaser ? (p.teaserCta ?? 'View Project') : (p.cardCta ?? 'View Project');
 const href = withBase(projectHref(p));
 const titleId = `project-card-${p.slug}-${variant}`;
 ---
 
 <article class:list={['pc', `pc--${variant}`, className]} aria-labelledby={titleId}>
   <a class="pc__media" href={href} tabindex="-1" aria-hidden="true">
-    <Media photo={p.photos[0]} ratio={variant === 'wide' ? '4 / 3' : '4 / 3'} sizes="(min-width: 1024px) 33vw, (min-width: 700px) 50vw, 100vw" />
+    <Media photo={p.cardPhoto ?? p.photos[0]} ratio={variant === 'wide' ? '4 / 3' : '4 / 3'} sizes="(min-width: 1024px) 33vw, (min-width: 700px) 50vw, 100vw" />
   </a>
   <div class="pc__body">
     <p class="pc__eyebrow eyebrow eyebrow--muted">

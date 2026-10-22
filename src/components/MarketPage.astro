@@ -132,7 +132,7 @@ const breadcrumbJsonLd = {
             <h2 id={`${slug}-featured`} class="title-lg">{c.featuredTitle}</h2>
             <a class="link-arrow" href={withBase('/experience')}>All projects <Icon name="arrow-right" /></a>
           </div>
-          <div class:list={['mp-featured__grid', featured.length === 1 && 'mp-featured__grid--single']}>
+          <div class:list={['mp-featured__grid', featured.length === 1 && 'mp-featured__grid--single', featured.length === 4 && 'mp-featured__grid--four']}>
             {featured.map((p) => <ProjectCard project={p} variant={featured.length === 1 ? 'wide' : 'index'} />)}
           </div>
         </div>
@@ -259,6 +259,10 @@ const breadcrumbJsonLd = {
   }
   .mp-featured__grid--single {
     grid-template-columns: minmax(0, 1fr);
+  }
+  .mp-featured__grid--four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 2rem;
   }
   .mp-sales {
     border-top: 1px solid var(--line);

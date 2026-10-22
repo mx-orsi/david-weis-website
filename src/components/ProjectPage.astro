@@ -123,8 +123,12 @@ const breadcrumbJsonLd = {
     )}
 
     {tail.length > 0 && (
-      <div class="container pp-break pp-break--grid" aria-label="More photos">
-        {tail.map((ph) => <Media photo={ph} ratio="4 / 3" />)}
+      <div class:list={['container', 'pp-break', 'pp-break--grid', p.largeGallery && 'pp-break--large']} aria-label="More photos">
+        {tail.map((ph, i) => {
+          // Large galleries run two across; an odd last photo spans the row.
+          const span = p.largeGallery && tail.length % 2 === 1 && i === tail.length - 1;
+          return <Media photo={ph} ratio={span ? '21 / 9' : '4 / 3'} sizes={p.largeGallery ? (span ? '100vw' : '(min-width: 700px) 50vw, 100vw') : undefined} class={span ? 'pp-span' : undefined} />;
+        })}
       </div>
     )}
   </div>
@@ -237,6 +241,17 @@ const breadcrumbJsonLd = {
   }
   .pp-break--grid {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .pp-break--large {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pp-break--large :global(.pp-span) {
+    grid-column: 1 / -1;
+  }
+  @media (max-width: 699px) {
+    .pp-break--large {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   .pp-foot {

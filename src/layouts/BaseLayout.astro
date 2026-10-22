@@ -22,6 +22,8 @@ interface Props {
   description: string;
   /** Path or absolute URL for the social share image. */
   ogImage?: string;
+  /** Description of a page-specific share image (falls back to the page title). */
+  ogImageAlt?: string;
   noindex?: boolean;
   /** The sitewide "Real estate rarely gives you only one option." band before the footer. */
   finalCta?: boolean;
@@ -29,7 +31,12 @@ interface Props {
   ogType?: 'website' | 'article';
 }
 
-const { title, description, ogImage = '/images/david-weis-share-image.jpg', noindex = false, finalCta = true, ogType = 'website' } = Astro.props;
+const DEFAULT_OG = '/images/david-weis-share-image.jpg';
+const { title, description, ogImage = DEFAULT_OG, ogImageAlt, noindex = false, finalCta = true, ogType = 'website' } = Astro.props;
+// David's 2026-10-12 review: a page's own share image gets its own description,
+// never the headshot's; only the default 1200×630 card declares its size.
+const isDefaultOg = ogImage === DEFAULT_OG;
+const ogAlt = isDefaultOg ? `The ${agent.name} logo beside a portrait of ${agent.name}` : (ogImageAlt ?? title);
 
 /** GA4 runs on production only, so preview visits never count. */
 const gaId = isPreviewBuild ? '' : integrations.gaMeasurementId;
@@ -110,14 +117,15 @@ const jsonLd = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImageURL} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={agent.headshot.alt} />
+    {isDefaultOg && <meta property="og:image:width" content="1200" />}
+    {isDefaultOg && <meta property="og:image:height" content="630" />}
+    <meta property="og:image:alt" content={ogAlt} />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content={ogAlt} />
 
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
     {gaId && (

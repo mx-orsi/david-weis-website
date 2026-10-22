@@ -23,4 +23,12 @@ export const salesUi = {
   previousPhoto: 'Previous photo',
   nextPhoto: 'Next photo',
   seeAllStories: 'See all sales stories',
+  /** Querencia sold-residence cards (David's 2026-10-14 brief). */
+  querenciaName: 'Querencia Palms',
+  querenciaPlace: 'Tahquitz River Estates · Palm Springs',
+  soldFor: 'Sold for',
+  representedLine: 'Seller / Developer represented by David Weis, Compass',
+  unitLink: (unit: string) => `View Unit ${unit} photos & details on QuerenciaPalms.com`,
+  newTab: '(opens in a new tab)',
+  readFullStory: 'Read the full story',
 } as const;

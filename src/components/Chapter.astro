@@ -51,6 +51,8 @@ const { chapter, slug } = Astro.props;
           <figure class="ch__aside-figure">
             <Media photo={b.aside} ratio={asideRatio} sizes="(min-width: 960px) 40vw, 100vw" class="ch__aside-photo" />
             {b.asideCaption && <figcaption class="ch__caption">{b.asideCaption}</figcaption>}
+            {b.asideMore && <Media photo={b.asideMore} ratio={asideRatio} sizes="(min-width: 960px) 40vw, 100vw" class="ch__aside-photo ch__aside-more" />}
+            {b.asideMoreCaption && <p class="ch__caption">{b.asideMoreCaption}</p>}
           </figure>
         </div>
       ) : (
@@ -407,6 +409,49 @@ const { chapter, slug } = Astro.props;
         </div>
       );
     }
+    if (b.type === 'ratings') {
+      return (
+        <div class="container ch__block ch__ratings">
+          <p class="ch__ratings-statement">{b.statement}</p>
+          <ul class="ch__ratings-grid">
+            {b.items.map((it) => (
+              <li class="ch__rating">
+                <span class="ch__rating-platform">{it.platform}</span>
+                <span class="ch__rating-value">{it.rating}</span>
+                {it.detail && <span class="ch__rating-detail">{it.detail}</span>}
+              </li>
+            ))}
+          </ul>
+          {b.note && <p class="ch__caption">{b.note}</p>}
+        </div>
+      );
+    }
+    if (b.type === 'reviews') {
+      return (
+        <div class="container ch__block ch__reviews">
+          {b.heading && (
+            <div class="split">
+              <h2 id={hid} class="title-lg">{b.heading}</h2>
+              {b.paragraphs && <div class="prose">{b.paragraphs.map((p) => <p>{p}</p>)}</div>}
+            </div>
+          )}
+          <ul class="ch__reviews-grid" aria-labelledby={b.heading ? hid : undefined}>
+            {b.items.map((r) => (
+              <li>
+                <figure class="ch__review">
+                  <p class="ch__review-score">{r.score}</p>
+                  <blockquote class="ch__review-text">{r.quote}</blockquote>
+                  <figcaption class="ch__review-attr">
+                    <span class="ch__review-author">{r.author}</span>
+                    <span class="ch__review-source">{[r.source, r.date].filter(Boolean).join(' · ')}</span>
+                  </figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
     if (b.type === 'quote') {
       return (
         <div class="container ch__block">
@@ -485,6 +530,9 @@ const { chapter, slug } = Astro.props;
   }
   .ch__aside--center {
     align-items: center;
+  }
+  .ch__aside-figure :global(.ch__aside-more) {
+    margin-top: 0.75rem;
   }
 
   /* Tiles: square cards side by side (About's community stories). */
@@ -1107,6 +1155,114 @@ const { chapter, slug } = Astro.props;
   }
 
   /* Quote panel (member spotlight) */
+  /* Ratings: four quiet columns between thin rules (two per row on phones). */
+  .ch__ratings {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .ch__ratings-statement {
+    font-family: var(--font-serif);
+    font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+    line-height: 1.3;
+    max-width: 40ch;
+    text-wrap: balance;
+  }
+  .ch__ratings-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-block: 1px solid var(--line-strong);
+  }
+  .ch__rating {
+    display: grid;
+    gap: 0.35rem;
+    align-content: start;
+    padding: 1.25rem 1rem;
+  }
+  .ch__rating + .ch__rating {
+    border-left: 1px solid var(--line);
+  }
+  .ch__rating-platform,
+  .ch__review-score {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ch__rating-value {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1.1;
+    color: var(--blue);
+  }
+  .ch__rating-detail {
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+  @media (max-width: 699px) {
+    .ch__ratings-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ch__rating:nth-child(3) {
+      border-left: 0;
+    }
+    .ch__rating:nth-child(n + 3) {
+      border-top: 1px solid var(--line);
+    }
+  }
+
+  /* Reviews: three matching cards. */
+  .ch__reviews {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .ch__reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .ch__review {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 1rem;
+    height: 100%;
+    margin: 0;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    border: 1px solid var(--line-strong);
+    border-top: 3px solid var(--blue);
+  }
+  .ch__review-text {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.5;
+  }
+  .ch__review-attr {
+    display: grid;
+    gap: 0.2rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--line);
+  }
+  .ch__review-author {
+    font-weight: 500;
+  }
+  .ch__review-source {
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+  @media (max-width: 899px) {
+    .ch__reviews-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
   .ch__quote {
     background: var(--surface-blue);
     color: var(--on-ink);

@@ -36,3 +36,6 @@ assets-source/drive-*/
 
 # Client emails and attachments (raw source, not committed)
 assets-source/emails/
+
+# Photos pulled from the Celebrity Vacation Homes listing (2026-10-22); the placed copies live in public/images.
+assets-source/cvh-*/

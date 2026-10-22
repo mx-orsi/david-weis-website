@@ -4,7 +4,12 @@
  * order. Each tile shows the unit's lead photo and its figures, and is a real
  * button that opens SaleLightbox on that unit's photos only (set `unit-<n>`).
  * A unit without photos gets a text-only tile that is not interactive.
+ *
+ * Each list item carries the anchor `unit-<n>` (QuerenciaPalms.com links to
+ * /sales/querencia-palms/#unit-102 and so on), and under the tile, outside
+ * the button, a plain link to that unit's page on QuerenciaPalms.com.
  */
+import Icon from './Icon.astro';
 import Media from './Media.astro';
 import type { QuerenciaUnit } from '../data/sales';
 import type { PhotoGroup } from '../data/salePhotos';
@@ -25,7 +30,7 @@ const tiles = units.map((u) => {
     u,
     lead: hero ?? photos[0],
     n,
-    name: `${salesUi.unitWord} ${u.unit}`,
+    name: `${salesUi.querenciaName} · ${salesUi.unitWord} ${u.unit}`,
     facts: `${u.beds} ${salesUi.bedWord} · ${u.baths} ${salesUi.bathWord} · ${u.sqft} ${salesUi.sqftWord}`,
     count: `${n} ${n === 1 ? salesUi.photoWord : salesUi.photosWord}`,
   };
@@ -50,14 +55,16 @@ const phases = [...new Set(units.map((u) => u.phase))].map((phase) => ({ phase, 
         )}
         <span class="ut__body">
           <span class="ut__name">{name}</span>
+          <span class="ut__place">{salesUi.querenciaPlace}</span>
           <span class="ut__facts">{facts}</span>
-          <span class="ut__price">{salesUi.soldWord} {u.price}</span>
+          <span class="ut__price">{salesUi.soldFor} {u.price}</span>
           <span class="ut__closed">{salesUi.closedWord} {u.closed}</span>
+          <span class="ut__rep">{salesUi.representedLine}</span>
         </span>
       </>
     );
     return (
-      <li class="ut__item">
+      <li class="ut__item" id={`unit-${u.unit}`}>
         {n > 0 ? (
           <button type="button" class="ut__tile" data-sl-set={`unit-${u.unit}`} data-sl-index="0" aria-label={`${name}: ${salesUi.viewAll} ${n} ${n === 1 ? salesUi.photoWord : salesUi.photosWord}. ${facts}. ${salesUi.soldWord} ${u.price}. ${salesUi.closedWord} ${u.closed}.`}>
             {body}
@@ -65,6 +72,9 @@ const phases = [...new Set(units.map((u) => u.phase))].map((phase) => ({ phase, 
         ) : (
           <div class="ut__tile ut__tile--text">{body}</div>
         )}
+        <a class="ut__ext link-arrow" href={u.listingUrl} target="_blank" rel="noopener">
+          {salesUi.unitLink(u.unit)} <Icon name="arrow-ext" /><span class="sr-only"> {salesUi.newTab}</span>
+        </a>
       </li>
     );
   })}
@@ -108,6 +118,10 @@ const phases = [...new Set(units.map((u) => u.phase))].map((phase) => ({ phase, 
     gap: clamp(1.5rem, 3vw, 2.25rem) 1.5rem;
   }
   .ut__item {
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+    scroll-margin-top: 6rem;
     min-width: 0;
     flex: 0 1 calc(50% - 0.75rem);
     max-width: 26rem;
@@ -117,7 +131,6 @@ const phases = [...new Set(units.map((u) => u.phase))].map((phase) => ({ phase, 
     gap: 0.9rem;
     align-content: start;
     width: 100%;
-    height: 100%;
     padding: 0;
     border: 0;
     background: none;
@@ -169,6 +182,17 @@ const phases = [...new Set(units.map((u) => u.phase))].map((phase) => ({ phase, 
   }
   button.ut__tile:hover .ut__name {
     color: var(--blue);
+  }
+  .ut__place,
+  .ut__rep {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ut__ext {
+    justify-self: start;
+    font-size: 0.875rem;
   }
   .ut__facts,
   .ut__closed {

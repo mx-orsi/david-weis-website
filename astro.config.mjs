@@ -54,7 +54,8 @@ export default defineConfig({
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
-      lastmod: new Date(),
+      // No lastmod: stamping every page with the build date tells search
+      // engines everything changed on every rebuild (David, 2026-10-12).
       filter: (page) => !page.includes('/privacy-policy') && !page.includes('/terms'),
       serialize: (item) => {
         const img = pageImages(item.url);

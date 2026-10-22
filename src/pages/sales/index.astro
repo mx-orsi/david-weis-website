@@ -3,12 +3,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
 import Media from '../../components/Media.astro';
 import SaleCard from '../../components/SaleCard.astro';
-import { salesPage, querenciaCaseStudy as q, sellerSales, buyerSales, saleHref, salePhotosFor } from '../../data/sales';
+import { salesPage, querenciaCaseStudy as q, sellerSales, buyerSales, saleHref, salePhotosFor, saleGroupsFor } from '../../data/sales';
+import { salesUi } from '../../data/salesUi';
 import { photoExists } from '../../lib/images';
 import { withBase } from '../../lib/paths';
 
 const lead = salePhotosFor(q.slug).find((p) => photoExists(p.src));
 const qRole = [q.role, q.roleNote].filter(Boolean).join(' · ');
+// David's 2026-10-14 note: skimmers should see every sold residence at a glance,
+// so a strip of the seven units (photo, unit number, price) sits under the feature.
+// A unit without a hero shot falls back to its first photo, as on the unit tiles.
+const unitGroups = saleGroupsFor(q.slug);
+const unitStrip = q.units
+  .map((u) => ({ u, photo: [u.hero, ...(unitGroups.find((g) => g.id === u.unit)?.photos ?? [])].find((p) => p && photoExists(p.src)) }))
+  .filter((x) => x.photo);
 ---
 
 <BaseLayout title={salesPage.seo.title} description={salesPage.seo.description}>
@@ -36,13 +44,28 @@ const qRole = [q.role, q.roleNote].filter(Boolean).join(' · ');
             {q.highlights.map((h) => <li>{h}</li>)}
           </ul>
           <p class="sx-feature__text">{q.paragraphs[0]}</p>
-          <a class="btn" href={withBase(saleHref(q))}>{salesPage.cardCta}<span class="sr-only"> about {q.title}</span> <Icon name="arrow-right" /></a>
         </div>
         {lead && (
           <div class="sx-feature__media">
             <Media photo={lead} ratio="4 / 3" sizes="(min-width: 900px) 45vw, 100vw" />
           </div>
         )}
+      </div>
+      {unitStrip.length > 0 && (
+        <ul class="sx-units" aria-label={`${q.title}: ${salesUi.soldResidences}`}>
+          {unitStrip.map(({ u, photo }) => (
+            <li>
+              <a class="sx-units__link" href={withBase(`${saleHref(q)}#unit-${u.unit}`)}>
+                <Media photo={photo!} ratio="1 / 1" sizes="(min-width: 1024px) 13vw, (min-width: 600px) 23vw, 45vw" />
+                <span class="sx-units__name">{salesUi.unitWord} {u.unit}</span>
+                <span class="sx-units__price">{u.price}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+      <div class="sx-feature__more">
+        <a class="btn" href={withBase(saleHref(q))}>{salesPage.cardCta}<span class="sr-only"> about {q.title}</span> <Icon name="arrow-right" /></a>
       </div>
     </div>
   </section>
@@ -93,7 +116,7 @@ const qRole = [q.role, q.roleNote].filter(Boolean).join(' · ');
     gap: clamp(1.5rem, 4vw, 3.5rem);
     align-items: center;
     padding-block: clamp(1.5rem, 3vw, 2.5rem);
-    border-block: 1px solid var(--line-strong);
+    border-top: 1px solid var(--line-strong);
   }
   .sx-feature__card--bare {
     grid-template-columns: minmax(0, 1fr);
@@ -124,6 +147,49 @@ const qRole = [q.role, q.roleNote].filter(Boolean).join(' · ');
     line-height: 1.1;
     text-wrap: balance;
   }
+  .sx-units {
+    --cols: 7;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem 1rem;
+    list-style: none;
+    margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+    padding: 0;
+  }
+  .sx-units li {
+    flex: 0 1 calc((100% - (var(--cols) - 1) * 1rem) / var(--cols));
+    min-width: 0;
+  }
+  .sx-units__link {
+    display: grid;
+    gap: 0.35rem;
+    color: inherit;
+    text-decoration: none;
+    text-align: center;
+  }
+  .sx-units__name {
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .sx-units__price {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  .sx-units__link:hover .sx-units__price,
+  .sx-units__link:focus-visible .sx-units__price {
+    color: var(--blue);
+  }
+  .sx-feature__more {
+    display: flex;
+    justify-content: center;
+    padding-block: clamp(1.5rem, 3vw, 2.25rem);
+    border-bottom: 1px solid var(--line-strong);
+  }
   .sx-feature__text {
     color: var(--ink-2);
     line-height: 1.7;
@@ -136,6 +202,9 @@ const qRole = [q.role, q.roleNote].filter(Boolean).join(' · ');
     margin-top: clamp(2rem, 4vw, 3rem);
   }
   @media (max-width: 1023px) {
+    .sx-units {
+      --cols: 4;
+    }
     .sx-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -147,6 +216,9 @@ const qRole = [q.role, q.roleNote].filter(Boolean).join(' · ');
     }
   }
   @media (max-width: 640px) {
+    .sx-units {
+      --cols: 3;
+    }
     .sx-grid {
       grid-template-columns: minmax(0, 1fr);
     }

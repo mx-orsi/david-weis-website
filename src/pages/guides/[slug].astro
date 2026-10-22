@@ -13,6 +13,6 @@ interface Props {
 const { guide } = Astro.props;
 ---
 
-<BaseLayout title={guide.seo.title} description={guide.seo.description} ogImage={guide.images[1].src} ogType="article" finalCta={false}>
+<BaseLayout title={guide.seo.title} description={guide.seo.description} ogImage={guide.images[1].src} ogImageAlt={guide.images[1].alt} ogType="article" finalCta={false}>
   <GuidePage guide={guide} />
 </BaseLayout>
