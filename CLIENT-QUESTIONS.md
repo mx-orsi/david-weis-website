@@ -10,9 +10,13 @@ as they are, including Version 2's "from the mid-400s" line. GoDaddy delegate in
 iHomeFinder (client #231381): **MLS Setup's board dropdown is empty**, so neither MLS is provisioned on
 the account yet (Kathy signed Oct 12; iHomeFinder's side is still pending). The **IDX page's Platform is
 set to "WordPress (Optima Express Plugin)"**; ours is not WordPress, so it must change to **Other**
-before setup. Version 10 is shown as recommended. David's MLS Agent ID and Office ID for each board are
-not in any of his emails: ask David, or iHomeFinder support can find them from one active listing's MLS
-number.
+before setup. Version 10 is shown as recommended. **David's texts, 2026-10-22:** he already
+sent his Agent and Office IDs to iHomeFinder. Their process: we embed the demo IDX on the site, test it,
+then the integration team switches the account to his live MLS data (so the empty board list is
+expected). He watched the training videos (CRM only, nothing on connecting IDX) and says Ted connects us
+with the integration team when we are ready. The control panel's "Website" tab still opens his Compass
+profile. Field guide reordered: email Ted (step 4), Cloudflare (5), Formspree (6), Analytics (7), demo
+install and hand-off to Ted (8).
 
 **David, 2026-10-12 to 2026-10-14 emails (built 2026-10-22):** "Close to the LAST Website Update!"
 (the 32-section accuracy review), "Belmont Beach House" and "A couple more Updates". Email text is
