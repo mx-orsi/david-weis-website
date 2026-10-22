@@ -66,6 +66,26 @@ Dashboard**. He is importing his contacts into iHomeFinder and will say when tha
   cannot be tested on the GitHub Pages preview. Plan: test it on the Cloudflare pages.dev address
   (base URL set there temporarily), then switch the base URL to https://davidweis.com at launch.
   Setup article: https://kb.ihomefinder.com/s/article/Optima-IDX-Setup.
+- **Ted Greenlee's implementation email (iHomeFinder Client Success, Oct 9, case 231381; first seen
+  2026-10-22, saved in the batch folder).** It cc'd Max and links the current integration article,
+  https://kb.ihomefinder.com/s/article/Optima-IDX (updated Oct 7, 2026). What it changes for us:
+  - The menu is now **iHomefinder Desktop > Setup > IDX** (pages Version, Website, IDX Pages; then
+    Display and Widgets). Choose **Version 10** and platform **Other**.
+  - **Website URL**: all lowercase, no trailing slash, exact match with https, or nothing displays.
+    Our `trailingSlash: 'never'` already fits.
+  - **Step 1:** one script in the `<head>` of every page that shows IDX content (BaseLayout).
+  - **Step 2 (required):** a public **Default IDX Page** at the URL iHomeFinder shows; anything without
+    its own page loads through it (e.g. `/idx?path=/listings`). It need not be in the menu.
+  - **Steps 3 and 4:** paste the embed code into that page, then create a **Search** page the same way.
+    Recommended next: Listing Details, Featured Listings and Pending Featured Listings (David's Active
+    and Pending feeds); Markets and Listing Report cover the market searches.
+  - Turn on a page's custom slug only after that page exists on the site.
+  - Content only loads on the live domain on the account, never in a preview. That keeps the plan: test
+    on the Cloudflare pages.dev address, then switch to https://davidweis.com at launch.
+  - To check when we build: whether custom-slug pages use deeper paths (e.g. one URL per listing). On a
+    static site those would need a Cloudflare rewrite to the page that holds the embed code.
+  - Support: 866-700-8855; Ted Greenlee 458-205-5503, tgreenlee@ihomefinder.com. Webinars Tuesdays
+    9:30 and Thursdays 11:00 PT. MLS paperwork: Kathy signed both on Oct 12 (David's Oct 12 reply).
 
 **David, 2026-10-08 to 2026-10-10 emails (applied 2026-10-11):** his line-by-line preview review,
 the Gay for Good and Garden Club rewrites, the Compass compliance list, the iHomeFinder demo notes and
