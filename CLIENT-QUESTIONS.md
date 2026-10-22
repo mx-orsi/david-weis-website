@@ -251,8 +251,10 @@ shows only the documented 2025 figures, and the Gay for Good page uses his past-
 - **Archived review links.** No individual review URLs were supplied, and the screenshots carry Lisa's
   "owner" line and reservation number, so the cards have no "View archived review" link. Send original
   URLs if he wants links.
-- **DBA spotlight article** (chambermate, May 4, 2026) says he "co-developed" The Cole. Leave the button
-  off until DBA corrects it; same correction for his Compass bio.
+- **DBA spotlight article** (May 4, 2026; public link from Max 2026-10-22, recorded in `src/data/dba.ts`)
+  still says he was "co-developing and managing The Cole Hotel", quotes him saying he "co-developed" it,
+  uses "five-star", and says his mom "was a Realtor". Button stays off until DBA corrects those lines;
+  same correction for his Compass bio. The attribution now reads "May 2026".
 - **Celebrity Vacation Homes listing** (his section 13): "Private porch", "Bicycles" and the Jersey Court
   directions should be checked by whoever maintains it.
 - **Still to do on our side:** his section 31 blog stories (after he reviews these corrections), the

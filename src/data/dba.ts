@@ -212,8 +212,12 @@ export const dbaStory: StoryPage = {
             'I appreciated that it told the story behind the work. This passage captured why being part of DBA matters to me:',
           ],
           quote: '“For David, being part of the DBA is about the power of community, connection, and creating opportunities for one another.”',
-          attribution: 'Desert Business Association / Member spotlight',
-          // No cta: the Facebook fallback could not be verified signed out, and DBA's own article is dead.
+          attribution: 'Desert Business Association / Member spotlight, May 2026',
+          // The article (posted 4 May 2026) is public at
+          // https://app.chambermate.com/public/standalone?standaloneContentTypeCode=POST&entityKey=FAPXSm%7CLOl%7CfNVvvuZHIrw2
+          // but still says David "co-developed" The Cole and uses "five-star", which his
+          // 2026-10-12 review corrects. Once DBA fixes it, turn the button on with:
+          // cta: { label: 'Read the DBA member spotlight', href: '<that URL>', external: true },
         },
       ],
     },
