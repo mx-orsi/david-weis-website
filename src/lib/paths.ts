@@ -13,3 +13,10 @@ export function withBase(path: string): string {
 
 /** True when the site is built for a non-root preview location. */
 export const isPreviewBuild = base !== '';
+
+/**
+ * True when the build must stay out of search and analytics: every preview,
+ * plus a production build with SITE_NOINDEX=1 (the Cloudflare pages.dev
+ * project before launch day; remove the variable at launch).
+ */
+export const isHiddenBuild = isPreviewBuild || (typeof process !== 'undefined' && process.env?.SITE_NOINDEX === '1');

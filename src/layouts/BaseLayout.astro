@@ -13,7 +13,7 @@ import Footer from '../components/Footer.astro';
 import FinalCta from '../components/FinalCta.astro';
 import { agent, siteUrl, social } from '../data/site';
 import { integrations } from '../data/integrations';
-import { withBase, isPreviewBuild } from '../lib/paths';
+import { withBase, isHiddenBuild } from '../lib/paths';
 
 interface Props {
   /** Full <title>. Keep unique per page, ideally under ~65 characters. */
@@ -39,7 +39,7 @@ const isDefaultOg = ogImage === DEFAULT_OG;
 const ogAlt = isDefaultOg ? `The ${agent.name} logo beside a portrait of ${agent.name}` : (ogImageAlt ?? title);
 
 /** GA4 runs on production only, so preview visits never count. */
-const gaId = isPreviewBuild ? '' : integrations.gaMeasurementId;
+const gaId = isHiddenBuild ? '' : integrations.gaMeasurementId;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? siteUrl);
 const ogImageURL = new URL(withBase(ogImage), Astro.site ?? siteUrl);
@@ -103,7 +103,7 @@ const jsonLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    {(noindex || isPreviewBuild) && <meta name="robots" content="noindex, nofollow" />}
+    {(noindex || isHiddenBuild) && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" href={withBase('/favicon.ico')} sizes="32x32" />
     <link rel="icon" type="image/png" href={withBase('/favicon-32.png')} sizes="32x32" />
     <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} sizes="180x180" />
